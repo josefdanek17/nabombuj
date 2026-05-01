@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bombG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7D4480"></stop>
+      <stop offset="1" stop-color="#3D1D40"></stop>
+    </linearGradient>
+    <radialGradient id="shine" cx=".35" cy=".3" r=".45">
+      <stop offset="0" stop-color="#fff" stop-opacity=".5"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#F5F5F7"></rect>
+  
+  <circle cx="30" cy="38" r="18" fill="url(#bombG)"></circle>
+  <circle cx="30" cy="38" r="18" fill="url(#shine)"></circle>
+  
+  <rect x="26" y="17" width="8" height="6" rx="1.5" fill="#1D1D1F"></rect>
+  
+  <path d="M30 17 Q38 10 44 14 Q50 18 48 10" fill="none" stroke="#1D1D1F" stroke-width="2.2" stroke-linecap="round"></path>
+  
+  <g>
+    <circle cx="48" cy="10" r="3.5" fill="#F9A825"></circle>
+    <circle cx="48" cy="10" r="2" fill="#E06D1E"></circle>
+    <circle cx="48" cy="10" r=".9" fill="#fff"></circle>
+  </g>
+</svg>
