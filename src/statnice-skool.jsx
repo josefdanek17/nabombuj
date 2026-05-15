@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, Fragment, createContext, useContext } from "react";
+import { createClient } from "@supabase/supabase-js";
 
 /* ════════════════════════════════════════════════════════
    NABOMBUJ — BOMBÍK BRAND TOKENS
@@ -250,6 +251,36 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }) {
         <path d="M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 3 3 6 3s6-1 6-3v-5"/><path d="M22 10v6"/>
       </svg>
     ),
+    tools: ( // Dovednosti 🔧
+      <svg {...svgProps}>
+        <path d="M14.7 6.3a4 4 0 105.6 5.6l-1.4-1.4a2 2 0 11-2.8-2.8z"/><path d="M9 11l-6 6a2 2 0 102.8 2.8l6-6"/><path d="M14 7l3 3"/>
+      </svg>
+    ),
+    grid: ( // GRID 9×9 ▦
+      <svg {...svgProps}>
+        <rect x="3" y="3" width="6" height="6" rx="0.5"/><rect x="9" y="3" width="6" height="6" rx="0.5"/><rect x="15" y="3" width="6" height="6" rx="0.5"/><rect x="3" y="9" width="6" height="6" rx="0.5"/><rect x="9" y="9" width="6" height="6" rx="0.5" fill={`${color}30`}/><rect x="15" y="9" width="6" height="6" rx="0.5"/><rect x="3" y="15" width="6" height="6" rx="0.5"/><rect x="9" y="15" width="6" height="6" rx="0.5"/><rect x="15" y="15" width="6" height="6" rx="0.5" fill={`${color}50`}/>
+      </svg>
+    ),
+    path: ( // Kontingenční / situační 🛤️
+      <svg {...svgProps}>
+        <path d="M3 21c0-9 6-12 9-12s9 3 9 12"/><circle cx="3" cy="21" r="1.5" fill={color}/><circle cx="21" cy="21" r="1.5" fill={color}/><circle cx="12" cy="9" r="1.5" fill={color}/>
+      </svg>
+    ),
+    sparkles: ( // Trendy ✨
+      <svg {...svgProps}>
+        <path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z" fill={`${color}30`}/><path d="M19 14l0.7 2.1L22 17l-2.3 0.9L19 20l-0.7-2.1L16 17l2.3-0.9z" fill={`${color}30`}/><path d="M5 4l0.5 1.5L7 6l-1.5 0.5L5 8l-0.5-1.5L3 6l1.5-0.5z" fill={`${color}30`}/>
+      </svg>
+    ),
+    badge: ( // Identifikace 🎖️
+      <svg {...svgProps}>
+        <circle cx="12" cy="9" r="6"/><path d="M9 13l-2 8 5-3 5 3-2-8"/><path d="M12 6v3l2 1.5" strokeWidth="1.5"/>
+      </svg>
+    ),
+    growth: ( // Rozvoj 🌱
+      <svg {...svgProps}>
+        <path d="M3 21h18"/><path d="M12 21V9"/><path d="M12 9c-3 0-5-2-5-5 3 0 5 2 5 5z" fill={`${color}30`}/><path d="M12 9c3 0 5-2 5-5-3 0-5 2-5 5z" fill={`${color}40`}/><path d="M12 14c-2 0-3-1-3-3 2 0 3 1 3 3z" fill={`${color}30`}/>
+      </svg>
+    ),
     bolt: ( // Distribuce moci ⚡
       <svg {...svgProps}>
         <polygon points="13,2 3,14 12,14 11,22 21,10 12,10" fill={`${color}20`} stroke={color}/>
@@ -373,12 +404,12 @@ const SUBJECTS = [
   {
     id: "lead", name: "Leadership", color: VSE.fmv, icon: "crown",
     okruhy: [
-      { n: 1, title: "Kompetence leadera, metody rozvoje", status: "todo", difficulty: 2 },
-      { n: 2, title: "Styly leadershipu", status: "todo", difficulty: 2 },
-      { n: 3, title: "Kreativní klima v organizaci", status: "todo", difficulty: 2 },
-      { n: 4, title: "Teorie motivace, ovlivňování", status: "todo", difficulty: 3 },
-      { n: 5, title: "Moc, distribuce moci, zdroje moci", status: "todo", difficulty: 2 },
-      { n: 6, title: "Team excellence (Larson, LaFasto)", status: "todo", difficulty: 2 },
+      { n: 1, title: "Kompetence leadera, metody rozvoje", status: "done", difficulty: 2 },
+      { n: 2, title: "Styly leadershipu", status: "done", difficulty: 2 },
+      { n: 3, title: "Kreativní klima v organizaci", status: "done", difficulty: 2 },
+      { n: 4, title: "Teorie motivace, ovlivňování", status: "done", difficulty: 3 },
+      { n: 5, title: "Moc, distribuce moci, zdroje moci", status: "done", difficulty: 2 },
+      { n: 6, title: "Team excellence (Larson, LaFasto)", status: "done", difficulty: 2 },
     ],
   },
   {
@@ -6362,9 +6393,10 @@ const NAV_TABS = [
   { id: "about", label: "O nás", iconName: "scroll" },
 ];
 
-function SkoolNav({ activeTab, setActiveTab, themeMode, setThemeMode }) {
+function SkoolNav({ activeTab, setActiveTab, themeMode, setThemeMode, profile, onSignOut, onOpenAdmin }) {
   const t = useTheme();
   const [streakOpen, setStreakOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   const isDark = themeMode === "dark";
   return (
     <div style={{ position: "sticky", top: 0, zIndex: 100, borderBottom: `1px solid ${t.border}`, background: t.bg }}>
@@ -6385,6 +6417,64 @@ function SkoolNav({ activeTab, setActiveTab, themeMode, setThemeMode }) {
           <button onClick={() => setThemeMode(isDark ? "light" : "dark")} style={{ background: "transparent", border: `1px solid ${t.border}`, color: t.text, borderRadius: RADIUS.pill, padding: "6px 14px", fontSize: 11.5, fontFamily: fontSans, fontWeight: 500, cursor: "pointer" }}>
             {isDark ? "Light" : "Dark"}
           </button>
+          {profile && (
+            <div style={{ position: "relative" }}>
+              <button onClick={() => setUserMenuOpen(!userMenuOpen)} style={{
+                display: "flex", alignItems: "center", gap: 8, background: "transparent",
+                border: `1px solid ${t.border}`, borderRadius: RADIUS.pill,
+                padding: "4px 12px 4px 4px", cursor: "pointer", fontFamily: fontSans,
+              }}>
+                {profile.avatar_url ? (
+                  <img src={profile.avatar_url} alt="" style={{ width: 24, height: 24, borderRadius: 99 }} />
+                ) : (
+                  <div style={{ width: 24, height: 24, borderRadius: 99, background: `${t.cta}30`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color: t.cta }}>
+                    {(profile.full_name || profile.email)?.[0]?.toUpperCase()}
+                  </div>
+                )}
+                <span style={{ fontSize: 11.5, color: t.text, fontWeight: 500 }}>
+                  {profile.full_name?.split(" ")[0] || profile.email?.split("@")[0]}
+                </span>
+                {profile.role === "admin" && (
+                  <span style={{ padding: "1px 6px", background: `${t.cta}20`, color: t.cta, borderRadius: 4, fontSize: 9, fontWeight: 700, fontFamily: fontMono }}>ADMIN</span>
+                )}
+              </button>
+              {userMenuOpen && (
+                <>
+                  <div onClick={() => setUserMenuOpen(false)} style={{ position: "fixed", inset: 0, zIndex: 200 }} />
+                  <div style={{
+                    position: "absolute", top: "calc(100% + 8px)", right: 0, zIndex: 201,
+                    minWidth: 220, background: t.surface, border: `1px solid ${t.border}`,
+                    borderRadius: 12, padding: 6, boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
+                  }}>
+                    <div style={{ padding: "10px 12px", borderBottom: `1px solid ${t.border}` }}>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: t.text }}>{profile.full_name || "—"}</div>
+                      <div style={{ fontSize: 11, color: t.textMuted, fontFamily: fontMono }}>{profile.email}</div>
+                    </div>
+                    {onOpenAdmin && (
+                      <button onClick={() => { setUserMenuOpen(false); onOpenAdmin(); }} style={{
+                        width: "100%", padding: "10px 12px", background: "transparent", border: "none",
+                        textAlign: "left", fontSize: 13, fontWeight: 500, color: t.text, cursor: "pointer",
+                        borderRadius: 8, fontFamily: fontSans, display: "flex", alignItems: "center", gap: 8,
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.background = `${t.cta}10`}
+                      onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}>
+                        👑 Admin Dashboard
+                      </button>
+                    )}
+                    <button onClick={() => { setUserMenuOpen(false); onSignOut(); }} style={{
+                      width: "100%", padding: "10px 12px", background: "transparent", border: "none",
+                      textAlign: "left", fontSize: 13, fontWeight: 500, color: t.text, cursor: "pointer",
+                      borderRadius: 8, fontFamily: fontSans, display: "flex", alignItems: "center", gap: 8,
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = `${t.border}40`}
+                    onMouseLeave={(e) => e.currentTarget.style.background = "transparent"}>
+                      ↪ Odhlásit se
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
       <StreakModal open={streakOpen} onClose={() => setStreakOpen(false)} />
@@ -6549,6 +6639,12 @@ function OkruhContent({ subjectId, okruhN }) {
   if (subjectId === "mng" && okruhN === 9) return <OkruhMng9Panel />;
   if (subjectId === "mng" && okruhN === 10) return <OkruhMng10Panel />;
   if (subjectId === "mng" && okruhN === 11) return <OkruhMng11Panel />;
+  if (subjectId === "lead" && okruhN === 1) return <OkruhLead1Panel />;
+  if (subjectId === "lead" && okruhN === 2) return <OkruhLead2Panel />;
+  if (subjectId === "lead" && okruhN === 3) return <OkruhLead3Panel />;
+  if (subjectId === "lead" && okruhN === 4) return <OkruhLead4Panel />;
+  if (subjectId === "lead" && okruhN === 5) return <OkruhLead5Panel />;
+  if (subjectId === "lead" && okruhN === 6) return <OkruhLead6Panel />;
 
   return null;
 }
@@ -6596,7 +6692,10 @@ function PraxeTab({ data, color }) {
                   <div style={{ fontSize: 14.5, fontWeight: 600, color: t.text, fontFamily: fontSans, letterSpacing: "-0.01em" }}>{ex.company}</div>
                   <div style={{ fontSize: 10.5, color: t.textMuted, fontFamily: fontMono, fontWeight: 600, letterSpacing: "1.4px", textTransform: "uppercase" }}>{ex.tag}</div>
                 </div>
-                <div style={{ fontSize: 13, color: t.textMuted, fontFamily: fontSans, lineHeight: 1.6 }}>{ex.content}</div>
+                {typeof ex.content === "string"
+                  ? <div style={{ fontSize: 13, color: t.textMuted, fontFamily: fontSans, lineHeight: 1.6 }} dangerouslySetInnerHTML={{ __html: ex.content }} />
+                  : <div style={{ fontSize: 13, color: t.textMuted, fontFamily: fontSans, lineHeight: 1.6 }}>{ex.content}</div>
+                }
               </div>
             ))}
           </div>
@@ -7026,6 +7125,2744 @@ function OkruhMng4Panel() {
     />
   );
 }
+
+/* ════════════════════════════════════════════════════════
+   LEADERSHIP 1 — Kompetence, dovednosti, vlastnosti, rozvoj lídra
+   ════════════════════════════════════════════════════════ */
+function OkruhLead1Panel() {
+  const studySectionsLead1 = [
+    { id: "intro", title: "Leadership ≠ Management", subtitle: "Co je leadership a proč to není to samé co management", color: VSE.fmv, emoji: "crown",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Leadership</b> = dělání správných věcí, osobní dispozice, styl chování, soubor dovedností. Proces ovlivňování skupiny nebo jednotlivců směrem k dosažení společného cíle. <b>Lídr ostatní inspiruje, lidé ho neposlouchají, protože musí, ale protože chtějí.</b>
+        </Def>
+        <Tag color={VSE.fmv}>Kotterovo rozlišení (klasika na zkoušku)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.ffu}08`, border: `1px solid ${VSE.ffu}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 6 }}>MANAGEMENT</div>
+            <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>„Dělání věcí správným způsobem”</div>
+            <Bullet items={["Technické a funkční záležitosti","Plánování, kontrola, organizace","Manažer = pozice, autorita formální","Lidé ho poslouchají, protože musí"]} color={VSE.ffu} />
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 6 }}>LEADERSHIP</div>
+            <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>„Dělání správných věcí”</div>
+            <Bullet items={["Inspirace, vize, motivace","Vede lidi, mění sebe i okolí","Lídr = osobnost, autorita přirozená","Lidé ho následují, protože chtějí"]} color={VSE.fmv} />
+          </div>
+        </div>
+        <Tag color={VSE.primary}>3 vrstvy leadershipu</Tag>
+        <Bullet items={[
+          "Osobní dispozice — kdo lídr je (rysy, charisma, integrita)",
+          "Styl chování — jak vede (autoritativní/demokratický/situační)",
+          "Soubor dovedností — co umí (technické, lidské, koncepční)",
+        ]} color={VSE.primary} />
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.warning}10`, borderRadius: 10, border: `1px solid ${VSE.warning}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.warning, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>POZOR:</span> Komise často chce slyšet, že management × leadership není „buď anebo” — dokonalý manažer je zároveň lídrem. Leadership je nadstavba.
+        </div>
+      </div>) },
+
+    { id: "rysy", title: "Teorie rysů (vlastnosti)", subtitle: "Jaké vlastnosti má mít lídr / Northouse 5 + Big Five", color: VSE.fmv, emoji: "star",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Nejstarší přístup (zač. 20. století). Teorie velkých mužů: <b>lídry se lidé rodí, nikoliv stávají</b>. Hledá vrozené předpoklady. Otázka: které rysy jsou pro leadership podstatné?
+        </Def>
+        <Tag color={VSE.fmv}>Northouse — 5 osobnostních charakteristik leadera</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>1. Inteligence</div>
+            <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>Logické myšlení, vyšší inteligence než průměr. Pozor: rozdíl IQ nadřízeného a podřízených by neměl být <b>příliš velký</b> — narušuje komunikaci.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>2. Sebedůvěra</div>
+            <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>Podpořené sebevědomí — lídr věří, že to dokáže, a jeho důvěra se přenáší na tým.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>3. Vytrvalost (drive)</div>
+            <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>Překonává překážky, energie, „tah na branku”. Nevzdá se po prvním neúspěchu.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>4. Sociabilita</div>
+            <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>Všímá si okolí, citlivost vůči potřebám druhých, zájem o jejich osobní pohodu.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>5. Integrita</div>
+            <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>Věrohodnost a čestnost. „<i>Nekáže vodu a pije víno</i>” — slova a činy se shodují.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Big Five — pětifaktorový model osobnosti</Tag>
+        <div style={{ fontSize: 12, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>Seřazeno od nejsilnější vazby k leadershipu:</div>
+        <Bullet items={[
+          "Extraverze — energie z lidí, iniciativa",
+          "Svědomitost — disciplína, plánování, dokončování",
+          "Otevřenost vůči nové zkušenosti — kreativita, učení",
+          "Vyrovnanost — emoční stabilita pod tlakem",
+          "Přívětivost — ochota pomáhat, kooperativní postoj",
+        ]} color={VSE.primary} />
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.danger}10`, borderRadius: 10, border: `1px solid ${VSE.danger}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.danger, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>LIMIT TEORIE RYSŮ:</span> Chybí situační kontext. Nevysvětluje, proč lidé s těmito rysy <b>nejsou</b> lídry — a proč jiní bez nich jsou.
+        </div>
+      </div>) },
+
+    { id: "dovednosti", title: "Dovednostní přístup + Model 4 kompetencí", subtitle: "Reakce na limit teorie rysů — Hogan & Warrenfeltz", color: VSE.fmv, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Reakce na limit teorie rysů. <b>Dovednosti se dají naučit</b> — narozdíl od vrozených rysů. (Robert Katz, 1955)
+        </Def>
+        <Tag color={VSE.fmv}>3 druhy dovedností (Katz)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.ffu}08`, border: `1px solid ${VSE.ffu}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 4 }}>🔧 Technické</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Odborné. <b>Nemusí mít tolik</b> — lídr nemusí být nejlepší programátor v týmu.</div>
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🤝 Lidské</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Interpersonální. Jednání s lidmi a jejich vedení. <b>Klíčové pro střední management.</b></div>
+          </div>
+          <div style={{ background: `${VSE.fph}08`, border: `1px solid ${VSE.fph}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fph, fontFamily: fontSans, marginBottom: 4 }}>🧠 Koncepční</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Strategické myšlení. <b>Musí mít hodně</b> — důležité pro plánování a top management.</div>
+          </div>
+        </div>
+        <Tag color={VSE.fmv}>Model 4 kompetenčních okruhů (Hogan & Warrenfeltz)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>1. Intrapersonální</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Regulace vlastních emocí a chování. Sebepoznání, sebekontrola.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>2. Interpersonální</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Sociální + komunikační dovednosti. Empatie, naslouchání, networking.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>3. Business</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Manažerské dovednosti pro plánování, koordinaci, finance, strategii.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>4. Leadership</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Ovlivňování druhých, formování týmů, motivace, vytváření vize.</div>
+          </GlassBox>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.warning}10`, borderRadius: 10, border: `1px solid ${VSE.warning}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.warning, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>BONUS — Johari okénko:</span> Sebepoznání lídra. 4 kvadranty: <b>Otevřená oblast</b> (ví o sobě já + vědí ostatní), <b>Slepá skvrna</b> (ostatní vidí, já ne), <b>Skrytá oblast</b> (vím, ostatní ne), <b>Neznámá</b> (neví nikdo). Cíl: rozšiřovat otevřenou oblast přes zpětnou vazbu.
+        </div>
+      </div>) },
+
+    { id: "behaviorální", title: "Behaviorální přístup + styly", subtitle: "Klasická teorie + Likertovy 4S", color: VSE.fmv, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Posun od rysů k <b>chování</b> lídrů. Co lídr <b>dělá</b>, ne jaký je. Dimenze: <b>orientace na lidi</b> × <b>orientace na úkoly</b>.
+        </Def>
+        <Tag color={VSE.fmv}>Klasická teorie vedení (3 styly)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.danger}08`, border: `1px solid ${VSE.danger}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 4 }}>👑 Autoritativní</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Rozhoduje sám, chce poslušnost. Rychlá rozhodnutí, ale demotivace.</div>
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🤝 Demokratický</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Participativní — lidi se podílejí, delegace. Lídr má <b>poslední slovo</b>.</div>
+          </div>
+          <div style={{ background: `${VSE.fm}08`, border: `1px solid ${VSE.fm}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fm, fontFamily: fontSans, marginBottom: 4 }}>🌊 Liberální (laissez-faire)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Volný styl. Lidé si stanoví cíle sami. Pasivní lídr, nekontroluje.</div>
+          </div>
+        </div>
+        <Tag color={VSE.fmv}>Likertova typologie 4S</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans }}>1. Exploračně autoritativní</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Absolutistický. Malá participace, malá důvěra. Motivace strachem.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans }}>2. Benevolentní</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>„Laskavý táta”. Diskuze probíhá, ale konečné slovo má manažer.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.info}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.info, fontFamily: fontSans }}>3. Konzultativní</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Kooperace mezi manažerem a podřízenými. Konečné slovo má manažer.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>4. Participativní</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Zapojení všech členů na rozhodnutích. Plná důvěra v tým.</div>
+          </GlassBox>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.danger}10`, borderRadius: 10, border: `1px solid ${VSE.danger}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.danger, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>LIMIT BEHAVIORÁLNÍHO PŘÍSTUPU:</span> Stejně jako rysy nezohledňuje <b>situační a organizační faktory</b>. Co je v jedné situaci optimální, v druhé selže.
+        </div>
+      </div>) },
+
+    { id: "grid", title: "Leadership GRID (manažerská mřížka)", subtitle: "Blake & Mouton — 9×9 / 5 stylů + 2 hybridy", color: VSE.fmv, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Blake a Mouton</b> — manažerská mřížka 9×9. Osy: <b>zájem o lidi</b> (vertikální) × <b>zájem o úkoly</b> (horizontální). Body 1–9. <b>Cíl: identifikovat dominantní styl manažera a posunout ho k 9.9 (týmový).</b>
+        </Def>
+        <Tag color={VSE.fmv}>5 základních stylů</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.danger, fontFamily: fontMono, minWidth: 36 }}>1.1</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontSans }}>Ochuzený styl</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}>Nízký zájem o lidi i úkoly. Lídr „přežívá” pracovní den, vyhýbá se rozhodnutím. Vysoká fluktuace, neefektivní organizace.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fm}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fm, fontFamily: fontSans, minWidth: 36 }}>1.9</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fm, fontFamily: fontSans }}>Country Club (venkovský klub)</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}>Vysoký zájem o lidi, nízký o úkoly. Pečuje o spokojenost, přátelská atmosféra. Lidé jsou šťastní, ale <b>nejsou produktivní</b>.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, minWidth: 36 }}>5.5</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontSans }}>Střední cesta</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}>Balanc, ale není excelence. Pravidla, kompromisy, průměrný výkon. <b>Bezpečné, ale ne výjimečné.</b></div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fis}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fis, fontFamily: fontSans, minWidth: 36 }}>9.1</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fis, fontFamily: fontSans }}>Autoritářský styl (diktátor)</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}>Vysoký zájem o úkoly, nízký o lidi. Tvrdá disciplína, kontrola, autorita. Vysoký výkon krátkodobě, ale konflikty a fluktuace.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 36 }}>9.9</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>Týmový styl ⭐ IDEÁL</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}>Vysoký zájem o lidi i úkoly. Lídr přemýšlí o výkonu i lidech. Prostor pro inovace, konflikty se řeší přímou konfrontací. Tým, motivace, malá fluktuace.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>2 přechodové styly</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🦊 Oportunistický</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Lídr využívá <b>jakýkoliv styl</b> z mřížky podle situace, aby <b>prospěl sám sobě</b>. Nebojí se manipulace.</div>
+          </div>
+          <div style={{ background: `${VSE.warning}08`, border: `1px solid ${VSE.warning}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>⚖️ Paternalistický</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Přechod 1.9 ↔ 9.1. <b>Když se maká, je 1.9 (laskavý).</b> Když se odchýlí od jeho vize, <b>přechází k 9.1</b> (trestá).</div>
+          </div>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.success}10`, borderRadius: 10, border: `1px solid ${VSE.success}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.success, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>NA ZKOUŠKU:</span> Komise často chce identifikovat styl lídra v případovce. Hledej signály — Jak rozhoduje? Jak řeší konflikty? Co je pro něj priorita? Pak označ kvadrant a doporuč posun k 9.9.
+        </div>
+      </div>) },
+
+    { id: "kontingenční", title: "Kontingenční teorie", subtitle: "Hersey-Blanchard situační + cesta k cíli", color: VSE.fmv, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Reakce na limity behaviorálního přístupu — <b>propojení stylu lídra se situačními podmínkami</b>. Není univerzální správný styl. Závisí na <b>připravenosti pracovníka</b> a <b>typu úkolu</b>.
+        </Def>
+        <Tag color={VSE.fmv}>Hersey-Blanchard situační leadership</Tag>
+        <div style={{ fontSize: 12, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 8, fontStyle: "italic" }}>Volíme styl podle <b>D1–D4</b> (úroveň připravenosti pracovníka):</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontMono, minWidth: 32 }}>D1</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontSans }}>Nezralý → S1: Přímý direktivní (přikazování)</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Studenti, absolventi. Nízká kompetence, vysoká odhodlanost. <b>Vysoká direktivita + nízká podpora.</b></div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontMono, minWidth: 32 }}>D2</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontSans }}>Začátečník → S2: Koučování</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Zapracovaný, nemá ještě toho zkušeností. <b>Vysoká direktivita + vysoká podpora.</b></div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.info}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.info, fontFamily: fontMono, minWidth: 32 }}>D3</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.info, fontFamily: fontSans }}>Zkušený → S3: Podporování</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Střední věk, zkušený, ale potřebuje občasnou podporu. <b>Nízká direktivita + vysoká podpora.</b></div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 32 }}>D4</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>Zralý → S4: Delegování</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Vysoká kompetence, vysoká odhodlanost. <b>Nízká direktivita + nízká podpora.</b> Nepotřebuje, chtějí to sami.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Teorie cesty k cíli (Path-Goal)</Tag>
+        <div style={{ fontSize: 12, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>Volba stylu podle <b>typu úkolu</b>:</div>
+        <Bullet items={[
+          "Direktivní — pro nejasná, komplexní zadání (potřebují pravidla)",
+          "Podporující — pro nudnou, stresující, nebezpečnou práci (zvyšuje lidské zacházení)",
+          "Participativní — pro nestrukturalizované úkoly (autonomie + kontrola pracovníka)",
+          "Výkonově orientovaný — pro komplexní úkoly + ambiciózní pracovníky",
+        ]} color={VSE.primary} />
+      </div>) },
+
+    { id: "trendy", title: "Nové trendy v leadershipu", subtitle: "Vyvážený / Transakční / Transformační 4I / Servant", color: VSE.fmv, emoji: "sparkles",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Moderní teorie kombinující předchozí přístupy. Nejdůležitější: <b>transformační leadership</b> a <b>servant leadership</b>.
+        </Def>
+        <Tag color={VSE.fmv}>Vyvážený (versatile) leadership</Tag>
+        <Bullet items={[
+          "JAK vede (styl) × CO vede (obsah — strategie / operativa)",
+          "Lídr musí zvládnout protipóly: autokrat × demokrat / lidi × úkoly / stabilita × změna",
+          "Nejedná impulsivně, ale účelně. Vyhodnotí situaci a volí odpovídající přístup.",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>Transakční leadership</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>
+          <b>Něco za něco.</b> Odměna a trest jako stimulátor výkonu.
+        </div>
+        <Bullet items={[
+          "Podmíněná odměna — specifikace odměn za splněný úkol",
+          "Management výjimek aktivní — chybu řekne hned",
+          "Management výjimek pasivní — vyčítá až po čase (půlroční hodnocení)",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.success}>Transformační leadership — 4I (Bass)</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 8 }}>
+          <b>Přidaná hodnota nad rámec očekávání.</b> Ovlivňování motivace, vytváření klimatu důvěry.
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>1. Idealizovaný vliv</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Lídr je <b>role model</b>. Komunikuje vizi, ctí etické zásady. Lidé ho následují, protože mu věří.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>2. Inspirativní motivování</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vysoká očekávání + důvěra v tým. Zapojení do tvorby vize.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>3. Intelektuální stimulace</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Stimuluje kreativitu a inovace. Důvěra v nekonvenční řešení.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>4. Individualizované uznání</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Všímá si jednotlivců. Poskytuje koučink, mentoring, podporu.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Další moderní typy</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans }}>⚠️ Pseudotransformační</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Hájí <b>vlastní zájmy</b>, ne tým. Sebestředný, malý zájem o druhé.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>✨ Autentický leadership</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Reakce na skandály velkých firem. Lídři jsou <b>sami sebou</b>. Sebeuvědomění, transparentnost, etika, vyvážené zpracování informací. Rozvíjí se přes <b>360° zpětnou vazbu</b>.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans }}>⚡ Charismatický leadership</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}><b>Lehce zneužitelný.</b> Založen na osobnosti a přesvědčivosti. Riziko: kult osobnosti.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>🤲 Servant leadership</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vedení lidí <b>s lidmi a pro lidi</b> — i nad rámec organizace. Vysoké etické standardy. <b>Manažer slouží lidem, ne naopak.</b> Potřeby zaměstnanců na prvním místě.</div>
+          </GlassBox>
+        </div>
+      </div>) },
+
+    { id: "identifikace", title: "Identifikace lídra ve firmě", subtitle: "Formální × neformální / Niterní × povrchní (Bender)", color: VSE.fmv, emoji: "badge",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Lídr = ovlivňovatel</b> směrem k dosažení společných cílů. Má osobní predispozice, chování, dovednosti, manažerské procesy. Mění sebe i okolí.
+        </Def>
+        <Tag color={VSE.fmv}>Formální × Neformální lídři</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.ffu}08`, border: `1px solid ${VSE.ffu}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 6 }}>Formální lídři (manažer)</div>
+            <Bullet items={[
+              "Vedoucí týmů, oddělení",
+              "Výrobní náměstci",
+              "Ředitelé",
+              "Pozice z titulu funkce",
+            ]} color={VSE.ffu} />
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 6 }}>Neformální lídři</div>
+            <Bullet items={[
+              "Lidé s největším vlivem ve skupině",
+              "Verbální přesvědčování",
+              "Iniciují nové myšlenky",
+              "Vyšší informovanost a „zřetelnost” v názorech",
+            ]} color={VSE.fmv} />
+          </div>
+        </div>
+        <Tag color={VSE.primary}>Niterní × povrchní leadership (Bender)</Tag>
+        <div style={{ fontSize: 12, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 8, fontStyle: "italic" }}>Bender: <b>zrníčko lídra je v každém z nás</b>. Otázka je, jak ho rozvineme.</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 4 }}>😨 Povrchní lídr</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>„Pohání” ho <b>strach</b> a vnější tlaky mimo jeho kontrolu. Reaktivní, nestabilní, chybí mu vize.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>💚 Niterní lídr</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Motivuje ho <b>snaha pomáhat</b> a touha uskutečnit <b>společnou vizi</b>. Proaktivní, stabilní.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.success}>5 kroků k niternému leadershipu</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          {[
+            ["1.", "Poznej sám sebe", "Urči své hodnoty, motivaci, osobnostní typ"],
+            ["2.", "Formuluj vizi a buď zaujatý", "Najdi co máš rád, měj rád co děláš"],
+            ["3.", "Riskuj", "Buď neustále odvážný"],
+            ["4.", "Komunikuj", "Přenášej vizi efektivně a s důvěrou"],
+            ["5.", "Kontroluj pokrok a výsledky", "Zjisti kde jsi a kam se chceš dostat"],
+          ].map(([num, title, desc]) => (
+            <GlassBox key={num} opacity={0.5} style={{ padding: "8px 12px", display: "flex", gap: 12, alignItems: "center", borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>{num}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>{title}</div>
+                <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+      </div>) },
+
+    { id: "rozvoj", title: "Rozvoj lídra a manažerských dovedností", subtitle: "On the job × Off the job / GROW model / 9-grid + Develop-Deploy-Connect", color: VSE.fmv, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Rozvoj lídrů</b> = kombinace různorodých postupů, aktivit a příležitostí. Integrace učení a rozvoje na individuální úrovni s účelem organizace. <b>Cíl: aby lídr rostl spolu s firmou.</b>
+        </Def>
+        <Tag color={VSE.fmv}>Aktivity vedoucí k rozvoji lídrů</Tag>
+        <Bullet items={[
+          "Učení se ze zkušenosti",
+          "Učení akcí (týmové projekty, řešení problémů v org.)",
+          "Sebevzdělávání",
+          "Individuální rozvoj (koučink, mentoring)",
+          "Aktivity v rámci řízení kariéry",
+          "Zpětná vazba (360° hodnocení, development centra)",
+          "MBA programy a další formální vzdělávání",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.primary}>Formální × Neformální vzdělávání</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.primary}08`, border: `1px solid ${VSE.primary}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.primary, fontFamily: fontSans, marginBottom: 4 }}>🎓 Formální</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vzdělávací programy, kurzy, MBA, certifikace.</div>
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🛠️ Neformální</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Práce na novém úkolu, v novém týmu, learning by doing.</div>
+          </div>
+        </div>
+        <Tag color={VSE.success}>On the job training (při výkonu práce)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+          {[
+            ["🎯 Coaching", "Podpora dosahování vlastních cílů. Trvalé zvyšování kompetence."],
+            ["📚 Mentoring", "Forma rozvoje s podporou mentora — rady, zkušenosti, ZV."],
+            ["📋 Instruktáž", "Krátkodobé předvedení a vysvětlení postupu."],
+            ["🗣️ Counselling", "Oboustranné konzultování a ovlivňování."],
+            ["👥 Asistování", "Pomoc zkušenějšímu při výkonu jeho práce."],
+            ["📦 Pověřování úkolem", "Větší odpovědnost a samostatnost."],
+            ["🔄 Rotace práce", "Různé pozice v různých částech firmy."],
+            ["💼 Pracovní porady", "Sdílení zkušeností a know-how."],
+          ].map(([title, desc]) => (
+            <GlassBox key={title} opacity={0.5} style={{ padding: "8px 12px", borderLeft: `2px solid ${VSE.success}`, borderRadius: 8 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 2 }}>{title}</div>
+              <div style={{ fontSize: 11, color: "var(--text)", fontFamily: fontSans }}>{desc}</div>
+            </GlassBox>
+          ))}
+        </div>
+        <Tag color={VSE.fph}>Off the job training (mimo výkon práce)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 8 }}>
+          {[
+            ["🎤 Přednáška", "Spojená s diskuzí — seminář."],
+            ["👁️ Demonstrování", "Předvedení postupu trenérem."],
+            ["📖 Případové studie", "Typická metoda pro vzdělávání managementu."],
+            ["💡 Brainstorming", "Volná diskuze, generování nápadů."],
+            ["🎭 Hraní rolí (role play)", "Simulace reálných situací."],
+            ["🏢 AC/DC center", "Assessment + Development centra."],
+            ["🌲 Outdoor training", "Spolupráce v jiných podmínkách."],
+            ["💻 E-learning", "Online vzdělávací platformy."],
+          ].map(([title, desc]) => (
+            <GlassBox key={title} opacity={0.5} style={{ padding: "8px 12px", borderLeft: `2px solid ${VSE.fph}`, borderRadius: 8 }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: VSE.fph, fontFamily: fontSans, marginBottom: 2 }}>{title}</div>
+              <div style={{ fontSize: 11, color: "var(--text)", fontFamily: fontSans }}>{desc}</div>
+            </GlassBox>
+          ))}
+        </div>
+        <Tag color={VSE.warning}>⭐ GROW model — koučovací rámec</Tag>
+        <div style={{ fontSize: 12, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 8, fontStyle: "italic" }}>Sled otázek pro koučovací rozhovor — Whitmore:</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 8 }}>
+          <div style={{ background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, padding: 10, textAlign: "center" }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: VSE.warning, fontFamily: fontMono }}>G</div>
+            <div style={{ fontSize: 11.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>Goal</div>
+            <div style={{ fontSize: 10.5, color: "var(--textMuted)", fontFamily: fontSans }}>Cíl</div>
+          </div>
+          <div style={{ background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, padding: 10, textAlign: "center" }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: VSE.warning, fontFamily: fontMono }}>R</div>
+            <div style={{ fontSize: 11.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>Reality</div>
+            <div style={{ fontSize: 10.5, color: "var(--textMuted)", fontFamily: fontSans }}>Realita</div>
+          </div>
+          <div style={{ background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, padding: 10, textAlign: "center" }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: VSE.warning, fontFamily: fontMono }}>O</div>
+            <div style={{ fontSize: 11.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>Options</div>
+            <div style={{ fontSize: 10.5, color: "var(--textMuted)", fontFamily: fontSans }}>Možnosti</div>
+          </div>
+          <div style={{ background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, padding: 10, textAlign: "center" }}>
+            <div style={{ fontSize: 18, fontWeight: 700, color: VSE.warning, fontFamily: fontMono }}>W</div>
+            <div style={{ fontSize: 11.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>Will</div>
+            <div style={{ fontSize: 10.5, color: "var(--textMuted)", fontFamily: fontSans }}>Vůle</div>
+          </div>
+        </div>
+        <Tag color={VSE.fis}>Velsor & McCauley — oblasti rozvoje lídrů</Tag>
+        <Bullet items={[
+          "Nabývání kompetencí v oblasti sebeřízení",
+          "Prohlubování sociálních kompetencí",
+          "Rozvoj dalších pracovních předpokladů",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.danger}>⚠️ Bonus: Talent management modely (taženky chtějí!)</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 4 }}>📊 9-grid model (9-box)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Mřížka 3×3: <b>výkon</b> (low/med/high) × <b>potenciál</b> (low/med/high). Identifikace talentů: top right = <b>future leader</b>. Bottom left = potřeba změny.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 4 }}>🔄 Develop-Deploy-Connect model</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}><b>Develop</b> = rozvoj kompetencí. <b>Deploy</b> = rozmístění tam, kde nejlépe uplatní schopnosti. <b>Connect</b> = propojení sítě zaměstnanců napříč firmou. Hledá rovnováhu mezi tužbami talentů a požadavky organizace.</div>
+          </GlassBox>
+        </div>
+      </div>) },
+
+  ];
+
+  const flashcardsLead1 = [
+    { term: "Leadership × Management (Kotter)", def: "Leadership = dělání správných věcí (vize, inspirace). Management = dělání věcí správným způsobem (procesy, kontrola).", tag: "DEFINICE" },
+    { term: "Teorie velkých mužů", def: "Nejstarší teorie (zač. 20. stol.). Lídry se lidé rodí, nikoliv stávají. Hledá vrozené předpoklady.", tag: "HISTORIE" },
+    { term: "5 osobnostních charakteristik (Northouse)", def: "Inteligence, Sebedůvěra, Vytrvalost, Sociabilita, Integrita.", tag: "RYSY" },
+    { term: "Big Five", def: "Extraverze, Svědomitost, Otevřenost, Vyrovnanost, Přívětivost. Pětifaktorový model osobnosti.", tag: "MODEL" },
+    { term: "3 druhy dovedností (Katz)", def: "Technické (odborné, nemusí mít tolik) / Lidské (interpersonální) / Koncepční (strategické, musí mít hodně).", tag: "DOVEDNOSTI" },
+    { term: "Model 4 kompetenčních okruhů (Hogan & Warrenfeltz)", def: "Intrapersonální / Interpersonální / Business / Leadership kompetence.", tag: "KOMPETENCE" },
+    { term: "Klasická teorie vedení", def: "3 styly: Autoritativní (rozhoduje sám) / Demokratický (participativní) / Liberální (laissez-faire).", tag: "STYLY" },
+    { term: "Likertova typologie 4S", def: "Exploračně autoritativní / Benevolentní / Konzultativní / Participativní.", tag: "STYLY" },
+    { term: "Leadership GRID 9.9", def: "Týmový styl. Vysoký zájem o lidi i úkoly. Ideál. Týmovost, motivace, malá fluktuace.", tag: "GRID" },
+    { term: "Oportunistický × Paternalistický styl", def: "Oportunistický = jakýkoliv styl pro vlastní prospěch. Paternalistický = přechod 1.9 ↔ 9.1 (laskavý, dokud se maká).", tag: "GRID" },
+    { term: "Hersey-Blanchard situační leadership", def: "D1-D4 (úroveň zralosti) → S1-S4 (styl): Přímý direktivní → Koučování → Podporování → Delegování.", tag: "SITUAČNÍ" },
+    { term: "Transformační leadership 4I (Bass)", def: "Idealizovaný vliv / Inspirativní motivování / Intelektuální stimulace / Individualizované uznání.", tag: "TRENDY" },
+    { term: "Servant leadership", def: "Vedení s lidmi a pro lidi. Manažer slouží lidem, ne naopak. Potřeby zaměstnanců na 1. místě. Vysoké etické standardy.", tag: "TRENDY" },
+    { term: "Niterní × povrchní leadership (Bender)", def: "Niterní = motivuje snaha pomáhat a vize. Povrchní = pohání strach a vnější tlaky.", tag: "BENDER" },
+    { term: "GROW model", def: "Koučovací rámec: Goal (cíl) / Reality (realita) / Options (možnosti) / Will (vůle).", tag: "ROZVOJ" },
+    { term: "Develop-Deploy-Connect", def: "Talent management model. Develop = rozvoj. Deploy = rozmístění. Connect = propojení sítě.", tag: "TALENT" },
+  ];
+
+  const quizLead1 = [
+    { q: "Jaký je rozdíl mezi managementem a leadershipem podle Kottera?", opts: ["Management = dělání správných věcí, leadership = dělání věcí správným způsobem", "Management = dělání věcí správným způsobem, leadership = dělání správných věcí", "Management a leadership jsou synonyma", "Leadership je nadřazený management"], correct: 1 },
+    { q: "Které z těchto charakteristik patří mezi Northousových 5 vlastností leadera?", opts: ["Inteligence, agresivita, vytrvalost, sociabilita, autorita", "Inteligence, sebedůvěra, vytrvalost, sociabilita, integrita", "Sebedůvěra, autorita, energie, charisma, kreativita", "Inteligence, vzdělání, zkušenost, sociabilita, výkonnost"], correct: 1 },
+    { q: "Co je Big Five?", opts: ["5 největších firem v Česku", "Pětifaktorový model osobnosti — Extraverze, Svědomitost, Otevřenost, Vyrovnanost, Přívětivost", "5 základních leaderských dovedností", "5 stylů vedení podle Likerta"], correct: 1 },
+    { q: "Které dovednosti musí mít lídr nejvíce podle Katze?", opts: ["Technické", "Lidské", "Koncepční", "Všechny tři stejnou měrou"], correct: 2 },
+    { q: "Co je Model 4 kompetenčních okruhů (Hogan & Warrenfeltz)?", opts: ["Intrapersonální, interpersonální, business, leadership", "Inteligence, integrita, intuice, iniciativa", "Plánování, organizování, vedení, kontrola", "Strategická, operativní, taktická, technická"], correct: 0 },
+    { q: "Jaký styl vedení popisuje Leadership GRID 9.9?", opts: ["Ochuzený — nezájem o lidi ani úkoly", "Country Club — vysoký zájem o lidi, nízký o úkoly", "Týmový — vysoký zájem o lidi i úkoly", "Autoritářský — vysoký zájem o úkoly, nízký o lidi"], correct: 2 },
+    { q: "Co charakterizuje paternalistický styl?", opts: ["Lídr využívá jakýkoliv styl pro vlastní prospěch", "Přechod 1.9 ↔ 9.1 — laskavý, dokud se maká, jinak trestá", "Pevná autorita bez výjimek", "Demokratické rozhodování"], correct: 1 },
+    { q: "V Hersey-Blanchard modelu — jaký styl je vhodný pro D1 (nezralého pracovníka)?", opts: ["Delegování", "Podporování", "Koučování", "Přímý direktivní (přikazování)"], correct: 3 },
+    { q: "Které jsou 4I transformačního leadershipu (Bass)?", opts: ["Inspirace, Iniciativa, Integrita, Innovation", "Idealizovaný vliv, Inspirativní motivování, Intelektuální stimulace, Individualizované uznání", "Influence, Information, Innovation, Implementation", "Idea, Insight, Initiative, Impact"], correct: 1 },
+    { q: "Co je servant leadership?", opts: ["Lídr slouží sám sobě a kariéře", "Lídr slouží zájmům akcionářů", "Lídr slouží lidem, potřeby zaměstnanců na 1. místě", "Lídr slouží jen organizaci, ne jednotlivcům"], correct: 2 },
+    { q: "V GROW modelu — co znamená písmeno R?", opts: ["Result (výsledek)", "Reality (realita / nynější situace)", "Resources (zdroje)", "Risk (riziko)"], correct: 1 },
+    { q: "Co je Develop-Deploy-Connect model?", opts: ["Strategie marketingové komunikace", "Talent management — rozvoj kompetencí, rozmístění, propojení sítě", "Model změnového managementu", "Model finančního plánování"], correct: 1 },
+  ];
+
+  const praxeLead1 = {
+    caseStudy: {
+      company: "Microsoft — Satya Nadella jako transformační lídr (4I)",
+      subtitle: "Z byrokratického giganta na cloud/AI lídra (2014→dnes)",
+      content: (<>
+        Když <b>Satya Nadella</b> převzal Microsoft v roce 2014, firma byla v defenzivě. Stagnující stock kolem $38, prohraný mobilní byznys, pokles desktopu, toxická interní kultura "stack rankingu" (manažeři museli každý rok určit X% lidí jako podprůměrných). Nadella aplikoval <b>všechny 4I transformačního leadershipu</b>:<br/><br/>
+        <b style={{ color: VSE.success }}>1. Idealizovaný vliv</b> — Nadella se prezentoval jako role model. Napsal knihu „Hit Refresh” o vlastní cestě (syn s postižením, vlastní introverze). Místo agrese empatie — citoval Mariannu Williamson, mluvil o „growth mindset”. Lidé mu věří, protože je autentický.<br/><br/>
+        <b style={{ color: VSE.success }}>2. Inspirativní motivování</b> — sjednotil firmu pod misí „<i>empower every person and organization on the planet</i>”. Skoncoval se stack rankingem. Změnil hodnocení na „learn-it-all”, ne „know-it-all”. Zaměstnanci dostali důvěru, že to firma dokáže.<br/><br/>
+        <b style={{ color: VSE.success }}>3. Intelektuální stimulace</b> — pivot k cloudu (Azure), AI (OpenAI partnerství), open source (Microsoft kupuje GitHub, podporuje Linux — což bylo dříve nemyslitelné). Stimuloval kreativní řešení nekonvenčních problémů.<br/><br/>
+        <b style={{ color: VSE.success }}>4. Individualizované uznání</b> — investice do vzdělávání zaměstnanců. „LinkedIn Learning” jako interní benefit. Manažeři jako koučové, ne kontroloři.<br/><br/>
+        <b style={{ color: VSE.fmv }}>Výsledek (2014→2025):</b> Stock $38 → $400+, market cap $300B → $3T (jeden z nejcennějších podniků světa). Microsoft je dnes #1 v cloud computingu (Azure) a AI infrastruktuře.
+      </>),
+      lessons: "Nadella ukazuje, že transformační lídr <b>mění firemní kulturu</b>, ne jen strategii. Klíč: autenticita (idealizovaný vliv) + sdílená vize (inspirativní motivace) + odvaha riskovat (intelektuální stimulace) + investice do lidí (individualizované uznání). Komise tohle ráda slyší — je to perfektní case na <b>4I + transformační leadership</b>."
+  },
+    miniExamples: [
+      { company: "Steve Jobs (Apple)", tag: "CHARISMATICKÝ", color: VSE.warning, content: "<b>Charismatický leadership v plné síle.</b> Vize iPhonu, iPadu — produkty, které si lidé nepředstavovali. Ale temná stránka: toxic culture, vyhazoval lidi na schodech, šikanoval inženýry. Klasický příklad <b>zneužitelnosti charismatu</b>. Po jeho smrti Tim Cook (servant leadership) firmu výrazně zhumánštil." },
+      { company: "Tomáš Baťa (česká klasika)", tag: "TRANSFORMAČNÍ", color: VSE.success, content: "Předchůdce moderního transformačního leadershipu. <b>Idealizovaný vliv</b> — sám pracoval ve fabrice. <b>Inspirativní motivování</b> — Baťovo motto „<i>Naším zákazníkům</i>”. <b>Intelektuální stimulace</b> — zaváděl montážní linky a pásovou výrobu (inovace 1920s). <b>Individualizované uznání</b> — Baťovy domky pro zaměstnance, vzdělávání. Zlín se stal globální centrum obuvnictví." },
+      { company: "Patagonia / Yvon Chouinard", tag: "SERVANT", color: VSE.success, content: "Klasický <b>servant leadership</b>. Chouinard v 2022 daroval celou firmu (cca $3 mld) ekologickému trustu. Politika „<i>let my people go surfing</i>” — flexibilní pracovní doba. Záruka oprav produktů na celý život. <b>Lídr, který slouží planetě a zaměstnancům, ne akcionářům.</b>" },
+      { company: "Andrej Babiš (Agrofert)", tag: "AUTORITÁŘSKÝ 9.1", color: VSE.danger, content: "Příklad <b>autoritářského stylu 9.1</b> a <b>oportunistického stylu</b>. Vysoký zájem o úkoly (efektivita, čísla), nízký o lidi. Vysoká fluktuace top managementu — Babiš je častý zdroj konfliktů. Adaptuje styl podle situace (před volbami populista, ve firmě tvrdý šéf). Krátkodobě úspěšné (růst Agrofertu), dlouhodobě riziko (závislost na jednom člověku)." }
+    ]
+  };
+
+  const examQuestionsLead1 = [
+    { komise: "ZS 2026 — Smrčka, Zamazalová, Kučera", otazka: "Kompetence manažera a lídra, které chybí manažerovi v případovce. Doložte na příkladech a doporučte, co s tím.", pozn: "Kučera potrápil — chtěl jednu konkrétní věc co měl na mysli." },
+    { komise: "ZS 2026 — Nový, Bočková, Tahal", otazka: "Kompetence manažera a lídra, které chybí manažerovi v případovce. Doložte na příkladech a doporučte.", pozn: "Stačily úplně základy + propojení s případovkou." },
+    { komise: "ZS 2026 — Mládková, Kolouchová, Mikan", otazka: "Jaké kompetence/dovednosti/schopnosti by si měl leader v případovce osvojit? Metody rozvoje leadera.", pozn: "Mládková chce naprosto přesnou teorii. Kolouchová milá. Mikan top." },
+    { komise: "ZS 2026 — Heřman, Schovancová, Vávra", otazka: "Leader v případovce — vyber a aplikuj na nějakou teorii leadershipu, zdůvodnění, navrhni doporučení rozvoje.", pozn: "Komise byla snová, všichni milí. 20-25 min zkoušení." },
+    { komise: "ZS 2026 — Bočková, Nový, Kolouchová", otazka: "Jaké dovednosti/kompetence by měl leader zlepšit, jaké jsou metody rozvoje?", pozn: "Ocenili navázání na praxi. Teorie je moc nezajímala." },
+    { komise: "ZS 2026 — Machek, Schovancová, Weget", otazka: "Jaké dovednosti/kompetence by měl leader zlepšit, jaké jsou metody rozvoje?", pozn: "Schovancová zájem především o aplikaci na PS." },
+    { komise: "ZS 2026 — Stříteský, Sieber, Vítečková", otazka: "Metody rozvoje zaměstnanců, talent management — chtěla slyšet 9-grid model a Develop-Deploy-Connect, aplikovat na případovku.", pozn: "⚠️ Konkrétně 9-grid + DDC model." },
+    { komise: "ZS 2025 — Vrbová, Tahal, Svobodová", otazka: "Kompetence, dovednosti a nástroje lídra v případovce. Navržení vhodných metod rozvoje lídra dle případovky." },
+    { komise: "ZS 2025 — Tahal, Cejthamr, Svobodová", otazka: "Rozvoj lídra, co lze použít a co bych doporučila lídrovi v případovce.", pozn: "Stačilo doporučit koučink + zdůvodnit." },
+    { komise: "ZS 2025 — Tahal, Kuděj, Kučera", otazka: "Kompetence", pozn: "Krátká otázka, ale chtějí důkladnou teorii." },
+    { komise: "LS 2025 — Štamfestová, Mládková, Vávra", otazka: "Kompetence leadera (kompetenční model, Johari okénko), možnosti rozvoje + aplikace na případovku.", pozn: "⚠️ Zmínili Johari okénko." },
+    { komise: "LS 2025 — Mikovcová, Vávra, Viktora", otazka: "Kompetence, dovednosti a rozvoj lídra." },
+    { komise: "LS 2025 — Stříteský, Andera, Kučera", otazka: "Dovednosti, vzdělávání lídrů, aplikace na případovku.", pozn: "Andera chtěl propojení s praxí. Kučera dával filozofické otázky." },
+    { komise: "LS 2025 — Machek, Kolouchová, Legnerová", otazka: "Dovednosti manažera, vzdělávání lídrů, aplikace na případovku, co by měl leader umět a mít." },
+    { komise: "LS 2025 — Nový, Svobodová, Kolouchová", otazka: "Teorie leadershipu, podle vybrané teorie popište vzhledem k případovce. Doporučení + zdůvodnění proč jste vybrala tu teorii." },
+    { komise: "LS 2025 — Tahal, Cejthamr, Schonfeld", otazka: "Jaké jsou metody rozvoje zaměstnanců? Talent management. Úvod teorie + napasovat na případovku.", pozn: "Cajthamr se doptával na diverzitu." },
+    { komise: "LS 2025 — Tahal, Cejthamr, Schonfeld", otazka: "Kompetence, navrhněte rozvoj manažera z případovky.", pozn: "Top komise, stačily základy." },
+    { komise: "LS 2025 — Mikovcová, Viktora, Kolouchová", otazka: "Jaké jsou metody rozvoje zaměstnanců? Talent managementu. Úvod teorie + napasovat na případovku." },
+    { komise: "LS 2025 — Mládková, Vávra, Hönig", otazka: "HR rozvoj zaměstnanců + talent management — definice, proč rozvíjet, on/off the job, aplikace na případovku." },
+    { komise: "LS 2025 — Double Stříteský, Mareš", otazka: "Teorie leadershipu, podle vybrané teorie popište vzhledem k případovce. Doporučení + zdůvodnění." },
+    { komise: "ZS 2025 — Špaček, Palíšková, Machek", otazka: "Talent management, co/kdo je talent a jak ho firma pozná, proces, talent pool." },
+    { komise: "ZS 2025 — Krause, Lorencová, Zamazalová", otazka: "Rozvoj zaměstnanců a talent management + aplikovat na případovku." },
+    { komise: "ZS 2026 — Machek, Schovancová, Weget", otazka: "Rozvoj zaměstnanců + talent management (aplikovat na případovku)." },
+    { komise: "ZS 2026 — Nový, Bočková, Tahal", otazka: "Leader v případovce — vyber a aplikuj na nějakou teorii leadershipu, zdůvodnění proč zrovna tu teorii." },
+  ];
+
+  const podcastLead1 = { title: "Leadership 1 — Kompetence a rozvoj lídra", description: "Teorie rysů, dovednosti, GRID, situační, transformační 4I, rozvoj on/off the job. 6 minut.", audioUrl: "/audio/lead-1.mp3", notebookLmUrl: null };
+
+  const examStrategyLead1 = `
+    <b style="color:#E06D1E">1.</b> Definuj leadership × management (Kotter — dělání správných věcí × správným způsobem).<br/>
+    <b style="color:#E06D1E">2.</b> Zmiň vývoj teorií: rysy → dovednosti → behaviorální → kontingenční → moderní (4 fáze).<br/>
+    <b style="color:#E06D1E">3.</b> Northouse 5 vlastností + Big Five + Model 4 kompetencí (Hogan & Warrenfeltz) — to chce přesně Mládková.<br/>
+    <b style="color:#E06D1E">4.</b> Identifikuj styl lídra v PS — GRID kvadrant + behaviorální styl + situační vhodnost.<br/>
+    <b style="color:#E06D1E">5.</b> Aplikuj transformační 4I a/nebo servant leadership — co konkrétně lídrovi v PS chybí.<br/>
+    <b style="color:#E06D1E">6.</b> Doporuč rozvoj — On the job (coaching GROW, mentoring) + Off the job (AC/DC, případovky).<br/>
+    <b style="color:#E06D1E">7.</b> ⚠️ Bonus pro Stříteského: 9-grid model + Develop-Deploy-Connect (talent management).<br/>
+    <b style="color:#E06D1E">8.</b> ⚠️ Bonus pro Štamfestovou: Johari okénko (sebepoznání lídra).<br/>
+    <b style="color:#E06D1E">9.</b> Závěr: konkrétní akční doporučení podle připravenosti pracovníků (Hersey-Blanchard).
+  `;
+
+  return (
+    <OkruhPanel
+      subject="Leadership" subjectId="lead" number={1} title="Kompetence a rozvoj lídra" subtitle="Teorie rysů / Dovednosti / GRID / Situační / Transformační 4I / Rozvoj" color={VSE.fmv}
+      questionText="Kompetence/dovednosti a další vlastnosti a nástroje leadera v případovce, navržení vhodných metod rozvoje lídra dle případovky"
+      questionDesc="Definuj leadership × management. Northouse 5 + Big Five. Model 4 kompetencí (Hogan & Warrenfeltz). GRID 9×9. Situační leadership (Hersey-Blanchard). Transformační 4I. Servant. Rozvoj on/off the job. GROW model. Talent management (9-grid, DDC)."
+      sloz={2} roz={3} freq={3}
+      examStrategy={examStrategyLead1}
+      studySections={studySectionsLead1}
+      flashcards={flashcardsLead1}
+      quiz={quizLead1}
+      praxe={praxeLead1}
+      examQuestions={examQuestionsLead1}
+      podcast={podcastLead1}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LEADERSHIP 2 — Styly leadershipu, aplikace na PS, doporučení změn
+   ════════════════════════════════════════════════════════ */
+function OkruhLead2Panel() {
+  const studySectionsLead2 = [
+    { id: "intro", title: "Co je leadership × management", subtitle: "Kotter — rozdíl, který musíš umět hned na začátku", color: VSE.fmv, emoji: "crown",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Leadership</b> = dělání správných věcí (vize, inspirace). <b>Management</b> = dělání věcí správným způsobem (procesy, kontrola). Komise často chce slyšet rozdíl jako úvod ke všem otázkám o stylech.
+        </Def>
+        <Tag color={VSE.fmv}>Vývoj teorií leadershipu — 4 fáze</Tag>
+        <Bullet items={[
+          "Teorie rysů (zač. 20. stol.) — vrozené vlastnosti lídra",
+          "Behaviorální (40-60. léta) — co lídr DĚLÁ a JAK se chová",
+          "Kontingenční (od 70. let) — situační vhodnost stylu",
+          "Moderní (od 90. let) — transformační, autentický, servant",
+        ]} color={VSE.fmv} />
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.warning}10`, borderRadius: 10, border: `1px solid ${VSE.warning}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.warning, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>POZOR:</span> Když komise chce „styl leadershipu v PS”, chce slyšet <b>identifikaci konkrétního stylu</b> z teorie + <b>aplikaci</b> + <b>doporučení změny</b>. Nestačí teorie sama o sobě.
+        </div>
+      </div>) },
+
+    { id: "klasicka", title: "Klasická teorie vedení", subtitle: "3 styly: autoritativní / demokratický / liberální", color: VSE.fmv, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Behaviorální přístup. Lewin (1939) rozlišuje 3 základní styly podle toho, <b>kde se rozhoduje</b>.
+        </Def>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.danger}08`, border: `1px solid ${VSE.danger}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 4 }}>👑 Autoritativní</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Rozhoduje sám, vyžaduje poslušnost. Rychlé rozhodnutí, ale demotivace.</div>
+            <div style={{ fontSize: 10.5, color: "var(--textMuted)", fontFamily: fontSans, marginTop: 4, fontStyle: "italic" }}>Vhodné: krize, nezralí pracovníci</div>
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🤝 Demokratický</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Participativní — lidé se podílejí, deleguje, ale konečné slovo má lídr.</div>
+            <div style={{ fontSize: 10.5, color: "var(--textMuted)", fontFamily: fontSans, marginTop: 4, fontStyle: "italic" }}>Vhodné: zkušený tým, kreativní práce</div>
+          </div>
+          <div style={{ background: `${VSE.fm}08`, border: `1px solid ${VSE.fm}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fm, fontFamily: fontSans, marginBottom: 4 }}>🌊 Liberální</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Laissez-faire. Lidi si stanoví cíle sami, lídr je pasivní.</div>
+            <div style={{ fontSize: 10.5, color: "var(--textMuted)", fontFamily: fontSans, marginTop: 4, fontStyle: "italic" }}>Vhodné: experti, vědci, autonomní práce</div>
+          </div>
+        </div>
+        <Tag color={VSE.primary}>Likertova typologie 4S — rozšířenější verze</Tag>
+        <Bullet items={[
+          "1. Exploračně autoritativní — vykořisťující, motivace strachem",
+          "2. Benevolentní autoritativní — laskavý táta, diskuze ano, rozhoduje šéf",
+          "3. Konzultativní — kooperace, ale konečné slovo má manažer",
+          "4. Participativní — zapojení všech členů na rozhodnutích, plná důvěra",
+        ]} color={VSE.primary} />
+      </div>) },
+
+    { id: "grid", title: "Leadership GRID 9×9", subtitle: "Blake & Mouton — 5 + 2 stylů, který lídr má v PS", color: VSE.fmv, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Manažerská mřížka 9×9</b> — osy: zájem o lidi × zájem o úkoly. <b>Klíč k identifikaci stylu lídra v PS.</b> Komise nejčastěji chce slyšet konkrétní kvadrant.
+        </Def>
+        <Tag color={VSE.fmv}>5 základních stylů</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.danger, fontFamily: fontMono, minWidth: 36 }}>1.1</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontSans }}>Ochuzený / Indiferentní</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}>Lídr „přežívá” pracovní den. <b>Vysoká fluktuace, neefektivní.</b> Často při vyhoření nebo blízko důchodu.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fm}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fm, fontFamily: fontSans, minWidth: 36 }}>1.9</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fm, fontFamily: fontSans }}>Country Club (venkovský klub)</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}>Vysoký zájem o lidi, nízký o úkoly. Lidé jsou spokojení, ale <b>nízká produktivita</b>. Pozn.: může podporovat inovace.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, minWidth: 36 }}>5.5</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontSans }}>Status quo / Střední cesta</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}>Balanc, ale není excelence. Pravidla, kompromisy. <b>Průměrný výkon.</b> Pozor: nestabilní — může se vychýlit k 9.1 nebo 1.9.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fis}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fis, fontFamily: fontSans, minWidth: 36 }}>9.1</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fis, fontFamily: fontSans }}>Autoritářský / Diktátorský</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}>Tvrdá disciplína. <b>Vysoké výkonové maximum krátkodobě, vysoká fluktuace</b>, konflikty.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 36 }}>9.9</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>Týmový styl ⭐ IDEÁL</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 4 }}><b>Cíl všech doporučení.</b> Vysoký zájem o lidi i úkoly. Tým, motivace, malá fluktuace, organizace atraktivní pro top talenty.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>2 přechodové styly (časté v PS!)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🦊 Oportunistický</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Lídr využívá <b>jakýkoliv styl</b> z mřížky podle situace, aby <b>prospěl sám sobě</b>. Manipulace.</div>
+          </div>
+          <div style={{ background: `${VSE.warning}08`, border: `1px solid ${VSE.warning}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>⚖️ Paternalistický</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Přechod 1.9 ↔ 9.1. <b>Když se maká, je 1.9 (laskavý).</b> Když se odchýlí, <b>přechází k 9.1</b> (trestá).</div>
+          </div>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.success}10`, borderRadius: 10, border: `1px solid ${VSE.success}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.success, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>JAK NA TO V PS:</span> Najdi signály — <b>Jak rozhoduje? Jak řeší konflikty? Co je priorita? Jak komunikuje?</b> Pak označ kvadrant a doporuč posun směrem k 9.9.
+        </div>
+      </div>) },
+
+    { id: "situacni", title: "Situační leadership (Hersey-Blanchard)", subtitle: "Volba stylu podle připravenosti pracovníka — D1-D4 / S1-S4", color: VSE.fmv, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Není univerzální správný styl. Závisí na <b>úrovni připravenosti pracovníka</b> (D1-D4) a podle ní volíme styl (S1-S4). Časté v PS s mladými/zkušenými týmy.
+        </Def>
+        <Tag color={VSE.fmv}>4 úrovně D × 4 styly S</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontMono, minWidth: 32 }}>D1</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontSans }}>Nezralý → S1: Přímý direktivní (přikazování)</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Studenti, absolventi. Nízká kompetence, vysoká odhodlanost. <b>Vysoká direktivita + nízká podpora.</b></div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontMono, minWidth: 32 }}>D2</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontSans }}>Začátečník → S2: Koučování</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Zapracovaný, ale nemá dost zkušeností. <b>Vysoká direktivita + vysoká podpora.</b></div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.info}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.info, fontFamily: fontMono, minWidth: 32 }}>D3</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.info, fontFamily: fontSans }}>Zkušený → S3: Podporování</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Střední věk, zkušený, ale potřebuje občasnou podporu. <b>Nízká direktivita + vysoká podpora.</b></div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 32 }}>D4</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>Zralý → S4: Delegování</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Vysoká kompetence, vysoká odhodlanost. <b>Nízká direktivita + nízká podpora.</b> Chtějí to sami.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Teorie cesty k cíli (Path-Goal)</Tag>
+        <div style={{ fontSize: 12, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>Volba stylu podle <b>typu úkolu</b>. Vychází z Vroomovi expectancy teorie:</div>
+        <Bullet items={[
+          "Direktivní — pro nejasná, komplexní zadání (potřebují pravidla)",
+          "Podporující — pro nudnou, stresující, nebezpečnou práci",
+          "Participativní — pro nestrukturalizované úkoly (autonomie)",
+          "Výkonově orientovaný — pro komplexní úkoly + ambiciózní",
+        ]} color={VSE.primary} />
+      </div>) },
+
+    { id: "trendy", title: "Moderní trendy", subtitle: "Transakční × Transformační 4I × Servant × Autentický × Charismatický", color: VSE.fmv, emoji: "sparkles",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Moderní teorie kombinující předchozí přístupy. <b>Transformační</b> a <b>servant</b> jsou nejčastěji požadované jako odpověď na otázku "jaký styl byste doporučil(a)".
+        </Def>
+        <Tag color={VSE.warning}>Transakční leadership</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>
+          <b>Něco za něco.</b> Odměna a trest jako stimulátor. Vhodné pro rutinní práci, výkon dle zadání.
+        </div>
+        <Bullet items={[
+          "Podmíněná odměna — specifikace odměn za splněný úkol",
+          "Management výjimek aktivní — chybu řekne hned",
+          "Management výjimek pasivní — vyčítá až při hodnocení",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.success}>⭐ Transformační leadership 4I (Bass) — KLÍČOVÉ</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 8 }}>
+          <b>Přidaná hodnota nad rámec očekávání.</b> Klima důvěry, mění lídra i podřízeného. Komise toto miluje.
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>1. Idealizovaný vliv</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Lídr je <b>role model</b>. Komunikuje vizi, ctí etiku. Lidé ho následují, protože mu věří.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>2. Inspirativní motivování</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vysoká očekávání + důvěra v tým. Zapojení do tvorby vize.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>3. Intelektuální stimulace</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Stimuluje kreativitu a inovace. Důvěra v nekonvenční řešení.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>4. Individualizované uznání</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Všímá si jednotlivců. Poskytuje koučink, mentoring, podporu.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.fmv}>Další moderní typy</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans }}>⚠️ Pseudotransformační</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Hájí <b>vlastní zájmy</b>, ne tým. Sebestředný, manipulátor.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>✨ Autentický leadership</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Reakce na skandály velkých firem. Lídři jsou <b>sami sebou</b>. Sebeuvědomění, transparentnost, etika. Rozvoj přes <b>360° zpětnou vazbu</b>.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans }}>⚡ Charismatický leadership</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}><b>Lehce zneužitelný.</b> Založen na osobnosti a přesvědčivosti. Riziko: kult osobnosti.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>🤲 Servant leadership</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vedení s lidmi a pro lidi — i nad rámec organizace. <b>Manažer slouží lidem, ne naopak.</b> Potřeby zaměstnanců na 1. místě. Cílem je služba, tvorba podmínek.</div>
+          </GlassBox>
+        </div>
+      </div>) },
+
+    { id: "vyvazeny", title: "Vyvážený (versatilní) leadership", subtitle: "JAK vede × CO vede — protichůdné póly", color: VSE.fmv, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Snaha překonat limity předchozích teorií. Lídr <b>musí zvládnout protichůdné póly</b> a podle situace adaptovat styl. Selhání = přehnané tíhnutí k jednomu pólu.
+        </Def>
+        <Tag color={VSE.fmv}>2 dimenze leadershipu</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 6 }}>JAK vedete (Styl)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 8 }}>Interpersonální rozhodnutí. Protipóly:</div>
+            <Bullet items={[
+              "Direktivita (autorita, přísnost)",
+              "Podpora (delegování, zapojování, uznání)",
+            ]} color={VSE.fmv} />
+          </div>
+          <div style={{ background: `${VSE.fph}08`, border: `1px solid ${VSE.fph}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fph, fontFamily: fontSans, marginBottom: 6 }}>CO vedete (Obsah)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 8 }}>Organizační rozhodnutí. Protipóly:</div>
+            <Bullet items={[
+              "Strategická orientace (dlouhodobé plánování, růst, inovace)",
+              "Operativní orientace (krátkodobé cíle, efektivita)",
+            ]} color={VSE.fph} />
+          </div>
+        </div>
+        <Tag color={VSE.primary}>Principy vyváženého leadershipu</Tag>
+        <Bullet items={[
+          "Žádný přístup nepoužívat v přehnané míře",
+          "Uplatňovat protichůdné postupy vyváženě (jin/jang)",
+          "Schopnost přepínat: autokrat ↔ demokrat / lidi ↔ úkoly / stabilita ↔ změna",
+          "Lídr nejedná impulsivně, ale účelně podle situace",
+        ]} color={VSE.primary} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup identifikace stylu + návrh změn", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          <b>Klíčový postup pro Lead 2 zkoušku.</b> Komise chce: identifikovat → popsat → odůvodnit → doporučit změnu. Prostě těchto 5 kroků.
+        </Def>
+        <Tag color={VSE.success}>Postup identifikace stylu lídra v PS</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 8 }}>
+          {[
+            ["1.", "Najdi signály v PS", "Jak rozhoduje? Jak komunikuje? Jak řeší konflikty? Co je priorita? Jak deleguje?"],
+            ["2.", "Označ kvadrant v GRID", "Zvol jeden z 5 stylů (1.1 / 1.9 / 5.5 / 9.1 / 9.9) nebo přechodový (oportunistický / paternalistický)"],
+            ["3.", "Doplň behaviorální styl", "Autoritativní / demokratický / liberální nebo Likertovo 4S"],
+            ["4.", "Zkontroluj situační vhodnost", "Hersey-Blanchard — odpovídá styl připravenosti pracovníků? Pokud ne, problém."],
+            ["5.", "Doporuč moderní teorii", "Co by lídr měl být — transformační 4I / servant / autentický + konkrétní akce"],
+          ].map(([num, title, desc]) => (
+            <GlassBox key={num} opacity={0.5} style={{ padding: "8px 12px", display: "flex", gap: 12, alignItems: "flex-start", borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 24 }}>{num}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>{title}</div>
+                <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+        <Tag color={VSE.warning}>⚠️ Časté chyby</Tag>
+        <Bullet items={[
+          "Pouze teorie bez aplikace na PS — komise to nepřijme",
+          "Doporučit 9.9 týmový styl bez zdůvodnění proč konkrétně",
+          "Nezohlednit, že mladí lidé v PS = D1/D2 → potřebují direktivu/koučink",
+          "Pomíchat transformační a transakční — KOMISE to ráda chytá",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsLead2 = [
+    { term: "Leadership × Management (Kotter)", def: "Leadership = dělání správných věcí (vize). Management = dělání věcí správným způsobem (procesy).", tag: "DEFINICE" },
+    { term: "Klasická teorie vedení (3 styly)", def: "Autoritativní (rozhoduje sám) / Demokratický (participativní) / Liberální (laissez-faire).", tag: "STYLY" },
+    { term: "Likertova typologie 4S", def: "Exploračně autoritativní / Benevolentní / Konzultativní / Participativní. Rozšíření klasické teorie.", tag: "STYLY" },
+    { term: "Leadership GRID osy", def: "Vertikální = zájem o lidi. Horizontální = zájem o úkoly. Body 1-9 na obou osách.", tag: "GRID" },
+    { term: "Styl 1.1 (Ochuzený)", def: "Nízký zájem o lidi i úkoly. Lídr „přežívá”. Vysoká fluktuace, neefektivita.", tag: "GRID" },
+    { term: "Styl 1.9 (Country Club)", def: "Vysoký zájem o lidi, nízký o úkoly. Spokojení lidé, ale nízká produktivita.", tag: "GRID" },
+    { term: "Styl 9.1 (Autoritářský)", def: "Vysoký zájem o úkoly, nízký o lidi. Vysoký výkon krátkodobě, vysoká fluktuace.", tag: "GRID" },
+    { term: "Styl 9.9 (Týmový)", def: "Vysoký zájem o lidi i úkoly. IDEÁL. Tým, motivace, malá fluktuace.", tag: "GRID" },
+    { term: "Oportunistický styl", def: "Lídr využívá jakýkoliv styl pro vlastní prospěch. Manipulace.", tag: "GRID" },
+    { term: "Paternalistický styl", def: "Přechod 1.9 ↔ 9.1. Laskavý, dokud se maká, jinak trestá.", tag: "GRID" },
+    { term: "Hersey-Blanchard D1-D4", def: "D1 nezralý → S1 direktivní. D2 začátečník → S2 koučování. D3 zkušený → S3 podporování. D4 zralý → S4 delegování.", tag: "SITUAČNÍ" },
+    { term: "Teorie cesty k cíli", def: "Path-Goal. 4 styly podle typu úkolu: direktivní / podporující / participativní / výkonově orientovaný.", tag: "SITUAČNÍ" },
+    { term: "Transformační 4I (Bass)", def: "Idealizovaný vliv / Inspirativní motivování / Intelektuální stimulace / Individualizované uznání.", tag: "TRENDY" },
+    { term: "Transakční leadership", def: "Něco za něco. Podmíněná odměna + management výjimek (aktivní/pasivní).", tag: "TRENDY" },
+    { term: "Servant leadership", def: "Manažer slouží lidem, ne naopak. Potřeby zaměstnanců na 1. místě.", tag: "TRENDY" },
+    { term: "Versatilní leadership", def: "JAK vede (direktivita ↔ podpora) × CO vede (strategická ↔ operativní orientace). Schopnost přepínat.", tag: "TRENDY" },
+  ];
+
+  const quizLead2 = [
+    { q: "V Leadership GRID — který styl je týmový (ideál)?", opts: ["1.1", "1.9", "9.1", "9.9"], correct: 3 },
+    { q: "Jaký styl je v PS, kde lídr rozhoduje sám a vyžaduje poslušnost?", opts: ["Liberální", "Demokratický", "Autoritativní", "Koučovací"], correct: 2 },
+    { q: "Co je paternalistický styl?", opts: ["Stálý 9.9 týmový styl", "Přechod 1.9 ↔ 9.1 — laskavý, dokud se maká, jinak trestá", "Synonym pro liberální styl", "Pouze 5.5 střední cesta"], correct: 1 },
+    { q: "V Hersey-Blanchard modelu — jaký styl pro D4 (zralého pracovníka)?", opts: ["S1 Přímý direktivní", "S2 Koučování", "S3 Podporování", "S4 Delegování"], correct: 3 },
+    { q: "Které 4I obsahuje transformační leadership (Bass)?", opts: ["Inspirace / Iniciativa / Integrita / Innovation", "Idealizovaný vliv / Inspirativní motivování / Intelektuální stimulace / Individualizované uznání", "Influence / Information / Innovation / Implementation", "Idea / Insight / Initiative / Impact"], correct: 1 },
+    { q: "Co je transakční leadership?", opts: ["Lídr slouží lidem nad rámec organizace", "Něco za něco — odměna a trest jako stimulátor", "Lídr stimuluje kreativitu a inovace", "Lídr přepíná styly podle situace"], correct: 1 },
+    { q: "V Likertově typologii 4S — který styl je nejautoritativnější?", opts: ["Participativní", "Konzultativní", "Benevolentní autoritativní", "Exploračně autoritativní"], correct: 3 },
+    { q: "Co charakterizuje servant leadership?", opts: ["Lídr trestá za chybné výkony", "Lídr slouží sám sobě a kariéře", "Manažer slouží lidem, potřeby zaměstnanců na 1. místě", "Lídr používá jakýkoliv styl pro vlastní prospěch"], correct: 2 },
+    { q: "Co je oportunistický styl v Leadership GRID?", opts: ["Stálý 5.5 styl", "Lídr využívá jakýkoliv styl pro vlastní prospěch", "Pouze 1.1 ochuzený", "Synonymum pro situační leadership"], correct: 1 },
+    { q: "Versatilní leadership rozlišuje 2 dimenze — JAK vede × CO vede. Co znamená 'CO'?", opts: ["Interpersonální rozhodnutí (direktivita vs. podpora)", "Organizační rozhodnutí (strategická vs. operativní orientace)", "Úroveň zkušeností pracovníka", "Typ odměny"], correct: 1 },
+    { q: "Pseudotransformační lídr je…", opts: ["Synonym transformačního lídra", "Hájí pouze vlastní zájmy, ne tým", "Vždy demokratický", "Jen aplikuje 4I bez chyby"], correct: 1 },
+    { q: "V PS s mladým týmem (D1-D2) je nejvhodnější styl…", opts: ["Delegování", "Liberální laissez-faire", "Direktivní + koučovací", "Pouze servant leadership"], correct: 2 },
+  ];
+
+  const praxeLead2 = {
+    caseStudy: {
+      company: "Steve Jobs (Apple) → Tim Cook — přechod stylů 9.1 → 9.9",
+      subtitle: "Z autoritářského diktátora na týmového lídra",
+      content: (<>
+        <b>Steve Jobs (1997-2011)</b> byl <b>klasický 9.1 autoritářský / oportunistický styl</b>. Vysoký zájem o úkoly (perfektní produkty), nízký o lidi. Vyhazoval lidi na schodech, šikanoval inženýry, byl neústupný. Charismatický leadership v plné síle — ale temná strana.<br/><br/>
+        <b style={{ color: VSE.danger }}>Signály 9.1 v Jobsovi:</b> Rozhodoval sám (designové rozhodnutí, žádná demokracie). Konflikt řešil konfrontací. Priorita = produkt, ne lidé. Komunikoval direktivně až agresivně.<br/><br/>
+        <b style={{ color: VSE.success }}>Tim Cook (2011-dnes) — přechod k 9.9 týmovému stylu.</b> Po Jobsově smrti Cook implementoval <b>servant leadership</b> a <b>transformační 4I</b>:<br/>
+        <b>1. Idealizovaný vliv</b> — Cook je etický role model (LGBTQ+ advokát, sociální zájem, ne jen produkt).<br/>
+        <b>2. Inspirativní motivování</b> — sjednotil Apple pod misí soukromí + udržitelnosti (carbon-neutral).<br/>
+        <b>3. Intelektuální stimulace</b> — pivot k službám (Apple TV+, Apple Music, iCloud) — kreativní řešení diverzifikace mimo iPhone.<br/>
+        <b>4. Individualizované uznání</b> — investice do zaměstnaneckých benefitů, transparentní platy.<br/><br/>
+        <b style={{ color: VSE.fmv }}>Výsledek (2011→dnes):</b> Apple market cap z $400B na $3T+ (8× růst). <b>Stejný úspěch, jiný styl.</b> Cook ukazuje, že 9.9 je možné v hi-tech firmě.
+      </>),
+      lessons: "Komise tohle miluje, protože ukazuje <b>přechod stylu lídra</b> v reálné firmě. Když máš v PS 9.1 lídra, doporuč Cookův model — postupný přechod k 9.9 přes <b>4I + servant leadership</b>. Není potřeba okamžitá revoluce, ale konkrétní akce: delegování, naslouchání, transparence."
+    },
+    miniExamples: [
+      { company: "Tomáš Baťa (česká klasika)", tag: "TRANSFORMAČNÍ 9.9", color: VSE.success, content: "Předchůdce moderního <b>transformačního leadershipu</b> + týmového stylu 9.9. <b>Idealizovaný vliv</b> — sám pracoval ve fabrice. <b>Inspirativní motivování</b> — Baťovo motto „<i>Naším zákazníkům</i>”. <b>Intelektuální stimulace</b> — montážní linky, pásová výroba (1920s). <b>Individualizované uznání</b> — Baťovy domky pro zaměstnance. Vysoký zájem o lidi i úkoly = perfektní 9.9. Zlín se stal globálním centrem obuvnictví." },
+      { company: "Andrej Babiš (Agrofert) — CZ", tag: "AUTORITÁŘSKÝ 9.1 + OPORTUNISTICKÝ", color: VSE.danger, content: "Klasický příklad <b>autoritářského stylu 9.1</b> a <b>oportunistického stylu</b>. Vysoký zájem o úkoly (efektivita, čísla), nízký o lidi. Vysoká fluktuace top managementu — Babiš je častý zdroj konfliktů. <b>Adaptuje styl podle situace</b> (před volbami populista = 1.9, ve firmě tvrdý šéf = 9.1). Krátkodobě úspěšné (růst Agrofertu na největší český holding), dlouhodobě riziko závislosti na jednom člověku." },
+      { company: "Pavel Maurer (TopGastro) — CZ", tag: "SERVANT", color: VSE.success, content: "Příklad <b>servant leadershipu</b> v česku. Maurer buduje gastronomickou komunitu nad rámec své firmy — Maurer's Grand Restaurant Toplist, podpora mladých kuchařů, mentoring. Slouží <b>celé branži</b>, ne jen sobě. Nízká fluktuace v jeho firmách, dlouhodobá loajalita." },
+      { company: "Microsoft — Satya Nadella", tag: "TRANSFORMAČNÍ 4I", color: VSE.success, content: "Přechod ze <b>Steve Ballmera (9.1 autoritář, stack ranking, toxic culture)</b> k Nadelovi (9.9 + transformační 4I). Stock $38 → $400+. Ukazuje, že přechod stylu jde i v ohromné korporaci. Klíč: <b>growth mindset, learn-it-all</b>, ne know-it-all. Empatie + vize + odvaha riskovat (cloud, AI partnership s OpenAI)." },
+    ]
+  };
+
+  const examQuestionsLead2 = [
+    { komise: "ZS 2026 — Mikovcová, Viktora, Vávra", otazka: "Styl leadershipu, který je využíván v PS, popsat ho, odůvodnit proč zrovna tento styl je na případovku aplikovatelný. Co bych změnila, aby to fungovalo lépe?", pozn: "Boží komise. Vávra na marketing byl úplný zlatíčko, neskákal do řeči, nechal mluvit." },
+    { komise: "ZS 2026 — Kupec, Mládková, Kolouchová", otazka: "Vybrat si styl leadershipu, popsat ho, aplikovat ho na případovku a odůvodnit proč zrovna tento styl je na případovku aplikovatelný.", pozn: "Kupec skvělý, hladil po srsti, nechal mluvit o teorii, jen zlehka se doptal k aplikaci." },
+    { komise: "ZS 2026 — Heřman, Schovancová, Vávra", otazka: "Leader v případovce — vyber a aplikuj na nějakou teorii leadershipu, zdůvodnění proč jsi zrovna vybral tu teorii, navrhni doporučení rozvoje leadera.", pozn: "Snová komise, všichni moc milí a sympatičtí." },
+    { komise: "ZS 2026 — Nový, Bočková, Tahal", otazka: "Leader v případovce — vyber a aplikuj na nějakou teorii leadershipu, zdůvodnění proč jsi zrovna vybral tu teorii.", pozn: "Komise byla v pohodě, všichni hodní." },
+    { komise: "ZS 2025 — Smrčka, Kolouchová, Říhová", otazka: "Styly leadershipů. Popsat jak to je v případovce a navrhnout změny." },
+    { komise: "ZS 2025 — Krause, Viktora, Tahal", otazka: "Typy leadershipu, popsat leadera v case study." },
+    { komise: "LS 2025 — Nový, Svobodová, Kolouchová", otazka: "Teorie leadershipu, podle vybrané teorie popište vzhledem k případovce. Jaké doporučení byste navrhla? Zdůvodněné proč jste vybrala tuto teorii leadershipu.", pozn: "Komise byla skvělá, začala jsem od marketingu." },
+    { komise: "LS 2025 — Double Stříteský, Mareš", otazka: "Teorie leadershipu, podle vybrané teorie popište vzhledem k případovce. Jaké doporučení byste navrhla? Zdůvodněné proč jste vybrala tuto teorii leadershipu.", pozn: "Mareš si to na pohodku odsedel." },
+    { komise: "LS 2025 — Nový, Müllerová, Kolouchová", otazka: "Ovlivňování pracovníků — zbytek všechno případovka, jak změnit řízení, jak motivovat, jak změnit leadership.", pozn: "Chtěli hodně ukázat aplikaci na případovce." },
+  ];
+
+  const podcastLead2 = { title: "Leadership 2 — Styly leadershipu", description: "Klasická teorie, Likert 4S, Leadership GRID, situační leadership, transformační/servant. Identifikace stylu v PS + doporučení.", audioUrl: "/audio/lead-2.mp3", notebookLmUrl: null };
+
+  const examStrategyLead2 = `
+    <b style="color:#E06D1E">1.</b> Začni Kotterovým rozlišením leadership × management (1 věta).<br/>
+    <b style="color:#E06D1E">2.</b> Krátký vývoj teorií: rysy → behaviorální → kontingenční → moderní (orientace).<br/>
+    <b style="color:#E06D1E">3.</b> <b>Identifikuj styl lídra v PS</b> — najdi signály (jak rozhoduje, řeší konflikty, priorita, komunikace).<br/>
+    <b style="color:#E06D1E">4.</b> Označ kvadrant v Leadership GRID + behaviorální styl + Likertovo 4S.<br/>
+    <b style="color:#E06D1E">5.</b> Zkontroluj situační vhodnost (Hersey-Blanchard) — odpovídá styl D1-D4 týmu?<br/>
+    <b style="color:#E06D1E">6.</b> Navrhni změny — posun k 9.9 týmovému + transformační 4I + servant leadership.<br/>
+    <b style="color:#E06D1E">7.</b> Konkrétně: co bys lídrovi řekl/a, aby udělal jinak (3-5 akcí).<br/>
+    <b style="color:#E06D1E">8.</b> Závěr: vize 9.9 + zdůvodnění proč zrovna tato teorie funguje na PS.
+  `;
+
+  return (
+    <OkruhPanel
+      subject="Leadership" subjectId="lead" number={2} title="Styly leadershipu" subtitle="Klasická teorie / Likert 4S / GRID / Hersey-Blanchard / Transformační"
+      color={VSE.fmv}
+      questionText="Leadership a styly vedení. Styly leadershipů. Popsat, jak to je v případovce a navrhnout změny."
+      questionDesc="Vývoj teorií. Klasická teorie 3 stylů. Likert 4S. Leadership GRID 9×9 + 5 stylů + 2 přechodové. Hersey-Blanchard situační. Path-Goal. Transformační 4I. Transakční. Servant. Versatilní leadership. Aplikace na PS + doporučení."
+      sloz={2} roz={2} freq={3}
+      examStrategy={examStrategyLead2}
+      studySections={studySectionsLead2}
+      flashcards={flashcardsLead2}
+      quiz={quizLead2}
+      praxe={praxeLead2}
+      examQuestions={examQuestionsLead2}
+      podcast={podcastLead2}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LEADERSHIP 3 — Kreativní klima v organizaci, metody rozvoje kreativity
+   ════════════════════════════════════════════════════════ */
+function OkruhLead3Panel() {
+  const studySectionsLead3 = [
+    { id: "intro", title: "Kreativita × Inovace", subtitle: "Co je organizační kreativita a proč ji řeší leadership", color: VSE.fmv, emoji: "lightbulb",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Kreativita</b> = proces vzniku nových, užitečných nápadů vedoucích ke zlepšování nebo tvorbě nových produktů/služeb/procesů. <b>Inovace</b> = praktická aplikace kreativního myšlení (uvedení na trh).
+        </Def>
+        <Tag color={VSE.fmv}>Organizační kreativita — 2 mechanismy</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 6 }}>👤 Individual creativity</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Aktivity jednotlivce — osobní kreativita. Expertiza, kreativní dovednosti, motivace pro úkol.</div>
+          </div>
+          <div style={{ background: `${VSE.fph}08`, border: `1px solid ${VSE.fph}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fph, fontFamily: fontSans, marginBottom: 6 }}>🏢 Organizational creativity</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Praktiky a procedury v organizaci, které podporují kreativní chování.</div>
+          </div>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.success}10`, borderRadius: 10, border: `1px solid ${VSE.success}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.success, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>NEJÚSPĚŠNĚJŠÍ ORG:</span> mají <b>oba</b> mechanismy. Nejde to jen tak shora ani zdola — musí být systém.
+        </div>
+        <Tag color={VSE.warning}>Proč kreativitu řešit?</Tag>
+        <Bullet items={[
+          "Společnosti se musí rychle přizpůsobovat změnám",
+          "Rostoucí význam inovací — inovaci vždy předchází kreativní nápad",
+          "Konkurenční výhoda v turbulentním prostředí",
+          "Engagement zaměstnanců — kreativita zvyšuje smysluplnost práce",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "potencial", title: "Kreativní potenciál jedince", subtitle: "3 faktory podle Amabile + bariéry kreativity", color: VSE.fmv, emoji: "star",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Teresa Amabile — 3 složky kreativního potenciálu jednotlivce. <b>Všechny 3 musí být přítomny</b>, jinak kreativita nefunguje.
+        </Def>
+        <Tag color={VSE.fmv}>3 faktory kreativního potenciálu</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🎓 Expertiza</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Odborné znalosti, schopnosti, dovednosti v oboru.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>💡 Kreativní dovednosti</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Kognitivní styl podporující kreativitu, nezávislost, sebevědomí, ochota riskovat.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🔥 Motivace pro úkol</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Míra zájmu jedince investovat čas a úsilí. <b>Vnitřní</b> motivace klíčová!</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.danger}>⚠️ Bariéry kreativity</Tag>
+        <Bullet items={[
+          "Lpění na tradicích — „takhle se to dělá”",
+          "Nevhodné fyzické prostředí (open space rušný, žádný klid)",
+          "Kritické reakce kolegů — strach z neúspěchu",
+          "Nepružnost vedení — pomalé schvalovací procesy",
+          "Nedostatek podpory při realizaci nápadů",
+          "Vnější stimuly mohou snížit kreativitu (paradox motivace)",
+        ]} color={VSE.danger} />
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.warning}10`, borderRadius: 10, border: `1px solid ${VSE.warning}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.warning, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>POZOR — paradox odměn:</span> Vnější stimuly (peníze, bonusy) mohou kreativitu <b>SNÍŽIT</b>. Lídr musí volit takovou odměnu, která <b>vnitřně motivovaného</b> člověka nedemotivuje. Často: čas, autonomie, uznání.
+        </div>
+      </div>) },
+
+    { id: "klima", title: "Kreativní klima v organizaci", subtitle: "4 faktory + organizační kultura podporující kreativitu", color: VSE.fmv, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Kreativní klima</b> = atmosféra v organizaci, která podporuje vznik a realizaci nových nápadů. Klíčový pojem otázky.
+        </Def>
+        <Tag color={VSE.fmv}>4 hlavní faktory kreativního klimatu</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>🆓 Svoboda a autonomie</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Volnost ve volbě cesty, jak dosáhnout cíle. Lidé mohou experimentovat.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>🚀 Práce jako výzva</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Smysluplné, náročné úkoly, které motivují k překonání sebe sama.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>🤝 Komunikace a důvěra</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Otevřená výměna nápadů. Důvěra, že nápad nebude zesměšněn.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>💪 Podpora kreativity</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Zdroje (čas, peníze, technologie). Tolerance neúspěchu.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Organizační kultura podporující kreativitu</Tag>
+        <Bullet items={[
+          "Strategie, mise, vize zaměřená na výzkum a inovace",
+          "Podpora experimentování (toleruje neúspěch)",
+          "Flexibilní organizační struktura (ne rigidní hierarchie)",
+          "Otevřená komunikace napříč úrovněmi",
+          "Dostupné zdroje (finanční i technologické)",
+          "Motivační program, který zohledňuje kreativní přínos",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.fis}>Faktory uvnitř organizace ovlivňující kreativitu</Tag>
+        <Bullet items={[
+          "Emoční rozpoložení — pozitivní nálada ve skupině zvyšuje kreativitu",
+          "Organizační prostředí — fyzické i psychologické",
+          "Leadership — jaký styl vede k inovacím (transformační!)",
+        ]} color={VSE.fis} />
+      </div>) },
+
+    { id: "metody-mng", title: "Manažerské metody pro kreativitu", subtitle: "CPS / Design Thinking / Synektika / TRIZ", color: VSE.fmv, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Klíčové metody</b> pro rozvoj kreativity v organizaci. Komise často chce, abys vyjmenoval(a) konkrétní metody a aplikoval(a) je na PS.
+        </Def>
+        <Tag color={VSE.fmv}>CPS — Creative Problem Solving</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 8 }}>
+          Univerzální rámec pro tvořivé řešení problémů. <b>Týmová práce</b>. Lze začít kdekoliv (průzkum, hledání nápadů, plánování, realizace).
+        </div>
+        <Bullet items={[
+          "Vyjasnění problému (identifikace, fakta, formulace)",
+          "Hledání nápadů (nová řešení)",
+          "Příprava k akci (vývoj řešení, realizace)",
+          "Kognitivní model — generování nových nápadů",
+          "Týmová práce — různé pohledy",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.success}>⭐ Design Thinking — TOP metoda</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 8 }}>
+          Zaměřuje se na <b>uživatele</b>, zákazníka — hledá jeho neuspokojené potřeby. Iterativní proces.
+        </div>
+        <div style={{ display: "flex", gap: 6, marginBottom: 8, flexWrap: "wrap" }}>
+          {["1. Empatie", "2. Definice", "3. Ideace", "4. Prototyp", "5. Test"].map((step, i) => (
+            <div key={i} style={{ background: `${VSE.success}15`, border: `1px solid ${VSE.success}40`, borderRadius: 8, padding: "6px 10px", fontSize: 11.5, fontWeight: 600, color: VSE.success, fontFamily: fontSans }}>
+              {step}
+            </div>
+          ))}
+        </div>
+        <Bullet items={[
+          "Ponoření — pochopit uživatele, jeho problém",
+          "Generování nápadů — brainstorming, divergent thinking",
+          "Prototypování — rychlá vizualizace, MVP",
+          "Test — sběr zpětné vazby, iterace",
+        ]} color={VSE.success} />
+        <Tag color={VSE.fph}>Synektika — propojování odlišných oblastí</Tag>
+        <Bullet items={[
+          "Volný běh myšlenek — bez cenzury",
+          "Využití analogie a asociací",
+          "Spojení odlišných věcí dohromady (kampus pro děti)",
+          "Ideální pro hledání průlomových řešení",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>TRIZ — řešení inovačních zadání</Tag>
+        <Bullet items={[
+          "Software s metodologií pro tvorbu inovací a zlepšení nápadů",
+          "Sběr informací, vytvoření analýzy, syntézy, verifikace problému",
+          "Bez dlouhého přemýšlení dojít k rychlému řešení problému",
+          "Nejlepší pro technické/inženýrské problémy",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "ideace", title: "Metody generování nápadů", subtitle: "Brainstorming / Brainwriting / Metoda 635 / 6 thinking hats", color: VSE.fmv, emoji: "brain",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Konkrétní techniky pro <b>generování nápadů</b> v týmu. Komise je často chce vyjmenovat a aplikovat.
+        </Def>
+        <Tag color={VSE.fmv}>Brainstorming</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>
+          Volná diskuze, vyprodukuje totik nápadů, kolik je v lidech sílách.
+        </div>
+        <Bullet items={[
+          "Diskuze bez zábran — píše se všechno → stupnice +/-",
+          "Předejít únosnost, strach z hodnocení, zapomenutí",
+          "Pravidlo: žádná kritika v ideační fázi",
+          "Po brainstormingu: ohodnotit, vybrat, zpracovat",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.fph}>Brainwriting</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>
+          Každý pracuje nejdřív sám — sepíše nápady, pak se dohromady ohodnotí. <b>Vhodné pro introverty</b>.
+        </div>
+        <Tag color={VSE.warning}>Metoda 635</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>
+          <b>6 účastníků, 3 nápady, 5 minut</b> — papír se točí celkem 30 min.
+        </div>
+        <Bullet items={[
+          "Každý napíše 3 nápady na svůj papír",
+          "Po 5 minutách předá papír sousedovi",
+          "Soused inspiruje a doplní svoje 3 nápady",
+          "Po 30 min: 6 účastníků × 3 nápady × 6 kol = 108 nápadů",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.success}>De Bono — 6 Thinking Hats</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 8 }}>
+          Laterální myšlení — odprostit se od dosavadních nápadů a předsudků. <b>Každý klobouk = jiný způsob myšlení.</b>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 6 }}>
+          {[
+            ["⚪ Bílý", "Fakta, data", VSE.text],
+            ["🔴 Červený", "Pocity, intuice", VSE.danger],
+            ["🟡 Žlutý", "Výhody, přínosy", VSE.warning],
+            ["🟢 Zelený", "Kreativita, alternativy", VSE.success],
+            ["🔵 Modrý", "Proces, plánování", VSE.info],
+            ["⚫ Černý", "Rizika, problémy", VSE.fis],
+          ].map(([title, desc, color]) => (
+            <div key={title} style={{ background: `${color}10`, border: `1px solid ${color}30`, borderRadius: 8, padding: "8px 10px" }}>
+              <div style={{ fontSize: 11.5, fontWeight: 700, color: color, fontFamily: fontSans }}>{title}</div>
+              <div style={{ fontSize: 10.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+            </div>
+          ))}
+        </div>
+        <Tag color={VSE.fis}>WOIS — strategie protikladů</Tag>
+        <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          Inovační strategie vycházející z protikladů. Způsob uvažování v <b>kategoriích</b>, kde předtím nebyly. Výsledkem jsou neočekávaná řešení.
+        </div>
+      </div>) },
+
+    { id: "leadership-kreativ", title: "Leadership kreativní organizace", subtitle: "Jaký styl podporuje kreativitu + Model organizační kreativity", color: VSE.fmv, emoji: "crown",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Leadership = klíčový faktor kreativní organizace.</b> Bez správného stylu vedení nelze kreativitu rozvinout. Komise často propojuje s otázkou stylu.
+        </Def>
+        <Tag color={VSE.fmv}>Které styly podporují kreativitu</Tag>
+        <Bullet items={[
+          "✅ Transformační (4I) — intelektuální stimulace přímo cílí na kreativitu",
+          "✅ Servant — slouží lidem, dává jim prostor experimentovat",
+          "✅ Versatilní — schopnost přepínat styly podle situace",
+          "✅ Demokratický / Participativní — zapojení v rozhodnutí",
+          "❌ Autoritativní 9.1 — strach ubíjí kreativitu",
+          "❌ Pseudotransformační — manipulace ubírá motivaci",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.primary}>Model organizační kreativity</Tag>
+        <div style={{ fontSize: 12, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 8, fontStyle: "italic" }}>4 prvky, jejichž propojení vede k inovacím:</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>👥 LIDÉ (Person)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Individuální kreativita. Expertiza + dovednosti + motivace.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>⚙️ PROCESY (Process)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Manažerské metody, design thinking, brainstorming.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>📦 PRODUKT (Product)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Výsledek — řešení problémů, nápady, služby, produkty.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>🌍 PROSTŘEDÍ (Environment)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Kultura — psychologické, fyzické, národnostní.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.success}>Co dělá lídr pro kreativní organizaci</Tag>
+        <Bullet items={[
+          "Vytváří klima důvěry — lidé nebojí přijít s nápadem",
+          "Toleruje neúspěch — chyba = učení, ne kritika",
+          "Dává čas a zdroje — bez slacku nelze experimentovat",
+          "Motivuje vnitřně — uznání, autonomie, smysl, ne jen peníze",
+          "Volí transformační styl — 4I = stimuluje kreativitu",
+          "Buduje různorodý tým — diverzita = více pohledů",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro Lead 3 zkoušku", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Komise chce: <b>najít kreativní/nekreativní klima v PS</b> + <b>doporučit konkrétní opatření</b> + <b>aplikovat metody</b> (CPS, design thinking, atd.).
+        </Def>
+        <Tag color={VSE.success}>Postup pro Lead 3</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 8 }}>
+          {[
+            ["1.", "Definuj kreativitu × inovaci", "Kreativita = nápad. Inovace = aplikace."],
+            ["2.", "Identifikuj stav v PS", "Je tam kreativní klima? Jaké jsou bariéry? Jak motivuje lídr?"],
+            ["3.", "Najdi 4 faktory klimatu", "Svoboda / Práce jako výzva / Komunikace / Podpora — co chybí?"],
+            ["4.", "Zkontroluj kulturu organizace", "Strategie zaměřená na inovace? Flexibilní struktura? Tolerance neúspěchu?"],
+            ["5.", "Doporuč konkrétní metody", "Design thinking pro produkty / Brainstorming pro tým / 6 hats pro porady"],
+            ["6.", "Doporuč změnu leadershipu", "Posun od autoritativního k transformačnímu 4I + intelektuální stimulace"],
+            ["7.", "Konkrétní akce v PS", "3-5 opatření: zavést inovační dny, motivační program, plochu pro experimenty"],
+          ].map(([num, title, desc]) => (
+            <GlassBox key={num} opacity={0.5} style={{ padding: "8px 12px", display: "flex", gap: 12, alignItems: "flex-start", borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 24 }}>{num}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>{title}</div>
+                <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.warning}10`, borderRadius: 10, border: `1px solid ${VSE.warning}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.warning, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>STŘÍTESKÝ TIP:</span> Stříteský miluje praxi a doporučení. Teorii moc neřeší. Připrav 3-5 konkrétních akcí, které bys lídrovi v PS doporučil(a). Příklad: <b>finanční bonus za realizovaný nápad</b> (jako u Lázní s bahenním pánem).
+        </div>
+      </div>) },
+  ];
+
+  const flashcardsLead3 = [
+    { term: "Kreativita × Inovace", def: "Kreativita = nápad. Inovace = praktická aplikace kreativního myšlení (uvedení na trh).", tag: "DEFINICE" },
+    { term: "Organizační kreativita", def: "Tvorba hodnotných a užitečných nových produktů, služeb, nápadů, procedur. 2 mechanismy: individuální + organizační.", tag: "DEFINICE" },
+    { term: "3 faktory kreativního potenciálu (Amabile)", def: "Expertiza / Kreativní dovednosti / Motivace pro úkol.", tag: "POTENCIÁL" },
+    { term: "4 faktory kreativního klimatu", def: "Svoboda a autonomie / Práce jako výzva / Komunikace a důvěra / Podpora kreativity.", tag: "KLIMA" },
+    { term: "Bariéry kreativity", def: "Lpění na tradicích, nevhodné prostředí, kritika kolegů, nepružnost vedení, nedostatek podpory.", tag: "BARIÉRY" },
+    { term: "Paradox vnějších odměn", def: "Vnější stimuly (peníze) mohou kreativitu SNÍŽIT. Vnitřně motivované lidi demotivují.", tag: "MOTIVACE" },
+    { term: "CPS — Creative Problem Solving", def: "Univerzální rámec pro tvořivé řešení problémů. Týmová práce, lze začít kdekoliv.", tag: "METODY" },
+    { term: "Design Thinking — 5 fází", def: "1. Empatie / 2. Definice / 3. Ideace / 4. Prototyp / 5. Test. Zaměřeno na uživatele.", tag: "METODY" },
+    { term: "Synektika", def: "Volný běh myšlenek + propojování odlišných oblastí. Analogie, asociace.", tag: "METODY" },
+    { term: "TRIZ", def: "Software/metodologie pro řešení inovačních zadání. Sběr info, analýza, syntéza, verifikace.", tag: "METODY" },
+    { term: "Brainstorming", def: "Volná diskuze. Žádná kritika v ideační fázi. Po: ohodnotit, vybrat, zpracovat.", tag: "IDEACE" },
+    { term: "Brainwriting", def: "Každý sám napíše nápady → pak dohromady. Vhodné pro introverty.", tag: "IDEACE" },
+    { term: "Metoda 635", def: "6 účastníků, 3 nápady, 5 minut. Po 30 min = až 108 nápadů.", tag: "IDEACE" },
+    { term: "De Bono — 6 Thinking Hats", def: "Bílý (fakta) / Červený (pocity) / Žlutý (přínosy) / Zelený (kreativita) / Modrý (proces) / Černý (rizika).", tag: "IDEACE" },
+    { term: "Model organizační kreativity", def: "4 prvky: Lidé / Procesy / Produkt / Prostředí. Leadership propojuje vše.", tag: "MODEL" },
+    { term: "Lídr pro kreativní organizaci", def: "Transformační 4I (intelektuální stimulace) + servant + tolerance neúspěchu.", tag: "LEADERSHIP" },
+  ];
+
+  const quizLead3 = [
+    { q: "Jaký je rozdíl mezi kreativitou a inovací?", opts: ["Synonyma", "Kreativita = nápad, inovace = praktická aplikace", "Kreativita = strategická, inovace = operativní", "Inovace = nápad, kreativita = aplikace"], correct: 1 },
+    { q: "Které jsou 3 faktory kreativního potenciálu jedince podle Amabile?", opts: ["Inteligence / Kreativita / Talent", "Expertiza / Kreativní dovednosti / Motivace pro úkol", "Vize / Mise / Strategie", "Plánování / Organizace / Kontrola"], correct: 1 },
+    { q: "Co je organizační kreativita?", opts: ["Pouze kreativita HR oddělení", "Tvorba hodnotných a užitečných nových produktů, služeb, nápadů, procedur", "Marketingová strategie", "Synonymum pro design thinking"], correct: 1 },
+    { q: "Které 4 faktory tvoří kreativní klima?", opts: ["Strategie / Mise / Vize / Hodnoty", "Svoboda a autonomie / Práce jako výzva / Komunikace a důvěra / Podpora kreativity", "Plat / Bonus / Pojištění / Dovolená", "Empatie / Definice / Ideace / Test"], correct: 1 },
+    { q: "Co je paradox vnějších odměn v kontextu kreativity?", opts: ["Peníze vždy zvyšují kreativitu", "Vnější stimuly mohou kreativitu snížit (vnitřně motivované demotivují)", "Pouze finanční bonusy fungují", "Odměny musí být vždy vyšší než plat"], correct: 1 },
+    { q: "Které jsou fáze Design Thinking?", opts: ["Plán / Akce / Kontrola / Vyhodnocení", "Empatie / Definice / Ideace / Prototyp / Test", "Vize / Strategie / Implementace / Měření", "Brainstorm / Vote / Decide / Implement"], correct: 1 },
+    { q: "Co je metoda 635?", opts: ["6 lidí, 3 dny, 5 nápadů", "6 účastníků, 3 nápady, 5 minut — papír se točí celkem 30 min", "6 hodin práce, 3 přestávky, 5 účastníků", "6× ročně, 3 setkání, 5 účastníků"], correct: 1 },
+    { q: "Co je černý klobouk v De Bono Six Thinking Hats?", opts: ["Fakta a data", "Kreativita a alternativy", "Rizika a problémy", "Pocity a intuice"], correct: 2 },
+    { q: "Co je TRIZ?", opts: ["Synonym pro brainstorming", "Software/metodologie pro tvorbu inovací — sběr info, analýza, syntéza, verifikace", "Marketingová metoda segmentace", "Personální metoda hodnocení"], correct: 1 },
+    { q: "Který styl leadershipu nejvíc podporuje kreativitu?", opts: ["Autoritativní 9.1", "Pseudotransformační", "Transformační (zejména intelektuální stimulace)", "Liberální laissez-faire pro každou situaci"], correct: 2 },
+    { q: "Co je Synektika?", opts: ["Software na inovace", "Volný běh myšlenek + propojování odlišných oblastí (analogie, asociace)", "Synonym brainstormingu", "Hodnotící metoda nápadů"], correct: 1 },
+    { q: "Které jsou 4 prvky modelu organizační kreativity?", opts: ["Strategie / Struktura / Systém / Skill", "Lidé / Procesy / Produkt / Prostředí", "Plán / Akce / Měření / Korekce", "Mise / Vize / Hodnoty / Cíle"], correct: 1 },
+  ];
+
+  const praxeLead3 = {
+    caseStudy: {
+      company: "Google — 20% pravidlo + organizační kreativita",
+      subtitle: "Jak Google buduje kreativní klima v 180 000-členném kolosu",
+      content: (<>
+        <b>Google</b> je ukázkový případ <b>organizační kreativity</b>. Firma kombinuje všechny 4 prvky modelu (Lidé + Procesy + Produkt + Prostředí) plus <b>specifický leadership</b>.<br/><br/>
+        <b style={{ color: VSE.fmv }}>1. Lidé (Person)</b> — Google najímá top talenty s vysokou expertizou, kreativními dovednostmi i vnitřní motivací. Selektivní hiring (acceptance rate ~0.2%) zajišťuje, že každý zaměstnanec má potenciál inovovat.<br/><br/>
+        <b style={{ color: VSE.fmv }}>2. Procesy (Process)</b> — slavné <b>20% pravidlo</b>: inženýři mohou 1 den v týdnu pracovat na čemkoliv, co jim přijde užitečné. Z tohoto principu vzešel <b>Gmail</b>, <b>Google News</b>, <b>AdSense</b>. Plus <b>Design Thinking, brainstorming, hackathony</b> jako standardní praxe.<br/><br/>
+        <b style={{ color: VSE.fmv }}>3. Produkt (Product)</b> — výsledkem je portfolio inovativních služeb, které mění svět: Search, Maps, YouTube, Android, Chrome, Cloud, AI (Bard, Gemini).<br/><br/>
+        <b style={{ color: VSE.fmv }}>4. Prostředí (Environment)</b> — kampusy s <b>4 faktory kreativního klimatu</b>: <b>Svoboda</b> (otevřený dress code, flexibilní hours), <b>Práce jako výzva</b> ("moonshots" — Google X projekty jako Waymo, Loon), <b>Komunikace</b> (TGIF firemní meetingy s Q&A pro CEO), <b>Podpora</b> (zdarma jídlo, fitness, masáže = čas na práci).<br/><br/>
+        <b style={{ color: VSE.success }}>Leadership (Sundar Pichai)</b> — kombinuje <b>servant</b> + <b>transformační 4I</b>. Slouží lidem (méně ego než Jobs), inspiruje vizí "AI-first company", stimuluje kreativitu, individuálně uznává.<br/><br/>
+        <b style={{ color: VSE.warning }}>Důsledek:</b> Google je #2 search engine i přes 20+ let dominance, market cap $2T. Žije z toho, že umí inovovat rychleji než konkurence — a inovace začíná u kreativity.
+      </>),
+      lessons: "Google ukazuje, že <b>kreativní klima není luxus, ale konkurenční výhoda</b>. Komise tohle case používá ráda, protože ilustruje všech 4 prvků modelu. Když máš v PS firmu, která nedělá inovace, doporuč: <b>20% time, design thinking workshops, transformační lídr, fyzické prostředí pro kreativitu</b>. Ne všechno musí být zdarma — důležitá je struktura, která dává čas a podporu."
+    },
+    miniExamples: [
+      { company: "3M (Post-it Notes)", tag: "TOLERANCE NEÚSPĚCHU", color: VSE.success, content: "<b>Post-it Notes</b> vznikly ze <b>selhaného experimentu</b>. Spencer Silver hledal silné lepidlo, vyrobil naopak slabé. 3M ho ale nevyhodila — udržela 6 let v rezervě. Pak ho Art Fry využil pro záložky do zpěvníku. <b>Klíč: 3M netrestal neúspěch.</b> 15% rule (předchůdce Google 20%) dává inženýrům prostor experimentovat. Kreativní klima v praxi." },
+      { company: "Avast / Pavel Baudiš (CZ)", tag: "TRANSFORMAČNÍ + INOVACE", color: VSE.success, content: "Český <b>kreativní lídr</b> v IT. Baudiš a Kučera začali jako garážová firma, vyrostli na globálního leadera v cybersecurity (Avast = $9.4B akvizice NortonLifeLock 2021). <b>Kreativní klima</b>: hodně technické svobody, plochá hierarchie, podpora experimentů. Avast inovoval v ML detekci hrozeb dřív než kdokoliv jiný. Inspirace pro české firmy: i v ČR se dá budovat kreativní organizace." },
+      { company: "Pixar (Brad Bird, Ed Catmull)", tag: "KREATIVNÍ KLIMA", color: VSE.success, content: "<b>Pixar Animation</b> — knižní příklad kreativní organizace. Catmull popisuje principy v knize „<i>Creativity Inc.</i>”: <b>Braintrust</b> (otevřená kritika nápadů bez hierarchie), <b>tolerance neúspěchu</b> (Toy Story 2 byl katastrofa, restartovali), <b>fyzické prostředí</b> (Steve Jobs designoval kampus tak, aby se lidé potkávali). 27× Oscar = výsledek systému, ne náhody." },
+      { company: "Lázně z Anetiny PS", tag: "PRAKTICKÝ TIP", color: VSE.warning, content: "Příklad ze státnicového testu (Stříteský): „Týpka s bahnem v lázních motivuje, že za <b>kreativní nápad dostane peníze</b>.” To je <b>tipický příklad finančního motivátoru pro kreativitu</b>. Funguje, ale POZOR na paradox vnějších odměn — pro vnitřně motivované to může být kontraproduktivní. Lepší: kombinace finanční bonus + uznání + autonomie." },
+    ]
+  };
+
+  const examQuestionsLead3 = [
+    { komise: "ZS 2026 — Stříteský, Schönfeld, Cejthamr", otazka: "Kreativita v organizaci — doporučení pro rozvoj kreativity v případovce.", pozn: "Top komise! Stříteského teorie moc nezajímala, hned přešel na případovku." },
+    { komise: "ZS 2025 — Špaček, Palíšková, Machek", otazka: "Formulujte doporučení, jak by mohla pracovat s kreativitou v organizaci (jaké jsou faktory atd) — aplikace na případovku." },
+    { komise: "ZS 2025 — Tahal, Kuděj, Nový", otazka: "Kreativita v organizaci, jaké metody použít pro rozvoj kreativity, aplikovat na případovku." },
+    { komise: "LS 2025 — Double Stříteský, Müllerová", otazka: "Kreativní organizace — popsat co to je, jak se toho dosáhne a aplikovat na případovku.", pozn: "Hodně milá komise, všichni chtěli praktické využití víc než teorii." },
+    { komise: "LS 2025 — Double Stříteský, Müllerová", otazka: "Kreativní organizace — případovka Lázně (chtěl slyšet, že týpka s bahnem motivuje peníze za kreativní nápad)." },
+    { komise: "LS 2025 — Double Stříteský, Mareš", otazka: "Kreativita a jaké metody použít pro rozvoj kreativního myšlení v organizaci.", pozn: "Velmi příjemná komise, kombinace teorie + případovka + doptávání. Nic zákeřného." },
+  ];
+
+  const podcastLead3 = { title: "Leadership 3 — Kreativní klima v organizaci", description: "Kreativita × inovace, 4 faktory kreativního klimatu, CPS, Design Thinking, brainstorming, 6 thinking hats. Aplikace + doporučení.", audioUrl: "/audio/lead-3.mp3", notebookLmUrl: null };
+
+  const examStrategyLead3 = `
+    <b style="color:#E06D1E">1.</b> Definuj kreativitu × inovaci (kreativita = nápad, inovace = aplikace).<br/>
+    <b style="color:#E06D1E">2.</b> Zmiň <b>2 mechanismy organizační kreativity</b> (individuální + organizační).<br/>
+    <b style="color:#E06D1E">3.</b> Identifikuj stav kreativního klimatu v PS — co tam je / chybí?<br/>
+    <b style="color:#E06D1E">4.</b> Najdi 4 faktory klimatu — Svoboda / Práce jako výzva / Komunikace / Podpora.<br/>
+    <b style="color:#E06D1E">5.</b> Zkontroluj kulturu — strategie zaměřená na inovace? Tolerance neúspěchu?<br/>
+    <b style="color:#E06D1E">6.</b> Doporuč konkrétní metody — Design Thinking / Brainstorming / 6 hats / Metoda 635.<br/>
+    <b style="color:#E06D1E">7.</b> Doporuč změnu leadershipu — transformační 4I s důrazem na intelektuální stimulaci.<br/>
+    <b style="color:#E06D1E">8.</b> Konkrétní akce — 3-5 doporučení (např. inovační dny, motivační program za realizované nápady).<br/>
+    <b style="color:#E06D1E">9.</b> ⚠️ Stříteský chce hlavně <b>aplikaci a praxi</b>, ne teorii — připrav konkrétní příklady!
+  `;
+
+  return (
+    <OkruhPanel
+      subject="Leadership" subjectId="lead" number={3} title="Kreativní klima v organizaci" subtitle="Kreativita × inovace / 4 faktory klimatu / Design Thinking / Brainstorming"
+      color={VSE.fmv}
+      questionText="Kreativní klima v organizaci, kreativní organizace, jaké metody použít pro rozvoj kreativity, aplikovat na případovku."
+      questionDesc="Kreativita × inovace. 3 faktory kreativního potenciálu (Amabile). 4 faktory kreativního klimatu. Bariéry. Manažerské metody (CPS, Design Thinking, Synektika, TRIZ). Metody generování (Brainstorming, Brainwriting, 635, 6 hats, WOIS). Model organizační kreativity. Aplikace + doporučení."
+      sloz={2} roz={2} freq={2}
+      examStrategy={examStrategyLead3}
+      studySections={studySectionsLead3}
+      flashcards={flashcardsLead3}
+      quiz={quizLead3}
+      praxe={praxeLead3}
+      examQuestions={examQuestionsLead3}
+      podcast={podcastLead3}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LEADERSHIP 4 — Teorie motivace, ovlivňování, stimulace
+   ════════════════════════════════════════════════════════ */
+function OkruhLead4Panel() {
+  const studySectionsLead4 = [
+    { id: "intro", title: "Co je motivace", subtitle: "Definice + 3 složky + vnitřní × vnější", color: VSE.fmv, emoji: "lightbulb",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Motivace</b> = dynamická složka osobnosti. Všechno, co způsobuje nějaké jednání, chování nebo reakci. Skládá se z komplexu motivů. <b>Motiv</b> = vnitřní hnací síla, psychologická příčina chování.
+        </Def>
+        <Tag color={VSE.fmv}>3 složky motivace</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🎯 Směr</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Kam motivace vede — co konkrétně chci dosáhnout.</div>
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>⚡ Intenzita</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Síla motivace — jak moc se snažím.</div>
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>⏱️ Trvání</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Doba trvání — jak dlouho motivace přetrvává.</div>
+          </div>
+        </div>
+        <Tag color={VSE.primary}>Vnitřní × vnější motivace</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>💚 Intrinsická (vnitřní)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vnitřní faktory — radost z práce, uznání, individuální posun. <b>Autonomní</b> (vlastní volba) × <b>Kontrolovaná</b> (vynucené závazky).</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>💰 Extrinsická (vnější)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vnější stimuly — systém odměňování, pracovní podmínky. Vázaná na organizační prostředí.</div>
+          </GlassBox>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.danger}10`, borderRadius: 10, border: `1px solid ${VSE.danger}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.danger, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>POZOR — paradox odměn:</span> Vnější stimuly mohou snížit vnitřní motivaci! Když dostáváš peníze za to, co tě baví, zájem klesá. Lídr musí volit odměnu opatrně.
+        </div>
+      </div>) },
+
+    { id: "konflikty", title: "Konflikty motivů (Lewin) + zdroje motivace", subtitle: "3 typy konfliktů + 5 zdrojů + frustrace × deprivace", color: VSE.fmv, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Lewin</b> popsal 3 základní typy konfliktů motivů. Důležité pro pochopení rozhodovací paralýzy a stresu zaměstnanců.
+        </Def>
+        <Tag color={VSE.fmv}>3 typy konfliktů (Lewin)</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>➕ Apetence-apetence (přitahování)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Dvě situace, oba motivy <b>pozitivní</b>, ale obě mít nemůžeš. Musíš si vybrat. Příklad: 2 dobré pracovní nabídky.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 3 }}>➖ Averze-averze (odpuzování)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Oba motivy <b>negativní</b>. Příklad: šetřit nebo propustit zaměstnance.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 3 }}>± Apetence-averze (ambivalentní)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Pozitivní i negativní u <b>jednoho cíle</b> — chci, ale musím / nechci, ale musím. Čím blíž k cíli, tím intenzivnější negativa.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>5 zdrojů motivace</Tag>
+        <Bullet items={[
+          "Potřeby — pociťovaný nedostatek (→ saturace potřeby)",
+          "Návyky — zautomatizovaný způsob jednání",
+          "Zájmy — trvalejší zaměření na určitou věc",
+          "Hodnoty — teoretický, ekonomický, estetický, sociální, politický, náboženský",
+          "Ideály — vodítka jednání (idoly = přijímané vzory)",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.danger}>⚠️ Frustrace × Deprivace</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>Frustrace</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Zmaření motivované činnosti. Reakce <b>adaptivní</b> (řeším) × <b>maladaptivní</b> (uzavírám se).</div>
+          </div>
+          <div style={{ background: `${VSE.danger}10`, border: `1px solid ${VSE.danger}30`, borderRadius: 10, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 4 }}>Deprivace</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}><b>Dlouhodobé</b> neuspokojení potřeby (sociální, citová, senzorická, biologická).</div>
+          </div>
+        </div>
+      </div>) },
+
+    { id: "maslow", title: "Maslowova pyramida potřeb", subtitle: "5 úrovní + výkon a motivace + Yerkes-Dodson", color: VSE.fmv, emoji: "pillar",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Klasická hierarchická teorie. Dokud nejsou splněny nižší potřeby, vyšší nemotivují. <b>Manažer musí vědět, na jaké úrovni jeho zaměstnanec je</b>, aby ho mohl motivovat.
+        </Def>
+        <Tag color={VSE.fmv}>Maslowova pyramida (zdola nahoru)</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 24 }}>5</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>Sebe-realizace</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Naplnění svého potenciálu, kreativita, smysl. Lídři, umělci, top experti.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>4</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>Uznání, sebeúcta</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Status, prestiž, respekt, kompetence. Pozice manažera, povýšení.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fph}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fph, fontFamily: fontMono, minWidth: 24 }}>3</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fph, fontFamily: fontSans }}>Sounáležitost, láska</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Vztahy v týmu, přátelství, příslušnost ke skupině.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.warning, fontFamily: fontMono, minWidth: 24 }}>2</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontSans }}>Bezpečí a jistota</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Stálé zaměstnání, jistota výplaty, pojištění, předvídatelnost.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.danger, fontFamily: fontMono, minWidth: 24 }}>1</div>
+              <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontSans }}>Fyziologické potřeby</div>
+            </div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginTop: 3 }}>Jídlo, voda, spánek, plat na obživu.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Výkon a motivace — Yerkes-Dodson zákon</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 8 }}>
+          Vzorec výkonu: <b style={{ fontFamily: fontMono }}>V = f(M, S, O)</b><br/>
+          M = úroveň motivace / S = úroveň schopností / O = okolnosti, vnější faktory
+        </div>
+        <div style={{ background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, padding: 12 }}>
+          <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>📊 Obrácená U-křivka (Yerkes-Dodson)</div>
+          <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Začátek: nízká motivace → nízký výkon. Pak: vysoká motivace → vysoký výkon. Pak: <b>přemotivování</b> → výkon klesá (anxieta). Optimum je <b>uprostřed</b>.</div>
+        </div>
+      </div>) },
+
+    { id: "teorie", title: "Teorie motivace — komplet", subtitle: "Herzberg / Vroom / Adams / White / McGregor / Skinner", color: VSE.fmv, emoji: "brain",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Klíčové teorie motivace.</b> Komise často chce 2-3 konkrétní teorie + aplikaci. Připrav si Herzberga, Vrooma, McGregora — to jsou nejčastější.
+        </Def>
+        <Tag color={VSE.fmv}>⭐ Herzbergova dvoufaktorová teorie</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.warning}08`, border: `1px solid ${VSE.warning}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>🧹 Hygienické faktory (frustrátory)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>Když chybí → nespokojenost. Když jsou → ne-nespokojenost (NE motivace!).</div>
+            <Bullet items={[
+              "Plat, pracovní podmínky",
+              "Vztahy s nadřízeným",
+              "Politika firmy, jistota",
+              "Nesmí klesnout pod úroveň",
+            ]} color={VSE.warning} />
+          </div>
+          <div style={{ background: `${VSE.success}08`, border: `1px solid ${VSE.success}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>🚀 Motivátory (satisfaktory)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>Když chybí → ne-nespokojenost. Když jsou → spokojenost + motivace.</div>
+            <Bullet items={[
+              "Uznání, povýšení",
+              "Smysluplná práce",
+              "Odpovědnost, autonomie",
+              "Růst, učení",
+            ]} color={VSE.success} />
+          </div>
+        </div>
+        <Tag color={VSE.fmv}>Vroomova teorie očekávání</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>
+          Vzorec: <b style={{ fontFamily: fontMono }}>M = E × ∑(I × V)</b>
+        </div>
+        <Bullet items={[
+          "E (Expectance) = Očekávání — pravděpodobnost, že dosáhnu cíle",
+          "I (Instrumentalita) = Subjektivní vnímání souvislosti mezi výsledky",
+          "V (Valence) = Preference jedince k cíli (negativní/pozitivní/neutrální)",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.fph}>Adamsova teorie spravedlnosti</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>
+          Pracovník <b>porovnává vlad do práce</b> (čas, úsilí, vzdělání) <b>s efekty</b> (odměna, uznání, kariéra). 3 typy spravedlnosti:
+        </div>
+        <Bullet items={[
+          "Distribuční — spravedlnost odměn",
+          "Procesní — spravedlnost procesů",
+          "Interakční — způsob jednání nadřízeného (nepreferování)",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.fis}>Teorie X a Y (McGregor)</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 4, fontStyle: "italic" }}>
+          Postoje manažerů vůči pracovníkům — <b>NE typologie pracovníků</b>!
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 4 }}>
+          <div style={{ background: `${VSE.danger}08`, border: `1px solid ${VSE.danger}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 4 }}>X: Nerad pracuje</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Lenivý, musí být k práci nucen, odmítá odpovědnost. → Direktivní řízení.</div>
+          </div>
+          <div style={{ background: `${VSE.success}08`, border: `1px solid ${VSE.success}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>Y: Práce je přirozená</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vyhledává odpovědnost, prostředek seberealizace. → Demokratický styl.</div>
+          </div>
+        </div>
+        <Tag color={VSE.warning}>Skinner — Teorie cukru a biče</Tag>
+        <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          Pozitivní (cukr = odměna) a negativní (bič = trest) zpevnění. Behaviorální základ.
+        </div>
+        <Tag color={VSE.success}>Teorie kompetence (White)</Tag>
+        <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          Motiv kompetence = potřeba ovládat své okolí. Pracovník ukazuje svou způsobilost. Lídr <b>vytváří prostředí</b> pro projevení kompetence + dává zpětnou vazbu.
+        </div>
+      </div>) },
+
+    { id: "moderni", title: "Moderní teorie motivace", subtitle: "4 drivers / Sebedeterminace / Teorie cílů SMART", color: VSE.fmv, emoji: "sparkles",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Lorencová pozor:</b> chce moderní teoretický přístupy k motivaci — metoda 4 driverů, zaměření na cíl a seberealizace, Vroom.
+        </Def>
+        <Tag color={VSE.fmv}>⭐ Teorie 4 driverů</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>1. Získat (Acquire)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Získat hmotné statky, zkušenosti, něčeho dosáhnout.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>2. Navázat (Bond)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Navazování, udržování a formování vztahů a sociálních vazeb.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>3. Učit se (Comprehend)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Uspokojit zvědavost, pracovat s informacemi, zjistit, pochopit.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>4. Bránit se (Defend)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Chránit sebe sama proti hrozbě.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.success}>⭐ Teorie sebedeterminace (Self-Determination Theory)</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>
+          Jedinci mají vrozenou tendenci vytvářet propracovanější já. <b>3 vrozené psychologické potřeby</b>:
+        </div>
+        <Bullet items={[
+          "Kompetence — efektivně ovlivňovat své okolí",
+          "Vztahy — pozitivní vzájemné vztahy",
+          "Autonomie — ovlivňovat své jednání",
+        ]} color={VSE.success} />
+        <Tag color={VSE.fph}>Teorie cílů SMART</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>
+          Lídr pomáhá pracovníkům na cestě k cílům. Důležité: <b>SMART cíle</b> + srozumitelnost, výzva, odpovědnost, feedback, dosažitelnost úkolu.
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr", gap: 6 }}>
+          {[
+            ["S", "Specific", "Konkrétní"],
+            ["M", "Measurable", "Měřitelný"],
+            ["A", "Achievable", "Dosažitelný"],
+            ["R", "Relevant", "Relevantní"],
+            ["T", "Time-bound", "Časově ohraničený"],
+          ].map(([letter, en, cz]) => (
+            <div key={letter} style={{ background: `${VSE.fph}10`, border: `1px solid ${VSE.fph}30`, borderRadius: 10, padding: 10, textAlign: "center" }}>
+              <div style={{ fontSize: 18, fontWeight: 700, color: VSE.fph, fontFamily: fontMono }}>{letter}</div>
+              <div style={{ fontSize: 10.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>{en}</div>
+              <div style={{ fontSize: 9.5, color: "var(--textMuted)", fontFamily: fontSans }}>{cz}</div>
+            </div>
+          ))}
+        </div>
+        <Tag color={VSE.warning}>Vnitřní motivace lídrů</Tag>
+        <Bullet items={[
+          "Motiv moci — schopnost ovlivňovat",
+          "Úsilí a motiv úspěchu — výkonová orientace",
+          "Silná pracovní morálka — odpovědnost, integrita",
+          "Houževnatost a výdrž — překonávat překážky",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "vykon", title: "Výkonová motivace + Motivační profil", subtitle: "Potřeba úspěchu × strach z neúspěchu + co je motivační profil", color: VSE.fmv, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Výkonová motivace</b> = vztah člověka k výkonu. 2 typy lidí podle toho, jak se k výkonu staví. <b>Nový se na to konkrétně ptá!</b>
+        </Def>
+        <Tag color={VSE.fmv}>Výkonová motivace — 2 typy</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>🏆 Potřeba úspěchu</div>
+            <Bullet items={[
+              "Výkonově orientovaní lidé",
+              "Dávají si vyšší cíle",
+              "Práci si hledají sami",
+              "Umí pracovat s rizikem",
+            ]} color={VSE.success} />
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>😰 Potřeba vyhnout se neúspěchu</div>
+            <Bullet items={[
+              "Nízká výkonová orientace",
+              "Cíle nižší, bezpečné",
+              "Nemají rádi riziko",
+              "Odpor ke změnám",
+            ]} color={VSE.warning} />
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Motivační profil jedince</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>
+          <b>Relativně stabilní charakteristika osobnosti</b>, jejímž obsahem jsou <b>významné motivační tendence</b>. Říká, co konkrétního jedince motivuje. Lídr by měl znát motivační profil každého podřízeného.
+        </div>
+        <Bullet items={[
+          "Co konkrétního pracovníka motivuje (peníze / uznání / vztahy / autonomie)",
+          "Jaký typ úkolů preferuje (výzvy × bezpečné)",
+          "Jak reaguje na ZV (potřebuje pochvalu × kritiku)",
+          "Co ho demotivuje (mikromanagement, nejistota, izolace)",
+        ]} color={VSE.primary} />
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.success}10`, borderRadius: 10, border: `1px solid ${VSE.success}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.success, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>NOVÝ TIP:</span> Komise s Novým chce slyšet, jak <b>znalost motivačního profilu pomáhá manažerovi</b>. Konkrétně: jiný motivuje peníze, jiného uznání, jiného autonomii. Lídr musí <b>individualizovat</b>.
+        </div>
+      </div>) },
+
+    { id: "stimulace", title: "Stimulace × Motivace", subtitle: "Rozdíl + 7 stimulů, které má manažer v rukou", color: VSE.fmv, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Stimulace × Motivace</b> — komise tohle ráda chytá. Stimulace je <b>vnější působení</b>, motivace je <b>vnitřní tlak</b>. Manažer má v rukou stimuly, ne motivaci samotnou.
+        </Def>
+        <Tag color={VSE.fmv}>Stimulace × Motivace — rozdíl</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.warning}08`, border: `1px solid ${VSE.warning}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>🎯 Stimulace (vnější)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vnější působení manažera na motivaci. Manažer to má v rukou. Peníze, podmínky, lídr.</div>
+          </div>
+          <div style={{ background: `${VSE.success}08`, border: `1px solid ${VSE.success}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>💚 Motivace (vnitřní)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vnitřní tlak na realizaci činnosti. Stimulací <b>naplníme</b> motivaci. Stimulace může změnit motivaci.</div>
+          </div>
+        </div>
+        <Tag color={VSE.primary}>7 stimulů, které má manažer v rukou</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          {[
+            ["💰 Hmotná odměna", "Fixní plat (zvýšení působí max 3 měsíce!) + pohyblivá složka (po výkonu, jasná pravidla, spravedlivá)", VSE.warning],
+            ["🎨 Vykonávaná práce", "Obsah práce — seberealizace, tvořivost, touha po moci, hrdost", VSE.fmv],
+            ["👑 Lídr a jeho styl", "Transformační styl motivuje víc než transakční", VSE.success],
+            ["🗣️ Povzbuzování", "ZV - shaping (naznačování směru, pozitiva), NE sandwich/labelling", VSE.fph],
+            ["👥 Spolupracovníci", "Vztahy v týmu, kohese, atmosféra", VSE.fis],
+            ["🏢 Pracovní podmínky", "Kultura, prestiž, fyzické prostředí, režim", VSE.fm],
+            ["🎓 Rozvoj a růst", "Možnost vzdělávání, postupu, koučink, mentoring", VSE.primary],
+          ].map(([title, desc, color]) => (
+            <GlassBox key={title} opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${color}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 12.5, fontWeight: 700, color: color, fontFamily: fontSans, marginBottom: 3 }}>{title}</div>
+              <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>{desc}</div>
+            </GlassBox>
+          ))}
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.danger}10`, borderRadius: 10, border: `1px solid ${VSE.danger}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.danger, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>POZOR:</span> Fixní plat <b>zvýšení působí stimulačně max 3 měsíce</b>. Pak si zaměstnanec zvykne. Pohyblivá složka funguje dlouhodoběji.
+        </div>
+      </div>) },
+
+    { id: "ovlivnovani", title: "Ovlivňování + propojení", subtitle: "Job design × Job crafting / Strategie ↔ struktura ↔ kultura", color: VSE.fmv, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Ovlivňování</b> propojuje motivaci s leadershipem. Komise často chce slyšet propojení <b>strategie ↔ struktura ↔ kultura ↔ motivace</b>.
+        </Def>
+        <Tag color={VSE.fmv}>Job Design × Job Crafting</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.ffu}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 4 }}>🏗️ Job Design (top-down)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Manažer/HR <b>shora</b> definuje, co budeš dělat. Tradiční přístup. Vnější ovlivňování motivace.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>✂️ Job Crafting (bottom-up)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Zaměstnanec si <b>sám</b> upraví práci, aby ho víc bavila. Vnitřní motivace. Moderní přístup.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Propojení Strategie ↔ Struktura ↔ Kultura ↔ Motivace</Tag>
+        <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 8 }}>
+          Komise s Novým, Bočkovou často chce <b>tohle propojení</b>. Postup:
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          {[
+            ["1.", "Strategie", "Co firma chce dosáhnout. Zvolená strategie určuje typy talentů a chování."],
+            ["2.", "Struktura", "Plochá vs. hierarchická → ovlivňuje autonomii a participaci."],
+            ["3.", "Kultura", "Hodnoty a normy → ovlivňují, co je v org. ceněno (uznání, výsledky, inovace)."],
+            ["4.", "Motivace", "Strategie + struktura + kultura společně tvoří motivační prostředí."],
+            ["5.", "Odměňování + rozvoj", "Konkrétní HR praktiky, které motivační prostředí realizují."],
+          ].map(([num, title, desc]) => (
+            <GlassBox key={num} opacity={0.5} style={{ padding: "8px 12px", display: "flex", gap: 12, alignItems: "flex-start", borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.primary, fontFamily: fontMono, minWidth: 24 }}>{num}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>{title}</div>
+                <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro Lead 4 zkoušku", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Lead 4 padá NEJVÍCKRÁT z Leadershipu (24 taženek!). Komise chce: identifikovat <b>motivační situaci v PS</b> + <b>aplikovat 2-3 teorie</b> + <b>doporučit konkrétní opatření</b>.
+        </Def>
+        <Tag color={VSE.success}>Postup pro Lead 4</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 8 }}>
+          {[
+            ["1.", "Definuj motivace + 3 složky", "Směr / Intenzita / Trvání. Vnitřní × vnější."],
+            ["2.", "Identifikuj stav v PS", "Co motivuje zaměstnance? Co je demotivuje? Jaký je motivační profil?"],
+            ["3.", "Aplikuj Maslowa", "Na jaké úrovni jsou zaměstnanci? Splněny nižší potřeby?"],
+            ["4.", "Aplikuj Herzberga", "Hygienické faktory OK? Co chybí v motivátorech?"],
+            ["5.", "Aplikuj 1 další teorii", "Vroom (očekávání) / Adams (spravedlnost) / McGregor (X-Y) / 4 drivers"],
+            ["6.", "Identifikuj styl leadershipu", "Transformační (4I) motivuje nejvíc — propoj s Lead 2!"],
+            ["7.", "Doporuč 5+ konkrétních akcí", "Pohyblivá složka platu, koučink, smysluplné cíle SMART, autonomie, ZV"],
+            ["8.", "Propoj se strategií + kulturou", "Motivační program musí odpovídat strategii a kultuře (Bočková chce!)"],
+          ].map(([num, title, desc]) => (
+            <GlassBox key={num} opacity={0.5} style={{ padding: "8px 12px", display: "flex", gap: 12, alignItems: "flex-start", borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 24 }}>{num}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>{title}</div>
+                <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+        <Tag color={VSE.warning}>⚠️ Komise-specific tipy</Tag>
+        <Bullet items={[
+          "Lorencová: chce moderní teorie — 4 drivers, sebedeterminace, Vroom",
+          "Nový: chce motivační profil + jak ho použít manažerem",
+          "Bočková/Mikovcová: propojení strategie + struktura + kultura + motivace",
+          "Stříteský: praxe nad teorií — připrav konkrétní akce",
+          "Kubíček: vnitřní × vnější + Herzberg + X/Y propojené",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsLead4 = [
+    { term: "Motivace — definice", def: "Dynamická složka osobnosti. Vše, co způsobuje jednání. Skládá se z motivů.", tag: "DEFINICE" },
+    { term: "3 složky motivace", def: "Směr / Intenzita / Trvání.", tag: "DEFINICE" },
+    { term: "Vnitřní × vnější motivace", def: "Intrinsická (radost, uznání) × Extrinsická (peníze, podmínky).", tag: "DEFINICE" },
+    { term: "Lewinovy konflikty motivů", def: "Apetence-apetence (oba pozitivní) / Averze-averze (oba negativní) / Apetence-averze (chci ale nesmím).", tag: "KONFLIKTY" },
+    { term: "Maslowova pyramida — 5 úrovní", def: "Fyziologické / Bezpečí / Sounáležitost / Uznání / Sebe-realizace.", tag: "MASLOW" },
+    { term: "Yerkes-Dodson zákon", def: "Obrácená U-křivka. Optimální výkon při střední motivaci. Přemotivování → výkon klesá.", tag: "VÝKON" },
+    { term: "Vzorec výkonu", def: "V = f(M, S, O). Motivace × Schopnosti × Okolnosti.", tag: "VÝKON" },
+    { term: "Herzberg — 2 faktory", def: "Hygienické (frustrátory): plat, podmínky → ne-nespokojenost. Motivátory (satisfaktory): uznání, smysl → spokojenost.", tag: "TEORIE" },
+    { term: "Vroomova teorie očekávání", def: "M = E × ∑(I × V). Expectance × Instrumentalita × Valence.", tag: "TEORIE" },
+    { term: "Adams — teorie spravedlnosti", def: "Pracovník porovnává vklad s efekty. Distribuční / Procesní / Interakční spravedlnost.", tag: "TEORIE" },
+    { term: "McGregor X a Y", def: "X (manažer): pracovník nerad pracuje, nutit. Y (manažer): pracovník vyhledává odpovědnost. NE typologie pracovníků!", tag: "TEORIE" },
+    { term: "4 drivery (Lawrence-Nohria)", def: "Acquire (získat) / Bond (navázat) / Comprehend (učit se) / Defend (bránit).", tag: "MODERNÍ" },
+    { term: "Sebedeterminace", def: "3 vrozené potřeby: Kompetence / Vztahy / Autonomie.", tag: "MODERNÍ" },
+    { term: "Stimulace × Motivace", def: "Stimulace = vnější působení (manažer). Motivace = vnitřní tlak. Stimulací naplníme motivaci.", tag: "STIMULACE" },
+    { term: "Motivační profil", def: "Relativně stabilní charakteristika osobnosti. Co konkrétního jedince motivuje.", tag: "PROFIL" },
+    { term: "Job Design × Job Crafting", def: "Job Design = top-down (manažer definuje). Job Crafting = bottom-up (zaměstnanec si upraví).", tag: "OVLIVŇOVÁNÍ" },
+  ];
+
+  const quizLead4 = [
+    { q: "Které jsou 3 složky motivace?", opts: ["Vnitřní / Vnější / Smíšená", "Směr / Intenzita / Trvání", "Plat / Bonus / Uznání", "Maslow / Herzberg / Vroom"], correct: 1 },
+    { q: "Co je Lewinův apetence-apetence konflikt?", opts: ["Oba motivy negativní", "Oba motivy pozitivní (musíš si vybrat)", "Pozitivní + negativní u stejného cíle", "Synonym pro Maslowa"], correct: 1 },
+    { q: "Jaká úroveň je nejvyšší v Maslowově pyramidě?", opts: ["Bezpečí a jistota", "Uznání a sebeúcta", "Sounáležitost", "Sebe-realizace"], correct: 3 },
+    { q: "Co popisuje Yerkes-Dodson zákon?", opts: ["Lineární vztah motivace a výkonu", "Obrácená U-křivka — přemotivování snižuje výkon", "Pyramidu potřeb", "Teorii X a Y"], correct: 1 },
+    { q: "V Herzbergově teorii — co jsou hygienické faktory?", opts: ["Motivátory pro spokojenost", "Faktory, jejichž absence způsobuje nespokojenost (plat, podmínky)", "Synonym pro Maslowa", "Pouze fyzické pracovní prostředí"], correct: 1 },
+    { q: "Jaký je Vroomův vzorec motivace?", opts: ["M = E × I × V", "M = f(M, S, O)", "M = potřeby - uspokojení", "M = SMART × cíle"], correct: 0 },
+    { q: "Adamsova teorie spravedlnosti rozlišuje 3 typy spravedlnosti — které?", opts: ["Plat / Bonus / Uznání", "Distribuční / Procesní / Interakční", "Vnitřní / Vnější / Smíšená", "Hygienické / Motivátory / Pracovní"], correct: 1 },
+    { q: "McGregorova teorie X a Y se týká…", opts: ["Typologie pracovníků (X = lenivý, Y = pracovitý)", "Postojů manažerů vůči pracovníkům", "Rozdílu mužů × žen", "Generací X a Y"], correct: 1 },
+    { q: "Které jsou 4 drivery podle Lawrence-Nohria?", opts: ["Power / Money / Status / Fame", "Acquire / Bond / Comprehend / Defend", "Plan / Do / Check / Act", "Strategy / Structure / System / Skill"], correct: 1 },
+    { q: "Sebedeterminace — 3 vrozené potřeby?", opts: ["Plat / Bonus / Uznání", "Kompetence / Vztahy / Autonomie", "Bezpečí / Jistota / Stabilita", "Vize / Mise / Strategie"], correct: 1 },
+    { q: "Co je rozdíl mezi stimulací a motivací?", opts: ["Synonyma", "Stimulace = vnější působení manažera, motivace = vnitřní tlak. Stimulací se naplňuje motivace.", "Motivace je hmotná, stimulace nehmotná", "Stimulace je negativní, motivace pozitivní"], correct: 1 },
+    { q: "Co je Job Crafting?", opts: ["Manažer top-down definuje práci", "Zaměstnanec si bottom-up upraví práci, aby ho víc bavila", "Synonym pro Job Design", "HR proces hodnocení"], correct: 1 },
+  ];
+
+  const praxeLead4 = {
+    caseStudy: {
+      company: "Pixar — Sebedeterminace v praxi",
+      subtitle: "Jak Pixar buduje motivační prostředí přes 3 vrozené potřeby (Kompetence + Vztahy + Autonomie)",
+      content: (<>
+        <b>Pixar Animation Studios</b> ukazuje, jak <b>teorie sebedeterminace</b> funguje v praxi. Ed Catmull (CEO) v knize „Creativity Inc.” popisuje, jak vědomě budují motivační prostředí přes <b>3 vrozené psychologické potřeby</b>.<br/><br/>
+        <b style={{ color: VSE.success }}>1. KOMPETENCE</b> — Pixar najímá <b>top talenty</b> a dává jim prostor projevit svou způsobilost. Každý animátor má svůj projekt, kde rozhoduje. Standardy excelence jsou vysoké, ale dosažitelné. Lidé cítí, že rostou.<br/><br/>
+        <b style={{ color: VSE.success }}>2. VZTAHY</b> — slavný <b>Braintrust</b> = pravidelné setkání top tvůrců, kde otevřeně kritizují nápady ostatních. Bez hierarchie, bez egos. Steve Jobs designoval kampus tak, aby se lidé <b>nevyhnutelně potkávali</b> (centrální atrium s toaletami a jídelnou). Sounáležitost = klíč ke kreativitě.<br/><br/>
+        <b style={{ color: VSE.success }}>3. AUTONOMIE</b> — režisérům dávají <b>plnou kreativní kontrolu</b> nad filmem. Můžou vyhodit scény, restartovat příběh (Toy Story 2 byl restartován po roce práce!). <b>Job Crafting</b> v plné síle.<br/><br/>
+        <b style={{ color: VSE.fmv }}>Aplikace dalších teorií:</b><br/>
+        <b>Herzberg</b> — Pixar zaplatí dobře (hygienické OK), ale pravá motivace je <b>smysluplná tvorba</b> (motivátory).<br/>
+        <b>Maslow</b> — všichni v Pixaru jsou na úrovni <b>5 (sebe-realizace)</b>. Pyramida je naplněná.<br/>
+        <b>Vroom</b> — vysoká valence (Pixar = top brand), vysoká instrumentalita (úspěch → reputace).<br/>
+        <b>4 drivers</b> — Acquire (Oscary), Bond (Braintrust), Comprehend (vzdělávání, Pixar University), Defend (jistota top značky).<br/><br/>
+        <b style={{ color: VSE.fmv }}>Výsledek:</b> 27× Oscar. Toy Story, Finding Nemo, WALL-E, Up, Inside Out — každý film z 25+ let je hit. Motivační prostředí Pixaru je <b>příklad systematického budování</b>, ne náhody.
+      </>),
+      lessons: "Pixar ukazuje, že motivace není jen o penězích. Když máš v PS firmu, kde lidé jen \"chodí do práce\", doporuč: <b>1) Definovat smysl práce</b> (mise, hodnoty), <b>2) Dát autonomii v rozhodování</b>, <b>3) Vybudovat tým s vztahy</b> (regular meetings, kultura ZV), <b>4) Investovat do růstu kompetencí</b> (vzdělávání, koučink). To pokrývá sebedeterminaci + Maslowovu sebe-realizaci."
+    },
+    miniExamples: [
+      { company: "Tomáš Baťa (CZ klasika)", tag: "VŠECHNY ÚROVNĚ MASLOWA", color: VSE.success, content: "Baťa pokryl <b>všech 5 úrovní Maslowovy pyramidy</b>: <b>1.</b> Plat (fyziologické). <b>2.</b> Stálé zaměstnání + Baťovy domky (bezpečí). <b>3.</b> Tým + Zlín jako komunita (sounáležitost). <b>4.</b> Povýšení podle výsledků + interní soutěže (uznání). <b>5.</b> Baťova škola práce + možnost kariéry až na vrchol (sebe-realizace). Klasický <b>holistický motivační systém</b> dlouho před Maslowem." },
+      { company: "Avast / Pavel Baudiš (CZ)", tag: "JOB CRAFTING + AUTONOMIE", color: VSE.success, content: "Avast je v ČR příklad <b>moderního motivačního prostředí</b>. Plochá hierarchie, autonomie pro inženýry, <b>Job Crafting</b> — lidi si můžou volit projekty. Avast platí top sazby (hygienické faktory OK), ale skutečně motivátorem je <b>technická excelence + smysl</b> (chrání svět před hackery). Acquire — IPO 2018 + akvizice $9.4B. Bond — silná tech komunita." },
+      { company: "Patagonia / Yvon Chouinard", tag: "SMYSL > PENÍZE", color: VSE.success, content: "Patagonia je důkaz, že <b>vnitřní motivace přebije vnější</b>. Politika „<i>let my people go surfing</i>” — flexibilní hodiny. Lidé pracují, protože věří v misi (klimatická změna). 2022: Chouinard daroval celou firmu ($3 mld) ekologickému trustu. <b>Sebedeterminace v praxi</b> — autonomie + smysl + komunita. Fluktuace v Patagonia je extrémně nízká navzdory nižšímu platu než konkurence." },
+      { company: "Andrej Babiš (Agrofert) — CZ", tag: "ANTI-PŘÍKLAD", color: VSE.danger, content: "Babiš ukazuje, jak <b>NEMOTIVOVAT</b>. Striktní kontrolu (X-pohled na zaměstnance), motivace strachem, vysoká fluktuace top managementu. Hygienické faktory OK (dobře zaplatí), ale motivátory chybí — <b>žádný smysl, žádná autonomie, žádné vztahy</b>. Lidé pracují jen pro peníze. Krátkodobě efektivní, dlouhodobě závislé na 1 člověku. <b>Anti-Pixar</b>." },
+    ]
+  };
+
+  const examQuestionsLead4 = [
+    { komise: "ZS 2026 — Smrčka, Zamazalová, Kučera", otazka: "Motivace" },
+    { komise: "ZS 2026 — Smrčka, Zamazalová, Viktora", otazka: "Motivace — jaký byl typ leadera v případovce, co bys navrhnul, jak lépe motivovat" },
+    { komise: "ZS 2026 — Mikovcová, Viktora, Vávra", otazka: "Motivace zaměstnanců" },
+    { komise: "ZS 2026 — Bočková, Nový, Kolouchová", otazka: "Motivace ve spojitosti s org. kulturou, strukturou a strategií. Jak se to projevuje na rozvoji a odměňování zamců? Najděte v případovce co by mohli dělat lépe." },
+    { komise: "ZS 2026 — Špaček, Nový, Machek", otazka: "Motivace a ovlivňování zaměstnanců — Nový se ptal na motivační profil, jeho charakteristiky a jak bych díky němu věděla, jak motivovat moje podřízený." },
+    { komise: "ZS 2026 — Svobodová, Nový, Machek", otazka: "Motivace, cíle motivace, jak to propojit se strategií, strukturou, kulturou a odměňováním" },
+    { komise: "ZS 2025 — Vávra, Mládková, Svobodová", otazka: "Ovlivňování, motivace, aplikuj na případovku jaké styly leadershipu zde jsou + jaké teorie motivace znáš" },
+    { komise: "ZS 2025 — Nový, Vávra, Heřman", otazka: "Ovlivňování, motivace, aplikuj na případovku jaké styly leadershipu zde jsou + jaké teorie motivace znáš" },
+    { komise: "ZS 2025 — Mikovcová, Kolouchová, Viktora", otazka: "Strategie, struktura organizace, kultura ve vztahu k motivaci. Stanovit doporučení k případovce, jak lépe motivovat zaměstnance." },
+    { komise: "ZS 2025 — Krause, Viktora, Tahal", otazka: "Ovlivňování a motivace zaměstnanců, jak by se dal zvýšit výkon pracovníků.", pozn: "Viktora chtěl jenom aplikaci, žádné teoretické kecy." },
+    { komise: "ZS 2025 — Kubíček, Říhová, Kolouchová", otazka: "HR ovlivňování pracovníků/zaměstnanců a aplikace na případovku — vnitřní × vnější motivace, Herzberg, rozřazení lidí XY." },
+    { komise: "ZS 2025 — Smrčka, Kolouchová, Říhová", otazka: "Odměňování zaměstnanců, motivace, vztažené na případovku, co bych firmě doporučila." },
+    { komise: "ZS 2025 — Tahal, Kuděj, Nový", otazka: "Organizační struktura a strategie ve vztahu k motivaci." },
+    { komise: "LS 2025 — Nový, Müllerová, Kolouchová", otazka: "Ovlivňování pracovníků — případovka, jak změnit řízení, jak motivovat, jak změnit leadership." },
+    { komise: "LS 2025 — Kolouchová, Viktora, Hönig", otazka: "Ovlivňování vnější a vnitřní motivace (Job Crafting a Job Design)." },
+    { komise: "LS 2025 — Tahal, Lorencová, Schönfeld", otazka: "Motivace a ovlivňování zaměstnanců — Lorencová požadovala MODERNÍ teoretické přístupy: 4 drivery, zaměření na cíl a seberealizace, Vroom.", pozn: "⚠️ Lorencová chce moderní teorie!" },
+    { komise: "LS 2025 — Mikovcová, Vávra, Viktora", otazka: "Motivace zaměstnanců v lázních — přečíst případovku a hned říct, jak v reálném životě motivovat lidi, zvednout výkon." },
+    { komise: "LS 2025 — Machek, Kolouchová, Legnerová", otazka: "Stimulace motivace." },
+    { komise: "LS 2025 — Cejthamr, Machek, Heřman", otazka: "Ovlivňování, motivace, stimulace, spojit s případovkou." },
+    { komise: "LS 2025 — Cejthamr, Machek, Heřman", otazka: "Motivace." },
+    { komise: "LS 2025 — Vávra, Lorencová, Krause", otazka: "Ovlivňování, motivace, stimulace, spojit s případovkou." },
+    { komise: "LS 2025 — Double Stříteský, Mareš", otazka: "Jak jsou v případovce prvky firmy (kultura, struktura, business approach) propsané do motivačního a rozvojového programu." },
+  ];
+
+  const podcastLead4 = { title: "Leadership 4 — Teorie motivace", description: "Motivace, Maslow, Herzberg, Vroom, Adams, McGregor X-Y, 4 drivers, sebedeterminace, stimulace × motivace.", audioUrl: "/audio/lead-4.mp3", notebookLmUrl: null };
+
+  const examStrategyLead4 = `
+    <b style="color:#E06D1E">1.</b> Definuj motivace + 3 složky (směr, intenzita, trvání) + vnitřní × vnější.<br/>
+    <b style="color:#E06D1E">2.</b> Identifikuj <b>motivační situaci v PS</b> — co lidé motivuje, demotivuje, na jaké úrovni Maslowa jsou.<br/>
+    <b style="color:#E06D1E">3.</b> Aplikuj <b>2-3 teorie motivace</b> (povinně Herzberg + Maslow, plus 1 podle komise).<br/>
+    <b style="color:#E06D1E">4.</b> Pro <b>Lorencovou</b>: 4 drivery, sebedeterminace, Vroom (moderní teorie!).<br/>
+    <b style="color:#E06D1E">5.</b> Pro <b>Nového</b>: motivační profil + jak ho použít manažerem.<br/>
+    <b style="color:#E06D1E">6.</b> Pro <b>Bočkovou/Mikovcovou</b>: propojení strategie + struktura + kultura + motivace.<br/>
+    <b style="color:#E06D1E">7.</b> Identifikuj styl leadershipu (Lead 2!) — transformační 4I motivuje nejvíc.<br/>
+    <b style="color:#E06D1E">8.</b> Doporuč <b>5+ konkrétních akcí</b>: pohyblivá složka platu, koučink, SMART cíle, autonomie, ZV.<br/>
+    <b style="color:#E06D1E">9.</b> Závěr: <b>stimulace × motivace</b> — manažer má v rukou stimuly, ne motivaci samotnou.
+  `;
+
+  return (
+    <OkruhPanel
+      subject="Leadership" subjectId="lead" number={4} title="Teorie motivace, ovlivňování"
+      subtitle="Maslow / Herzberg / Vroom / Adams / 4 drivers / Sebedeterminace / Stimulace"
+      color={VSE.fmv}
+      questionText="Teorie motivace, ovlivňování, motivace. Aplikuj na případovku — jaké styly leadershipu zde jsou + jaké teorie motivace znáš."
+      questionDesc="Motivace + 3 složky + vnitřní × vnější. Lewinovy konflikty motivů. Maslowova pyramida. Yerkes-Dodson. Herzberg dvoufaktorová. Vroom očekávání. Adams spravedlnost. McGregor X-Y. Skinner. White kompetence. 4 drivery. Sebedeterminace. SMART cíle. Stimulace × motivace. Job Design × Job Crafting. Aplikace na PS + doporučení."
+      sloz={3} roz={3} freq={3}
+      examStrategy={examStrategyLead4}
+      studySections={studySectionsLead4}
+      flashcards={flashcardsLead4}
+      quiz={quizLead4}
+      praxe={praxeLead4}
+      examQuestions={examQuestionsLead4}
+      podcast={podcastLead4}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LEADERSHIP 5 — Moc, distribuce moci, French-Raven, organizační struktury
+   ════════════════════════════════════════════════════════ */
+function OkruhLead5Panel() {
+  const studySectionsLead5 = [
+    { id: "intro", title: "Co je moc", subtitle: "Moc × pravomoc × autorita / personalizovaná × socializovaná", color: VSE.fmv, emoji: "bolt",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Moc</b> = sociální vztah, kdy jeden ovlivňuje ostatní i přes jejich vůli. <b>Není to schopnost ani vlastnost</b> — je to vztah. Vždy jeden profituje více = nerovnovážný vztah.
+        </Def>
+        <Tag color={VSE.fmv}>Moc × Pravomoc × Autorita</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>⚡ Moc</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Sociální vztah ovlivňování. Lze získat i nabývat. Není vázaná na pozici.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.ffu}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 4 }}>📜 Pravomoc</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}><b>Formální oprávnění</b> ovlivňovat druhé. Váže se k organizační struktuře a konkrétní pozici.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>👑 Autorita</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Lídr je nositelem. Realizuje se v <b>uznání respektu</b> ze strany podřízených.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Formální × Neformální autorita</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.ffu}08`, border: `1px solid ${VSE.ffu}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 4 }}>Formální autorita</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Bezprostředně odvozená z pravomocí. Nabývá/pozbývá se s pozicí.</div>
+          </div>
+          <div style={{ background: `${VSE.success}08`, border: `1px solid ${VSE.success}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>Neformální autorita</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Vyplývá z <b>morálního či subjektivního hodnocení</b> osobnosti lídra.</div>
+          </div>
+        </div>
+        <Tag color={VSE.warning}>Personalizovaná × Socializovaná moc</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.danger}08`, border: `1px solid ${VSE.danger}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 4 }}>👤 Personalizovaná</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Moc <b>sama o sobě cílem</b>, většinou ku prospěchu jedince.</div>
+          </div>
+          <div style={{ background: `${VSE.success}08`, border: `1px solid ${VSE.success}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>👥 Socializovaná</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Moc je <b>prostředkem</b> (ne cílem) k uskutečnění změn.</div>
+          </div>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.fmv}10`, borderRadius: 10, border: `1px solid ${VSE.fmv}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.fmv, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>KLÍČOVÉ:</span> Lídr by měl umět utvářet mocenské vztahy, které jsou <b>funkční</b> i <b>sociálně přijatelné</b>. Moc v rámci pravomoci nemusí být použita — někdy stačí její existence.
+        </div>
+      </div>) },
+
+    { id: "podoby", title: "Podoby moci (vývojové fáze)", subtitle: "Trestající → Kompenzační → Podmíněná", color: VSE.fmv, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          3 vývojové fáze moci od <b>otevřeného násilí</b> po <b>skrytou manipulaci</b>. Komise často chce identifikovat, jakou podobu moci v PS lídr používá.
+        </Def>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 4 }}>1. ⚔️ Trestající moc</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 4 }}>Trest, sankce, fyzické násilí. <b>Zjevný mocenský vztah</b>. Nejstarší podoba.</div>
+            <div style={{ fontSize: 11, color: "var(--textMuted)", fontFamily: fontSans, fontStyle: "italic" }}>Příklad: výpověd, snížení platu, veřejná kritika</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>2. 💱 Kompenzační moc</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 4 }}>Kompenzujeme mocenský vztah. <b>Něco za něco</b> — ekonomická výhoda, klid. <b>Výhodný pro obě strany.</b> Podmíněno dohodou.</div>
+            <div style={{ fontSize: 11, color: "var(--textMuted)", fontFamily: fontSans, fontStyle: "italic" }}>Příklad: bonus za výkon, povýšení, benefity</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>3. 🎭 Podmíněná moc</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 4 }}><b>Ani si neuvědomujeme</b>, že jsme součástí mocenského vztahu. Skrytá. Pracuje s neviditelnou stránkou. Marketing, ideologie, kultura.</div>
+            <div style={{ fontSize: 11, color: "var(--textMuted)", fontFamily: fontSans, fontStyle: "italic" }}>Příklad: firemní kultura, branding, propaganda</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Zdroje moci (Weber — zjednodušeně)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>👤 Osobnost</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Jsme silní, druzí z nás mají strach, respektují nás.</div>
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>💎 Vlastnictví</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Něco máme a díky tomu rozhodujeme (peníze, zdroje).</div>
+          </div>
+          <div style={{ background: `${VSE.fmv}08`, border: `1px solid ${VSE.fmv}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 4 }}>🏢 Organizace</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Jsme vysoko v organizační struktuře.</div>
+          </div>
+        </div>
+      </div>) },
+
+    { id: "french_raven", title: "⭐ French & Raven — 5 zdrojů moci", subtitle: "NEJDŮLEŽITĚJŠÍ — 4× v ZS 2026, komise to chce přesně", color: VSE.fmv, emoji: "star",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>French a Raven (1959)</b> definovali 5 zdrojů moci, které manažer používá. Komise <b>tohle chce přesně</b>: vyjmenovat všech 5 + identifikovat, který používá manažer v PS + doporučit, který by měl rozvinout.
+        </Def>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.ffu}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.ffu, fontFamily: fontMono, minWidth: 24 }}>1</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans }}>📜 Legitimní moc</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 4 }}>Plyne z <b>formální pozice</b> v hierarchii. Ředitel má legitimní moc nad zaměstnanci, protože je ředitel.</div>
+            <div style={{ fontSize: 11, color: "var(--textMuted)", fontFamily: fontSans, fontStyle: "italic" }}>= Pravomoc + autorita pozice. Padá s pozicí.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.danger, fontFamily: fontMono, minWidth: 24 }}>2</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.danger, fontFamily: fontSans }}>🔨 Donucovací moc</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 4 }}><b>Schopnost trestat.</b> Strach z negativních důsledků. Krátkodobě efektivní, dlouhodobě ničí kulturu.</div>
+            <div style={{ fontSize: 11, color: "var(--textMuted)", fontFamily: fontSans, fontStyle: "italic" }}>= Trestající moc. Vyhazov, snížení platu, veřejná kritika.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.warning, fontFamily: fontMono, minWidth: 24 }}>3</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.warning, fontFamily: fontSans }}>🎁 Odměňovací moc</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 4 }}><b>Schopnost rozdělovat odměny</b> — peníze, povýšení, dovolenou, prestižní úkoly. Něco za něco.</div>
+            <div style={{ fontSize: 11, color: "var(--textMuted)", fontFamily: fontSans, fontStyle: "italic" }}>= Kompenzační moc. Funguje když jsou pravidla jasná a spravedlivá.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.fph}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fph, fontFamily: fontMono, minWidth: 24 }}>4</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fph, fontFamily: fontSans }}>🎓 Expertní moc</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 4 }}>Plyne ze <b>znalostí, dovedností, zkušeností</b>. „On to ví nejlíp.” Nezávislá na pozici.</div>
+            <div style={{ fontSize: 11, color: "var(--textMuted)", fontFamily: fontSans, fontStyle: "italic" }}>Pozn.: může mít negativní dopad, pokud manažer chybně deleguje znalost.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 24 }}>5</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>✨ Referenční (charismatická) moc</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 4 }}>Lidé chtějí být <b>jako lídr</b>. Identifikace, charisma, respekt z osobnosti.</div>
+            <div style={{ fontSize: 11, color: "var(--textMuted)", fontFamily: fontSans, fontStyle: "italic" }}>Nejsilnější dlouhodobě. Steve Jobs, Elon Musk, Tomáš Baťa.</div>
+          </GlassBox>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.success}10`, borderRadius: 10, border: `1px solid ${VSE.success}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.success, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>JAK NA TO V PS:</span> Najdi v PS <b>signály, které zdroje manažer používá</b> (legitimní + odměňovací = klasický manager / + expertní + referenční = lídr / + donucovací = autoritář). Doporuč rozvinout <b>expertní + referenční moc</b> — to jsou dlouhodobě nejsilnější a sociálně nejpřijatelnější.
+        </div>
+      </div>) },
+
+    { id: "distribuce", title: "Distribuce moci — Hierarchie × Kolektivní moudrost", subtitle: "Birkinshawova dimenze + propojení s Mng okruh 4", color: VSE.fmv, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Birkinshaw — 2. dimenze managementu</b>: kde se rozhoduje. Tradiční hierarchie × moderní kolektivní moudrost. <b>Důležité: propojuje se s organizační strukturou v PS.</b>
+        </Def>
+        <Tag color={VSE.fmv}>2 protipóly distribuce moci</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.ffu}08`, border: `1px solid ${VSE.ffu}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 6 }}>🏛️ HIERARCHIE</div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>= Armádní velení — generál rozhoduje, vojáci plní</div>
+            <Bullet items={[
+              "Vertikální tok rozhodnutí",
+              "Top-down (shora dolů)",
+              "Jasná odpovědnost",
+              "Rychlé v krizi",
+              "Demotivuje iniciativu",
+            ]} color={VSE.ffu} />
+          </div>
+          <div style={{ background: `${VSE.success}08`, border: `1px solid ${VSE.success}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 6 }}>🐝 KOLEKTIVNÍ MOUDROST</div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>= Wikipedia — miliony editorů píšou nejpřesnější encyklopedii</div>
+            <Bullet items={[
+              "Bottom-up rozhodování",
+              "Decentralizace",
+              "Crowd wisdom",
+              "Kreativní řešení",
+              "Pomalé v krizi",
+            ]} color={VSE.success} />
+          </div>
+        </div>
+        <Tag color={VSE.primary}>Formy participace na rozhodování</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          {[
+            ["1.", "Autokratické rozhodování", "Manažer rozhoduje sám, bez vlivu okolí.", VSE.danger],
+            ["2.", "Konzultování", "Manažer žádá své okolí o názory, ale rozhoduje sám.", VSE.warning],
+            ["3.", "Společné rozhodování", "Manažer se schází s týmem, diskutuje, společně rozhoduje.", VSE.fph],
+            ["4.", "Delegování", "Manažer deleguje rozhodnutí včetně odpovědnosti.", VSE.success],
+          ].map(([num, title, desc, color]) => (
+            <GlassBox key={num} opacity={0.5} style={{ padding: "8px 12px", display: "flex", gap: 12, alignItems: "flex-start", borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: color, fontFamily: fontMono, minWidth: 24 }}>{num}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: color, fontFamily: fontSans }}>{title}</div>
+                <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+        <Tag color={VSE.warning}>Pozitiva participace</Tag>
+        <Bullet items={[
+          "Vyšší kvalita rozhodování (více pohledů)",
+          "Vyšší míra přijetí rozhodnutí (lidé se identifikují)",
+          "Spokojenost s rozhodovacím procesem",
+          "Rozvoj dovedností členů týmu",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "struktury", title: "Organizační struktury (planning × discovery)", subtitle: "Co zvolit v PS — komise často chce konkrétní strukturu", color: VSE.fmv, emoji: "dna",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Komise často chce zvolit org. strukturu</b> v PS. Klíčový rozdíl: <b>planning</b> (řízení podle plánu) × <b>discovery</b> (řízení podle objevování). Vychází z Birkinshawa a moderních teorií.
+        </Def>
+        <Tag color={VSE.fmv}>Planning × Discovery (Birkinshaw)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.ffu}08`, border: `1px solid ${VSE.ffu}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 6 }}>📋 Planning (alignment)</div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>= GPS navigace — zadáš cíl, algoritmus tě dovede</div>
+            <Bullet items={[
+              "Jasné cíle stanovené předem",
+              "Top-down plánování",
+              "Měřitelné KPI",
+              "Vhodné pro: výrobu, stabilní byznys",
+            ]} color={VSE.ffu} />
+          </div>
+          <div style={{ background: `${VSE.success}08`, border: `1px solid ${VSE.success}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 6 }}>🔍 Discovery (obliquity)</div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>= Objevitel — necháváš si prostor pro emergenci</div>
+            <Bullet items={[
+              "Cíle se objevují v procesu",
+              "Bottom-up iniciativa",
+              "Experimentování",
+              "Vhodné pro: inovace, R&D, startup",
+            ]} color={VSE.success} />
+          </div>
+        </div>
+        <Tag color={VSE.primary}>Klasické organizační struktury</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.ffu}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 3 }}>Funkční struktura</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Po odděleních (HR, finance, marketing). Klasická hierarchie. Jasné odpovědnosti.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>Divizionální struktura</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Po produktech / regionech / zákaznících. Vhodné pro velké firmy.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fph}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fph, fontFamily: fontSans, marginBottom: 3 }}>Maticová struktura</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Dvojí podřízenost (manažer projektu + manažer oddělení). Vhodné pro projekty.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>Plochá / týmová struktura</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Minimum úrovní řízení. Týmy se sebeřízením. Holacracy. Vhodné pro startupy.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 3 }}>Síťová / virtuální</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Outsourcing, freelanceři, partnerské firmy. Maximální flexibilita.</div>
+          </GlassBox>
+        </div>
+      </div>) },
+
+    { id: "mikropolitika", title: "Mikropolitika", subtitle: "Cesty a způsoby prosazování zájmů + nástroje", color: VSE.fmv, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Mikropolitika</b> = pestrý repertoár cest a způsobů prosazení individuálních zájmů. <b>= jednání toho slabšího v mocenském vztahu</b>. Třeba v organizacích — všichni dělají mikropolitiku, ať si to uvědomují nebo ne.
+        </Def>
+        <Tag color={VSE.fmv}>Praktiky a nástroje mikropolitiky</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          {[
+            ["💪 Nátlak, trest, dominantní vystupování", "Na hraně etiky, někdy validní postup. Vyplývá z rozdílu postavení.", VSE.danger],
+            ["🎁 Odměna, výhody, výměny", "Pokud nejde o korupci, vděčný nástroj. Nutné mít, co má pro druhého hodnotu.", VSE.warning],
+            ["⬆️ Odvolání se k vyšší autoritě", "Osoba, instituce, morální principy. Nemanipulační ovlivnění.", VSE.fph],
+            ["💬 Racionální argumentace", "„Zasednout ke stolu” + přesvědčit. Nutný partner schopný naslouchat.", VSE.success],
+            ["🤝 Vytváření koalic", "Skupina lidí, kteří prosazují společný/individuální záměr. I domněnka koalice = nátlak.", VSE.fmv],
+            ["⭐ Zdůraznění osobní výjimečnosti", "Akcent na mimořádné kompetence, zkušenosti, vztahy.", VSE.fis],
+          ].map(([title, desc, color]) => (
+            <GlassBox key={title} opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${color}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 12.5, fontWeight: 700, color: color, fontFamily: fontSans, marginBottom: 3 }}>{title}</div>
+              <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>{desc}</div>
+            </GlassBox>
+          ))}
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.warning}10`, borderRadius: 10, border: `1px solid ${VSE.warning}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.warning, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>POZOR:</span> Lídr by měl být schopen mikropolitiku <b>uplatnit</b> a <b>využívat</b>, ale v <b>etických mantinelech</b>. Nemůže se tomu vyhnout — všichni v organizaci to dělají.
+        </div>
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro Lead 5 zkoušku — French-Raven + struktura", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Lead 5 padá hodně (10 taženek, 4× v ZS 2026!). Komise chce: <b>identifikovat zdroje moci v PS (French-Raven)</b> + <b>doporučit, které rozvinout</b> + případně <b>zvolit organizační strukturu</b>.
+        </Def>
+        <Tag color={VSE.success}>Postup pro Lead 5</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 8 }}>
+          {[
+            ["1.", "Definuj moc + pravomoc + autorita", "Moc = sociální vztah. Pravomoc = formální. Autorita = uznání."],
+            ["2.", "Personalizovaná × socializovaná", "Manažer v PS používá moc pro sebe nebo pro firmu?"],
+            ["3.", "⭐ French-Raven — 5 zdrojů moci", "Identifikuj, které zdroje manažer využívá."],
+            ["4.", "Posuď rizika", "Když je dominantní jen donucovací → vysoká fluktuace. Když jen legitimní → demotivace."],
+            ["5.", "Distribuce moci v org.", "Hierarchie × kolektivní moudrost. Forma participace."],
+            ["6.", "Vyber organizační strukturu", "Planning (výroba, stabilita) × Discovery (R&D, inovace)."],
+            ["7.", "Mikropolitika v PS", "Identifikuj, jaké praktiky používají lidé proti nadřízeným."],
+            ["8.", "Doporuč", "Rozvinout expertní + referenční moc. Více participace v rozhodování. Etické mantinely."],
+          ].map(([num, title, desc]) => (
+            <GlassBox key={num} opacity={0.5} style={{ padding: "8px 12px", display: "flex", gap: 12, alignItems: "flex-start", borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 24 }}>{num}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>{title}</div>
+                <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+        <Tag color={VSE.warning}>⚠️ Komise-specific tipy</Tag>
+        <Bullet items={[
+          "Svobodová / Schönfeld / Bočková: chce přesně French-Raven + aplikaci + rizika + doporučení",
+          "Stříteský: praxe nad teorií, chce ukázat na případovce + na praktických příkladech",
+          "Nový (ZS 2025): chce strukturu - planning × discovery aplikované",
+          "Tahal/Cejthamr: zdroje moci + followership (propojit s Lead 2 styly)",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsLead5 = [
+    { term: "Moc — definice", def: "Sociální vztah, kdy jeden ovlivňuje ostatní i přes jejich vůli. Není to schopnost ani vlastnost.", tag: "DEFINICE" },
+    { term: "Moc × Pravomoc × Autorita", def: "Moc = sociální vztah. Pravomoc = formální oprávnění (vázané na pozici). Autorita = uznání respektu.", tag: "DEFINICE" },
+    { term: "Personalizovaná × socializovaná moc", def: "Personalizovaná = moc cílem (pro sebe). Socializovaná = moc prostředkem (pro změnu).", tag: "DEFINICE" },
+    { term: "3 podoby moci (vývojové fáze)", def: "Trestající (zjevný) → Kompenzační (něco za něco) → Podmíněná (skrytá manipulace).", tag: "PODOBY" },
+    { term: "⭐ French & Raven — 5 zdrojů moci", def: "Legitimní / Donucovací / Odměňovací / Expertní / Referenční (charismatická).", tag: "FRENCH-RAVEN" },
+    { term: "Legitimní moc", def: "Plyne z formální pozice v hierarchii. Padá s pozicí.", tag: "FRENCH-RAVEN" },
+    { term: "Donucovací moc", def: "Schopnost trestat. Strach. Krátkodobě efektivní, dlouhodobě ničí kulturu.", tag: "FRENCH-RAVEN" },
+    { term: "Odměňovací moc", def: "Schopnost rozdělovat odměny — peníze, povýšení, prestižní úkoly.", tag: "FRENCH-RAVEN" },
+    { term: "Expertní moc", def: "Plyne ze znalostí, dovedností, zkušeností. Nezávislá na pozici.", tag: "FRENCH-RAVEN" },
+    { term: "Referenční moc", def: "Lidé chtějí být jako lídr. Charisma, identifikace. Nejsilnější dlouhodobě.", tag: "FRENCH-RAVEN" },
+    { term: "Distribuce moci (Birkinshaw)", def: "Hierarchie × Kolektivní moudrost. 2. dimenze managementu.", tag: "DISTRIBUCE" },
+    { term: "4 formy participace", def: "Autokratické / Konzultování / Společné rozhodování / Delegování.", tag: "DISTRIBUCE" },
+    { term: "Planning × Discovery", def: "Planning = řízení podle plánu (alignment). Discovery = řízení podle objevování (obliquity).", tag: "STRUKTURY" },
+    { term: "Organizační struktury", def: "Funkční / Divizionální / Maticová / Plochá-týmová / Síťová.", tag: "STRUKTURY" },
+    { term: "Mikropolitika", def: "Cesty a způsoby prosazení individuálních zájmů. Jednání slabšího v mocenském vztahu.", tag: "MIKROPOLITIKA" },
+    { term: "Nástroje mikropolitiky", def: "Nátlak / Odměny / Vyšší autorita / Argumentace / Koalice / Osobní výjimečnost.", tag: "MIKROPOLITIKA" },
+  ];
+
+  const quizLead5 = [
+    { q: "Co je moc podle definice?", opts: ["Vlastnost manažera", "Schopnost rozhodovat", "Sociální vztah, kdy jeden ovlivňuje ostatní i přes jejich vůli", "Formální pozice v hierarchii"], correct: 2 },
+    { q: "Jaký je rozdíl mezi mocí a pravomocí?", opts: ["Synonyma", "Moc = sociální vztah, pravomoc = formální oprávnění vázané na pozici", "Moc je legální, pravomoc nelegální", "Pravomoc je vyšší než moc"], correct: 1 },
+    { q: "Které jsou 5 zdrojů moci podle French & Raven?", opts: ["Plat / Bonus / Status / Prestiž / Vzdělání", "Legitimní / Donucovací / Odměňovací / Expertní / Referenční", "Hmotná / Nehmotná / Sociální / Vědomá / Nevědomá", "Vize / Mise / Strategie / Hodnoty / Cíle"], correct: 1 },
+    { q: "Co je referenční (charismatická) moc?", opts: ["Plyne z formální pozice", "Schopnost trestat", "Lidé chtějí být jako lídr — identifikace, charisma", "Plyne ze znalostí"], correct: 2 },
+    { q: "Co je expertní moc?", opts: ["Plyne z formální pozice", "Plyne ze znalostí, dovedností, zkušeností — nezávislá na pozici", "Schopnost rozdělovat odměny", "Synonym pro charismatickou moc"], correct: 1 },
+    { q: "Která podoba moci je nejvíc skrytá?", opts: ["Trestající", "Kompenzační", "Podmíněná (firemní kultura, branding, ideologie)", "Žádná z nich"], correct: 2 },
+    { q: "Co je personalizovaná moc?", opts: ["Moc je cílem (pro sebe)", "Moc je prostředkem (pro změnu)", "Moc získaná z osobnosti", "Synonym pro charisma"], correct: 0 },
+    { q: "V Birkinshawově dimenzi distribuce moci — co je kolektivní moudrost?", opts: ["Vertikální tok rozhodnutí", "Bottom-up rozhodování, decentralizace, crowd wisdom", "Top-down s konzultací", "Synonym pro autokracii"], correct: 1 },
+    { q: "Které jsou 4 formy participace na rozhodování?", opts: ["Plán / Akce / Kontrola / Korekce", "Autokratické / Konzultování / Společné rozhodování / Delegování", "Vize / Mise / Strategie / Cíle", "Strategie / Struktura / Systém / Kultura"], correct: 1 },
+    { q: "Co je Planning přístup k organizační struktuře?", opts: ["Bottom-up emergence", "Cíle se objevují v procesu", "Řízení podle plánu (alignment) — jasné cíle, top-down, KPI", "Synonym pro discovery"], correct: 2 },
+    { q: "Co je Discovery přístup?", opts: ["Řízení podle plánu", "Řízení podle objevování (obliquity) — cíle se objevují, experimentování, R&D", "Hierarchické řízení", "Synonym pro autokracii"], correct: 1 },
+    { q: "Co je mikropolitika?", opts: ["Politika v malé firmě", "Cesty a způsoby prosazení individuálních zájmů — jednání slabšího v mocenském vztahu", "Politická reklama", "Komunální politika"], correct: 1 },
+  ];
+
+  const praxeLead5 = {
+    caseStudy: {
+      company: "Elon Musk (Tesla, SpaceX) — všech 5 zdrojů moci v praxi",
+      subtitle: "Jak charismatický lídr používá kombinaci všech French-Raven zdrojů",
+      content: (<>
+        <b>Elon Musk</b> je ideální case na <b>French-Raven 5 zdrojů moci</b>, protože používá <b>všech 5</b> — některé velmi efektivně, jiné kontroverzně.<br/><br/>
+        <b style={{ color: VSE.ffu }}>1. Legitimní moc</b> — Musk je <b>CEO Tesly + SpaceX + xAI + vlastník X</b>. Jeho legitimní moc je obrovská, nikdo ji nezpochybňuje (vlastník = absolutní pravomoc). To dává základ pro vše ostatní.<br/><br/>
+        <b style={{ color: VSE.danger }}>2. Donucovací moc</b> — slavné <b>masové vyhazovy</b>. Twitter (X) — vyhodil 80% zaměstnanců. Tesla — opakované restrukturalizace. Hardcore email „<i>commit to working long hours at high intensity, or go home</i>”. Riskantní, dlouhodobě poškozuje kulturu.<br/><br/>
+        <b style={{ color: VSE.warning }}>3. Odměňovací moc</b> — <b>akciové opce</b> jsou v Tesle/SpaceX top v branži. Být u Muska = potenciálně bohatý. Lidé pracují 80h týdně, protože je čeká finanční výplata.<br/><br/>
+        <b style={{ color: VSE.fph }}>4. Expertní moc</b> — Musk má <b>hluboké inženýrské znalosti</b> (PayPal, raketová technika, baterie, AI). Když zaměstnanec přijde s problémem, Musk rozumí detailu — to budí respekt. Inženýři ho neberou jen jako CEO, ale jako kolegu.<br/><br/>
+        <b style={{ color: VSE.success }}>5. Referenční moc — KLÍČOVÁ</b> — Musk je <b>vizionář</b>. Lidé chtějí být součástí jeho mise (kolonizace Marsu, udržitelná energie, AI safety). Stovky tisíc lidí by pro něj pracovaly zdarma. <b>Tohle je důvod, proč mu lidé odpouštějí donucovací moc.</b><br/><br/>
+        <b style={{ color: VSE.fmv }}>Distribuce moci</b> — Musk je extrémní <b>hierarchie</b>. Top-down rozhodování. Všechno musí projít přes něj. Funguje díky jeho expertize, ale neškálovatelné — proto má problémy s delegováním (Twitter chaos).<br/><br/>
+        <b style={{ color: VSE.warning }}>Rizika kombinace:</b> Příliš silná donucovací moc + závislost na referenční moci = pokud Musk odejde nebo ztratí důvěru, organizace se rozpadne. <b>Doporučení:</b> postupně rozvíjet další leadery (referenční moc + delegování), aby nezávisela na 1 člověku.
+      </>),
+      lessons: "Musk ukazuje, že dlouhodobě silní lídři <b>kombinují všech 5 zdrojů</b>, ale s důrazem na <b>expertní + referenční moc</b>. Donucovací moc lze tolerovat jen krátkodobě a jen když je ostatní zdroje vyrovnají. Když máš v PS lídra s jen <b>legitimní + donucovací</b> mocí, doporuč <b>investici do expertních znalostí</b> (vzdělávání) + <b>budování charismatu</b> (vize, transparentnost, autenticita) — to jsou dlouhodobě nejudržitelnější zdroje moci."
+    },
+    miniExamples: [
+      { company: "Tomáš Baťa (CZ klasika)", tag: "EXPERTNÍ + REFERENČNÍ", color: VSE.success, content: "Baťa kombinoval <b>4 z 5 zdrojů</b>. <b>Expertní moc</b> — sám pracoval ve fabrice, znal každý detail výroby. <b>Referenční</b> — Zlín ho zbožňoval, lidé chtěli být jako on. <b>Legitimní</b> — vlastník firmy. <b>Odměňovací</b> — Baťovy domky, podíly na zisku. <b>Donucovací</b> minimalizoval — místo trestu osvěta a vzdělávání. Klasický <b>socializovaný</b> přístup k moci." },
+      { company: "Andrej Babiš (Agrofert)", tag: "LEGITIMNÍ + DONUCOVACÍ", color: VSE.danger, content: "Babiš stojí na <b>2 zdrojích</b>: <b>Legitimní</b> (vlastník) + <b>Donucovací</b> (vysoká fluktuace, strach). Expertní moc menší (deleguje), referenční slabá (lidé ho neberou jako vzor). <b>Personalizovaná moc</b> — pro vlastní prospěch. Krátkodobě efektivní, dlouhodobě riziko." },
+      { company: "Steve Jobs (Apple)", tag: "REFERENČNÍ + DONUCOVACÍ", color: VSE.warning, content: "Jobs měl extrémní <b>referenční moc</b> (kult osobnosti) + extrémní <b>donucovací</b> (vyhazoval lidi na schodech). Plus <b>expertní</b> (rozuměl designu). <b>Mikropolitika</b> — používal nátlak, dominantní vystupování, koalice. Funkční jen díky charismatu — kdyby chyběla referenční moc, byl by tyran." },
+      { company: "Kongregační rozhodování / Pixar Braintrust", tag: "KOLEKTIVNÍ MOUDROST", color: VSE.success, content: "<b>Pixar Braintrust</b> = ukázka <b>kolektivní moudrosti v praxi</b>. Top tvůrci se setkávají, otevřeně kritizují nápady, bez hierarchie. Catmull (CEO) tam <b>není legitimní šéf</b> — všichni jsou si rovni. <b>Distribuce moci</b> = horizontální. Fungovalo by tohle v armádě? Ne. Funguje to v kreativním byznysu? Ano — výsledek 27 Oscarů." },
+    ]
+  };
+
+  const examQuestionsLead5 = [
+    { komise: "ZS 2026 — Svobodová, Nový, Machek", otazka: "Zdroje moci French Raven. Aplikovat na případovku, jaké zdroje moci manažer využívá, jaká jsou rizika a co bych jim doporučila." },
+    { komise: "ZS 2026 — Schönfeld, Legnerová, Zamazalová", otazka: "Zdroje moci French Raven. Aplikovat na případovku, jaké zdroje moci manažer využívá, jaká jsou rizika a co bych jim doporučila.", pozn: "Skvělá komise" },
+    { komise: "ZS 2026 — Bočková, Nový, Kolouchová", otazka: "Zdroje moci French Raven. Aplikovat na případovku, jaké zdroje moci manažer využívá, jaká jsou rizika a co bych jim doporučila.", pozn: "Kolouchová super, Nový důležité rozumět detailům, Bočková se moc netváří, ale je v pohodě." },
+    { komise: "ZS 2026 — Svobodová, Tahal, Cejthamr", otazka: "Distribuce moci.", pozn: "Boží komise" },
+    { komise: "ZS 2026 — Stříteský, Lorencová, Pernica", otazka: "Rozhodování a distribuce moci, aplikace na případovku.", pozn: "Komise milá, hodně chce ukázat na případovce ale chtěla i na praktických příkladech." },
+    { komise: "ZS 2025 — Krause, Viktora, Tahal", otazka: "Zdroje moci v leadershipu, najít nejvíce využívaný přístup v případovce, vztáhnout na leadera, co dělá dobře/špatně, poradit mu." },
+    { komise: "ZS 2025 — Nový, Vávra, Heřman", otazka: "Distribuce moci, zdroje moci a aplikace na případovku + zvolit organizační strukturu (planning × discovery).", pozn: "Šlo vybrat i jinou strukturu - já jsem řekla že bych zůstala u jejich." },
+    { komise: "LS 2025 — Tahal, Cejthamr, Schönfeld", otazka: "Zdroje moci (French, Raven), followership.", pozn: "Hodně dobrá komise, pomáhá pořád mluvit." },
+    { komise: "LS 2025 — Double Stříteský, Müllerová", otazka: "Distribuce moci a rozhodování v organizaci. Jaký přístup je použitý v případovce? Jaké jsou výhody/nevýhody? Jak byste zlepšili na modernější variantu?" },
+    { komise: "LS 2025 — Nepamatuju si komisi", otazka: "Zdroje moci (French, Raven), aplikovat na případovku, navrhnout řešení jaké moci by měl manažer uplatňovat více." },
+  ];
+
+  const podcastLead5 = { title: "Leadership 5 — Moc, distribuce moci, French-Raven", description: "5 zdrojů moci, distribuce moci, planning × discovery, mikropolitika. Aplikace na PS + doporučení.", audioUrl: "/audio/lead-5.mp3", notebookLmUrl: null };
+
+  const examStrategyLead5 = `
+    <b style="color:#E06D1E">1.</b> Definuj moc + pravomoc + autorita (3 různé pojmy!).<br/>
+    <b style="color:#E06D1E">2.</b> Personalizovaná × socializovaná moc — manažer pro sebe nebo pro firmu?<br/>
+    <b style="color:#E06D1E">3.</b> ⭐ <b>French-Raven 5 zdrojů moci</b> — vyjmenuj všech 5 (Legitimní / Donucovací / Odměňovací / Expertní / Referenční).<br/>
+    <b style="color:#E06D1E">4.</b> <b>Identifikuj zdroje, které manažer v PS používá</b> — najdi konkrétní signály.<br/>
+    <b style="color:#E06D1E">5.</b> <b>Rizika kombinace</b> — co se stane, když používá jen donucovací? Když chybí expertní?<br/>
+    <b style="color:#E06D1E">6.</b> <b>Distribuce moci</b> — hierarchie × kolektivní moudrost. Forma participace.<br/>
+    <b style="color:#E06D1E">7.</b> <b>Organizační struktura</b> — planning (výroba) × discovery (R&D, inovace).<br/>
+    <b style="color:#E06D1E">8.</b> <b>Doporučení</b>: rozvinout expertní + referenční moc (dlouhodobě nejsilnější), více participace.<br/>
+    <b style="color:#E06D1E">9.</b> Závěr: lídr v etických mantinelech, mikropolitika OK, ale s mírou.
+  `;
+
+  return (
+    <OkruhPanel
+      subject="Leadership" subjectId="lead" number={5} title="Moc, distribuce moci, zdroje moci"
+      subtitle="French-Raven 5 zdrojů / Hierarchie × kolektivní moudrost / Org. struktury / Mikropolitika"
+      color={VSE.fmv}
+      questionText="Moc, distribuce moci (hierarchie × kolektivní moudrost), zdroje moci a aplikace na případovku + zvolit organizační strukturu."
+      questionDesc="Moc × pravomoc × autorita. Personalizovaná × socializovaná. 3 podoby moci (trestající / kompenzační / podmíněná). ⭐ French-Raven 5 zdrojů (Legitimní / Donucovací / Odměňovací / Expertní / Referenční). Distribuce moci - hierarchie × kolektivní moudrost. 4 formy participace. Planning × Discovery. Organizační struktury. Mikropolitika. Aplikace na PS + doporučení."
+      sloz={2} roz={2} freq={3}
+      examStrategy={examStrategyLead5}
+      studySections={studySectionsLead5}
+      flashcards={flashcardsLead5}
+      quiz={quizLead5}
+      praxe={praxeLead5}
+      examQuestions={examQuestionsLead5}
+      podcast={podcastLead5}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   LEADERSHIP 6 — Team Excellence (Larson, LaFasto), pracovní týmy
+   ════════════════════════════════════════════════════════ */
+function OkruhLead6Panel() {
+  const studySectionsLead6 = [
+    { id: "intro", title: "Pracovní skupina × Tým", subtitle: "Rozdíl + základní znaky + Hillův model", color: VSE.fmv, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Komise často chce rozlišit <b>pracovní skupinu</b> a <b>pracovní tým</b>. Klíč: <b>tým existuje pro úkol</b>, skupina jede pořád. Lidé můžou být v obou paralelně.
+        </Def>
+        <Tag color={VSE.fmv}>Pracovní skupina × Pracovní tým</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.ffu}08`, border: `1px solid ${VSE.ffu}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.ffu, fontFamily: fontSans, marginBottom: 6 }}>👥 Pracovní SKUPINA</div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>Dlouhodobá. Společný úkol i pracoviště. <b>Nejsou bezprostředně závislé.</b></div>
+            <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>Příklad: účtárna, finance, HR oddělení</div>
+            <Bullet items={[
+              "Společné cíle, činnost, pracoviště",
+              "Vnitřní struktura pozic a rolí",
+              "Časté vzájemné kontakty",
+              "Vědomí příslušnosti = priorita",
+            ]} color={VSE.ffu} />
+          </div>
+          <div style={{ background: `${VSE.success}08`, border: `1px solid ${VSE.success}25`, borderRadius: 12, padding: 14 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 6 }}>🎯 Pracovní TÝM</div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>Vzniká na <b>určitý úkol</b>, časově omezený, společná odpovědnost. <b>Formálně nestrukturovaný</b> (jen vedoucí).</div>
+            <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 6, fontStyle: "italic" }}>Příklad: projektový tým, krizový tým, Avengers</div>
+            <Bullet items={[
+              "Kooperace a synergie",
+              "Tým má vyšší výkon než suma jednotlivců",
+              "Lidé mohou být paralelně ve skupině i týmu",
+            ]} color={VSE.success} />
+          </div>
+        </div>
+        <Tag color={VSE.primary}>Hillův model — kdy lídr zasahuje</Tag>
+        <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          Lídr <b>motivuje a zasahuje pouze v případě potřeby</b>. Interní × externí zásah.
+        </div>
+        <Bullet items={[
+          "Interní zásah — řízení vnitřních dynamik (konflikty, role, ZV)",
+          "Externí zásah — řízení vnějších vztahů (zdroje, partneři, vyšší vedení)",
+          "Klíč: kdy přesně zasáhnout? Příliš brzy = mikromanagement. Pozdě = krize.",
+        ]} color={VSE.primary} />
+      </div>) },
+
+    { id: "formace", title: "Formace týmu (Tuckman) + Belbinovy role", subtitle: "5 fází vývoje + Thinking/Action/People oriented", color: VSE.fmv, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Bruce Tuckman</b> popsal 5 fází vývoje týmu. Důležité: lídr musí vědět, ve které fázi je tým, aby ho mohl správně podporovat.
+        </Def>
+        <Tag color={VSE.fmv}>5 fází formace týmu (Tuckman)</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans, marginBottom: 3 }}>1. 🌱 Forming (formování)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Orientace, nejistota, závislost na vedoucím, formulace cílů.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 3 }}>2. ⚡ Storming (bouření)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Konfrontace, sociální role, napětí, názory. <b>Konflikty jsou normální!</b></div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 3 }}>3. 📋 Norming (normování)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Utváření pravidel, sociálních norem, kooperace, role se ustálí.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>4. 🚀 Performing (výkonnost)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Funguje, řeší úkoly, přirozenost. <b>Vrchol</b> — tady tým dosahuje synergie.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fph}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fph, fontFamily: fontSans, marginBottom: 3 }}>5. 🏁 Adjourning (rozpuštění)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Udržení znalostí, kontrola, zlepšení do budoucna. Reflexe + retrospektivy.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Týmové role — Belbin (3 oblasti, 9 rolí)</Tag>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginTop: 8 }}>
+          <div style={{ background: `${VSE.fph}08`, border: `1px solid ${VSE.fph}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fph, fontFamily: fontSans, marginBottom: 4 }}>🧠 Thinking oriented</div>
+            <div style={{ fontSize: 11, color: "var(--text)", fontFamily: fontSans }}>Plant (kreativec) / Monitor Evaluator (analytik) / Specialist (expert)</div>
+          </div>
+          <div style={{ background: `${VSE.warning}08`, border: `1px solid ${VSE.warning}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 4 }}>⚡ Action oriented</div>
+            <div style={{ fontSize: 11, color: "var(--text)", fontFamily: fontSans }}>Shaper (formovač) / Implementer (realizátor) / Completer Finisher (dokončovatel)</div>
+          </div>
+          <div style={{ background: `${VSE.success}08`, border: `1px solid ${VSE.success}25`, borderRadius: 12, padding: 12 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 4 }}>👥 People oriented</div>
+            <div style={{ fontSize: 11, color: "var(--text)", fontFamily: fontSans }}>Coordinator (koordinátor) / Teamworker (týmový hráč) / Resource Investigator (vyhledávač zdrojů)</div>
+          </div>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.success}10`, borderRadius: 10, border: `1px solid ${VSE.success}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.success, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>KLÍČ:</span> Optimální tým má <b>všechny 3 oblasti</b> zastoupené. Jednotlivci mívají 2-3 dominantní role.
+        </div>
+      </div>) },
+
+    { id: "team_excellence", title: "⭐ Team Excellence — Larson, LaFasto", subtitle: "8 charakteristik vysoce úspěšných týmů + 9. bod udržitelnost", color: VSE.fmv, emoji: "trophy",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Larson a LaFasto (1989)</b> analyzovali charakteristiky vysoce úspěšných týmů a definovali <b>8 standardů excelence</b>. Komise <b>tohle chce přesně</b> — vyjmenovat všech 8 + identifikovat, které v PS jsou a které chybí.
+        </Def>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>1</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>🎯 Jasný, motivující cíl</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>Lídr zajišťuje soustředění týmu na cíl. Cíl musí být srozumitelný a inspirující.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>2</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>📊 Na výsledek orientovaná struktura a strategie</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>Každý člen má svou roli. Lídr sleduje výsledky a odměňuje je.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>3</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>🤝 Jednotný závazek</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>Pocit jednoty. Všichni jdou za stejným cílem. Týmový duch.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>4</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>💚 Atmosféra spolupráce</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>Důvěra mezi členy, respekt, vzájemná pomoc. Lidi spolu chtějí pracovat.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>5</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>🎓 Kompetentní členové týmu</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>Technicky i interpersonálně. Schopnost dokončit práci, řešit problémy, otevřenost, optimismus.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>6</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>📏 Standardy excelence (efektivity)</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>Definované standardy = očekávání, jak má být tým výkonný. Lídr udává směr podporou standardů.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>7</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>💼 Externí podpora</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>Penězi, materiálem, know-how ze strany organizace. Odměnami za výkon. Zázemí.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.fmv}`, borderRadius: 10 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, minWidth: 24 }}>8</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.fmv, fontFamily: fontSans }}>👑 Zásady leadershipu</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>Lídr motivuje, poskytuje feedback, udává strategii, koordinuje dovednosti členů týmu.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "12px 16px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10, background: `${VSE.success}08` }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 24 }}>9</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: VSE.success, fontFamily: fontSans }}>♻️ Udržitelnost (BONUS — Tahal/Kuděj/Kučera)</div>
+            </div>
+            <div style={{ fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>Komise <b>Tahal/Kuděj/Kučera</b> chce slyšet jako 9. bod <b>udržitelnost</b>. Tým musí být dlouhodobě udržitelný — nejen výkonný teď, ale i za rok. Burn-out, fluktuace, work-life balance.</div>
+          </GlassBox>
+        </div>
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.warning}10`, borderRadius: 10, border: `1px solid ${VSE.warning}30`, fontSize: 12, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.warning, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>JAK NA TO:</span> Komise chce <b>vyjmenovat všech 8 (+ udržitelnost)</b>, identifikovat které jsou v PS, které <b>chybí</b>, a doporučit, jak chybějící doplnit.
+        </div>
+      </div>) },
+
+    { id: "hackman", title: "Hackman — Podmínky aktivity skupiny", subtitle: "6 podmínek pro efektivitu skupiny + jevy v týmu", color: VSE.fmv, emoji: "construction",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Hackman (2012)</b> popsal 6 podmínek aktivujících efektivitu skupiny. Komplementární k Larson/LaFasto — místo charakteristik popisuje <b>aktivátory</b>.
+        </Def>
+        <Tag color={VSE.fmv}>6 podmínek aktivity skupiny (Hackman)</Tag>
+        <Bullet items={[
+          "Přesvědčivý důvod existence — proč tým existuje, jasný smysl",
+          "Vhodní lidé — správná kombinace dovedností a osobností",
+          "Reálný tým — jasně definovaný, stabilní, omezený na velikost",
+          "Jasné normy chování — co je očekáváno, jak komunikovat",
+          "Podpůrný organizační kontext — zázemí, zdroje, autorita",
+          "Trénink zaměřený na tým — společný rozvoj, ne jen jednotlivců",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.danger}>⚠️ Jevy v pracovní skupině</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>✅ Sociální facilitace</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Přítomnost lidí <b>zvyšuje</b> výkon. Pozitivní jev. Příklad: studovat ve studovně místo doma.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 3 }}>❌ Deindividualizace</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Pocit ztráty identity, splynutí se skupinou. <b>Rozplynutí odpovědnosti</b> — nikdo neudělá úkol.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 3 }}>⚠️ Efekt přihlížejících (bystander)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Čím více lidí, tím méně jejich pomoci — všichni si myslí, že to udělá někdo jiný.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 3 }}>🌀 Sociální lenost</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Větší skupina → menší úsilí jednotlivce. Někdo se „jen veze”.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 3 }}>🐑 Konformita + Poslušnost autoritě</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Podléháme okolí + přesouváme odpovědnost na autoritu. Asch + Milgram experimenty.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 3 }}>🤖 Skupinové rozhodování (groupthink)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Tendence rozhodovat jedním způsobem. Potlačení alternativních názorů. Chyby Bay of Pigs, Challenger.</div>
+          </GlassBox>
+        </div>
+      </div>) },
+
+    { id: "followership", title: "Followership a participativní leadership", subtitle: "Typy followerů (Kelly) + 3 úrovně ovlivňování", color: VSE.fmv, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Followership</b> = vědomé následování. <b>Každý lídr je zároveň followerem</b>. Komise často chce propojit s Lead 5 (moc) nebo Lead 2 (styly).
+        </Def>
+        <Tag color={VSE.fmv}>Typy followerů (Kelly) — 2 osy</Tag>
+        <div style={{ fontSize: 12, color: "var(--textMuted)", fontFamily: fontSans, marginBottom: 8, fontStyle: "italic" }}>
+          Osy: Active × Passive / Independent thinking × Dependent thinking
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 3 }}>⭐ Effective followers (příkladní)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Active + Independent. <b>Nejlepší!</b> Proaktivní, kritičtí, dochladí. Lídr je deleguje.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.warning}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.warning, fontFamily: fontSans, marginBottom: 3 }}>Alienated followers (odcizení)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Passive + Independent. <b>Nepostouchají</b>, mají vlastní hlavu. Lídr potřebuje podpůrný styl.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.fph}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.fph, fontFamily: fontSans, marginBottom: 3 }}>Conformist followers (konformisté)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Active + Dependent. „Yes-men”. <b>Vše splní bez přemýšlení</b>. Lídr potřebuje direktivní styl.</div>
+          </GlassBox>
+          <GlassBox opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${VSE.danger}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.danger, fontFamily: fontSans, marginBottom: 3 }}>Passive followers (pasivní ovce)</div>
+            <div style={{ fontSize: 11.5, color: "var(--text)", fontFamily: fontSans }}>Passive + Dependent. „Sheep”. <b>Dělají co se řekne, jinak nic.</b> Lídr potřebuje koučink.</div>
+          </GlassBox>
+        </div>
+        <Tag color={VSE.primary}>Ovlivňování následovníků — 3 úrovně</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 8 }}>
+          {[
+            ["1.", "Instrumentální podřízení", "Zaměstnanec vynaloží co nejmenší úsilí pro získání odměny a vyhnutí se trestu."],
+            ["2.", "Vnitřní ztotožnění", "Loajální, přijímá názory lídra a ztotožňuje se s nimi."],
+            ["3.", "Osobní identifikace", "Pracovník se identifikuje s chováním a postoji lídra — vytvoření vzájemného vztahu s lídrem."],
+          ].map(([num, title, desc]) => (
+            <GlassBox key={num} opacity={0.5} style={{ padding: "8px 12px", display: "flex", gap: 12, alignItems: "flex-start", borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.primary, fontFamily: fontMono, minWidth: 24 }}>{num}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>{title}</div>
+                <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro Lead 6 — Team Excellence aplikované", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Lead 6 padá méně (5 taženek), ale komise chce <b>přesnou znalost 8 charakteristik Larson/LaFasto</b> + identifikaci v PS.
+        </Def>
+        <Tag color={VSE.success}>Postup pro Lead 6</Tag>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6, marginTop: 8 }}>
+          {[
+            ["1.", "Definuj skupina × tým", "Skupina = dlouhodobá, není závislost. Tým = úkol, omezený, závislost."],
+            ["2.", "Identifikuj v PS", "Co je tým a co skupina? Kdo je v obou paralelně?"],
+            ["3.", "Aplikuj Tuckman 5 fází", "V jaké fázi je tým v PS? Forming / Storming / Norming / Performing / Adjourning?"],
+            ["4.", "⭐ Vyjmenuj všech 8 charakteristik", "Jasný cíl / Struktura / Závazek / Atmosféra / Kompetentní / Standardy / Externí podpora / Leadership"],
+            ["5.", "Identifikuj které jsou a které chybí", "V PS: které charakteristiky tým má a které postrádá?"],
+            ["6.", "Pro Tahal/Kuděj/Kučera: dodaj 9. bod", "Udržitelnost — work-life balance, ne-burn-out, dlouhodobost"],
+            ["7.", "Aplikuj Belbinovy role", "Má tým všechny 3 oblasti (thinking / action / people)? Co chybí?"],
+            ["8.", "Identifikuj jevy", "Sociální facilitace? Sociální lenost? Groupthink?"],
+            ["9.", "Doporuč konkrétní akce", "Definovat jasné role, standardy, externí podporu, koučink, ZV cyklus"],
+          ].map(([num, title, desc]) => (
+            <GlassBox key={num} opacity={0.5} style={{ padding: "8px 12px", display: "flex", gap: 12, alignItems: "flex-start", borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: VSE.success, fontFamily: fontMono, minWidth: 24 }}>{num}</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: "var(--text)", fontFamily: fontSans }}>{title}</div>
+                <div style={{ fontSize: 11.5, color: "var(--textMuted)", fontFamily: fontSans }}>{desc}</div>
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+        <Tag color={VSE.warning}>⚠️ Komise-specific tipy</Tag>
+        <Bullet items={[
+          "Tahal/Kuděj/Kučera (ZS 2025): chce 9. bod udržitelnost!",
+          "Tahal/Kuděj/Nový (ZS 2025): vyjmenovat, najít v případovce a popsat",
+          "Tahal/Cejthamr/Schönfeld (LS 2025): krátká otázka, ale chtějí všech 8 přesně",
+          "Abíková/Kolouchová/Smrčka: aplikace na případovku — najít v týmu z PS",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsLead6 = [
+    { term: "Pracovní skupina × tým", def: "Skupina = dlouhodobá, společný úkol, není závislost (účtárna). Tým = vzniká na úkol, závislost, časově omezený.", tag: "DEFINICE" },
+    { term: "Hillův model", def: "Lídr motivuje a zasahuje pouze v případě potřeby. Interní × externí zásah.", tag: "DEFINICE" },
+    { term: "Tuckman 5 fází", def: "Forming / Storming / Norming / Performing / Adjourning.", tag: "TUCKMAN" },
+    { term: "Storming", def: "2. fáze. Konfrontace, sociální role, napětí, názory. Konflikty jsou normální.", tag: "TUCKMAN" },
+    { term: "Performing", def: "4. fáze. Tým funguje, řeší úkoly, přirozenost. Vrchol — synergie.", tag: "TUCKMAN" },
+    { term: "Belbin — 3 oblasti rolí", def: "Thinking oriented / Action oriented / People oriented. 9 rolí celkem.", tag: "BELBIN" },
+    { term: "⭐ Larson, LaFasto — 8 charakteristik", def: "1. Jasný cíl / 2. Struktura / 3. Jednotný závazek / 4. Atmosféra spolupráce / 5. Kompetentní členové / 6. Standardy / 7. Externí podpora / 8. Zásady leadershipu.", tag: "TEAM-EXC" },
+    { term: "9. bod (Tahal/Kuděj)", def: "Udržitelnost — dlouhodobá udržitelnost týmu, work-life balance, ne-burn-out.", tag: "TEAM-EXC" },
+    { term: "Hackman — 6 podmínek", def: "Důvod existence / Vhodní lidé / Reálný tým / Normy chování / Podpůrný kontext / Trénink na tým.", tag: "HACKMAN" },
+    { term: "Sociální facilitace", def: "Přítomnost lidí ZVYŠUJE výkon. Pozitivní jev.", tag: "JEVY" },
+    { term: "Sociální lenost", def: "Větší skupina → menší úsilí jednotlivce. Někdo se jen veze.", tag: "JEVY" },
+    { term: "Deindividualizace", def: "Pocit ztráty identity, splynutí. Rozplynutí odpovědnosti.", tag: "JEVY" },
+    { term: "Groupthink", def: "Tendence rozhodovat jedním způsobem. Potlačení alternativ.", tag: "JEVY" },
+    { term: "Kelly — typy followerů", def: "Effective (active+independent) / Alienated (passive+indep) / Conformist (active+dep) / Passive (passive+dep).", tag: "FOLLOWERSHIP" },
+    { term: "3 úrovně ovlivňování následovníků", def: "Instrumentální podřízení / Vnitřní ztotožnění / Osobní identifikace.", tag: "FOLLOWERSHIP" },
+    { term: "Synergie v týmu", def: "Tým má vyšší výkon než suma jednotlivců. 1+1 = 3.", tag: "DEFINICE" },
+  ];
+
+  const quizLead6 = [
+    { q: "Jaký je rozdíl mezi pracovní skupinou a týmem?", opts: ["Synonyma", "Skupina = dlouhodobá, není závislost (účtárna). Tým = vzniká na úkol, závislost, časově omezený.", "Tým je menší než skupina", "Skupina má lídra, tým ne"], correct: 1 },
+    { q: "Které jsou Tuckmanovy fáze vývoje týmu?", opts: ["Plan / Do / Check / Act", "Forming / Storming / Norming / Performing / Adjourning", "Vize / Mise / Strategie / Cíle", "Empatie / Definice / Ideace / Test"], correct: 1 },
+    { q: "V Tuckmanově modelu — co je Storming?", opts: ["1. fáze, orientace, nejistota", "2. fáze, konfrontace, sociální role, napětí — konflikty jsou normální", "Vrchol týmové výkonnosti", "Rozpuštění týmu"], correct: 1 },
+    { q: "Které jsou Belbinovy 3 oblasti týmových rolí?", opts: ["Plant / Shaper / Coordinator", "Thinking oriented / Action oriented / People oriented", "Leader / Follower / Observer", "Strategy / Tactic / Operation"], correct: 1 },
+    { q: "Které jsou 8 charakteristik Team Excellence (Larson, LaFasto)?", opts: ["Jasný cíl / Struktura / Závazek / Atmosféra / Kompetence / Standardy / Externí podpora / Leadership", "Plan / Do / Check / Act / Review / Improve / Audit / Restart", "Vize / Mise / Strategie / Hodnoty / Cíle / Plán / KPI / Reward", "Belbin 9 rolí"], correct: 0 },
+    { q: "Jaký 9. bod chce komise Tahal/Kuděj/Kučera doplnit k Team Excellence?", opts: ["Inovace", "Diverzitu", "Udržitelnost", "Globalizaci"], correct: 2 },
+    { q: "Co je sociální facilitace?", opts: ["Snížení výkonu kvůli skupině", "Přítomnost lidí ZVYŠUJE výkon", "Snadné přijímání nových členů", "Synonym pro groupthink"], correct: 1 },
+    { q: "Co je sociální lenost?", opts: ["Lidé v týmu jsou neefektivní", "Větší skupina → menší úsilí jednotlivce, někdo se jen veze", "Synonym pro deindividualizaci", "Pomalá fáze týmu"], correct: 1 },
+    { q: "Co je groupthink?", opts: ["Pozitivní jev týmové synergie", "Tendence rozhodovat jedním způsobem, potlačení alternativ", "Synonym pro kolektivní moudrost", "Týmový brainstorming"], correct: 1 },
+    { q: "V Kelly typologii followerů — kteří jsou nejlepší?", opts: ["Passive sheep", "Conformist yes-men", "Effective followers (active + independent)", "Alienated"], correct: 2 },
+    { q: "Které jsou 3 úrovně ovlivňování následovníků?", opts: ["Plat / Bonus / Uznání", "Instrumentální podřízení / Vnitřní ztotožnění / Osobní identifikace", "Vize / Strategie / Implementace", "Top / Middle / Bottom"], correct: 1 },
+    { q: "Hackmanových 6 podmínek aktivity skupiny obsahuje…", opts: ["Pouze finanční odměny", "Důvod existence / Vhodní lidé / Reálný tým / Normy chování / Podpůrný kontext / Trénink na tým", "Pouze týmové role podle Belbina", "Pouze 8 standardů Larson/LaFasto"], correct: 1 },
+  ];
+
+  const praxeLead6 = {
+    caseStudy: {
+      company: "Avengers (Marvel) — Team Excellence v praxi přes všech 8 bodů + udržitelnost",
+      subtitle: "Jak Nick Fury sestavil tým, který naplňuje Larson/LaFasto",
+      content: (<>
+        <b>Avengers</b> jsou klasická case study na Team Excellence, protože Nick Fury (lídr) prošel <b>všemi 8 charakteristikami</b> + řešil 9. bod udržitelnosti.<br/><br/>
+        <b style={{ color: VSE.fmv }}>1. Jasný, motivující cíl</b> — porazit Loki / Thanos. Existenciální, srozumitelný, motivující. Žádný „<i>zvýšit revenue o 5%</i>”, ale „<i>zachránit svět</i>”.<br/><br/>
+        <b style={{ color: VSE.fmv }}>2. Na výsledek orientovaná struktura</b> — každý má roli: Cap (taktika), Iron Man (technologie), Hulk (síla), Thor (magie), Black Widow (špionáž), Hawkeye (precise). <b>Nepřekrývají se kompetence.</b><br/><br/>
+        <b style={{ color: VSE.fmv }}>3. Jednotný závazek</b> — i přes konflikty (Civil War) se vrátí, když je třeba. Týmový duch nad osobními rozdíly.<br/><br/>
+        <b style={{ color: VSE.fmv }}>4. Atmosféra spolupráce</b> — postupně vybudovaná. Začátek = Storming (konflikty Iron Man × Cap). Pak Norming → Performing (Endgame).<br/><br/>
+        <b style={{ color: VSE.fmv }}>5. Kompetentní členové</b> — extrémně kompetentní jak technicky (Hulk = vědec, Iron Man = inženýr), tak interpersonálně (Cap, Black Widow).<br/><br/>
+        <b style={{ color: VSE.fmv }}>6. Standardy excelence</b> — Cap nastavuje morální standard. „<i>I can do this all day.</i>” Žádné odpouštění zlu.<br/><br/>
+        <b style={{ color: VSE.fmv }}>7. Externí podpora</b> — S.H.I.E.L.D., NASA, vlády světa. Zázemí, technologie, financování (Iron Man bohatý, Stark Industries).<br/><br/>
+        <b style={{ color: VSE.fmv }}>8. Zásady leadershipu</b> — Nick Fury udává strategii, koordinuje. Cap je field leader, Tony je technický lídr. <b>Distribuovaný leadership</b>.<br/><br/>
+        <b style={{ color: VSE.success }}>9. Udržitelnost</b> — kde Avengers selhávají. <b>Burn-out</b> po Endgame, Iron Man + Black Widow umírají, Cap odchází. <b>Tým neudržitelný dlouhodobě.</b> To je co Tahal/Kuděj/Kučera chce slyšet — i nejlepší tým musí myslet na udržitelnost.<br/><br/>
+        <b style={{ color: VSE.fmv }}>Aplikace na Tuckman:</b> Avengers (2012) = Forming. Ultron (2015) = Storming (Civil War). Endgame (2019) = Performing. Po Endgame = Adjourning.
+      </>),
+      lessons: "Avengers ukazují, že <b>Team Excellence není jen o splnění 8 bodů</b> — je o jejich <b>kombinaci a dlouhodobé udržitelnosti</b>. Když máš v PS tým, který má jasný cíl, kompetentní lidi, ale nemá externí podporu nebo nezohledňuje burn-out, doporuč: <b>1) Definovat externí zázemí</b> (zdroje, podpora vyšších manažerů), <b>2) Vybudovat standardy</b> (jak má vypadat výkon), <b>3) Investovat do udržitelnosti</b> (work-life balance, retrospektivy, koučink)."
+    },
+    miniExamples: [
+      { company: "Pixar Braintrust", tag: "ATMOSFÉRA + STANDARDY", color: VSE.success, content: "<b>Pixar Braintrust</b> = ukázka <b>charakteristik 4 (atmosféra spolupráce) + 6 (standardy excelence)</b>. Top tvůrci se setkávají, otevřeně kritizují nápady. <b>Bez hierarchie, ale se standardy</b> — výsledek = 27 Oscarů. <b>Kompetentní členové</b> — Pete Docter, Brad Bird, Andrew Stanton — top experti. Jednotný závazek = vyrobit nejlepší animovaný film." },
+      { company: "Tomáš Baťa Zlín (CZ)", tag: "VŠECH 8 BODŮ + UDRŽITELNOST", color: VSE.success, content: "Baťa pokryl <b>všech 8 charakteristik</b> + <b>9. udržitelnost</b>. <b>Cíl</b>: „Naším zákazníkům.” <b>Struktura</b>: jasná hierarchie, ale lidé měli prostor. <b>Externí podpora</b>: Baťovy domky, škola, nemocnice. <b>Udržitelnost</b>: Zlín fungoval desítky let, lidé si pamatují Baťovu kulturu dodnes. Vzor pro celé Československo." },
+      { company: "Avast / Pavel Baudiš (CZ)", tag: "KOMPETENTNÍ + STANDARDY", color: VSE.success, content: "Avast — moderní příklad <b>Team Excellence v IT</b>. <b>Kompetentní členové</b> = top tech talent. <b>Standardy excelence</b> = nejnižší false-positive rate v branži. <b>Atmosféra</b> = plochá hierarchie, technický respekt. <b>Externí podpora</b> = IPO 2018, akvizice $9.4B. <b>Udržitelnost</b> = postupně budovaná, dnes součást NortonLifeLock." },
+      { company: "Andrej Babiš (Agrofert) — anti-vzor", tag: "CHYBÍ ATMOSFÉRA + UDRŽITELNOST", color: VSE.danger, content: "Agrofert je <b>anti-vzor Team Excellence</b>. Má jasný cíl (růst, zisk), strukturu, externí podporu (peníze). Ale <b>chybí atmosféra spolupráce</b> (vysoká fluktuace top managementu), <b>chybí standardy excelence</b> (proměnlivé), <b>chybí udržitelnost</b> (vše závisí na Babišovi). Krátkodobě efektivní, dlouhodobě riziko. <b>Když je v PS firma, která se chová jako Agrofert, doporuč Baťovský model.</b>" },
+    ]
+  };
+
+  const examQuestionsLead6 = [
+    { komise: "ZS 2025 — Tahal, Kuděj, Kučera", otazka: "Team Excellence (chtěl slyšet jako jeden bod udržitelnost).", pozn: "⚠️ KLÍČOVÉ: 9. bod = udržitelnost!" },
+    { komise: "ZS 2025 — Tahal, Kuděj, Nový", otazka: "Týmová excelence — vyjmenovat, najít v případovce a popsat." },
+    { komise: "LS 2025 — Tahal, Cejthamr, Schönfeld", otazka: "Týmová excelence." },
+    { komise: "LS 2025 — Abíková, Kolouchová, Smrčka", otazka: "Týmová excelence aplikovat na případovku." },
+    { komise: "LS 2025 — Pichanič, Kuděj, Zamazalová", otazka: "Team Excellence." },
+  ];
+
+  const podcastLead6 = { title: "Leadership 6 — Team Excellence Larson, LaFasto", description: "Pracovní skupina × tým, Tuckman 5 fází, Belbinovy role, 8 charakteristik Team Excellence + 9. bod udržitelnost. Aplikace na PS.", audioUrl: "/audio/lead-6.mp3", notebookLmUrl: null };
+
+  const examStrategyLead6 = `
+    <b style="color:#E06D1E">1.</b> Definuj <b>pracovní skupina × tým</b> (skupina dlouhodobá, tým na úkol).<br/>
+    <b style="color:#E06D1E">2.</b> Hillův model — lídr zasahuje jen v případě potřeby (interní × externí).<br/>
+    <b style="color:#E06D1E">3.</b> Aplikuj <b>Tuckman 5 fází</b> — v jaké fázi je tým v PS?<br/>
+    <b style="color:#E06D1E">4.</b> ⭐ <b>Vyjmenuj všech 8 charakteristik Larson/LaFasto</b> (Jasný cíl / Struktura / Závazek / Atmosféra / Kompetence / Standardy / Externí podpora / Leadership).<br/>
+    <b style="color:#E06D1E">5.</b> <b>Identifikuj v PS</b> — které charakteristiky tým má a které chybí.<br/>
+    <b style="color:#E06D1E">6.</b> ⚠️ Pro <b>Tahal/Kuděj/Kučera</b>: přidej <b>9. bod udržitelnost</b>.<br/>
+    <b style="color:#E06D1E">7.</b> Aplikuj <b>Belbinovy role</b> — má tým všechny 3 oblasti (thinking / action / people)?<br/>
+    <b style="color:#E06D1E">8.</b> Identifikuj <b>jevy v týmu</b> — sociální facilitace / lenost / groupthink.<br/>
+    <b style="color:#E06D1E">9.</b> Doporuč <b>konkrétní akce</b> pro doplnění chybějících charakteristik.
+  `;
+
+  return (
+    <OkruhPanel
+      subject="Leadership" subjectId="lead" number={6} title="Team Excellence (Larson, LaFasto)"
+      subtitle="Skupina × tým / Tuckman / Belbin / 8 charakteristik + udržitelnost"
+      color={VSE.fmv}
+      questionText="Team excellence (Larson, Le Fasto) — vyjmenovat všechny body a jejich aplikace na CS, které chybí a které tam jsou."
+      questionDesc="Pracovní skupina × tým. Hillův model. Tuckman 5 fází (Forming/Storming/Norming/Performing/Adjourning). Belbinovy role (3 oblasti, 9 rolí). ⭐ Larson, LaFasto — 8 charakteristik Team Excellence + 9. bod udržitelnost. Hackman 6 podmínek. Jevy v týmu (sociální facilitace, lenost, groupthink). Followership (Kelly). 3 úrovně ovlivňování. Aplikace na PS + doporučení."
+      sloz={2} roz={2} freq={2}
+      examStrategy={examStrategyLead6}
+      studySections={studySectionsLead6}
+      flashcards={flashcardsLead6}
+      quiz={quizLead6}
+      praxe={praxeLead6}
+      examQuestions={examQuestionsLead6}
+      podcast={podcastLead6}
+    />
+  );
+}
+
 
 function OkruhyTab({ navTarget, clearNavTarget }) {
   const t = useTheme();
@@ -8191,14 +11028,561 @@ function SearchButton({ onClick }) {
   );
 }
 
-function App() {
+/* ════════════════════════════════════════════════════════
+   SUPABASE AUTH — Landing, Login, Pending, Admin Dashboard
+   ════════════════════════════════════════════════════════ */
+
+// ────────────────────────────────────────────────────────
+// SUPABASE CLIENT
+// ────────────────────────────────────────────────────────
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || "https://akozapgciparbxhbyzns.supabase.co";
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_zHxwItx_POGlrr6gxsd_Ug_-95eP0YI";
+const ADMIN_EMAIL = "josefdanek17@gmail.com";
+
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ────────────────────────────────────────────────────────
+// AUTH HOOK
+// ────────────────────────────────────────────────────────
+function useAuth() {
+  const [session, setSession] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+
+    // Get initial session
+    supabase.auth.getSession().then(async ({ data: { session: s } }) => {
+      if (!mounted) return;
+      setSession(s);
+      if (s?.user) {
+        const { data: p } = await supabase.from("profiles").select("*").eq("id", s.user.id).single();
+        if (mounted) setProfile(p);
+      }
+      if (mounted) setLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, s) => {
+      if (!mounted) return;
+      setSession(s);
+      if (s?.user) {
+        // Retry max 3x — někdy trigger ještě nedoběhl
+        let p = null;
+        for (let i = 0; i < 3 && !p; i++) {
+          const { data } = await supabase.from("profiles").select("*").eq("id", s.user.id).single();
+          p = data;
+          if (!p) await new Promise(r => setTimeout(r, 500));
+        }
+        if (mounted) setProfile(p);
+      } else {
+        if (mounted) setProfile(null);
+      }
+    });
+
+    return () => { mounted = false; subscription.unsubscribe(); };
+  }, []);
+
+  const signInWithGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: window.location.origin },
+    });
+  };
+
+  const signOut = async () => {
+    await supabase.auth.signOut();
+    setProfile(null);
+    setSession(null);
+  };
+
+  return { session, profile, loading, signInWithGoogle, signOut };
+}
+
+// ────────────────────────────────────────────────────────
+// LANDING PAGE
+// ────────────────────────────────────────────────────────
+function LandingPage({ onSignIn }) {
+  const features = [
+    { icon: "🎯", title: "Reálné tažené otázky", desc: "100+ skutečných otázek z minulých státnic — víš přesně, co tě čeká." },
+    { icon: "🎙️", title: "Audio podcasty ke každému okruhu", desc: "Poslechni si přípravu cestou do školy, do práce nebo při běhu. Nemusíš sedět nad knihou." },
+    { icon: "⚡", title: "Flashcards + kvízy + případovky", desc: "Učení podle vědy. Aktivní vybavování, ne pasivní čtení. Připraveno k aplikaci na PS." },
+  ];
+
+  const testimonials = [
+    { name: "Marek H.", role: "Management, ZS 2025", text: "Bez Nabombuju bych státnice nikdy nedal za 14 dní. Tažené otázky byly k nezaplacení.", avatar: "👨‍🎓" },
+    { name: "Tereza N.", role: "Management, LS 2025", text: "Podcasty mi zachránily život. Poslouchala jsem je v MHD a najednou mi to dávalo smysl.", avatar: "👩‍🎓" },
+    { name: "Pavel K.", role: "Management, ZS 2026", text: "Konečně systém, který chápe, jak studenti VŠE reálně studují. 1 z 1.", avatar: "👨‍💼" },
+    { name: "Eliška V.", role: "Management, ZS 2026", text: "Flashcards a kvízy mě dovedly k tomu, že jsem si konečně pamatovala teorie autorů.", avatar: "👩‍💼" },
+  ];
+
+  return (
+    <div style={{ minHeight: "100vh", background: VSE.bg, color: VSE.text, fontFamily: fontSans }}>
+      {/* HERO */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 24px 60px", textAlign: "center" }}>
+        <div style={{ display: "inline-block", padding: "6px 14px", borderRadius: 999, background: `${VSE.primary}15`, border: `1px solid ${VSE.primary}30`, color: VSE.primary, fontSize: 12, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px", marginBottom: 24 }}>
+          🎓 PŘÍPRAVA NA OBOROVÉ STÁTNICE VŠE
+        </div>
+        <h1 style={{ fontFamily: fontSans, fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 800, lineHeight: 1.05, margin: "0 0 24px", letterSpacing: "-0.02em" }}>
+          Nabombuj státnice<br />
+          <span style={{ background: `linear-gradient(135deg, ${VSE.primary} 0%, ${VSE.fmv} 100%)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            za pár týdnů
+          </span>
+        </h1>
+        <p style={{ fontSize: 18, color: VSE.textMuted, maxWidth: 640, margin: "0 auto 40px", lineHeight: 1.5 }}>
+          100+ reálných tažených otázek, podcasty ke každému okruhu, flashcards a kvízy.<br />
+          Vše na jednom místě — vytvořeno studenty pro studenty.
+        </p>
+        <button onClick={onSignIn} style={{
+          display: "inline-flex", alignItems: "center", gap: 12,
+          padding: "16px 32px", background: VSE.text, color: VSE.bg,
+          border: "none", borderRadius: 14, fontSize: 16, fontWeight: 700,
+          fontFamily: fontSans, cursor: "pointer", letterSpacing: "-0.01em",
+          boxShadow: `0 8px 24px ${VSE.text}30`,
+          transition: "transform 0.15s",
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.03)"}
+        onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Přihlásit se přes Google
+        </button>
+        <p style={{ fontSize: 12, color: VSE.textSubtle, marginTop: 16, fontFamily: fontMono }}>
+          Zdarma · Žádná kreditka · Schválení do 24 hodin
+        </p>
+      </div>
+
+      {/* FEATURES */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "40px 24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+          {features.map((f, i) => (
+            <div key={i} style={{
+              padding: 28, background: VSE.surface, border: `1px solid ${VSE.border}`,
+              borderRadius: 18, transition: "transform 0.2s",
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-4px)"}
+            onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}>
+              <div style={{ fontSize: 36, marginBottom: 14 }}>{f.icon}</div>
+              <h3 style={{ fontSize: 18, fontWeight: 700, margin: "0 0 8px", color: VSE.text }}>{f.title}</h3>
+              <p style={{ fontSize: 14, color: VSE.textMuted, lineHeight: 1.5, margin: 0 }}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* TESTIMONIALS */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "60px 24px" }}>
+        <h2 style={{ fontSize: 32, fontWeight: 800, textAlign: "center", margin: "0 0 12px", letterSpacing: "-0.02em" }}>
+          Co o tom říkají studenti
+        </h2>
+        <p style={{ fontSize: 16, color: VSE.textMuted, textAlign: "center", marginBottom: 40 }}>
+          Reálné zkušenosti od těch, co státnice už složili.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 18 }}>
+          {testimonials.map((t, i) => (
+            <div key={i} style={{
+              padding: 24, background: VSE.surface, border: `1px solid ${VSE.border}`,
+              borderRadius: 18,
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+                <div style={{ fontSize: 32 }}>{t.avatar}</div>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 14, color: VSE.text }}>{t.name}</div>
+                  <div style={{ fontSize: 12, color: VSE.textMuted, fontFamily: fontMono }}>{t.role}</div>
+                </div>
+              </div>
+              <p style={{ fontSize: 14, color: VSE.text, lineHeight: 1.55, margin: 0, fontStyle: "italic" }}>
+                „{t.text}"
+              </p>
+              <div style={{ marginTop: 12, color: VSE.warning, fontSize: 14 }}>★★★★★</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CTA BOTTOM */}
+      <div style={{ maxWidth: 700, margin: "0 auto", padding: "60px 24px 100px", textAlign: "center" }}>
+        <h2 style={{ fontSize: 32, fontWeight: 800, margin: "0 0 16px", letterSpacing: "-0.02em" }}>
+          Připraven nabombit?
+        </h2>
+        <p style={{ fontSize: 16, color: VSE.textMuted, marginBottom: 28 }}>
+          Přihlas se přes Google a začni se učit chytře. Schválení obvykle do pár hodin.
+        </p>
+        <button onClick={onSignIn} style={{
+          display: "inline-flex", alignItems: "center", gap: 12,
+          padding: "14px 28px", background: VSE.text, color: VSE.bg,
+          border: "none", borderRadius: 12, fontSize: 15, fontWeight: 700,
+          fontFamily: fontSans, cursor: "pointer",
+          boxShadow: `0 6px 20px ${VSE.text}30`,
+        }}>
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Začít zdarma
+        </button>
+      </div>
+
+      {/* FOOTER */}
+      <div style={{ borderTop: `1px solid ${VSE.border}`, padding: "24px", textAlign: "center", fontSize: 12, color: VSE.textSubtle, fontFamily: fontMono }}>
+        Nabombuj · Vytvořeno studenty VŠE pro studenty VŠE · © 2026
+      </div>
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────
+// PENDING SCREEN
+// ────────────────────────────────────────────────────────
+function PendingScreen({ profile, onSignOut }) {
+  return (
+    <div style={{
+      minHeight: "100vh", background: VSE.bg, color: VSE.text,
+      display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
+      fontFamily: fontSans,
+    }}>
+      <div style={{
+        maxWidth: 480, textAlign: "center",
+        padding: 40, background: VSE.surface,
+        border: `1px solid ${VSE.border}`, borderRadius: 20,
+      }}>
+        <div style={{ fontSize: 64, marginBottom: 16 }}>⏳</div>
+        <h1 style={{ fontSize: 28, fontWeight: 800, margin: "0 0 12px", letterSpacing: "-0.02em" }}>
+          Čekáš na schválení
+        </h1>
+        <p style={{ fontSize: 15, color: VSE.textMuted, lineHeight: 1.55, marginBottom: 24 }}>
+          Ahoj <b>{profile?.full_name || profile?.email}</b>! Tvoje žádost byla zaregistrována a čeká na schválení administrátorem.
+        </p>
+        <div style={{
+          padding: 16, background: `${VSE.fmv}10`, border: `1px solid ${VSE.fmv}30`,
+          borderRadius: 12, marginBottom: 24, textAlign: "left",
+        }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: VSE.fmv, fontFamily: fontMono, marginBottom: 6 }}>
+            ⏱️ DALŠÍ KROKY
+          </div>
+          <ul style={{ margin: 0, paddingLeft: 18, fontSize: 13, color: VSE.text, lineHeight: 1.6 }}>
+            <li>Schválení obvykle do <b>24 hodin</b></li>
+            <li>Dostaneš notifikaci e-mailem (zkontroluj i spam)</li>
+            <li>Pak se znovu přihlas a všechno bude přístupné</li>
+          </ul>
+        </div>
+        <button onClick={onSignOut} style={{
+          padding: "10px 20px", background: "transparent",
+          border: `1px solid ${VSE.border}`, borderRadius: 10,
+          color: VSE.text, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: fontSans,
+        }}>
+          Odhlásit se
+        </button>
+        <p style={{ fontSize: 11, color: VSE.textSubtle, marginTop: 16, fontFamily: fontMono }}>
+          Otázky? Napiš na josefdanek17@gmail.com
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────
+// REJECTED SCREEN
+// ────────────────────────────────────────────────────────
+function RejectedScreen({ profile, onSignOut }) {
+  return (
+    <div style={{
+      minHeight: "100vh", background: VSE.bg, color: VSE.text,
+      display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
+      fontFamily: fontSans,
+    }}>
+      <div style={{
+        maxWidth: 480, textAlign: "center",
+        padding: 40, background: VSE.surface,
+        border: `1px solid ${VSE.border}`, borderRadius: 20,
+      }}>
+        <div style={{ fontSize: 64, marginBottom: 16 }}>🚫</div>
+        <h1 style={{ fontSize: 24, fontWeight: 800, margin: "0 0 12px" }}>
+          Přístup zamítnut
+        </h1>
+        <p style={{ fontSize: 15, color: VSE.textMuted, lineHeight: 1.55, marginBottom: 24 }}>
+          Tvoje žádost o přístup nebyla schválena. Pokud máš pocit, že jde o chybu, kontaktuj administrátora.
+        </p>
+        <button onClick={onSignOut} style={{
+          padding: "10px 20px", background: VSE.text, color: VSE.bg,
+          border: "none", borderRadius: 10, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: fontSans,
+        }}>
+          Odhlásit se
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────
+// ADMIN DASHBOARD
+// ────────────────────────────────────────────────────────
+function AdminDashboard({ onClose }) {
+  const [tab, setTab] = useState("pending");
+  const [users, setUsers] = useState([]);
+  const [progress, setProgress] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const loadData = async () => {
+    setLoading(true);
+    const { data: u } = await supabase.from("profiles").select("*").order("created_at", { ascending: false });
+    const { data: p } = await supabase.from("user_progress").select("*");
+    setUsers(u || []);
+    setProgress(p || []);
+    setLoading(false);
+  };
+
+  useEffect(() => { loadData(); }, []);
+
+  const updateUserStatus = async (id, status) => {
+    await supabase.from("profiles").update({
+      status,
+      approved_at: status === "approved" ? new Date().toISOString() : null,
+    }).eq("id", id);
+    loadData();
+  };
+
+  const updateUserPlan = async (id, plan) => {
+    await supabase.from("profiles").update({ plan }).eq("id", id);
+    loadData();
+  };
+
+  const pending = users.filter(u => u.status === "pending");
+  const approved = users.filter(u => u.status === "approved");
+  const rejected = users.filter(u => u.status === "rejected");
+
+  return (
+    <div style={{ minHeight: "100vh", background: VSE.bg, fontFamily: fontSans }}>
+      {/* HEADER */}
+      <div style={{ borderBottom: `1px solid ${VSE.border}`, padding: "16px 24px", display: "flex", alignItems: "center", justifyContent: "space-between", background: VSE.surface }}>
+        <div>
+          <h1 style={{ fontSize: 22, fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}>👑 Admin Dashboard</h1>
+          <div style={{ fontSize: 12, color: VSE.textMuted, fontFamily: fontMono, marginTop: 2 }}>Nabombuj · Management Console</div>
+        </div>
+        <button onClick={onClose} style={{
+          padding: "8px 16px", background: VSE.text, color: VSE.bg,
+          border: "none", borderRadius: 10, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: fontSans,
+        }}>
+          ← Zpět na app
+        </button>
+      </div>
+
+      {/* TABS */}
+      <div style={{ borderBottom: `1px solid ${VSE.border}`, padding: "0 24px", display: "flex", gap: 4, background: VSE.surface }}>
+        {[
+          { id: "pending", label: "Pending", count: pending.length, color: VSE.warning },
+          { id: "users", label: "Všichni uživatelé", count: users.length, color: VSE.fmv },
+          { id: "stats", label: "Statistiky", count: null, color: VSE.success },
+          { id: "content", label: "Obsah", count: null, color: VSE.fph },
+        ].map(t => (
+          <button key={t.id} onClick={() => setTab(t.id)} style={{
+            padding: "12px 16px", background: "transparent", border: "none",
+            borderBottom: `2px solid ${tab === t.id ? t.color : "transparent"}`,
+            color: tab === t.id ? t.color : VSE.textMuted,
+            fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: fontSans,
+            display: "flex", alignItems: "center", gap: 6,
+          }}>
+            {t.label}
+            {t.count !== null && (
+              <span style={{
+                padding: "1px 7px", background: tab === t.id ? `${t.color}20` : `${VSE.border}40`,
+                borderRadius: 99, fontSize: 11, fontWeight: 700, fontFamily: fontMono,
+              }}>{t.count}</span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* CONTENT */}
+      <div style={{ padding: "24px", maxWidth: 1200, margin: "0 auto" }}>
+        {loading ? (
+          <div style={{ textAlign: "center", padding: 60, color: VSE.textMuted }}>Načítání…</div>
+        ) : (
+          <>
+            {tab === "pending" && (
+              <div>
+                <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 16 }}>Čekající na schválení ({pending.length})</h2>
+                {pending.length === 0 ? (
+                  <div style={{ padding: 40, textAlign: "center", color: VSE.textMuted, background: VSE.surface, border: `1px solid ${VSE.border}`, borderRadius: 14 }}>
+                    🎉 Žádné čekající žádosti
+                  </div>
+                ) : (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                    {pending.map(u => (
+                      <UserRow key={u.id} user={u} onApprove={() => updateUserStatus(u.id, "approved")} onReject={() => updateUserStatus(u.id, "rejected")} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {tab === "users" && (
+              <div>
+                <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 16 }}>Všichni uživatelé ({users.length})</h2>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 20 }}>
+                  <StatCard label="Approved" value={approved.length} color={VSE.success} />
+                  <StatCard label="Pending" value={pending.length} color={VSE.warning} />
+                  <StatCard label="Rejected" value={rejected.length} color={VSE.danger} />
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {users.map(u => (
+                    <UserRow
+                      key={u.id} user={u}
+                      onApprove={u.status !== "approved" ? () => updateUserStatus(u.id, "approved") : null}
+                      onReject={u.status !== "rejected" ? () => updateUserStatus(u.id, "rejected") : null}
+                      onTogglePlan={() => updateUserPlan(u.id, u.plan === "paid" ? "free" : "paid")}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {tab === "stats" && (
+              <div>
+                <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 16 }}>Statistiky</h2>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12, marginBottom: 24 }}>
+                  <StatCard label="Total uživatelé" value={users.length} color={VSE.fmv} />
+                  <StatCard label="Approved" value={approved.length} color={VSE.success} />
+                  <StatCard label="Free plan" value={users.filter(u => u.plan === "free").length} color={VSE.fph} />
+                  <StatCard label="Paid plan" value={users.filter(u => u.plan === "paid").length} color={VSE.warning} />
+                  <StatCard label="Studované okruhy" value={new Set(progress.map(p => `${p.subject_id}-${p.okruh_n}`)).size} color={VSE.fis} />
+                  <StatCard label="Záznamy pokroku" value={progress.length} color={VSE.primary} />
+                </div>
+                <div style={{ padding: 24, background: VSE.surface, border: `1px solid ${VSE.border}`, borderRadius: 14 }}>
+                  <h3 style={{ fontSize: 14, fontWeight: 700, marginBottom: 12, color: VSE.textMuted, fontFamily: fontMono, letterSpacing: "0.5px" }}>NEJVÍCE STUDOVANÉ OKRUHY</h3>
+                  {(() => {
+                    const counts = {};
+                    progress.forEach(p => {
+                      const k = `${p.subject_id}-${p.okruh_n}`;
+                      counts[k] = (counts[k] || 0) + 1;
+                    });
+                    const top = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+                    if (top.length === 0) return <div style={{ color: VSE.textMuted, fontSize: 13 }}>Zatím žádná data</div>;
+                    return top.map(([k, c]) => (
+                      <div key={k} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: `1px solid ${VSE.border}50`, fontSize: 13 }}>
+                        <span style={{ fontFamily: fontMono }}>{k}</span>
+                        <span style={{ fontWeight: 700 }}>{c} uživatelů</span>
+                      </div>
+                    ));
+                  })()}
+                </div>
+              </div>
+            )}
+
+            {tab === "content" && (
+              <div>
+                <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 16 }}>Obsah</h2>
+                <div style={{ padding: 40, textAlign: "center", color: VSE.textMuted, background: VSE.surface, border: `1px solid ${VSE.border}`, borderRadius: 14 }}>
+                  <div style={{ fontSize: 32, marginBottom: 12 }}>🚧</div>
+                  <p style={{ margin: "0 0 8px", fontWeight: 600 }}>Editace obsahu zatím není implementovaná</p>
+                  <p style={{ margin: 0, fontSize: 13 }}>Okruhy se aktualizují přes GitHub (commit do <code style={{ fontFamily: fontMono, background: VSE.bg, padding: "2px 6px", borderRadius: 4 }}>statnice-skool.jsx</code>) — Vercel auto-deployne za ~2 min.</p>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function StatCard({ label, value, color }) {
+  return (
+    <div style={{ padding: 18, background: VSE.surface, border: `1px solid ${VSE.border}`, borderRadius: 14 }}>
+      <div style={{ fontSize: 11, color: VSE.textMuted, fontFamily: fontMono, letterSpacing: "0.5px", marginBottom: 6 }}>{label.toUpperCase()}</div>
+      <div style={{ fontSize: 28, fontWeight: 800, color, letterSpacing: "-0.02em" }}>{value}</div>
+    </div>
+  );
+}
+
+function UserRow({ user, onApprove, onReject, onTogglePlan }) {
+  const statusColor = user.status === "approved" ? VSE.success : user.status === "rejected" ? VSE.danger : VSE.warning;
+  return (
+    <div style={{
+      display: "flex", alignItems: "center", gap: 12, padding: "12px 16px",
+      background: VSE.surface, border: `1px solid ${VSE.border}`, borderRadius: 12,
+    }}>
+      {user.avatar_url ? (
+        <img src={user.avatar_url} alt="" style={{ width: 36, height: 36, borderRadius: 99 }} />
+      ) : (
+        <div style={{ width: 36, height: 36, borderRadius: 99, background: `${VSE.fmv}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 700, color: VSE.fmv }}>
+          {(user.full_name || user.email)?.[0]?.toUpperCase()}
+        </div>
+      )}
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ fontSize: 14, fontWeight: 600, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          {user.full_name || user.email}
+          {user.role === "admin" && <span style={{ marginLeft: 8, padding: "2px 6px", background: `${VSE.primary}20`, color: VSE.primary, borderRadius: 4, fontSize: 10, fontWeight: 700, fontFamily: fontMono }}>ADMIN</span>}
+        </div>
+        <div style={{ fontSize: 12, color: VSE.textMuted, fontFamily: fontMono }}>{user.email}</div>
+      </div>
+      <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+        <span style={{ padding: "3px 8px", background: `${statusColor}15`, color: statusColor, borderRadius: 6, fontSize: 10, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>
+          {user.status.toUpperCase()}
+        </span>
+        <span style={{ padding: "3px 8px", background: user.plan === "paid" ? `${VSE.warning}15` : `${VSE.border}40`, color: user.plan === "paid" ? VSE.warning : VSE.textMuted, borderRadius: 6, fontSize: 10, fontWeight: 700, fontFamily: fontMono }}>
+          {user.plan.toUpperCase()}
+        </span>
+      </div>
+      <div style={{ display: "flex", gap: 6 }}>
+        {onApprove && (
+          <button onClick={onApprove} style={{ padding: "6px 12px", background: VSE.success, color: "white", border: "none", borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: fontSans }}>
+            ✓ Schválit
+          </button>
+        )}
+        {onReject && (
+          <button onClick={onReject} style={{ padding: "6px 12px", background: "transparent", color: VSE.danger, border: `1px solid ${VSE.danger}40`, borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: fontSans }}>
+            ✕ Zamítnout
+          </button>
+        )}
+        {onTogglePlan && user.status === "approved" && (
+          <button onClick={onTogglePlan} style={{ padding: "6px 12px", background: "transparent", color: VSE.fmv, border: `1px solid ${VSE.fmv}40`, borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: "pointer", fontFamily: fontSans }}>
+            {user.plan === "paid" ? "→ Free" : "→ Paid"}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ────────────────────────────────────────────────────────
+// LOADING SCREEN
+// ────────────────────────────────────────────────────────
+function LoadingScreen() {
+  return (
+    <div style={{ minHeight: "100vh", background: VSE.bg, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16, fontFamily: fontSans }}>
+      <div style={{
+        width: 40, height: 40, borderRadius: 99,
+        border: `3px solid ${VSE.border}`, borderTopColor: VSE.primary,
+        animation: "spin 1s linear infinite",
+      }} />
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      <div style={{ fontSize: 13, color: VSE.textMuted, fontFamily: fontMono }}>Načítání…</div>
+    </div>
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   APP WRAPPER — Auth Gating
+   ════════════════════════════════════════════════════════ */
+function AppContent() {
   const [themeMode, setThemeMode] = useState("light");
   const [activeTab, setActiveTab] = useState("okruhy");
   const [searchOpen, setSearchOpen] = useState(false);
   const [navTarget, setNavTarget] = useState(null);
+  const [showAdmin, setShowAdmin] = useState(false);
+  const { profile, signOut } = useContext(AuthCtx);
   const t = THEMES[themeMode];
+  const isAdmin = profile?.role === "admin";
 
-  // Cmd+K / Ctrl+K shortcut
   useEffect(() => {
     const handler = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -8215,6 +11599,15 @@ function App() {
     setNavTarget({ subjectId: result.subjectId, okruhN: result.okruhN, type: result.type, sectionId: result.sectionId });
   };
 
+  if (showAdmin) {
+    return (
+      <ThemeCtx.Provider value={t}>
+        <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <AdminDashboard onClose={() => setShowAdmin(false)} />
+      </ThemeCtx.Provider>
+    );
+  }
+
   return (
     <ThemeCtx.Provider value={t}>
       <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -8226,7 +11619,11 @@ function App() {
       }}>
         <GradientMesh themeMode={themeMode} />
         <div style={{ position: "relative", zIndex: 1 }}>
-          <SkoolNav activeTab={activeTab} setActiveTab={setActiveTab} themeMode={themeMode} setThemeMode={setThemeMode} />
+          <SkoolNav
+            activeTab={activeTab} setActiveTab={setActiveTab}
+            themeMode={themeMode} setThemeMode={setThemeMode}
+            profile={profile} onSignOut={signOut} onOpenAdmin={isAdmin ? () => setShowAdmin(true) : null}
+          />
           {activeTab === "okruhy" && <OkruhyTab navTarget={navTarget} clearNavTarget={() => setNavTarget(null)} />}
           {activeTab === "komunita" && <KomunitaTab />}
           {activeTab === "kalendar" && <KalendarTab />}
@@ -8239,4 +11636,24 @@ function App() {
   );
 }
 
+const AuthCtx = createContext(null);
+
+function App() {
+  const auth = useAuth();
+  const { session, profile, loading, signInWithGoogle, signOut } = auth;
+
+  if (loading) return <LoadingScreen />;
+  if (!session) return <LandingPage onSignIn={signInWithGoogle} />;
+  if (!profile) return <LoadingScreen />;
+  if (profile.status === "pending") return <PendingScreen profile={profile} onSignOut={signOut} />;
+  if (profile.status === "rejected") return <RejectedScreen profile={profile} onSignOut={signOut} />;
+
+  return (
+    <AuthCtx.Provider value={auth}>
+      <AppContent />
+    </AuthCtx.Provider>
+  );
+}
+
 export default App;
+
