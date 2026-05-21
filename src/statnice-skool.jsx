@@ -15014,13 +15014,14 @@ function App() {
             height: auto !important;
             min-height: calc(100vh - 105px);
           }
-          /* Sidebar -> nahoře, collapsovatelná */
+          /* Sidebar -> nahoře, větší výška + sticky předmět selector */
           [data-skool-sidebar] {
             width: 100% !important;
             max-width: 100% !important;
             border-right: none !important;
-            border-bottom: 1px solid var(--border) !important;
-            max-height: 35vh !important;
+            border-bottom: 2px solid var(--border) !important;
+            max-height: 60vh !important;
+            min-height: 320px !important;
             overflow-y: auto !important;
           }
           /* Content -> roztáhnout */
