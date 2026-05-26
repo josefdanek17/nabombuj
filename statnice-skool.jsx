@@ -204,6 +204,11 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }) {
         <path d="M4 20h16"/><rect x="5" y="12" width="3" height="8" rx="0.5"/><rect x="10.5" y="6" width="3" height="14" rx="0.5"/><rect x="16" y="9" width="3" height="11" rx="0.5"/>
       </svg>
     ),
+    truck: ( // Logistika 🚚
+      <svg {...svgProps}>
+        <path d="M3 16V5h11v11"/><path d="M14 9h4l3 3v4h-3"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/><path d="M14 16h-4.5"/>
+      </svg>
+    ),
     target: ( // Strategie 🎯
       <svg {...svgProps}>
         <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill={color}/>
@@ -426,27 +431,33 @@ const SUBJECTS = [
     ],
   },
   {
-    id: "mkt", name: "Marketing + Logistika", color: VSE.fis, icon: "chart",
+    id: "marketing", name: "Marketing", color: VSE.fis, icon: "chart",
     okruhy: [
-      { n: 1, title: "Segmentace, typy, kritéria", status: "todo", difficulty: 2 },
-      { n: 2, title: "Positioning, POP, POD, referenční rámec", status: "todo", difficulty: 2 },
-      { n: 3, title: "Výrobek, charakteristiky, výrobková řada", status: "todo", difficulty: 2 },
-      { n: 4, title: "Cenotvorba, cenové strategie, diskriminace", status: "todo", difficulty: 2 },
-      { n: 5, title: "Distribuce, distribuční kanály, logistické řetězce", status: "todo", difficulty: 2 },
-      { n: 6, title: "Integrovaná marketingová komunikace", status: "todo", difficulty: 2 },
-      { n: 7, title: "Hromadná marketingová komunikace (reklama, PR)", status: "todo", difficulty: 2 },
-      { n: 8, title: "Osobní marketing, direct marketing", status: "todo", difficulty: 2 },
-      { n: 9, title: "Branding, modely hodnoty značky", status: "todo", difficulty: 2 },
-      { n: 10, title: "Marketingový výzkum, analytické metody", status: "todo", difficulty: 3 },
-      { n: 11, title: "Cenový výzkum, cenové testy", status: "todo", difficulty: 2 },
-      { n: 12, title: "Produktový výzkum, uvedení na trh", status: "todo", difficulty: 2 },
-      { n: 13, title: "Mediální výzkum, měření reklamy", status: "todo", difficulty: 2 },
-      { n: 14, title: "Výzkum marketingové komunikace", status: "todo", difficulty: 2 },
-      { n: 15, title: "Marketing služeb, kvalita, outsourcing v log.", status: "todo", difficulty: 2 },
-      { n: 16, title: "MIS a pohyb informací v logistice", status: "todo", difficulty: 2 },
+      { n: 1, title: "Marketingový výzkum, metody a jejich limity, mediální výzkumy", status: "done", difficulty: 2 },
+      { n: 2, title: "Analytické metody mkt výzkumu, primární × sekundární data", status: "done", difficulty: 3 },
+      { n: 3, title: "Segmentace, typy, fáze, postup, kritéria (+ logistika v segmentaci)", status: "done", difficulty: 2 },
+      { n: 4, title: "Positioning — úrovně, ref. rámec, POP a POD", status: "done", difficulty: 2 },
+      { n: 5, title: "Konkurence, KV, konkurenční strategie (+ logistické strategie)", status: "done", difficulty: 3 },
+      { n: 6, title: "Produkt/výrobek — klasifikace, charakteristiky, šířka/délka/hloubka", status: "done", difficulty: 2 },
+      { n: 7, title: "Rozhodování o výrobkových řadách, sortiment, cena výrobkové řady", status: "done", difficulty: 2 },
+      { n: 8, title: "Životní cyklus výrobku — strategie ve fázích (móda, výstřelek, vlny)", status: "done", difficulty: 2 },
+      { n: 9, title: "Metody výrobkového výzkumu a zavedení nového výrobku na trh", status: "done", difficulty: 2 },
+      { n: 10, title: "Značka/Branding — funkce, prvky, modely hodnoty značky", status: "done", difficulty: 3 },
+      { n: 11, title: "Cenotvorba, cena, spotřebitelské stanovování ceny, diskriminace", status: "done", difficulty: 3 },
+      { n: 12, title: "Cenový výzkum, efekty (citlivost) a metodologie cenových testů", status: "done", difficulty: 3 },
+      { n: 13, title: "Integrovaná mkt komunikace, komunikační mix", status: "done", difficulty: 3 },
+      { n: 14, title: "Hromadná mkt komunikace — 5M, reklama, PR, mass", status: "done", difficulty: 3 },
+      { n: 15, title: "Osobní složka mkt komunikace, direct marketing, prodejní síly", status: "done", difficulty: 3 },
+      { n: 16, title: "Výzkum marketingové komunikace, mediální komunikace", status: "todo", difficulty: 2 },
       { n: 17, title: "Řízení marketingových kampaní", status: "todo", difficulty: 2 },
-      { n: 18, title: "Hodnota značky, prvky, strategie", status: "todo", difficulty: 2 },
-      { n: 19, title: "Konkurenční strategie a logistický systém", status: "todo", difficulty: 3 },
+    ],
+  },
+  {
+    id: "logistika", name: "Logistika", color: BOMBIK.success, icon: "truck",
+    okruhy: [
+      { n: 1, title: "Distribuce, distribuční kanály, log. řetězce u výrobních a obchodních podniků", status: "done", difficulty: 2 },
+      { n: 2, title: "Marketing služeb, řízení kvality a role distribuce služeb v logistice (outsourcing)", status: "done", difficulty: 2 },
+      { n: 3, title: "MIS a pohyb informací v logistice (zdroje, složky), logistický systém", status: "done", difficulty: 2 },
     ],
   },
   {
@@ -525,6 +536,33 @@ function Bullet({ items, color }) {
   ))}</div>;
 }
 
+/* ExamAlert — vizuální upozornění na tažené otázky uvnitř studyssekce */
+function ExamAlert({ komise, what, color }) {
+  const t = useTheme();
+  const c = color || VSE.danger;
+  return (
+    <div style={{
+      background: t.surfaceMuted,
+      border: `1px solid ${t.borderSoft}`,
+      borderLeft: `4px solid ${c}`,
+      borderRadius: RADIUS.md,
+      padding: "12px 14px",
+      marginTop: 14,
+      marginBottom: 10,
+      fontSize: 14.5,
+      fontFamily: fontSans,
+      color: t.text,
+      lineHeight: 1.55
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+        <span style={{ fontSize: 13, color: c }}>⚠️</span>
+        <span style={{ fontSize: 12, fontFamily: fontMono, color: c, fontWeight: 700, letterSpacing: "1.4px", textTransform: "uppercase" }}>Tažená — {komise}</span>
+      </div>
+      <div dangerouslySetInnerHTML={{ __html: what }} />
+    </div>
+  );
+}
+
 /* ════════════════════════════════════════════════════════
    RESPONSIVE HELPERS — pro mobile-friendly layout
    ════════════════════════════════════════════════════════ */
@@ -586,8 +624,8 @@ function ExamQ({ komise, otazka, pozn }) {
   return (
     <div style={{ background: t.surfaceMuted, border: `1px solid ${t.borderSoft}`, borderRadius: RADIUS.md, padding: "14px 16px", marginBottom: 8, marginTop: 4 }}>
       <div style={{ fontSize: 12.5, color: t.textSubtle, fontFamily: fontMono, marginBottom: 6, letterSpacing: "1.6px", textTransform: "uppercase", fontWeight: 600 }}>{komise}</div>
-      <div style={{ fontSize: 15.5, color: t.text, fontWeight: 500, fontFamily: fontSans, marginBottom: 6, lineHeight: 1.45 }}>„{otazka}”</div>
-      <div style={{ fontSize: 14.5, color: t.cta, fontFamily: fontItalic, fontStyle: "italic" }}>→ {pozn}</div>
+      <div style={{ fontSize: 15.5, color: t.text, fontWeight: 500, fontFamily: fontSans, marginBottom: 6, lineHeight: 1.45 }}>„<span dangerouslySetInnerHTML={{ __html: otazka }} />”</div>
+      <div style={{ fontSize: 14.5, color: t.cta, fontFamily: fontItalic, fontStyle: "italic" }}>→ <span dangerouslySetInnerHTML={{ __html: pozn }} /></div>
     </div>
   );
 }
@@ -644,16 +682,16 @@ function Section({ s, isOpen, onToggle, subjectId, okruhN, subjectLabel }) {
   const accent = s.color || t.accent;
   return (
     <div style={{ marginBottom: 4 }}>
-      <div onClick={onToggle} style={{
+      <div style={{
         background: isOpen ? t.surface : t.surface,
         border: `1px solid ${isOpen ? t.borderStrong : t.borderSoft}`,
         borderRadius: RADIUS.lg, padding: isOpen ? "20px 22px" : "14px 18px",
-        cursor: "pointer", transition: "all 0.25s cubic-bezier(0.4,0,0.2,1)",
+        transition: "all 0.25s cubic-bezier(0.4,0,0.2,1)",
         boxShadow: isOpen ? t.shadow : "none",
         position: "relative", overflow: "hidden",
       }}>
         {isOpen && <div style={{ position: "absolute", top: 0, left: 0, width: 3, height: "100%", background: accent }} />}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+        <div onClick={onToggle} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, cursor: "pointer", userSelect: "none" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, flex: 1, minWidth: 0 }}>
             <Icon name={s.emoji} size={20} color={isOpen ? accent : t.textMuted} />
             <div style={{ flex: 1, minWidth: 0 }}>
@@ -666,7 +704,7 @@ function Section({ s, isOpen, onToggle, subjectId, okruhN, subjectLabel }) {
             <span style={{ color: t.textMuted, fontSize: 14, fontFamily: fontMono, transition: "transform 0.3s", transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}>▾</span>
           </div>
         </div>
-        {isOpen && <div style={{ marginTop: 18 }}>{s.content}</div>}
+        {isOpen && <div style={{ marginTop: 18, userSelect: "text" }}>{s.content}</div>}
       </div>
     </div>
   );
@@ -7076,6 +7114,24 @@ function OkruhContent({ subjectId, okruhN }) {
   if (subjectId === "hr" && okruhN === 7) return <OkruhHr7Panel />;
   if (subjectId === "hr" && okruhN === 8) return <OkruhHr8Panel />;
   if (subjectId === "hr" && okruhN === 9) return <OkruhHr9Panel />;
+  if (subjectId === "logistika" && okruhN === 1) return <OkruhLog1Panel />;
+  if (subjectId === "logistika" && okruhN === 2) return <OkruhLog2Panel />;
+  if (subjectId === "logistika" && okruhN === 3) return <OkruhLog3Panel />;
+  if (subjectId === "marketing" && okruhN === 1) return <OkruhMkt1Panel />;
+  if (subjectId === "marketing" && okruhN === 2) return <OkruhMkt2Panel />;
+  if (subjectId === "marketing" && okruhN === 3) return <OkruhMkt3Panel />;
+  if (subjectId === "marketing" && okruhN === 4) return <OkruhMkt4Panel />;
+  if (subjectId === "marketing" && okruhN === 5) return <OkruhMkt5Panel />;
+  if (subjectId === "marketing" && okruhN === 6) return <OkruhMkt6Panel />;
+  if (subjectId === "marketing" && okruhN === 7) return <OkruhMkt7Panel />;
+  if (subjectId === "marketing" && okruhN === 8) return <OkruhMkt8Panel />;
+  if (subjectId === "marketing" && okruhN === 9) return <OkruhMkt9Panel />;
+  if (subjectId === "marketing" && okruhN === 10) return <OkruhMkt10Panel />;
+  if (subjectId === "marketing" && okruhN === 11) return <OkruhMkt11Panel />;
+  if (subjectId === "marketing" && okruhN === 12) return <OkruhMkt12Panel />;
+  if (subjectId === "marketing" && okruhN === 13) return <OkruhMkt13Panel />;
+  if (subjectId === "marketing" && okruhN === 14) return <OkruhMkt14Panel />;
+  if (subjectId === "marketing" && okruhN === 15) return <OkruhMkt15Panel />;
 
   return null;
 }
@@ -7115,24 +7171,37 @@ function CaseStudyTab({ data, color }) {
     return (
       <div style={{ fontSize: isMobile ? 14.5 : 15.5, color: t.text, fontFamily: fontSans, lineHeight: 1.7, textWrap: "pretty", hyphens: "auto", WebkitHyphens: "auto" }}>
         {paragraphs.map((para, pIdx) => {
+          // Detekce bullet item (začíná "• ")
+          const isBullet = para.trim().startsWith("• ");
+          const paraText = isBullet ? para.trim().slice(2) : para;
+          const baseStyle = isBullet
+            ? { margin: "0 0 8px", paddingLeft: 22, position: "relative" }
+            : { margin: "0 0 14px" };
+
           if (!highlights) {
-            return <p key={pIdx} style={{ margin: pIdx === 0 ? "0 0 14px" : "0 0 14px" }}>{para}</p>;
+            return (
+              <p key={pIdx} style={baseStyle}>
+                {isBullet && <span style={{ position: "absolute", left: 6, color: color, fontWeight: 700, fontSize: 17 }}>•</span>}
+                {paraText}
+              </p>
+            );
           }
           // Rozdělíme paragraf po signal[i] markerech
           const parts = [];
           let lastIdx = 0;
           signals.forEach((sig) => {
-            const idx = para.indexOf(sig.text, lastIdx);
+            const idx = paraText.indexOf(sig.text, lastIdx);
             if (idx >= 0) {
-              if (idx > lastIdx) parts.push({ type: "plain", text: para.slice(lastIdx, idx) });
+              if (idx > lastIdx) parts.push({ type: "plain", text: paraText.slice(lastIdx, idx) });
               parts.push({ type: "highlight", text: sig.text, color: sig.color || color, reason: sig.reason });
               lastIdx = idx + sig.text.length;
             }
           });
-          if (lastIdx < para.length) parts.push({ type: "plain", text: para.slice(lastIdx) });
+          if (lastIdx < paraText.length) parts.push({ type: "plain", text: paraText.slice(lastIdx) });
 
           return (
-            <p key={pIdx} style={{ margin: "0 0 12px" }}>
+            <p key={pIdx} style={baseStyle}>
+              {isBullet && <span style={{ position: "absolute", left: 6, color: color, fontWeight: 700, fontSize: 17 }}>•</span>}
               {parts.map((p, i) => p.type === "plain" ? (
                 <span key={i}>{p.text}</span>
               ) : (
@@ -7220,9 +7289,9 @@ function CaseStudyTab({ data, color }) {
                     background: bg, color: t.text,
                     border: `2px solid ${borderColor}`, borderRadius: 10,
                     cursor: answer1Submitted ? "default" : "pointer",
-                    fontSize: isMobile ? 13.5 : 13, fontFamily: fontSans, textAlign: "left",
+                    fontSize: isMobile ? 14.5 : 14, fontFamily: fontSans, textAlign: "left",
                     transition: "all 0.15s", display: "flex", gap: 10, alignItems: "center",
-                    lineHeight: 1.45,
+                    lineHeight: 1.5,
                   }}>
                   <span style={{
                     width: 24, height: 24, borderRadius: 12, flexShrink: 0,
@@ -7257,10 +7326,10 @@ function CaseStudyTab({ data, color }) {
                 <div style={{ fontSize: 14.5, color: t.text, fontFamily: fontSans, lineHeight: 1.6 }}>
                   <b>Klíčové signály v PS</b> (viz zvýrazněné v textu výše):
                 </div>
-                <div style={{ marginTop: 8, display: "flex", flexDirection: "column", gap: 6 }}>
+                <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 10 }}>
                   {(data.signals || []).map((sig, i) => (
-                    <div key={i} style={{ fontSize: isMobile ? 12 : 11.5, color: t.text, fontFamily: fontSans, lineHeight: 1.5, paddingLeft: 12, borderLeft: `2px solid ${sig.color || color}` }}>
-                      <b style={{ color: sig.color || color }}>"{sig.text}"</b> — {sig.reason}
+                    <div key={i} style={{ fontSize: isMobile ? 15 : 15.5, color: t.text, fontFamily: fontSans, lineHeight: 1.65, paddingLeft: 14, borderLeft: `3px solid ${sig.color || color}`, userSelect: "text", padding: "4px 0 4px 14px" }}>
+                      <b style={{ color: sig.color || color }}>"{sig.text}"</b> — <span dangerouslySetInnerHTML={{ __html: sig.reason }} />
                     </div>
                   ))}
                 </div>
@@ -7304,18 +7373,28 @@ function CaseStudyTab({ data, color }) {
                   padding: isMobile ? "14px 14px" : "12px 14px",
                   background: bg, color: t.text,
                   border: `2px solid ${borderColor}`, borderRadius: 10,
-                  fontSize: isMobile ? 13.5 : 13, fontFamily: fontSans,
+                  fontSize: isMobile ? 14.5 : 14, fontFamily: fontSans,
                 }}>
-                  <div onClick={() => {
-                    if (answer2Submitted) return;
-                    const next = new Set(answer2);
-                    next.has(i) ? next.delete(i) : next.add(i);
-                    setAnswer2(next);
-                  }} style={{
+                  <div
+                    onMouseDown={(e) => { e.currentTarget.dataset.startX = e.clientX; e.currentTarget.dataset.startY = e.clientY; }}
+                    onMouseUp={(e) => {
+                      if (answer2Submitted) return;
+                      const dx = Math.abs(e.clientX - (parseInt(e.currentTarget.dataset.startX) || 0));
+                      const dy = Math.abs(e.clientY - (parseInt(e.currentTarget.dataset.startY) || 0));
+                      // Pokud uživatel táhl myší (selekce textu), neaktivovat toggle
+                      if (dx > 5 || dy > 5) return;
+                      // Pokud má uživatel selekci textu, taky neaktivovat
+                      if (window.getSelection && window.getSelection().toString().length > 0) return;
+                      const next = new Set(answer2);
+                      next.has(i) ? next.delete(i) : next.add(i);
+                      setAnswer2(next);
+                    }}
+                    style={{
                     display: "flex", gap: 10, alignItems: "center",
                     cursor: answer2Submitted ? "default" : "pointer",
                     minHeight: 36,
-                    lineHeight: 1.45,
+                    lineHeight: 1.5,
+                    userSelect: answer2Submitted ? "text" : "none",
                   }}>
                     <span style={{
                       width: 24, height: 24, borderRadius: 4, flexShrink: 0,
@@ -7325,15 +7404,20 @@ function CaseStudyTab({ data, color }) {
                       {showResult && isCorrect && <span style={{ color: "#fff", fontSize: 14.5 }}>✓</span>}
                       {showResult && !isCorrect && isSelected && <span style={{ color: "#fff", fontSize: 14.5 }}>✗</span>}
                     </span>
-                    <span style={{ flex: 1 }}>{opt.text}</span>
+                    <span style={{ flex: 1, userSelect: answer2Submitted ? "text" : "none" }}>{opt.text}</span>
                   </div>
                   {showResult && opt.reason && (
-                    <div style={{
-                      marginTop: 8, paddingTop: 8, borderTop: `1px solid ${borderColor}30`,
-                      fontSize: isMobile ? 12 : 11.5, color: isCorrect ? VSE.success : VSE.danger,
-                      fontFamily: fontSans, lineHeight: 1.55, fontStyle: "italic",
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      onMouseDown={(e) => e.stopPropagation()}
+                      onMouseUp={(e) => e.stopPropagation()}
+                      style={{
+                        marginTop: 8, paddingTop: 8, borderTop: `1px solid ${borderColor}30`,
+                        fontSize: isMobile ? 14 : 13.5, color: isCorrect ? VSE.success : VSE.danger,
+                        fontFamily: fontSans, lineHeight: 1.6,
+                        userSelect: "text",
                     }}>
-                      <b>{isCorrect ? "✓ Správně:" : "✗ Špatně:"}</b> {opt.reason}
+                      <b>{isCorrect ? "✓ Správně:" : "✗ Špatně:"}</b> <span dangerouslySetInnerHTML={{ __html: opt.reason }} />
                     </div>
                   )}
                 </div>
@@ -7356,7 +7440,7 @@ function CaseStudyTab({ data, color }) {
                 <div style={{ fontSize: 13, fontFamily: fontMono, color: VSE.success, fontWeight: 700, letterSpacing: "1.4px", marginBottom: 6 }}>
                   💡 SHRNUTÍ ŘEŠENÍ
                 </div>
-                <div style={{ fontSize: isMobile ? 13 : 12.5, color: t.text, fontFamily: fontSans, lineHeight: 1.65 }}
+                <div style={{ fontSize: isMobile ? 14.5 : 14, color: t.text, fontFamily: fontSans, lineHeight: 1.7, userSelect: "text" }}
                   dangerouslySetInnerHTML={{ __html: data.summary }} />
               </GlassBox>
               <button onClick={reset} style={{
@@ -10979,30 +11063,17 @@ function OkruhHr1Panel() {
         ]} color={VSE.fmv} />
       </div>) },
 
-    { id: "kultura_hofstede", title: "🌍 Hofstedeho 6 kulturních dimenzí", subtitle: "Power Distance, Individualism, Masculinity, Uncertainty, Long-term, Indulgence", color: VSE.ffu, emoji: "globe",
+    { id: "kultura_hofstede", title: "🌍 Hofstedeho 6 kulturních dimenzí", subtitle: "PDI, IDV, MAS, UAI, LTO, IND — detailně v HR 3", color: VSE.ffu, emoji: "globe",
       content: (<div>
         <Def color={VSE.ffu}>
-          <b>Geert Hofstede</b> srovnal národní kultury podle 6 dimenzí. Důležité v případovkách s <b>mezinárodním kontextem</b> (expanze, expatrianti, M&A). Komise: <b>Schönfeld/Legnerová/Stříteský</b>.
+          <b>Geert Hofstede</b> srovnal národní kultury podle 6 dimenzí. V kontextu strategie + kultury (HR 1) stačí znát, že kultura firmy ovlivňuje motivaci jinak v různých zemích.
         </Def>
-        <Tag color={VSE.ffu}>6 dimenzí — vždy 2 protipóly</Tag>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
-          {[
-            { name: "1. Power Distance (PDI)", left: "Equal society", right: "Strict hierarchy", desc: "Jak moc společnost akceptuje mocenské rozdíly. ČR = střední, Asie = vysoké, Skandinávie = nízké.", color: VSE.danger },
-            { name: "2. Individualism × Collectivism (IDV)", left: "Individualism", right: "Collectivism", desc: "Já × my. USA = ind., Asie = kol. ČR = středně individualistická.", color: VSE.fmv },
-            { name: "3. Masculinity × Femininity (MAS)", left: "Masculine (úspěch, výkon)", right: "Feminine (kvalita života)", desc: "Co se cení. Japonsko = masc., Skandinávie = fem.", color: VSE.warning },
-            { name: "4. Uncertainty Avoidance (UAI)", left: "Tolerance nejistoty", right: "Vyhýbání se nejistotě", desc: "Jak moc lidé snášejí změny. Německo = vysoká, ČR = středně vysoká.", color: VSE.fph },
-            { name: "5. Long-term × Short-term (LTO)", left: "Krátkodobá orient.", right: "Dlouhodobá orient.", desc: "Pragmatismus × tradice. Asie = LT, USA = ST.", color: VSE.success },
-            { name: "6. Indulgence × Restraint (IND)", left: "Užívání života (bad)", right: "Sebekontrola (good)", desc: "Hedonismus × disciplína. Latinská Amerika = ind., Východní Evropa = restr.", color: VSE.fis },
-          ].map((d, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "10px 14px", borderLeft: `3px solid ${d.color}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14.5, fontWeight: 700, color: d.color, fontFamily: fontSans, marginBottom: 3 }}>{d.name}</div>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 12.5, color: "var(--text-muted)", fontFamily: fontMono, marginBottom: 4 }}>
-                <span>← {d.left}</span><span>{d.right} →</span>
-              </div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{d.desc}</div>
-            </GlassBox>
-          ))}
-        </div>
+        <Tag color={VSE.warning}>📎 Detailní teorie viz HR 3 (Globální × lokální)</Tag>
+        <Bullet items={[
+          "<b>6 dimenzí:</b> PDI (Power Distance) · IDV (Individualism × Collectivism) · MAS (Masculinity × Femininity) · UAI (Uncertainty Avoidance) · LTO (Long-term Orientation) · IND (Indulgence × Restraint)",
+          "<b>Pro HR 1 stačí zmínit:</b> Hofstede pomáhá pochopit, proč stejná strategie+kultura motivuje jinak v ČR a Asii. Detailní rozbor s aplikací patří do HR 3.",
+          "<b>V PS u HR 1:</b> pokud firma operuje globálně, krátce zmiň Hofstede jako další dimenzi kulturní analýzy (vedle Scheina a Denisona).",
+        ]} color={VSE.ffu} />
       </div>) },
 
     { id: "kultura_denison", title: "🔄 Denisonův model — 4 typy kultury", subtitle: "Adaptability, Mission, Involvement, Consistency", color: VSE.ffu, emoji: "compass",
@@ -11901,10 +11972,10 @@ function OkruhHr3Panel() {
   };
 
   const examQuestionsHr3 = [
-    { commission: "Schönfeld + Stříteský + Krause", year: "2024", question: "HR globální × lokální + identifikujte strategii v PS + Hofstede analýza", what: "Studenti měli identifikovat aktuální strategii firmy v matici Bartlett & Ghoshal (Global/Multidomestic/International/Transnational) a navrhnout přechod na transnational přes glokalizaci. Klíčové: použít Hofstede dimenze pro konkrétní zemi v PS." },
-    { commission: "Schönfeld", year: "2023", question: "Expatrianti — kdy je vysílat a jak připravit", what: "Komise se ptala na expat lifecycle (4 fáze), náklady (3-5× lokální plat), kritéria výběru (cultural intelligence, ne jen výkon), repatriaci jako nejpodceněnější fázi." },
-    { commission: "Krause", year: "2024", question: "Co lokalizovat, co globalizovat — konkrétní příklady", what: "Studenti měli vyjmenovat: globální = vize/mise/hodnoty/leadership programy/core competencies. Lokální = benefity/platy/onboarding/PM cyklus. Příklady: McDonald's, IKEA, Spotify." },
-    { commission: "Stříteský", year: "2023", question: "Hofstede dimenze + aplikace na konkrétní zemi", what: "Komise chtěla 4-6 dimenzí Hofstedeho a aplikaci na zemi z PS. Typicky Indie (vysoká PDI), Německo (vysoká UAI), USA (vysoká IDV), Japonsko (vysoká MAS+UAI)." },
+    { komise: "2024 — Schönfeld + Stříteský + Krause", otazka: "HR globální × lokální + identifikujte strategii v PS + Hofstede analýza", pozn: "Studenti měli identifikovat aktuální strategii firmy v matici Bartlett & Ghoshal (Global/Multidomestic/International/Transnational) a navrhnout přechod na transnational přes glokalizaci. Klíčové: použít Hofstede dimenze pro konkrétní zemi v PS." },
+    { komise: "2023 — Schönfeld", otazka: "Expatrianti — kdy je vysílat a jak připravit", pozn: "Komise se ptala na expat lifecycle (4 fáze), náklady (3-5× lokální plat), kritéria výběru (cultural intelligence, ne jen výkon), repatriaci jako nejpodceněnější fázi." },
+    { komise: "2024 — Krause", otazka: "Co lokalizovat, co globalizovat — konkrétní příklady", pozn: "Studenti měli vyjmenovat: globální = vize/mise/hodnoty/leadership programy/core competencies. Lokální = benefity/platy/onboarding/PM cyklus. Příklady: McDonald's, IKEA, Spotify." },
+    { komise: "2023 — Stříteský", otazka: "Hofstede dimenze + aplikace na konkrétní zemi", pozn: "Komise chtěla 4-6 dimenzí Hofstedeho a aplikaci na zemi z PS. Typicky Indie (vysoká PDI), Německo (vysoká UAI), USA (vysoká IDV), Japonsko (vysoká MAS+UAI)." },
   ];
 
   const podcastHr3 = { title: "HR 3 — Globální × Lokální HR, expatrianti", description: "Globalizace × lokalizace × glokalizace, 4 strategie Bartlett & Ghoshal, Hofstede 6 dimenzí v HR praktikách, expat lifecycle (4 fáze), co globalizovat × co lokalizovat. McDonald's, IKEA, Walmart Germany.", audioUrl: null, notebookLmUrl: null };
@@ -12172,10 +12243,10 @@ function OkruhHr4Panel() {
   };
 
   const examQuestionsHr4 = [
-    { commission: "Mládková", year: "2024", question: "Diverzita — vyjmenovat dimenze + výhody i nevýhody + aplikace na PS", what: "Studenti museli vyjmenovat primární (gender, věk, etnicita) i sekundární (vzdělání, životní zkušenosti) dimenze. Mládková chtěla i NEVÝHODY (konflikty, komunikační bariéry, vyšší náklady) — kdo zmínil jen plus, dostal trojku. Aplikace: konkrétní doporučení pro firmu v PS." },
-    { commission: "Mládková + Kolouchová", year: "2024", question: "4 fáze řízení diverzity + identifikujte fázi v PS", what: "Komise chtěla Roosevelt Thomas model (Resistance → Discrimination → Tolerance → Inclusion). Studenti měli najít fázi firmy v PS a doporučit kroky k posunu na vyšší fázi." },
-    { commission: "Mikan", year: "2023", question: "Diverzita × inkluze × equity — rozlišit 3 pojmy + DEI nástroje", what: "Klíčové: 3 různé pojmy, ne synonyma. Diverzita = kdo, Inkluze = pocit, Equity = přístup. Nástroje: Diversity Council, bias training, blind recruitment, ERGs, mentoring, pay audit." },
-    { commission: "Mládková", year: "2023", question: "Glass ceiling, tokenism, unconscious bias — vysvětlit + jak řešit", what: "Pasti diverzity. Glass ceiling = bariéra žen do top managementu. Tokenism = 1 minoritka pro show. Unconscious bias = nevědomé předsudky. Řešení: blind recruitment, inclusive leadership, mentoring, pay audits." },
+    { komise: "2024 — Mládková", otazka: "Diverzita — vyjmenovat dimenze + výhody i nevýhody + aplikace na PS", pozn: "Studenti museli vyjmenovat primární (gender, věk, etnicita) i sekundární (vzdělání, životní zkušenosti) dimenze. Mládková chtěla i NEVÝHODY (konflikty, komunikační bariéry, vyšší náklady) — kdo zmínil jen plus, dostal trojku. Aplikace: konkrétní doporučení pro firmu v PS." },
+    { komise: "2024 — Mládková + Kolouchová", otazka: "4 fáze řízení diverzity + identifikujte fázi v PS", pozn: "Komise chtěla Roosevelt Thomas model (Resistance → Discrimination → Tolerance → Inclusion). Studenti měli najít fázi firmy v PS a doporučit kroky k posunu na vyšší fázi." },
+    { komise: "2023 — Mikan", otazka: "Diverzita × inkluze × equity — rozlišit 3 pojmy + DEI nástroje", pozn: "Klíčové: 3 různé pojmy, ne synonyma. Diverzita = kdo, Inkluze = pocit, Equity = přístup. Nástroje: Diversity Council, bias training, blind recruitment, ERGs, mentoring, pay audit." },
+    { komise: "2023 — Mládková", otazka: "Glass ceiling, tokenism, unconscious bias — vysvětlit + jak řešit", pozn: "Pasti diverzity. Glass ceiling = bariéra žen do top managementu. Tokenism = 1 minoritka pro show. Unconscious bias = nevědomé předsudky. Řešení: blind recruitment, inclusive leadership, mentoring, pay audits." },
   ];
 
   const podcastHr4 = { title: "HR 4 — Diverzita a její řízení", description: "Diverzita × inkluze × equity (3 různé pojmy), dimenze (primární × sekundární), 4 fáze Roosevelt Thomas, 3 strategie (kompenzační/kulturní/strategická), nástroje (Diversity Council, blind recruitment, ERGs, bias training). Microsoft pod Nadellou, Patagonia, Norway 40 % rule.", audioUrl: null, notebookLmUrl: null };
@@ -12467,10 +12538,10 @@ function OkruhHr5Panel() {
   };
 
   const examQuestionsHr5 = [
-    { commission: "Stříteský + Tahal", year: "2024", question: "Talent management v PS — najít top talenty, navrhnout development", what: "Studenti měli identifikovat top talenty přes 9-Box, navrhnout DDC strategii (Develop pro top, Deploy pro solid, Develop/Exit pro under), doporučit konkrétní rozvojové metody (stretch assignments, mentoring, coaching)." },
-    { commission: "Bočková", year: "2023", question: "Kompetenční model — vyjmenovat složky + aplikace", what: "Klasický KSA + Attitudes. Bočková ostře sleduje, jestli zmíníš 4 nebo jen 3 složky (Attitudes často chybí). Iceberg model + hire for attitude philosophy." },
-    { commission: "Tahal", year: "2024", question: "Rozvojové metody on/off the job + 70-20-10 rule", what: "Studenti měli vyjmenovat metody (mentoring, coaching, job rotation, stretch assignments, kurzy, MBA, certifikace) a vysvětlit 70-20-10. Tahal chce konkrétní firemní příklady (Google g2g, GE Crotonville)." },
-    { commission: "Stříteský", year: "2023", question: "GROW model coachingu — vysvětlit + aplikovat", what: "John Whitmore, 4 fáze: Goal, Reality, Options, Will. Stříteský chce konkrétní aplikaci na rozhovor manažer-podřízený v PS." },
+    { komise: "2024 — Stříteský + Tahal", otazka: "Talent management v PS — najít top talenty, navrhnout development", pozn: "Studenti měli identifikovat top talenty přes 9-Box, navrhnout DDC strategii (Develop pro top, Deploy pro solid, Develop/Exit pro under), doporučit konkrétní rozvojové metody (stretch assignments, mentoring, coaching)." },
+    { komise: "2023 — Bočková", otazka: "Kompetenční model — vyjmenovat složky + aplikace", pozn: "Klasický KSA + Attitudes. Bočková ostře sleduje, jestli zmíníš 4 nebo jen 3 složky (Attitudes často chybí). Iceberg model + hire for attitude philosophy." },
+    { komise: "2024 — Tahal", otazka: "Rozvojové metody on/off the job + 70-20-10 rule", pozn: "Studenti měli vyjmenovat metody (mentoring, coaching, job rotation, stretch assignments, kurzy, MBA, certifikace) a vysvětlit 70-20-10. Tahal chce konkrétní firemní příklady (Google g2g, GE Crotonville)." },
+    { komise: "2023 — Stříteský", otazka: "GROW model coachingu — vysvětlit + aplikovat", pozn: "John Whitmore, 4 fáze: Goal, Reality, Options, Will. Stříteský chce konkrétní aplikaci na rozhovor manažer-podřízený v PS." },
   ];
 
   const podcastHr5 = { title: "HR 5 — Talent management a rozvoj zaměstnanců", description: "9-Box Grid (Performance × Potential), DDC model (Develop/Deploy/Connect), 70-20-10 rule, kompetenční model KSA + Attitudes, GROW coaching, on/off the job learning, succession planning. Google, GE Crotonville, McKinsey, Microsoft pod Nadellou.", audioUrl: null, notebookLmUrl: null };
@@ -12673,42 +12744,19 @@ function OkruhHr6Panel() {
         ]} color={VSE.warning} />
       </div>) },
 
-    { id: "ulrich", title: "🎯 Ulrich 4 role HR + HR jako business partner", subtitle: "Transformace role HR oddělení (Dave Ulrich 1997)", color: VSE.fph, emoji: "compass",
+    { id: "ulrich", title: "🎯 Ulrich 4 role HR — krátký přehled", subtitle: "Detailně v HR 8 (Strategie ŘLZ)", color: VSE.fph, emoji: "compass",
       content: (<div>
         <Def color={VSE.fph}>
-          <b>Dave Ulrich (1997)</b> popsal posun HR z čistě administrativní role na <b>4 paralelní role</b>. Aneta to v taženkách 2024 zmiňuje explicitně.
+          <b>Dave Ulrich (1997)</b> definoval 4 paralelní role HR. V HR 6 to zmiň jako moderní trend (HR jako business partner). <b>Detailní rozbor patří do HR 8</b> (Strategie ŘLZ).
         </Def>
-        <Tag color={VSE.fph}>4 role HR podle Ulricha</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.warning, t: "1. ADMIN EXPERT", d: "Operativní HR — payroll, benefits administration, contracts. Efektivita procesů. Tradiční HR role. Dnes často digitalizováno." },
-            { c: VSE.fmv, t: "2. EMPLOYEE CHAMPION", d: "Advocate zaměstnanců. Engagement, wellbeing, fair treatment, voice of employees. Buduje employee experience." },
-            { c: VSE.fph, t: "3. CHANGE AGENT", d: "Facilitátor transformací. Change management, kulturní změna, organizační development. Implementuje Kotter, Lewin." },
-            { c: VSE.success, t: "4. STRATEGIC PARTNER", d: "HR sedí u stolu strategického plánování. Provázanost HR strategie s business strategií. Ulrich vize: HR jako rovnocenný partner CFO, COO, CMO." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>HR Business Partner (HRBP) model</Tag>
+        <Tag color={VSE.warning}>📎 Detailní teorie viz HR 8 (Strategie ŘLZ)</Tag>
         <Bullet items={[
-          "<b>HRBP = senior HR profesionál</b> přiřazený k business jednotce (sales, engineering, marketing)",
-          "<b>Reportuje 2×:</b> CHRO (HR funkční) + leadovi business unit (business)",
-          "<b>Není administrativa</b> — strategický partner, change agent, coach pro managery",
-          "<b>Centers of Excellence (CoE):</b> Komp & Ben, Talent Acquisition, Learning — specialisté centralizovaně",
-          "<b>Shared Services:</b> HR operations, payroll — centralizováno, často outsourcing",
-          "<b>Důsledek:</b> HR transformuje z 80 % admin + 20 % strategy na 20 % admin + 80 % strategy",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.danger}>EFQM model (Excellence)</Tag>
-        <Bullet items={[
-          "<b>European Foundation for Quality Management — model excellence</b>",
-          "<b>9 kritérií:</b> 5 enablers (Leadership, People, Strategy, Partnerships, Processes) + 4 results (People Results, Customer Results, Society Results, Business Results)",
-          "<b>HR role v EFQM:</b> People (zaměstnanci jako enabler) + People Results (engagement, satisfaction, fluktuace)",
-          "<b>EFQM Award:</b> Evropský benchmark — BMW, Bosch, IKEA, Volvo, Siemens jsou laureáti",
-          "<b>Aplikace:</b> firemní self-assessment a kontinuální zlepšování. Klasický benchmark TQM (Total Quality Management).",
-        ]} color={VSE.danger} />
+          "<b>1. Admin Expert</b> — operativní HR (payroll, contracts). Tradiční role.",
+          "<b>2. Employee Champion</b> — advocate zaměstnanců, EX, engagement.",
+          "<b>3. Change Agent</b> — facilitátor transformací, kulturní změny.",
+          "<b>4. Strategic Partner</b> — HR u stolu strategického plánování. Rovnocenný CFO/COO/CMO.",
+          "<b>Pro HR 6 stačí:</b> trend posunu z 80 % admin na 80 % strategie. HRBP model + EFQM (excellence rámec) jako součást moderních trendů.",
+        ]} color={VSE.fph} />
       </div>) },
 
     { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro HR 6 — trendy v HR", color: VSE.success, emoji: "target",
@@ -12816,10 +12864,10 @@ function OkruhHr6Panel() {
   };
 
   const examQuestionsHr6 = [
-    { commission: "Stříteský + Bočková", year: "2024", question: "Trendy v HR — vyjmenovat + aplikace na PS", what: "Studenti měli vyjmenovat 5-8 klíčových trendů (digitalizace, AI, hybrid work, EX, wellbeing, DEI, skills-based, continuous feedback) s konkrétními příklady firem. Bočková ostře sleduje 3 charakteristiky HR strategie." },
-    { commission: "Bočková", year: "2023", question: "HR strategie — 3 charakteristiky kvalitní", what: "Klasická Bočková otázka. Specifická + Komplexní + Provázaná. Studenti, co řekli jen 2 ze 3, dostali trojku. Komplexní = transformační, provázaná = napříč procesy." },
-    { commission: "Tahal", year: "2024", question: "AI v HR — příležitosti a rizika", what: "Studenti měli zmínit AI use cases (CV screening, prediktivní analytika, chatboti) ale i RIZIKA — bias (Amazon 2018), privacy, transparency. Tahal chce vyvážený pohled." },
-    { commission: "Kuděj", year: "2023", question: "Hybrid work a EX — modely + implementace", what: "Komise chtěla 4 hybrid modely (Remote-first / Hybrid-flexible / Office-first / Full RTO) + EX lifecycle (6 fází). Konkrétní firmy: GitLab, Spotify, Apple, Amazon." },
+    { komise: "2024 — Stříteský + Bočková", otazka: "Trendy v HR — vyjmenovat + aplikace na PS", pozn: "Studenti měli vyjmenovat 5-8 klíčových trendů (digitalizace, AI, hybrid work, EX, wellbeing, DEI, skills-based, continuous feedback) s konkrétními příklady firem. Bočková ostře sleduje 3 charakteristiky HR strategie." },
+    { komise: "2023 — Bočková", otazka: "HR strategie — 3 charakteristiky kvalitní", pozn: "Klasická Bočková otázka. Specifická + Komplexní + Provázaná. Studenti, co řekli jen 2 ze 3, dostali trojku. Komplexní = transformační, provázaná = napříč procesy." },
+    { komise: "2024 — Tahal", otazka: "AI v HR — příležitosti a rizika", pozn: "Studenti měli zmínit AI use cases (CV screening, prediktivní analytika, chatboti) ale i RIZIKA — bias (Amazon 2018), privacy, transparency. Tahal chce vyvážený pohled." },
+    { komise: "2023 — Kuděj", otazka: "Hybrid work a EX — modely + implementace", pozn: "Komise chtěla 4 hybrid modely (Remote-first / Hybrid-flexible / Office-first / Full RTO) + EX lifecycle (6 fází). Konkrétní firmy: GitLab, Spotify, Apple, Amazon." },
   ];
 
   const podcastHr6 = { title: "HR 6 — Nové trendy v HR a strategie HR", description: "HR strategie 3 charakteristiky (specifická/komplexní/provázaná), digitalizace (HRIS, ATS), AI v HR (bias risk!), hybrid work modely (Remote-first/Hybrid-flexible), Employee Experience lifecycle, mental health & wellbeing, DEI (CSRD 2025), skills-based hiring, continuous feedback. Microsoft pod Nadellou, GitLab, IBM.", audioUrl: null, notebookLmUrl: null };
@@ -13096,10 +13144,10 @@ function OkruhHr7Panel() {
   };
 
   const examQuestionsHr7 = [
-    { commission: "Mikovcová + Viktora", year: "2024", question: "HR Canvas + HR controlling — podrobně, návaznost na strategii", what: "Studenti museli vyjmenovat 9 polí HR Canvas, popsat 4 perspektivy HR Balanced Scorecard, identifikovat leading × lagging indikátory v PS, navrhnout dashboard 5-7 klíčových metrik navázaných na strategické cíle firmy v PS." },
-    { commission: "Mikovcová", year: "2023", question: "Ukazatele HR controllingu — vyjmenovat + aplikace", what: "Komise chtěla konkrétní metriky podle oblasti: nábor (time to hire, cost per hire), retence (turnover rate, eNPS), engagement (Gallup Q12), rozvoj (training ROI), odměňování (compa-ratio, pay equity). Mikovcová ostře sleduje rozdíl leading × lagging." },
-    { commission: "Viktora", year: "2024", question: "Návaznost HR strategie na firemní strategii — HR Scorecard", what: "Klasická otázka — bez firemní strategie není HR strategie. KPI musí odrážet strategické cíle (růst, inovace, expanze, kvalita). HR Scorecard jako framework propojení." },
-    { commission: "Mikovcová", year: "2023", question: "Markovova analýza + talent pipeline", what: "Studenti měli vysvětlit přechodovou matici a její použití pro succession planning. Aplikace na PS — kolik manažerů je v pipeline na nahrazení odcházejících." },
+    { komise: "2024 — Mikovcová + Viktora", otazka: "HR Canvas + HR controlling — podrobně, návaznost na strategii", pozn: "Studenti museli vyjmenovat 9 polí HR Canvas, popsat 4 perspektivy HR Balanced Scorecard, identifikovat leading × lagging indikátory v PS, navrhnout dashboard 5-7 klíčových metrik navázaných na strategické cíle firmy v PS." },
+    { komise: "2023 — Mikovcová", otazka: "Ukazatele HR controllingu — vyjmenovat + aplikace", pozn: "Komise chtěla konkrétní metriky podle oblasti: nábor (time to hire, cost per hire), retence (turnover rate, eNPS), engagement (Gallup Q12), rozvoj (training ROI), odměňování (compa-ratio, pay equity). Mikovcová ostře sleduje rozdíl leading × lagging." },
+    { komise: "2024 — Viktora", otazka: "Návaznost HR strategie na firemní strategii — HR Scorecard", pozn: "Klasická otázka — bez firemní strategie není HR strategie. KPI musí odrážet strategické cíle (růst, inovace, expanze, kvalita). HR Scorecard jako framework propojení." },
+    { komise: "2023 — Mikovcová", otazka: "Markovova analýza + talent pipeline", pozn: "Studenti měli vysvětlit přechodovou matici a její použití pro succession planning. Aplikace na PS — kolik manažerů je v pipeline na nahrazení odcházejících." },
   ];
 
   const podcastHr7 = { title: "HR 7 — HR Canvas, HR controlling, ukazatele", description: "HR controlling jako koordinační koncept, hlavní cíle (flexibilita/integrace/adaptibilita), role HR controllera, leading × lagging indikátory, klíčové metriky (time to hire, eNPS, compa-ratio, revenue per FTE), HR Balanced Scorecard (4 perspektivy), HR Canvas (9 polí), Markovova analýza, návaznost na firemní strategii. Google People Operations, Mobil Oil.", audioUrl: null, notebookLmUrl: null };
@@ -13397,10 +13445,10 @@ function OkruhHr8Panel() {
   };
 
   const examQuestionsHr8 = [
-    { commission: "Bočková + Stříteský", year: "2024", question: "Strategie ŘLZ — najít principy v PS + doporučení", what: "Studenti museli identifikovat typ strategie firmy (Komplexní × Specifická), Hard × Soft orientaci, 4 oblasti (talents/kapacity/výkon/prostředí), HR politiky a nástroje. Klíčové: konkrétní doporučení pro situaci v PS — bez toho trojka." },
-    { commission: "Bočková", year: "2023", question: "Hard HRM × Soft HRM — Storey + aplikace", what: "Klasický rámec. Hard = lidé jako zdroj (Amazon), Soft = lidé jako hodnota (Patagonia). Většina firem hybrid. Studenti měli identifikovat orientaci v PS." },
-    { commission: "Tahal", year: "2024", question: "HR politiky a nástroje realizace strategie ŘLZ", what: "Komise chtěla vyjmenovat 5 HR politik (nábor/odměňování/rozvoj/performance/diverzita) + nástroje (operativní/taktické/strategické). Aplikace na konkrétní firmu v PS." },
-    { commission: "Kuděj", year: "2023", question: "Organizace HR útvaru + plánování lidských zdrojů", what: "Studenti měli vysvětlit faktory uspořádání HR (velikost/strategie/kultura/obor), modely organizace (liniově-štábní, front/back office, CoE, Shared Services) a proces HRP (předpověď, gap, akce)." },
+    { komise: "2024 — Bočková + Stříteský", otazka: "Strategie ŘLZ — najít principy v PS + doporučení", pozn: "Studenti museli identifikovat typ strategie firmy (Komplexní × Specifická), Hard × Soft orientaci, 4 oblasti (talents/kapacity/výkon/prostředí), HR politiky a nástroje. Klíčové: konkrétní doporučení pro situaci v PS — bez toho trojka." },
+    { komise: "2023 — Bočková", otazka: "Hard HRM × Soft HRM — Storey + aplikace", pozn: "Klasický rámec. Hard = lidé jako zdroj (Amazon), Soft = lidé jako hodnota (Patagonia). Většina firem hybrid. Studenti měli identifikovat orientaci v PS." },
+    { komise: "2024 — Tahal", otazka: "HR politiky a nástroje realizace strategie ŘLZ", pozn: "Komise chtěla vyjmenovat 5 HR politik (nábor/odměňování/rozvoj/performance/diverzita) + nástroje (operativní/taktické/strategické). Aplikace na konkrétní firmu v PS." },
+    { komise: "2023 — Kuděj", otazka: "Organizace HR útvaru + plánování lidských zdrojů", pozn: "Studenti měli vysvětlit faktory uspořádání HR (velikost/strategie/kultura/obor), modely organizace (liniově-štábní, front/back office, CoE, Shared Services) a proces HRP (předpověď, gap, akce)." },
   ];
 
   const podcastHr8 = { title: "HR 8 — Strategie ŘLZ, nástroje, politiky", description: "Strategie ŘLZ jako business partner, 4 strategické cíle HRM, 2 typy strategie (Komplexní transformační × Specifická), 4 oblasti (talents/kapacity/výkon/prostředí), Hard HRM × Soft HRM (Storey), 5 HR politik, nástroje (operativní/taktické/strategické), organizace HR útvaru (Centers of Excellence, Shared Services), plánování LZ. Patagonia, Microsoft transformace, Amazon Hard HRM.", audioUrl: null, notebookLmUrl: null };
@@ -13538,41 +13586,27 @@ function OkruhHr9Panel() {
         ]} color={VSE.danger} />
       </div>) },
 
-    { id: "kompetencni", title: "🔧 Kompetenční model — KSA + Attitudes (4 složky!)", subtitle: "Návaznost na HR 5 + Strategické kompetence firmy", color: VSE.fph, emoji: "tools",
+    { id: "kompetencni", title: "ð§ KompetenÄnÃ­ model + strategickÃ© kompetence", subtitle: "KSA + Attitudes detailnÄ v HR 5 â zde aplikace na strategickÃ© schopnosti", color: VSE.fph, emoji: "tools",
       content: (<div>
         <Def color={VSE.fph}>
-          <b>Kompetenční model</b> definuje, co zaměstnanec musí umět pro úspěch v roli. Klasické 4 složky: <b>Knowledge + Skills + Abilities + Attitudes</b>. Bočková ostře sleduje — když řekneš jen 3, dostaneš trojku.
+          <b>KompetenÄnÃ­ model</b> = 4 sloÅ¾ky (KSA + Attitudes). DetailnÃ­ rozbor patÅÃ­ do <b>HR 5 (Talent management)</b>. V HR 9 staÄÃ­ znÃ¡t strukturu a aplikovat ji na <b>strategickÃ© kompetence firmy</b> (Anetina subotÃ¡zka 2).
         </Def>
-        <Tag color={VSE.fph}>4 složky kompetenčního modelu (KSA + A)</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "K — KNOWLEDGE", d: "Co víš. Teoretické znalosti. Finance, marketing, programování. Nabývá se studiem. Měřitelné, trénovatelné v měsících." },
-            { c: VSE.warning, t: "S — SKILLS", d: "Co umíš. Praktické dovednosti. Psaní kódu, vyjednávání, prezentace. Nabývá se praxí. Trénovatelné v měsících." },
-            { c: VSE.fph, t: "A — ABILITIES", d: "Co dokážeš. Vrozené nebo dlouhodobě vyvinuté schopnosti. Analytické myšlení, kreativita, EQ. Měnitelné v letech." },
-            { c: VSE.success, t: "A — ATTITUDES", d: "Jaký jsi. Postoje, hodnoty, motivace. Nejhůře měnitelné. Často NEJDŮLEŽITĚJŠÍ. ⚠️ Často chybí v definici!" },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>Iceberg model kompetencí</Tag>
+        <Tag color={VSE.warning}>ð DetailnÃ­ teorie KSA + Iceberg model v HR 5</Tag>
         <Bullet items={[
-          "<b>Nad hladinou (viditelné):</b> Knowledge + Skills — měřitelné, ovlivnitelné trainingem",
-          "<b>Pod hladinou (skryté):</b> Abilities + Attitudes — vrozené nebo dlouhodobé, hluboko zakořeněné",
-          "<b>Praktický důsledek:</b> Hire for attitude, train for skills (Southwest Airlines model)",
+          "<b>4 sloÅ¾ky:</b> Knowledge (co vÃ­Å¡) + Skills (co umÃ­Å¡) + Abilities (co dokÃ¡Å¾eÅ¡) + Attitudes (jakÃ½ jsi). â ï¸ BoÄkovÃ¡ chce VÅ ECHNY 4, ne 3!",
+          "<b>Iceberg model:</b> Knowledge + Skills viditelnÃ© a trÃ©novatelnÃ©. Abilities + Attitudes pod hladinou â vrozenÃ© nebo dlouhodobÃ©.",
+          "<b>PraktickÃ½ dÅ¯sledek:</b> Hire for attitude, train for skills.",
         ]} color={VSE.warning} />
-        <Tag color={VSE.success}>Strategické kompetence firmy (3. Anetina subotázka)</Tag>
+        <Tag color={VSE.success}>StrategickÃ© kompetence firmy (Anetina subotÃ¡zka 2)</Tag>
         <Bullet items={[
-          "<b>Strategické kompetence</b> = unikátní schopnosti firmy, které vytvářejí konkurenční výhodu",
-          "<b>Příklady:</b> Apple = design + integrace (HW+SW). Toyota = lean operations. Google = data + AI. Patagonia = sustainability.",
-          "<b>HR role v budování:</b> identifikace klíčových kompetencí → kompetenční model → hire/develop pro tyto kompetence",
-          "<b>Návaznost na talent management (HR 5):</b> 9-Box + DDC pro klíčové strategické kompetence",
+          "<b>StrategickÃ© kompetence</b> = unikÃ¡tnÃ­ schopnosti firmy, kterÃ© vytvÃ¡ÅejÃ­ konkurenÄnÃ­ vÃ½hodu",
+          "<b>PÅÃ­klady:</b> Apple = design + integrace HW/SW. Toyota = lean operations. Google = data + AI. Patagonia = sustainability.",
+          "<b>VRIO test:</b> Value, Rarity, Imitability, Organization â strategickÃ¡ schopnost musÃ­ splnit vÅ¡echny 4 kritÃ©ria.",
+          "<b>HR role v budovÃ¡nÃ­:</b> identifikace klÃ­ÄovÃ½ch kompetencÃ­ â kompetenÄnÃ­ model â hire/develop pro tyto kompetence (pÅes 9-Box a DDC z HR 5).",
         ]} color={VSE.success} />
       </div>) },
 
-    { id: "mereni", title: "📏 Měření intelektuálního kapitálu", subtitle: "Skandia Navigator, Intangible Assets Monitor, BSC, Tobinovo Q", color: VSE.fph, emoji: "scale",
+        { id: "mereni", title: "📏 Měření intelektuálního kapitálu", subtitle: "Skandia Navigator, Intangible Assets Monitor, BSC, Tobinovo Q", color: VSE.fph, emoji: "scale",
       content: (<div>
         <Def color={VSE.fph}>
           Měření IK je <b>obtížné</b>, ale ne nemožné. Existuje několik klasických metod. Mikovcová a Viktora chtějí, abys uměl 2-3 metody.
@@ -13728,10 +13762,10 @@ function OkruhHr9Panel() {
   };
 
   const examQuestionsHr9 = [
-    { commission: "Bočková + Stříteský", year: "2024", question: "Intelektuální kapitál + 3 subotázky (HR vliv, strategické schopnosti, opatření)", what: "Klasická Anetina otázka 2024. Studenti museli odpovědět všechny 3 subotázky: 1) Jak HR ovlivňuje IK (per 3 složky), 2) Jak popsat strategické schopnosti v PS (VRIO + příklady firem), 3) Konkrétní nástroje pro posílení role HR. Bez všech 3 trojka." },
-    { commission: "Bočková", year: "2023", question: "3 složky IK (Galbraith) + měření", what: "Klasický rámec. Lidský / strukturální / vztahový. Měření: Skandia Navigator (Edvinsson), Intangible Assets Monitor (Sveiby), BSC, Tobinovo Q. Bočková chce 2-3 metody." },
-    { commission: "Stříteský", year: "2024", question: "Tacitní × explicitní znalosti + HR nástroje pro převod", what: "Komise chtěla rozlišit 3 typy znalostí (explicitní/implicitní/tacitní) a HR opatření pro převod tacit → explicit: mentoring, exit interviews, knowledge management systémy, Communities of Practice." },
-    { commission: "Tahal", year: "2023", question: "Kompetenční model KSA + Attitudes — aplikace na PS", what: "Bočková ostře sleduje — 4 složky, ne 3 (Attitudes často chybí). Iceberg model. Hire for attitude, train for skills. Aplikace: jaká kompetence firmy chybí, jak rozvinout." },
+    { komise: "2024 — Bočková + Stříteský", otazka: "Intelektuální kapitál + 3 subotázky (HR vliv, strategické schopnosti, opatření)", pozn: "Klasická Anetina otázka 2024. Studenti museli odpovědět všechny 3 subotázky: 1) Jak HR ovlivňuje IK (per 3 složky), 2) Jak popsat strategické schopnosti v PS (VRIO + příklady firem), 3) Konkrétní nástroje pro posílení role HR. Bez všech 3 trojka." },
+    { komise: "2023 — Bočková", otazka: "3 složky IK (Galbraith) + měření", pozn: "Klasický rámec. Lidský / strukturální / vztahový. Měření: Skandia Navigator (Edvinsson), Intangible Assets Monitor (Sveiby), BSC, Tobinovo Q. Bočková chce 2-3 metody." },
+    { komise: "2024 — Stříteský", otazka: "Tacitní × explicitní znalosti + HR nástroje pro převod", pozn: "Komise chtěla rozlišit 3 typy znalostí (explicitní/implicitní/tacitní) a HR opatření pro převod tacit → explicit: mentoring, exit interviews, knowledge management systémy, Communities of Practice." },
+    { komise: "2023 — Tahal", otazka: "Kompetenční model KSA + Attitudes — aplikace na PS", pozn: "Bočková ostře sleduje — 4 složky, ne 3 (Attitudes často chybí). Iceberg model. Hire for attitude, train for skills. Aplikace: jaká kompetence firmy chybí, jak rozvinout." },
   ];
 
   const podcastHr9 = { title: "HR 9 — Intelektuální kapitál, kompetenční model", description: "Intelektuální kapitál (Galbraith — 3 složky: lidský/strukturální/vztahový), 3 typy znalostí (explicitní/implicitní/tacitní), kompetenční model KSA + Attitudes (4 složky!), Iceberg model, měření IK (Skandia Navigator/Sveiby Intangible Assets/BSC/Tobinovo Q), strategické kompetence firmy (VRIO), 3 Anetiny subotázky o HR vlivu. Microsoft pod Nadellou, Toyota Master Craftsmen, Apple ecosystem.", audioUrl: null, notebookLmUrl: null };
@@ -13811,6 +13845,8176 @@ function OkruhHr9Panel() {
     />
   );
 }
+
+
+/* ════════════════════════════════════════════════════════
+   LOGISTIKA 1 — Distribuce, distribuční kanály, log. řetězce
+   ════════════════════════════════════════════════════════ */
+function OkruhLog1Panel() {
+  const studySectionsLog1 = [
+    { id: "intro", title: "Distribuce, distribuční kanály — pojmy a kontext", subtitle: "Co je distribuce + 3 hlavní rozhodnutí v MMix", color: BOMBIK.success, emoji: "truck",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Distribuce</b> = veškerá činnost firmy, která dělá produkt fyzicky dostupný zákazníkovi v pravé množství, ve správný čas a na správném místě. Třetí P v 4P marketingovém mixu (Place). Komise <b>Tahal, Kolouchová, Mikovcová</b> tohle chtějí dost rozepsané.
+        </Def>
+        <Tag color={BOMBIK.success}>3 strategická rozhodnutí o distribuci</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "1. KANÁLY", d: "Přímé × nepřímé. Kolik prostředníků. Velkoobchod / maloobchod / agenti." },
+            { c: VSE.warning, t: "2. INTENZITA", d: "Intenzivní × selektivní × exkluzivní. Kolik prodejen v dané oblasti." },
+            { c: VSE.fph, t: "3. ŘÍZENÍ", d: "Push × pull, koordinace, motivace partnerů, řešení konfliktů." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Distribuční systémy — 3 typy</Tag>
+        <Bullet items={[
+          "<b>Přímé cesty:</b> Výrobce → Spotřebitel (e-shop, factory outlet, B2B přímý prodej). Plná kontrola, ale drahé.",
+          "<b>Nepřímé cesty:</b> Výrobce → 1 nebo víc mezičlánků → Spotřebitel. Mezičlánek = velkoobchod, maloobchod, agent.",
+          "<b>Hybridní cesty:</b> Kombinace obojího. Apple (vlastní store + autorizovaní prodejci + e-shop). Nejrozšířenější.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "strategie", title: "Distribuční strategie — intenzivní × selektivní × exkluzivní", subtitle: "3 strategie podle počtu prodejen + push × pull", color: BOMBIK.success, emoji: "chart",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>3 distribuční strategie</b> podle <b>počtu prodejen</b> v dané oblasti. Komise <b>Tahal, Krause, Viktora</b> chtějí <b>výhody a nevýhody</b> intenzivní a exkluzivní strategie — bez tohohle to neudělíš.
+        </Def>
+        <Tag color={BOMBIK.success}>3 strategie distribuce</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "INTENZIVNÍ", d: "Max počet prodejen. Coca-Cola, žvýkačky, baterie. Dostupnost > kontrola. Levné produkty denní potřeby.", v: "+ pokrytí, snadný impulse buy", n: "− cena tlačená dolů, slabá značka" },
+            { c: VSE.warning, t: "SELEKTIVNÍ", d: "Omezený počet vybraných prodejců. Elektronika (Samsung, LG). Mezi intenzivní a exkluzivní.", v: "+ rovnováha pokrytí a kontroly", n: "− stále riziko cenové soutěže" },
+            { c: VSE.danger, t: "EXKLUZIVNÍ", d: "1 prodejce v oblasti. Luxus (Rolex, Ferrari, Louis Vuitton). Kontrola > pokrytí.", v: "+ premium image, vysoké marže", n: "− omezené pokrytí, ztráta zákazníků" },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 6 }}>{b.d}</div>
+              <div style={{ fontSize: 12.5, color: VSE.success, fontFamily: fontSans, fontWeight: 600 }}>{b.v}</div>
+              <div style={{ fontSize: 12.5, color: VSE.danger, fontFamily: fontSans, fontWeight: 600 }}>{b.n}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Push × Pull strategie</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "PUSH (tlačení)", d: "Výrobce tlačí produkt přes distribuční kanál. Promo, slevy, bonusy pro velkoobchody a maloobchody. Cíl: aby prodejci tlačili produkt na zákazníka. Typické pro B2B, neznámé značky, novinky." },
+            { c: VSE.fph, t: "PULL (tahání)", d: "Výrobce komunikuje přímo se spotřebitelem. Reklamou v TV/online vytváří poptávku → zákazník si žádá produkt v obchodě → obchod musí mít na skladě. Coca-Cola, Apple, většina FMCG." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "retezec", title: "Logistický řetězec — Nákup × Výroba × Distribuce", subtitle: "3 bloky log. řetězce + podstata + typy toků", color: BOMBIK.success, emoji: "refresh",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Logistický řetězec</b> spojuje tok surovin s trhem spotřebitelů. Pomáhá při plánování poptávky, výroby, skladování a dodávek. Cílem je efektivně řídit tok zboží i informací mezi jednotlivými články řetězce.
+        </Def>
+        <Tag color={BOMBIK.success}>3 hlavní bloky logistického řetězce</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "1. NÁKUP", d: "Opatřovací logistika. Identifikace potřeby, výběr dodavatele, objednávka, doprava do firmy." },
+            { c: VSE.warning, t: "2. VÝROBA", d: "Produkční (výrobní) logistika. Vnitropodnikový tok materiálu mezi stadii výroby." },
+            { c: VSE.fph, t: "3. DISTRIBUCE", d: "Distribuční logistika. Skladování, doprava, dodání ke konečnému zákazníkovi." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>3 pilíře podstaty řetězce</Tag>
+        <Bullet items={[
+          "<b>Transparentnost</b> (průhlednost) podél celé délky řetězce — dodávková i odbytová situace musí být zřejmá pro všechny podniky.",
+          "<b>Konektivita</b> (propojenost) článků řetězce — schopnost vyměňovat, interpretovat a používat informace s přesahem úseků a funkcí.",
+          "<b>Agilnost partnerů</b> — usilovat o rychlé a cílené dosažení praktických změn na základě získaných informací.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Typy logistických řetězců</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "S PŘETRŽITÝMI TOKY", d: "Doprava, skladování. Velké objednávky, mezisklady, vysoká produktivita. Dodací lhůta charakteristická pro výrobce." },
+            { c: VSE.warning, t: "S KONTINUÁLNÍMI TOKY", d: "Průběžné zásobení dle objednávek. Přizpůsobení aktuální poptávce. Delší doba dodávky." },
+            { c: VSE.fph, t: "SE SYNCHRONNÍMI TOKY", d: "Výroba na základě zakázky, s min. zásobou, automatizace v JIT. Toyota Production System, Kanban." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "integrace", title: "Vertikální × horizontální integrace + konflikty v kanále", subtitle: "Jak řešit vztahy v kanále + výhody/nevýhody integrace", color: BOMBIK.success, emoji: "scale",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Distribuční kanál není vždy spolupráce. <b>Konflikty</b> mezi výrobcem a prodejcem (cena, dostupnost, ostatní značky) jsou běžné. <b>Integrace</b> je jeden ze způsobů řešení.
+        </Def>
+        <Tag color={BOMBIK.success}>2 typy konfliktů v kanále</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "VERTIKÁLNÍ KONFLIKT", d: "Mezi úrovněmi kanálu (výrobce × velkoobchod × maloobchod). Typicky o ceně, dostupnosti, marže. Příklad: výrobce chce vyšší výlohy, maloobchod chce nižší cenu." },
+            { c: VSE.warning, t: "HORIZONTÁLNÍ KONFLIKT", d: "Mezi prodejci stejné úrovně (dva maloobchody se stejnou značkou). Tlak na ceny, akce, výhradnost regionu. Typicky franšízing." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Vertikální integrace — výhody × nevýhody</Tag>
+        <PlusMinus
+          plus={[
+            "Absorpce výkyvů v poptávce — vlastní řízení toků",
+            "Možnost diferenciace produktů, pokrytí segmentů, které konkurence nepokrývá",
+            "Využití reklamy konkurence — když ji slabší článek nepokrývá",
+            "Kontrola nad výslednou cenou pro spotřebitele",
+            "Možnost uplatňovat různou cenovou politiku v různých článcích",
+          ]}
+          minus={[
+            "Vysoké náklady v některých částech hodnotového řetězce",
+            "Nižší flexibilita — přechod na nový trh trvá déle",
+            "Riziko ztráty fokusu (firma musí umět všechno)",
+            "Blokovaný vstup do odvětví — nelze využít specializace",
+          ]}
+        />
+      </div>) },
+
+    { id: "vyzkum", title: "Distribuční výzkum — výběr kanálů + postup", subtitle: "Co zkoumat a jak vybrat DC", color: BOMBIK.success, emoji: "target",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Distribuční výzkum</b> = hodnocení distribuční cesty (DC) podle příjmů zajištěných distributorem, efektivnosti, rozsahu a prodejní cesty na 1 ks z SKU nebo DC. Pozor — <b>Tahal ho nechce</b>, ale ostatní komise (Krause, Mikovcová) o něm chtějí slyšet.
+        </Def>
+        <Tag color={BOMBIK.success}>3 typy distribučního výzkumu</Tag>
+        <Bullet items={[
+          "<b>Výzkum mkt kanálu — AIDA u obchodníka:</b> kdo distribuuje, jak velké, konkurence, sklady, sortiment, kvalita, hodnocení.",
+          "<b>Výzkum trhu — místa distribuce:</b> umístění skladu, image, testování prodejny, mystery shopping, zájmová oblast, kupní potenciál lokality.",
+          "<b>Distri výzkum u distributora:</b> rozsah prodejního sortimentu, disponibilita (možnost objednání, dodání, službu), analýza merchandisingu (POS, shelfy).",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Postup volby DC — 5 kroků</Tag>
+        <Bullet items={[
+          "<b>1. Analýza trhu</b> — potřeba a NCH zákazníků",
+          "<b>2. Stanovení cílů</b> — kritéria pro vyhodnocení DC",
+          "<b>3. Identifikace a hodnocení alternativ</b>",
+          "<b>4. Výběr distribuční strategie</b> — úroveň, prostředníci, organizace (intenzivní/selektivní/exkluzivní)",
+          "<b>5. Řízení distribučních kanálů</b> — motivace partnerů, řešení konfliktů, monitoring",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Další faktory ovlivňující výběr DC</Tag>
+        <Bullet items={[
+          "Povaha výrobku, charakter podmínek, povaha trhu, náklady, prostředí",
+          "Velikost a typ zákazníka (B2B exkluzivní, B2C intenzivní)",
+          "Komplexnost produktu (technický → potřebuje vyškoleného prodejce → selektivní/exkluzivní)",
+          "Životní cyklus výrobku (zaváděcí fáze → exkluzivní, růst → intenzivní)",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "incoterms", title: "Incoterms a outsourcing v distribuci (2PL–5PL)", subtitle: "Mezinárodní pravidla + outsourcing log. služeb", color: BOMBIK.success, emoji: "globe",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Incoterms</b> (International Commercial Terms) = sada 11 mezinárodně uznávaných pravidel, která definují <b>kdo platí dopravu, pojištění, kdo nese riziko</b> přepravy a kde přechází vlastnictví. Vydává <b>Mezinárodní obchodní komora (ICC)</b>, aktuální verze <b>Incoterms 2020</b>.
+        </Def>
+        <Tag color={BOMBIK.success}>4 skupiny Incoterms 2020</Tag>
+        <Bullet items={[
+          "<b>Skupina E (Departure):</b> EXW — Ex Works. Prodávající dá zboží k dispozici v sídle, kupující si bere vše ostatní (doprava, riziko, pojištění). Nejméně závazků pro prodávajícího.",
+          "<b>Skupina F (Main Carriage Unpaid):</b> FCA, FAS, FOB — Prodávající dodá zboží dopravci určenému kupujícím. Kupující platí hlavní dopravu.",
+          "<b>Skupina C (Main Carriage Paid):</b> CFR, CIF, CPT, CIP — Prodávající platí hlavní dopravu, ale riziko přechází na kupujícího při nakládce.",
+          "<b>Skupina D (Arrival):</b> DAP, DPU, DDP — Prodávající nese vše až do dodání kupujícímu. DDP = Delivered Duty Paid (max závazky pro prodávajícího).",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Outsourcing v logistice — 2PL až 5PL</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "2PL — 2nd Party Logistics", d: "Najímá ředitel — jen část dopravy. Klasický speditér. Firma řídí vše, jen outsourcuje vozidla." },
+            { c: VSE.warning, t: "3PL — 3rd Party Logistics", d: "Poskytovatel komplex log. služeb: doprava, skladování, manipulace, administrativa. DHL, UPS, Geis. Mezi aplikační přístup." },
+            { c: VSE.fph, t: "4PL — 4th Party Logistics", d: "Kompletní převzetí řízení log. řetězce. Není jen poskytovatel — řídí, koordinuje, optimalizuje. Ztráta kontroly, ale max specializace." },
+            { c: VSE.danger, t: "5PL — 5th Party Logistics", d: "Vyšší stupeň využití zdrojů — snaha o propojení subjektů 3PL a 4PL v jeden integrovaný systém. Big data, AI, IoT." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Make or Buy Decision — kdy outsourcovat</Tag>
+        <PlusMinus
+          plus={[
+            "Nákladově — outsourcing levnější než vlastní kapacity",
+            "Kapacitně — vlastní kapacity jsou plné",
+            "Kvalitativně — dodavatel zajistí vyšší kvalitu",
+            "Kapitálově — nemáme prostředky na investici",
+            "Know-how — nejsou zkušenosti, know-how",
+            "Právně — produkční práva nelze zajistit nebo jsou drahá",
+            "Rizikově — vlastní výroba přináší rizika (bezpečnost, výrobní)",
+          ]}
+          minus={[
+            "Ztráta kontroly nad částí log. řetězce",
+            "Závislost na partnerovi (lock-in)",
+            "Únik citlivých informací o klientech, objemech",
+            "Případná nižší flexibilita v krizi (dodavatel má svoje priority)",
+            "Riziko zhoršené kvality, pokud partner nedodrží SLA",
+          ]}
+        />
+      </div>) },
+
+    { id: "naklady", title: "Náklady logistického řetězce a klíčové trendy", subtitle: "5 typů nákladů + moderní trendy (digitalizace, ESG)", color: BOMBIK.success, emoji: "coins",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Logistický řetězec generuje <b>5 typů nákladů</b>. Pochopení struktury je klíčové pro <b>optimalizaci</b> a hledání úspor. Trendy jsou jasné: <b>digitalizace</b>, <b>udržitelnost</b>, <b>last mile</b>, <b>e-commerce</b>.
+        </Def>
+        <Tag color={BOMBIK.success}>5 hlavních typů nákladů</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "PROCESNÍ", d: "Administrativa nákupu, papírování, IT systémy, koordinace." },
+            { c: VSE.warning, t: "NÁKUPNÍ", d: "Cena, sjedná, slevy, manipulace na vstupu." },
+            { c: VSE.fph, t: "FINANČNÍ", d: "Držba peněz v zásobách (cost of capital), platební podmínky." },
+            { c: VSE.danger, t: "VÝROBNÍ", d: "Materiál, režie, pracovní síla, údržba strojů." },
+            { c: VSE.success, t: "SKLADOVACÍ", d: "Zásoby, sklady, manipulační technika, pojištění zboží." },
+            { c: VSE.primary, t: "DISTRIBUČNÍ", d: "Balení, doprava, pojištění, last-mile." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Klíčové trendy 2025+</Tag>
+        <Bullet items={[
+          "<b>Digitalizace + IoT:</b> tracking zboží v reálném čase, automatizace skladů (Amazon, Alza), prediktivní analytika.",
+          "<b>Green logistika:</b> ISO 14001, redukce CO₂, elektromobilita, intermodalita (vlak místo kamion), kruhová ekonomika.",
+          "<b>Last mile fokus:</b> 50–70 % nákladů distribuce. Lockery (Zásilkovna), micro-hubs, drony, autonomní rozvážka.",
+          "<b>Resilient SCM:</b> diverzifikace dodavatelů (post-COVID, post-Ukrajina). Žádný single-source. Lokalizace klíčových surovin.",
+          "<b>Lean SCM:</b> JIT, Kanban, eliminace přítěží — minimální zásoby, max efektivita. Toyota model.",
+          "<b>SCM 4.0:</b> AI optimalizace tras (UPS ORION), digitální dvojčata, blockchain pro traceability.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsLog1 = [
+    { term: "Distribuce", def: "Veškerá činnost firmy, která dělá produkt fyzicky dostupný zákazníkovi v pravé množství, na správném místě a ve správný čas. Třetí P (Place) v 4P.", tag: "POJEM" },
+    { term: "Distribuční kanál", def: "Cesta od výrobce ke spotřebiteli. Přímý (e-shop, B2B přímo) × nepřímý (přes velkoobchod, maloobchod, agenta).", tag: "POJEM" },
+    { term: "Intenzivní distribuce", def: "Max počet prodejen v oblasti. Coca-Cola, žvýkačky, baterie. Dostupnost prioritou. + pokrytí / − cenová soutěž.", tag: "STRATEGIE" },
+    { term: "Selektivní distribuce", def: "Vybraní prodejci. Samsung, LG, parfumerie. Mezi intenzivní a exkluzivní. Vyvážená rovnováha.", tag: "STRATEGIE" },
+    { term: "Exkluzivní distribuce", def: "1 prodejce v oblasti. Rolex, Ferrari, LV. Kontrola prioritou. + premium image / − omezené pokrytí.", tag: "STRATEGIE" },
+    { term: "Push strategie", def: "Výrobce tlačí produkt přes kanál — slevy, promo, bonusy prodejcům. Typicky B2B, neznámé značky.", tag: "STRATEGIE" },
+    { term: "Pull strategie", def: "Výrobce komunikuje přímo se spotřebitelem (TV, online), zákazník si žádá produkt v obchodě. Coca-Cola, Apple, FMCG.", tag: "STRATEGIE" },
+    { term: "Logistický řetězec", def: "Spojuje tok surovin s trhem spotřebitelů přes 3 bloky: Nákup (opatřovací) — Výroba (produkční) — Distribuce (distribuční).", tag: "ŘETĚZEC" },
+    { term: "3 pilíře řetězce", def: "Transparentnost (průhlednost), Konektivita (propojenost), Agilnost (rychlé změny na základě informací).", tag: "ŘETĚZEC" },
+    { term: "Řetězec s přetržitými toky", def: "Doprava, skladování, velké objednávky, mezisklady. Vysoká produktivita, ale skladovací náklady.", tag: "TYPY TOKŮ" },
+    { term: "Řetězec s kontinuálními toky", def: "Průběžné zásobení dle aktuální poptávky. Delší doba dodávky.", tag: "TYPY TOKŮ" },
+    { term: "Řetězec se synchronními toky", def: "Výroba na zakázku, min zásoby, automatizace. JIT, Toyota Production System, Kanban.", tag: "TYPY TOKŮ" },
+    { term: "Vertikální konflikt v kanále", def: "Mezi úrovněmi (výrobce × velkoobchod × maloobchod). O ceně, dostupnosti, marže.", tag: "KONFLIKTY" },
+    { term: "Horizontální konflikt", def: "Mezi prodejci stejné úrovně (dva maloobchody se stejnou značkou). Tlak na ceny, výhradnost regionu.", tag: "KONFLIKTY" },
+    { term: "Vertikální integrace", def: "Firma vlastní víc úrovní řetězce (Apple — design + výroba + Apple Store + e-shop). + kontrola / − náklady, fokus.", tag: "INTEGRACE" },
+    { term: "Distribuční výzkum", def: "Hodnocení DC podle příjmů, efektivnosti, rozsahu, prodejní cesty na 1 ks z SKU nebo DC.", tag: "VÝZKUM" },
+    { term: "Postup volby DC (5 kroků)", def: "Analýza trhu → Cíle/kritéria → Hodnocení alternativ → Výběr strategie → Řízení kanálů.", tag: "VÝZKUM" },
+    { term: "Incoterms", def: "Mezinárodní pravidla (11 termínů, verze 2020) definující kdo platí dopravu, pojištění a nese riziko. Vydává ICC.", tag: "INCOTERMS" },
+    { term: "EXW (Ex Works)", def: "Skupina E. Prodávající dá zboží k dispozici v sídle, kupující bere vše. Nejméně závazků pro prodávajícího.", tag: "INCOTERMS" },
+    { term: "DDP (Delivered Duty Paid)", def: "Skupina D. Prodávající nese vše až po dodání kupujícímu. Max závazky pro prodávajícího.", tag: "INCOTERMS" },
+    { term: "FOB / CIF", def: "FOB = Free on Board (skupina F). CIF = Cost, Insurance, Freight (skupina C). Klasika v námořní přepravě.", tag: "INCOTERMS" },
+    { term: "2PL", def: "2nd Party Logistics. Speditér — outsourcing jen části dopravy. Firma stále řídí celý řetězec.", tag: "OUTSOURCING" },
+    { term: "3PL", def: "3rd Party Logistics. Komplex log. služeb — doprava + skladování + manipulace + administrativa. DHL, UPS, Geis.", tag: "OUTSOURCING" },
+    { term: "4PL", def: "4th Party Logistics. Kompletní řízení log. řetězce. Klient ztrácí kontrolu, získává specializaci.", tag: "OUTSOURCING" },
+    { term: "5PL", def: "5th Party Logistics. Propojení 3PL a 4PL přes big data, AI, IoT. Integrovaný systém.", tag: "OUTSOURCING" },
+    { term: "Make or Buy Decision", def: "Rozhodnutí outsourcovat × dělat vlastní. Faktory: cena, kapacita, kvalita, kapitál, know-how, právo, riziko.", tag: "OUTSOURCING" },
+    { term: "Náklady log. řetězce", def: "5 typů: procesní (admin), nákupní, finanční (cost of capital v zásobách), výrobní, skladovací, distribuční.", tag: "NÁKLADY" },
+    { term: "Last mile", def: "Poslední úsek distribuce ke spotřebiteli — 50–70 % nákladů distribuce. Trend: lockery, micro-hubs, drony.", tag: "TRENDY" },
+    { term: "Green SCM", def: "Udržitelná logistika — ISO 14001, redukce CO₂, elektromobilita, intermodalita (vlak místo kamionu), kruhová ekonomika.", tag: "TRENDY" },
+    { term: "Resilient SCM", def: "Odolný řetězec proti turbulencím (COVID, válka). Diverzifikace dodavatelů, lokalizace klíčových surovin, žádný single-source.", tag: "TRENDY" },
+    { term: "JIT (Just-in-Time)", def: "Dodání zboží přesně v čas, kdy je potřeba, žádné pojistné zásoby. Toyota Production System. Riziko: malá odchylka = stop výroby.", tag: "ZÁSOBY" },
+    { term: "Kanban", def: "Kartičky s identifikací produktu, jeho potřeba se mezi sklady mění, řízeno principem pull. Toyota.", tag: "ZÁSOBY" },
+  ];
+
+  const quizLog1 = [
+    { q: "Co je hlavní cíl distribuce v marketing mixu?", opts: ["Snížit cenu", "Dělat produkt fyzicky dostupný zákazníkovi v pravé množství, čas a místě", "Maximalizovat marže prodejců", "Generovat reklamu"], correct: 1 },
+    { q: "Která distribuční strategie maximalizuje počet prodejen?", opts: ["Exkluzivní", "Selektivní", "Intenzivní", "Hybridní"], correct: 2 },
+    { q: "Která distribuční strategie je typická pro Rolex nebo Ferrari?", opts: ["Intenzivní", "Selektivní", "Exkluzivní", "Pull"], correct: 2 },
+    { q: "Co je push strategie?", opts: ["Reklama přímo spotřebiteli", "Výrobce tlačí produkt přes kanál slevy a bonusy prodejcům", "Outsourcing distribuce", "Snížení cen pro spotřebitele"], correct: 1 },
+    { q: "Z kolika hlavních bloků se skládá logistický řetězec?", opts: ["2 (Výroba + Doprava)", "3 (Nákup + Výroba + Distribuce)", "4 (Plánování + Nákup + Výroba + Prodej)", "5"], correct: 1 },
+    { q: "Co jsou 3 pilíře podstaty logistického řetězce?", opts: ["Cena, kvalita, čas", "Transparentnost, konektivita, agilnost", "Doprava, sklad, prodej", "Plánování, nákup, distribuce"], correct: 1 },
+    { q: "Která Incoterms skupina znamená max závazky pro PRODÁVAJÍCÍHO?", opts: ["E (EXW)", "F (FOB)", "C (CIF)", "D (DDP)"], correct: 3 },
+    { q: "Co je 3PL?", opts: ["Speditér — jen doprava", "3rd Party Logistics — komplex služeb: doprava + sklad + manipulace + administrativa", "Vlastní logistika firmy", "5G logistika"], correct: 1 },
+    { q: "Jaký je rozdíl mezi 3PL a 4PL?", opts: ["Nejsou rozdíly", "3PL = poskytovatel komplex služeb. 4PL = kompletní řízení celého log. řetězce (vyšší abstrakce)", "3PL je dražší", "4PL je jen pro malé firmy"], correct: 1 },
+    { q: "Co znamená JIT?", opts: ["Just in Trouble", "Just-in-Time — dodání zboží přesně v čas, žádné pojistné zásoby", "Joint Inventory Tracking", "Job Inventory Test"], correct: 1 },
+    { q: "Která distribuční strategie má nejvyšší marže pro výrobce?", opts: ["Intenzivní (objemy)", "Selektivní", "Exkluzivní (premium image)", "Push"], correct: 2 },
+    { q: "Co je horizontální konflikt v kanále?", opts: ["Mezi výrobcem a velkoobchodem", "Mezi dvěma prodejci stejné úrovně", "Mezi zákazníkem a prodejcem", "Mezi výrobcem a spotřebitelem"], correct: 1 },
+    { q: "Která fáze postupu volby DC je první?", opts: ["Výběr strategie", "Analýza trhu (potřeba a NCH zákazníků)", "Řízení kanálů", "Hodnocení alternativ"], correct: 1 },
+    { q: "Co je last mile?", opts: ["Poslední úsek výroby", "Poslední úsek distribuce ke spotřebiteli — 50–70 % nákladů distribuce", "Cena", "Sklad"], correct: 1 },
+    { q: "Která Incoterms termíny patří do skupiny F?", opts: ["EXW", "FCA, FAS, FOB", "CIF, CFR, CPT", "DAP, DDP"], correct: 1 },
+    { q: "Co je největší riziko outsourcingu logistiky (4PL)?", opts: ["Vyšší náklady vždy", "Ztráta kontroly nad částí log. řetězce + závislost na partnerovi", "Lepší kvalita", "Není riziko"], correct: 1 },
+    { q: "Která firma je etalonem JIT a Kanban?", opts: ["Apple", "Toyota (Toyota Production System)", "Amazon", "Coca-Cola"], correct: 1 },
+  ];
+
+  const praxeLog1 = {
+    caseStudy: {
+      company: "IKEA — etalon vertikální integrace a globálního log. řetězce",
+      subtitle: "Globální značka, lokální distribuce, design log. řetězce v páteři byznysu",
+      content: (<>
+        <b>IKEA</b> je <b>klasický příklad vertikálně integrované firmy</b>, kde logistický řetězec je <b>součást konkurenční výhody</b>, ne náklady. 460 obchodů v 60 zemích, 50 mld. EUR ročně.<br/><br/>
+        <b style={{ color: VSE.success }}>Co dělá IKEA jinak:</b><br/>
+        • <b>Plochá balení</b> (flat-pack) — design produktu navržen tak, aby zabíral min místo v dopravě a skladech. 60–70 % úspora oproti smontovanému nábytku<br/>
+        • <b>Vlastní obchody</b> (B2C přímo) — selektivní distribuce, full kontrola nad zákazníkem<br/>
+        • <b>Vlastní design + výběr dodavatelů</b> — 1600 dodavatelů ve 55 zemích, hard kontrola kvality<br/>
+        • <b>Centrální sklady</b> v každém regionu (32 globálně) — strategická poloha, optimalizace last-mile<br/>
+        • <b>E-commerce + Click & Collect</b> — hybridní cesty od 2018<br/><br/>
+        <b style={{ color: VSE.warning }}>Distribuční strategie IKEA:</b><br/>
+        • <b>SELEKTIVNÍ:</b> jen vlastní obchody + vlastní e-shop. Žádné franšízing (kromě 7 IKEA franchise zemí jako Indonésie, Izrael)<br/>
+        • <b>Pull strategie:</b> globální brand + katalog (300 mil výtisků ročně) → zákazník přijde sám<br/>
+        • <b>Vertikální integrace:</b> design → výroba (Swedwood) → distribuce → prodej → after-sales<br/><br/>
+        <b style={{ color: VSE.fmv }}>Logistický řetězec IKEA:</b><br/>
+        • <b>Toky:</b> kombinace přetržitých (mezisklady) a kontinuálních (just-in-store)<br/>
+        • <b>Konektivita:</b> SAP ERP propojené napříč 60 zeměmi, real-time inventory<br/>
+        • <b>Transparentnost:</b> každý dodavatel vidí prognózu poptávky na 12 týdnů dopředu<br/>
+        • <b>Agilnost:</b> rychlá adaptace v COVIDu — Click & Collect, e-commerce růst +60 % YoY<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> IKEA má <b>nejnižší marže v odvětví</b>, ale díky objemu a integraci je nejziskovější. Příklad, kdy <b>logistika je core competence</b>, ne náklad.
+      </>),
+      lessons: "Komise tohle miluje — IKEA je <b>učebnicový příklad vertikální integrace</b> a strategie distribuce, kde řetězec je <b>konkurenční výhoda</b>. Když máš v PS firmu řešící distribuci, doporuč: <b>selektivní strategii pro premium značku</b>, <b>flat-pack design</b> pro úsporu, <b>centrální sklady</b> regionálně. Pro alternativu zmiň <b>Amazon</b> (logistika jako tech platform), <b>Alzu</b> (lockery, micro-hubs), <b>Zalando</b> (free return — driver loyalty)."
+    },
+    miniExamples: [
+      { tag: "INTENZIVNÍ", color: VSE.fmv, company: "Coca-Cola — globální intenzivní distribuce", content: "20+ milionů prodejních míst globálně. Stejná lahev v Tesco i u Vietnamskýho prodavače. Pull strategie přes globální brand. Distribuční partneři lokálně — bottlers (lokalizace výroby kvůli ceně).<br/><br/><b>Co dělají perfektně:</b> Lokální bottlery (Coca-Cola HBC v ČR), centrální brand, distribuce 24/7." },
+      { tag: "EXKLUZIVNÍ", color: VSE.danger, company: "Rolex — anti-volume strategie", content: "Jen 4000 autorizovaných prodejců globálně, 110 let firma. Žádný e-shop pro koncové zákazníky! Web jen lokátor prodejen. Záměrně omezí nabídku → vznik waiting lists 2–5 let → premium image.<br/><br/><b>Lekce:</b> Někdy je <b>méně více</b>. Tahal tohle miluje — paradox že exkluzivita = vyšší poptávka." },
+      { tag: "PULL", color: VSE.success, company: "Apple — Pull mistrovství", content: "Reklama na iPhone v TV → zákazník přijde do Apple Store nebo na apple.com → koupí. Žádný push do prodejců, jen vlastní kanály + premium retail partneři (CZC, Alza). Kontrola nad zážitkem, ceny netlačí dolů.<br/><br/><b>Lekce:</b> Pull funguje, když máš globální brand. Začínající firma musí push." },
+      { tag: "OUTSOURCING (3PL)", color: VSE.warning, company: "Alza × Geis/DHL — last mile mix", content: "Alza si <b>core logistiku (sklady, robotika) drží in-house</b>, ale <b>last mile outsourcuje</b> (DPD, Zásilkovna, Česká pošta) + vlastní AlzaBox lockery (3000+ v ČR). Hybridní přístup — own + outsource.<br/><br/><b>Lekce:</b> Není nutné outsourcovat všechno. Klíčové funkce in-house, supporting funkce outsource." },
+    ]
+  };
+
+  const examQuestionsLog1 = [
+    { komise: "2026 — Mládková + Kolouchová + Mikan", otazka: "Distribuce, plánování distribuční cesty, logistický řetězec, incoterms, outsourcing", pozn: "Komise chce komplexní obraz: distribuční cesta (přímá × nepřímá), pak postup volby DC (5 kroků), pak typy řetězce (3 bloky + 3 toky), pak Incoterms (4 skupiny E/F/C/D), nakonec outsourcing (2PL–5PL + make or buy)." },
+    { komise: "2025 — Krause + Lorencová + Zamazalová", otazka: "Distribuce, distribuční strategie, distribuční výzkum, logistické řetězce + aplikovat na PS", pozn: "Studenti měli identifikovat 3 strategie (intenzivní/selektivní/exkluzivní + výhody/nevýhody), výzkum (3 typy: kanálu/trhu/distributora), řetězce (3 bloky). Krause chce konkrétní aplikaci — nestačí teorie." },
+    { komise: "2025 — Krause + Viktora + Tahal", otazka: "Řízení marketingových kanálů, logistický řetězec a distribuční výzkum", pozn: "Tahal nechtěl distribuční výzkum — chtěl jen přímé/nepřímé cesty, prostředníci/zprostředkovatelé, intenzivní/selektivní/exkluzivní + hlavně výhody a nevýhody intenzivní a exkluzivní strategie." },
+    { komise: "2025 — Mikovcová + Viktora + Kolouchová", otazka: "Distribuce, řízení distribučních kanálů v marketingu spotřebního zboží, výzkum DC, logistické řetězce", pozn: "Komise se ptala na rozdíl mezi selektivní, exkluzivní a intenzivní strategií. Kolouchová mlčela, Mikovcová vedla. Pro spotřební zboží typicky intenzivní (FMCG) × selektivní (elektronika)." },
+    { komise: "2025 — Nový + Vávra + Heřman", otazka: "Marketingový výzkum, logistika jako KV, log. řetězce a jejich přínosy. Integrace log. řetězce (vertikální)", pozn: "Vávra chtěl explicitně <b>logistiku jako KV</b> + <b>vertikální integraci</b> + její výhody. PS Horská chata — nelo aplikovat plně, ale komise to brala. Klíč: IKEA, Apple, Amazon jako příklady." },
+    { komise: "2025 — Vávra + Lorencová + Krause", otazka: "Distribuce, řízení distribučních kanálů v marketingu spotřebního zboží, výzkum DC, logistické řetězce — Kola", pozn: "Bylo to dost rozepsané. Komise chce strukturovaný výklad: pojem → 3 strategie → push/pull → 3 bloky řetězce → konflikty → výzkum DC. Aplikovat na výrobce kol — pravděpodobně selektivní (kvalita)." },
+  ];
+
+  const podcastLog1 = { title: "Logistika 1 — Distribuce, distribuční kanály, log. řetězce", description: "Distribuce jako P v 4P, 3 strategie (intenzivní/selektivní/exkluzivní), push × pull, logistický řetězec (3 bloky + 3 toky + 3 pilíře), vertikální × horizontální konflikty, distribuční výzkum (5 kroků), Incoterms 2020 (E/F/C/D), outsourcing 2PL–5PL. IKEA, Coca-Cola, Rolex, Apple, Alza.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyLog1 = `
+    <b style="color:#245373">1.</b> Začni definicí distribuce — 3 P v 4P (Place). 3 strategická rozhodnutí: kanály × intenzita × řízení.<br/>
+    <b style="color:#245373">2.</b> 3 typy cest — přímé / nepřímé / hybridní + příklady.<br/>
+    <b style="color:#245373">3.</b> ⚠️ <b>3 distribuční strategie</b> (intenzivní / selektivní / exkluzivní) — Tahal chce výhody A nevýhody!<br/>
+    <b style="color:#245373">4.</b> Push × Pull strategie — kdy která, příklady.<br/>
+    <b style="color:#245373">5.</b> Logistický řetězec — 3 bloky (Nákup × Výroba × Distribuce).<br/>
+    <b style="color:#245373">6.</b> 3 pilíře řetězce — Transparentnost, Konektivita, Agilnost.<br/>
+    <b style="color:#245373">7.</b> 3 typy toků — přetržité / kontinuální / synchronní (JIT).<br/>
+    <b style="color:#245373">8.</b> Vertikální × horizontální konflikt v kanále + integrace (výhody/nevýhody).<br/>
+    <b style="color:#245373">9.</b> Distribuční výzkum — 3 typy (kanál/trh/distributor) + 5 kroků volby DC.<br/>
+    <b style="color:#245373">10.</b> ⚠️ Incoterms 2020 — 4 skupiny E/F/C/D + příklady EXW, FOB, CIF, DDP.<br/>
+    <b style="color:#245373">11.</b> Outsourcing 2PL–5PL + Make or Buy Decision.<br/>
+    <b style="color:#245373">12.</b> 5 typů nákladů řetězce + trendy (digitalizace, green, last mile, resilient).<br/>
+    <b style="color:#245373">13.</b> Aplikace na PS — která strategie (podle typu produktu), kdo prostředníci, jak řídit konflikty.<br/>
+    <b style="color:#245373">14.</b> Příklady firem — IKEA (vertikální), Coca-Cola (intenzivní), Rolex (exkluzivní), Apple (pull), Alza (3PL hybrid).
+  `;
+
+  const caseStudyLog1 = {
+    title: "Roman — CEO BikeForge, českého výrobce horských kol, 60 zaměstnanců, 80 mil. Kč",
+    subtitle: "Identifikuj distribuční problémy a navrhni strategii kanálů + log. řetězce",
+    scenario: "Roman (38 let) vede BikeForge 5 let. Český výrobce premium horských kol s rámem od 80 000 do 250 000 Kč. 60 zaměstnanců — 35 ve výrobě v Brně, 15 v R&D a designu, 10 v marketing/sales. Tržby 80 mil. Kč ročně, růst 12 %. Cílovka: serious amateurs a profi cyklisté, věk 30–55, příjem nad 80k měsíčně.\n\nRoman je technický nadšenec — investoval do vlastního R&D, custom geometrií, ručního lakování. Produkt je výborný, recenze v Bike Magazine a 2024 Eurobike Award. Ale distribuce je rozbitá.\n\nAktuální setup: BikeForge prodává přes 45 cyklistických prodejen po celé ČR (klasická síť), vlastní e-shop (15 % obratu), nemá flagship store. Mezi prodejci nepanuje pořádek — někteří dělají slevy 10 % bez schválení, jiní nedrží na skladě prémiové modely a jen objednávají. Tři velké řetězce (Sportisimo, Decathlon) nás chtějí — Roman váhá. Cyklistické prodejny si stěžují, že velké řetězce by je zničily.\n\nVýrobní problémy: BikeForge si vyrábí rámy sám, ale 90 % komponentů (Shimano, SRAM, Fox) nakupuje z Asie přes 3 dodavatele. Lead time 18 týdnů. Když přišel COVID a pak Ukrajina, dodavky se zpozdily o 8 týdnů, výroba stála 6 týdnů. Po krizi Roman nediverzifikoval — pořád ti samí 3 dodavatelé.\n\nDistribuce ven: BikeForge má vlastní sklad v Brně, kola odesílá přes PPL/DPD. Last mile zoufalý — 3 reklamace ze 10 (poškrábané rámy v dopravě). Skladovací náklady 12 % obratu (zbytečně vysoké — drží 2-měsíční zásobu).\n\nKonkurence: Specialized, Trek, Canyon (D2C model, prodávají jen přes vlastní web) — všichni se rozšiřují. Canyon roste 25 % ročně v EU. Roman přemýšlí, jestli zrušit prodejny a jít D2C, ale bojí se ztráty 85 % obratu, který přes prodejny dělá. Komise chtějí vidět strategický pohled na celý log. řetězec.",
+    signals: [
+      { text: "45 cyklistických prodejen po celé ČR (klasická síť)", color: VSE.warning, reason: "Intenzivní distribuce pro premium produkt. Problém: nekonzistentní zážitek, ztráta kontroly nad cenou. Selektivní by byla lepší — 15-20 vybraných prodejců s certifikací." },
+      { text: "Někteří dělají slevy 10 % bez schválení", color: VSE.danger, reason: "Vertikální konflikt v kanále. Klasický důsledek příliš intenzivní distribuce. Roman ztrácí kontrolu nad cenou, devalvuje brand." },
+      { text: "Tři velké řetězce (Sportisimo, Decathlon) nás chtějí — Roman váhá", color: VSE.danger, reason: "Past intenzivní distribuce — masové řetězce zničí premium brand. Rolex/Ferrari to nikdy nedělají. Roman má pravdu se obávat." },
+      { text: "90 % komponentů z Asie přes 3 dodavatele", color: VSE.danger, reason: "Klasický single-source risk + dlouhý lead time (18 týdnů). Bez resilient SCM. Po COVID/Ukrajina měl Roman diverzifikovat." },
+      { text: "Po krizi Roman nediverzifikoval — pořád ti samí 3 dodavatelé", color: VSE.danger, reason: "Resilient SCM principle ignored. Měl by mít backup dodavatele v EU (Evropa, Tchajwan, ne jen Čína)." },
+      { text: "Last mile zoufalý — 3 reklamace ze 10 (poškrábané rámy)", color: VSE.danger, reason: "Last mile = 50–70 % nákladů distribuce + customer touchpoint. PPL/DPD neumí prémiové zboží. Roman potřebuje specializovaného přepravce nebo vlastní rozvoz v ČR." },
+      { text: "Skladovací náklady 12 % obratu (drží 2-měsíční zásobu)", color: VSE.warning, reason: "Vysoké financial náklady (cost of capital). JIT nebo Kanban by snížil zásoby — ale jen pokud má spolehlivé dodavatele (což nemá). Začarovaný kruh." },
+      { text: "Canyon (D2C model, prodávají jen přes vlastní web) — roste 25 % ročně", color: VSE.warning, reason: "Konkurenční signal — D2C model funguje pro premium kola (Canyon, Cube). Roman by měl uvažovat o hybridu — own e-shop + selektivních prodejcích." },
+      { text: "vlastní e-shop (15 % obratu)", color: VSE.warning, reason: "Slabý e-shop podíl pro premium značku. Canyon = 100 % D2C. Trek = 60 % retail, 40 % D2C. Roman by měl tlačit 30-40 % D2C — vyšší marže, kontrola." },
+    ],
+    quiz1: {
+      question: "Jaká je hlavní problémová strategie BikeForge?",
+      options: [
+        "Selektivní distribuce — výborná pro premium",
+        "Intenzivní distribuce (45 prodejen) — nesoulad s premium pozicí",
+        "Exkluzivní distribuce — příliš omezené pokrytí",
+        "D2C model — to není problém",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Co by Roman měl udělat pro zlepšení distribuce a log. řetězce?",
+      options: [
+        { text: "Přejít na selektivní distribuci — 15–20 certifikovaných prodejců + flagship store v Praze + vlastní e-shop (30 % obratu)", correct: true, reason: "✓ Selektivní strategie sedí premium značce. Méně partnerů = lepší kontrola ceny, vyšší marže, konzistentní zážitek. Canyon, Specialized model." },
+        { text: "Diverzifikovat dodavatele komponentů — backup v EU (Tchajwan, Polsko, Německo) + 6 dodavatelů místo 3", correct: true, reason: "✓ Resilient SCM. Po COVID/Ukrajina je single-source neudržitelný. Lead time klesne z 18 na 8 týdnů, riziko stop výroby pryč." },
+        { text: "Odmítnout Sportisimo a Decathlon — masové řetězce zničí premium brand a vyvolají horizontální konflikt s prodejci", correct: true, reason: "✓ Premium značka nesmí do masových řetězců. Rolex, Apple, Tesla tohle nedělají. Roman má pravdu se obávat." },
+        { text: "Najít specializovaného přepravce na kola nebo zavést vlastní rozvoz v ČR + balení v ochranných boxech (jak dělá Canyon)", correct: true, reason: "✓ Last mile je 50–70 % nákladů a klíčový touchpoint. 3 reklamace ze 10 jsou nepřípustné pro premium. Canyon má vlastní rozvoz v DE." },
+        { text: "Implementovat Kanban + snížit zásoby na 3 týdny (až po diverzifikaci dodavatelů!)", correct: true, reason: "✓ Lean SCM. Sníží náklady z 12 na 4-5 % obratu. Ale podmínka — nejdřív diverzifikovat dodavatele, jinak risk stop výroby." },
+        { text: "Zrušit všechny prodejce a jít plně D2C jako Canyon", correct: false, reason: "✗ Příliš radikální. BikeForge ztratí 85 % obratu před tím, než e-shop naroste. Postupný přesun na 30–40 % D2C." },
+        { text: "Otevřít vlastní výrobu komponentů (Shimano, Fox) v ČR", correct: false, reason: "✗ Vertikální integrace má smysl, ale komponenty jsou commodity s vysokou bariérou (R&D, patenty). Roman by si rozbil byznys." },
+        { text: "Akceptovat Sportisimo a Decathlon — bigger reach = bigger revenue", correct: false, reason: "✗ Klasická intenzifikační past. Premium brand nesmí do masových řetězců. Marže by spadly, brand by se devalvoval." },
+      ],
+    },
+    summary: "<b>BikeForge má intenzivní distribuci v premium segmentu (rozpor) a single-source závislost u komponentů.</b> Klíčem je <b>přechod na selektivní distribuci + diverzifikace SCM</b>.<br/><br/><b>3 vrstvy řešení:</b><br/>• <b>Distribuce:</b> Selektivní strategie (15-20 prodejců) + flagship store v Praze + push na 30-40 % D2C přes vlastní e-shop<br/>• <b>Log. řetězec:</b> Diverzifikace dodavatelů (6 namísto 3, EU + Asie), pak Kanban/JIT pro snížení zásob<br/>• <b>Last mile:</b> Specializovaný přepravce nebo vlastní rozvoz v ČR + ochranné balení pro premium pozici<br/><br/><b>Pro komisi:</b> Klasický rozpor mezi <b>premium produktem a intenzivní distribucí</b>. Roman musí volit — buď premium (Rolex/Canyon model — selektivní/exkluzivní), nebo mass-market (Decathlon partner). Není střed. Resilient SCM je nezbytný po COVID/Ukrajina. Příklady: <b>Canyon (D2C premium), Specialized (selektivní), IKEA (vertikální integrace)</b>.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Logistika" subjectId="logistika" number={1} title="Distribuce, distribuční kanály, log. řetězce"
+      subtitle="3 strategie distribuce + 3 bloky řetězce + Incoterms + outsourcing 2PL–5PL"
+      color={BOMBIK.success}
+      questionText="Distribuce, Řízení distribučních kanálů v marketingu spotřebního zboží, výzkum distribučních kanálů, Distribuční články, Logistické řetězce u výrobních a obchodních podniků."
+      questionDesc="Distribuce jako P v 4P. 3 strategická rozhodnutí (kanály × intenzita × řízení). 3 typy cest (přímé/nepřímé/hybridní). 3 strategie intenzity (intenzivní/selektivní/exkluzivní + V/N). Push × Pull. Logistický řetězec — 3 bloky (Nákup/Výroba/Distribuce), 3 pilíře (Transparentnost/Konektivita/Agilnost), 3 typy toků. Vertikální × horizontální konflikty + integrace. Distribuční výzkum — 3 typy + 5 kroků postupu. Incoterms 2020 — 4 skupiny E/F/C/D. Outsourcing 2PL–5PL + Make or Buy. 5 typů nákladů + trendy. IKEA, Canyon, Coca-Cola, Rolex, Apple, Alza."
+      sloz={2} roz={3} freq={3}
+      examStrategy={examStrategyLog1}
+      studySections={studySectionsLog1}
+      flashcards={flashcardsLog1}
+      quiz={quizLog1}
+      praxe={praxeLog1}
+      examQuestions={examQuestionsLog1}
+      podcast={podcastLog1}
+      caseStudy={caseStudyLog1}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   LOGISTIKA 2 — Marketing služeb, řízení kvality, outsourcing
+   ════════════════════════════════════════════════════════ */
+function OkruhLog2Panel() {
+  const studySectionsLog2 = [
+    { id: "intro", title: "Marketing služeb — co je služba + 4 hlavní charakteristiky", subtitle: "Definice + nehmotnost, neoddělitelnost, proměnlivost, pomíjivost (4N)", color: BOMBIK.success, emoji: "sparkles",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Služba</b> = aktivita nebo užitek, který jedna strana nabízí druhé. Je v zásadě <b>nehmotná</b> a nevzniká žádné vlastnictví. Komise <b>Špaček, Vávra, Mládková</b> tohle chtějí jako úvod — bez 4 charakteristik to neudělíš.
+        </Def>
+        <Tag color={BOMBIK.success}>4N — 4 charakteristiky služeb (klasika!)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "1. NEHMOTNOST (Intangibility)", d: "Službu nelze před koupí vidět, ohmatat, ochutnat, slyšet, voně. Kadeřník, lékař, právník — jen výsledek. Marketing musí vizualizovat: testimonials, certifikáty, prostředí." },
+            { c: VSE.warning, t: "2. NEODDĚLITELNOST (Inseparability)", d: "Služba se vyrábí a spotřebovává současně. Není jako mýdlo (vyrobí se → uskladní → prodá). Lékař ošetří pacienta v tom samém momentě. Vyžaduje osobní přítomnost." },
+            { c: VSE.fph, t: "3. PROMĚNLIVOST (Variability)", d: "Stejná služba se může výrazně lišit kvalitou — kdo, kdy, kde, komu. Stejný kadeřník v pondělí ráno × pátek večer. Standardizace přes procesy a školení." },
+            { c: VSE.danger, t: "4. POMÍJIVOST (Perishability)", d: "Služby nelze skladovat. Prázdné sedadlo v letadle dnes = ztracený příjem. Hotel pokoj, koncertní místo, doktorský slot — všechno mizí v čase." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>+ 2 další (rozšířená sada 6N)</Tag>
+        <Bullet items={[
+          "<b>Nepřevoditelné vlastnictví (No ownership):</b> Zákazník nezíská vlastnictví — jen právo užívat (let, masáž, právní rada).",
+          "<b>Mediadatelnost:</b> Některé služby vyžadují prostředníka (cestovka, broker, agent).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "klasifikace", title: "Klasifikace služeb — Kotler + dělení podle různých kritérií", subtitle: "5 typů produktové nabídky + dělení podle poskytovatele a cíle", color: BOMBIK.success, emoji: "scale",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Kotlerova klasifikace</b> rozdělí <b>5 typů produktové nabídky</b> podle <b>výše hmotné a nehmotné složky</b>. Klíčové pro pochopení, že čistá služba je vzácná — většina je hybrid.
+        </Def>
+        <Tag color={BOMBIK.success}>Kotler — 5 typů nabídky podle hmotnosti</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "1. ČISTÝ HMOTNÝ PRODUKT", d: "Mýdlo, sůl, ocel. Žádná služba. Prodá a hotovo." },
+            { c: VSE.warning, t: "2. HMOTNÝ + DOPROVOD. SLUŽBA", d: "Auto + servis, počítač + technická podpora. Hmota dominuje." },
+            { c: VSE.fph, t: "3. HYBRID", d: "Restaurace — jídlo (hmota) + obsluha (služba). 50/50." },
+            { c: VSE.danger, t: "4. PŘEVAŽUJÍCÍ SLUŽBA + ZBOŽÍ", d: "Hotel (pokoj + jídlo), letecká doprava (let + jídlo). Služba dominuje." },
+            { c: VSE.success, t: "5. ČISTÁ SLUŽBA", d: "Masáž, právní rada, koučink. Žádné fyzické zboží." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Další dělení služeb</Tag>
+        <Bullet items={[
+          "<b>Podle poskytovatele:</b> Lidé (právník, učitel) × Stroje (bankomat, parkovací automat, samoobsluha)",
+          "<b>Podle cíle poskytovatele:</b> Ziskový (banka, restaurace) × Neziskový (vzdělávání, zdravotnictví)",
+          "<b>Podle přítomnosti zákazníka:</b> Vyžaduje (zubař) × Nevyžaduje (čistírna, opravna)",
+          "<b>Podle způsobu dodání:</b> U dodavatele × U zákazníka (mobile services, on-site)",
+          "<b>Podle oblasti podnikání:</b> Doprava, finance, zdravotnictví, vzdělávání, retail, gastronomie...",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "kvalita", title: "Řízení kvality služeb — vnímaná × technická × funkční", subtitle: "3 pohledy na kvalitu + 5 standardů + GAP model", color: BOMBIK.success, emoji: "target",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Kvalita služby</b> je <b>subjektivně vnímaná</b> — záleží jak ji zákazník zažil vs co očekával. Tahal a Špaček chtějí 3 pohledy a 5 standardů.
+        </Def>
+        <Tag color={BOMBIK.success}>3 pohledy na kvalitu služby</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "PŘEDPOKLÁDANÁ", d: "To, co zákazník očekává před koupí. Tvořena reklamou, WOM, minulou zkušeností." },
+            { c: VSE.warning, t: "VNÍMANÁ", d: "To, jak zákazník hodnotí službu během/po spotřebě. Subjektivní." },
+            { c: VSE.success, t: "SKUTEČNĚ POZNANÁ", d: "Objektivní kvalita (procesy, kompetence). Často se liší od vnímané." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Technická × Funkční kvalita (Grönroos)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "TECHNICKÁ — CO", d: "Výsledek služby. Jak dobře zubař vyspravil zub, jak dobrý hotel pokoj. Měřitelné." },
+            { c: VSE.warning, t: "FUNKČNÍ — JAK", d: "Proces dodání. Jak se zubař choval, jak rychle byl pokoj uklizený. Subjektivní." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.success}>5 standardů kvality služeb (klasika)</Tag>
+        <Bullet items={[
+          "<b>Spolehlivost (Reliability):</b> Schopnost poskytnout slibovanou službu spolehlivě a přesně. Letadlo včas, doktor objednaný čas.",
+          "<b>Ochota (Responsiveness):</b> Ochota pomoci zákazníkům a poskytnout rychlou službu. Čekací doba, reakční čas.",
+          "<b>Jistota (Assurance):</b> Znalosti a zdvořilost zaměstnanců + jejich schopnost vzbudit důvěru. Znalý lékař, profesionální advokát.",
+          "<b>Empatie (Empathy):</b> Individuální péče o zákazníky. Zapamatování si jména, preferencí.",
+          "<b>Hmotné prvky (Tangibles):</b> Vzhled prostředí, vybavení, personálu, materiálů. Čistý nemocniční pokoj, moderní vybavení.",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "servqual", title: "GAP analýza + SERVQUAL — měření kvality služeb", subtitle: "5 mezer mezi kvalitními + SERVQUAL nástroj", color: BOMBIK.success, emoji: "scale",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>GAP model</b> (Parasuraman, Zeithaml, Berry, 1985) identifikuje <b>5 mezer (gaps)</b>, kvůli kterým může vzniknout rozdíl mezi <b>očekávanou a vnímanou kvalitou</b>. <b>SERVQUAL</b> je dotazníkový nástroj pro měření.
+        </Def>
+        <Tag color={BOMBIK.success}>5 GAPs — kde vznikají mezery</Tag>
+        <Bullet items={[
+          "<b>GAP 1 — Management nerozumí očekávání zákazníka.</b> Management myslí, že zákazník chce levně, ale chce rychle.",
+          "<b>GAP 2 — Management nepřevede očekávání do specifikací.</b> Ví, že chtějí rychle, ale nezavedl SLA 5 min.",
+          "<b>GAP 3 — Zaměstnanci nedodrží specifikace.</b> SLA 5 min existuje, ale zaměstnanci nemají kapacitu/motivaci.",
+          "<b>GAP 4 — Komunikace neodpovídá realitě.</b> Reklama slibuje VIP servis, realita je standard. Overpromise, underdeliver.",
+          "<b>GAP 5 — Vnímaná kvalita ≠ očekávaná kvalita.</b> Výsledný gap mezi tím, co zákazník čekal a zažil. Dáno GAPy 1-4.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>SERVQUAL — 7 dimenzí pro dotazník</Tag>
+        <Bullet items={[
+          "<b>Spolehlivost</b> (přesnost slibovaného plnění)",
+          "<b>Kompetence</b> (odborné znalosti a dovednosti)",
+          "<b>Ochota</b> (vstřícnost, rychlost reakce)",
+          "<b>Bezpečnost</b> (cítí se zákazník bezpečně)",
+          "<b>Přístupnost</b> (snadnost kontaktu, dosažitelnost)",
+          "<b>Komunikativnost</b> (informování v jazyce zákazníka)",
+          "<b>Porozumění zákazníkovi</b> (individuální péče)",
+          "<b>Dojem — Tangibles</b> (vzhled prostředí, lidí)",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Další metody měření kvality</Tag>
+        <Bullet items={[
+          "<b>Mystery shopping:</b> Falešný zákazník hodnotí službu (řetězce hotelů, banky, retail).",
+          "<b>NPS (Net Promoter Score):</b> Doporučili byste 0-10? % promoters − % detractors.",
+          "<b>CSI (Customer Satisfaction Index):</b> Komplex spokojenosti přes více otázek.",
+          "<b>Vyhodnocení reklamací:</b> Počet, typy, doba řešení, recovery rate.",
+          "<b>Posuzování výsledků mkt studií:</b> Pravidelné průzkumy + benchmarking s konkurencí.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "branding", title: "Branding služeb — proč je značka u služeb klíčová", subtitle: "Funkce značky u nehmotného + 3 strategie", color: BOMBIK.success, emoji: "sparkles",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          U služeb je <b>značka kritičtější</b> než u hmotných produktů, protože <b>nehmotnost = vyšší riziko</b>. Zákazník nevidí, co kupuje, proto se spoléhá na značku. Komise <b>Špaček, Mládková</b> chtějí tohle slyšet explicitně.
+        </Def>
+        <Tag color={BOMBIK.success}>Proč je branding u služeb klíčový</Tag>
+        <Bullet items={[
+          "<b>Snižuje vnímané riziko:</b> Zákazník nevidí službu před koupí. Značka (McDonald's, Marriott, KPMG) říká — víme co dostaneme.",
+          "<b>Vytváří image:</b> Důvěryhodnost, hodnoty, sympatičnost. Klíčové při výběru právníka, lékaře, finanční služby.",
+          "<b>Cenová prémie:</b> Známá značka může účtovat víc. McKinsey × neznámá poradenská firma.",
+          "<b>Loajalita zákazníků:</b> Známá značka = vyšší retention. Banka, telekom, pojišťovna.",
+          "<b>Snižuje cenu komunikace:</b> Word-of-mouth + reputace levnější než reklama.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Prvky značky u služeb</Tag>
+        <Bullet items={[
+          "<b>Volba prvků značky:</b> Logo, slogan, název, barvy — zapamatovatelný motiv. Apple jablko, FedEx šipka v logu.",
+          "<b>Vytváření image:</b> Důvěryhodnost a sympatičnost. Patagonia (environmentální), Volvo (bezpečnost).",
+          "<b>Zhmotnění služby:</b> Fyzické důkazy (certifikáty, kanceláře, uniformy) — kompenzace nehmotnosti.",
+          "<b>Předávání brand strategie:</b> Hierarchie značky a portfolio pro řízení targeting a positioning.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Holistický marketing služeb (Kotler)</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "EXTERNÍ MARKETING", d: "Klasický 4P — produkt, cena, distribuce, propagace SMĚREM K ZÁKAZNÍKOVI. Reklama, slogan, web." },
+            { c: VSE.warning, t: "INTERNÍ MARKETING", d: "Vůči zaměstnancům — trénink, motivace, kultura. Zaměstnanec = první zákazník služby." },
+            { c: VSE.success, t: "INTERAKTIVNÍ MARKETING", d: "Schopnost personálu při obsluze. Touchpoint zaměstnance × zákazníka. Klíč pro proměnlivost." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "diferenciace", title: "Diferenciace služeb + komplementární služby", subtitle: "Jak se odlišit + value-added služby", color: BOMBIK.success, emoji: "sparkles",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Komise <b>Tahal (sanace/plísně)</b> chtěla explicitně <b>diferenciaci výrobku × služby</b>. Komise <b>Stříteský</b> chtěl <b>návaznost na marketingovou strategii</b>. Klíčová oblast.
+        </Def>
+        <Tag color={BOMBIK.success}>10 způsobů diferenciace služeb</Tag>
+        <Bullet items={[
+          "<b>Snadnost objednání:</b> Web, app, telefon, chatbot 24/7. Booking.com, Uber.",
+          "<b>Rychlost dodání:</b> Stejný den (Amazon Prime), do 2 hodin (Wolt), do 30 min (Pizza Express).",
+          "<b>Customizace:</b> Přizpůsobení individuálním požadavkům. Personal training, custom catering.",
+          "<b>Přesnost a péče:</b> Premium prostředí, atentní obsluha. Ritz-Carlton, Mandarin Oriental.",
+          "<b>Digitální zážitek:</b> Self-service, automatizace. Amazon, Netflix, Spotify recommendations.",
+          "<b>Milý personál:</b> Soft skills, kultura, smiling staff. Disney parks, Zappos.",
+          "<b>Empatie:</b> Pochopení zákazníka, individuální přístup. Apple Genius Bar.",
+          "<b>Rady a poradenství:</b> Edukace + doporučení. Apothecary, Sephora consultants.",
+          "<b>Dostupnost:</b> Geografická + časová. Tesco 24/7, urgentní lékař na dovolané.",
+          "<b>Inovativní nabídka:</b> Nové služby, které konkurence nemá. Amazon Go (no checkout).",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Komplementární služby (value-added)</Tag>
+        <Bullet items={[
+          "<b>Rychlost a agilnost:</b> Express servis, on-demand modely. Tesla mobile service, Apple support 24/7.",
+          "<b>Individualizace, customizace:</b> Šitý servis na míru. Private banking, custom Nike sneakers.",
+          "<b>Ekologičnost:</b> Carbon-neutral varianta. DPD GoGreen, ČSOB Sustainable banking.",
+          "<b>Digitální služby:</b> App-only, self-service, online portal. Banking app, ČD app.",
+          "<b>Globální dosažitelnost:</b> Stejná služba kdekoliv. Marriott, AmEx Centurion, Hertz Gold.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "outsourcing", title: "Outsourcing v logistice — Make or Buy + 2PL až 5PL", subtitle: "Kdy outsourcovat + úrovně outsourcingu + problémy", color: BOMBIK.success, emoji: "scale",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Outsourcing v logistice</b> = svěření části nebo celé logistické funkce externímu poskytovateli. Komise <b>Tahal, Mládková, Vávra, Bočková</b> tohle vyžadují vždy — <b>logistika jako služba</b>.
+        </Def>
+        <Tag color={BOMBIK.success}>Make or Buy Decision — kdy outsourcovat</Tag>
+        <PlusMinus
+          plus={[
+            "Nákladově — outsourcing levnější než vlastní kapacity",
+            "Kapacitně — vlastní kapacity jsou plné",
+            "Kvalitativně — dodavatel zajistí vyšší kvalitu (specializace)",
+            "Kapitálově — nemáme prostředky na investici (sklady, technika)",
+            "Know-how — nejsou zkušenosti, know-how",
+            "Právně — produkční práva nelze zajistit nebo jsou drahá",
+            "Rizikově — vlastní výroba/sklady přinášejí rizika",
+          ]}
+          minus={[
+            "Cena je menší než vlastní náklady",
+            "Dodavatel je schopen zajistit vyšší kvalitu",
+            "Vlastní kapacity jsou zaplněné",
+            "Nejsou zajistitelná produkční práva nebo jsou příliš drahá",
+            "Vlastní výroba přináší rizika (bezpečnostní, výrobní)",
+            "Nejsou zkušenosti s řízením podobné výroby",
+          ]}
+        />
+        <Tag color={VSE.warning}>4 úrovně outsourcingu v logistice (2PL–5PL)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "2PL — 2nd Party Logistics", d: "Speditér. Outsourcuji jen část dopravy. Firma řídí vše ostatní, jen pronájem vozidel. ČSAD, klasický přepravce." },
+            { c: VSE.warning, t: "3PL — 3rd Party Logistics", d: "Komplex log. služeb: doprava + skladování + manipulace + administrativa. DHL, UPS, Geis, Dachser. Většina firem volí 3PL." },
+            { c: VSE.fph, t: "4PL — 4th Party Logistics", d: "Kompletní převzetí řízení log. řetězce. Klient ztrácí kontrolu, získává specializaci. IBM, Accenture v B2B." },
+            { c: VSE.danger, t: "5PL — 5th Party Logistics", d: "Propojení 3PL a 4PL v jeden integrovaný systém. Big data, AI, IoT. Amazon Logistics, JD.com." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Typické problémy outsourcingu</Tag>
+        <Bullet items={[
+          "<b>Řízení vztahů:</b> Komunikace s dodavatelem, eskalace, SLA management.",
+          "<b>Smlouvy:</b> SLA, KPI, sankce, exit clauses, ochrana dat.",
+          "<b>Pracovníci:</b> Co s vlastními zaměstnanci? Transfer, propuštění, retraining.",
+          "<b>Kvalita:</b> Dodavatel má vlastní priority, jeho kvalita ≠ naše kvalita.",
+          "<b>Zaměstnanci:</b> Pocit nejistoty, ztráta loyalty, kulturní mismatch.",
+        ]} color={VSE.danger} />
+      </div>) },
+  ];
+
+  const flashcardsLog2 = [
+    { term: "Služba", def: "Aktivita nebo užitek, který jedna strana nabízí druhé. V zásadě nehmotná, nevzniká žádné vlastnictví.", tag: "POJEM" },
+    { term: "Nehmotnost", def: "Službu nelze před koupí vidět, ohmatat, ochutnat. Marketing musí vizualizovat — testimonials, certifikáty.", tag: "4N" },
+    { term: "Neoddělitelnost", def: "Služba se vyrábí a spotřebovává současně. Lékař ošetří pacienta v tom samém momentě.", tag: "4N" },
+    { term: "Proměnlivost", def: "Stejná služba se liší kvalitou — kdo, kdy, kde, komu. Standardizace přes procesy a školení.", tag: "4N" },
+    { term: "Pomíjivost", def: "Služby nelze skladovat. Prázdné sedadlo v letadle dnes = ztracený příjem.", tag: "4N" },
+    { term: "Nepřevoditelné vlastnictví", def: "Zákazník nezíská vlastnictví — jen právo užívat (let, masáž, právní rada).", tag: "4N" },
+    { term: "Mediadatelnost", def: "Některé služby vyžadují prostředníka (cestovka, broker, agent).", tag: "4N" },
+    { term: "Kotler 5 typů nabídky", def: "Čistý hmotný produkt → Hmotný + doprovodné služby → Hybrid → Převažující služba + zboží → Čistá služba.", tag: "KOTLER" },
+    { term: "Čistá služba", def: "Masáž, právní rada, koučink. Žádné fyzické zboží. Nejvyšší riziko nehmotnosti.", tag: "KOTLER" },
+    { term: "Hybrid", def: "Restaurace — jídlo (hmota) + obsluha (služba). 50/50 mix.", tag: "KOTLER" },
+    { term: "Předpokládaná kvalita", def: "To, co zákazník očekává před koupí. Tvořena reklamou, WOM, minulou zkušeností.", tag: "KVALITA" },
+    { term: "Vnímaná kvalita", def: "To, jak zákazník hodnotí službu během/po spotřebě. Subjektivní.", tag: "KVALITA" },
+    { term: "Skutečně poznaná kvalita", def: "Objektivní kvalita (procesy, kompetence). Často se liší od vnímané.", tag: "KVALITA" },
+    { term: "Technická kvalita (Grönroos)", def: "Co — výsledek služby. Jak dobře zubař vyspravil zub. Měřitelné.", tag: "GRÖNROOS" },
+    { term: "Funkční kvalita (Grönroos)", def: "Jak — proces dodání. Jak se zubař choval, rychlost. Subjektivní.", tag: "GRÖNROOS" },
+    { term: "5 standardů kvality", def: "Spolehlivost / Ochota / Jistota / Empatie / Hmotné prvky (Tangibles).", tag: "KVALITA" },
+    { term: "GAP model", def: "Parasuraman, Zeithaml, Berry 1985. 5 mezer mezi očekávanou a vnímanou kvalitou.", tag: "GAP" },
+    { term: "GAP 1", def: "Management nerozumí očekávání zákazníka. Myslí, že chce levně, ale chce rychle.", tag: "GAP" },
+    { term: "GAP 4", def: "Komunikace neodpovídá realitě. Reklama slibuje VIP, realita je standard.", tag: "GAP" },
+    { term: "GAP 5", def: "Výsledná mezera mezi očekávanou a vnímanou kvalitou. Dáno GAPy 1-4.", tag: "GAP" },
+    { term: "SERVQUAL", def: "Dotazníkový nástroj pro měření kvality. 7-8 dimenzí: spolehlivost, kompetence, ochota, bezpečnost, přístupnost, komunikativnost, porozumění, dojem.", tag: "SERVQUAL" },
+    { term: "Mystery shopping", def: "Falešný zákazník hodnotí službu. Banky, hotely, retail řetězce.", tag: "MĚŘENÍ" },
+    { term: "NPS (Net Promoter Score)", def: "Doporučili byste 0-10? % promoters − % detractors. Klíčová metrika loyalty.", tag: "MĚŘENÍ" },
+    { term: "Branding služeb", def: "Snižuje vnímané riziko, vytváří image, umožňuje cenovou prémii, buduje loyalty.", tag: "BRANDING" },
+    { term: "Zhmotnění služby", def: "Fyzické důkazy (certifikáty, prostředí, uniformy) — kompenzace nehmotnosti.", tag: "BRANDING" },
+    { term: "Holistický marketing služeb", def: "Externí (klasický 4P směrem k zákazníkovi) + Interní (vůči zaměstnancům) + Interaktivní (personál × zákazník).", tag: "HOLISTIC" },
+    { term: "Interní marketing", def: "Vůči zaměstnancům — trénink, motivace, kultura. Zaměstnanec = první zákazník služby.", tag: "HOLISTIC" },
+    { term: "Interaktivní marketing", def: "Schopnost personálu při obsluze. Touchpoint zaměstnance × zákazníka.", tag: "HOLISTIC" },
+    { term: "Outsourcing v logistice", def: "Svěření části nebo celé logistické funkce externímu poskytovateli (2PL–5PL).", tag: "OUTSOURCING" },
+    { term: "Make or Buy", def: "Rozhodnutí outsourcovat × dělat vlastní. Faktory: cena, kapacita, kvalita, kapitál, know-how, právo, riziko.", tag: "OUTSOURCING" },
+    { term: "2PL", def: "Speditér — outsourcuji jen část dopravy. Firma řídí vše ostatní. ČSAD klasika.", tag: "OUTSOURCING" },
+    { term: "3PL", def: "Komplex log. služeb. Doprava + skladování + manipulace + administrativa. DHL, UPS, Geis.", tag: "OUTSOURCING" },
+    { term: "4PL", def: "Kompletní řízení log. řetězce. Klient ztrácí kontrolu, získává specializaci.", tag: "OUTSOURCING" },
+    { term: "5PL", def: "Propojení 3PL a 4PL přes big data, AI, IoT. Amazon Logistics, JD.com.", tag: "OUTSOURCING" },
+    { term: "Diferenciace služeb", def: "10 způsobů: snadnost objednání, rychlost dodání, customizace, přesnost, digitální zážitek, milý personál, empatie, rady, dostupnost, inovativní nabídka.", tag: "DIFERENCIACE" },
+  ];
+
+  const quizLog2 = [
+    { q: "Která ze 4N je o tom, že službu nelze před koupí vidět ani ohmatat?", opts: ["Neoddělitelnost", "Nehmotnost", "Proměnlivost", "Pomíjivost"], correct: 1 },
+    { q: "Co znamená neoddělitelnost služby?", opts: ["Nelze ji vidět", "Vyrábí se a spotřebovává současně", "Mění se podle kvality", "Nelze ji skladovat"], correct: 1 },
+    { q: "Co je primárně příklad čisté služby (Kotler 5. kategorie)?", opts: ["Auto + servis", "Restaurace", "Hotel + jídlo", "Masáž, právní rada, koučink"], correct: 3 },
+    { q: "Kdo zavedl rozdíl mezi technickou a funkční kvalitou?", opts: ["Kotler", "Parasuraman", "Grönroos", "Porter"], correct: 2 },
+    { q: "Co je technická kvalita podle Grönroose?", opts: ["Jak — proces dodání", "Co — výsledek služby", "Cena", "Image"], correct: 1 },
+    { q: "Která z 5 standardů kvality znamená individuální péče o zákazníka?", opts: ["Spolehlivost", "Ochota", "Jistota", "Empatie"], correct: 3 },
+    { q: "Kolik GAPs identifikuje GAP model?", opts: ["3", "4", "5", "7"], correct: 2 },
+    { q: "Co je GAP 5?", opts: ["Management nerozumí", "Specifikace chybí", "Zaměstnanci nedodrží", "Výsledná mezera mezi očekávanou a vnímanou kvalitou"], correct: 3 },
+    { q: "Co je SERVQUAL?", opts: ["Druh hodnocení zaměstnanců", "Dotazníkový nástroj pro měření kvality služeb (7-8 dimenzí)", "Logo společnosti", "Pojistka kvality"], correct: 1 },
+    { q: "Proč je značka u služeb klíčovější než u hmotných produktů?", opts: ["Je levnější", "Nehmotnost = vyšší vnímané riziko, značka ho snižuje", "Je vidět", "Je povinná"], correct: 1 },
+    { q: "Co je interní marketing v holistickém modelu?", opts: ["Klasická 4P", "Vůči zaměstnancům — trénink, motivace, kultura", "Reklama v interních médiích", "Internetový marketing"], correct: 1 },
+    { q: "Co je interaktivní marketing?", opts: ["Interaktivní reklama", "Schopnost personálu při obsluze — touchpoint zaměstnance × zákazníka", "Marketing na sociálních sítích", "Direct marketing"], correct: 1 },
+    { q: "Co je 3PL?", opts: ["3 partneři", "3rd Party Logistics — komplex služeb: doprava + sklad + manipulace + administrativa", "3 partyové logo", "3rd Place v rankingu"], correct: 1 },
+    { q: "Jaký je rozdíl mezi 3PL a 4PL?", opts: ["Není rozdíl", "3PL = poskytovatel komplex služeb. 4PL = kompletní řízení celého log. řetězce (vyšší abstrakce)", "3PL je levnější vždy", "3PL je jen pro velké firmy"], correct: 1 },
+    { q: "Které je největší riziko outsourcingu logistiky?", opts: ["Vyšší náklady vždy", "Ztráta kontroly + závislost na dodavateli + jeho priority ≠ naše", "Není riziko", "Lepší kvalita"], correct: 1 },
+    { q: "Co je mystery shopping?", opts: ["Online nákup", "Falešný zákazník hodnotí službu inkognito", "Tajná promo akce", "Slevová akce"], correct: 1 },
+    { q: "Co znamená NPS?", opts: ["Net Profit Score", "Net Promoter Score — % promoters − % detractors", "New Product Service", "National Price Standard"], correct: 1 },
+  ];
+
+  const praxeLog2 = {
+    caseStudy: {
+      company: "Ritz-Carlton — etalon service excellence + Disney Service Quality",
+      subtitle: "Standardy SERVQUAL v praxi + branding služeb",
+      content: (<>
+        <b>Ritz-Carlton</b> je <b>učebnicový případ premium hotelové služby</b>. 100+ hotelů globálně, průměrná cena 800-1500 USD/noc, 95 % retention. Co dělají jinak:<br/><br/>
+        <b style={{ color: VSE.success }}>5 standardů kvality v praxi:</b><br/>
+        • <b>Spolehlivost:</b> Roomservice do 30 min nebo zdarma. Standardizovaný proces.<br/>
+        • <b>Ochota:</b> Každý zaměstnanec smí utratit až <b>2000 USD bez schválení</b> pro vyřešení problému hosta. Empowerment.<br/>
+        • <b>Jistota:</b> Personál proškolen 250 hodin před prvním kontaktem. Hamburger University-style.<br/>
+        • <b>Empatie:</b> CRM si pamatuje preferenci hosta (typ polštáře, alergie, oblíbený nápoj). Re-používá při dalším pobytu.<br/>
+        • <b>Hmotné prvky:</b> Luxusní materiály, mramor, čerstvé květiny denně, parfém v koridorech.<br/><br/>
+        <b style={{ color: VSE.warning }}>Branding služeb v praxi:</b><br/>
+        • Motto: <b>"We are Ladies and Gentlemen serving Ladies and Gentlemen"</b> — značka definuje vztah host × zaměstnanec<br/>
+        • Zlatý lev v logu = stabilita, prestiž, dědictví<br/>
+        • Cena za umístění Ritz-Carlton ve městě = +10-15 % oproti ostatním 5* hotelům<br/>
+        • Loyalty: 80 % hostů se vrací do roka<br/><br/>
+        <b style={{ color: VSE.fmv }}>Holistický marketing v Ritz-Carlton:</b><br/>
+        • <b>Externí:</b> Klasický mkt — luxusní fotky, magazíny, F1 sponzoring<br/>
+        • <b>Interní:</b> Daily lineup — 15 min každé ráno trénink standardů, sdílení historek excellence<br/>
+        • <b>Interaktivní:</b> Personál proškolen v "anticipation" — předvídat potřeby hosta dřív, než požádá<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Ritz-Carlton vyhrál <b>Malcolm Baldrige National Quality Award</b> dvakrát (jediná hotelová síť). NPS přes 75 (norm 30-40), retention 95 %.
+      </>),
+      lessons: "Komise tohle miluje — Ritz-Carlton je <b>učebnicový příklad service excellence</b>. Když máš v PS firmu poskytující služby, doporuč: <b>standardizace přes procesy</b>, <b>empowerment zaměstnanců</b>, <b>memorable rituály</b> (jako daily lineup), <b>CRM pro empatii</b>. Pro alternativu zmiň <b>Disney (Magic Kingdom standards), Zappos (Hire for culture), Apple Genius Bar (technical + soft skills)</b>."
+    },
+    miniExamples: [
+      { tag: "SERVQUAL", color: VSE.fmv, company: "Air New Zealand — 5 standardů", content: "Air NZ má 95 % on-time performance (Spolehlivost), Premium Lounge s personalizovaným servisem (Empatie), perfektně trénovaný personál (Jistota), moderní letadla A350/787 (Tangibles). Letecký Skytrax award 5 let v řadě." },
+      { tag: "OUTSOURCING 3PL", color: VSE.warning, company: "H&M × DHL Supply Chain", content: "H&M outsourcuje 70 % logistiky DHL Supply Chain (3PL). DHL provozuje sklady, picking, last-mile do 60 zemí. H&M se soustředí na design + retail, DHL na logistiku. Klasický win-win.<br/><br/><b>Důsledek:</b> H&M má rychlejší expanzi, DHL má dlouhodobý kontrakt 10+ let." },
+      { tag: "BRANDING SLUŽEB", color: VSE.success, company: "McKinsey — premium consulting brand", content: "McKinsey účtuje 5000+ USD/den/konzultant. Konkurence (Big 4) účtuje 2-3k. Proč zákazníci platí? <b>Značka</b> — McKinsey alumni v Fortune 500, prestigeous projekty, 80% partneři z McKinsey/HBS/Stanford. Klasická cenová prémie u nehmotných služeb." },
+      { tag: "GAP MODEL", color: VSE.danger, company: "United Airlines guitar fiasco (2009)", content: "United zničili kytaru Davea Carrolla, odmítli refund. Carrol napsal song \"United Breaks Guitars\" → 20M views YouTube → akcie −10 % (150M USD market cap). Klasický <b>GAP 4</b> (reklama slibuje care, realita ne) + <b>GAP 5</b> (vnímaná kvalita destruována)." },
+    ]
+  };
+
+  const examQuestionsLog2 = [
+    { komise: "2026 — Špaček + Nový + Machek", otazka: "Služby, charakteristiky, měření kvality služeb, řízení značky služeb, outsourcing v logistice, personální strategie", pozn: "Komplexní výklad — 4N charakteristiky, 5 standardů kvality + SERVQUAL, branding služeb (proč klíčový), outsourcing 2PL–5PL + Make or Buy. Logistiku a personálku student vůbec neřešil — ale podle Anety to chtějí." },
+    { komise: "2025 — Tahal + Kuděj + Nový", otazka: "Marketing služeb, jeho řízení a role distribuce služeb v logistice", pozn: "Tahal chce: 4N + 5 standardů + holistický mkt + role distribuce služeb v logistice (B2B vs B2C, fyzické zhmotnění). PS sanace/plísně/odvlhčování — typický B2B servis." },
+    { komise: "2025 — Vávra + Štamfestová + Mládková", otazka: "Marketing služeb, charakteristiky, řízení značky u služeb, personální přístup, logistika a outsourcing (logistika jako služba)", pozn: "Vávra explicitně chtěl <b>logistiku jako službu</b> + konkretizováno na <b>outsourcing</b>. Klíčové: B2B perspektiva, kvalita SLA, KPI v dodavateli." },
+    { komise: "2025 — Machek + Kolouchová + Legnerová", otazka: "Služby, charakteristiky, řízení značky služeb, outsourcing v logistice, personální strategie", pozn: "Komplex 4 témat. Doporučovaná struktura: 4N → branding (proč klíčový) → outsourcing 2PL–5PL → personální strategie (HR ve službách = interní marketing)." },
+    { komise: "2025 — Špaček + Kučera + Zamazalová", otazka: "Marketing služeb + řízení a měření kvality + branding u služeb jeho význam + Logistika (outsourcing + řízení lidských zdrojů)", pozn: "Velmi rozsáhlá otázka. Začni 4N → kvalita 3 pohledy (předpokládaná/vnímaná/poznaná) → SERVQUAL → branding (důvody) → outsourcing v log → HR v outsourcingu (transfer zaměstnanců)." },
+    { komise: "2025 — Tahal + Kuděj + Nový", otazka: "Rozhodování o výrobku. Marketingová strategie, charakteristiky výrobku. Diferenciace služeb a výrobku.", pozn: "Tahal chce explicitně diferenciaci — 10 způsobů diferenciace služeb. Klíčové porovnání: výrobek (vlastnosti, design) × služba (rychlost, empatie, customizace)." },
+    { komise: "2025 — Mládková + Mareš + Vávra", otazka: "Marketing služeb + logistické systémy (ve vazbě na případovku)", pozn: "PS Horská chata. Mládková chce propojit mkt služeb (hotelové) s log. systémy (zásobování, dodávky surovin pro restauraci). Klíčové: hotel = převažující služba + zboží (Kotler 4. kategorie)." },
+  ];
+
+  const podcastLog2 = { title: "Logistika 2 — Marketing služeb, řízení kvality, outsourcing", description: "Charakteristiky služeb (4N: nehmotnost, neoddělitelnost, proměnlivost, pomíjivost), Kotlerova 5 typů nabídky, 3 pohledy na kvalitu, Grönroos technická × funkční, 5 standardů kvality (Reliability, Responsiveness, Assurance, Empathy, Tangibles), GAP model + SERVQUAL, holistický marketing služeb (externí/interní/interaktivní), branding služeb a 10 způsobů diferenciace, outsourcing v logistice (2PL–5PL + Make or Buy). Ritz-Carlton, McKinsey, Air NZ, H&M × DHL.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyLog2 = `
+    <b style="color:#245373">1.</b> Začni definicí služby a <b>4N charakteristikami</b> (Nehmotnost / Neoddělitelnost / Proměnlivost / Pomíjivost) — klíč pro každou komisi.<br/>
+    <b style="color:#245373">2.</b> Kotlerova klasifikace — 5 typů nabídky podle hmotnosti.<br/>
+    <b style="color:#245373">3.</b> 3 pohledy na kvalitu — předpokládaná × vnímaná × skutečně poznaná.<br/>
+    <b style="color:#245373">4.</b> Grönroos — technická (co) × funkční (jak) kvalita.<br/>
+    <b style="color:#245373">5.</b> ⚠️ 5 standardů kvality — Spolehlivost, Ochota, Jistota, Empatie, Hmotné prvky.<br/>
+    <b style="color:#245373">6.</b> ⚠️ <b>GAP model + SERVQUAL</b> (Špaček + Vávra to chtějí!).<br/>
+    <b style="color:#245373">7.</b> Měření kvality — mystery shopping, NPS, CSI, reklamace.<br/>
+    <b style="color:#245373">8.</b> ⚠️ <b>Branding služeb — proč je značka u služeb klíčová</b> (snižuje riziko z nehmotnosti).<br/>
+    <b style="color:#245373">9.</b> Holistický marketing služeb — Externí / Interní / Interaktivní.<br/>
+    <b style="color:#245373">10.</b> Diferenciace služeb — 10 způsobů + komplementární služby.<br/>
+    <b style="color:#245373">11.</b> ⚠️ <b>Outsourcing v logistice — Make or Buy + 2PL až 5PL</b> (vždy chtějí!).<br/>
+    <b style="color:#245373">12.</b> Problémy outsourcingu — řízení vztahů, smlouvy, pracovníci, kvalita, zaměstnanci.<br/>
+    <b style="color:#245373">13.</b> Aplikace na PS — identifikuj typ služby, navrhni standardy a outsourcing strategii.<br/>
+    <b style="color:#245373">14.</b> Příklady firem — Ritz-Carlton (excellence), McKinsey (premium brand), Air NZ (SERVQUAL), H&M × DHL (3PL), United (GAP 4 catastrofa).
+  `;
+
+  const caseStudyLog2 = {
+    title: "Vendula — CEO ServiCare, české úklidové a facility management firmy, 180 zaměstnanců, 95 mil. Kč",
+    subtitle: "Identifikuj problémy v kvalitě služeb a navrhni branding + outsourcing strategii",
+    scenario: "Vendula (42 let) vede ServiCare 8 let. Česká úklidová a facility management firma — úklid kanceláří, ostraha, drobná údržba. 180 zaměstnanců — 150 v terénu (úklidovky, vrátní, údržbáři), 20 manažeři poboček (Praha/Brno/Ostrava), 10 administrativa. Tržby 95 mil. Kč ročně, růst 8 %. Klienti: 120 firem (kanceláře 50–500 zaměstnanců), 15 nemocnic, 8 školských zařízení.\n\nProblémy se hromadí. Klienti si stěžují, že kvalita úklidu kolísá — někteří uklízejí dobře, jiní špatně. Reklamací 23 za poslední čtvrtletí (z 120 klientů). 5 klientů odešlo (5 mil. Kč ročně). NPS klesl z 32 na 8. Konkurence (ISS Facility Services, Sodexo) získává klienty Venduly.\n\nVendula se snaží — koupila novou techniku (200k Kč), zaplatila reklamu (rádio + Google Ads, 800k Kč/rok), přepracovala web. Ale zákazníci dál odcházejí. Tým jí říká, že problém je v lidech — fluktuace 45 % ročně, mzda na úklidovku 22 000 Kč brutto (trh 28 000). Trénink? Den před prvním shiftem 30 min. Cílí v rozhovorech jen na praxi, ne na soft skills. Žádný daily lineup, žádné pravidelné review.\n\nKlienti, kteří zůstali, si stěžují konkrétně: úklidovka přijde, ale nezdraví. Když rozlije káva, dělá obličej. Nikdo nepamatuje na specifické požadavky (alergeny v nemocnici, časy zasedaček). Manažer pobočky řeší reklamace ad-hoc, žádný proces. Smlouvy se SLAs jsou vágní — „denní úklid kanceláří bez specifikace.\n\nBranding: ServiCare logo z 2008 (modrý štít s nápisem), web vypadá jako z 2015. Marketingové materiály bez konzistence. Klienti vnímají firmu jako commodity (cena ze 3 nabídek). Žádná diferenciace, žádný brand premium.\n\nVendula přemýšlí o 2 cestách: A) Outsourcovat ostrahu a údržbu (jen úklid in-house) — soustředit se na core. B) Plný rebrand + service excellence model (Ritz-Carlton inspirace). Komise chce vidět strategickou volbu.",
+    signals: [
+      { text: "Reklamací 23 za poslední čtvrtletí (z 120 klientů)", color: VSE.danger, reason: "19 % reklamačnost je katastrofa pro služby. Klasický GAP 3 — zaměstnanci nedodrží specifikace + GAP 1 — management nezná očekávání." },
+      { text: "NPS klesl z 32 na 8", color: VSE.danger, reason: "Kritický pokles loyalty. NPS pod 10 = krize. Klíčový externí signal — zákazníci nedoporučí ServiCare ostatním. WOM destruction." },
+      { text: "kvalita úklidu kolísá — někteří uklízejí dobře, jiní špatně", color: VSE.danger, reason: "Klasická proměnlivost (3N) bez řízení. Standardizace přes procesy a školení chybí. Ritz-Carlton model nepoužitý." },
+      { text: "fluktuace 45 % ročně, mzda na úklidovku 22 000 Kč brutto (trh 28 000)", color: VSE.danger, reason: "Interní marketing katastrofa. Levnější mzda → vyšší fluktuace → horší kvalita. Holistic mkt: zaměstnanec = první zákazník. Bez interního mkt není kvalitní service." },
+      { text: "Trénink? Den před prvním shiftem 30 min", color: VSE.danger, reason: "30 min × 250 hodin u Ritz-Carlton = 500× méně. Klasický GAP 3. Standardy nelze splnit bez trénování." },
+      { text: "Cílí v rozhovorech jen na praxi, ne na soft skills", color: VSE.warning, reason: "U služeb (4N proměnlivost) jsou soft skills klíčové. Empatie, ochota, jistota — to zákazník zažívá. Zappos: \"Hire for culture, train for skill\"." },
+      { text: "úklidovka přijde, ale nezdraví. Když rozlije káva, dělá obličej", color: VSE.danger, reason: "Selhání ve standardu Ochota + Empatie. Klasický funkční kvalita problém (Grönroos). Zákazník nezná technickou kvalitu úklidu, ale ví že úklidovka udělala obličej." },
+      { text: "Nikdo nepamatuje na specifické požadavky (alergeny v nemocnici, časy zasedaček)", color: VSE.danger, reason: "Empatie standard selhání + chybí CRM. V Ritz-Carlton si CRM pamatuje vše. Tady ani Excel." },
+      { text: "Smlouvy se SLAs jsou vágní — \"denní úklid kanceláří\" bez specifikace", color: VSE.warning, reason: "Klasický GAP 2 — management ví, co chtějí, ale nepřevedl do specifikací. Bez SLA nelze měřit ani vymáhat kvalitu." },
+      { text: "Klienti vnímají firmu jako commodity (cena ze 3 nabídek)", color: VSE.warning, reason: "Bez brandingu = bez cenové prémie. McKinsey účtuje 5x víc než konkurence díky značce. ServiCare bojuje cenou." },
+      { text: "Branding: ServiCare logo z 2008, web vypadá jako z 2015", color: VSE.warning, reason: "Hmotné prvky (Tangibles — 5. standard) v rozkladu. Zhmotnění služby chybí. Klient nevidí service quality v komunikaci." },
+    ],
+    quiz1: {
+      question: "Která 4N charakteristika je hlavní příčinou problémů ServiCare?",
+      options: [
+        "Nehmotnost — služby nelze vidět",
+        "Neoddělitelnost — vyrábí se a spotřebovává současně",
+        "Proměnlivost — kvalita kolísá podle toho, kdo, kdy, kde",
+        "Pomíjivost — služby nelze skladovat",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Vendula měla udělat pro zlepšení kvality a brandingu ServiCare?",
+      options: [
+        { text: "Zavést SERVQUAL pro pravidelné měření kvality + NPS dotazník po každém měsíci servisu", correct: true, reason: "✓ Bez měření není řízení. SERVQUAL identifikuje slabé dimenze (např. ochotu, empatii). NPS sleduje trend loyalty." },
+        { text: "Zvýšit mzdu úklidovek na 28 000 Kč + investovat 50 hodin trénink (procesy + soft skills) před prvním shiftem", correct: true, reason: "✓ Interní marketing — bez kvalitních zaměstnanců není kvalitní služba. Zappos, Ritz-Carlton model. Sníží fluktuaci ze 45 % na 15 %." },
+        { text: "Specifikovat SLA v každé smlouvě — frekvence úkonů, čas reakce, sankce, KPI", correct: true, reason: "✓ Eliminace GAP 2. Bez SLA nelze měřit ani vymáhat. Klíčové pro B2B služby." },
+        { text: "Implementovat CRM s preferencemi klientů (alergeny, časy, kontaktní osoby) + daily briefing pro úklidovky", correct: true, reason: "✓ Empatie + standardizace v praxi. CRM kompenzuje proměnlivost (různí lidé, stejný service)." },
+        { text: "Rebrand — nové logo, web, uniformy, marketingové materiály + brand strategie premium (ServiCare Pro)", correct: true, reason: "✓ Zhmotnění služby (Tangibles). Premium brand → cenová prémie → vyšší marže → vyšší mzda → lepší lidé. Pozitivní spirála." },
+        { text: "Outsourcovat ostrahu a údržbu (3PL model) — soustředit se na core úklid + ServiCare Pro pro premium klienty", correct: true, reason: "✓ Make or Buy — Vendula nemá expertize v ostraze ani údržbě. Outsourcing umožní fokus + scaling premium úklidu." },
+        { text: "Snížit mzdy aby ušetřila peníze na reklamu", correct: false, reason: "✗ Spirála smrti. Nižší mzdy → vyšší fluktuace → horší kvalita → víc reklamací → odchod klientů. Klasický bottleneck." },
+        { text: "Zavolat všem 120 klientům a slíbit slevu 20 %", correct: false, reason: "✗ Cenová past. Sleva neřeší problém kvality. Klienti uvidí slevu jako přiznání chyby, ale dál budou nespokojení." },
+      ],
+    },
+    summary: "<b>ServiCare bojuje s klasickou kombinací — proměnlivost služeb bez interního marketingu, žádné měření kvality, slabý branding.</b> Klíč je <b>excellence model + outsourcing non-core + premium brand</b>.<br/><br/><b>3 vrstvy řešení:</b><br/>• <b>Kvalita:</b> SERVQUAL měření + 5 standardů (Reliability/Responsiveness/Assurance/Empathy/Tangibles) + SLA v každé smlouvě + CRM s preferencemi<br/>• <b>Lidé:</b> Mzda na trhu (28k+) + 50h trénink (procesy + soft skills) + daily lineup + empowerment. Interní marketing.<br/>• <b>Brand:</b> Rebrand → ServiCare Pro premium + cenová prémie 20 % + outsourcing non-core (ostraha, údržba) přes 3PL partnery<br/><br/><b>Pro komisi:</b> Klasický B2B service business v krizi kvality. <b>Ritz-Carlton model</b> aplikovaný na úklid funguje (Cintas v USA, ISS v EU). <b>Make or Buy</b> rozhodnutí — Vendula nemá expertize v ostraze/údržbě, outsource. <b>Holistický marketing</b> (externí + interní + interaktivní) je klíč — bez zaměstnanců není služba.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Logistika" subjectId="logistika" number={2} title="Marketing služeb, řízení kvality, outsourcing"
+      subtitle="4N charakteristiky + SERVQUAL + branding služeb + outsourcing 2PL–5PL"
+      color={BOMBIK.success}
+      questionText="Marketing služeb, řízení kvality a role distribuce služeb v logistice (outsourcing)."
+      questionDesc="4N charakteristiky služeb (Nehmotnost/Neoddělitelnost/Proměnlivost/Pomíjivost). Kotlerova klasifikace 5 typů nabídky. 3 pohledy na kvalitu (předpokládaná/vnímaná/poznaná). Grönroos technická × funkční kvalita. 5 standardů kvality (Reliability/Responsiveness/Assurance/Empathy/Tangibles). GAP model (5 mezer) + SERVQUAL nástroj. Mystery shopping, NPS, CSI. Branding služeb — proč klíčový (snižuje riziko z nehmotnosti). Holistický marketing služeb (externí/interní/interaktivní). 10 způsobů diferenciace + komplementární služby. Outsourcing v logistice (Make or Buy + 2PL–5PL) + typické problémy. Ritz-Carlton, McKinsey, Air NZ, H&M × DHL, United Airlines anti-vzor."
+      sloz={2} roz={3} freq={3}
+      examStrategy={examStrategyLog2}
+      studySections={studySectionsLog2}
+      flashcards={flashcardsLog2}
+      quiz={quizLog2}
+      praxe={praxeLog2}
+      examQuestions={examQuestionsLog2}
+      podcast={podcastLog2}
+      caseStudy={caseStudyLog2}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   LOGISTIKA 3 — MIS a pohyb informací v logistice, log. systém
+   ════════════════════════════════════════════════════════ */
+function OkruhLog3Panel() {
+  const studySectionsLog3 = [
+    { id: "intro", title: "Informace v marketingu a logistice — proč je klíčová", subtitle: "Definice informace + role v rozhodování + 4 charakteristiky", color: BOMBIK.success, emoji: "lightbulb",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Informace</b> = údaj, který má smysl, význam a přínos pro rozhodování. Komise <b>Vrbová, Špaček, Stříteský</b> chtějí slyšet definici a hlavně <b>roli v rozhodování</b> — bez tohohle to neudělíš.
+        </Def>
+        <Tag color={BOMBIK.success}>Proč jsou informace KV (konkurenční výhoda)</Tag>
+        <Bullet items={[
+          "<b>Rychlost rozhodování:</b> Real-time data → rychlejší reakce na trh než konkurence. Amazon mění ceny milionkrát denně.",
+          "<b>Predikce:</b> AI + big data umí předpovědět poptávku → optimální zásoby, žádné out-of-stock.",
+          "<b>Personalizace:</b> Data o zákazníkovi → individuální nabídka. Netflix doporučení, Spotify Discover Weekly.",
+          "<b>Efektivita:</b> Optimalizace tras (UPS ORION ušetří 100M USD/rok na palivu), JIT bez zásob.",
+          "<b>Transparentnost řetězce:</b> Vidím každý článek řetězce → vím kde je problém → rychlý fix.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>4 charakteristiky kvalitní informace</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "RELEVANCE", d: "Odpovídá na otázku, kterou si kladu. Není to šum. Příklad: data o teplotě v Brně, když plánuji distribuci v Praze, jsou irrelevantní." },
+            { c: VSE.warning, t: "PŘESNOST", d: "Pravdivá, ověřitelná, bez chyb. Garbage in, garbage out — špatná data = špatné rozhodnutí." },
+            { c: VSE.fph, t: "VČASNOST", d: "Dostane se k rozhodovateli včas. Skladové stavy z minulého týdne jsou pro JIT zbytečné." },
+            { c: VSE.success, t: "ÚPLNOST", d: "Nejen kus dat, ale celý obraz. Sales bez informace o vrácení zboží = falešná čísla." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "zdroje", title: "Zdroje informací — primární × sekundární, interní × externí", subtitle: "4 typy zdrojů + kvalitativní × kvantitativní + vyčerpávající × výběrové", color: BOMBIK.success, emoji: "scale",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Informace mají <b>různé zdroje</b>. Komise <b>Špaček (IT firma), Stříteský (Müllerová)</b> chtějí explicitně <b>zdroje a složky</b>. Klíč: rozdělení podle <b>původu</b> a <b>typu</b>.
+        </Def>
+        <Tag color={BOMBIK.success}>2 hlavní osy zdrojů informací</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "PRIMÁRNÍ DATA", d: "Sbírám si je sám pro konkrétní účel. Drahé, ale relevantní. Dotazníky, rozhovory, experimenty, focus group, mystery shopping." },
+            { c: VSE.warning, t: "SEKUNDÁRNÍ DATA", d: "Už existují, sbíral je někdo jiný. Levné, rychlé, ale obecné. Statistiky ČSÚ, EUROSTAT, výzkumy, oborové reporty, vlastní historie." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Interní × Externí (druhá osa)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "INTERNÍ ZDROJE", d: "Z vlastní firmy. Účetnictví, prodejní data, CRM, ERP, HR records. Většinou sekundární (vznikly pro jiný účel)." },
+            { c: VSE.danger, t: "EXTERNÍ ZDROJE", d: "Mimo firmu. ČSÚ, EUROSTAT, oborové studie, sociální sítě, Google Trends, kupované databáze. Mohou být primární nebo sekundární." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Další dělení informací</Tag>
+        <Bullet items={[
+          "<b>Kvalitativní × Kvantitativní:</b> Kvalitativní = popis (proč zákazník koupil), kvantitativní = čísla (kolik prodáno).",
+          "<b>Vyčerpávající × Výběrové:</b> Vyčerpávající = celá populace (drahé). Výběrové = vzorek (statisticky reprezentativní).",
+          "<b>Statické × Dynamické:</b> Statická = bod v čase (rozvaha). Dynamické = vývoj v čase (sales chart).",
+          "<b>Strukturovaná × Nestrukturovaná:</b> Strukturovaná = v databázi (excel, ERP). Nestrukturovaná = volný text, video, sociální média.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "mis", title: "MIS — Marketingový informační systém", subtitle: "Definice + 3 hlavní složky + funkce", color: BOMBIK.success, emoji: "chart",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>MIS (Marketing Information System)</b> = soubor lidí, zařízení a procesů pro <b>sběr, třídění, analýzu a distribuci informací</b> potřebných pro marketingová rozhodnutí. Centralizuje vše do jednoho místa, aby byla data <b>rychle dostupná</b>.
+        </Def>
+        <Tag color={BOMBIK.success}>3 hlavní složky MIS (klasický model Kotler)</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "1. VNITŘNÍ IS", d: "Záznamy o objednávkách, prodejích, cenách, zásobách, pohledávkách. Tvoří se a aktualizují přes ERP, CRM, účetní systém." },
+            { c: VSE.warning, t: "2. MKT ZPRAVODAJSKÝ", d: "Informace o vývoji v tržním prostředí. Konkurence, trendy, regulace. Zdroje: oborové reporty, oborové konference, sales lidé." },
+            { c: VSE.fph, t: "3. MKT VÝZKUM", d: "Systematický sběr, analýza a interpretace dat pro konkrétní marketingový problém. Studie, dotazníky, experimenty." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.success}>4. složka — MDSS (Marketing Decision Support System)</Tag>
+        <Bullet items={[
+          "<b>MDSS</b> = analytický model + statistické nástroje + software → optimalizační algoritmy. Pomáhá manažerovi rozhodnout, ne jen ukázat data.",
+          "<b>Příklad:</b> Optimalizační algoritmus pro alokaci marketingového budgetu mezi 5 kanálů (TV/online/print/PR/event).",
+          "<b>Nástroje:</b> Excel pivot tables → Tableau/Power BI → SAS, R, Python pro pokročilou analýzu.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.danger}>Funkce MIS — proč ho mít</Tag>
+        <Bullet items={[
+          "<b>Hodnocení potřeb informací:</b> Co manažeři potřebují vědět + jaké je rozhodnutí.",
+          "<b>Sběr a zpracování:</b> Sběr ze všech zdrojů (vnitřní, vnější), čištění, formátování.",
+          "<b>Distribuce:</b> Dostane se ke správnému manažerovi v rychlém čase (real-time dashboardy).",
+          "<b>Centralizace:</b> Vše na jednom místě → konzistentní data napříč firmou (single source of truth).",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "logsystem", title: "Logistický systém — definice a procesní pohled", subtitle: "Co je log. systém + procesní řetězec + business procesy", color: BOMBIK.success, emoji: "refresh",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Logistický systém</b> = soubor SW, který souvisí s principem business procesů v logistice. Propojuje <b>nákup → výroba → distribuce → prodej</b> do jednoho integrovaného systému, který sleduje toky materiálů i informací.
+        </Def>
+        <Tag color={BOMBIK.success}>Co řeší logistický systém</Tag>
+        <Bullet items={[
+          "<b>Plánování:</b> Predikce poptávky, plán výroby, plán nákupů, plán distribuce.",
+          "<b>Realizace:</b> Příjem objednávky, výroba, balení, expedice, dodání zákazníkovi.",
+          "<b>Kontrola:</b> Tracking zboží, monitoring KPI (on-time delivery, zásoby, náklady).",
+          "<b>Optimalizace:</b> Trasy, sklady, zásoby, dodavatelé — AI + algoritmy.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Klíčové aspekty integrace</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "INTEGRACE INFORMACÍ", d: "Všechny systémy mluví jedním jazykem (API, datový model). Bez integrace ERP × WMS × TMS si firma rozbíjí data." },
+            { c: VSE.warning, t: "REAL-TIME PROVOZ", d: "Změna zásoby v Brně se okamžitě zobrazí v centrále i e-shopu. Bez delay." },
+            { c: VSE.fph, t: "AUTOMATIZACE PROCESŮ", d: "Workflow — objednávka → automatický pick → automatický balení → automatický expedition label. Méně lidských chyb." },
+            { c: VSE.success, t: "ANALYTIKA + BI", d: "Reporting a predikce. Co se prodává? Co se vrací? Které trasy nejdražší? Vidíme čísla v reálném čase." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "erp_wms_tms", title: "ERP, WMS, TMS, MES — hlavní typy IS v logistice", subtitle: "Co dělá který systém + příklady SAP, Oracle, ASW", color: BOMBIK.success, emoji: "tools",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Komise <b>Tahal, Stříteský, Špaček</b> chtějí explicitně <b>4 hlavní typy IS</b>. Bez ERP / WMS / TMS / MES to neudělíš. Tahal navíc dodá: "Google Analytics mu nestačí" — chce konkrétní enterprise systémy.
+        </Def>
+        <Tag color={BOMBIK.success}>4 hlavní typy IS v logistice</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "ERP — Enterprise Resource Planning", d: "Plánování podnikových zdrojů (kapacity, zásoby, finance, HR). Každé oddělení má aplikaci → propojí se. Automatizace nákupních procesů. SAP, Oracle, Microsoft Dynamics, Helios, Money S5." },
+            { c: VSE.warning, t: "WMS — Warehouse Management System", d: "Sleduje příchod a odchod zboží/materiálu z/do skladu. Automatizace skladových procesů, optimalizace tras skladníka, FIFO/LIFO. Manhattan, Blue Yonder, Reflex, SAP EWM." },
+            { c: VSE.fph, t: "TMS — Transport Management System", d: "Systém pro řízení dopravy. Vazba na ERP a WMS, navrhuje optimální trasy pro závozy. Mercurgate, MercuryGate, BluJay, Oracle OTM." },
+            { c: VSE.success, t: "MES — Manufacturing Execution System", d: "Detailní plánování a řízení výroby. Automatizace výroby, propojeno na ERP. Sběr dat, řízení výrobní zakázky, materiálu. Siemens Opcenter, GE Proficy, Wonderware." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Jak fungují spolu — integrovaný stack</Tag>
+        <Bullet items={[
+          "<b>ERP</b> je centrální mozek — má účetnictví, zakázky, plány. Ostatní s ním komunikují přes API.",
+          "<b>WMS</b> řídí sklad fyzicky — řekne skladníkovi jaký box vzít, kam dát, kdy odeslat. Reportuje stavy do ERP.",
+          "<b>TMS</b> plánuje dopravu — optimalizuje trasy z WMS výstupů. ERP fakturuje, TMS organizuje, WMS expeduje.",
+          "<b>MES</b> řídí výrobní halu — sleduje stroj po stroji, kolik vyrobeno, jaká vada. Reportuje do ERP.",
+          "<b>Hybridní systémy:</b> Některé moderní řešení (SAP S/4HANA, Microsoft Dynamics 365) integrují ERP + WMS + TMS do jednoho.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "bi", title: "BI a analytické nástroje — historie, současnost, predikce", subtitle: "Business Intelligence + data warehouse + AI/ML v logistice", color: BOMBIK.success, emoji: "lightbulb",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>BI (Business Intelligence)</b> = sada nástrojů pro <b>analýzu dat</b> z různých systémů (ERP, WMS, TMS, CRM) a jejich <b>prezentaci ve formě reportů, dashboardů a predikcí</b>. Tahal explicitně chce slyšet, že Google Analytics nestačí — BI je o enterprise úrovni.
+        </Def>
+        <Tag color={BOMBIK.success}>3 úrovně analýzy v BI</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "HISTORICKÁ", d: "Co se stalo? Reporty z minulosti. Tržby Q1, vrácené zboží, počet zásilek. Excel pivot, Tableau dashboard." },
+            { c: VSE.warning, t: "SOUČASNÁ", d: "Co se právě děje? Real-time dashboardy. Live status zásob, online sales, aktuální polohy kamionů." },
+            { c: VSE.success, t: "PREDIKTIVNÍ", d: "Co se stane? AI + ML modely. Predikce poptávky, optimalizace cen, risk scoring. Amazon, Netflix, UPS." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Klíčové nástroje BI</Tag>
+        <Bullet items={[
+          "<b>Data warehouse:</b> Centralizované úložiště všech dat z firemních systémů. Snowflake, Amazon Redshift, Google BigQuery.",
+          "<b>ETL nástroje:</b> Extract, Transform, Load — přesun dat ze systémů do warehouse. Informatica, Talend, Apache Airflow.",
+          "<b>Vizualizace:</b> Tableau, Power BI, Looker, Qlik. Dashboardy pro management.",
+          "<b>AI/ML platformy:</b> Databricks, Azure ML, Google Vertex AI. Predikce, anomaly detection, optimalizace.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Aplikace AI/ML v logistice (2025+)</Tag>
+        <Bullet items={[
+          "<b>UPS ORION:</b> AI optimalizace tras — ušetří 100M+ USD ročně na palivu a čase.",
+          "<b>Amazon prediction:</b> ML model předpoví, co zákazník chce, ještě před objednávkou (\"anticipatory shipping\").",
+          "<b>DHL Resilience360:</b> AI sleduje globální risk faktory (počasí, politika, výpadky) a doporučuje alternativní trasy.",
+          "<b>Walmart restocking:</b> AI sleduje regály v reálném čase, predikuje vyprodání, automaticky objedná.",
+          "<b>Tesla manufacturing:</b> MES + AI optimalizace výroby — zachytí vadu okamžitě, ne až při finální kontrole.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "trendy", title: "Trendy a budoucnost informačních systémů v logistice", subtitle: "Cloud, IoT, blockchain, digital twins, edge computing", color: BOMBIK.success, emoji: "bolt",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Logistika prochází <b>digitální transformací</b>. Mladí komisaři (Bočková, Tahal, Stříteský) o tom rádi slyší — ukazuje to, že umíš víc než teorii z učebnic.
+        </Def>
+        <Tag color={BOMBIK.success}>5 klíčových trendů 2025+</Tag>
+        <Bullet items={[
+          "<b>Cloud-first ERP:</b> Místo on-premise serveru → cloud (SAP S/4HANA Cloud, Oracle Cloud ERP, Microsoft Dynamics 365). Rychlejší upgrades, menší IT náklady, škálovatelnost.",
+          "<b>IoT senzory:</b> RFID/GPS/teplotní senzory na zboží → real-time tracking. Důležité pro chladící řetězec (potraviny, léky, vakcíny).",
+          "<b>Blockchain pro traceability:</b> Maersk + IBM TradeLens — sleduje kontejnery napříč celým světem. Walmart sleduje původ potravin (food safety).",
+          "<b>Digital twins:</b> Virtuální kopie skladu/výrobní linky. Testuju změny v simulaci dřív, než to nasadím v reálu. BMW, Tesla, DHL.",
+          "<b>Edge computing:</b> Zpracování dat přímo na místě (sklad, kamion), ne v cloudu. Rychlejší rozhodování bez delay (autonomní stroje, AGV).",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Výzvy implementace IS v logistice</Tag>
+        <Bullet items={[
+          "<b>Cena:</b> ERP implementace 5–50 mil. Kč pro střední firmu. 2-5 let payback.",
+          "<b>Změnové řízení:</b> Lidé musí změnit zvyky. 70 % ERP projektů selže na change managementu, ne na technologii.",
+          "<b>Integrace:</b> Stará data, legacy systémy, různé formáty. Data cleansing před migrací = 50 % projektu.",
+          "<b>Dovednosti:</b> Chybí lidé. SAP konzultant 150k Kč/den. Databricks data engineer 200k+ měsíčně.",
+          "<b>Security:</b> Cyberattacks na log. firmy rostou (Maersk 2017 ransomware → 300M USD ztráta). Zero-trust security stačí.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsLog3 = [
+    { term: "Informace", def: "Údaj, který má smysl, význam a přínos pro rozhodování. Klíčová konkurenční výhoda v dnešní logistice.", tag: "POJEM" },
+    { term: "4 charakteristiky kvalitní informace", def: "Relevance / Přesnost / Včasnost / Úplnost. Bez všech 4 je informace nepoužitelná pro rozhodování.", tag: "POJEM" },
+    { term: "Primární data", def: "Sbírám si je sám pro konkrétní účel. Drahé, ale relevantní. Dotazníky, focus group, experimenty, mystery shopping.", tag: "ZDROJE" },
+    { term: "Sekundární data", def: "Už existují, sbíral je někdo jiný. Levné, rychlé, ale obecné. ČSÚ, EUROSTAT, oborové reporty, vlastní historie.", tag: "ZDROJE" },
+    { term: "Interní zdroje", def: "Z vlastní firmy. ERP, CRM, účetnictví, prodejní data, HR records. Většinou sekundární (jiný účel).", tag: "ZDROJE" },
+    { term: "Externí zdroje", def: "Mimo firmu. ČSÚ, EUROSTAT, sociální sítě, Google Trends, kupované databáze, oborové studie.", tag: "ZDROJE" },
+    { term: "Kvalitativní data", def: "Popis, kontext, motivace. Proč zákazník koupil? Z dotazníků, rozhovorů, focus groups.", tag: "TYPY" },
+    { term: "Kvantitativní data", def: "Čísla, statistiky. Kolik prodáno, jaká marže. Z ERP, e-shopu, CRM.", tag: "TYPY" },
+    { term: "MIS", def: "Marketing Information System — soubor lidí, zařízení a procesů pro sběr, třídění, analýzu a distribuci informací pro mkt rozhodování.", tag: "MIS" },
+    { term: "3 složky MIS (Kotler)", def: "Vnitřní IS (záznamy) + Marketingový zpravodajský (info o prostředí) + Marketingový výzkum (systematický sběr pro konkrétní problém).", tag: "MIS" },
+    { term: "MDSS", def: "Marketing Decision Support System — 4. složka MIS. Analytický model + statistické nástroje pomáhající rozhodnout, ne jen ukázat data.", tag: "MIS" },
+    { term: "Mkt zpravodajský systém", def: "Soubor postupů a zdrojů pro získávání informací o vývoji v tržním prostředí. Konkurence, trendy, regulace.", tag: "MIS" },
+    { term: "Funkce MIS", def: "Hodnocení potřeb / Sběr a zpracování / Distribuce / Centralizace (single source of truth).", tag: "MIS" },
+    { term: "Logistický systém", def: "Soubor SW, který souvisí s principem business procesů v logistice. Propojuje nákup → výroba → distribuce → prodej.", tag: "LOG. SYSTÉM" },
+    { term: "ERP", def: "Enterprise Resource Planning — plánování podnikových zdrojů (kapacity, zásoby, finance, HR). SAP, Oracle, Dynamics, Helios.", tag: "ERP" },
+    { term: "ERP funkce", def: "Plánování zdrojů, automatizace nákupních procesů, propojení oddělení, centrální datová báze. Mozek logistiky.", tag: "ERP" },
+    { term: "WMS", def: "Warehouse Management System — sleduje příchod a odchod zboží ze skladu. Optimalizace skladových procesů, FIFO/LIFO. Manhattan, Blue Yonder.", tag: "WMS" },
+    { term: "TMS", def: "Transport Management System — řízení dopravy, vazba na ERP a WMS, navrhuje optimální trasy. MercuryGate, Oracle OTM, BluJay.", tag: "TMS" },
+    { term: "MES", def: "Manufacturing Execution System — detailní plánování a řízení výroby, propojeno na ERP. Sběr dat, řízení výroby. Siemens Opcenter, GE Proficy.", tag: "MES" },
+    { term: "Integrovaný stack", def: "ERP centrální mozek + WMS sklad + TMS doprava + MES výroba. Komunikují přes API. Moderní (S/4HANA) integruje vše do jednoho.", tag: "INTEGRACE" },
+    { term: "BI", def: "Business Intelligence — sada nástrojů pro analýzu dat z různých systémů a jejich prezentaci v reportech, dashboardech, predikcích.", tag: "BI" },
+    { term: "3 úrovně BI analýzy", def: "Historická (co se stalo) / Současná (co se děje teď) / Prediktivní (co se stane — AI/ML modely).", tag: "BI" },
+    { term: "Data warehouse", def: "Centralizované úložiště dat z firemních systémů pro analýzu. Snowflake, Amazon Redshift, Google BigQuery.", tag: "BI" },
+    { term: "ETL", def: "Extract, Transform, Load — přesun dat ze zdrojových systémů do data warehouse. Informatica, Talend, Apache Airflow.", tag: "BI" },
+    { term: "AI/ML v logistice", def: "Predikce poptávky, optimalizace tras, anomaly detection. UPS ORION (úspora 100M USD/rok), Amazon anticipatory shipping.", tag: "AI" },
+    { term: "Cloud-first ERP", def: "Trend 2025+. SAP S/4HANA Cloud, Oracle Cloud ERP, MS Dynamics 365. Rychlejší upgrades, menší IT náklady.", tag: "TRENDY" },
+    { term: "IoT v logistice", def: "RFID/GPS/teplotní senzory na zboží. Real-time tracking, klíčové pro chladící řetězec (potraviny, léky).", tag: "TRENDY" },
+    { term: "Blockchain pro traceability", def: "Sleduje původ a pohyb zboží. Maersk + IBM TradeLens (kontejnery), Walmart food safety.", tag: "TRENDY" },
+    { term: "Digital twin", def: "Virtuální kopie skladu/linky. Testuju změny v simulaci dřív, než nasadím v reálu. BMW, Tesla, DHL.", tag: "TRENDY" },
+    { term: "Edge computing", def: "Zpracování dat přímo na místě (sklad, kamion), ne v cloudu. Rychlejší rozhodování (AGV, autonomní stroje).", tag: "TRENDY" },
+    { term: "Výzvy ERP implementace", def: "Cena (5–50 mil. Kč), change management (70 % projektů selže na lidech), integrace legacy systémů, chybí lidé, security.", tag: "VÝZVY" },
+    { term: "Single source of truth", def: "Princip — všechna data v jednom místě, konzistentní napříč firmou. Klíč MIS i ERP.", tag: "INTEGRACE" },
+  ];
+
+  const quizLog3 = [
+    { q: "Co je hlavní rozdíl mezi daty a informací?", opts: ["Není rozdíl", "Informace = data, která mají smysl a přínos pro rozhodování", "Data jsou kvantitativní, informace kvalitativní", "Informace jsou online, data offline"], correct: 1 },
+    { q: "Které ze 4 charakteristik kvalitní informace znamená včasné dodání?", opts: ["Relevance", "Přesnost", "Včasnost", "Úplnost"], correct: 2 },
+    { q: "Co jsou primární data?", opts: ["První data v databázi", "Sbírám si je sám pro konkrétní účel (dotazníky, experimenty)", "Nejstarší data", "Data z primárního trhu"], correct: 1 },
+    { q: "ČSÚ a EUROSTAT jsou příklady:", opts: ["Primárních interních dat", "Sekundárních externích dat", "Primárních externích dat", "Sekundárních interních dat"], correct: 1 },
+    { q: "Kolik složek má klasický MIS model (Kotler)?", opts: ["2", "3 (vnitřní IS + zpravodajský + výzkum)", "4 (+ MDSS)", "5"], correct: 1 },
+    { q: "Co je MDSS?", opts: ["Mass Data Storage System", "Marketing Decision Support System — analytický model + statistické nástroje", "Marketing Database Survey Software", "Mobile Distribution Service"], correct: 1 },
+    { q: "Co dělá ERP?", opts: ["Jen účetnictví", "Plánování podnikových zdrojů — kapacity, zásoby, finance, HR. Centrální mozek firmy.", "Jen sklady", "Jen dopravu"], correct: 1 },
+    { q: "Co dělá WMS?", opts: ["Warehouse Marketing System", "Warehouse Management System — řídí příchod a odchod zboží ze skladu, optimalizuje sklady", "Web Management Service", "Workplace Monitoring System"], correct: 1 },
+    { q: "Co dělá TMS?", opts: ["Time Management System", "Transport Management System — řídí dopravu, optimalizace tras", "Tax Management System", "Team Management System"], correct: 1 },
+    { q: "Co dělá MES?", opts: ["Marketing Excellence System", "Manufacturing Execution System — detailní plánování a řízení výroby", "Mobile Enterprise Service", "Money Exchange System"], correct: 1 },
+    { q: "Jaká je vazba mezi ERP a WMS?", opts: ["Nesouvisí", "WMS reportuje skladové stavy do ERP, ERP řídí zakázky a fakturaci", "WMS je nadřazený ERP", "Jsou identické"], correct: 1 },
+    { q: "Co je BI (Business Intelligence)?", opts: ["Druh investice", "Sada nástrojů pro analýzu dat z různých systémů a jejich prezentaci v reportech/dashboardech", "Sledování konkurence", "Business plán"], correct: 1 },
+    { q: "Co je data warehouse?", opts: ["Datový sklad pro fyzická data", "Centralizované úložiště dat z firemních systémů pro analýzu (Snowflake, BigQuery)", "Cloudový backup", "Web stránka"], correct: 1 },
+    { q: "Co znamená ETL?", opts: ["Enterprise Technology Layer", "Extract, Transform, Load — přesun dat ze zdrojů do data warehouse", "European Tech License", "Energy Transfer Logic"], correct: 1 },
+    { q: "Která firma proslula AI optimalizací tras (úspora 100M USD/rok)?", opts: ["Amazon", "UPS (ORION)", "Microsoft", "Tesla"], correct: 1 },
+    { q: "Co je digital twin?", opts: ["AI chatbot", "Virtuální kopie skladu/linky pro simulaci změn před nasazením", "Dvojí backup", "Digitální podpis"], correct: 1 },
+    { q: "Proč selhává 70 % ERP projektů?", opts: ["Technologie nefunguje", "Change management — lidé se brání změnám zvyků", "Vysoká cena", "Není dostupné internet"], correct: 1 },
+  ];
+
+  const praxeLog3 = {
+    caseStudy: {
+      company: "Amazon — etalon datově řízené logistiky a anticipatory shipping",
+      subtitle: "Integrace ERP + WMS + TMS + AI/ML predikce v praxi",
+      content: (<>
+        <b>Amazon</b> je <b>globální etalon datově řízené logistiky</b>. 500+ skladů (fulfillment centers) globálně, 1.6 mld. zákazníků, 18 % světového e-commerce trhu. Data jsou v jádru firmy.<br/><br/>
+        <b style={{ color: VSE.success }}>Amazon integrated stack:</b><br/>
+        • <b>ERP:</b> Vlastní postavený systém (ne SAP/Oracle), na míru pro masivní škálovatelnost<br/>
+        • <b>WMS:</b> Amazon Robotics (Kiva) — autonomní roboti přinášejí regály k pickerovi. 350 000+ robotů ve skladech<br/>
+        • <b>TMS:</b> Amazon Logistics — vlastní flotila (Prime Air, vans, Rivian elektro), plus 3PL partneři (UPS, FedEx)<br/>
+        • <b>MES:</b> Amazon Devices (Kindle, Echo) — vlastní výroba s předikcí kvality<br/>
+        • <b>BI:</b> AWS Redshift data warehouse + AWS QuickSight dashboardy<br/><br/>
+        <b style={{ color: VSE.warning }}>Anticipatory shipping (2014 patent):</b><br/>
+        • AI model predikuje, co zákazník bude chtít, <b>ještě před objednávkou</b><br/>
+        • Zboží se přesune do nejbližšího fulfillment centra <b>preventivně</b><br/>
+        • Když zákazník objedná, doručení je za hodiny (Prime Now), ne dny<br/>
+        • Vstup do modelu: nákupní historie, search history, čas na položce, wishlist, sezóna, region<br/><br/>
+        <b style={{ color: VSE.fmv }}>3 úrovně BI v Amazonu:</b><br/>
+        • <b>Historická:</b> Tržby po dnech, kategoriích, regionech (real-time pro CFO)<br/>
+        • <b>Současná:</b> Live status skladů, zásoby, kamiony (Amazon NOC dashboard)<br/>
+        • <b>Prediktivní:</b> Demand forecasting, dynamic pricing (cena se mění milionkrát denně), risk scoring<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Amazon má <b>nejnižší fulfillment cost na transakci v branži</b> (3-4× lepší než klasický e-commerce). Akcie 1500× růst za 25 let. Logistika je core competence + KV.
+      </>),
+      lessons: "Komise tohle miluje — Amazon je <b>učebnicový příklad informačního systému jako KV</b>. Když máš v PS firmu s logistickými problémy, doporuč: <b>integrovaný stack (ERP + WMS + TMS)</b>, <b>data warehouse + BI dashboardy</b>, <b>AI predikci poptávky</b>, <b>real-time tracking</b>. Pro alternativu zmiň <b>Alza (česká cesta, AlzaBox lockery), Walmart (AI restocking), UPS (ORION optimalizace), DHL Resilience360</b>."
+    },
+    miniExamples: [
+      { tag: "ERP", color: VSE.fmv, company: "Maersk × SAP S/4HANA", content: "Maersk (největší kontejnerová přepravce světa) v 2019 nasadil SAP S/4HANA Cloud. 3 roky implementace, 1 mld. USD náklady, ale jednotná data napříč 130+ zeměmi. Před tím 50+ regionálních systémů, žádná konsolidace. Po nasazení: real-time visibility, 15 % úspora na admin nákladech." },
+      { tag: "WMS", color: VSE.warning, company: "Alza × vlastní WMS", content: "Alza si postavila <b>vlastní WMS</b> (ne Blue Yonder ani Manhattan). Důvody: rychlejší development, plná kontrola, lower TCO. Sklad v Praze odbaví <b>3M+ zásilek měsíčně</b>, picking automatizovaný. Český příklad in-house IS." },
+      { tag: "BI + AI", color: VSE.success, company: "Walmart AI restocking", content: "Walmart v 4700 obchodech USA má AI sledující regály v reálném čase (kamery + image recognition). Predikuje vyprodání 24h dopředu, automaticky objedná u dodavatele. Vrátky o 30 % méně, dostupnost o 15 % vyšší. Příklad AI v retail logistice." },
+      { tag: "CYBER RISK", color: VSE.danger, company: "Maersk NotPetya útok (2017)", content: "Ransomware útok ochromil Maersk na <b>10 dní</b>. 76 přístavů offline, ručně řízeno, papír místo systémů. <b>300M USD ztráta</b>. Nucená rekonstrukce ERP. Lekce: cybersecurity je core riziko, ne IT detail. Zero-trust security architecture po útoku." },
+    ]
+  };
+
+  const examQuestionsLog3 = [
+    { komise: "2025 — Stříteský + Schönfeld + Cejthamr", otazka: "MIS a IS v logistice", pozn: "Klasická kombinovaná otázka. Začni MIS (3 složky Kotler) → přejdi na IS v logistice (ERP/WMS/TMS/MES) → propojení mezi MIS (marketing) a IS v logistice (operations) → BI jako spojovací článek." },
+    { komise: "2025 — Špaček + Palíšková + Machek", otazka: "Informační systémy a význam informací v logistice a v marketingu — zdroje a složky", pozn: "Špaček chce explicitně <b>zdroje a složky</b>. Strukturuj: definice informace → 4 zdroje (primární/sekundární × interní/externí) → MIS (3 složky) → IS v logistice (ERP/WMS/TMS/MES) → integrace." },
+    { komise: "2025 — Tahal + Cejthamr + Schönfeld", otazka: "Konkurenční strategie, logistické strategie, logistický systém a konkurenční výhody v logistice — napasovat na PS", pozn: "Tahal chce vidět IS jako KV. Klíčové: digitalizace + automatizace + AI/ML jako nový moat. Doporučení: ERP/WMS/TMS pro PS firmu + data warehouse + dashboardy + AI predikce poptávky." },
+    { komise: "2025 — Abíková + Kolouchová + Smrčka", otazka: "Úloha informací v marketingu a logistice. MIS, Logistické systémy", pozn: "Strukturuj: definice informace → 4 charakteristiky → MIS (3 složky) → IS v logistice (4 typy) → integrovaný stack → trendy (AI, cloud, IoT). Aplikuj na PS." },
+    { komise: "2025 — Tahal + Lorencová + Schönfeld", otazka: "Marketingové a logistické informační systémy — zaměření na data: jak se získávají, druhy. Google Analytics mu nestačí.", pozn: "Tahal explicitně: <b>Google Analytics nestačí!</b> Chce enterprise systémy. Vyjmenuj: ERP, WMS, TMS, MES, BI, data warehouse, ETL, AI/ML. Zdroje dat: primární × sekundární, interní × externí, kvalitativní × kvantitativní." },
+    { komise: "2025 — Double Stříteský + Müllerová", otazka: "MIS — Marketingové a logistické informační systémy. Jaká jsou data a k čemu jsou informace + software log. systémy", pozn: "Stříteský chce explicitně <b>software logistických systémů</b>. Vyjmenuj konkrétní produkty: SAP S/4HANA, Oracle, Microsoft Dynamics, Helios (ČR), Manhattan WMS, MercuryGate TMS, Siemens Opcenter MES." },
+    { komise: "2025 — Špaček + Kučera + Zamazalová", otazka: "Marketingový informační systém", pozn: "Klasický MIS — definice, 3 složky Kotler (vnitřní IS / zpravodajský / výzkum), MDSS 4. složka, funkce (sběr, distribuce, centralizace), nástroje (CRM, ERP, BI). Aplikace na PS Lázně." },
+  ];
+
+  const podcastLog3 = { title: "Logistika 3 — MIS a informační systémy v logistice", description: "Informace jako konkurenční výhoda, 4 charakteristiky kvalitní informace, zdroje (primární × sekundární, interní × externí), MIS 3 složky Kotler + MDSS, logistický systém a procesní pohled, ERP/WMS/TMS/MES (4 hlavní typy IS), BI a 3 úrovně analýzy (historická/současná/prediktivní), data warehouse + ETL, AI/ML v logistice, trendy (cloud, IoT, blockchain, digital twins). Amazon, Maersk, Walmart, UPS ORION, DHL.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyLog3 = `
+    <b style="color:#245373">1.</b> Začni <b>definicí informace</b> — údaj, který má smysl, význam, přínos pro rozhodování.<br/>
+    <b style="color:#245373">2.</b> <b>4 charakteristiky kvalitní informace</b> — Relevance / Přesnost / Včasnost / Úplnost.<br/>
+    <b style="color:#245373">3.</b> Proč jsou informace KV — rychlost rozhodování, predikce, personalizace, efektivita, transparentnost řetězce.<br/>
+    <b style="color:#245373">4.</b> ⚠️ <b>Zdroje informací</b> (Špaček chce!) — primární × sekundární, interní × externí, kvalitativní × kvantitativní.<br/>
+    <b style="color:#245373">5.</b> ⚠️ <b>MIS — Marketingový informační systém</b> — definice + 3 složky Kotler (vnitřní IS, zpravodajský, výzkum) + MDSS.<br/>
+    <b style="color:#245373">6.</b> Funkce MIS — sběr, distribuce, centralizace, hodnocení potřeb.<br/>
+    <b style="color:#245373">7.</b> Logistický systém — definice + co řeší (plánování, realizace, kontrola, optimalizace).<br/>
+    <b style="color:#245373">8.</b> ⚠️ <b>4 hlavní IS v logistice — ERP / WMS / TMS / MES</b> (klasika!).<br/>
+    <b style="color:#245373">9.</b> Konkrétní software — SAP, Oracle, Microsoft Dynamics, Helios, Manhattan, MercuryGate, Siemens (Stříteský chce!).<br/>
+    <b style="color:#245373">10.</b> Integrovaný stack — jak ERP × WMS × TMS × MES komunikují přes API.<br/>
+    <b style="color:#245373">11.</b> ⚠️ <b>BI a 3 úrovně analýzy</b> — historická / současná / prediktivní (AI/ML).<br/>
+    <b style="color:#245373">12.</b> Trendy 2025+ — cloud-first ERP, IoT, blockchain, digital twins, edge computing.<br/>
+    <b style="color:#245373">13.</b> Výzvy implementace — cena, change management (70 % selhání na lidech), integrace legacy, chybí lidé, security.<br/>
+    <b style="color:#245373">14.</b> Aplikace na PS — který IS by firma potřebovala + jak by změnil KV. Příklady: Amazon, Maersk, Alza, UPS, Walmart.
+  `;
+
+  const caseStudyLog3 = {
+    title: "Petr — IT ředitel CzechParts, českého výrobce automotive komponentů, 850 zaměstnanců, 1.2 mld. Kč",
+    subtitle: "Identifikuj chaos v informačních systémech a navrhni integraci",
+    scenario: "Petr (45 let) je IT ředitel CzechParts 3 roky. Český výrobce automotive komponentů — brzdové systémy, díly pro karoserii. 850 zaměstnanců — 600 ve výrobě v Mladé Boleslavi, 100 v R&D, 80 v salesu, 70 v admin/IT. Tržby 1.2 mld. Kč ročně, růst 6 %. Klienti: Škoda Auto, BMW (Lipsko), VW (Wolfsburg), Audi (Ingolstadt). 70 % B2B Tier 1 do automotive.\n\nIT chaos. CzechParts za 20 let nasbíral 15+ různých systémů. Účetnictví v Pohodě (od 2005), CRM v Excel sheets + Salesforce (sales si pořídili sami v 2020), výroba na papíře + Excel (mistr má sešit), sklad ve vlastním systému z 2010 (rozbitý, vede ho jen 1 starší kolega Mirek), doprava řeší přes WhatsApp s 3 dopravci. ERP žádný — jen rozjedinečné moduly.\n\nDopady jsou katastrofální. Když se BMW zeptá, jaká je dodací lhůta na 1000 ks komponentu X, Petrův tým musí: zavolat výrobě (Mirek se ptá mistra), zavolat skladu (Mirek hledá v systému), zavolat dopravě (sales píše dopravcům na WhatsApp). Odpověď za 2-3 dny. Konkurence (Continental, Bosch, Magna) odpoví během 5 minut.\n\nDalší problémy: \n• Sales prodá BMW komponenty, které ve skladě nejsou (žádná real-time integrace) → BMW musí čekat 4 týdny → penalizace 200k EUR za quarter\n• Výroba neví, co se prodává — pošle do skladu 5000 ks neprodejných položek a 0 ks bestsellerů\n• Po Mirkově plánovaném odchodu (důchod 2026) NIKDO neumí starý sklad systém — backup chybí\n• Audit dat: 30 % zákazníků v Salesforce není v Pohodě, 40 % faktur nelze přiřadit ke konkrétnímu prodejnímu kontaktu\n• ESG reporting (CSRD od 2026): chybí data o emisích z dopravy, energie ve výrobě, materiálových tokách\n\nPetr navrhuje 5letý IT transformační projekt. Cena: 80 mil. Kč (SAP S/4HANA Cloud + Manhattan WMS + MercuryGate TMS + Siemens Opcenter MES + AWS Redshift BI). CEO ale váhá — \"je to drahé, dělali jsme to dosud bez toho\". Komise chce vidět strategický argument.",
+    signals: [
+      { text: "15+ různých systémů. Účetnictví v Pohodě, CRM v Excel, výroba na papíře, sklad ve vlastním systému z 2010", color: VSE.danger, reason: "Klasický legacy chaos. Žádné single source of truth. 15 systémů × 15 různých datových formátů = nelze dělat reporting bez týdne práce." },
+      { text: "ERP žádný — jen rozjedinečné moduly", color: VSE.danger, reason: "ERP je centrální mozek firmy. Bez něho nelze řídit kapacity, zásoby, finance, HR. CzechParts s 1.2 mld. Kč obratem MUSÍ mít ERP." },
+      { text: "doprava řeší přes WhatsApp s 3 dopravci", color: VSE.danger, reason: "Manuální TMS přes WhatsApp v 2026 = profesionální selhání. Žádný tracking, žádná optimalizace tras, žádný audit. Klasický důvod pro TMS." },
+      { text: "Odpověď za 2-3 dny. Konkurence odpoví během 5 minut", color: VSE.danger, reason: "Klíčový externí signal — ztráta KV proti Continental/Bosch/Magna. Informace = rychlost rozhodování. CzechParts ztrácí klienty pomalou reakcí." },
+      { text: "Sales prodá BMW komponenty, které ve skladě nejsou (žádná real-time integrace) → penalizace 200k EUR za quarter", color: VSE.danger, reason: "Chybí integrace CRM × WMS × ERP. Reálné finanční důsledky — 800k EUR/rok pokut. ERP integrace by to vyřešila během měsíce." },
+      { text: "Výroba neví, co se prodává — pošle do skladu 5000 ks neprodejných položek a 0 ks bestsellerů", color: VSE.danger, reason: "Klasický bull-whip effect bez integrace MES × ERP × WMS. AI predikce poptávky by problém řešila." },
+      { text: "Po Mirkově plánovaném odchodu NIKDO neumí starý sklad systém — backup chybí", color: VSE.danger, reason: "Key person risk + tribal knowledge. Mirek odejde → sklad nefunguje. CzechParts musí naléhavě migrovat na standardní WMS (Manhattan, Blue Yonder)." },
+      { text: "30 % zákazníků v Salesforce není v Pohodě, 40 % faktur nelze přiřadit ke kontaktu", color: VSE.warning, reason: "Data quality crisis. Před nasazením ERP MUSÍ proběhnout data cleansing — 50 % nákladů ERP projektu. Bez toho ERP zopakuje chaos." },
+      { text: "ESG reporting (CSRD od 2026): chybí data o emisích z dopravy, energie ve výrobě, materiálových tokách", color: VSE.warning, reason: "Regulatory risk. CSRD je povinný od 2026 pro firmy 250+ zaměstnanců. CzechParts musí mít data sběr přes ERP/MES/TMS. Bez nich = pokuty, ztráta klientů (BMW vyžaduje ESG od dodavatelů)." },
+      { text: "CEO ale váhá — je to drahé, dělali jsme to dosud bez toho", color: VSE.warning, reason: "Klasický change resistance management. 70 % ERP projektů selže na change managementu, ne technologii. Petr musí ROI: 800k EUR pokut/rok + ztráta klientů + ESG compliance." },
+    ],
+    quiz1: {
+      question: "Jaký je hlavní problém CzechParts v IT?",
+      options: [
+        "Drahé licence",
+        "Pomalý internet",
+        "Žádná integrace mezi systémy — 15+ izolovaných nástrojů, žádné single source of truth, žádné ERP",
+        "Příliš složitý ERP",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Petr měl udělat pro vyřešení IT chaosu?",
+      options: [
+        { text: "Nasadit integrovaný ERP (SAP S/4HANA Cloud) — centrální mozek pro účetnictví, plánování, zásoby, finance, HR", correct: true, reason: "✓ Bez ERP nelze řídit firmu s 1.2 mld. Kč. Cloud verze = rychlejší implementace (12-18 měsíců) než on-premise (3-5 let)." },
+        { text: "Doplnit WMS (Manhattan nebo Blue Yonder) pro sklad — náhrada Mirkova systému před jeho odchodem", correct: true, reason: "✓ Key person risk řešení. Standardní WMS + dokumentace + školení 5 lidí. Žádný single point of failure." },
+        { text: "Doplnit TMS (MercuryGate, BluJay) pro dopravu — náhrada WhatsApp komunikace s dopravci", correct: true, reason: "✓ Optimalizace tras, real-time tracking pro BMW/Škoda požadavky, audit trail pro CSRD reporting." },
+        { text: "Doplnit MES (Siemens Opcenter) pro výrobu — propojit s ERP, sledovat produkci v reálném čase", correct: true, reason: "✓ Eliminace bull-whip efektu. Výroba uvidí aktuální poptávku z ERP, automaticky upraví plán. CSRD ESG data o materiálových tokách." },
+        { text: "Data cleansing PŘED nasazením ERP — sjednotit Salesforce × Pohoda, vyčistit 30 % nesouladu, dohromady 6 měsíců práce", correct: true, reason: "✓ Garbage in, garbage out. Bez čistých dat ERP zopakuje chaos. 50 % nákladů ERP projektu jde na data migration." },
+        { text: "Postavit data warehouse (AWS Redshift) + BI dashboardy (Power BI) — pro management visibility + ESG reporting CSRD", correct: true, reason: "✓ Real-time visibility pro CEO + CSRD compliance. BI nad ERP/WMS/TMS/MES daty = strategická KV." },
+        { text: "Najmout SAP konzultanty (Accenture, Deloitte) na implementaci + change management (komunikace, školení)", correct: true, reason: "✓ Vlastními silami nezvládnou. 70 % ERP projektů selže na change managementu. Profi konzultanti + interní champions." },
+        { text: "Zachovat status quo — Mirek je nepostradatelný, Pohoda funguje, není potřeba měnit", correct: false, reason: "✗ Klasický change resistance. Status quo už stojí 800k EUR/rok pokut + ztráta klientů + Mirek odchází. Petr musí přesvědčit CEO čísly." },
+        { text: "Implementovat všech 15 systémů znovu, ale propojit je přes API", correct: false, reason: "✗ Spaghetti architecture. 15 × 15 = 225 integrací. Levnější je nasadit jeden ERP než propojovat 15 starých systémů." },
+      ],
+    },
+    summary: "<b>CzechParts má klasický legacy IT chaos — 15+ izolovaných systémů bez integrace, žádné ERP, key person risk u skladu.</b> Klíč je <b>5letá IT transformace s integrovaným stackem</b>.<br/><br/><b>3 vrstvy řešení:</b><br/>• <b>Foundation (rok 1-2):</b> Data cleansing + SAP S/4HANA Cloud ERP (centrální mozek) + Salesforce CRM integrace<br/>• <b>Operations (rok 2-3):</b> Manhattan WMS + MercuryGate TMS + Siemens Opcenter MES (3 systémy nad ERP, propojené přes API)<br/>• <b>Analytics (rok 3-5):</b> AWS Redshift data warehouse + Power BI dashboardy + AI/ML predikce poptávky + CSRD ESG reporting<br/><br/><b>Pro komisi:</b> Klasická česká středně velká výrobní firma s legacy chaos. <b>SAP S/4HANA Cloud</b> je standard pro automotive Tier 1 (Continental, Bosch). <b>Change management</b> je 70 % úspěchu — Petr musí přesvědčit CEO ROI (800k EUR pokut/rok + Mirek odejde + CSRD compliance). <b>Anti-vzor: Maersk NotPetya 2017</b> — bez moderní IT architektury jsou firmy zranitelné. <b>Příklady úspěchu: Maersk SAP S/4HANA migrace, Amazon vlastní stack, Alza in-house WMS</b>.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Logistika" subjectId="logistika" number={3} title="MIS a IS v logistice, logistický systém"
+      subtitle="Informace + zdroje + MIS 3 složky + ERP/WMS/TMS/MES + BI + trendy"
+      color={BOMBIK.success}
+      questionText="MIS a pohyb informací v logistice (zdroje, složky), logistický systém."
+      questionDesc="Informace jako KV. 4 charakteristiky kvalitní informace (Relevance/Přesnost/Včasnost/Úplnost). Zdroje — primární × sekundární, interní × externí, kvalitativní × kvantitativní, vyčerpávající × výběrové. MIS — definice + 3 složky Kotler (vnitřní IS / zpravodajský / výzkum) + 4. MDSS. Funkce MIS. Logistický systém — definice + co řeší. 4 hlavní IS v logistice (ERP / WMS / TMS / MES) + konkrétní software (SAP, Oracle, Manhattan, MercuryGate, Siemens). Integrovaný stack přes API. BI a 3 úrovně analýzy (historická/současná/prediktivní). Data warehouse, ETL, AI/ML. Trendy 2025+ (cloud, IoT, blockchain, digital twins, edge). Výzvy implementace. Amazon, Maersk, Walmart, UPS ORION, Alza."
+      sloz={2} roz={3} freq={3}
+      examStrategy={examStrategyLog3}
+      studySections={studySectionsLog3}
+      flashcards={flashcardsLog3}
+      quiz={quizLog3}
+      praxe={praxeLog3}
+      examQuestions={examQuestionsLog3}
+      podcast={podcastLog3}
+      caseStudy={caseStudyLog3}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 1 — Marketingový výzkum, metody a limity, mediální výzkumy
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt1Panel() {
+  const studySectionsMkt1 = [
+    { id: "intro", title: "Marketingový výzkum — definice, cíle, proces", subtitle: "Co je MV + 3 cíle + 3 fáze procesu + MV jako součást MIS", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Marketingový výzkum (MV)</b> = systematický <b>sběr, zpracování, analýza, interpretace a prezentace</b> informací pro marketingové rozhodování.
+        </Def>
+        <Tag color={VSE.fis}>3 cíle MV</Tag>
+        <Bullet items={[
+          "<b>Pochopit trh</b> — kdo je zákazník, jaké má potřeby, jak se trh mění.",
+          "<b>Snížit nejistotu</b> — než nasadíme produkt/kampaň, ověříme data.",
+          "<b>Zvýšit efektivitu</b> — ROI, optimalizace mixu, lepší targeting.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Proces MV — 3 fáze</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "10px 0 6px" }}>
+          <svg viewBox="0 0 520 100" style={{ width: "100%", maxWidth: 520, height: "auto" }}>
+            <defs>
+              <marker id="arrowMv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+              </marker>
+            </defs>
+            {/* 3 boxy se šipkami */}
+            <rect x="10" y="20" width="140" height="60" rx="10" fill={VSE.fmv} opacity="0.85"/>
+            <text x="80" y="45" textAnchor="middle" fontSize="22" fill="#fff">📥</text>
+            <text x="80" y="68" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">1. SBĚR DAT</text>
+            <line x1="155" y1="50" x2="185" y2="50" stroke="#888" strokeWidth="2" markerEnd="url(#arrowMv)"/>
+            <rect x="190" y="20" width="140" height="60" rx="10" fill={VSE.warning} opacity="0.85"/>
+            <text x="260" y="45" textAnchor="middle" fontSize="22" fill="#fff">📊</text>
+            <text x="260" y="68" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">2. ANALÝZA</text>
+            <line x1="335" y1="50" x2="365" y2="50" stroke="#888" strokeWidth="2" markerEnd="url(#arrowMv)"/>
+            <rect x="370" y="20" width="140" height="60" rx="10" fill={VSE.success} opacity="0.85"/>
+            <text x="440" y="45" textAnchor="middle" fontSize="22" fill="#fff">💡</text>
+            <text x="440" y="68" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">3. ZOBECNĚNÍ</text>
+            {/* Bottom labels */}
+            <text x="80" y="95" textAnchor="middle" fontSize="10" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">desk + field</text>
+            <text x="260" y="95" textAnchor="middle" fontSize="10" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">statistika (M2)</text>
+            <text x="440" y="95" textAnchor="middle" fontSize="10" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">doporučení</text>
+          </svg>
+        </div>
+        <Bullet items={[
+          "<b>1. SBĚR DAT:</b> Desk research (sekundární — ČSÚ, reporty) + Field research (primární — dotazníky, rozhovory).",
+          "<b>2. ANALÝZA:</b> Statistické metody, kódování, interpretace (detail v M2).",
+          "<b>3. ZOBECNĚNÍ:</b> Závěry pro rozhodování, doporučení managementu.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>MV jako součást MIS (Kotler)</Tag>
+        <Bullet items={[
+          "<b>MIS</b> = soubor lidí, zařízení a procesů pro sběr a analýzu marketingových informací.",
+          "<b>3 složky:</b> Vnitřní IS (data z firmy) + Marketingový zpravodajský (info o prostředí, konkurenci) + <b>Marketingový výzkum</b> (systematický pro konkrétní problém).",
+          "<b>+ MDSS</b> (Marketing Decision Support System) jako 4. složka — modely + nástroje, které pomáhají rozhodnout, ne jen ukázat data.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Nový + Vávra + Heřman 2025 (Horská chata)"
+          what="Nový chce <b>celý proces</b> — proč výzkum dělám, jaká data, jaké metody, co následuje. Plynule propoj: cíl → sběr → analýza → aplikace."
+        />
+      </div>) },
+
+    { id: "data_typy", title: "Typy dat — primární × sekundární, interní × externí", subtitle: "Kde data brát + kvant × kval (KOLIK × PROČ)", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Než začneš výzkum, musíš vědět, <b>jaká data potřebuješ</b> a kde je vzít. 2 hlavní osy: <b>původ dat</b> (primární/sekundární) a <b>zdroj</b> (interní/externí).
+        </Def>
+        <Tag color={VSE.fis}>Primární × Sekundární data</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🔬 PRIMÁRNÍ", d: "Sbírám si je sám pro konkrétní účel. Drahé, ale relevantní. Dotazníky, rozhovory, experimenty, focus group, mystery shopping." },
+            { c: VSE.warning, t: "📚 SEKUNDÁRNÍ", d: "Už existují, sbíral je někdo jiný. Levné, rychlé, ale obecné. ČSÚ, EUROSTAT, oborové reporty, vlastní historie." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Interní × Externí zdroje</Tag>
+        <Bullet items={[
+          "<b>Interní:</b> ERP, CRM, e-shop, sales data, účetnictví. Většinou sekundární.",
+          "<b>Externí:</b> ČSÚ, EUROSTAT, sociální sítě, Google Trends, kupované databáze. Primární i sekundární.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Kvantitativní × Kvalitativní — KOLIK × PROČ</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📊 KVANTITATIVNÍ (KOLIK?)", d: "Měření četnosti, intenzity. Velký vzorek (1000+), reprezentativnost, standardizace. Dotazování (F2F, CATI, CAWI, PAPI), experiment, omnibus, panel." },
+            { c: VSE.warning, t: "💭 KVALITATIVNÍ (PROČ?)", d: "Hledání motivů, příčin, postojů. Menší vzorek (30-200), hloubka. Focus group (6-10 lidí), hloubkový rozhovor, mystery shopping, projektivní techniky." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Struktura dotazníku — 5 typů otázek</Tag>
+        <Bullet items={[
+          "<b>Úvodní</b> → <b>Filtrační</b> (kvalifikace) → <b>Kvalifikační</b> (cílovka) → <b>Meritorní</b> (jádro výzkumu) → <b>Identifikační</b> (demografika na konec).",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "vyber", title: "Výběr respondentů — náhodný, stratifikovaný, kvótní", subtitle: "Co dělá náhodný výběr náhodným (Stříteský chytá!)", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Klíčová otázka výzkumu:</b> Koho se ptát? Reprezentativnost vzorku = klíč k validitě výsledků.
+        </Def>
+        <Tag color={VSE.fis}>4 typy výběru</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🎲 1. NÁHODNÝ", d: "Vyžaduje KOMPLETNÍ seznam populace + losování. Každý má STEJNOU pravděpodobnost. Statisticky nejlepší." },
+            { c: VSE.warning, t: "📋 2. STRATIFIKOVANÝ NÁHODNÝ", d: "Populaci rozdělíme do skupin (věk, region). V každé skupině náhodný výběr. Reprezentativnější." },
+            { c: VSE.fph, t: "🎯 3. KVÓTNÍ", d: "Kvóty (60 % ženy, 40 % muži). Tazatel sehnal kohokoli s kvótou. Levnější, ale NENÍ náhodný." },
+            { c: VSE.success, t: "🧠 4. ÚSUDKOVÝ", d: "Výzkumník vybírá podle úsudku. Subjektivní, rychlé. Pilotní studie, kvalitativní výzkum." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>⚠️ Co dělá náhodný výběr náhodným?</Tag>
+        <Bullet items={[
+          "<b>1.</b> Existuje <b>kompletní seznam populace</b>.",
+          "<b>2.</b> Každý člen má <b>stejnou pravděpodobnost</b> být vybrán.",
+          "<b>3.</b> Výběr je <b>nezávislý</b> (jeden neovlivňuje druhý).",
+          "<b>4.</b> Konkrétní techniky: los, generátor náhodných čísel, systematický k-tý.",
+          "<b>POZOR:</b> FB dotazník NENÍ náhodný (jen FB cílovka). Kvótní podle sympatie tazatele NENÍ náhodný.",
+        ]} color={VSE.danger} />
+        <ExamAlert
+          komise="Double Stříteský + Müllerová 2025 (Lázně)"
+          what="Stříteský chytá konkrétně: <b>„Co dělá náhodný výběr náhodným?\u201D</b> Pokud řekneš jen „náhodný výběr je náhodný\u201D, neuděláš. Musíš jmenovat 4 podmínky výše."
+        />
+      </div>) },
+
+    { id: "tote", title: "Pretest, korekční test, post-test + TOTE model", subtitle: "3 fáze validace výzkumu (Mikovcová chce!)", color: VSE.fis, emoji: "refresh",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Klíč k systematickému výzkumu je <b>validace ve 3 fázích</b> — před akcí, během, po akci. Bez nich peníze vyletí oknem.
+        </Def>
+        <ExamAlert
+          komise="Mikovcová + Vávra + Viktora 2025 (Lázně)"
+          what="Komisi stačily <b>pretesty, korekční testy, post-testy</b> — bez explicitního vyjmenování všech 3 fází NEUDĚLÍŠ. Doplň <b>TOTE model</b> jako nadhled."
+        />
+        <Tag color={VSE.fis}>3 fáze testování</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🧪 1. PRETEST", d: "PŘED nasazením. Ověření konceptu, designu, message. Test akceptace cílovkou." },
+            { c: VSE.warning, t: "⚙️ 2. KOREKČNÍ TEST", d: "BĚHEM kampaně. Sledování průběhu, korekce směru. A/B test, real-time úprava." },
+            { c: VSE.success, t: "📈 3. POST-TEST", d: "PO nasazení. Vyhodnocení dopadu, ROI, atribuce. Brand lift, sales lift." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Model TOTE — Test, Operate, Test, Exit (Miller, Galanter, Pribram 1960)</Tag>
+        <Bullet items={[
+          "<b>TEST:</b> Zjišťuji situaci — kde stojíme?",
+          "<b>OPERATE:</b> Provedu akci (kampaň, změnu produktu).",
+          "<b>TEST:</b> Zjišťuji znovu — pomohlo to?",
+          "<b>EXIT:</b> Pokud ano, končím. Pokud ne, vracím se k Operate s úpravami.",
+          "<b>Kontinuální charakter</b> — každý post-test je vstupem do dalšího cyklu.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "medialni", title: "Mediální výzkum — specifika měření reklamy a metriky", subtitle: "Co měřit u reklamy + online metriky + statistické testy", color: VSE.fis, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Mediální výzkum</b> je <b>specifická aplikace pre/post-testu na reklamu</b>. Fáze viz předchozí sekce — zde se zaměříme na <b>CO konkrétně měříme</b> u reklamy a <b>jaké metriky</b> používáme.
+        </Def>
+        <Tag color={VSE.fis}>4 dimenze měření reklamy</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "👁️ ROZPOZNÁNÍ (Recognition)", d: "Vybavíš si značku po 3s zobrazení? Brand recall, aided × unaided. Awareness." },
+            { c: VSE.warning, t: "💡 POCHOPENÍ (Comprehension)", d: "Rozumíš message? Co reklama tvrdí o produktu? 30-40 % diváků message nepochopí." },
+            { c: VSE.fph, t: "❤️ AKCEPTACE (Likability)", d: "Líbí se vizuál, hudba, příběh? Likability koreluje se sales liftem." },
+            { c: VSE.success, t: "🛒 PERSUASION + INTENT", d: "Změní reklama nákupní úmysl? Klíčová metrika pro ROI. Před × po expozici." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ExamAlert
+          komise="Stříteský + Müllerová 2025 (Neziskovka)"
+          what="Stříteský chce <b>konkrétní zkratky online metrik</b> (GRP, CTR, CPC, CPA, brand lift). Naučit nazpaměť — obecné fráze nestačí."
+        />
+        <Tag color={VSE.warning}>Klíčové metriky online reklamy</Tag>
+        <Bullet items={[
+          "<b>Reach × Frequency × GRP:</b> Reach = unikátní lidé. Frequency = kolikrát viděli. GRP = Reach × Frequency.",
+          "<b>CTR (Click-Through Rate):</b> Klikací rate na bannery/PPC. Standard 0,5–2 %.",
+          "<b>CPC / CPM / CPA:</b> Cena za klik / 1000 zobrazení / akvizici.",
+          "<b>Conversion Rate:</b> % návštěvníků, kteří udělají žádanou akci.",
+          "<b>Brand Lift:</b> Změna awareness/preference před vs po kampani (Google, Meta survey).",
+          "<b>Attribution Models:</b> Last-click, first-click, linear, time-decay, data-driven.",
+          "<b>Viewability:</b> % impresions skutečně viditelné. Standard 50 %/1s pro banner.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Nástroje a statistické testy</Tag>
+        <Bullet items={[
+          "<b>Adwise (Median), AdGraal (Nielsen):</b> Pre/post test reklamy. Recall, likability, persuasion.",
+          "<b>McNemarův test:</b> Porovnává pre × post výsledky stejné skupiny (2 závislé vzorky).",
+          "<b>Kolmogorov-Smirnov test:</b> Vyhodnocení preferencí (2 vzorky), neparametrický.",
+          "<b>Google Analytics 4 (GA4):</b> Web analytics, eventy, konverze. Standard pro digital.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "limity", title: "Limity marketingového výzkumu", subtitle: "Co MV neumí + 6 typů bias + moderní trendy", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          MV není kouzelná koule — má svoje hranice. Komise tohle chce slyšet jako <b>kritické zhodnocení metod</b>, ne jen jejich popis.
+        </Def>
+        <ExamAlert
+          komise="Stříteský + Bočková + Lorencová 2025 (Horská chata)"
+          what="Klasická Stříteského otázka: <b>„Marketingový výzkum, metody a jejich limity\u201D</b>. Bez explicitního vyjmenování 5 limitů NEUDĚLÍŠ. Limity jsou nedostatek, který musíš dorazit."
+        />
+        <Tag color={VSE.fis}>5 hlavních limitů MV</Tag>
+        <Bullet items={[
+          "<b>1. Respondent ≠ skutečnost.</b> Lidé říkají jiné věci, než dělají. 80 % řekne „budu zdravě jíst\", 20 % skutečně. Stated × revealed preference.",
+          "<b>2. Reprezentativnost vzorku.</b> Pokud vzorek není reprezentativní (FB dotazník), výsledky nejsou zobecnitelné.",
+          "<b>3. Otázka tvoří odpověď.</b> Leading questions. „Jak často podvádíte?\" — pravděpodobně lžou.",
+          "<b>4. Halo efekt + sociální desirability.</b> Respondent odpovídá podle toho, co je společensky přijatelné.",
+          "<b>5. Časová prodleva.</b> Výzkum trvá týdny → výsledek je už zastaralý. Real-time data překonávají.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>6 typů bias (zkreslení)</Tag>
+        <Bullet items={[
+          "<b>Selection bias:</b> Vzorek není reprezentativní (jen lidi, co mají čas).",
+          "<b>Response bias:</b> Odpovídají sociálně přijatelně, ne pravdivě.",
+          "<b>Confirmation bias:</b> Výzkumník hledá data potvrzující jeho hypotézu.",
+          "<b>Recall bias:</b> Paměť je zrádná („co jste jedli minulý týden?\").",
+          "<b>Survivorship bias:</b> Ptáme se jen úspěšných, ignorujeme ty, co odešli.",
+          "<b>Hawthorne effect:</b> Sledovaní se chovají jinak, protože ví, že jsou sledováni.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Moderní trendy překonávající limity</Tag>
+        <Bullet items={[
+          "<b>Behaviorální data:</b> Skutečné chování (sales, web analytics, IoT) > deklarace.",
+          "<b>Pasivní měření:</b> Eye-tracking, EEG, facial coding — měří emoce, ne názory.",
+          "<b>Big data + AI:</b> Miliony datových bodů, ne dotazník 1000 lidí (Amazon, Netflix).",
+          "<b>Sentiment analysis:</b> Real-time monitoring zmínek značky (Brand24, Talkwalker).",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsMkt1 = [
+    { term: "Marketingový výzkum", def: "Systematický sběr, zpracování, analýza, interpretace, prezentace informací pro mkt rozhodování. 3 cíle: pochopit trh, snížit nejistotu, zvýšit efektivitu.", tag: "POJEM" },
+    { term: "Proces MV", def: "3 fáze: Sběr dat (desk + field research) → Analýza (statistika) → Zobecnění (závěry pro rozhodování).", tag: "PROCES" },
+    { term: "MIS a MV", def: "MV je 1 ze 3 složek MIS (Kotler) + MDSS jako 4. složka. Vnitřní IS + zpravodajský + MV + MDSS.", tag: "POJEM" },
+    { term: "Primární data", def: "Sbírám si je sám pro konkrétní účel. Drahé, ale relevantní. Dotazníky, rozhovory, experimenty.", tag: "DATA" },
+    { term: "Sekundární data", def: "Už existují, sbíral je někdo jiný. Levné, rychlé, ale obecné. ČSÚ, EUROSTAT, oborové reporty.", tag: "DATA" },
+    { term: "Interní × Externí zdroje", def: "Interní = z vlastní firmy (ERP, CRM). Externí = mimo firmu (ČSÚ, FB, Google Trends).", tag: "DATA" },
+    { term: "Kvantitativní výzkum", def: "KOLIK? Velký vzorek (1000+), reprezentativnost, standardizace. Dotazování (F2F, CATI, CAWI, PAPI), experiment, omnibus, panel.", tag: "METODY" },
+    { term: "Kvalitativní výzkum", def: "PROČ? Menší vzorek (30-200), hloubka. Focus group, hloubkový rozhovor, mystery shopping, projektivní.", tag: "METODY" },
+    { term: "F2F / CATI / CAWI / PAPI", def: "Face-to-Face / Computer Assisted Telephone / Web / Paper. Klesající cena, klesající kvalita.", tag: "DOTAZOVÁNÍ" },
+    { term: "5 typů otázek v dotazníku", def: "Úvodní → Filtrační → Kvalifikační → Meritorní (jádro) → Identifikační (demografika na konci).", tag: "DOTAZNÍK" },
+    { term: "Focus group", def: "Skupinová diskuse 6-10 respondentů + moderátor, 1,5-3 hodiny. Dynamika, nové nápady.", tag: "KVALITATIVNÍ" },
+    { term: "Hloubkový rozhovor", def: "1-on-1, 1-2 hodiny. Hloubka, citlivá témata. Bez skupinového vlivu.", tag: "KVALITATIVNÍ" },
+    { term: "Mystery shopping", def: "Falešný zákazník hodnotí službu inkognito. Standardizovaný protokol. Banky, hotely, retail.", tag: "KVALITATIVNÍ" },
+    { term: "Náhodný výběr", def: "Vyžaduje kompletní seznam + každý má stejnou pravděpodobnost + nezávislý výběr. Statisticky nejlepší.", tag: "VÝBĚR" },
+    { term: "Co dělá náhodný náhodným?", def: "1) Kompletní seznam, 2) Stejná pravděpodobnost, 3) Nezávislý výběr, 4) Techniky (los, generátor, k-tý). FB NENÍ náhodný.", tag: "VÝBĚR" },
+    { term: "Stratifikovaný náhodný", def: "Populaci rozdělíme do skupin (věk, region). V každé skupině náhodný výběr. Reprezentativnější.", tag: "VÝBĚR" },
+    { term: "Kvótní výběr", def: "Kvóty (60 % ženy, 40 % muži). Tazatel sehnal kohokoli s kvótou. Levnější, ale NENÍ náhodný.", tag: "VÝBĚR" },
+    { term: "Pretest", def: "PŘED nasazením. Test konceptu, designu, message. Akceptace cílovkou.", tag: "VALIDACE" },
+    { term: "Korekční test", def: "BĚHEM kampaně. Sledování průběhu, korekce směrem. A/B test, real-time úprava.", tag: "VALIDACE" },
+    { term: "Post-test", def: "PO nasazení. ROI, atribuce. Brand lift, sales lift, awareness shift.", tag: "VALIDACE" },
+    { term: "TOTE model", def: "Test, Operate, Test, Exit. 4-krokový model rozhodování (Miller, Galanter, Pribram 1960). Kontinuální cyklus.", tag: "VALIDACE" },
+    { term: "Mediální výzkum — 4 dimenze", def: "Rozpoznání / Pochopení / Akceptace / Persuasion. Co konkrétně měříme u reklamy.", tag: "MÉDIA" },
+    { term: "GRP, CTR, CPC, CPA", def: "Gross Rating Points (Reach×Freq) / Click-Through / Cost Per Click / Cost Per Acquisition. Ekonomika kampaně.", tag: "MÉDIA" },
+    { term: "Brand Lift", def: "Změna awareness/preference značky před vs po kampani. Google, Meta měří přes survey.", tag: "MÉDIA" },
+    { term: "Adwise / AdGraal", def: "Pre/post test reklamy. Median × Nielsen. McNemarův test = statistická metoda pro porovnání pre × post.", tag: "MÉDIA" },
+    { term: "5 limitů MV", def: "Respondent ≠ skutečnost / Reprezentativnost / Otázka tvoří odpověď / Halo efekt / Časová prodleva.", tag: "LIMITY" },
+    { term: "Stated × Revealed preference", def: "Stated = co lidé říkají. Revealed = co skutečně dělají. 80 % řekne zdravé, 20 % udělá.", tag: "LIMITY" },
+    { term: "Selection bias", def: "Vzorek není reprezentativní — jen lidi s časem na dotazník. FB = FB cílovka.", tag: "LIMITY" },
+    { term: "Hawthorne effect", def: "Sledovaní lidé se chovají jinak, protože vědí, že jsou sledováni.", tag: "LIMITY" },
+  ];
+
+  const quizMkt1 = [
+    { q: "Co je definice marketingového výzkumu?", opts: ["Náhodný sběr dat", "Systematický sběr, zpracování, analýza, interpretace a prezentace informací pro mkt rozhodování", "Reklamní kampaň", "SWOT analýza"], correct: 1 },
+    { q: "Kolik složek má klasický MIS (Kotler)?", opts: ["2", "3 (vnitřní IS + zpravodajský + výzkum)", "4 s MDSS", "5"], correct: 1 },
+    { q: "Co jsou primární data?", opts: ["První data v databázi", "Sbírám si je sám pro konkrétní účel", "Nejstarší data", "Data z primárního trhu"], correct: 1 },
+    { q: "Hlavní rozdíl kvantitativní × kvalitativní výzkum:", opts: ["Cena", "Kvant = KOLIK? (čísla, velký vzorek). Kval = PROČ? (motivace, hloubka)", "Doba trvání", "Online × offline"], correct: 1 },
+    { q: "Co znamená CATI?", opts: ["Computer Application Testing", "Computer Assisted Telephone Interview", "California Internet Test", "Customer Acquisition Test"], correct: 1 },
+    { q: "Která metoda má 6-10 respondentů + moderátora?", opts: ["Hloubkový rozhovor", "Focus group", "Mystery shopping", "Pozorování"], correct: 1 },
+    { q: "Co dělá náhodný výběr náhodným?", opts: ["Tazatel vybírá podle pocitu", "Kompletní seznam + stejná pravděpodobnost + nezávislý výběr", "FB dotazník", "Kvóty"], correct: 1 },
+    { q: "Co je kvótní výběr?", opts: ["Náhodný výběr", "Stanovíme kvóty (60 % ženy, 40 % muži) — tazatel sehnal kohokoli s kvótou. NENÍ náhodný.", "Pouze pro experimenty", "Statistická metoda"], correct: 1 },
+    { q: "Co je pretest?", opts: ["Test PO kampani", "Test PŘED nasazením kampaně — akceptace, pochopení, design", "Statistický test", "Test produktivity"], correct: 1 },
+    { q: "Co je TOTE model?", opts: ["Tipy O Testování", "Test, Operate, Test, Exit — 4-krokový model rozhodování", "Testing Online Tools", "Total Operative Time"], correct: 1 },
+    { q: "Co znamená GRP?", opts: ["Gross Revenue Profit", "Gross Rating Points — Reach × Frequency", "General Research Plan", "Gross Reach Percentage"], correct: 1 },
+    { q: "Co je Brand Lift?", opts: ["Zvýšení loga", "Změna awareness/preference značky před vs po kampani", "Cena značky", "Pozice na trhu"], correct: 1 },
+    { q: "Stated × Revealed preference — co je rozdíl?", opts: ["Synonyma", "Stated = co říkají. Revealed = co skutečně dělají", "Stated jsou cizinci", "Není rozdíl"], correct: 1 },
+    { q: "Které z těchto NENÍ limit MV?", opts: ["Respondent ≠ skutečnost", "Halo efekt", "Časová prodleva", "Použití SPSS software"], correct: 3 },
+  ];
+
+  const praxeMkt1 = {
+    caseStudy: {
+      company: "Procter & Gamble — etalon systematického MV",
+      subtitle: "Globální mistr výzkumu na primárních datech",
+      content: (<>
+        <b>P&G</b> investuje <b>~400 mil. USD ročně</b> do MV — víc než kdokoli v FMCG. Důsledek: 65+ brandů, 5 mld. zákazníků.<br/><br/>
+        <b style={{ color: VSE.success }}>Systematický přístup:</b><br/>
+        • <b>Living It:</b> Výzkumníci žijí s rodinami zákazníků 2-4 týdny (etnografie).<br/>
+        • <b>Working It:</b> Zaměstnanci stráví týden v retailu — vykládají, prodávají, slyší stížnosti.<br/>
+        • <b>IHUT (In-Home Use Test):</b> 500 lidí testuje prototyp doma 30 dní.<br/>
+        • <b>Tracking:</b> Týdenní brand health ve 30+ zemích.<br/><br/>
+        <b style={{ color: VSE.warning }}>Klasické úspěchy:</b><br/>
+        • <b>Tide Pods:</b> 5 let výzkumu před launchem. Hloubkové studie problému s prachem/kapalinou. 75 % market share za 1 rok.<br/>
+        • <b>Febreze:</b> První verze flop. Etnografie ukázala — není o pachu, ale o pocitu úklidu. Re-launch = úspěch.<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> P&G má <b>nejnižší fail rate launchů</b> (15 % vs branche 50-70 %).
+      </>),
+      lessons: "P&G je <b>etalon systematického MV</b>. Když máš v PS firmu launchující nový produkt, doporuč: <b>Etnografie + Focus groups + IHUT + AdGraal pretest reklamy</b>. Alternativa: <b>Unilever, IDEO design thinking, Spotify A/B testing</b>."
+    },
+    miniExamples: [
+      { tag: "PRETEST", color: VSE.fmv, company: "Pilsner Urquell, Staropramen — pretest reklamy", content: "České pivovary testují každou TV kampaň přes <b>Adwise (Median)</b> před nasazením. 200 respondentů × 3 verze. Metriky: recall, likability, persuasion. Vítězná verze jde na trh." },
+      { tag: "POST-TEST", color: VSE.success, company: "Coca-Cola — Marketing Mix Modeling", content: "Coca-Cola používá MMM pro atribuci sales liftu k TV, online, OOH, sponzoringu. Po 1 roce: 1 USD do online = 1,8 USD obratu, do TV = 1,3 USD → realokace budgetu." },
+      { tag: "ANTI-VZOR", color: VSE.danger, company: "Apple — žádné focus groups", content: "Steve Jobs: <b>„It's not the customer's job to know what they want.\u201D</b> Místo MV insider testing s Jony Ive týmem. Funguje JEN pro Apple — pro většinu firem MV nezbytný." },
+      { tag: "MEDIÁLNÍ", color: VSE.fph, company: "Alza — data-driven media buying", content: "Real-time bidding (RTB) + atribuční model. Každou minutu mění bid podle CTR, conversion rate, hour of day. Google GA4 + Meta Conversions API jako standard." },
+    ]
+  };
+
+  const examQuestionsMkt1 = [
+    { komise: "2025-02-03 — Stříteský + Bočková + Lorencová (Horská chata)", otazka: "Marketingový výzkum, metody a jejich limity", pozn: "Stříteský chce nejen metody, ale hlavně <b>LIMITY</b>. Bez 5 limitů (respondent ≠ skutečnost, reprezentativnost, otázka tvoří odpověď, halo efekt, časová prodleva) neudělíš." },
+    { komise: "2025-01-30 — Nový + Vávra + Heřman (Horská chata)", otazka: "Marketingový výzkum — kvalitativní × kvantitativní + celkový proces", pozn: "Nový chce <b>celý proces</b> — proč výzkum, jaká data, jaké metody, co následuje. Plynule provázat cíle → proces → aplikaci." },
+    { komise: "2025-01-28 — Smrčka + Kolouchová + Říhová", otazka: "Výzkum marketingového výzkumu + Mediální výzkumy", pozn: "Smrčka chce <b>spojeně</b> klasický MV + mediální výzkum. Klíčové: 3 fáze měření reklamy + metriky (GRP, CTR, brand lift) + nástroje." },
+    { komise: "2025-02-05 — Krause + Viktora + Tahal (Neziskovka)", otazka: "Marketingový výzkum", pozn: "Krause v rychlosti — chce hlavně strukturu (definice → cíle → proces → metody → limity). Aplikace na neziskovku: kvalitativní převažuje (motivace darování)." },
+    { komise: "2025-06-10 — Stříteský + Müllerová (Neziskovka)", otazka: "Mediální výzkum — jak měříme reklamu, online, metriky", pozn: "Stříteský chce <b>metriky online</b> — Reach, Frequency, GRP, CTR, CPC, CPM, CPA, Conversion Rate, Brand Lift, Attribution, Viewability. + Nástroje (AdGraal, GA4)." },
+    { komise: "2025-06-10 — Mikovcová + Vávra + Viktora (Lázně)", otazka: "Marketingové výzkumy — pretesty, korekční testy, post-testy", pozn: "Mikovcová chce 3 fáze validace. Pretest před, korekční během, post-test po. Doplň <b>TOTE model</b> jako nadhled." },
+    { komise: "2025-06-16 — Double Stříteský + Müllerová (Lázně)", otazka: "Marketingový výzkum — co dělá náhodný výběr náhodným?", pozn: "<b>Stříteský chytá!</b> Konkrétní odpověď: 1) Kompletní seznam populace, 2) Každý má stejnou pravděpodobnost, 3) Nezávislý výběr, 4) Konkrétní techniky (los, generátor, k-tý). FB NENÍ náhodný." },
+  ];
+
+  const podcastMkt1 = { title: "Marketing 1 — Marketingový výzkum, metody a mediální výzkum", description: "Definice MV (3 cíle), proces sběr → analýza → zobecnění, MV jako součást MIS, typy dat (primární × sekundární, interní × externí), kvant × kval (KOLIK × PROČ), dotazování (F2F/CATI/CAWI/PAPI), 5 typů otázek, kvalitativní metody (focus group, hloubkový rozhovor, mystery shopping), výběr respondentů (náhodný, stratifikovaný, kvótní), pretest/korekční/post-test + TOTE, mediální výzkum (4 dimenze + GRP/CTR/brand lift), limity MV (5 hlavních + bias). P&G, Coca-Cola, Apple, Alza.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt1 = `
+    <b style="color:#A82A5F">1.</b> Začni <b>definicí MV</b> — systematický sběr, zpracování, analýza, interpretace, prezentace.<br/>
+    <b style="color:#A82A5F">2.</b> 3 cíle MV + 3 fáze procesu + MV jako součást MIS (Kotler).<br/>
+    <b style="color:#A82A5F">3.</b> Typy dat — primární × sekundární, interní × externí.<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>Kvantitativní × Kvalitativní</b> (KOLIK × PROČ) — Nový chce!<br/>
+    <b style="color:#A82A5F">5.</b> Dotazování — F2F, CATI, CAWI, PAPI + 5 typů otázek.<br/>
+    <b style="color:#A82A5F">6.</b> Kvalitativní metody — focus group, hloubkový rozhovor, mystery shopping.<br/>
+    <b style="color:#A82A5F">7.</b> ⚠️ <b>Výběr respondentů + co dělá náhodný náhodným</b> (Stříteský chytá!).<br/>
+    <b style="color:#A82A5F">8.</b> ⚠️ <b>Pretest / Korekční / Post-test + TOTE model</b> (Mikovcová chce!).<br/>
+    <b style="color:#A82A5F">9.</b> Mediální výzkum — 4 dimenze + metriky (GRP, CTR, brand lift) + nástroje.<br/>
+    <b style="color:#A82A5F">10.</b> ⚠️ <b>Limity MV</b> (Stříteský + Bočková chtějí!) — 5 hlavních + bias typy.<br/>
+    <b style="color:#A82A5F">11.</b> Aplikace na PS — který výzkum, kolik respondentů, jaký rozpočet.
+  `;
+
+  const caseStudyMkt1 = {
+    title: "Karolína — Marketing Director GreenLife (bio kosmetika startup, 18 mil. Kč)",
+    subtitle: "Identifikuj chyby v MV a navrhni systematický proces",
+    scenario: "Karolína (33 let) vede marketing GreenLife — startup výrobce bio kosmetiky (12 lidí, 18 mil. Kč, růst 22 %). Cílovka: ženy 25-45, městské, příjem 35k+.\n\nProblém: Před rokem launch šamponu Cassia selhal (800 ks místo 4000, ztráta 1 mil. Kč). Vůně byla skvělá — selhalo zaměření a komunikace. Co Karolína udělala:\n\n• Pretest: 8 kamarádek na Instagramu („líbí se vám vůně?\")\n• Cílovka: „ženy, co mají rády bio\" — bez detailů\n• Cena: zkopírovaná od Yves Rocher bez výzkumu\n• Reklama: 1 verze na FB+IG bez pretest, bez tracking\n• Sales: jen měsíční dashboard, žádná atribuce\n\nTeď se chystá launch nové řady (5 produktů, investice 4 mil. Kč). CEO tlačí na profesionalizaci. Karolína má 6 měsíců a budget 600k Kč na MV. Konkurence Yves Rocher chystá podobnou řadu na Q1 2027.",
+    signals: [
+      { text: "Pretest: 8 kamarádek na Instagramu", color: VSE.danger, reason: "Convenience sampling + selection bias + halo efekt. 8 kamarádek NENÍ reprezentativní. Potřeba 50+ neutrálních z cílovky." },
+      { text: "Cílovka: „ženy, co mají rády bio\" — bez detailů", color: VSE.danger, reason: "Žádná segmentace. Chybí demografika, psychografika, behaviorální. Bez detailní cílovky se výzkum nedá udělat." },
+      { text: "Cena zkopírovaná bez výzkumu", color: VSE.warning, reason: "Konkurence není měřítko — má jiný brand, cílovku. Měla použít Van Westendorp nebo Gabor-Granger." },
+      { text: "Reklama: 1 verze bez pretest, bez tracking", color: VSE.danger, reason: "Žádný pretest přes Adwise/AdGraal. Žádný A/B test. Žádný brand lift study. Peníze do koše." },
+      { text: "Sales: jen měsíční dashboard, žádná atribuce", color: VSE.warning, reason: "Chybí post-test. Bez atribuce nevidíme, který kanál přinesl prodej. Nelze se učit." },
+      { text: "Vůně byla skvělá — selhalo zaměření a komunikace", color: VSE.warning, reason: "Klíčový insight — produkt OK, marketing špatně. Bez systematic MV se to opakuje." },
+    ],
+    quiz1: {
+      question: "Jaký byl hlavní problém v MV u launchu Cassie?",
+      options: [
+        "Vůně produktu byla špatná",
+        "Cena byla příliš nízká",
+        "Žádný systematický MV — pretest na 8 kamarádkách, žádná segmentace, žádné měření",
+        "Trh nebyl připraven",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Karolína měla udělat pro systematický MV nové řady?",
+      options: [
+        { text: "Fáze 1 (m. 1-2): Segmentační výzkum — CAWI 800 respondentů + 2 focus groups → 2-3 personas", correct: true, reason: "✓ Bez segmentace nelze targetovat. CAWI levný + rychlý. Focus groups doplní hloubku." },
+        { text: "Fáze 2 (m. 2-3): IHUT — 100 lidí z cílovky testuje produkt 4 týdny doma + 20 hloubkových rozhovorů", correct: true, reason: "✓ P&G standard. Reálné použití > deklarace." },
+        { text: "Fáze 3 (m. 3): Cenový výzkum — Van Westendorp + Gabor-Granger × 300 respondentů", correct: true, reason: "✓ Bez cenové citlivosti nastavíme cenu naslepo." },
+        { text: "Fáze 4 (m. 4-5): Pretest reklamy — 3 verze přes Adwise × 200 respondentů (recall, likability, persuasion)", correct: true, reason: "✓ Pretest před nasazením budgetu 2 mil. Kč." },
+        { text: "Fáze 5 (m. 6): Soft launch + týdenní brand health + GA4 + atribuční model", correct: true, reason: "✓ Post-launch — sales lift, brand lift, atribuce kanálů." },
+        { text: "Outsourcovat agentuře (Ipsos, Median) — interní team to nezvládne", correct: true, reason: "✓ 12-členný team nemá kapacitu. Agentura má panely + know-how." },
+        { text: "Zopakovat strategii z Cassie — 8 kamarádek na IG", correct: false, reason: "✗ Stejná chyba = stejný výsledek." },
+        { text: "Spustit BEZ pretest, aby předběhli Yves Rocher", correct: false, reason: "✗ Rychlost vs systematika. Bez pretest opakuje debakl." },
+      ],
+    },
+    summary: "<b>GreenLife udělalo klasickou chybu — MV intuitivně bez systému.</b> Klíč: <b>5-fázový systematický MV proces</b> v 6 měsících za 600k Kč.<br/><br/><b>5 fází:</b> Segmentace (CAWI + focus groups) → IHUT (concept test) → Cenový výzkum (Van Westendorp) → Pretest reklamy (Adwise) → Soft launch + tracking.<br/><br/><b>Pro komisi:</b> <b>P&G systematický model</b> (Living It, IHUT, AdGraal) je etalon. Bez segmentace, pretest, post-test launch selhává. <b>TOTE model</b> je kontinuální cyklus. <b>Limity MV</b> (respondent ≠ skutečnost) musí Karolína znát. <b>Anti-vzor: Apple</b> — funguje JEN pro Apple, ne pro startup.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={1} title="Marketingový výzkum, metody a limity, mediální výzkum"
+      subtitle="Definice + proces + kvant × kval + výběr respondentů + pretest/post-test + mediální metriky + limity"
+      color={VSE.fis}
+      questionText="Marketingový výzkum, metody a jejich limity, mediální výzkumy."
+      questionDesc="Definice MV + 3 cíle + 3 fáze procesu + MV jako součást MIS. Typy dat (primární × sekundární, interní × externí). Kvantitativní × Kvalitativní metody. Výběr respondentů (4 typy + co dělá náhodný náhodným). Pretest / korekční / post-test + TOTE model. Mediální výzkum — 4 dimenze + online metriky (GRP, CTR, brand lift). Nástroje (AdGraal, Adwise, GA4). 5 limitů MV + 6 typů bias. P&G, Coca-Cola, Apple, Alza."
+      sloz={2} roz={3} freq={3}
+      examStrategy={examStrategyMkt1}
+      studySections={studySectionsMkt1}
+      flashcards={flashcardsMkt1}
+      quiz={quizMkt1}
+      praxe={praxeMkt1}
+      examQuestions={examQuestionsMkt1}
+      podcast={podcastMkt1}
+      caseStudy={caseStudyMkt1}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 2 — Analytické metody mkt výzkumu, primární × sekundární data
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt2Panel() {
+  const studySectionsMkt2 = [
+    { id: "intro", title: "Analýza dat v MV — kdy co použít", subtitle: "Návaznost na M1 + 3 typy analýzy (sumarizace × diference × souvislosti)", color: VSE.fis, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Tento okruh navazuje na <b>M1 (sběr dat)</b> a věnuje se <b>analytickým metodám</b> — co s daty udělat, abychom z nich získali insight. Komise <b>Kupec, Vávra, Mládková</b> chtějí slyšet konkrétní metody, ne obecné fráze.
+        </Def>
+        <Tag color={VSE.fis}>3 hlavní typy analýzy (podle účelu)</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "📊 1. SUMARIZACE", d: "Popis dat. Průměr, medián, modus, kvartily, řády. „Kolik %, jaký průměr.\u201D" },
+            { c: VSE.warning, t: "⚖️ 2. SLEDOVÁNÍ DIFERENCÍ", d: "Liší se skupiny? ANOVA, chí-kvadrát, t-test. „Liší se preference žen × mužů?\u201D" },
+            { c: VSE.success, t: "🔗 3. SLEDOVÁNÍ SOUVISLOSTÍ", d: "Co s čím souvisí? Korelace, regrese, faktorová analýza. „Jak cena ovlivňuje prodej?\u201D" },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Návaznost na primární × sekundární data</Tag>
+        <Bullet items={[
+          "<b>Sekundární data:</b> Typicky analýzy <b>časových řad</b> (vývoj v čase) — index, klouzavé průměry, korelace, regrese.",
+          "<b>Primární data:</b> Typicky analýzy přímého <b>chování či postoje</b> — sumarizace, diference (ANOVA), souvislosti (faktorová, conjoint, shluková).",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Kupec + Mládková + Kolouchová 2026 (Coffee Pot)"
+          what="Komise chce <b>konkrétní metody</b> — ANOVA, conjoint, shluková analýza, BPTO. Obecné fráze jako „použila bych analytické metody\u201D nestačí. Musíš vědět, KDY co použít."
+        />
+      </div>) },
+
+    { id: "sumarizace", title: "Sumarizace — popisná statistika", subtitle: "Průměr, medián, modus, variabilita, řady", color: VSE.fis, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Sumarizace</b> = popis dat <b>v jednom čísle nebo grafu</b>. Nejjednodušší analýza — víc o čem mluvit, ale málo o čem rozhodovat.
+        </Def>
+        <Tag color={VSE.fis}>Míry centrální tendence</Tag>
+        <Bullet items={[
+          "<b>Průměr (mean):</b> Součet hodnot / počet. Citlivý na extrémy. Vhodné pro kvantitativní data bez outlierů.",
+          "<b>Medián:</b> Prostřední hodnota. Robustní vůči extrémům. Vhodné pro skewed distribuci (např. příjem).",
+          "<b>Modus:</b> Nejčastější hodnota. Jediný použitelný pro kategoriální data (oblíbená značka).",
+          "<b>Kvartily:</b> 25 %, 50 %, 75 % hranice. Box plot vizualizace.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Míry variability</Tag>
+        <Bullet items={[
+          "<b>Rozptyl (variance):</b> Průměrná čtvercová odchylka od průměru.",
+          "<b>Směrodatná odchylka (SD):</b> Odmocnina rozptylu. Klasická míra rozptylu okolo průměru.",
+          "<b>Variační koeficient:</b> SD / průměr. Relativní variabilita (porovnání souborů s různým průměrem).",
+          "<b>Rozsah (range):</b> Max - Min. Hrubá míra.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Analýza časových řad (sekundární data!)</Tag>
+        <Bullet items={[
+          "<b>Trend:</b> Dlouhodobý směr vývoje (např. růst tržeb).",
+          "<b>Sezónnost:</b> Pravidelné výkyvy (vánoční sales, letní turistika).",
+          "<b>Klouzavé průměry:</b> Vyhlazení dat — průměr posledních N období.",
+          "<b>Indexy:</b> Procentní změna proti základnímu období. CPI, sales index.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "diference", title: "Sledování diferencí — ANOVA, chí-kvadrát, t-testy", subtitle: "Liší se skupiny? Parametrické × neparametrické testy", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Sledování diferencí</b> testuje, zda <b>se 2+ skupiny statisticky liší</b>. Klíčové pro segmentaci a A/B testing.
+        </Def>
+        <Tag color={VSE.fis}>Parametrické testy (data normálně rozdělená)</Tag>
+        <Bullet items={[
+          "<b>t-test (Student):</b> Porovnává průměry 2 skupin (např. tržby v Praze × Brně). Závislý vs nezávislý.",
+          "<b>ANOVA (analýza rozptylu):</b> Porovnává průměry <b>3+ skupin</b>. Jednoduchá (1 faktor) × vícefaktorová (2+ faktory najednou).",
+          "<b>F-test:</b> Test rozptylů — homogenita variancí (předpoklad ANOVY).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Neparametrické testy (data abnormální nebo ordinální)</Tag>
+        <Bullet items={[
+          "<b>Chí-kvadrát (χ²):</b> Test nezávislosti dvou kategoriálních proměnných (např. pohlaví × značka). <b>Křížové tabulky</b> jsou základ.",
+          "<b>Mann-Whitney U test:</b> Neparametrická alternativa t-testu (data nemají normální distribuci).",
+          "<b>Kruskal-Wallis test:</b> Neparametrická alternativa ANOVA.",
+          "<b>Kolmogorov-Smirnov test:</b> Vyhodnocení preferencí (2 vzorky). Detail v M1 (mediální výzkum).",
+          "<b>McNemarův test:</b> Pre × post stejné skupiny (2 závislé vzorky). Detail v M1.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Křížové tabulky (cross-tabs)</Tag>
+        <Bullet items={[
+          "<b>Souvislost mezi 2 jevy</b>, nejčastěji A × B (např. pohlaví × značka kávy).",
+          "<b>Výstup:</b> Tabulka četností + procentuální podíly.",
+          "<b>Statistika:</b> Chí-kvadrát test ověří, zda je souvislost statisticky významná.",
+          "<b>Aplikace:</b> Segmentace zákazníků, profilace cílovek.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "souvislosti", title: "Sledování souvislostí — korelace, regrese", subtitle: "Co s čím souvisí + jak silně + lineární vs nelineární", color: VSE.fis, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Sledování souvislostí</b> zkoumá <b>vztah mezi kvantitativními proměnnými</b>. Cíl: identifikovat, co ovlivňuje co (např. cena × prodej, reklama × awareness).
+        </Def>
+        <Tag color={VSE.fis}>Korelační analýza</Tag>
+        <Bullet items={[
+          "<b>Korelační koeficient (r):</b> Síla a směr vztahu mezi 2 proměnnými. Rozsah −1 až +1.",
+          "<b>r = 1:</b> Perfektní pozitivní (čím víc X, tím víc Y).",
+          "<b>r = −1:</b> Perfektní negativní (čím víc X, tím méně Y).",
+          "<b>r = 0:</b> Žádný lineární vztah.",
+          "<b>Pearson r:</b> Pro normální kvantitativní data. <b>Spearman ρ:</b> Pro ordinální data.",
+          "<b>POZOR:</b> Korelace ≠ kauzalita. Spotřeba zmrzliny koreluje s utopeními (společná příčina = léto).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Regresní analýza</Tag>
+        <Bullet items={[
+          "<b>Vztah nezávislé proměnné X a závislé Y:</b> Y = a + b·X + e (lineární regrese).",
+          "<b>Jednoduchá regrese:</b> 1 nezávislá X (např. cena → prodej).",
+          "<b>Vícenásobná regrese:</b> Více X (cena + reklama + sezóna → prodej).",
+          "<b>Koeficient determinace R²:</b> % rozptylu Y vysvětlený X. R² = 0,8 = 80 % rozptylu vysvětleno.",
+          "<b>Použití:</b> Predikce hodnot Y při znalosti X. „Pokud zlevníme o 10 %, prodej vzroste o X.\u201D",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Specifické typy regrese</Tag>
+        <Bullet items={[
+          "<b>Logistická regrese:</b> Y je binární (koupí/nekoupí). Predikuje pravděpodobnost.",
+          "<b>Nelineární regrese:</b> Vztah není přímka (exponenciální, logaritmická, polynomická).",
+          "<b>Time-series regrese:</b> Y v čase (sales forecasting).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "multivariate", title: "Multivariantní analýzy — faktorová, shluková, diskriminační", subtitle: "Analýza více proměnných najednou", color: VSE.fis, emoji: "hive",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Multivariantní analýzy</b> zkoumají <b>vztahy mezi více proměnnými najednou</b>. Klíčové pro segmentaci, positioning, redukci dat.
+        </Def>
+        <Tag color={VSE.fis}>Faktorová analýza</Tag>
+        <Bullet items={[
+          "<b>Cíl:</b> Redukce počtu proměnných na menší počet <b>faktorů</b> (skrytých dimenzí).",
+          "<b>Příklad:</b> 20 otázek o produktu → 3 faktory (kvalita, cena, design).",
+          "<b>Použití:</b> Identifikace klíčových dimenzí nákupního rozhodování, zjednodušení dotazníků.",
+          "<b>Výstup:</b> Faktorové zatížení (loading) — který item patří do kterého faktoru.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Shluková analýza (Cluster analysis)</Tag>
+        <Bullet items={[
+          "<b>Cíl:</b> Seskupit respondenty do <b>homogenních shluků</b> (segments). Uvnitř podobní, navzájem různí.",
+          "<b>Metody:</b> K-means (předem definovaný počet shluků), hierarchický cluster (dendrogram).",
+          "<b>Použití:</b> <b>Segmentace zákazníků</b> — typický nástroj. Detail v M3 (Segmentace).",
+          "<b>Výstup:</b> 3-7 segmentů s profily (např. „Cenově citliví\", „Premium hledači\", „Ekologicky uvědomělí\").",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Diskriminační analýza</Tag>
+        <Bullet items={[
+          "<b>Cíl:</b> Identifikovat, <b>které proměnné nejvíc odlišují</b> předem definované skupiny.",
+          "<b>Rozdíl od shlukové:</b> Shluková skupiny tvoří, diskriminační je rozliší.",
+          "<b>Použití:</b> „Co odlišuje naše zákazníky od konkurence?\" — vstup do positioning.",
+          "<b>Výstup:</b> Diskriminační funkce + váhy klíčových proměnných.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Conjoint analýza (CA)</Tag>
+        <Bullet items={[
+          "<b>Cíl:</b> Zjistit, <b>kterou kombinaci vlastností produktu</b> respondent preferuje. Hodnotí celkovou utilitu, ne dílčí.",
+          "<b>Vstup:</b> Respondent srovnává varianty produktu (např. 5 telefonů s různými kombinacemi: cena/baterie/foťák/váha).",
+          "<b>Výstup:</b> Důležitost (pretence) jednotlivých atributů pro zákazníka. <b>„Kterou vlastnost je ochoten obětovat?\u201D</b>",
+          "<b>Použití:</b> Optimalizace produktové nabídky, pricing, feature prioritization.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "tools", title: "Nástroje pro analýzu + limity primárních × sekundárních dat", subtitle: "SPSS, R, Python, GA4 + co data neumí říct", color: VSE.fis, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Bez nástrojů jsou metody jen teorie. Komise <b>Vávra (Lázně)</b> chce vědět, čím se analyzuje. Komise <b>Tahal</b>: „Google Analytics nestačí\".
+        </Def>
+        <Tag color={VSE.fis}>Statistické nástroje (od jednoduchých k pokročilým)</Tag>
+        <Bullet items={[
+          "<b>Excel + Power Pivot:</b> Sumarizace, jednoduché t-testy, korelace. Limit: max ~1M řádků, slabé multivariate.",
+          "<b>SPSS (IBM):</b> Klasický akademický standard. ANOVA, regrese, faktorová, shluková. GUI-based.",
+          "<b>R / Python:</b> Open-source, pokročilá statistika a machine learning. R ggplot2, Python pandas/scikit-learn.",
+          "<b>SAS:</b> Enterprise standard pro velké firmy (banky, farma).",
+          "<b>Tableau / Power BI:</b> Vizualizace dat, dashboardy. Doplněk SPSS/R.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Specializované MV nástroje</Tag>
+        <Bullet items={[
+          "<b>Google Analytics 4 (GA4):</b> Web analytics — eventy, konverze, atribuce. Standard pro digital.",
+          "<b>Meta Business Suite, Google Ads:</b> Platform-native analytika kampaní.",
+          "<b>Brand24, Talkwalker:</b> Sentiment analysis sociálních sítí.",
+          "<b>Hotjar, Smartlook:</b> Heatmaps + session recordings — kvalitativní web analytics.",
+          "<b>Sawtooth Software:</b> Conjoint analysis — průmyslový standard.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Limity primárních × sekundárních dat</Tag>
+        <Bullet items={[
+          "<b>Sekundární:</b> Mohou být zastaralé, sbíraná pro jiný účel, různá metodika (nesrovnatelnost), agregovaná (chybí detail).",
+          "<b>Primární:</b> Drahé, časově náročné, omezený rozsah (1000 vs miliony bodů big data), respondent bias (M1 limity).",
+          "<b>Tip pro PS:</b> Začni sekundárními (rychlá orientace, levné) → identifikuj mezery → doplň primárními pro konkrétní otázky.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsMkt2 = [
+    { term: "Analýza dat v MV", def: "3 typy podle účelu: Sumarizace (popis) / Sledování diferencí (liší se skupiny?) / Sledování souvislostí (co s čím souvisí).", tag: "POJEM" },
+    { term: "Sumarizace", def: "Popis dat. Průměr, medián, modus, kvartily, variance, SD. Nejjednodušší analýza.", tag: "SUMARIZACE" },
+    { term: "Průměr × Medián", def: "Průměr citlivý na extrémy. Medián robustní (50. percentil). Pro skewed data (příjem) lepší medián.", tag: "SUMARIZACE" },
+    { term: "Variační koeficient", def: "SD / průměr. Relativní variabilita — pro porovnání souborů s různým průměrem.", tag: "SUMARIZACE" },
+    { term: "Časové řady", def: "Trend (dlouhodobý směr) + Sezónnost (pravidelné výkyvy) + Klouzavé průměry (vyhlazení) + Indexy (% změna).", tag: "ČAS. ŘADY" },
+    { term: "t-test (Student)", def: "Parametrický test — porovnává průměry 2 skupin. Závislý vs nezávislý.", tag: "DIFERENCE" },
+    { term: "ANOVA", def: "Analýza rozptylu — porovnává průměry 3+ skupin. Jednoduchá (1 faktor) × vícefaktorová.", tag: "DIFERENCE" },
+    { term: "Chí-kvadrát (χ²)", def: "Neparametrický test nezávislosti 2 kategoriálních proměnných. Křížové tabulky jsou základ.", tag: "DIFERENCE" },
+    { term: "Křížové tabulky", def: "Souvislost mezi 2 jevy (A × B). Tabulka četností + chí-kvadrát test významnosti.", tag: "DIFERENCE" },
+    { term: "Parametrické × Neparametrické", def: "Parametrické (t-test, ANOVA) předpokládají normální rozdělení. Neparametrické (chí², Mann-Whitney, Kruskal-Wallis) ne.", tag: "DIFERENCE" },
+    { term: "Korelační koeficient r", def: "Síla a směr vztahu mezi 2 proměnnými. −1 až +1. Pearson (kvant) × Spearman (ordinální). r = 0 = žádný lineární vztah.", tag: "SOUVISLOSTI" },
+    { term: "Korelace ≠ kauzalita", def: "Spotřeba zmrzliny koreluje s utopeními (společná příčina = léto). Korelace neznamená příčinnost.", tag: "SOUVISLOSTI" },
+    { term: "Regrese", def: "Y = a + b·X + e. Vztah X (nezávislá) → Y (závislá). Jednoduchá (1 X) × vícenásobná (více X).", tag: "SOUVISLOSTI" },
+    { term: "R² (koeficient determinace)", def: "% rozptylu Y vysvětlený nezávislými X. R² = 0,8 = 80 % rozptylu vysvětleno modelem.", tag: "SOUVISLOSTI" },
+    { term: "Logistická regrese", def: "Y je binární (koupí/nekoupí). Predikuje pravděpodobnost. Klíč v predikci churn.", tag: "SOUVISLOSTI" },
+    { term: "Faktorová analýza", def: "Redukce počtu proměnných na menší počet faktorů (skrytých dimenzí). 20 otázek → 3 faktory (kvalita, cena, design).", tag: "MULTIVARIATE" },
+    { term: "Shluková analýza", def: "Seskupení respondentů do homogenních shluků (segments). K-means / hierarchický. Klíč pro segmentaci zákazníků.", tag: "MULTIVARIATE" },
+    { term: "Diskriminační analýza", def: "Identifikuje, které proměnné nejvíc odlišují předem definované skupiny. Shluková tvoří, diskriminační rozliší.", tag: "MULTIVARIATE" },
+    { term: "Conjoint analýza (CA)", def: "Zjišťuje preference kombinací vlastností produktu. Respondent srovnává varianty. Výstup: důležitost atributů pro zákazníka.", tag: "MULTIVARIATE" },
+    { term: "SPSS", def: "Klasický akademický standard. ANOVA, regrese, faktorová, shluková. GUI-based.", tag: "NÁSTROJE" },
+    { term: "R / Python", def: "Open-source pokročilá statistika a ML. R ggplot2, Python pandas/scikit-learn.", tag: "NÁSTROJE" },
+    { term: "Google Analytics 4 (GA4)", def: "Web analytics — eventy, konverze, atribuce. Standard pro digital MV.", tag: "NÁSTROJE" },
+    { term: "Hotjar / Smartlook", def: "Heatmaps + session recordings. Kvalitativní web analytics — kde uživatel zírá, kde klikne.", tag: "NÁSTROJE" },
+    { term: "Limity sekundárních dat", def: "Zastaralá, jiný účel sběru, různá metodika (nesrovnatelnost), agregovaná (chybí detail).", tag: "LIMITY" },
+    { term: "Limity primárních dat", def: "Drahé, časově náročné, omezený rozsah (1000 vs miliony), respondent bias (viz M1 limity).", tag: "LIMITY" },
+  ];
+
+  const quizMkt2 = [
+    { q: "Jaké jsou 3 hlavní typy analýzy v MV?", opts: ["Online / Offline / Hybrid", "Sumarizace / Sledování diferencí / Sledování souvislostí", "Kvantitativní / Kvalitativní / Smíšená", "Pretest / Korekce / Post-test"], correct: 1 },
+    { q: "Která míra centrální tendence je nejrobustnější vůči extrémům?", opts: ["Průměr", "Medián", "Modus", "Maximum"], correct: 1 },
+    { q: "Co je ANOVA?", opts: ["Italský sýr", "Analýza rozptylu — porovnává průměry 3+ skupin", "Adobe software", "Test náhodnosti"], correct: 1 },
+    { q: "Co testuje chí-kvadrát?", opts: ["Teplotu", "Nezávislost 2 kategoriálních proměnných (křížové tabulky)", "Cenu", "Loyalty"], correct: 1 },
+    { q: "Jaký je rozsah korelačního koeficientu r?", opts: ["0 až 1", "−1 až +1", "0 až 100", "0 až ∞"], correct: 1 },
+    { q: "Korelace = kauzalita?", opts: ["Ano vždycky", "Ne — korelace pouze ukazuje vztah, ne příčinu", "Jen u Pearson r", "Jen u kvant dat"], correct: 1 },
+    { q: "Co je R² (koeficient determinace)?", opts: ["Druhá odmocnina", "% rozptylu Y vysvětlený nezávislými X v regresi", "R-squared software", "Reach × Repetition"], correct: 1 },
+    { q: "Která analýza redukuje proměnné na menší počet faktorů?", opts: ["Shluková", "Faktorová", "Diskriminační", "Conjoint"], correct: 1 },
+    { q: "K čemu slouží shluková analýza?", opts: ["Predikce ceny", "Seskupení respondentů do homogenních segmentů", "Reklamy", "SWOT"], correct: 1 },
+    { q: "Co je conjoint analýza?", opts: ["Spojení tabulek", "Měření preferencí kombinací vlastností produktu (respondent srovnává varianty)", "Statistický test", "Druh dotazníku"], correct: 1 },
+    { q: "Jaký je rozdíl mezi shlukovou a diskriminační analýzou?", opts: ["Nejsou rozdíly", "Shluková skupiny TVOŘÍ. Diskriminační je ROZLIŠÍ (které proměnné je odlišují).", "Shluková je dražší", "Diskriminační je jen pro velké vzorky"], correct: 1 },
+    { q: "Která regrese predikuje binární výstup (koupí/nekoupí)?", opts: ["Jednoduchá lineární", "Vícenásobná", "Logistická", "Polynomická"], correct: 2 },
+    { q: "Co je hlavní limit sekundárních dat?", opts: ["Jsou drahá", "Mohou být zastaralá, sbíraná pro jiný účel, různá metodika", "Jsou jen v angličtině", "Není limit"], correct: 1 },
+    { q: "Které analýzy se nejčastěji používají v segmentaci zákazníků?", opts: ["t-test + ANOVA", "Shluková + faktorová analýza", "Korelace + regrese", "Chí-kvadrát + sumarizace"], correct: 1 },
+  ];
+
+  const praxeMkt2 = {
+    caseStudy: {
+      company: "Netflix — etalon data-driven analýzy v zábavním průmyslu",
+      subtitle: "Multivariantní analýza + ML na všech levels",
+      content: (<>
+        <b>Netflix</b> má <b>260 mil. zákazníků</b> a generuje <b>petabajty dat denně</b>. Klíčová KV — analýza dat pro doporučení, content investice, retention.<br/><br/>
+        <b style={{ color: VSE.success }}>Co Netflix analyzuje:</b><br/>
+        • <b>Shluková analýza:</b> 2000+ mikrosegmentů ("Cluster 542 — fanoušci k-pop dramat s noir prvky"). Personalizace na úrovni jednotlivce, ne demografie.<br/>
+        • <b>Conjoint analýza:</b> Před investicí do nového seriálu testují kombinace (žánr × herec × délka epizody × tempo). House of Cards = výsledek datové analýzy: Kevin Spacey + David Fincher + politický thriller = jistá výhra.<br/>
+        • <b>Regresní modely:</b> Predikce churn (pravděpodobnost zrušení). Logistická regrese na 100+ vstupních proměnných (viewing time, ratings, search behavior).<br/>
+        • <b>A/B testing:</b> 500+ testů ročně. Thumbnaily seriálů personalizovány pro každého uživatele zvlášť (různá obálka House of Cards podle preferencí).<br/><br/>
+        <b style={{ color: VSE.warning }}>Konkrétní úspěchy:</b><br/>
+        • <b>House of Cards (2013):</b> 100M USD před první epizodou. Riziko? Conjoint + historická data ukázaly 95 % šanci úspěchu.<br/>
+        • <b>Stranger Things:</b> Cluster analýza našla skrytý segment „80s nostalgie + sci-fi\" — 28M domácností sledovalo v prvních 4 týdnech.<br/>
+        • <b>Personalizovaný UI:</b> 75 % obsahu sledováno přes doporučovací algoritmus (collaborative filtering + content-based).<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Netflix ROI z dat: ~1B USD ročně z prevence churn (1 % retention = 100M USD/rok).
+      </>),
+      lessons: "Netflix je <b>etalon analýzy v zábavě</b>. Pro PS s digitálním produktem doporuč: <b>shluková analýza pro mikrosegmenty + logistická regrese pro churn prediction + A/B testing + conjoint pro feature prioritization</b>. Alternativa: <b>Spotify (Discover Weekly), Amazon (anticipatory shipping z M1), Alza (atribuce kanálů)</b>."
+    },
+    miniExamples: [
+      { tag: "ANOVA", color: VSE.fmv, company: "Pepsi vs Coca-Cola blind test (1975)", content: "Pepsi Challenge — slepé testování chuti. ANOVA porovnání průměrných ratings 3 skupin (Pepsi/Coke/blind). Výsledek statisticky významný: respondenti preferovali Pepsi v slepém testu. <b>New Coke (1985)</b> = důsledek — flop kvůli emocionální vazbě (chyba: ignorovali kvalitativní výzkum)." },
+      { tag: "REGRESE", color: VSE.warning, company: "P&G Marketing Mix Modeling", content: "P&G používá vícenásobnou regresi pro atribuci sales liftu. Y = sales. X = TV GRP + online impressions + price promo + season. R² typicky 0,7-0,85. Výstup: 1 USD do TV reklamy = 1,3 USD obratu, online 1,8 USD → realokace budgetu." },
+      { tag: "FAKTOROVÁ", color: VSE.success, company: "Škoda Auto — drivers of choice", content: "Škoda měří, co rozhoduje při nákupu auta. 25 atributů (cena, design, bezpečnost, spotřeba…) → faktorová analýza redukuje na 4 faktory: Praktičnost, Image, Cena, Ekologie. Reklamní kampaně cílí na 4 faktory, ne 25 atributů." },
+      { tag: "CONJOINT", color: VSE.fph, company: "Apple — iPhone feature prioritization", content: "Apple používá conjoint analýzu při design nového iPhonu. Test různých kombinací (baterie × foťák × čip × cena). Výsledek: zákazníci si nejvíc cení foťák > čip > baterie > cena. Marketing pak komunikuje exactly v tomto pořadí." },
+    ]
+  };
+
+  const examQuestionsMkt2 = [
+    { komise: "2026-02-06 — Kupec + Mládková + Kolouchová (Coffee Pot)", otazka: "Analytické metody marketingového výzkumu. Analýza primárních a sekundárních dat", pozn: "Komise chce <b>konkrétní metody</b>. Začni 3 typy analýzy (sumarizace/diference/souvislosti) → konkrétní techniky (ANOVA, regrese, shluková, conjoint). Doplň rozdíl primární × sekundární (M1)." },
+    { komise: "2026-02-06 — Mládková + Kolouchová + Mikan (Horská chata)", otazka: "Marketingové analytické nástroje. Primární a sekundární výzkum", pozn: "Student vyjmenoval Anova, conjoint, shluková analýza, BPTO — komisi to stačilo. Pozor: BPTO je cenový test (M12), ne analytická metoda. Lepší: ANOVA + faktorová + shluková + regrese." },
+    { komise: "2025-01-29 — Vávra + Mládková + Svobodová (Lázně)", otazka: "Analytické metody marketingového výzkumu, primární a sekundární data", pozn: "Vávra chce nástroje (SPSS, Excel, GA4) + příklady analýz pro lázně (např. shluková analýza pro segmentaci hostů, regrese pro forecast obsazenosti)." },
+    { komise: "2025-06-09 — Tahal + Lorencová + Schönfeld (Sucho)", otazka: "Marketingové a logistické informační systémy — data, jak se získávají, druhy. Google Analytics nestačí", pozn: "Tahal explicitně: <b>Google Analytics nestačí!</b> Vyjmenuj víc — SPSS, R, Python, SAS, Tableau. Pro sekundární data: ČSÚ, EUROSTAT. Pro primární: vlastní výzkum přes Ipsos/Median." },
+    { komise: "2026-02-06 — Stříteský + Krause + Zamazalová (Realitní firma)", otazka: "Segmentace — typy, shluky, pojem, podle Kotlera, induktivní/deduktivní", pozn: "Stříteský chce <b>shlukovou analýzu</b> jako nástroj segmentace. Detail v M3 (Segmentace), tady jen krátký odkaz: shluková = homogenní uvnitř, heterogenní mezi shluky." },
+  ];
+
+  const podcastMkt2 = { title: "Marketing 2 — Analytické metody mkt výzkumu", description: "3 typy analýzy (sumarizace × diference × souvislosti), popisná statistika (průměr/medián/modus, časové řady), parametrické × neparametrické testy (t-test, ANOVA, chí-kvadrát), korelace × regrese (Pearson, Spearman, R²), multivariantní analýzy (faktorová, shluková, diskriminační, conjoint), nástroje (SPSS, R, Python, GA4), limity primárních × sekundárních dat. Netflix, P&G, Pepsi, Škoda, Apple.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt2 = `
+    <b style="color:#A82A5F">1.</b> Naváži na M1 — sběr dat → analytické metody (toto je M2).<br/>
+    <b style="color:#A82A5F">2.</b> 3 typy analýzy podle účelu — <b>Sumarizace / Diference / Souvislosti</b>.<br/>
+    <b style="color:#A82A5F">3.</b> Sumarizace — průměr, medián, modus, SD, časové řady.<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>Sledování diferencí</b> — parametrické (t-test, ANOVA) × neparametrické (chí², Mann-Whitney, Kruskal-Wallis).<br/>
+    <b style="color:#A82A5F">5.</b> Křížové tabulky — souvislost 2 kategoriálních proměnných.<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>Korelace × Regrese</b> — Pearson/Spearman, jednoduchá × vícenásobná regrese, R², korelace ≠ kauzalita.<br/>
+    <b style="color:#A82A5F">7.</b> ⚠️ <b>Multivariantní analýzy</b> — faktorová (redukce), shluková (segmentace), diskriminační (rozliší), conjoint (preference kombinací).<br/>
+    <b style="color:#A82A5F">8.</b> Nástroje — SPSS, R, Python, GA4, Tableau, Sawtooth Software (conjoint).<br/>
+    <b style="color:#A82A5F">9.</b> Limity primárních × sekundárních dat.<br/>
+    <b style="color:#A82A5F">10.</b> Aplikace na PS — která analýza pro jaký problém. Netflix, P&G, Apple jako příklady.
+  `;
+
+  const caseStudyMkt2 = {
+    title: "Marek — Data Analytics Lead retailového řetězce SnackBar (kavárny + lokální pekařství, 80 poboček, 380 mil. Kč)",
+    subtitle: "Identifikuj problémy v analytice + navrhni metody",
+    scenario: "Marek (35 let) je Data Analytics Lead SnackBar 2 roky. Síť 80 poboček napříč ČR, růst 8 %. Cílovka: pracující 25-45 let, městské, kupují snídani a oběd v práci.\n\nCEO chce, aby Marek odpověděl na 4 otázky pro strategický plán 2026:\n\n1) Které pobočky mají potenciál růst? Které zavřít?\n\n2) Jaké produkty by měli přidat do menu (5 nových položek)?\n\n3) Jaká skupina zákazníků utrácí nejvíc — a co je odlišuje od příležitostných?\n\n4) Jak ovlivnily promo akce v Q3 sales? Vyplatily se?\n\nMarek má k dispozici:\n\n• POS data všech 80 poboček × 24 měsíců (sales po hodině/dni/produktu)\n\n• CRM databáze 120k loyalty karet (frekvence, koš, demo)\n\n• Sekundární data ČSÚ (demografika měst), Google Trends, oborové reporty\n\n• Budget 200k Kč na primární výzkum (CAWI dotazník)\n\nMarek pracuje sám, má SPSS a Power BI. Komise chce vědět: jaké analytické metody by Marek měl použít na každou ze 4 otázek + jak by spojil primární a sekundární data.",
+    signals: [
+      { text: "Které pobočky mají potenciál růst? Které zavřít?", color: VSE.fmv, reason: "Klasický případ pro <b>regresní analýzu</b> — Y = sales, X = location demografika + size + traffic + competition. R² ukáže model fit. Pobočky s reziduály (skutečné sales − predikované) výrazně níž = problém. + sekundární data ČSÚ pro demografiku každého města." },
+      { text: "Jaké produkty by měli přidat do menu (5 nových položek)?", color: VSE.warning, reason: "<b>Conjoint analýza</b> přes CAWI (primární data, 200k Kč budget). Respondent srovnává různé kombinace (typ produktu × cena × dietní profil × ingredience). Výstup: top 5 atributů + jejich preferované hodnoty. Lepší než ptát „co byste si přidali?\u201D." },
+      { text: "Jaká skupina zákazníků utrácí nejvíc — co je odlišuje od příležitostných?", color: VSE.fph, reason: "2 metody dohromady: <b>Shluková analýza</b> (k-means na CRM datech — 120k zákazníků, vstupy: frekvence, koš, demo) → identifikuje 4-6 segmentů. <b>Diskriminační analýza</b> identifikuje, KTERÉ proměnné nejvíc odlišují top segment od zbytku — vstup do positioning." },
+      { text: "Jak ovlivnily promo akce v Q3 sales?", color: VSE.success, reason: "<b>Regresní analýza časových řad</b> — Y = denní sales, X = promo (binární) + den v týdnu + sezónnost + počasí. Vícenásobná regrese s kontrolními proměnnými. + <b>t-test</b> průměrných sales pre × post promo (závislé vzorky)." },
+      { text: "POS data + CRM databáze 120k loyalty karet", color: VSE.warning, reason: "Bohatá <b>interní sekundární data</b> — perfektní pro shlukovou analýzu a regrese. Žádný dotazník není potřeba pro otázky 1, 3, 4. Pouze otázka 2 (nové produkty) vyžaduje primární výzkum." },
+      { text: "Budget 200k Kč na primární výzkum (CAWI dotazník)", color: VSE.fph, reason: "Realistický budget pro 1 fokusovaný výzkum — conjoint analýza nového menu. 400-600 respondentů × 200-500 Kč = 80-150k Kč. Zbytek na Sawtooth software a analýzu." },
+    ],
+    quiz1: {
+      question: "Která metoda je nejlepší pro otázku „Které pobočky mají potenciál růst?\"?",
+      options: [
+        "ANOVA — porovnání průměrných sales",
+        "Vícenásobná regrese — predikce sales podle externích proměnných (lokalita, demografika, traffic)",
+        "Faktorová analýza",
+        "Conjoint analýza",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Co by Marek měl udělat pro každou z 4 otázek?",
+      options: [
+        { text: "Otázka 1 (pobočky): Vícenásobná regrese (sales ~ demografika + size + traffic) → pobočky s negativním residualem = problém", correct: true, reason: "✓ Klasická regresní úloha. Sekundární ČSÚ + interní POS = ideální kombinace." },
+        { text: "Otázka 2 (nové produkty): Conjoint analýza přes CAWI — respondent srovnává kombinace (typ × cena × dieta) → top 5 atributů", correct: true, reason: "✓ Conjoint je standard pro feature prioritization. Lepší než přímý dotaz." },
+        { text: "Otázka 3 (segmenty): Shluková analýza CRM dat (k-means) → 4-6 segmentů, pak diskriminační analýza pro top segment", correct: true, reason: "✓ Shluková tvoří segmenty, diskriminační identifikuje klíčové odlišovače pro positioning." },
+        { text: "Otázka 4 (promo): Regrese časových řad + t-test pre/post promo (závislé vzorky)", correct: true, reason: "✓ Klasická úloha promo evaluace. Kontrolní proměnné (sezónnost, počasí) klíčové." },
+        { text: "Spojit sekundární (ČSÚ pro otázku 1) + primární (CAWI conjoint pro otázku 2) — efektivní využití 200k budgetu", correct: true, reason: "✓ Otázky 1, 3, 4 jdou z interních dat. Pouze otázka 2 vyžaduje nový sběr." },
+        { text: "Použít jen Excel — SPSS je drahý", correct: false, reason: "✗ Excel zvládne sumarizaci a t-test, ale ne shlukovou analýzu, conjoint ani vícenásobnou regresi se 100k řádky." },
+        { text: "Outsourcovat všechno agentuře (Ipsos) za 1 mil. Kč", correct: false, reason: "✗ Marek má 200k budget + interní data + SPSS. Pouze otázka 2 potřebuje agenturu." },
+        { text: "Použít ChatGPT na všechny otázky", correct: false, reason: "✗ ChatGPT není analytický nástroj. Pro reálnou analytiku potřeba SPSS/R/Python s konkrétními modely." },
+      ],
+    },
+    summary: "<b>Marek musí použít 4 různé analytické metody pro 4 typy otázek.</b> Klíč: <b>sumarizace nestačí — potřeba diference (ANOVA, t-test) + souvislosti (regrese) + multivariate (shluková, diskriminační, conjoint)</b>.<br/><br/><b>Plán:</b><br/>• <b>Otázka 1:</b> Vícenásobná regrese (POS + ČSÚ) → identifikace pobočků s problémem<br/>• <b>Otázka 2:</b> CAWI conjoint analýza (primární data, 200k budget) → top atributy<br/>• <b>Otázka 3:</b> Shluková + diskriminační analýza CRM → 4-6 segmentů + jejich odlišovače<br/>• <b>Otázka 4:</b> Regrese časových řad + t-test → atribuce promo<br/><br/><b>Pro komisi:</b> Klasický data-driven retail. <b>Netflix</b> aplikuje stejné metody na obsah, <b>P&G</b> na sales lift. Klíčové: <b>každá obchodní otázka má svou analytickou metodu</b>. Korelace ≠ kauzalita (Marek si musí dávat pozor při interpretaci). Bez správné analýzy = špatná rozhodnutí.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={2} title="Analytické metody, primární × sekundární data"
+      subtitle="3 typy analýzy + ANOVA, regrese, faktorová, shluková, conjoint + nástroje + limity"
+      color={VSE.fis}
+      questionText="Analytické metody marketingového výzkumu. Analýza primárních a sekundárních dat."
+      questionDesc="3 typy analýzy podle účelu (sumarizace × diference × souvislosti). Popisná statistika (průměr/medián/modus, časové řady). Parametrické × neparametrické testy (t-test, ANOVA, chí-kvadrát, Mann-Whitney). Křížové tabulky. Korelační analýza (Pearson, Spearman, korelace ≠ kauzalita). Regrese (jednoduchá, vícenásobná, logistická, R²). Multivariantní analýzy — faktorová (redukce), shluková (segmentace), diskriminační (rozlišení), conjoint (preference kombinací). Nástroje (SPSS, R, Python, GA4, Tableau, Sawtooth). Limity primárních × sekundárních dat. Netflix, P&G, Pepsi, Škoda, Apple."
+      sloz={3} roz={3} freq={2}
+      examStrategy={examStrategyMkt2}
+      studySections={studySectionsMkt2}
+      flashcards={flashcardsMkt2}
+      quiz={quizMkt2}
+      praxe={praxeMkt2}
+      examQuestions={examQuestionsMkt2}
+      podcast={podcastMkt2}
+      caseStudy={caseStudyMkt2}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 3 — Segmentace, typy, fáze, postup, kritéria (+ logistika)
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt3Panel() {
+  const studySectionsMkt3 = [
+    { id: "intro", title: "Segmentace — definice, pojem, STP model", subtitle: "Co je tržní segment + 4 podmínky + STP proces", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Segmentace trhu</b> = rozdělení trhu na <b>jednotlivé skupiny zákazníků</b>, kteří mají podobné potřeby, charakteristiky či chování. Cíl: <b>cíleně oslovit homogenní skupinu</b> místo plošné komunikace.
+        </Def>
+        <Tag color={VSE.fis}>Tržní segment — 4 podmínky kvality</Tag>
+        <Bullet items={[
+          "<b>Vnitřní homogenita:</b> Uvnitř segmentu si jsou zákazníci podobní (preference, chování).",
+          "<b>Vnější heterogenita:</b> Mezi segmenty se zákazníci výrazně liší (jinak by to nebyly samostatné segmenty).",
+          "<b>Měřitelnost:</b> Velikost a charakteristiky segmentu lze kvantifikovat.",
+          "<b>Dostatečnost:</b> Segment je dost velký, aby se mu vyplatilo věnovat zvláštní pozornost.",
+          "<b>Dynamika v čase:</b> Segmenty se mění — co fungovalo loni nemusí letos (sledování trendů).",
+        ]} color={VSE.fis} />
+        <ExamAlert
+          komise="Stříteský + Krause + Zamazalová 2026 (Realitní firma)"
+          what="Stříteský chce slyšet definici přesně: <b>„homogenní uvnitř, heterogenní zvenku\u201D</b>. Bez této věty mu odpověď nestačí. + chce vědět, čím se segmenty tvoří (shluková analýza, viz M2)."
+        />
+        <Tag color={VSE.warning}>STP model — 3 kroky segmentace</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 480 200" style={{ width: "100%", maxWidth: 480, height: "auto" }}>
+            <defs>
+              <linearGradient id="stpgrad1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor={VSE.fmv} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.fmv} stopOpacity="0.7"/>
+              </linearGradient>
+              <linearGradient id="stpgrad2" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor={VSE.warning} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.warning} stopOpacity="0.7"/>
+              </linearGradient>
+              <linearGradient id="stpgrad3" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor={VSE.success} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.success} stopOpacity="0.7"/>
+              </linearGradient>
+            </defs>
+            {/* Funnel — 3 trapezoidy, postupně užší */}
+            <polygon points="20,30 460,30 420,70 60,70" fill="url(#stpgrad1)"/>
+            <polygon points="60,80 420,80 380,120 100,120" fill="url(#stpgrad2)"/>
+            <polygon points="100,130 380,130 340,170 140,170" fill="url(#stpgrad3)"/>
+            {/* Texty */}
+            <text x="240" y="55" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fff" fontFamily="Inter Tight, sans-serif">🧩 1. SEGMENTATION</text>
+            <text x="240" y="105" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fff" fontFamily="Inter Tight, sans-serif">🎯 2. TARGETING</text>
+            <text x="240" y="155" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fff" fontFamily="Inter Tight, sans-serif">📍 3. POSITIONING (M4)</text>
+            {/* Šipka dolů */}
+            <text x="240" y="195" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono, monospace">trh → cílová skupina → mysl zákazníka</text>
+          </svg>
+        </div>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🧩 1. SEGMENTATION", d: "Rozdělení trhu na homogenní skupiny podle kritérií (geo, demo, psycho, behavior)." },
+            { c: VSE.warning, t: "🎯 2. TARGETING", d: "Výběr 1-3 cílových segmentů, na které se zaměříme. Atraktivita × fit s firmou." },
+            { c: VSE.success, t: "📍 3. POSITIONING", d: "Umístění produktu v mysli zákazníka cílového segmentu. Detail v M4." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "kriteria", title: "Segmentační kritéria — 4 klasická + tradiční × netradiční", subtitle: "Geo, demo, psycho, behavior + Anetina Zuzčina tabulka", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>4 klasická kritéria</b> podle Kotlera. Komise <b>Mikovcová</b> chce vyjmenovat všechna 4 + příklady. Bočková chce navíc rozlišit <b>tradiční × netradiční</b>.
+        </Def>
+        <Tag color={VSE.fis}>4 klasická kritéria (Kotler)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🌍 1. GEOGRAFICKÁ", d: "Stát, region, město, klimatická zóna, hustota osídlení. ČR × SK, Praha × venkov." },
+            { c: VSE.warning, t: "👥 2. DEMOGRAFICKÁ", d: "Věk, pohlaví, příjem, vzdělání, rodinný stav, povolání. Klasika pro masový trh." },
+            { c: VSE.fph, t: "🧠 3. PSYCHOGRAFICKÁ", d: "Životní styl, osobnost, hodnoty, postoje. „LOHAS\u201D (Lifestyle of Health & Sustainability)." },
+            { c: VSE.success, t: "🛍️ 4. BEHAVIORÁLNÍ", d: "Jak se chová při nákupu — frekvence, příležitost, loyalty, role kupujícího, mira užívání." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ExamAlert
+          komise="Mikovcová + Kolouchová + Viktora 2025 (Hrnce)"
+          what="Komise chce hlavně <b>vyjmenovat všechna 4 kritéria + dát příklady</b>. Bez příkladů (LOHAS, věk 25-45, Praha × venkov) se to bere jako šum."
+        />
+        <Tag color={VSE.warning}>Popisná × Vysvětlující × Vysvětlované kritérium (Zuzka tabulka)</Tag>
+        <Bullet items={[
+          "<b>Popisná kritéria:</b> Charakteristiky, které popisují kdo zákazník je (demografika, geografika). Jednoduše měřitelné, ale neříkají PROČ.",
+          "<b>Vysvětlující kritéria:</b> Hodnoty, postoje, motivace — vysvětlují PROČ kupuje (psychografika).",
+          "<b>Vysvětlované kritérium:</b> Skutečné chování — nákupy, frekvence, koš. Co reálně dělá.",
+          "<b>Forward segmentation:</b> Od vysvětlujících proměnných → k chování. „Lidé s hodnotou A → mají chování B.\u201D",
+          "<b>Backward segmentation:</b> Od chování → k popisným proměnným. „Kdo nás kupuje? Jak je popsat?\u201D",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Tradiční × Netradiční kritéria</Tag>
+        <Bullet items={[
+          "<b>Tradiční:</b> Demografická, geografická — klasický masový marketing.",
+          "<b>Netradiční:</b> Psychografická, behaviorální, momentová (čas, místo, nálada) — digitální éra.",
+          "<b>Mikrosegmentace:</b> Jeden zákazník = jeden segment. Netflix, Amazon. Detail v M2 (shluková analýza).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "typy", title: "Typy segmentace + RFM + cílení marketingu", subtitle: "Mikro × strategická × makro + RFM + 3 typy marketingu", color: VSE.fis, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Segmentace</b> má více úrovní detailu (mikro × strategická × makro) a různé přístupy podle <b>typu marketingu</b> (masový × segmentový × niche × individuální).
+        </Def>
+        <Tag color={VSE.fis}>3 úrovně segmentace</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🔍 MIKRO SEGMENTACE", d: "Konkrétní úroveň nákupního chování. Individualizace, propojení s konkrétními zákazníky (CRM). „Karel z Brna, 35 let, kupuje měsíčně.\u201D" },
+            { c: VSE.warning, t: "📊 STRATEGICKÁ", d: "Podle hodnoty zákazníka (VIP × normální), scoringové modely, lifetime value. „Top 10 % zákazníků generuje 70 % obratu.\u201D" },
+            { c: VSE.fph, t: "🌐 MAKRO SEGMENTACE", d: "Široké tržní skupiny, dále nesegmentujeme. „Mladí městští\u201D, „Senioři venkov\u201D. Krátkodobá strategie." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>RFM segmentace (behaviorální klasika)</Tag>
+        <Bullet items={[
+          "<b>R — Recency:</b> Doba od posledního nákupu. Nedávní = aktivní, dlouho neviděni = riziko churn.",
+          "<b>F — Frequency:</b> Počet nákupů za období. Loyalitu.",
+          "<b>M — Monetary:</b> Celkový objem útrat. VIP × normální zákazníci.",
+          "<b>Použití:</b> CRM segmentace, retention kampaně, churn prediction. Klasika v retailu a e-commerce.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>3 typy marketingu (podle segmentace)</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "📢 NEDIFERENCOVANÝ", d: "Masový marketing — 1 nabídka pro celý trh. Coca-Cola classic, sůl, voda." },
+            { c: VSE.warning, t: "🎯 DIFERENCOVANÝ (STP)", d: "Segmenty × cílení × positioning. Různá nabídka pro různé segmenty. Většina firem." },
+            { c: VSE.success, t: "💎 KONCENTROVANÝ (NICHE)", d: "1 segment + hluboká specializace. Rolex, Patagonia, Tesla začátky." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Skupiny tržní segmentace (preference)</Tag>
+        <Bullet items={[
+          "<b>Homogenní preference:</b> Trh má jednotný vkus (sůl, mouka, klasická voda). Masový marketing.",
+          "<b>Rozptýlené preference:</b> Každý chce něco jiného, žádné jasné shluky. Maximální variabilita.",
+          "<b>Shlukové preference:</b> Jasné skupiny s podobnými preferencemi. Klasická segmentace funguje nejlépe.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "postup", title: "Postup segmentace — 4 fáze odvíjení segmentů", subtitle: "Vymezení trhu → kritéria → odlišení → rozvoj", color: VSE.fis, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Komise <b>Vávra, Smrčka, Mikovcová</b> chtějí <b>postup segmentace</b>. Bez konkrétních fází odpověď nestačí. 4 klasické fáze:
+        </Def>
+        <Tag color={VSE.fis}>4 fáze postupu segmentace</Tag>
+        <Bullet items={[
+          "<b>1. Vymezení daného trhu</b> — definujeme, na jakém trhu hrajeme. Produkt, geografie, typ zákazníka (B2B × B2C). „Bio kosmetika pro ženy v ČR.\u201D",
+          "<b>2. Posílení významných kritérií</b> — výběr 2-4 klíčových segmentačních proměnných. <b>Segmentační báze</b> (klíčové) × <b>popisná</b> (doplňující). Forward segmentation (od vysvětlujících k chování) × Backward (od chování k popisným).",
+          "<b>3. Odlišení segmentů</b> — shluková, diskriminační, conjoint analýza (viz M2). Identifikace 3-6 odlišných skupin.",
+          "<b>4. Rozvoj segmentů</b> — doplnění detailů, vytvoření person, doporučení strategií pro každý segment.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>2 přístupy k segmentaci</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "⬆️ INDUKTIVNÍ (zdola)", d: "Vlastní výzkum → identifikace shluků. Bottom-up. Drahé, ale precizní. Aplikace shlukové analýzy (M2). Pro nové trhy." },
+            { c: VSE.warning, t: "⬇️ DEDUKTIVNÍ (shora)", d: "Odhad podle toho, jak by měla obsahovat. Top-down. Levné, ale méně přesné. Pro stabilní trhy se známou strukturou." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Ad hoc × Post hoc segmentace</Tag>
+        <Bullet items={[
+          "<b>Ad hoc:</b> Předem zvolíme kritérium, podle něj rozdělíme. „Rozdělíme zákazníky podle věku.\u201D Rychlé, ale slabší.",
+          "<b>Post hoc:</b> Sledujeme segmenty, identifikujeme společná kritéria pomocí analýzy. „Najdeme přirozené shluky a popíšeme je.\u201D Silnější, ale dražší.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Vávra + Nový + Heřman 2025"
+          what="Vávra chce <b>postup + aplikaci na PS</b>. Naučit fáze + na případovce ukázat konkrétně: „1. Vymezím trh jako X, 2. Klíčová kritéria jsou A,B,C, 3. Identifikuji 3 segmenty: ..., 4. Pro každý doporučím strategii.\u201D"
+        />
+      </div>) },
+
+    { id: "vyber", title: "Výběr cílových segmentů — strategie cílení", subtitle: "4 strategie pokrytí trhu + jak vybrat atraktivní segment", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Po segmentaci přichází <b>targeting</b> — výběr 1-3 segmentů, na které se firma zaměří. Klíčové: <b>atraktivita segmentu</b> × <b>fit s firmou</b> (zdroje, kompetence).
+        </Def>
+        <Tag color={VSE.fis}>4 strategie pokrytí trhu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🌐 POKRYTÍ CELÉHO TRHU", d: "Diferenciovaný × nediferencovaný marketing. Pro velké hráče (Coca-Cola, P&G). Drahé, ale max obrat." },
+            { c: VSE.warning, t: "📊 SPECIALIZACE NA VÍCE SEGMENTŮ", d: "Selektivní specializace. Více segmentů, ale ne všechny. Vyvážené portfolio." },
+            { c: VSE.fph, t: "💎 SOUSTŘEDĚNÍ NA 1 SEGMENT (NICHE)", d: "Tržní výklenek. Hluboká specializace, vysoké marže. Rolex, Patagonia." },
+            { c: VSE.success, t: "👤 INDIVIDUÁLNÍ MARKETING (1-TO-1)", d: "Customizace pro každého. Tailor, Tesla custom, B2B prodej. Drahé, ale loyalita." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Kritéria atraktivity segmentu</Tag>
+        <Bullet items={[
+          "<b>Velikost a růstový potenciál</b> — segment je dost velký a roste.",
+          "<b>Ziskovost</b> — průměrná marže, ochota platit.",
+          "<b>Konkurence v segmentu</b> — kolik hráčů, jaká je rivalita (5 Porterových sil).",
+          "<b>Bariéry vstupu/výstupu</b> — kapitál, regulace, know-how.",
+          "<b>Fit s firmou</b> — odpovídá kompetencím, hodnotám, distribuci.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "logistika", title: "Logistika v segmentaci — požadavky na log. služby", subtitle: "Specifika logistické segmentace (Smrčka, Mikovcová chtějí!)", color: VSE.fis, emoji: "truck",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Komise <b>Smrčka, Mikovcová, Krause, Tahal</b> chtějí <b>logistiku v segmentaci</b> — jak segmenty kladou různé požadavky na logistické služby. Hodně zkoušená vazba.
+        </Def>
+        <ExamAlert
+          komise="Smrčka + Zamazalová + Kučera 2025 (Výroba kol)"
+          what="Smrčka chce explicitně <b>segmentační kritéria a jejich využití pro logistiku</b>. Bez aplikace na log. služby nestačí. Klíčové: <b>každý segment má jiné požadavky na rychlost, spolehlivost, customizaci dodání</b>."
+        />
+        <Tag color={VSE.fis}>Logistika jako segmentační kritérium</Tag>
+        <Bullet items={[
+          "<b>Frekvence dodávek:</b> Daily × týdně × měsíčně. Restaurace × běžný retail × průmysl.",
+          "<b>Velikost zásilky:</b> Plné kamiony × LTL (less-than-truckload) × parcel. B2B × B2C.",
+          "<b>Rychlost dodání:</b> Same-day × 24h × týden. Pizza × Alza × klasická pošta.",
+          "<b>Spolehlivost (on-time):</b> Just-in-Time × tolerance ke zpoždění. Toyota × běžné firmy.",
+          "<b>Customizace:</b> Standardní balení × custom (loga, barvy, dárkové zabalení).",
+          "<b>Návratky:</b> Free returns × paid × žádné. Zalando × běžný retail × B2B.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Typické segmenty podle log. požadavků</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🏃 SPEED LOVERS", d: "Rychlost > cena. Wolt, Pizza, urgent business. Premium price." },
+            { c: VSE.warning, t: "💰 VALUE SEEKERS", d: "Cena > rychlost. Akceptují 3-5 dní. Klasický e-shop." },
+            { c: VSE.fph, t: "⏱️ RELIABILITY DEMANDERS", d: "On-time > vše. B2B Tier 1, JIT manufacturing. Toyota, BMW." },
+            { c: VSE.success, t: "✨ PREMIUM EXPERIENCE", d: "Customizace, white-glove delivery. Apple, luxus, F&B." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Praktická aplikace</Tag>
+        <Bullet items={[
+          "<b>Diferenciace cenou:</b> Premium delivery (express) × standard. Zákazník si vybírá.",
+          "<b>Diferenciace nabídkou služeb:</b> Free returns pro VIP, paid pro standard.",
+          "<b>Geografická segmentace + logistika:</b> Centra měst (rychlé) × venkov (pomalejší, lockery, výdejny).",
+          "<b>B2B segmentace + SLA:</b> Tier 1 zákazníci → garantovaná dostupnost 99,9 %. Tier 3 → 95 %.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsMkt3 = [
+    { term: "Segmentace trhu", def: "Rozdělení trhu na jednotlivé skupiny zákazníků s podobnými potřebami, charakteristikami či chováním. Cíl: cíleně oslovit homogenní skupinu.", tag: "POJEM" },
+    { term: "Tržní segment", def: "Skupina zákazníků homogenní uvnitř + heterogenní zvenku + měřitelný + dostatečně velký + dynamický v čase.", tag: "POJEM" },
+    { term: "STP model", def: "3 kroky: Segmentation (rozdělení) → Targeting (výběr cílových) → Positioning (umístění v mysli — detail M4).", tag: "POJEM" },
+    { term: "4 klasická kritéria (Kotler)", def: "Geografická / Demografická / Psychografická / Behaviorální. Klasická segmentační proměnná.", tag: "KRITÉRIA" },
+    { term: "Geografická kritéria", def: "Stát, region, město, klimatická zóna, hustota osídlení. ČR × SK, Praha × venkov.", tag: "KRITÉRIA" },
+    { term: "Demografická kritéria", def: "Věk, pohlaví, příjem, vzdělání, rodinný stav, povolání. Klasika pro masový trh.", tag: "KRITÉRIA" },
+    { term: "Psychografická kritéria", def: "Životní styl, osobnost, hodnoty, postoje. LOHAS (Lifestyle of Health & Sustainability).", tag: "KRITÉRIA" },
+    { term: "Behaviorální kritéria", def: "Chování při nákupu — frekvence, příležitost, loyalty, role kupujícího, míra užívání.", tag: "KRITÉRIA" },
+    { term: "Popisná kritéria", def: "Charakteristiky, kdo zákazník je (demo, geo). Měřitelné, ale neříkají PROČ.", tag: "KRITÉRIA" },
+    { term: "Vysvětlující kritéria", def: "Hodnoty, postoje, motivace — vysvětlují PROČ kupuje (psychografika).", tag: "KRITÉRIA" },
+    { term: "Vysvětlované kritérium", def: "Skutečné chování — nákupy, frekvence, koš. Co reálně dělá.", tag: "KRITÉRIA" },
+    { term: "Forward × Backward segmentation", def: "Forward: od vysvětlujících → k chování. Backward: od chování → k popisným proměnným.", tag: "KRITÉRIA" },
+    { term: "Tradiční × Netradiční kritéria", def: "Tradiční: demo, geo (masový mkt). Netradiční: psychografika, behavior, momentová (digitální éra).", tag: "KRITÉRIA" },
+    { term: "Mikro segmentace", def: "Konkrétní úroveň nákupního chování, individualizace, CRM propojení. Detail po jednotlivcích.", tag: "TYPY" },
+    { term: "Strategická segmentace", def: "Podle hodnoty zákazníka (VIP × normal), scoringové modely, lifetime value (LTV).", tag: "TYPY" },
+    { term: "Makro segmentace", def: "Široké tržní skupiny, dále nesegmentujeme. „Mladí městští\u201D, „Senioři venkov\u201D.", tag: "TYPY" },
+    { term: "RFM segmentace", def: "Recency (doba od posledního nákupu) / Frequency (počet nákupů) / Monetary (objem útrat). Klasika v retailu/e-commerce.", tag: "TYPY" },
+    { term: "Nediferencovaný marketing", def: "Masový — 1 nabídka pro celý trh. Coca-Cola classic, sůl, voda.", tag: "MARKETING" },
+    { term: "Diferencovaný marketing (STP)", def: "Segmenty × cílení × positioning. Různá nabídka pro různé segmenty. Většina firem.", tag: "MARKETING" },
+    { term: "Koncentrovaný (niche) marketing", def: "1 segment + hluboká specializace. Tržní výklenek. Rolex, Patagonia, Tesla začátky.", tag: "MARKETING" },
+    { term: "4 fáze postupu segmentace", def: "1) Vymezení trhu → 2) Posílení významných kritérií → 3) Odlišení segmentů → 4) Rozvoj segmentů.", tag: "POSTUP" },
+    { term: "Induktivní × Deduktivní", def: "Induktivní: bottom-up vlastní výzkum (drahé, precizní). Deduktivní: top-down odhad (levné, méně přesné).", tag: "POSTUP" },
+    { term: "Ad hoc × Post hoc segmentace", def: "Ad hoc: předem zvolíme kritérium (rozdělíme podle věku). Post hoc: sledujeme přirozené shluky + popíšeme.", tag: "POSTUP" },
+    { term: "4 strategie pokrytí trhu", def: "Pokrytí celého trhu / Specializace na více segmentů / Niche (1 segment) / Individuální marketing (1-to-1).", tag: "STRATEGIE" },
+    { term: "Atraktivita segmentu", def: "Velikost + růst + ziskovost + konkurence + bariéry + fit s firmou.", tag: "STRATEGIE" },
+    { term: "Logistika v segmentaci", def: "Každý segment klade jiné požadavky: frekvence, velikost zásilky, rychlost, spolehlivost (JIT), customizace, návratky.", tag: "LOGISTIKA" },
+    { term: "Speed Lovers segment", def: "Rychlost > cena. Wolt, Pizza, urgent business. Premium price za express delivery.", tag: "LOGISTIKA" },
+    { term: "Reliability Demanders segment", def: "On-time > vše. B2B Tier 1, JIT manufacturing (Toyota, BMW). Penalty za zpoždění.", tag: "LOGISTIKA" },
+    { term: "Skupiny tržní segmentace", def: "Homogenní preference (masový mkt) / Rozptýlené (max variability) / Shlukové (klasická segmentace funguje).", tag: "PREFERENCE" },
+  ];
+
+  const quizMkt3 = [
+    { q: "Co je definice tržního segmentu?", opts: ["Náhodná skupina zákazníků", "Homogenní uvnitř + heterogenní zvenku + měřitelný + dostatečně velký", "Všichni zákazníci", "Konkurence"], correct: 1 },
+    { q: "Co znamená STP model?", opts: ["Strategy, Tactics, Plan", "Segmentation, Targeting, Positioning", "Sales, Test, Performance", "Standard, Technical, Premium"], correct: 1 },
+    { q: "Kolik klasických segmentačních kritérií definuje Kotler?", opts: ["3", "4 (geo, demo, psycho, behavior)", "5", "6"], correct: 1 },
+    { q: "Psychografická kritéria zahrnují:", opts: ["Věk a pohlaví", "Životní styl, osobnost, hodnoty, postoje (LOHAS)", "Region a město", "Frekvenci nákupu"], correct: 1 },
+    { q: "Která kritéria popisují, kdo zákazník JE?", opts: ["Vysvětlující", "Popisná (demo, geo)", "Vysvětlované", "Behaviorální"], correct: 1 },
+    { q: "Jaký je rozdíl mezi forward a backward segmentací?", opts: ["Není rozdíl", "Forward: od vysvětlujících → k chování. Backward: od chování → k popisným.", "Forward je novější", "Backward je dražší"], correct: 1 },
+    { q: "Co znamená RFM v segmentaci?", opts: ["Random Frequency Method", "Recency / Frequency / Monetary — behaviorální klasika v retailu", "Real Field Marketing", "Rapid Feedback Model"], correct: 1 },
+    { q: "Coca-Cola classic je příklad jakého typu marketingu?", opts: ["Diferencovaný (STP)", "Nediferencovaný (masový)", "Koncentrovaný (niche)", "Individuální"], correct: 1 },
+    { q: "Rolex a Patagonia jsou příklady:", opts: ["Masového marketingu", "Diferencovaného", "Koncentrovaného / Niche", "Není relevantní"], correct: 2 },
+    { q: "Která fáze postupu segmentace je první?", opts: ["Rozvoj segmentů", "Vymezení daného trhu", "Odlišení segmentů", "Posílení kritérií"], correct: 1 },
+    { q: "Co je induktivní přístup k segmentaci?", opts: ["Top-down odhad", "Bottom-up vlastní výzkum → identifikace shluků (shluková analýza z M2)", "Synonyma s deduktivním", "Pouze pro B2B"], correct: 1 },
+    { q: "Která analytická metoda nejčastěji slouží segmentaci?", opts: ["t-test", "ANOVA", "Shluková analýza (M2)", "Regrese"], correct: 2 },
+    { q: "Co je hlavní logistický požadavek segmentu Reliability Demanders?", opts: ["Rychlost", "Cena", "On-time delivery (JIT) — Toyota, BMW", "Customizace"], correct: 2 },
+    { q: "Co by mělo splňovat atraktivní cílový segment?", opts: ["Pouze velikost", "Velikost + růst + ziskovost + konkurence + bariéry + fit s firmou", "Pouze ziskovost", "Pouze růst"], correct: 1 },
+  ];
+
+  const praxeMkt3 = {
+    caseStudy: {
+      company: "Tesla — etalon mikrosegmentace + premium niche",
+      subtitle: "Z koncentrovaného (1 segment) k diferencovanému (více modelů)",
+      content: (<>
+        <b>Tesla</b> v 15 letech prošla <b>klasickým evolučním vývojem segmentace</b>. Z niche premium k širšímu trhu.<br/><br/>
+        <b style={{ color: VSE.success }}>Fáze 1 (2008-2012): Koncentrovaný marketing — niche</b><br/>
+        • <b>Tesla Roadster</b> — 1 model, 1 segment (rich early adopters, environmentally conscious).<br/>
+        • Cena 110k USD. Vyrobeno 2 500 ks. Cíl: dokázat, že EV jde.<br/>
+        • <b>Segmentace:</b> Psychografika (eco-conscious) + demografika (high income) + behaviorální (early adopter).<br/><br/>
+        <b style={{ color: VSE.warning }}>Fáze 2 (2012-2017): Specializace — Model S, X</b><br/>
+        • <b>Model S</b> — premium sedan 75-130k USD. <b>Model X</b> — premium SUV.<br/>
+        • Stále 1 segment (premium green), ale širší (rodiny + executive).<br/>
+        • <b>Růst:</b> Z 2 500 na 100 000 ks/rok.<br/><br/>
+        <b style={{ color: VSE.fmv }}>Fáze 3 (2017+): Diferencovaný — Model 3, Y</b><br/>
+        • <b>Model 3</b> (35-55k USD) a <b>Model Y</b> SUV — mainstream segment.<br/>
+        • <b>Segmenty:</b> Premium (S/X) × Mainstream (3/Y) × Future Cybertruck (utility).<br/>
+        • <b>Výsledek:</b> 1.8 mil. aut/rok (2023), 80 % EV market share v USA.<br/><br/>
+        <b style={{ color: VSE.success }}>Tesla segmentace v praxi:</b><br/>
+        • <b>Demografika:</b> Příjem 60k+ USD, vzdělání vysokoškoláci, věk 30-55<br/>
+        • <b>Psychografika:</b> Eco-conscious, tech-savvy, status seekers, Musk fans<br/>
+        • <b>Behaviorální:</b> Early adopters, online buyers (no dealership!), brand evangelists<br/>
+        • <b>Geografika:</b> Western coast USA, EU urban, čínská megacities<br/><br/>
+        <b style={{ color: VSE.fph }}>Logistika v segmentaci:</b><br/>
+        • Mobile service (přijdou domů) — premium customer requirement<br/>
+        • Direct-to-consumer (žádný dealer) — control + lower cost<br/>
+        • Supercharger network — řeší range anxiety pro long-distance segment
+      </>),
+      lessons: "Tesla je <b>etalon evolučního použití segmentace</b>. Když máš v PS firmu rostoucí, doporuč: <b>začni niche (premium price → cash flow), pak rozšiřuj na specializaci, nakonec diferencuj na mainstream</b>. STP vždy + RFM pro CRM. Alternativy: <b>Patagonia (zůstává niche), Apple (postupně mainstream), Spotify (freemium → premium pyramida)</b>."
+    },
+    miniExamples: [
+      { tag: "GEOGRAFIKA", color: VSE.fmv, company: "McDonald's — segmentace podle země", content: "McDonald's segmentuje globálně podle geografiky + kultury. <b>Maharaja Mac v Indii</b> (no beef), <b>Croque McDo ve Francii</b>, <b>Teriyaki burger v Japonsku</b>. Stejná značka, různé menu. Klasická diferencovaná strategie přes geografická + kulturní kritéria." },
+      { tag: "DEMOGRAFIKA", color: VSE.warning, company: "Pampers — 5 segmentů podle věku dítěte", content: "Pampers má 5 produktových řad podle <b>věku dítěte</b> (newborn, P1, P2, P3, junior). Každá řada má jiné absorpční vlastnosti, design, marketing. Klasická demografická segmentace s explicitní customizací produktu pro každý segment." },
+      { tag: "PSYCHOGRAFIKA", color: VSE.success, company: "Lululemon — Mindful Athletes", content: "Lululemon segmentuje psychograficky — <b>„Mindful Athletes\u201D</b> (yoga, mindfulness, premium fitness). Demograficky to jsou ženy 25-45 s příjmem 60k+, ale klíč je <b>psychografika</b> (hodnoty zdraví, sebepoznání, sustainability). Allbirds, Patagonia podobně." },
+      { tag: "BEHAVIORÁLNÍ", color: VSE.fph, company: "Amazon Prime — heavy users segment", content: "Amazon segmentuje <b>behaviorálně</b> — <b>Prime členové</b> (heavy users, frekvence 3+/měsíc) vs casual buyers. Prime členové mají 2× větší LTV. Strategie: investice do retention Prime (Prime Video, Music, free shipping) za stovky USD ročně, abychom udrželi tento behaviorální segment." },
+    ]
+  };
+
+  const examQuestionsMkt3 = [
+    { komise: "2026-02-06 — Stříteský + Krause + Zamazalová (Realitní firma)", otazka: "Segmentace — typy, shluky, pojem, podle Kotlera, induktivní/deduktivní", pozn: "Stříteský chce přesnou definici: <b>„homogenní uvnitř, heterogenní zvenku\u201D</b>. + 4 kritéria Kotlera (geo/demo/psycho/behavior). + shluková analýza (M2). + induktivní × deduktivní přístup." },
+    { komise: "2025-09-11 — Smrčka + Zamazalová + Kučera (Výroba kol)", otazka: "Segmentační kritéria a jejich využití pro logistiku", pozn: "Smrčka chce <b>aplikaci na logistiku</b>. Klíčové: každý segment klade jiné požadavky (rychlost, on-time, customizace, návratky). Příklady segmentů: Speed Lovers / Value Seekers / Reliability Demanders / Premium Experience." },
+    { komise: "2025-02-03 — Stříteský + Bočková + Viktora (IT firma)", otazka: "Segmentace s ohledem na logistiku — kritéria dle Zuzčiny tabulky", pozn: "Bočková chce <b>tradiční × netradiční</b> kritéria + <b>popisná × vysvětlující × vysvětlované</b>. + příklady pro každé kritérium. Psychografika (LOHAS), fyziografika (zdraví). Tabulka ze Zuzčiných materiálů." },
+    { komise: "2025-02-04 — Mikovcová + Kolouchová + Viktora (Hrnce)", otazka: "Parametry segmentace s ohledem na logistické služby", pozn: "Mikovcová chce <b>4 klasická kritéria + příklady</b>. Logistika jí moc nezajímala — stačila zmínka, že segmenty mají různé požadavky na dodání." },
+    { komise: "2025-01-28 — Smrčka + Kolouchová + Říhová", otazka: "Segmentace, typy, fáze", pozn: "Klasická Smrčkova otázka — fáze (4 kroky: vymezení trhu → kritéria → odlišení → rozvoj) + typy (mikro/strategická/makro + nediferencovaný/diferencovaný/niche)." },
+    { komise: "2025-01-30 — Vávra + Nový + Heřman", otazka: "Segmentace, postup, typy, kritéria + aplikace na případovku", pozn: "Vávra chce <b>celý balík + aplikaci na PS</b>. Plynule provázat: pojem → 4 kritéria → 4 fáze → typy → aplikace na konkrétní PS firmu (vymezit trh, vybrat kritéria, identifikovat 3 segmenty, doporučit strategii)." },
+    { komise: "2025-01-28 — Tahal + Kuděj + Kučera", otazka: "Segmentační proměnné, požadavky zákazníků na logistické služby v segmentaci trhu", pozn: "Tahal chce <b>logistiku jako segmentační proměnnou</b>. Co zákazník očekává od dodání (rychlost, customizace, returns) = může být segmentační kritérium. Typické segmenty: Speed × Value × Reliability × Premium." },
+    { komise: "2025-06-10 — Mikovcová + Vávra + Viktora (Lázně)", otazka: "Segmentace trhu, postup, metody, typy", pozn: "Klasická 4 fáze + induktivní/deduktivní + ad hoc/post hoc + 4 strategie pokrytí trhu. Aplikace na lázně: nepravidelní hosté × wellness × seniorský trh × business retreat." },
+  ];
+
+  const podcastMkt3 = { title: "Marketing 3 — Segmentace trhu, typy, fáze, kritéria", description: "Definice segmentace (homogenní uvnitř, heterogenní zvenku) + 4 podmínky kvalitního segmentu. STP model (Segmentation/Targeting/Positioning). 4 klasická kritéria Kotler (geo/demo/psycho/behavior). Popisná × vysvětlující × vysvětlované. Tradiční × netradiční. 3 úrovně (mikro/strategická/makro) + RFM. 3 typy marketingu (nediferencovaný/diferencovaný/niche). 4 fáze postupu segmentace. Induktivní × deduktivní + ad hoc × post hoc. 4 strategie pokrytí trhu. Logistika v segmentaci (Speed × Value × Reliability × Premium segmenty). Tesla, McDonald's, Pampers, Lululemon, Amazon Prime.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt3 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>homogenní uvnitř, heterogenní zvenku</b> + 4 podmínky kvality segmentu.<br/>
+    <b style="color:#A82A5F">2.</b> ⚠️ <b>STP model</b> (Segmentation → Targeting → Positioning — M4).<br/>
+    <b style="color:#A82A5F">3.</b> ⚠️ <b>4 klasická kritéria Kotler</b> — geografická / demografická / psychografická / behaviorální + příklady.<br/>
+    <b style="color:#A82A5F">4.</b> <b>Popisná × Vysvětlující × Vysvětlované</b> (Bočková chce Zuzčina tabulku!).<br/>
+    <b style="color:#A82A5F">5.</b> Forward × Backward segmentation.<br/>
+    <b style="color:#A82A5F">6.</b> Tradiční × netradiční kritéria.<br/>
+    <b style="color:#A82A5F">7.</b> 3 úrovně — mikro × strategická × makro.<br/>
+    <b style="color:#A82A5F">8.</b> RFM segmentace (Recency, Frequency, Monetary).<br/>
+    <b style="color:#A82A5F">9.</b> 3 typy mkt — nediferencovaný / diferencovaný / koncentrovaný (niche).<br/>
+    <b style="color:#A82A5F">10.</b> ⚠️ <b>4 fáze postupu</b> — vymezení trhu → kritéria → odlišení → rozvoj.<br/>
+    <b style="color:#A82A5F">11.</b> Induktivní × deduktivní + ad hoc × post hoc.<br/>
+    <b style="color:#A82A5F">12.</b> 4 strategie pokrytí trhu — celý trh / specializace / niche / individuální.<br/>
+    <b style="color:#A82A5F">13.</b> ⚠️ <b>Logistika v segmentaci</b> (Smrčka, Mikovcová, Tahal chtějí!) — Speed × Value × Reliability × Premium.<br/>
+    <b style="color:#A82A5F">14.</b> Aplikace na PS — vymezit trh → vybrat kritéria → identifikovat 3 segmenty → doporučit strategii.
+  `;
+
+  const caseStudyMkt3 = {
+    title: "Adam — CEO PaperWorks, českého výrobce kancelářských potřeb, 90 zaměstnanců, 220 mil. Kč",
+    subtitle: "Identifikuj chybnou segmentaci + navrhni STP + logistiku pro segmenty",
+    scenario: "Adam (44 let) vede PaperWorks 10 let. Český výrobce kancelářských potřeb — sešity, šanony, perá, post-it. Tržby 220 mil. Kč, růst 3 % (pomalu). 90 zaměstnanců.\n\nProblém: Adam dosud segmentuje pouze podle velikosti zákazníka (malá firma × střední × velká). Strategie cílení = jedna nabídka pro všechny. Trh kancelářských potřeb klesá kvůli digitalizaci, ale Adam ztrácí podíl rychleji než trh — z 18 % na 12 % za 5 let.\n\nCEO konkurence (Logo Print) rozvinul 4 segmenty (Schools / SMB / Enterprise / Creative agencies) a roste 8 % ročně. PaperWorks ne. CMO Adama (Eva) chce segmentaci přepracovat. Aktuální data:\n\n• 1 200 B2B zákazníků v CRM (24 měsíců historie)\n\n• Hlavní kanály: vlastní e-shop (40 %), velkoobchody Office Depot (30 %), přímý prodej (30 %)\n\n• Distribuce: vlastní sklad v Brně + DPD/PPL. Žádná diferenciace dodání.\n\n• Marketing: 1 katalog, 1 e-shop, žádné cílené kampaně\n\nEva navrhuje: STP analýzu + nové segmenty + diferenciaci logistiky podle segmentu. Adam váhá — má 6 měsíců do AGM, kde musí prezentovat plán návratu na 18 % market share.",
+    signals: [
+      { text: "Adam dosud segmentuje pouze podle velikosti zákazníka (malá × střední × velká)", color: VSE.danger, reason: "Klasická chyba — pouze 1 kritérium (demografika). Chybí psychografika a behaviorální data. Bez nich nelze cílit přesně." },
+      { text: "Jedna nabídka pro všechny", color: VSE.danger, reason: "Nediferencovaný marketing v klesajícím trhu = smrt. Logo Print s diferencovaným mkt roste 8 %. Adam musí přejít na STP." },
+      { text: "Z 18 % na 12 % market share za 5 let", color: VSE.danger, reason: "Tvrdý externí důsledek špatné segmentace. Konkurence (Logo Print) získává tržní podíl díky cílenému marketingu." },
+      { text: "Konkurence rozvinul 4 segmenty (Schools / SMB / Enterprise / Creative agencies) a roste 8 %", color: VSE.warning, reason: "Benchmark — STP model funguje. Adam by měl podobně rozdělit svůj trh + diferencovat nabídku pro každý segment." },
+      { text: "Žádná diferenciace dodání", color: VSE.warning, reason: "Logistika v segmentaci. Schools potřebují septembrový peak + low cost. Enterprise potřebuje JIT + premium. Creative agencies potřebují customizaci." },
+      { text: "1 200 B2B zákazníků v CRM (24 měsíců historie)", color: VSE.fph, reason: "Bohatá interní data pro <b>shlukovou analýzu</b> (M2). Stačí RFM analýza nebo k-means na CRM datech → 4-6 přirozených segmentů." },
+    ],
+    quiz1: {
+      question: "Co je hlavní chyba Adamovy segmentace?",
+      options: [
+        "Příliš mnoho segmentů",
+        "Segmentuje pouze podle velikosti zákazníka — chybí psychografika a behaviorální data, žádná diferenciace nabídky",
+        "Nepoužívá Excel",
+        "Má moc dat",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Co by Adam měl udělat pro restartování růstu?",
+      options: [
+        { text: "Provést shlukovou analýzu CRM (M2) — 1200 zákazníků × 24 měsíců → 4-5 přirozených segmentů (Schools / SMB / Enterprise / Creative / E-commerce)", correct: true, reason: "✓ Bottom-up induktivní segmentace. Data má, jen je nezpracoval. K-means nebo hierarchický cluster v SPSS/Python." },
+        { text: "Aplikovat 4 klasická kritéria Kotler — demografika (typ firmy, velikost) + psychografika (eco-conscious × tradicional) + behaviorální (frekvence, koš, sezónnost) + geografika", correct: true, reason: "✓ Kombinace všech 4 kritérií. Bez toho chybí celostní pohled." },
+        { text: "Diferencovat logistiku — Schools (peak servis srpen-září, low cost) + SMB (standard) + Enterprise (JIT, custom branding) + Creative (rychlé dodání, premium balení)", correct: true, reason: "✓ Logistika v segmentaci = klíčový diferenciátor. Smrčka tohle miluje." },
+        { text: "Vytvořit positioning a komunikaci pro každý segment zvlášť — Schools (cena), SMB (jednoduchost), Enterprise (kvalita+SLA), Creative (design+customizace)", correct: true, reason: "✓ STP kompletní — segmentace + targeting + positioning. Detail positioningu v M4." },
+        { text: "Sledovat RFM zákazníků v CRM — Recency (kdy naposled), Frequency (jak často), Monetary (kolik utratí) → identifikovat VIP segment a top performers", correct: true, reason: "✓ RFM klasika pro retenci a upsell." },
+        { text: "Outsourcovat segmentační výzkum agentuře (Ipsos) za 800k Kč — bez interních dat by stejně začínali od nuly", correct: false, reason: "✗ Má interní data 1200 × 24 měsíců. Stačí 200k na shlukovou analýzu + interní analytika." },
+        { text: "Zachovat strategii — segmentace velikostí stačí, problém je trh, ne strategie", correct: false, reason: "✗ Konkurence (Logo Print) ve stejném trhu roste. Problém je v Adamovi, ne v trhu." },
+        { text: "Zaměřit se jen na 1 segment (niche — Creative agencies) a opustit ostatní", correct: false, reason: "✗ Příliš radikální. Ztratí 80 % obratu okamžitě. Lepší postupný přechod na diferencovaný marketing." },
+      ],
+    },
+    summary: "<b>PaperWorks má klasickou krizi z nediferencovaného marketingu v klesajícím trhu.</b> Klíč: <b>STP + diferenciace logistiky podle segmentu</b>.<br/><br/><b>Plán:</b><br/>• <b>Měsíc 1-2:</b> Shluková analýza CRM (1200 × 24m) → identifikace 4-5 přirozených segmentů<br/>• <b>Měsíc 2-3:</b> Aplikace 4 kritérií Kotler + RFM analýza → kompletní profily segmentů<br/>• <b>Měsíc 3-4:</b> Targeting — výběr 3 prioritních segmentů (Enterprise, Schools, Creative) + atraktivita každého<br/>• <b>Měsíc 4-5:</b> Diferencovaná nabídka — logistika (JIT × peak × custom), pricing, komunikace<br/>• <b>Měsíc 6:</b> Pilot v 1 segmentu (Creative agencies) → AGM prezentace<br/><br/><b>Pro komisi:</b> Klasický B2B s nediferencovanou strategií v klesajícím trhu. <b>Tesla, McDonald's, Pampers</b> jako příklady úspěšné segmentace. <b>STP</b> je základ, <b>4 kritéria Kotler</b> jsou rámec, <b>shluková analýza</b> (M2) je metoda. <b>Logistika v segmentaci</b> = diferenciátor (Smrčka, Tahal).",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={3} title="Segmentace trhu — typy, fáze, kritéria, logistika"
+      subtitle="STP model + 4 kritéria Kotler + 4 fáze postupu + 4 strategie + logistika v segmentaci"
+      color={VSE.fis}
+      questionText="Segmentace, typy, fáze, postup, kritéria (+ logistika v segmentaci)."
+      questionDesc="Definice segmentace (homogenní uvnitř, heterogenní zvenku) + 4 podmínky kvality. STP model. 4 klasická kritéria Kotler (geografická/demografická/psychografická/behaviorální) + příklady. Popisná × vysvětlující × vysvětlované (Zuzčina tabulka). Forward × Backward segmentation. Tradiční × netradiční. 3 úrovně (mikro/strategická/makro) + RFM. 3 typy marketingu (nediferencovaný/diferencovaný/koncentrovaný-niche). 4 fáze postupu segmentace. Induktivní × deduktivní + ad hoc × post hoc. 4 strategie pokrytí trhu. Logistika v segmentaci — Speed Lovers / Value Seekers / Reliability Demanders / Premium Experience. Tesla, McDonald's, Pampers, Lululemon, Amazon Prime."
+      sloz={2} roz={3} freq={5}
+      examStrategy={examStrategyMkt3}
+      studySections={studySectionsMkt3}
+      flashcards={flashcardsMkt3}
+      quiz={quizMkt3}
+      praxe={praxeMkt3}
+      examQuestions={examQuestionsMkt3}
+      podcast={podcastMkt3}
+      caseStudy={caseStudyMkt3}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 4 — Positioning, POP, POD, referenční rámec
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt4Panel() {
+  const studySectionsMkt4 = [
+    { id: "intro", title: "Positioning — definice a DOCS model", subtitle: "Pozice v mysli zákazníka + 4 kroky DOCS", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Positioning</b> = umístění produktu/značky <b>v mysli cílového zákazníka</b> oproti konkurenci. Cíl: vytvořit <b>žádoucí vědomý postoj</b> — značka má být v dané kategorii vnímána jako jednoznačně nejlepší volba pro daný segment.
+        </Def>
+        <Tag color={VSE.fis}>Návaznost na M3 — STP model</Tag>
+        <Bullet items={[
+          "<b>Segmentation</b> (M3) → rozdělíme trh na segmenty.",
+          "<b>Targeting</b> (M3) → vybereme cílové segmenty.",
+          "<b>Positioning</b> (M4) → určíme, JAK chceme být v mysli zákazníků cílového segmentu vnímáni.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>DOCS model — 4 kroky positioningu</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 400 280" style={{ width: "100%", maxWidth: 400, height: "auto" }}>
+            {/* Cyklus — 4 kruhy ve čtverci propojené šipkami */}
+            <defs>
+              <marker id="arrowDocs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+              </marker>
+            </defs>
+            {/* 4 kruhy v rozích */}
+            <circle cx="100" cy="80" r="55" fill={VSE.fmv} opacity="0.85"/>
+            <circle cx="300" cy="80" r="55" fill={VSE.warning} opacity="0.85"/>
+            <circle cx="300" cy="200" r="55" fill={VSE.fph} opacity="0.85"/>
+            <circle cx="100" cy="200" r="55" fill={VSE.success} opacity="0.85"/>
+            {/* Texty v kruzích */}
+            <text x="100" y="73" textAnchor="middle" fontSize="22" fill="#fff">📝</text>
+            <text x="100" y="100" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">DEFINE</text>
+            <text x="300" y="73" textAnchor="middle" fontSize="22" fill="#fff">🚀</text>
+            <text x="300" y="100" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">OVERDELIVER</text>
+            <text x="300" y="193" textAnchor="middle" fontSize="22" fill="#fff">📣</text>
+            <text x="300" y="220" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">CLAIM</text>
+            <text x="100" y="193" textAnchor="middle" fontSize="22" fill="#fff">🏆</text>
+            <text x="100" y="220" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">SUCCESS</text>
+            {/* Šipky mezi kruhy — cyklus */}
+            <line x1="158" y1="80" x2="240" y2="80" stroke="#888" strokeWidth="2" markerEnd="url(#arrowDocs)"/>
+            <line x1="300" y1="138" x2="300" y2="142" stroke="#888" strokeWidth="2" markerEnd="url(#arrowDocs)"/>
+            <line x1="240" y1="200" x2="158" y2="200" stroke="#888" strokeWidth="2" markerEnd="url(#arrowDocs)"/>
+            <line x1="100" y1="142" x2="100" y2="138" stroke="#888" strokeWidth="2" markerEnd="url(#arrowDocs)"/>
+            {/* Středový text */}
+            <text x="200" y="135" textAnchor="middle" fontSize="11" fill="#666" fontFamily="JetBrains Mono">kontinuální</text>
+            <text x="200" y="150" textAnchor="middle" fontSize="11" fill="#666" fontFamily="JetBrains Mono">cyklus</text>
+          </svg>
+        </div>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📝 1. DEFINE", d: "Vymezit nabídku — komu, co, proč. Konkrétní cílová skupina + benefity." },
+            { c: VSE.warning, t: "🚀 2. OVERDELIVER", d: "Doručit víc, než zákazník očekává. Překonat konkurenci v klíčových atributech." },
+            { c: VSE.fph, t: "📣 3. CLAIM", d: "Komunikovat positioning — slogan, claim, brand message. Konzistentně všude." },
+            { c: VSE.success, t: "🏆 4. SUCCESS", d: "Měřit dopad — brand awareness, preference, market share, NPS." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ExamAlert
+          komise="Mládková + Vávra + Hönig 2025 (Prádlo)"
+          what="Mládková chce <b>DOCS model</b> explicitně. Bez Define-Overdeliver-Claim-Success nestačí. Vávra v chillu, takže <b>úvodní 2 strany ze Zuzky stačí</b>."
+        />
+      </div>) },
+
+    { id: "urovne", title: "Úrovně positioningu — pyramida", subtitle: "Specifický × nadstavbový × total value positioning", color: VSE.fis, emoji: "pillar",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>3 úrovně positioningu</b> tvoří pyramidu od specifik produktu po total value. Firma může být silná v 1, 2 nebo všech úrovních. Komise <b>Kolouchová, Honig</b> chtějí explicitně úrovně + přístupy.
+        </Def>
+        <Tag color={VSE.fis}>3 úrovně positioningu (od základní k nejvyšší)</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 420 260" style={{ width: "100%", maxWidth: 420, height: "auto" }}>
+            {/* Pyramida — 3 vrstvy od základu nahoru */}
+            <defs>
+              <linearGradient id="pyrGrad1" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.fmv} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.fmv} stopOpacity="0.7"/>
+              </linearGradient>
+              <linearGradient id="pyrGrad2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.warning} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.warning} stopOpacity="0.7"/>
+              </linearGradient>
+              <linearGradient id="pyrGrad3" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.success} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.success} stopOpacity="0.7"/>
+              </linearGradient>
+            </defs>
+            {/* Spodní vrstva — Specifický */}
+            <polygon points="20,230 400,230 360,170 60,170" fill="url(#pyrGrad1)"/>
+            <text x="210" y="205" textAnchor="middle" fontSize="15" fontWeight="700" fill="#fff" fontFamily="Inter Tight">🔬 SPECIFICKÝ — atributy, USP, ESP</text>
+            {/* Střední vrstva — Nadstavbový */}
+            <polygon points="60,160 360,160 320,100 100,100" fill="url(#pyrGrad2)"/>
+            <text x="210" y="135" textAnchor="middle" fontSize="15" fontWeight="700" fill="#fff" fontFamily="Inter Tight">⚖️ NADSTAVBOVÝ — cena × užitek</text>
+            {/* Vrchol — Total Value */}
+            <polygon points="100,90 320,90 280,30 140,30" fill="url(#pyrGrad3)"/>
+            <text x="210" y="65" textAnchor="middle" fontSize="15" fontWeight="700" fill="#fff" fontFamily="Inter Tight">💎 TOTAL VALUE</text>
+            {/* Labely vedle */}
+            <text x="210" y="252" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">co umí → co stojí za to → kdo jsme</text>
+          </svg>
+        </div>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🔬 1. SPECIFICKÝ POS", d: "Specifika produktu — USP, ESP. „Co konkrétně produkt umí lépe?\u201D Atributy, vlastnosti, funkce." },
+            { c: VSE.warning, t: "⚖️ 2. NADSTAVBOVÝ POS", d: "Cena × užitek / hodnota. „Co zákazník dostane oproti tomu, co dá?\u201D Value proposition." },
+            { c: VSE.success, t: "💎 3. TOTAL VALUE POS", d: "Celková propozice značky. „Proč máme jako značka existovat? Co znamenáme?\u201D Brand essence." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>USP × ESP — 2 přístupy k specifickému positioningu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🧠 USP (Unique Selling Proposition)", d: "Racionální benefit. Proč zákazníci kupují? Co produkt umí jiného/lepšího než konkurence? Odlišné, hodnotné, srozumitelné. Volvo = bezpečnost. Duracell = vydrží déle." },
+            { c: VSE.warning, t: "❤️ ESP (Emotional Selling Proposition)", d: "Emocionální benefit. Spotřebitelé se nerozhodují jen racionálně. Dává osobnost a energii podnikání. Coca-Cola = štěstí. Nike = Just Do It." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "ramec", title: "Referenční (konkurenční) rámec", subtitle: "Vymezení kategorie + identifikace konkurence", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Referenční rámec</b> (Frame of Reference) určuje <b>kategorii</b>, do které značka patří, a tím <b>identifikuje konkurenci</b>. Bez vymezení rámce neumíme říct, co je POP a co POD.
+        </Def>
+        <Tag color={VSE.fis}>Co určuje referenční rámec</Tag>
+        <Bullet items={[
+          "<b>Tržní kategorii</b>, do které produkt patří — bez ní zákazník neví, s čím nás porovnávat.",
+          "<b>Cíle a postup</b>, kam výrobek patří + jak ho budeme komunikovat.",
+          "<b>Příslušnost ke kategorii</b> — proč jsme součástí dané kategorie (tvoří identifikační údaje, viz analýza konkurence).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Vymezení kategorie — 3 přístupy</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🔬 ÚZKÉ VYMEZENÍ", d: "„Premium ekologická kosmetika.\u201D Konkurence úzká, snadno identifikovatelná. Niche pozice." },
+            { c: VSE.warning, t: "🌐 ŠIROKÉ VYMEZENÍ", d: "„Krása a péče o sebe.\u201D Větší trh, ale složitější komunikace. Mass-market." },
+            { c: VSE.success, t: "✨ NETRADIČNÍ", d: "„Lifestyle značka.\u201D Můžeme bojovat napříč kategoriemi (Patagonia, Apple)." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Příklad — vymezení rámce u Tesly</Tag>
+        <Bullet items={[
+          "<b>Úzké:</b> Premium elektromobil → konkurence: Mercedes EQS, BMW iX.",
+          "<b>Široké:</b> Premium auto → konkurence: BMW, Mercedes, Audi (i benzínové).",
+          "<b>Netradiční:</b> Tech & lifestyle značka → konkurence: Apple, Google Waymo.",
+          "<b>Důsledek:</b> Pokud chce Tesla růst, MUSÍ se přepoziciovat z úzkého (EV) na široké (premium auto) — jinak narazí na limit trhu.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Smrčka + Kolouchová + Říhová 2025"
+          what="Smrčka chce <b>vymezení referenčního rámce</b> jako první krok positioningu. Bez něj nelze určit, kdo je konkurence a co je POP/POD. Aplikuj na PS — jak by firma definovala kategorii."
+        />
+      </div>) },
+
+    { id: "pop_pod", title: "POP a POD — body shody a rozdílnosti", subtitle: "Co sdílíme s konkurencí (POP) × čím se odlišujeme (POD)", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>POP</b> (Points of Parity, body shody) = atributy, kterými <b>jsme stejně dobří jako konkurence</b>. <b>POD</b> (Points of Difference, body rozdílnosti) = atributy, kterými se <b>odlišujeme a jsme lepší</b>. Bez obojího není positioning kompletní.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 500 240" style={{ width: "100%", maxWidth: 500, height: "auto" }}>
+            {/* 2 překrývající se kruhy — Venn diagram */}
+            <circle cx="180" cy="120" r="95" fill={VSE.warning} fillOpacity="0.4" stroke={VSE.warning} strokeWidth="2"/>
+            <circle cx="320" cy="120" r="95" fill={VSE.fmv} fillOpacity="0.4" stroke={VSE.fmv} strokeWidth="2"/>
+            {/* Labely uvnitř kruhů */}
+            <text x="130" y="95" textAnchor="middle" fontSize="14" fontWeight="700" fill={VSE.warning} fontFamily="Inter Tight">🤝 NAŠE ZNAČKA</text>
+            <text x="130" y="125" textAnchor="middle" fontSize="11" fill="var(--text, #333)" fontFamily="Inter Tight">co nás odlišuje</text>
+            <text x="130" y="145" textAnchor="middle" fontSize="11" fill="var(--text, #333)" fontFamily="Inter Tight">(vlastnosti, image)</text>
+            <text x="370" y="95" textAnchor="middle" fontSize="14" fontWeight="700" fill={VSE.fmv} fontFamily="Inter Tight">⚔️ KONKURENCE</text>
+            <text x="370" y="125" textAnchor="middle" fontSize="11" fill="var(--text, #333)" fontFamily="Inter Tight">jejich silné</text>
+            <text x="370" y="145" textAnchor="middle" fontSize="11" fill="var(--text, #333)" fontFamily="Inter Tight">stránky</text>
+            {/* Průnik — POP */}
+            <text x="250" y="105" textAnchor="middle" fontSize="14" fontWeight="700" fill="#222" fontFamily="Inter Tight">🤝 POP</text>
+            <text x="250" y="125" textAnchor="middle" fontSize="10" fill="#222" fontFamily="Inter Tight">body shody</text>
+            <text x="250" y="142" textAnchor="middle" fontSize="10" fill="#222" fontFamily="Inter Tight">(sdílené)</text>
+            {/* Šipky a labely k POD oblastem */}
+            <text x="100" y="40" textAnchor="middle" fontSize="13" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">💎 POD</text>
+            <text x="100" y="58" textAnchor="middle" fontSize="11" fill={VSE.success} fontFamily="Inter Tight">body rozdílnosti</text>
+            <line x1="115" y1="65" x2="135" y2="95" stroke={VSE.success} strokeWidth="1.5" markerEnd="url(#arrowPop)"/>
+            <defs>
+              <marker id="arrowPop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill={VSE.success}/>
+              </marker>
+            </defs>
+            {/* Spodní info */}
+            <text x="250" y="220" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">POP otevírá dveře ke kategorii → POD vyhrává volbu zákazníka</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fis}>POP — Body shody (Points of Parity)</Tag>
+        <Bullet items={[
+          "<b>Co to je:</b> Asociace, které <b>sdílíme s konkurencí</b> v rámci kategorie.",
+          "<b>Účel:</b> Zákazník nás musí <b>uznat jako legitimního hráče v kategorii</b>. Bez POP nejsme „v kategorii\u201D.",
+          "<b>2 typy POP:</b> Kategoriální POP (musíme mít, abychom byli „bankou\u201D — pobočky, ATM, online banking) + Konkurenční POP (vyrovnáváme se konkurenci v jejich silných stránkách).",
+          "<b>Interval tolerance:</b> POP nemusí být perfektní — stačí být „dost dobří\u201D v kategoriální normě.",
+          "<b>Příklad:</b> Tesla musí mít stejnou bezpečnost jako BMW (POP). Nemusí mít lepší — stačí stejnou.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>POD — Body rozdílnosti (Points of Difference)</Tag>
+        <Bullet items={[
+          "<b>Co to je:</b> Asociace <b>jedinečné pro naši značku</b>, co nás odlišuje.",
+          "<b>Účel:</b> Důvod, proč si zákazník vybere nás místo konkurence.",
+          "<b>3 podmínky kvalitního POD:</b> <b>Uvěřitelný</b> (zákazník věří, že to dokážeme) + <b>Prosaditelný</b> (umíme to dlouhodobě dodat) + <b>Jednoduše sdělitelný</b> (řekneme to v 1 větě).",
+          "<b>Atributy nebo benefity</b>, které spotřebitelé <b>silně spojují se značkou</b> a věří, že se nemůžou najít u konkurence.",
+          "<b>Příklad:</b> Tesla = autopilot + premium tech UX (POD). BMW autopilot taky má, ale Tesla je s ním <b>spojována silněji</b>.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Vztah POP × POD</Tag>
+        <Bullet items={[
+          "<b>POP otevírá dveře</b> ke kategorii. Bez nich nejsme považováni za serióznní hráč.",
+          "<b>POD vyhrává volbu.</b> Bez nich jsme jen komodita.",
+          "<b>Selhání POP</b>: Tesla má autopilot (POD), ale chybí dealerství a service network (POP) → ztráta tradičních klientů.",
+          "<b>Selhání POD</b>: Klasický fastfood má vše stejné jako konkurence (POP), žádnou odlišnost → boj cenou.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Nový + Vávra + Heřman 2025 (Horská chata)"
+          what="Komise chce <b>POP A POD současně</b> + aplikaci na PS. Nestačí jen vysvětlit teoreticky — musíš pro PS firmu identifikovat 2-3 konkrétní POP a 2-3 POD."
+        />
+      </div>) },
+
+    { id: "statement", title: "Positioning statement + mantra značky + percepční mapa", subtitle: "Jak positioning vyjádřit a vizualizovat", color: VSE.fis, emoji: "scroll",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Po vymezení POP a POD potřebujeme positioning <b>vyjádřit konkrétní větou</b> (statement), <b>shrnout v mantře</b> a <b>vizualizovat na mapě</b>.
+        </Def>
+        <Tag color={VSE.fis}>Positioning Statement — vzor</Tag>
+        <Bullet items={[
+          "<b>Pro</b> [cílová skupina + potřeba] <b>je</b> [naše značka] [tržní kategorie], <b>která přináší</b> [klíčový benefit/POD], <b>jelikož</b> [reason to believe / důkaz].",
+          "<b>Příklad Tesla:</b> Pro tech-savvy environmentálně uvědomělé klienty s vyšším příjmem je Tesla premium auto, které přináší zero-emission luxury performance, jelikož kombinuje 0-100 za 2,5s, autonomní funkce a Supercharger network.",
+          "<b>Účel:</b> Jasný směr pro veškerou komunikaci, design, R&D. „Pokud něco nezapadá, nedělejme to.\u201D",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Mantra značky (Brand Mantra)</Tag>
+        <Bullet items={[
+          "<b>3-5 slovní zkratka</b> srdce a duše značky. <b>Interní</b> — neukazuje se zákazníkům.",
+          "<b>3 funkce mantry:</b> Komunikovat (interně), Zjednodušit (k podstatě), Inspirovat (zaměstnance).",
+          "<b>Příklady:</b> Disney = Fun Family Entertainment. Nike = Authentic Athletic Performance. Volvo = Safety.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Percepční mapa (Perceptual Map)</Tag>
+        <Bullet items={[
+          "<b>Vizuální vyjádření</b> vnímání a preferencí spotřebitelů.",
+          "<b>2 osy</b> = 2 klíčové atributy (cena × kvalita, premium × mass, traditional × modern).",
+          "<b>Body</b> = pozice značek na trhu podle vnímání zákazníků.",
+          "<b>Použití:</b> Identifikace mezery v trhu (white space). „Kde není nikdo? Můžeme tam být.\u201D",
+          "<b>Tvořeno přes výzkum</b> — dotazník hodnotící značky na škále podle atributů (M1) + faktorová analýza (M2).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Motivační positioning</Tag>
+        <Bullet items={[
+          "<b>Rovnice motivačního pos:</b> PODs + POPs + Rezonance = kompromis, který musí firma najít.",
+          "<b>Nemůžeme být všechno</b> — silný POD v jedné dimenzi často znamená slabší POP v jiné.",
+          "<b>Příklad:</b> Walmart = nízká cena (POD) → kompromis v kvalitě obsluhy (slabší POP). Naopak Apple = premium UX (POD) → vysoká cena (slabší POP cenové dostupnosti).",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "strategie", title: "Strategie positioningu + diferenciace", subtitle: "9 klasických strategií + 3 cesty diferenciace", color: VSE.fis, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>9 klasických strategií positioningu</b> — různé úhly, kterými firma může komunikovat svou pozici. Lze kombinovat, ale musí být <b>konzistentní</b>.
+        </Def>
+        <Tag color={VSE.fis}>9 strategií positioningu</Tag>
+        <Bullet items={[
+          "<b>1. Atributy produktu:</b> Technické parametry. Volvo = bezpečnost, Duracell = vydrží déle.",
+          "<b>2. Nabízený užitek:</b> Co produkt dělá pro zákazníka. Activia = dobré zažívání.",
+          "<b>3. Příležitost použití:</b> Kdy/kde použít. Káva = ranní rituál, energy drink = aktivní moment.",
+          "<b>4. Uživatelé:</b> Pro koho je. Nike = sportovci, Lego = děti i rodiče.",
+          "<b>5. Aktivity:</b> Spojení s činností. Gambrinus = fotbal, Red Bull = extrémní sporty.",
+          "<b>6. Osobnost:</b> Lidská charakteristika značky. Harley Davidson = rebel, Disney = magie.",
+          "<b>7. Původ:</b> Geografická vazba. Irská whiskey, švýcarské hodinky, německá auta.",
+          "<b>8. Proti konkurenci:</b> Definujeme se proti někomu. Avis: „We try harder.\u201D 7Up = non-cola.",
+          "<b>9. Příslušnost ke třídě:</b> Kategorizace. Mercedes = luxus, Škoda = praktická volba.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Diferenciace — 3 cesty</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "⚔️ KONKURENČNÍ VÝHODA", d: "Nižší ceny (Lidl, Wizz Air) × vyšší užitky (Apple, BMW). Klasická Porterova volba." },
+            { c: VSE.warning, t: "🎯 STRATEGICKÁ DIFERENCIACE", d: "Diferenciace produktem × distribučním kanálem × image. Kde jsme jiní." },
+            { c: VSE.success, t: "👁️ SALIENT POSITIONING", d: "Být viditelní (salient), nikoli jen odlišní. Komunikace, kulturní moment, branding." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Vztah positioning → značka → komunikace</Tag>
+        <Bullet items={[
+          "<b>Positioning</b> = strategie (kde chceme být v mysli).",
+          "<b>Značka</b> = nástroj (jak to vyjádříme — viz M10 Branding).",
+          "<b>Komunikace</b> = výkon (jak to doručíme — viz M13-16 Mkt komunikace).",
+          "<b>Konzistence</b> = klíč. Pokud positioning, značka a komunikace neladí, zákazník je zmatený.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsMkt4 = [
+    { term: "Positioning", def: "Umístění produktu/značky v mysli cílového zákazníka oproti konkurenci. Cíl: žádoucí vědomý postoj.", tag: "POJEM" },
+    { term: "STP model", def: "Segmentation → Targeting (M3) → Positioning (M4). 3 kroky, jak vstoupit na trh strategicky.", tag: "POJEM" },
+    { term: "DOCS model", def: "4 kroky positioningu: Define (vymezit) → Overdeliver (přinést víc) → Claim (komunikovat) → Success (měřit).", tag: "DOCS" },
+    { term: "3 úrovně positioningu", def: "1) Specifický (USP, ESP, atributy) → 2) Nadstavbový (cena × užitek) → 3) Total Value (celková propozice značky).", tag: "ÚROVNĚ" },
+    { term: "USP (Unique Selling Proposition)", def: "Racionální benefit. Proč zákazníci kupují? Odlišné, hodnotné, srozumitelné. Volvo = bezpečnost. Duracell = vydrží déle.", tag: "USP/ESP" },
+    { term: "ESP (Emotional Selling Proposition)", def: "Emocionální benefit. Dává osobnost a energii. Coca-Cola = štěstí. Nike = Just Do It.", tag: "USP/ESP" },
+    { term: "Referenční rámec (Frame of Reference)", def: "Určuje kategorii, do které značka patří, a tím identifikuje konkurenci. Bez něj nelze určit POP/POD.", tag: "RÁMEC" },
+    { term: "Vymezení kategorie", def: "Úzké (premium EV) × Široké (premium auto) × Netradiční (lifestyle značka). Volba určuje konkurenci.", tag: "RÁMEC" },
+    { term: "POP — Body shody", def: "Points of Parity. Asociace, které sdílíme s konkurencí. Bez nich nejsme „v kategorii\u201D. 2 typy: kategoriální + konkurenční.", tag: "POP/POD" },
+    { term: "POD — Body rozdílnosti", def: "Points of Difference. Asociace jedinečné pro značku. Důvod, proč zákazník volí nás. Uvěřitelné, prosaditelné, sdělitelné.", tag: "POP/POD" },
+    { term: "3 podmínky kvalitního POD", def: "Uvěřitelný (věřím že to dokážete) + Prosaditelný (umíte to dlouhodobě) + Jednoduše sdělitelný (1 věta).", tag: "POP/POD" },
+    { term: "Vztah POP × POD", def: "POP otevírá dveře ke kategorii. POD vyhrává volbu. Bez POP nejsme seriózní hráč. Bez POD jsme komodita.", tag: "POP/POD" },
+    { term: "Positioning Statement", def: "Pro [cílová skupina] je [naše značka] [kategorie], která přináší [POD], jelikož [reason to believe].", tag: "STATEMENT" },
+    { term: "Mantra značky", def: "3-5 slovní zkratka srdce a duše značky. Interní! Disney = Fun Family Entertainment. Volvo = Safety.", tag: "MANTRA" },
+    { term: "3 funkce mantry", def: "Komunikovat (interně) + Zjednodušit (k podstatě) + Inspirovat (zaměstnance).", tag: "MANTRA" },
+    { term: "Percepční mapa", def: "Vizualizace vnímání spotřebitelů. 2 osy = 2 klíčové atributy. Body = pozice značek. Identifikace mezery v trhu (white space).", tag: "MAPA" },
+    { term: "Motivační positioning", def: "PODs + POPs + Rezonance = kompromis. Silný POD v jedné dimenzi často znamená slabší POP v jiné.", tag: "MAPA" },
+    { term: "9 strategií positioningu", def: "Atributy / Užitek / Příležitost / Uživatelé / Aktivity / Osobnost / Původ / Proti konkurenci / Příslušnost ke třídě.", tag: "STRATEGIE" },
+    { term: "Positioning podle atributů", def: "Technické parametry. Volvo = bezpečnost, Duracell = vydrží déle.", tag: "STRATEGIE" },
+    { term: "Positioning podle aktivity", def: "Spojení s činností. Gambrinus = fotbal, Red Bull = extrémní sporty.", tag: "STRATEGIE" },
+    { term: "Positioning proti konkurenci", def: "Definujeme se proti někomu. Avis: „We try harder.\u201D 7Up = non-cola.", tag: "STRATEGIE" },
+    { term: "Positioning podle původu", def: "Geografická vazba. Irská whiskey, švýcarské hodinky, německá auta.", tag: "STRATEGIE" },
+    { term: "Diferenciace — 3 cesty", def: "Konkurenční výhoda (cena × užitek) / Strategická (produkt, kanál, image) / Salient (viditelnost).", tag: "DIFERENCIACE" },
+    { term: "Konzistence positioningu", def: "Positioning (strategie) → značka (M10) → komunikace (M13-16). Bez konzistence je zákazník zmatený.", tag: "DIFERENCIACE" },
+  ];
+
+  const quizMkt4 = [
+    { q: "Co je positioning?", opts: ["Vývoj nového produktu", "Umístění produktu/značky v mysli cílového zákazníka oproti konkurenci", "Cenotvorba", "Reklamní kampaň"], correct: 1 },
+    { q: "Co je DOCS model?", opts: ["Software", "Define → Overdeliver → Claim → Success", "Druh dotazníku", "DOC Series"], correct: 1 },
+    { q: "Co je nejvyšší úroveň positioningu?", opts: ["Specifický", "Nadstavbový", "Total Value Positioning", "USP"], correct: 2 },
+    { q: "Jaký je rozdíl USP × ESP?", opts: ["Není rozdíl", "USP = racionální benefit. ESP = emocionální benefit.", "USP je dražší", "ESP je jen v reklamě"], correct: 1 },
+    { q: "Co je referenční rámec?", opts: ["Náš tým", "Určuje kategorii, do které značka patří + identifikuje konkurenci", "Reklamní rámec", "Cenový strop"], correct: 1 },
+    { q: "Co jsou POP (Points of Parity)?", opts: ["Body popularity", "Asociace, které sdílíme s konkurencí — bez nich nejsme „v kategorii\u201D", "Reklamní body", "Cenové body"], correct: 1 },
+    { q: "Co jsou POD (Points of Difference)?", opts: ["Body Of Distinction", "Asociace jedinečné pro značku — důvod, proč zákazník volí nás", "Druh papíru", "Body za diferenciaci"], correct: 1 },
+    { q: "Které 3 podmínky musí splňovat kvalitní POD?", opts: ["Drahý, prémiový, originální", "Uvěřitelný + Prosaditelný + Jednoduše sdělitelný", "Online, offline, hybridní", "Pro děti, dospělé, seniory"], correct: 1 },
+    { q: "Co dělá POP × POD v positioningu?", opts: ["Stejnou věc", "POP otevírá dveře ke kategorii. POD vyhrává volbu zákazníka.", "POP je novější", "POD je pouze pro luxus"], correct: 1 },
+    { q: "Co je Brand Mantra?", opts: ["Východní filozofie", "3-5 slovní zkratka srdce značky — interní (Disney = Fun Family Entertainment)", "Externí slogan", "Reklamní jingle"], correct: 1 },
+    { q: "K čemu slouží percepční mapa?", opts: ["Geografická mapa", "Vizualizace vnímání spotřebitelů + identifikace white space", "Mapa konkurence", "Mapa prodejen"], correct: 1 },
+    { q: "Kolik klasických strategií positioningu existuje?", opts: ["3", "5", "9 (atributy / užitek / příležitost / uživatelé / aktivity / osobnost / původ / proti konkurenci / třída)", "12"], correct: 2 },
+    { q: "Volvo = bezpečnost je positioning podle:", opts: ["Aktivity", "Atributu produktu", "Osobnosti", "Původu"], correct: 1 },
+    { q: "Avis „We try harder\u201D je positioning podle:", opts: ["Užitku", "Proti konkurenci", "Příležitosti", "Třídy"], correct: 1 },
+  ];
+
+  const praxeMkt4 = {
+    caseStudy: {
+      company: "Volvo — etalon konzistentního positioningu 60+ let",
+      subtitle: "Safety jako POD od 1959 do dnes",
+      content: (<>
+        <b>Volvo</b> je <b>učebnicový příklad konzistentního positioningu</b> postaveného na jednom POD — <b>bezpečnost</b>. 65 let stejná pozice v mysli zákazníků.<br/><br/>
+        <b style={{ color: VSE.success }}>Volvo Positioning Statement:</b><br/>
+        „Pro rodinně orientované řidiče, kteří si cení své bezpečí, je Volvo prémiové švédské auto, které přináší nejvyšší standard pasivní a aktivní bezpečnosti, jelikož vynalezlo trojbodový bezpečnostní pás (1959) a dodnes leads v crash test ratings.\u201D<br/><br/>
+        <b style={{ color: VSE.warning }}>POP (body shody) Volva v premium segmentu:</b><br/>
+        • Premium materiály a finishing (Volvo se vyrovnává Mercedesu, BMW)<br/>
+        • Moderní infotainment a tech features<br/>
+        • Performance (V60 Polestar 415 koní)<br/>
+        • Luxusní design (skandinávský minimalismus)<br/><br/>
+        <b style={{ color: VSE.danger }}>POD (body rozdílnosti) Volva:</b><br/>
+        • <b>Bezpečnost #1</b> — nejvíce IIHS Top Safety Pick+ ocenění v segmentu<br/>
+        • <b>Vize Zero</b> — žádný řidič nezemře ani vážně nezraní ve Volvu od 2020 (ambicióznější než konkurence)<br/>
+        • <b>Trojbodový pás</b> — vynalezli ho 1959 a otevřeli patent zdarma celému světu (zachránil 1M+ životů)<br/><br/>
+        <b style={{ color: VSE.fmv }}>Mantra značky:</b> <b>„For Life\u201D</b> (3 slova — bezpečnost, rodina, dlouhověkost)<br/><br/>
+        <b style={{ color: VSE.fph }}>Konzistence napříč dekádami:</b><br/>
+        • 1959: Trojbodový pás → komunikace o bezpečnosti<br/>
+        • 1991: Boční airbagy<br/>
+        • 2010: City Safety (autonomní brzdění)<br/>
+        • 2020: Pilot Assist (semi-autonomní)<br/>
+        • 2025: Vize Zero deadline<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> 95 % cílovky asociuje Volvo s bezpečností (vs Mercedes 35 %, BMW 25 %). Volvo má <b>nejvyšší retention</b> v segmentu — 60 % majitelů kupuje znovu Volvo.
+      </>),
+      lessons: "Volvo je <b>etalon disciplinovaného positioningu</b>. Klíče: <b>1 POD (bezpečnost) konzistentně 65 let, silné POP v premium kategorii, jasná mantra (For Life), kontinuální innovation v jádru POD</b>. Pro PS doporuč: <b>identifikovat 1 silný POD a držet ho dlouhodobě</b>. Alternativy: <b>Apple (design + UX), Patagonia (environment), Disney (family magic), IKEA (affordable design)</b>."
+    },
+    miniExamples: [
+      { tag: "POD ATRIBUTY", color: VSE.fmv, company: "Duracell — POD vydrží déle", content: "Duracell má 1 jasný POD: <b>vydrží déle než konkurence</b>. Slogan „The Coppertop\u201D + zlatý vrchol baterie = visual cue. POP: standardní velikosti, dostupnost v retailu. Marketing 40+ let stejný — disciplinovaný positioning." },
+      { tag: "POD AKTIVITY", color: VSE.warning, company: "Red Bull — gives you wings", content: "Red Bull positionuje přes <b>aktivity</b> — extrémní sporty, F1, Wings for Life. POD: energetický nápoj pro <b>moment akce a překonání limitů</b>. POP: cena, dostupnost. Net Worth 35 mld. USD postavené na 1 positioning." },
+      { tag: "POD PROTI", color: VSE.success, company: "Avis — We try harder", content: "Avis byl #2 v půjčovnách aut (za Hertz). Místo skrývání udělali z toho POD: <b>„We're #2. We try harder.\u201D</b> (1962). Geniální positioning proti konkurenci. Tržní podíl vzrostl o 28 % za 4 roky." },
+      { tag: "PERCEPČNÍ MAPA", color: VSE.fph, company: "Tesla — white space v EV premium", content: "V 2008 byla percepční mapa: osa cena × osa eco-friendly. Mercedes/BMW = high price, low eco. Toyota Prius = low price, eco. <b>White space:</b> high price, high eco. Tesla obsadila → 80 % EV market share v premium segmentu." },
+    ]
+  };
+
+  const examQuestionsMkt4 = [
+    { komise: "2025-01-28 — Smrčka + Kolouchová + Říhová", otazka: "Positioning, typy, body rozdílnosti, body shodnosti, referenční rámec", pozn: "Smrčka chce <b>kompletní balík</b>: definice → DOCS → úrovně → referenční rámec → POP + POD + 3 podmínky kvalitního POD. Aplikace na PS." },
+    { komise: "2025-01-30 — Nový + Vávra + Heřman (Horská chata)", otazka: "Positioning, typy, referenční rámec, body shody, body rozdílnosti + aplikace na případovku", pozn: "Nový chce <b>aplikaci na PS</b>. Pro horskou chatu: vymezit rámec (lyžařský resort × wellness × outdoor), identifikovat POP (musí mít — pokoje, jídlo, parkování) + POD (čím odlišíme — eko design, lokální menu, family friendly)." },
+    { komise: "2025-06-05 — Kolouchová + Viktora + Honig (Nádobí)", otazka: "Positioning, úrovně positioningu a přístupy k positioningu, POP, POD, konkurenční rámec", pozn: "Kolouchová chce explicitně <b>úrovně</b> (specifický → nadstavbový → total value) + <b>přístupy</b> (USP × ESP). Pro nádobí: USP = trvanlivost, ESP = rodinné večeře." },
+    { komise: "2025-06-18 — Mládková + Vávra + Hönig (Prádlo)", otazka: "Positioning — vymezení, úrovně, referenční konkurenční rámec a POD a POP, Zuzčiných 2 strany", pozn: "Mládková chce <b>první 2 strany Zuzčina materiálu</b> — vymezení, úrovně, referenční rámec, POP/POD. Vávra v chillu, takže nešel do hloubky. Stačí solidní základ." },
+    { komise: "2025-01-30 — Nový + Vávra + Heřman (Horská chata)", otazka: "Značka, prvky, měření/modely (NPS, BRANDZ), typy + aplikace na PS", pozn: "Komise chtěla v rámci positioningu propojit se značkou (M10). <b>Použít USP a cílovku z PS</b>. Pokud v PS chybí značka, vzít cílovku + nějaké USP a stavět na tom." },
+  ];
+
+  const podcastMkt4 = { title: "Marketing 4 — Positioning, POP, POD, referenční rámec", description: "Positioning jako pozice v mysli zákazníka. STP model návaznost. DOCS model (Define/Overdeliver/Claim/Success). 3 úrovně positioningu (specifický/nadstavbový/total value). USP × ESP. Referenční rámec (úzké × široké × netradiční vymezení). POP a POD — definice, 3 podmínky kvalitního POD, vztah. Positioning Statement vzor. Brand Mantra. Percepční mapa. Motivační positioning (PODs + POPs + rezonance = kompromis). 9 strategií positioningu. Diferenciace 3 cestami. Volvo, Duracell, Red Bull, Avis, Tesla.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt4 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>positioning = umístění v mysli zákazníka oproti konkurenci</b>.<br/>
+    <b style="color:#A82A5F">2.</b> Návaznost na M3 — STP (Segmentation → Targeting → Positioning).<br/>
+    <b style="color:#A82A5F">3.</b> ⚠️ <b>DOCS model</b> — Define / Overdeliver / Claim / Success (Mládková chce!).<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>3 úrovně positioningu</b> — specifický (USP, ESP) → nadstavbový (cena × užitek) → total value.<br/>
+    <b style="color:#A82A5F">5.</b> USP (racionální) × ESP (emocionální).<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>Referenční rámec</b> — vymezení kategorie + identifikace konkurence.<br/>
+    <b style="color:#A82A5F">7.</b> ⚠️ <b>POP</b> (body shody) + <b>POD</b> (body rozdílnosti) — Smrčka, Nový chtějí!<br/>
+    <b style="color:#A82A5F">8.</b> 3 podmínky kvalitního POD — uvěřitelný + prosaditelný + jednoduše sdělitelný.<br/>
+    <b style="color:#A82A5F">9.</b> Vztah POP × POD — POP otevírá dveře, POD vyhrává volbu.<br/>
+    <b style="color:#A82A5F">10.</b> Positioning Statement — pro [cílovka] je [značka] [kategorie], která přináší [POD], jelikož [reason to believe].<br/>
+    <b style="color:#A82A5F">11.</b> Mantra značky (3-5 slov, interní).<br/>
+    <b style="color:#A82A5F">12.</b> Percepční mapa — vizualizace + white space.<br/>
+    <b style="color:#A82A5F">13.</b> 9 strategií positioningu (atributy, užitek, aktivity, proti konkurenci...).<br/>
+    <b style="color:#A82A5F">14.</b> Aplikace na PS — vymezit rámec → identifikovat POP/POD → napsat statement → vybrat strategii.
+  `;
+
+  const caseStudyMkt4 = {
+    title: "Hana — Marketing Manager BrewHouse, českého craft pivovaru (15 mil. Kč, 3 zaměstnanci)",
+    subtitle: "Identifikuj chybějící positioning + navrhni POP/POD pro craft segment",
+    scenario: "Hana (29 let) vede marketing BrewHouse 2 roky. Craft pivovar v Plzni, 3 zaměstnanci + zakladatel-sládek Pavel (45 let). Vaří 6 piv (IPA, stout, pšeničné, lager, sezonní 2 ks). Tržby 15 mil. Kč, růst 5 % (pomalu).\n\nProblém: BrewHouse v posici hluboké krize identity. Zákazníci si nepamatují, co BrewHouse stojí za. Konkurence v craft segmentu (Matuška, Sibeeria, Cobolis) má jasný positioning:\n\n• Matuška = West Coast IPA experti (POD: nejlepší IPA v ČR)\n\n• Sibeeria = Belgické styly (POD: jediný v ČR co vaří traditional Belgian)\n\n• Cobolis = experimental brewing (POD: divoké fermenty, hop bomby)\n\nBrewHouse vaří „všechno všeho\" — žádný jasný POD. Pavel je sládek-perfekcionalista, ale Hana nemá positioning statement. Marketing chaotický:\n• Web: „Kvalitní craft piva pro náročné\" (vague)\n• Sociální sítě: kombinace produktových fotek + sládkových videí + memes\n• Slogan: žádný\n\nDealerské síti říká „máme pivo X, Y, Z\" bez emocionální nadstavby. Pavel váhá, ostatní pivovary mu připadají povrchní s marketingem. Hana chce v Q1 2026 udělat repositioning. Má rozpočet 200k Kč na výzkum + brand strategie.\n\nKlíčové vstupy:\n• Cílovka: kraft beer enthusiasts 28-45, urban, vyšší příjem, foodies\n• Pavel má 18 let v pivovarnictví, učil se v Belgii (málokdo to ví)\n• 6 piv: 2 prodávají dobře (IPA, lager), 4 mají slabé prodeje\n• 1 pivo (Belgian Tripel) vyhrálo bronz na World Beer Cup 2024 — Hana to skoro nepoužívá v marketingu",
+    signals: [
+      { text: "Zákazníci si nepamatují, co BrewHouse stojí za", color: VSE.danger, reason: "Klasický signál chybějícího positioningu. Bez POD nemají na co se chytit. Generic craft není POD." },
+      { text: "Konkurence má jasný POD — Matuška IPA, Sibeeria Belgian, Cobolis experimental", color: VSE.danger, reason: "Benchmark — všichni konkurenti měli pochopení, BrewHouse ne. Bez POD = bez důvodu volby." },
+      { text: "BrewHouse vaří „všechno všeho\u201D — žádný jasný POD", color: VSE.danger, reason: "Klasická chyba startupu. Bez specializace v craft segmentu = neviditelnost." },
+      { text: "Web: „Kvalitní craft piva pro náročné\u201D (vague)", color: VSE.danger, reason: "Generic message. Tohle by mohl říct kdokoli. Chybí specifický POD + emocionální nadstavba (ESP)." },
+      { text: "Pavel se učil v Belgii — málokdo to ví", color: VSE.warning, reason: "<b>Skrytý POD!</b> Belgian brewing tradition + 18 let experience = unikátní příběh. Lze postavit positioning na origin (strategie #7) + atributu kvality." },
+      { text: "Belgian Tripel vyhrál bronz na World Beer Cup 2024 — skoro nepoužívají v marketingu", color: VSE.warning, reason: "<b>Konkrétní reason to believe!</b> WBC bronz je world-class ocenění. Hana to musí použít v positioning statement." },
+      { text: "2 piva (IPA, lager) prodávají dobře, 4 slabé", color: VSE.fph, reason: "Signal pro fokus na portfolio. Místo 6 piv → 3-4 piva, ale s jasnou strategií (Belgian heritage)." },
+    ],
+    quiz1: {
+      question: "Co je hlavní problém BrewHouse?",
+      options: [
+        "Špatná kvalita piva",
+        "Vysoká cena",
+        "Chybějící POD a positioning — vaří všechno, nikdo neví, co BrewHouse znamená",
+        "Pavel je perfekcionista",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Hana měla udělat pro repositioning?",
+      options: [
+        { text: "POD: Belgian-inspired craft beer od sládka s belgickou tradicí. Hluboce belgické styly + WBC ocenění jako reason to believe", correct: true, reason: "✓ Konkrétní, defendable, ownable POD. Belgie = unikátní origin v ČR craft scéně. Pavel + 18 let + Belgie + WBC bronz = silný foundation." },
+        { text: "Vymezit referenční rámec: úzké = Belgian-inspired craft. Konkurence: Sibeeria (jediná belgická v ČR), ne masový Matuška/Cobolis", correct: true, reason: "✓ Úzký rámec = jasná konkurence + jasná pozice. Lepší než „craft pivo\u201D obecně." },
+        { text: "POP: standardní craft kvalita (čerstvost, hop forward), 3 prodejní kanály (pivnice, retail, web). Zákazník nás musí uznat jako legitimní craft.", correct: true, reason: "✓ Bez POP nejsme „v kategorii\u201D. Musíme být dobří v základech craft brewing." },
+        { text: "Positioning Statement: „Pro craft beer enthusiasty 28-45 je BrewHouse autentický belgický craft pivovar, který přináší world-class belgické styly inspirované 18letou tradicí sládka, jelikož Pavel vyhrál bronz na World Beer Cup 2024.\u201D", correct: true, reason: "✓ Plný PS vzor. Vše prvky: cílovka, kategorie, POD, reason to believe." },
+        { text: "Brand Mantra: „Belgian Soul, Czech Craft\u201D (3-4 slova — heritage, místo, kvalita)", correct: true, reason: "✓ Interní zkratka. Inspiruje tým, sjednocuje komunikaci." },
+        { text: "Portfolio fokus: redukovat z 6 piv na 3 belgické styly + 1 IPA jako bestseller. Stout/pšeničné zrušit (slabé prodeje + nezapadají do positioningu)", correct: true, reason: "✓ Strategická diferenciace přes produkt. Méně = lepší zaměření." },
+        { text: "Komunikace: storytelling Pavla a belgické tradice, příprava videa o WBC ocenění, foodpairing belgických piv (POD aktivita)", correct: true, reason: "✓ Salient positioning — být viditelní v relevantním kontextu (foodie events, gastronomie)." },
+        { text: "Pokračovat ve strategii „kvalitní craft piva pro náročné\u201D", correct: false, reason: "✗ Generic, nediferencované. Pokračovat = pomalá smrt v konkurenci." },
+        { text: "Zaměřit se jen na IPA (Matuška-style), opustit ostatní", correct: false, reason: "✗ Zbytečně boj s Matuškou, který už má pozici. Belgian je white space." },
+      ],
+    },
+    summary: "<b>BrewHouse trpí klasickou krizí identity — chybí POD a positioning.</b> Klíč: <b>vymezit Belgian-inspired craft pozici postavenou na Pavlově belgické tradici a WBC ocenění</b>.<br/><br/><b>Plán Q1 2026:</b><br/>• <b>Repositioning:</b> Belgian-inspired craft pivovar (úzký rámec). POD = belgická tradice + WBC bronz + Pavlovo 18 let<br/>• <b>POP:</b> Standardní craft kvalita (čerstvost, hop forward, prodejní kanály)<br/>• <b>Statement:</b> Pro craft beer enthusiasty je BrewHouse autentický belgický craft pivovar, který... (jelikož WBC bronz 2024)<br/>• <b>Mantra:</b> Belgian Soul, Czech Craft<br/>• <b>Portfolio:</b> Redukce 6 → 4 piv (3 belgické styly + 1 IPA jako bestseller)<br/>• <b>Komunikace:</b> Storytelling Pavla, WBC video, foodpairing events<br/><br/><b>Pro komisi:</b> Klasický B2B craft startup bez positioningu. <b>Volvo</b> (1 POD 65 let) je etalon disciplíny. <b>DOCS model</b> jako framework. <b>Origin strategy</b> (#7 z 9 strategií) ideální pro lokální craft brand. <b>Konkurenční mapa:</b> Matuška = IPA, Sibeeria = Belgian (přímý konkurent!), Cobolis = experimental. BrewHouse musí Sibeerii porazit kvalitou + příběhem (Belgian heritage Pavla, WBC ocenění).",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={4} title="Positioning, POP, POD, referenční rámec"
+      subtitle="DOCS model + 3 úrovně + USP/ESP + POP/POD + referenční rámec + 9 strategií"
+      color={VSE.fis}
+      questionText="Positioning — úrovně, ref. rámec, POP a POD."
+      questionDesc="Definice positioningu. Návaznost na STP (M3). DOCS model (Define/Overdeliver/Claim/Success). 3 úrovně positioningu (specifický/nadstavbový/total value). USP × ESP. Referenční rámec — úzké × široké × netradiční vymezení. POP (body shody) — 2 typy + interval tolerance. POD (body rozdílnosti) — 3 podmínky kvalitního (uvěřitelný/prosaditelný/sdělitelný). Vztah POP × POD. Positioning Statement vzor. Brand Mantra (3-5 slov, interní). Percepční mapa + white space. Motivační positioning (PODs+POPs+rezonance=kompromis). 9 strategií positioningu (atributy, užitek, aktivity, proti konkurenci, původ, třída...). Diferenciace 3 cestami. Volvo, Duracell, Red Bull, Avis, Tesla."
+      sloz={2} roz={3} freq={4}
+      examStrategy={examStrategyMkt4}
+      studySections={studySectionsMkt4}
+      flashcards={flashcardsMkt4}
+      quiz={quizMkt4}
+      praxe={praxeMkt4}
+      examQuestions={examQuestionsMkt4}
+      podcast={podcastMkt4}
+      caseStudy={caseStudyMkt4}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 5 — Konkurence, KV, konkurenční strategie + logistické strategie
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt5Panel() {
+  const studySectionsMkt5 = [
+    { id: "intro", title: "Konkurence, postavení na trhu, KV — úvod", subtitle: "Trh + okolí + 3 analyzovaná měřítka (market/mind/heart share)", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Konkurence</b> = subjekty na trhu, které usilují o stejné zákazníky. <b>Konkurenční výhoda (KV)</b> = unikátní vlastnost firmy, která jí umožňuje porážet konkurenci dlouhodobě. Komise <b>Schönfeld, Tahal</b> chtějí <b>spojit mkt strategii + logistickou strategii + KV v logistice</b>.
+        </Def>
+        <Tag color={VSE.fis}>Trh a jeho okolí — 2 úrovně</Tag>
+        <Bullet items={[
+          "<b>Makro okolí — PESTLE</b>: Politické / Ekonomické / Sociální / Technologické / Legislativní / Ekologické faktory. Vnější síly, které firma neovlivní.",
+          "<b>Mikro okolí — Porter 5 sil</b>: Konkurence v odvětví / Síla dodavatelů / Síla odběratelů / Substituty / Noví konkurenti. Specifika daného odvětví.",
+          "<b>Nástroje analýzy</b>: SWOT (silné/slabé/příležitosti/hrozby), SPACE matice, benchmark, PESTLE, Porter.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>3 měřítka analýzy konkurence (Market / Mind / Heart Share)</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 480 180" style={{ width: "100%", maxWidth: 480, height: "auto" }}>
+            <defs>
+              <linearGradient id="msGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.fmv} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.fmv} stopOpacity="0.7"/>
+              </linearGradient>
+              <linearGradient id="mndGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.warning} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.warning} stopOpacity="0.7"/>
+              </linearGradient>
+              <linearGradient id="htGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.danger} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.danger} stopOpacity="0.7"/>
+              </linearGradient>
+            </defs>
+            <rect x="20" y="40" width="140" height="100" rx="12" fill="url(#msGrad)"/>
+            <text x="90" y="70" textAnchor="middle" fontSize="26" fill="#fff">📊</text>
+            <text x="90" y="100" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">MARKET SHARE</text>
+            <text x="90" y="122" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="Inter Tight">% z prodejů na trhu</text>
+            <rect x="170" y="40" width="140" height="100" rx="12" fill="url(#mndGrad)"/>
+            <text x="240" y="70" textAnchor="middle" fontSize="26" fill="#fff">🧠</text>
+            <text x="240" y="100" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">MIND SHARE</text>
+            <text x="240" y="122" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="Inter Tight">% kdo si vzpomene</text>
+            <rect x="320" y="40" width="140" height="100" rx="12" fill="url(#htGrad)"/>
+            <text x="390" y="70" textAnchor="middle" fontSize="26" fill="#fff">❤️</text>
+            <text x="390" y="100" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">HEART SHARE</text>
+            <text x="390" y="122" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="Inter Tight">% kdo nás miluje</text>
+            <text x="240" y="170" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">co prodáváme → co lidé znají → co lidé milují</text>
+          </svg>
+        </div>
+        <Bullet items={[
+          "<b>Market share</b> — % prodejů v dané kategorii. Tvrdá metrika (Nielsen, GfK data).",
+          "<b>Mind share</b> — % zákazníků, kteří si jako první vzpomenou na značku v kategorii. Top-of-mind awareness.",
+          "<b>Heart share</b> — % zákazníků, kteří značku preferují emocionálně. NPS, loyalty, brand love.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "porter5", title: "Porter 5 sil — analýza odvětví", subtitle: "Klasika analýzy konkurenčního prostředí", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Porter 5 sil</b> (1979) je <b>nejpoužívanější nástroj analýzy mikro okolí</b>. Identifikuje 5 sil, které ovlivňují ziskovost odvětví. Bez Porter 5 sil nelze udělat dobrou strategii.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 540 380" style={{ width: "100%", maxWidth: 540, height: "auto" }}>
+            <defs>
+              <marker id="arrowPorter" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+              </marker>
+            </defs>
+            {/* Centrum - rivalita */}
+            <circle cx="270" cy="190" r="80" fill={VSE.danger} fillOpacity="0.85"/>
+            <text x="270" y="178" textAnchor="middle" fontSize="22" fill="#fff">⚔️</text>
+            <text x="270" y="200" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">RIVALITA</text>
+            <text x="270" y="218" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="Inter Tight">v odvětví</text>
+            {/* 4 boxy po stranách */}
+            <rect x="200" y="20" width="140" height="55" rx="8" fill={VSE.fmv} opacity="0.85"/>
+            <text x="270" y="42" textAnchor="middle" fontSize="18" fill="#fff">🆕</text>
+            <text x="270" y="62" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">NOVÍ KONKURENTI</text>
+            <rect x="200" y="305" width="140" height="55" rx="8" fill={VSE.warning} opacity="0.85"/>
+            <text x="270" y="327" textAnchor="middle" fontSize="18" fill="#fff">🔄</text>
+            <text x="270" y="347" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">SUBSTITUTY</text>
+            <rect x="20" y="160" width="140" height="60" rx="8" fill={VSE.fph} opacity="0.85"/>
+            <text x="90" y="182" textAnchor="middle" fontSize="18" fill="#fff">📦</text>
+            <text x="90" y="202" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">DODAVATELÉ</text>
+            <text x="90" y="216" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">vyjednávací síla</text>
+            <rect x="380" y="160" width="140" height="60" rx="8" fill={VSE.success} opacity="0.85"/>
+            <text x="450" y="182" textAnchor="middle" fontSize="18" fill="#fff">🛒</text>
+            <text x="450" y="202" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">ODBĚRATELÉ</text>
+            <text x="450" y="216" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">vyjednávací síla</text>
+            {/* Šipky od 4 sil do centra */}
+            <line x1="270" y1="80" x2="270" y2="105" stroke="#888" strokeWidth="2" markerEnd="url(#arrowPorter)"/>
+            <line x1="270" y1="300" x2="270" y2="275" stroke="#888" strokeWidth="2" markerEnd="url(#arrowPorter)"/>
+            <line x1="165" y1="190" x2="185" y2="190" stroke="#888" strokeWidth="2" markerEnd="url(#arrowPorter)"/>
+            <line x1="375" y1="190" x2="355" y2="190" stroke="#888" strokeWidth="2" markerEnd="url(#arrowPorter)"/>
+          </svg>
+        </div>
+        <Tag color={VSE.fis}>5 sil Porterova modelu</Tag>
+        <Bullet items={[
+          "<b>⚔️ Rivalita v odvětví</b>: Počet konkurentů, růst trhu, bariéry exitu. Vysoká rivalita = ničí ziskovost.",
+          "<b>🆕 Hrozba nových konkurentů</b>: Bariéry vstupu — kapitál, regulace, brand, ekonomy of scale.",
+          "<b>🔄 Hrozba substitutů</b>: Alternativní produkty řešící stejný problém (vlak × auto, Netflix × kino).",
+          "<b>📦 Vyjednávací síla dodavatelů</b>: Kolik dodavatelů, jak unikátní jejich produkt, switching costs.",
+          "<b>🛒 Vyjednávací síla odběratelů</b>: Kolik zákazníků, jak velký každý je, jak snadno se přesunou.",
+        ]} color={VSE.fis} />
+      </div>) },
+
+    { id: "typy_konkurence", title: "Typy konkurentů podle tržního podílu", subtitle: "Leader / Challenger / Follower / Nicher + jejich strategie", color: VSE.fis, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Klasické rozdělení konkurentů podle <b>tržního podílu</b> (market share). Každý typ má svou strategii. Komise <b>Stříteský</b> chytá: <b>co dělá cenový vůdce, co challenger</b> — bez toho neudělíš.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 480 240" style={{ width: "100%", maxWidth: 480, height: "auto" }}>
+            {/* 4 vrstvy pyramidy */}
+            <defs>
+              <linearGradient id="leaderGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.danger} stopOpacity="0.95"/>
+                <stop offset="100%" stopColor={VSE.danger} stopOpacity="0.75"/>
+              </linearGradient>
+              <linearGradient id="chalGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.warning} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.warning} stopOpacity="0.7"/>
+              </linearGradient>
+              <linearGradient id="folGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.fph} stopOpacity="0.85"/>
+                <stop offset="100%" stopColor={VSE.fph} stopOpacity="0.65"/>
+              </linearGradient>
+              <linearGradient id="nichGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={VSE.success} stopOpacity="0.85"/>
+                <stop offset="100%" stopColor={VSE.success} stopOpacity="0.65"/>
+              </linearGradient>
+            </defs>
+            <polygon points="180,20 300,20 280,60 200,60" fill="url(#leaderGrad)"/>
+            <text x="240" y="46" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">👑 LEADER (~40 %)</text>
+            <polygon points="150,70 330,70 310,110 170,110" fill="url(#chalGrad)"/>
+            <text x="240" y="96" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">⚡ CHALLENGER (~30 %)</text>
+            <polygon points="120,120 360,120 340,160 140,160" fill="url(#folGrad)"/>
+            <text x="240" y="146" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">🐾 FOLLOWER (~20 %)</text>
+            <polygon points="90,170 390,170 370,210 110,210" fill="url(#nichGrad)"/>
+            <text x="240" y="196" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">💎 NICHER (~10 %)</text>
+            <text x="240" y="232" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">tržní podíl klesá → strategie se mění</text>
+          </svg>
+        </div>
+        <Tag color={VSE.danger}>👑 LEADER (~40 %) — Coca-Cola, Microsoft, Google</Tag>
+        <Bullet items={[
+          "<b>Cíl:</b> Udržení místa, opatrnost. Volba mezi rozšířením trhu × obranou podílu × expanzí podílu.",
+          "<b>6 obranných strategií:</b> Pozic (drží své pozice) / Bicí (buduje silné stránky) / Preventivní (zaútočí na konkurenta před oklatkou) / Protiútok (po napadení) / Mobilní (rozšiřuje na další trhy) / Stažení (vzdá se slabých pozic).",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.warning}>⚡ CHALLENGER (~30 %) — Pepsi vs Coca, Burger King vs McD</Tag>
+        <Bullet items={[
+          "<b>Cíl:</b> Chce být první. Útok na lídra.",
+          "<b>6 útočných strategií:</b> Frontální (přímý útok na sílu lídra) / Po křídlech (slabé stránky, region, segment) / Obklíčení (ze všech stran) / Útok mimo (jiné trhy, technologie) / Partyzánský (krátké údery, slevy) / Technologický skok (přeskočit konkurenci novou tech).",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>🐾 FOLLOWER (~20 %) — Dr Pepper, mnoho lokálních značek</Tag>
+        <Bullet items={[
+          "<b>Cíl:</b> Drží 3. místo, je tady, nevyzývá, následuje. Kopíruje úspěšné kroky.",
+          "<b>4 typy:</b> Padělatel (1:1 kopie, často ilegální) / Kopírovač (mírně upraví) / Imitátor (kopíruje hlavní rysy, ale s odlišnostmi) / Adaptér (přizpůsobuje pro jiný trh).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>💎 NICHER (~10 %) — Rolex, Ferrari, Patagonia</Tag>
+        <Bullet items={[
+          "<b>Cíl:</b> Specializace, ovládnutí zbytkového segmentu. Premium ceny, vysoké marže.",
+          "<b>Klíč:</b> Najít niche dost velký na zisk, ale příliš malý na zájem leaderů. Hluboká znalost zákazníka, customizace.",
+        ]} color={VSE.success} />
+        <ExamAlert
+          komise="Double Stříteský + Mareš 2025 (Nádobí)"
+          what="Stříteský chce <b>příklady konkurenčních strategií</b> — co může dělat cenový vůdce, co challenger. Speciálně chce slyšet <b>obranné</b> (pozic, mobilní, stažení) <b>i růstové</b> strategie (zvětšení potenciálního trhu, ne jen tržního podílu)."
+        />
+      </div>) },
+
+    { id: "porter_strategie", title: "Porterovy generické strategie + KV", subtitle: "3 cesty získání KV + jak ji udržet", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Porterovy generické strategie</b> (1980) — 3 cesty, jak získat <b>udržitelnou konkurenční výhodu</b>. Matice 2×2: rozsah trhu (úzký × široký) × zdroj KV (nízké náklady × diferenciace).
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 500 320" style={{ width: "100%", maxWidth: 500, height: "auto" }}>
+            {/* Osy */}
+            <text x="250" y="20" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight">ZDROJ KV</text>
+            <text x="120" y="42" textAnchor="middle" fontSize="11" fill="var(--text-muted, #666)" fontFamily="Inter Tight">Nízké náklady</text>
+            <text x="380" y="42" textAnchor="middle" fontSize="11" fill="var(--text-muted, #666)" fontFamily="Inter Tight">Diferenciace</text>
+            <text x="20" y="170" textAnchor="middle" fontSize="12" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight" transform="rotate(-90, 20, 170)">ROZSAH TRHU</text>
+            <text x="60" y="105" textAnchor="middle" fontSize="11" fill="var(--text-muted, #666)" fontFamily="Inter Tight" transform="rotate(-90, 60, 105)">Široký</text>
+            <text x="60" y="235" textAnchor="middle" fontSize="11" fill="var(--text-muted, #666)" fontFamily="Inter Tight" transform="rotate(-90, 60, 235)">Úzký</text>
+            {/* Kvadranty 2x2 */}
+            <rect x="90" y="60" width="180" height="120" rx="8" fill={VSE.fmv} opacity="0.85"/>
+            <text x="180" y="95" textAnchor="middle" fontSize="20" fill="#fff">💰</text>
+            <text x="180" y="125" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">COST LEADERSHIP</text>
+            <text x="180" y="145" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">Walmart, Lidl, Ryanair</text>
+            <text x="180" y="160" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">nejnižší náklady v branži</text>
+            <rect x="280" y="60" width="180" height="120" rx="8" fill={VSE.warning} opacity="0.85"/>
+            <text x="370" y="95" textAnchor="middle" fontSize="20" fill="#fff">✨</text>
+            <text x="370" y="125" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">DIFFERENTIATION</text>
+            <text x="370" y="145" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">Apple, BMW, Patagonia</text>
+            <text x="370" y="160" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">unikátní hodnota</text>
+            <rect x="90" y="190" width="180" height="100" rx="8" fill={VSE.fph} opacity="0.85"/>
+            <text x="180" y="220" textAnchor="middle" fontSize="20" fill="#fff">🎯</text>
+            <text x="180" y="248" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">COST FOCUS</text>
+            <text x="180" y="268" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">Pepco, Action</text>
+            <rect x="280" y="190" width="180" height="100" rx="8" fill={VSE.success} opacity="0.85"/>
+            <text x="370" y="220" textAnchor="middle" fontSize="20" fill="#fff">💎</text>
+            <text x="370" y="248" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">DIFFERENTIATION FOCUS</text>
+            <text x="370" y="268" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">Rolex, Ferrari</text>
+            <text x="250" y="312" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">⚠️ „stuck in the middle\u201D = bez jasné strategie ztratíme</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fis}>3 generické strategie (Porter)</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "💰 COST LEADERSHIP", d: "Nejnižší náklady v branži. Úspory z rozsahu, efektivita, levné suroviny. Cena = klíčový vstup, marže nízké. Walmart, Lidl, Ryanair, Pepco." },
+            { c: VSE.warning, t: "✨ DIFFERENTIATION", d: "Unikátní hodnota pro zákazníka. Vyšší cena, vyšší marže. Brand, design, kvalita, service. Apple, BMW, Patagonia, Nespresso." },
+            { c: VSE.success, t: "🎯 FOCUS (Niche)", d: "Specializace na úzký segment. Cost focus (Pepco) × Differentiation focus (Rolex, Ferrari). Klíč: dominance v nice." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>VRIO model — co dělá KV udržitelnou?</Tag>
+        <Bullet items={[
+          "<b>V — Valuable</b>: Přináší hodnotu zákazníkům.",
+          "<b>R — Rare</b>: Vzácný — konkurenti to nemají.",
+          "<b>I — Inimitable</b>: Těžko napodobitelný — patenty, kultura, know-how.",
+          "<b>O — Organized</b>: Firma je schopna ho využít — má procesy, lidi, zdroje.",
+          "<b>Pokud splňuje všechny 4 → udržitelná KV.</b> Pokud chybí O → konkurence to udělá lépe.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "value_chain", title: "Hodnotový řetězec (Porter) — kde vzniká KV", subtitle: "Primární × podpůrné činnosti + jak najít KV uvnitř firmy", color: VSE.fis, emoji: "refresh",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Hodnotový řetězec (Value Chain, Porter 1985)</b> = rozbití firmy na <b>primární a podpůrné činnosti</b>. KV vzniká tam, kde firma dělá některou činnost <b>lépe než konkurence</b>.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 600 280" style={{ width: "100%", maxWidth: 600, height: "auto" }}>
+            {/* Podpůrné činnosti - 4 řádky nad primárními */}
+            <rect x="20" y="20" width="500" height="32" fill={VSE.fph} opacity="0.7"/>
+            <text x="30" y="40" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">🏢 Infrastruktura podniku</text>
+            <rect x="20" y="54" width="500" height="32" fill={VSE.fph} opacity="0.6"/>
+            <text x="30" y="74" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">👥 Řízení lidských zdrojů</text>
+            <rect x="20" y="88" width="500" height="32" fill={VSE.fph} opacity="0.5"/>
+            <text x="30" y="108" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">🔬 Technologický rozvoj</text>
+            <rect x="20" y="122" width="500" height="32" fill={VSE.fph} opacity="0.4"/>
+            <text x="30" y="142" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">📦 Obstaravatelská činnost</text>
+            <text x="270" y="172" textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">PODPŮRNÉ ČINNOSTI</text>
+            {/* Primární činnosti - 5 boxů ve šipce */}
+            <polygon points="20,190 110,190 130,220 110,250 20,250" fill={VSE.fmv} opacity="0.85"/>
+            <text x="70" y="217" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">📥 Vstupní</text>
+            <text x="70" y="232" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">operace</text>
+            <polygon points="115,190 215,190 235,220 215,250 115,250 135,220" fill={VSE.warning} opacity="0.85"/>
+            <text x="175" y="225" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">🏭 Výroba</text>
+            <polygon points="220,190 320,190 340,220 320,250 220,250 240,220" fill={VSE.fph} opacity="0.85"/>
+            <text x="280" y="217" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">📤 Výstupní</text>
+            <text x="280" y="232" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">operace</text>
+            <polygon points="325,190 425,190 445,220 425,250 325,250 345,220" fill={VSE.danger} opacity="0.85"/>
+            <text x="385" y="217" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">📣 Marketing</text>
+            <text x="385" y="232" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">a obchod</text>
+            <polygon points="430,190 530,190 550,220 530,250 430,250 450,220" fill={VSE.success} opacity="0.85"/>
+            <text x="490" y="217" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">🔧 Servisní</text>
+            <text x="490" y="232" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">služby</text>
+            <text x="285" y="270" textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">PRIMÁRNÍ ČINNOSTI → ZISK</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fis}>Primární činnosti (přímo vytvářejí hodnotu)</Tag>
+        <Bullet items={[
+          "<b>📥 Vstupní operace (Inbound logistics):</b> Příjem surovin, skladování, kontrola kvality.",
+          "<b>🏭 Výroba (Operations):</b> Transformace vstupů na výstupy.",
+          "<b>📤 Výstupní operace (Outbound logistics):</b> Skladování hotových výrobků, distribuce, doprava.",
+          "<b>📣 Marketing a obchod:</b> Reklama, prodej, kanály, ceny.",
+          "<b>🔧 Servisní služby (After-sale service):</b> Instalace, opravy, podpora zákazníka.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Podpůrné činnosti (umožňují primární)</Tag>
+        <Bullet items={[
+          "<b>🏢 Infrastruktura podniku:</b> Management, finance, právo, plánování.",
+          "<b>👥 Řízení lidských zdrojů:</b> Recruiting, vzdělávání, motivace.",
+          "<b>🔬 Technologický rozvoj:</b> R&D, IT, automatizace.",
+          "<b>📦 Obstaravatelská činnost (Procurement):</b> Nákup surovin, materiálů, služeb.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "logistika_kv", title: "Logistika jako KV — strategie + integrace řetězce", subtitle: "Smrčka, Tahal chtějí logistiku jako KV!", color: VSE.fis, emoji: "truck",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Komise <b>Tahal, Schönfeld, Pichanič, Nový</b> chtějí explicitně <b>logistiku jako KV</b>. V dnešní době, kdy produkty jsou si podobné, je <b>logistika častý zdroj diferenciace</b> (Amazon, Zara, Toyota).
+        </Def>
+        <ExamAlert
+          komise="Tahal + Cejthamr + Svobodová 2025 (Prádlo)"
+          what="Tahal vždy chce <b>4 spojené body</b>: konkurenční výhoda + konkurenční strategie + logistická strategie + konk. výhoda v logistice. Bez všech 4 NEUDĚLÍŠ. Musíš to umět provázat — nestačí jen vyjmenovat odděleně."
+        />
+        <Tag color={VSE.fis}>7 logistických KV (z M1 — distribuce)</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🏃 Rychlost", d: "Same-day delivery, 24h dodání. Amazon Prime Now, Wolt." },
+            { c: VSE.warning, t: "⚡ Agilnost", d: "Rychlá reakce na změny poptávky. Zara nový design → obchod za 2 týdny." },
+            { c: VSE.fph, t: "🎨 Individualizace", d: "Customizace produktu (Nike By You). Personalizovaná logistika." },
+            { c: VSE.success, t: "🌱 Ekologičnost", d: "Carbon-neutral, electric fleet. DPD GoGreen, Tesla supply chain." },
+            { c: VSE.danger, t: "📱 Digitální služby", d: "Real-time tracking, app-only ordering. Alza, Amazon." },
+            { c: VSE.fis, t: "🌍 Globální dosažitelnost", d: "Doručení kamkoli ve světě. DHL, Maersk." },
+            { c: VSE.fmv, t: "🤖 Automatizace", d: "Roboti ve skladu, autonomní doprava. Amazon Robotics, Tesla." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Logistické strategie (jak ji použít jako KV)</Tag>
+        <Bullet items={[
+          "<b>JIT (Just-in-Time):</b> Žádné zásoby, suroviny přicházejí přesně když je potřebuji. <b>Toyota</b> klasika — KV = nízké náklady na sklady + flexibilita.",
+          "<b>Lean logistics:</b> Minimalizace plýtvání (čas, materiál, prostor). KV = efektivita + agilita.",
+          "<b>Quick Response (QR):</b> Rychlá reakce na poptávku. <b>Zara</b> — design k dispozici za 2 týdny vs branche 6 měsíců.",
+          "<b>Cross-docking:</b> Zboží přejíždí ze vstupu na výstup bez skladování. <b>Walmart</b> — KV = nízké náklady na sklady.",
+          "<b>Vertical integration:</b> Vlastnit dodavatele/distributory. <b>Tesla</b> Gigafactory, <b>Apple</b> chipy. KV = kontrola + náklady.",
+          "<b>Outsourcing 3PL/4PL:</b> Specializovaný partner. KV = focus na core competence.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Integrace logistického řetězce</Tag>
+        <Bullet items={[
+          "<b>Vertikální integrace</b> (Nový chce!): Firma vlastní více článků řetězce. <b>Backward</b> — k dodavatelům (Tesla baterie). <b>Forward</b> — k distribuci (Apple Stores). Detail viz Logistika 1.",
+          "<b>Horizontální integrace</b>: Konsolidace na stejné úrovni. Walmart kupuje konkurenta = market share.",
+          "<b>Výhody vertikální integrace</b>: Nižší náklady, kontrola nad kvalitou, ochrana proti dodavatelům.",
+          "<b>Nevýhody</b>: Vysoké náklady v některých článcích řetězce, nižší flexibilita, kapitálová náročnost.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "strategie_aplikace", title: "Strategie podle situace + aplikace na PS", subtitle: "Jak vybrat strategii podle pozice + komise chce aplikaci!", color: VSE.fis, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Strategie se mění podle <b>pozice firmy na trhu</b>. Komise <b>Schönfeld, Mikovcová, Pichanič</b> chtějí explicitně <b>aplikaci na PS firmu</b> — nestačí teorie.
+        </Def>
+        <Tag color={VSE.fis}>Strategie podle pozice na trhu — shrnutí</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.danger, t: "👑 Leader", d: "Rozšíření trhu (zvětšit koláč) + obrana podílu + protiútok. Coca-Cola, Microsoft." },
+            { c: VSE.warning, t: "⚡ Challenger", d: "Útok na lídra. Frontální (vzácně) nebo po křídlech (slabá místa). Pepsi, Burger King." },
+            { c: VSE.fph, t: "🐾 Follower", d: "Kopírovat, ale levněji. Nebýt agresivní, neprovokovat lídra. Dr Pepper, Aldi (vs Tesco)." },
+            { c: VSE.success, t: "💎 Nicher", d: "Specializace, prémiové ceny. Ovládnout zbytkový segment. Rolex, Ferrari, Patagonia." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Růstové strategie (zvětšení trhu, ne podílu)</Tag>
+        <Bullet items={[
+          "<b>1. Nové trhy (market development):</b> Expand to new countries/segments. Apple → China.",
+          "<b>2. Nové produkty (product development):</b> Inovace v existujícím trhu. iPhone → iPad → Apple Watch.",
+          "<b>3. Více užití (usage):</b> Více příležitostí pro existující produkt. „Coca-Cola na snídani.\u201D",
+          "<b>4. Více uživatelů (penetration):</b> Cílit na nové cílovky. Lego pro dospělé.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Jak se pozná dobrý konkurent (Porter)</Tag>
+        <Bullet items={[
+          "<b>Je důvěryhodný</b> — potenciální hrozba pro nové hráče.",
+          "<b>Má nějakou slabou stránku</b> — místo pro útok.",
+          "<b>Chápe a respektuje pravidla</b> — neničí trh agresivní cenovou válkou.",
+          "<b>Uvědomuje si výši svých nákladů</b> — racionálně rozhoduje.",
+          "<b>Pozor na špatného konkurenta:</b> agresivní cenovou válku, nekonzistentní strategii, kapitálově silný outsider.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Aplikace na PS — checklist pro komisi</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj pozici firmy v PS — Leader / Challenger / Follower / Nicher.",
+          "<b>2.</b> Vyber generic strategy (Cost / Differentiation / Focus).",
+          "<b>3.</b> Identifikuj 1-2 KV (z Value Chain — kde je firma silná).",
+          "<b>4.</b> Propoj s logistikou — jaká logistická KV podporuje strategii (Rychlost? Cena? Ekologie?).",
+          "<b>5.</b> Doporuč 2-3 konkrétní kroky (zlepšit X, investovat do Y, opustit Z).",
+        ]} color={VSE.danger} />
+      </div>) },
+  ];
+
+  const flashcardsMkt5 = [
+    { term: "Konkurence", def: "Subjekty na trhu, které usilují o stejné zákazníky. Klíčový vstup do strategie.", tag: "POJEM" },
+    { term: "Konkurenční výhoda (KV)", def: "Unikátní vlastnost firmy, která jí umožňuje dlouhodobě porážet konkurenci. Měřeno přes VRIO.", tag: "POJEM" },
+    { term: "Makro × Mikro okolí", def: "Makro = PESTLE (politické, ekonomické, sociální, technologické, legislativní, ekologické). Mikro = Porter 5 sil (odvětví).", tag: "OKOLÍ" },
+    { term: "Porter 5 sil", def: "Rivalita v odvětví + Hrozba nových konkurentů + Hrozba substitutů + Síla dodavatelů + Síla odběratelů.", tag: "PORTER" },
+    { term: "Market / Mind / Heart share", def: "Market = % prodejů. Mind = % top-of-mind awareness. Heart = % emocionální preference.", tag: "ANALÝZA" },
+    { term: "Typy konkurence", def: "Leader (~40 %) / Challenger (~30 %) / Follower (~20 %) / Nicher (~10 %). Klasické rozdělení podle tržního podílu.", tag: "TYPY" },
+    { term: "Leader — strategie", def: "Rozšíření trhu / Obrana podílu / Expanze. 6 obranných: pozic, bicí, preventivní, protiútok, mobilní, stažení.", tag: "TYPY" },
+    { term: "Challenger — útočné strategie", def: "Frontální / Po křídlech / Obklíčení / Útok mimo / Partyzánský / Technologický skok.", tag: "TYPY" },
+    { term: "Follower — 4 typy", def: "Padělatel (1:1) / Kopírovač (mírně upraví) / Imitátor (hlavní rysy + odlišnosti) / Adaptér (jiný trh).", tag: "TYPY" },
+    { term: "Nicher", def: "Specialista na zbytkový segment. Premium ceny, vysoké marže. Najít niche dost velký pro zisk, ale malý pro lídra.", tag: "TYPY" },
+    { term: "Porterovy generic strategie", def: "Cost Leadership / Differentiation / Focus (Cost focus × Differentiation focus). Matice trh × zdroj KV.", tag: "PORTER" },
+    { term: "Cost Leadership", def: "Nejnižší náklady v branži. Walmart, Lidl, Ryanair, Pepco. Úspory z rozsahu, efektivita.", tag: "PORTER" },
+    { term: "Differentiation", def: "Unikátní hodnota. Apple, BMW, Patagonia. Vyšší cena, vyšší marže.", tag: "PORTER" },
+    { term: "Focus (Niche)", def: "Specializace na úzký segment. Cost focus (Pepco) × Differentiation focus (Rolex, Ferrari).", tag: "PORTER" },
+    { term: "Stuck in the middle", def: "Porter: bez jasné strategie ztratíme. Nelze být současně cost leader i diferenciovaný.", tag: "PORTER" },
+    { term: "VRIO model", def: "V (Valuable) + R (Rare) + I (Inimitable) + O (Organized). Pokud splňuje všechny 4 → udržitelná KV.", tag: "VRIO" },
+    { term: "Hodnotový řetězec (Porter)", def: "Rozbití firmy na primární + podpůrné činnosti. KV vzniká tam, kde je firma lepší než konkurence.", tag: "VALUE CHAIN" },
+    { term: "Primární činnosti (Value Chain)", def: "Vstupní operace → Výroba → Výstupní operace → Marketing a obchod → Servisní služby. Přímo vytvářejí hodnotu.", tag: "VALUE CHAIN" },
+    { term: "Podpůrné činnosti", def: "Infrastruktura podniku / Řízení LZ / Technologický rozvoj / Obstaravatelská činnost (Procurement).", tag: "VALUE CHAIN" },
+    { term: "Logistika jako KV", def: "Rychlost / Agilnost / Individualizace / Ekologičnost / Digitální služby / Globální dosažitelnost / Automatizace.", tag: "LOGISTIKA" },
+    { term: "JIT (Just-in-Time)", def: "Žádné zásoby. Toyota klasika. KV = nízké náklady + flexibilita.", tag: "LOGISTIKA" },
+    { term: "Quick Response (QR)", def: "Zara — design k dispozici za 2 týdny vs branche 6 měsíců. KV = rychlost reakce na trendy.", tag: "LOGISTIKA" },
+    { term: "Cross-docking", def: "Zboží přejíždí ze vstupu na výstup bez skladování. Walmart. KV = nízké náklady na sklady.", tag: "LOGISTIKA" },
+    { term: "Vertikální integrace", def: "Backward (dodavatelé — Tesla baterie) × Forward (distribuce — Apple Stores). KV = kontrola + náklady.", tag: "LOGISTIKA" },
+    { term: "Horizontální integrace", def: "Konsolidace na stejné úrovni. Walmart kupuje konkurenta. KV = market share.", tag: "LOGISTIKA" },
+    { term: "Růstové strategie (4 typy)", def: "Nové trhy / Nové produkty / Více užití / Více uživatelů. Pro rozšíření trhu, ne jen podílu.", tag: "RŮSTOVÉ" },
+    { term: "Dobrý konkurent (Porter)", def: "Je důvěryhodný + má slabou stránku + respektuje pravidla + uvědomuje si náklady.", tag: "KONKURENCE" },
+    { term: "PESTLE", def: "Politické / Ekonomické / Sociální / Technologické / Legislativní / Ekologické faktory makro okolí.", tag: "OKOLÍ" },
+  ];
+
+  const quizMkt5 = [
+    { q: "Co je konkurenční výhoda (KV)?", opts: ["Reklamní slogan", "Unikátní vlastnost firmy, která jí umožňuje dlouhodobě porážet konkurenci", "Cenová sleva", "Velikost firmy"], correct: 1 },
+    { q: "Kolik sil definuje Porter v analýze odvětví?", opts: ["3", "5 (rivalita, noví, substituty, dodavatelé, odběratelé)", "6", "8"], correct: 1 },
+    { q: "Co je Market share × Mind share?", opts: ["Synonyma", "Market = % prodejů. Mind = % top-of-mind awareness.", "Market je americký, Mind evropský", "Mind je novější"], correct: 1 },
+    { q: "Který typ konkurenta má ~40 % market share?", opts: ["Nicher", "Follower", "Challenger", "Leader"], correct: 3 },
+    { q: "Která strategie Challenger útočí na slabé stránky lídra?", opts: ["Frontální", "Po křídlech", "Obklíčení", "Partyzánský"], correct: 1 },
+    { q: "Kolik typů Followera definujeme?", opts: ["2", "3", "4 (padělatel, kopírovač, imitátor, adaptér)", "5"], correct: 2 },
+    { q: "Co je hlavní strategie Nichera?", opts: ["Cenová válka", "Specializace, ovládnutí zbytkového segmentu, premium ceny", "Útok na lídra", "Kopírování"], correct: 1 },
+    { q: "Kolik generic strategií definuje Porter?", opts: ["2", "3 (Cost Leadership / Differentiation / Focus)", "4", "5"], correct: 1 },
+    { q: "Walmart je příkladem:", opts: ["Differentiation", "Cost Leadership", "Focus", "Stuck in the middle"], correct: 1 },
+    { q: "Co znamená VRIO?", opts: ["Vize/Realita/Identita/Organizace", "Valuable / Rare / Inimitable / Organized — model udržitelné KV", "Variabilní rate", "Virtuální organizace"], correct: 1 },
+    { q: "Kolik primárních činností je ve Value Chain (Porter)?", opts: ["3", "4", "5 (vstupní op., výroba, výstupní op., marketing, servis)", "6"], correct: 2 },
+    { q: "Která logistická strategie je klíčem pro Toyotu?", opts: ["Cross-docking", "JIT (Just-in-Time)", "QR (Quick Response)", "Outsourcing 3PL"], correct: 1 },
+    { q: "Která logistická strategie je klíčem pro Zaru?", opts: ["JIT", "Quick Response — design za 2 týdny", "Cross-docking", "Vertikální integrace"], correct: 1 },
+    { q: "Co je vertikální integrace?", opts: ["Růst do nových zemí", "Vlastnit více článků hodnotového řetězce (dodavatelé nebo distributoři)", "Reklama", "Cenová strategie"], correct: 1 },
+    { q: "Která NENÍ z růstových strategií?", opts: ["Nové trhy", "Nové produkty", "Cenová válka", "Více užití existujícího produktu"], correct: 2 },
+  ];
+
+  const praxeMkt5 = {
+    caseStudy: {
+      company: "Tesla — etalon kombinace KV: Differentiation + vertikální integrace + logistická KV",
+      subtitle: "Z challengera k leaderovi EV trhu za 15 let",
+      content: (<>
+        <b>Tesla</b> je <b>učebnicový příklad propojení konkurenčních strategií + logistiky jako KV</b>. Z malého challengera (2008) k lídrovi EV trhu (2024).<br/><br/>
+        <b style={{ color: VSE.success }}>Porterova strategie:</b><br/>
+        • <b>Differentiation Focus</b> (2008-2017): Niche premium EV. Konkurence: jenom hybridy (Prius).<br/>
+        • <b>Differentiation</b> (2017+): Mainstream Model 3, Y. Konkurence: BMW, Mercedes, Audi.<br/>
+        • Vyhnula se „stuck in the middle\u201D — vždy jasná pozice.<br/><br/>
+        <b style={{ color: VSE.warning }}>VRIO Tesly:</b><br/>
+        • <b>Valuable:</b> Zero-emission + performance + tech UX → max hodnota pro eco+tech segment.<br/>
+        • <b>Rare:</b> Žádný auto výrobce v 2010 neměl battery+motor+SW integraci.<br/>
+        • <b>Inimitable:</b> Patenty, 10 let náskoku v battery tech, Supercharger network.<br/>
+        • <b>Organized:</b> Gigafactory, direct sales (no dealers), OTA updates.<br/><br/>
+        <b style={{ color: VSE.fmv }}>Vertikální integrace = klíčová KV:</b><br/>
+        • <b>Backward:</b> Vlastní baterie (Gigafactory), AI čipy, autopilot SW. Nezávislost na dodavatelích.<br/>
+        • <b>Forward:</b> Direct sales online + vlastní Tesla Stores. Žádní dealeři. Plná kontrola customer experience.<br/>
+        • <b>Supercharger network:</b> 50k+ stanic globálně. Otevřené pro konkurenci od 2024 (Ford, GM).<br/><br/>
+        <b style={{ color: VSE.fph }}>Logistická KV Tesly:</b><br/>
+        • <b>🤖 Automatizace:</b> Gigafactory Texas — 80% automatizace výroby<br/>
+        • <b>📱 Digitální služby:</b> OTA updates — auto se zlepšuje bez návštěvy servisu<br/>
+        • <b>🌱 Ekologičnost:</b> Carbon-neutral cíl 2040, vlastní solar elektřina pro Gigafactory<br/>
+        • <b>🌍 Globální dosažitelnost:</b> Supercharger v 40+ zemích<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Tesla má <b>80 % EV market share v USA</b>, market cap 800 mld. USD, profitabilní od 2020 (žádný EV competitor není).
+      </>),
+      lessons: "Tesla je <b>etalon propojení mkt strategie + logistická strategie + KV v logistice</b>. Když máš v PS firmu chce růst, doporuč: <b>jasná Porter strategie (Differentiation nebo Cost Leadership) + identifikace 2-3 KV podle VRIO + vertikální integrace na klíčových článcích + logistika jako diferenciátor</b>. Alternativy: <b>Zara (QR), Amazon (Prime + automation), Apple (vertikální integrace), Toyota (JIT), Walmart (cross-docking)</b>."
+    },
+    miniExamples: [
+      { tag: "COST LEADERSHIP", color: VSE.fmv, company: "Ryanair — nejnižší náklady v Evropě", content: "Ryanair má <b>40 % nižší náklady na sedadlo</b> než konkurence. Klíče: secondary airports (Bratislava místo Vídně), 1 typ letadla (Boeing 737-800, levný servis), no-frills (placené jídlo, taxy, místa), agresivní reklama o ceně. Klasický <b>Cost Leadership</b>." },
+      { tag: "DIFFERENTIATION", color: VSE.warning, company: "Apple — premium ecosystem", content: "Apple = <b>Differentiation</b> přes design + UX + ecosystem. Premium cena 30-50 % nad konkurencí, ale margin 40 % (vs Samsung 20 %). KV: vlastní čipy M-series (vertical integration), iCloud (lock-in), App Store (monetizace). VRIO ✓ ✓ ✓ ✓." },
+      { tag: "JIT", color: VSE.success, company: "Toyota — Lean + JIT", content: "Toyota Production System je <b>etalon JIT</b>. Suroviny přichází do fabriky 2-4 h před výrobou. Zero inventory = nízké náklady. Když 2011 fukushima zničila dodavatele, Toyota stála 6 týdnů — daň za extrémní JIT. Lekce: KV má i risk." },
+      { tag: "QR (Quick Response)", color: VSE.fph, company: "Zara — 2 týdny z designu na trh", content: "Zara má <b>nejrychlejší supply chain v fashion branži</b>. Nový design → obchod za 2 týdny (H&M 6 měsíců, Gap 9). Klíče: vlastní fabriky (50 % v Španělsku), letecká doprava místo lodě, malé batches. KV = rychlost. Marže 60 % vs branch 30 %." },
+    ]
+  };
+
+  const examQuestionsMkt5 = [
+    { komise: "2026-02-02 — Schönfeld + Legnerová + Zamazalová (Prádlo)", otazka: "Konkurenční strategie v marketingu, logistické strategie a konkurenční výhody v logistice — napasovat na PS", pozn: "Komise chce <b>4 spojené body</b>: mkt strategie + log strategie + KV v logistice + aplikace na PS. Pro prádlo (B2B oděvy): Cost Leadership nebo Differentiation? Logistika = JIT (B2B dodávky) nebo QR (rychlá reakce)?" },
+    { komise: "2025-01-28 — Tahal + Kuděj + Kučera", otazka: "Pohled marketingu na konkurenční výhodu, konk. strategie, log. strategie, KV v logistice", pozn: "Tahal vyžaduje <b>kompletní balík</b>. Začni KV definicí → VRIO → Porter 3 generic → log strategie (JIT, QR, vertical integration) → logistika jako KV (7 typů). Aplikace na PS povinná." },
+    { komise: "2025-02-04 — Tahal + Cejthamr + Svobodová (Prádlo a.s.)", otazka: "KV, konk. strategie, log. strategie, KV v logistice", pozn: "Stejně jako výše. Pro Prádlo a.s. (oděvy): doporučit Differentiation (kvalita, design) nebo Cost Leadership (úspory z rozsahu)? Log: outsourcing 3PL (DHL), nebo vertical (vlastní sklady)?" },
+    { komise: "2025-01-30 — Nový + Vávra + Heřman (Horská chata)", otazka: "MV, Logistika jako KV, log. řetězce a jejich přínosy. Integrace log. řetězce (vertikální) + výhody", pozn: "Nový chce <b>logistiku jako KV</b> + <b>vertikální integraci</b>. Klíčové: rozdíl backward × forward integrace, výhody (kontrola, náklady), nevýhody (kapitál, flexibilita)." },
+    { komise: "2025-02-05 — Krause + Viktora + Tahal (Neziskovka)", otazka: "Marketingové konkurenční strategie, využití logistických služeb jako KV", pozn: "Pro neziskovku: konkurence je o donorech, ne zákazníci. KV: efektivita, transparence, dopad. Logistika: low-cost, využití dobrovolníků jako 3PL." },
+    { komise: "2025-06-04 — Tahal + Cejthamr + Schönfeld", otazka: "Konk. strategie v mkt, log. strategie, log. systém, KV v logistice — aplikace na PS", pozn: "Tahal opakovaně chce <b>4 propojené body</b>. Doplň <b>log. systém</b> (ERP/WMS/TMS — viz Log 3). KV v logistice je o použití systému jako diferenciátoru (Alza vlastní WMS, Amazon AI)." },
+    { komise: "2025-06-10 — Mikovcová + Vávra + Viktora (Lázně)", otazka: "Marketing a konkurence, mkt strategie, logistika a strategie — navázat na PS hlavně logistiku", pozn: "Mikovcová chce <b>aplikaci na PS</b>. Pro lázně: Differentiation Focus (premium wellness). Log KV: kvalitní lokální dodávky (potraviny, kosmetika), digitální booking, sustainability." },
+    { komise: "2025-06-12 — Pichanič + Kuděj + Zamazalová (Víno)", otazka: "Mkt strategie a strategie v logistice — jak pomáhá ke KV?", pozn: "Pichanič chce <b>propojení mkt+log strategií → KV</b>. Pro víno: Differentiation (origin, sommelier story) + log KV (čerstvost, cold chain, e-commerce direct-to-consumer)." },
+    { komise: "2025-06-16 — Double Stříteský + Mareš (Nádobí)", otazka: "Mkt strategie, zařazení firmy z PS, příklady konkurenčních strategií (cenový vůdce, challenger, leader, růstové strategie)", pozn: "<b>Stříteský chytá:</b> chce explicitně <b>leaderovské strategie</b> (obranné: pozic, mobilní, stažení) + <b>růstové</b> (zvětšení potenciálního trhu, ne jen tržního podílu). Naučit obojí." },
+  ];
+
+  const podcastMkt5 = { title: "Marketing 5 — Konkurence, KV, konkurenční strategie + logistické strategie", description: "Konkurence a postavení na trhu. Makro (PESTLE) × mikro (Porter 5 sil). Analýza konkurence (market/mind/heart share). Typy konkurentů — Leader/Challenger/Follower/Nicher. Strategie každého typu (6 obranných lídra, 6 útočných challengera). Porterovy generic strategie (Cost Leadership/Differentiation/Focus). VRIO model. Hodnotový řetězec (primární + podpůrné činnosti). Logistika jako KV (7 typů). Logistické strategie (JIT, QR, cross-docking, vertical integration). Integrace řetězce (vertikální × horizontální). Růstové strategie. Tesla, Ryanair, Apple, Toyota, Zara, Walmart.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt5 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>konkurence + KV (unikátní udržitelná vlastnost)</b>.<br/>
+    <b style="color:#A82A5F">2.</b> Makro (PESTLE) × Mikro (Porter 5 sil) okolí.<br/>
+    <b style="color:#A82A5F">3.</b> ⚠️ <b>Porter 5 sil</b> — rivalita, nový, substituty, dodavatelé, odběratelé.<br/>
+    <b style="color:#A82A5F">4.</b> 3 měřítka — Market share / Mind share / Heart share.<br/>
+    <b style="color:#A82A5F">5.</b> ⚠️ <b>Typy konkurentů</b> — Leader (40 %) / Challenger (30 %) / Follower (20 %) / Nicher (10 %).<br/>
+    <b style="color:#A82A5F">6.</b> Strategie každého typu — 6 obranných lídra, 6 útočných challengera (Stříteský chytá!).<br/>
+    <b style="color:#A82A5F">7.</b> ⚠️ <b>Porterovy generic strategie</b> — Cost Leadership / Differentiation / Focus.<br/>
+    <b style="color:#A82A5F">8.</b> VRIO model — Valuable / Rare / Inimitable / Organized.<br/>
+    <b style="color:#A82A5F">9.</b> Hodnotový řetězec — primární + podpůrné činnosti.<br/>
+    <b style="color:#A82A5F">10.</b> ⚠️ <b>Logistika jako KV</b> (Tahal, Schönfeld chtějí!) — 7 typů + Toyota/Zara/Walmart.<br/>
+    <b style="color:#A82A5F">11.</b> Logistické strategie — JIT, QR, cross-docking, vertical integration.<br/>
+    <b style="color:#A82A5F">12.</b> Vertikální integrace — backward × forward (Nový chce!).<br/>
+    <b style="color:#A82A5F">13.</b> Růstové strategie — nové trhy / produkty / užití / uživatelé (Stříteský chce).<br/>
+    <b style="color:#A82A5F">14.</b> Aplikace na PS — pozice firmy → strategie → 2 KV → log podpora → 2-3 kroky.
+  `;
+
+  const caseStudyMkt5 = {
+    title: "Robert — CEO TextilCZ, českého výrobce pracovních oděvů (180 zaměstnanců, 320 mil. Kč)",
+    subtitle: "Identifikuj pozici + strategii + logistickou KV pro B2B trh",
+    scenario: "Robert (52 let) vede TextilCZ 15 let. Český B2B výrobce pracovních oděvů (montérky, košile, pracovní obuv) pro průmysl, stavebnictví, retail. Tržby 320 mil. Kč, 180 zaměstnanců, růst 4 % (pomalu). Vyrábí v Česku (Náchod), 70 % B2B klientů (ČEZ, Skanska, Tesco logistic), 30 % retail (Bauhaus, OBI).\n\nKonkurenční situace:\n\n• Lídr trhu: Cerva (CZ, ~25 % market share) — Cost Leadership, masová produkce v Asii\n\n• Challenger: Engelbert Strauss (DE, ~18 %) — Differentiation, premium design + B2C\n\n• Followers: Heros (CZ), Goldschmidt (DE), ~10-15 % každý\n\n• TextilCZ: Follower s ~8 % market share. Cena 10-20 % nad Cervou, ale 30 % pod Engelbert.\n\nProblém: Cerva diktuje ceny (cenová válka). Engelbert získává premium klienty. TextilCZ uvízl uprostřed — stuck in the middle. Robert váhá:\n\n• Cesta A: Cost Leadership — přesun výroby do Maďarska, automatizace → boj s Cervou cenou\n\n• Cesta B: Differentiation — premium kvalita + design + customizace (logo firmy) → konkurence Engelbertu\n\n• Cesta C: Focus — soustředit se na 1 niche (např. ochranné oděvy pro chemický průmysl)\n\nKlíčové vstupy:\n\n• 65 % materiálu z EU dodavatelů (UE textil), 35 % z Číny\n\n• Výroba v Náchodě stojí 35 % více než Cerva v Číně, ale kvalita vyšší + delivery 2 týdny vs Cerva 8 týdnů\n\n• Sklady: 1 centrální v Praze, využití 70 %. Distribuce přes vlastní vozy (drahé) — 15 % nákladů\n\n• Žádný e-shop, jen B2B distribuce přes katalogy\n\n• 80 % klientů opakovaně (loyal), ale rostoucí pomalu\n\nLogistická KV potenciál:\n\n• Rychlost dodání (2 týdny vs Cerva 8) = nevyužitý KV\n\n• Customizace (logo firmy na košile) = už dělají, ale málo komunikují\n\n• Sustainability = zatím žádná, ale roste poptávka (CSRD)",
+    signals: [
+      { text: "Stuck in the middle — cena 10-20 % nad Cervou, ale 30 % pod Engelbertem", color: VSE.danger, reason: "Klasické <b>Porterovo \"stuck in the middle\"</b> — TextilCZ nemá jasnou pozici. Musí si vybrat: Cost Leadership × Differentiation × Focus." },
+      { text: "Cerva diktuje ceny (cenová válka)", color: VSE.danger, reason: "Cerva jako Leader s 25 % market share může cenovou válku přežít, TextilCZ ne. Cost Leadership cesta nereálná." },
+      { text: "Výroba v Náchodě stojí 35 % více než Cerva v Číně, ale kvalita vyšší + delivery 2 týdny vs 8 týdnů", color: VSE.warning, reason: "<b>Silné KV — rychlost a kvalita!</b> Quick Response (QR) strategie jako Zara. Klíč: udělat z toho marketingový argument." },
+      { text: "80 % klientů opakovaně (loyal), ale rostoucí pomalu", color: VSE.fph, reason: "Vysoká loyalty = dobrý základ pro Differentiation. Klienti jsou ochotni platit více za kvalitu + servis." },
+      { text: "Customizace (logo firmy) = už dělají, ale málo komunikují", color: VSE.warning, reason: "Skrytý <b>POD</b> (z M4). B2B klienti milují branded uniformy. Klíč: komunikovat to jako differentiation." },
+      { text: "Sustainability = zatím žádná, ale roste poptávka (CSRD)", color: VSE.fph, reason: "CSRD od 2026 povinný pro firmy 250+ (ČEZ, Skanska to vyžadují od dodavatelů). Ekologičnost = příležitost pro KV." },
+      { text: "Žádný e-shop, jen B2B přes katalogy", color: VSE.danger, reason: "Chybí digitální KV. B2B e-commerce roste 25 %/rok. Engelbert má, Cerva má, TextilCZ ne." },
+      { text: "Distribuce přes vlastní vozy — 15 % nákladů", color: VSE.warning, reason: "Vertikální integrace forward (vlastní distribuce) = vysoké náklady. Outsourcing 3PL (DHL, Geis) může snížit o 30-40 %." },
+    ],
+    quiz1: {
+      question: "Co je hlavní strategický problém TextilCZ?",
+      options: [
+        "Špatná kvalita",
+        "Vysoké ceny",
+        "Stuck in the middle — žádná jasná strategie (cena nad Cervou, kvalita pod Engelbertem)",
+        "Špatný marketing",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Robert měl udělat — kombinace strategií pro TextilCZ?",
+      options: [
+        { text: "Volba: Differentiation Focus — premium B2B uniformy s customizací + 2 týdny delivery + sustainability. Pozice: Czech-made quality + speed", correct: true, reason: "✓ Využije existující silné stránky (kvalita, rychlost, customizace). Cesta B + C kombinace." },
+        { text: "Quick Response (QR) jako Zara — 2 týdny delivery jako klíčový KV. Komunikovat to v B2B sales pitchích a katalogu", correct: true, reason: "✓ Konkurenční výhoda už existuje, jen nevyužitá. Zara model aplikovaný na B2B textil." },
+        { text: "Vertikální integrace backward — vlastní výroba (zachovat Náchod) + investice do automatizace pro snížení nákladů o 15 % bez ztráty kvality", correct: true, reason: "✓ Backward = kontrola nad kvalitou. Automatizace = částečně se přiblížit cenám Cervy, ale nezahodit KV (rychlost+kvalita)." },
+        { text: "Customizace jako klíčový POD — investovat do digital print technologie, nabídnout B2B klientům branded uniformy s 1 týdnem lead time", correct: true, reason: "✓ Skrytý KV → otevřený POD (z M4). B2B klienti milují branded oblečení pro brand consistency." },
+        { text: "Sustainability iniciativa — recycled materials + carbon-neutral výroba do 2027. Připravit se na CSRD reporting (ČEZ, Skanska vyžadují)", correct: true, reason: "✓ CSRD je business risk + příležitost. Eco brand = premium positioning + budoucí požadavek B2B klientů." },
+        { text: "B2B e-shop + digital katalog — odpovídat trendu B2B e-commerce (25 % růst/rok). Digitální KV jako Engelbert", correct: true, reason: "✓ Digitální distribuce = nižší náklady + lepší customer experience. Konkurence to má, TextilCZ musí dohnat." },
+        { text: "Outsourcing distribuce na 3PL (DHL, Geis) — snížení nákladů z 15 % na 9 % obratu, focus na core (výroba + design)", correct: true, reason: "✓ Make or Buy: distribuce není core competence. DHL to umí lépe + levněji díky scale." },
+        { text: "Cost Leadership — přesun výroby do Maďarska, agresivní cenová válka s Cervou", correct: false, reason: "✗ Sebevražedná strategie. Cerva má 25 % market share + asijské náklady. TextilCZ tu bitvu prohraje a navíc zničí KV (rychlost + kvalita)." },
+        { text: "Zůstat stuck in the middle — pomalu klesat se stávající strategií", correct: false, reason: "✗ Porter to varuje — stuck in the middle = pomalá smrt. Muset si vybrat jasnou pozici." },
+      ],
+    },
+    summary: "<b>TextilCZ trpí klasickým „stuck in the middle\u201D — nejde se vyhnout volbě.</b> Klíč: <b>Differentiation Focus + Quick Response + 3PL outsourcing</b>.<br/><br/><b>Plán 12 měsíců:</b><br/>• <b>Q1:</b> Differentiation Focus pozice — premium Czech-made B2B uniformy s 2-týdenním delivery + customizací<br/>• <b>Q2:</b> QR strategy implementation — komunikace 2 týdnů jako KV ve všech kanálech + B2B e-shop launch<br/>• <b>Q2-Q3:</b> Customizační KV — digital print technologie + samostatný sales process pro custom orders<br/>• <b>Q3:</b> Outsourcing distribuce na DHL/Geis (úspora 6 % obratu = 19 mil. Kč/rok)<br/>• <b>Q3-Q4:</b> Sustainability roadmap — recycled materials + CSRD compliance do 2027<br/>• <b>Q4:</b> Vertikální backward — automatizace v Náchodě (úspora 15 % výrobních nákladů)<br/><br/><b>Pro komisi:</b> Klasický B2B follower v cenové válce. <b>Porter generic strategies</b> + <b>VRIO</b> + <b>Value Chain</b> + <b>Logistika jako KV (QR jako Zara)</b>. Anti-vzor: Cost Leadership proti Cervě = sebevražda. Vzor: <b>Engelbert Strauss</b> (Differentiation premium) + <b>Zara</b> (QR rychlost) + <b>Toyota</b> (vertikální integrace) jako benchmarky.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={5} title="Konkurence, KV, konkurenční strategie + logistické strategie"
+      subtitle="Porter 5 sil + Leader/Challenger/Follower/Nicher + generic strategies + Value Chain + logistika jako KV"
+      color={VSE.fis}
+      questionText="Konkurenční strategie v marketingu, logistické strategie a konkurenční výhody v logistice."
+      questionDesc="Konkurence + KV definice. Makro (PESTLE) × Mikro (Porter 5 sil). Market/Mind/Heart share. Typy konkurentů — Leader/Challenger/Follower/Nicher + strategie každého. Porterovy generic (Cost Leadership/Differentiation/Focus). VRIO model. Hodnotový řetězec (primární + podpůrné činnosti). Logistika jako KV (7 typů). Log. strategie (JIT, QR, cross-docking, vertical integration). Integrace řetězce (vertikální backward × forward, horizontální). Růstové strategie. Tesla, Ryanair, Apple, Toyota, Zara, Walmart."
+      sloz={3} roz={4} freq={5}
+      examStrategy={examStrategyMkt5}
+      studySections={studySectionsMkt5}
+      flashcards={flashcardsMkt5}
+      quiz={quizMkt5}
+      praxe={praxeMkt5}
+      examQuestions={examQuestionsMkt5}
+      podcast={podcastMkt5}
+      caseStudy={caseStudyMkt5}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 6 — Produkt/výrobek — charakteristiky, vrstvy, klasifikace
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt6Panel() {
+  const studySectionsMkt6 = [
+    { id: "intro", title: "Produkt — definice + kompletní výrobek", subtitle: "Co je produkt + komoditní × diferencované × symbolický náboj", color: VSE.fis, emoji: "gift",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Produkt (výrobek)</b> = cokoliv, co může být nabídnuto na trhu pro <b>uspokojení potřeby zákazníka</b>. Klíčový prvek <b>4P marketing mixu</b>. Komise <b>Nový, Vávra, Machek</b> chtějí slyšet definici + charakteristiky jako úvod.
+        </Def>
+        <Tag color={VSE.fis}>Co tvoří kompletní výrobek</Tag>
+        <Bullet items={[
+          "<b>Kompletní výrobek</b> = souhrn všech <b>typických psychologických vlastností</b>, co zákazníkovi nabízíme. Ne jen fyzické vlastnosti, ale i image, značka, servis, záruka.",
+          "<b>Příklad iPhone:</b> Fyzicky = telefon. Kompletně = symbol statusu + ekosystém + design + záruka + Apple Store servis.",
+          "<b>Vztah k mkt strategii:</b> Pokud chápeme produkt jen jako fyzickou věc, prohrajeme. Konkurence ho chápe holisticky.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>2 hlavní typy produktů</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🍞 KOMODITNÍ PRODUKTY", d: "Standardizované, zaměnitelné. Sůl, mouka, benzín, suroviny. Zákazník rozhoduje hlavně podle ceny. Nízké marže." },
+            { c: VSE.warning, t: "💎 DIFERENCOVANÉ PRODUKTY", d: "Unikátní vlastnosti, branding. Apple, Tesla, BMW, Patagonia. Zákazník volí podle kvality/značky/zážitku. Vyšší marže." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Symbolický náboj produktu</Tag>
+        <Bullet items={[
+          "<b>Co produkt vyjadřuje</b> u lidí — status, identita, hodnoty, příslušnost ke skupině.",
+          "<b>Rolex</b> = úspěch. <b>Apple</b> = kreativita a tech-savvy. <b>Tesla</b> = inovace a eco. <b>Birkin bag</b> = exkluzivita.",
+          "<b>Symbolický náboj zvyšuje hodnotu daleko nad fyzickou užitkovost.</b> Rolex za 10k EUR neukazuje čas lépe než Casio za 30 EUR.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Nový + Vávra + Heřman 2025 (Horská chata)"
+          what="Komise chce slyšet, že produkt <b>není jen fyzická věc</b>. <b>Holistický pohled</b> — vrstvy + charakteristiky + symbolický náboj + branding. Bez toho zní odpověď amatérsky."
+        />
+      </div>) },
+
+    { id: "vrstvy", title: "5 vrstev produktu (Kotler) — co kupujete vs co reálně dostáváte", subtitle: "Jádro → Očekávaný → Vylepšený → Potenciální", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Kotlerův model 5 vrstev produktu</b> (1967) je <b>nejklíčovější framework</b> Mkt6. Komise <b>Vávra</b> chce <b>vrstvy explicitně</b> — bez nich neuděláš. Pyramida od fyzického jádra po potenciál do budoucna.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 500 360" style={{ width: "100%", maxWidth: 500, height: "auto" }}>
+            <defs>
+              <radialGradient id="layerCore" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor={VSE.danger} stopOpacity="1"/>
+                <stop offset="100%" stopColor={VSE.danger} stopOpacity="0.85"/>
+              </radialGradient>
+            </defs>
+            {/* 5 koncentrických kruhů */}
+            <circle cx="250" cy="180" r="160" fill={VSE.fph} fillOpacity="0.15" stroke={VSE.fph} strokeWidth="1.5" strokeDasharray="4,3"/>
+            <circle cx="250" cy="180" r="130" fill={VSE.success} fillOpacity="0.2" stroke={VSE.success} strokeWidth="1.5"/>
+            <circle cx="250" cy="180" r="100" fill={VSE.warning} fillOpacity="0.3" stroke={VSE.warning} strokeWidth="1.5"/>
+            <circle cx="250" cy="180" r="70" fill={VSE.fmv} fillOpacity="0.45" stroke={VSE.fmv} strokeWidth="1.5"/>
+            <circle cx="250" cy="180" r="40" fill="url(#layerCore)"/>
+            {/* Labely uvnitř */}
+            <text x="250" y="178" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">💎 1. JÁDRO</text>
+            <text x="250" y="195" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">co kupujete</text>
+            <text x="250" y="125" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.fmv} fontFamily="Inter Tight">📦 2. ZÁKLADNÍ</text>
+            <text x="250" y="100" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.warning} fontFamily="Inter Tight">✓ 3. OČEKÁVANÝ</text>
+            <text x="250" y="70" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">⚡ 4. VYLEPŠENÝ</text>
+            <text x="250" y="38" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.fph} fontFamily="Inter Tight">🚀 5. POTENCIÁLNÍ</text>
+            {/* Vnější popisek */}
+            <text x="250" y="350" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">benefit → produkt → minimum → diferenciace → budoucnost</text>
+          </svg>
+        </div>
+        <Tag color={VSE.danger}>5 vrstev produktu (Kotler) — od centra ven</Tag>
+        <Bullet items={[
+          "<b>💎 1. JÁDRO (Core Benefit):</b> Co zákazník <b>reálně kupuje</b>. Důvod existence produktu. Hotel = noc spánku v cizím městě. Auto = doprava A do B. <b>Ne fyzický předmět</b>, ale benefit.",
+          "<b>📦 2. ZÁKLADNÍ PRODUKT (Basic Product):</b> Fyzická forma jádra. Hotel = pokoj + postel + koupelna. Auto = motor + kola + sedačky.",
+          "<b>✓ 3. OČEKÁVANÝ PRODUKT (Expected Product):</b> Co zákazník očekává jako <b>standard v kategorii</b>. Hotel = WiFi + ručníky + ticho. Auto = klimatizace + airbagy + rádio. Bez tohoto = zklamání.",
+          "<b>⚡ 4. VYLEPŠENÝ PRODUKT (Augmented Product):</b> Co dělá produkt <b>jiný a lepší</b> než konkurence. Hotel = bezplatná snídaně + lázně + 24/7 concierge. Auto = autopilot + OTA updates (Tesla). <b>Klíč pro diferenciaci.</b>",
+          "<b>🚀 5. POTENCIÁLNÍ PRODUKT (Potential Product):</b> Všechny <b>budoucí možnosti</b> rozšíření. Hotel = personalizace AI doporučení. Auto = full self-driving v 2030. <b>Strategický horizont.</b>",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "charakteristiky", title: "Charakteristiky výrobku — 6 dimenzí + obal", subtitle: "Technické, funkční, smyslové, identifikační, ekonomické, obal", color: VSE.fis, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Charakteristiky výrobku</b> jsou konkrétní vlastnosti, podle kterých se zákazník rozhoduje. Komise <b>Nový, Tahal, Machek</b> chtějí všech 6 dimenzí + příklady.
+        </Def>
+        <Tag color={VSE.fis}>6 dimenzí charakteristik výrobku</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "⚙️ TECHNICKÉ", d: "Specifikace, parametry, materiál, technologie. iPhone čip M3, BMW motor 250 kW, Tesla baterie 75 kWh." },
+            { c: VSE.warning, t: "🎯 FUNKČNÍ", d: "Co produkt umí, jaké funkce nabízí. Telefon volá+fotí+streamuje. Auto jezdí + bezpečí + komfort." },
+            { c: VSE.fph, t: "👁️ SMYSLOVÉ", d: "Vzhled, barva, vůně, zvuk, dotek. Apple unboxing zážitek, BMW interiérová vůně, Coca-Cola charakteristická lahvička." },
+            { c: VSE.success, t: "🏷️ IDENTIFIKAČNÍ", d: "Značka, logo, design, obal — to, co odlišuje od konkurence. Tiffany blue, Coca-Cola červená, Apple jablko." },
+            { c: VSE.danger, t: "💰 EKONOMICKÉ", d: "Cena, kvalita za cenu, životnost, provozní náklady. Tesla = drahá kupní, levný provoz. Bauhaus = nízká cena za hodnotu." },
+            { c: VSE.fis, t: "📦 OBAL", d: "Více než ochrana — image + komunikace. Apple unboxing experience, Tiffany blue krabička, Coca-Cola lahev." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Obal — 5 funkcí (důležitá samostatná kategorie!)</Tag>
+        <Bullet items={[
+          "<b>🛡️ Ochranná:</b> Chrání produkt při přepravě a skladování (sklo, plast, papír).",
+          "<b>🎨 Prezentační:</b> Reklama na regále, atraktivita pro zákazníka. Apple, Tiffany.",
+          "<b>📋 Informační:</b> Složení, datum spotřeby, návod, certifikáty.",
+          "<b>🚚 Přeprava:</b> Tvar a velikost optimalizovaná pro logistiku (palety, kontejnery).",
+          "<b>📦 Ukládání:</b> Skladovatelnost — kolik se vejde do regálu, lednice.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "klasifikace", title: "Klasifikace výrobku — podle různých kritérií", subtitle: "Trvanlivost / Hmatatelnost / Využití + spotřebitelské × průmyslové", color: VSE.fis, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Klasifikace výrobků</b> umožňuje vybrat <b>správnou mkt strategii</b>. Komise <b>Schönfeld, Kolouchová, Honig</b> chtějí vazbu klasifikace → strategie.
+        </Def>
+        <Tag color={VSE.fis}>Podle trvanlivosti</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🥑 NETRVANLIVÉ", d: "Spotřeba do dnů/týdnů. Potraviny, čerstvé zboží. Vysoká frekvence nákupu, intensivní distribuce." },
+            { c: VSE.warning, t: "👕 TRVANLIVÉ", d: "Roky používání. Oblečení, elektronika, auto. Občasný nákup, selektivní distribuce, vyšší marže." },
+            { c: VSE.success, t: "💆 SLUŽBY", d: "Nehmotné, neoddělitelné. Detail v Logistika 2. Frizér, lékař, banka, právní rada." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Spotřebitelské zboží — 4 typy podle nákupního chování</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🛒 DENNÍ SPOTŘEBY (Convenience)", d: "Časté nákupy, nízká cena, malé úsilí. Chléb, mléko, noviny. Intensivní distribuce všude." },
+            { c: VSE.warning, t: "🔍 DLOUHODOBÉ (Shopping)", d: "Porovnávají se před nákupem (vhodnost, kvalita, cena). Oblečení, elektronika. Selektivní distribuce." },
+            { c: VSE.fph, t: "💎 SPECIÁLNÍ (Specialty)", d: "Jedinečné, zákazník je ochoten cestovat. Luxus, exkluzivní značky, audiotechnika. Exkluzivní distribuce." },
+            { c: VSE.danger, t: "❓ NEHLEDANÉ (Unsought)", d: "Zákazník o nich neuvažuje (pojistka, pohřební služby). Vyžaduje agresivní reklama, push prodej." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>B2C × B2B — průmyslové výrobky</Tag>
+        <Bullet items={[
+          "<b>Materiály a součástky:</b> Suroviny + meziprodukty (ocel, plasty, čipy).",
+          "<b>Kapitálové vybavení:</b> Stroje, budovy, výrobní linky. Vysoká cena, dlouhé rozhodování.",
+          "<b>Pomocné materiály a služby:</b> Údržba, kancelářské potřeby, poradenství.",
+          "<b>B2B rozdíl od B2C:</b> Více racionální rozhodování, dlouhý nákupní cyklus, multi-stakeholder, ROI focus.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Schönfeld + Legnerová + Zamazalová 2026 (Prádlo)"
+          what="Schönfeld chce <b>klasifikaci výrobku + vztah k marketingové strategii</b>. Konkrétně: pro pracovní oděvy (B2B trvanlivé shopping goods) = selektivní distribuce + důraz na kvalitu + customizace, ne masová reklama."
+        />
+      </div>) },
+
+    { id: "diferenciace", title: "Diferenciace produktu — 6 cest odlišení od konkurence", subtitle: "Forma, kvalita, vlastnosti, spolehlivost, trvanlivost, design", color: VSE.fis, emoji: "sparkles",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Diferenciace produktu</b> = snaha o odlišení od konkurence. Komise <b>Tahal, Stříteský</b> chtějí explicitně <b>diferenciaci produktu × služeb</b> (M5 doplňuje strategickou diferenciaci přes Porter).
+        </Def>
+        <Tag color={VSE.fis}>6 cest diferenciace produktu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📐 FORMA", d: "Velikost, tvar, struktura. Coca-Cola lahev, iPhone tenký design, Tesla cybertruck." },
+            { c: VSE.warning, t: "⭐ KVALITA", d: "Materiály, výroba, kontrola. BMW vs Škoda, Rolex vs Casio, Bose vs JBL." },
+            { c: VSE.fph, t: "🎯 VLASTNOSTI", d: "Funkce, features. iPhone Face ID, Tesla autopilot, Dyson cyklon. Unique selling points." },
+            { c: VSE.success, t: "🛡️ SPOLEHLIVOST", d: "Bezporuchovost, garance. Toyota legendy spolehlivosti, BMW záruka, Tesla OTA updates fixují bugy." },
+            { c: VSE.danger, t: "⏱️ TRVANLIVOST", d: "Doba životnosti. Duracell vydrží déle, Levi's 501 nezničitelné, IKEA furniture pro generace." },
+            { c: VSE.fis, t: "🎨 DESIGN", d: "Vzhled, ergonomie, estetika. Apple design, Tesla minimalismus, Patagonia funkčnost." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Diferenciace výrobku × služeb (Tahal chytá!)</Tag>
+        <Bullet items={[
+          "<b>Výrobek (hmotný)</b> = diferenciace přes vlastnosti, kvalitu, design, technologii. Měřitelné, viditelné.",
+          "<b>Služby (nehmotné — viz Log2)</b> = diferenciace přes rychlost, empatii, personalizaci, expertízu. Subjektivní, závisí na zaměstnanci.",
+          "<b>Hybrid:</b> Tesla = výrobek (auto) + služby (OTA updates, Supercharger, app). Klasický příklad spojené diferenciace.",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Tahal + Kuděj + Nový 2025 (Sanace)"
+          what="Tahal chce <b>diferenciaci výrobku A služeb</b> + co má vliv na <b>volbu spotřebitele</b>. Pro firmu na sanaci plísní: výrobek = chemikálie (kvalita, eko), služba = rychlost, garance, profesionalita techniků."
+        />
+      </div>) },
+
+    { id: "spotrebitel", title: "Faktory ovlivňující volbu spotřebitele + zainteresovanost", subtitle: "Co rozhoduje + 5 úrovní zainteresovanosti", color: VSE.fis, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Faktory ovlivňující volbu spotřebitele</b> = klíč pro mkt strategii. Komise <b>Vávra, Tahal</b> chtějí explicitně. Klíčové: ne všichni zákazníci jsou stejně zaintegrované do nákupního rozhodnutí.
+        </Def>
+        <Tag color={VSE.fis}>4 hlavní faktory volby (Kotler)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🌍 KULTURNÍ FAKTORY", d: "Kultura, subkultura, sociální třída. McDonald's bez beef v Indii, alkohol bez muslimských zemí." },
+            { c: VSE.warning, t: "👥 SOCIÁLNÍ FAKTORY", d: "Referenční skupiny, rodina, role a status. Vlivový marketing, peer pressure (teens + brand)." },
+            { c: VSE.fph, t: "🧠 OSOBNÍ FAKTORY", d: "Věk, povolání, životní styl, příjem, osobnost. Cílení podle person." },
+            { c: VSE.success, t: "💭 PSYCHOLOGICKÉ", d: "Motivace, vnímání, učení, postoje. Maslowova pyramida, kognitivní bias, halo efekt." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Zainteresovanost spotřebitele na výrobku (5 úrovní)</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 500 220" style={{ width: "100%", maxWidth: 500, height: "auto" }}>
+            {/* 5 horizontálních pásů s emoji */}
+            <rect x="20" y="20" width="460" height="32" rx="6" fill={VSE.success} opacity="0.85"/>
+            <text x="35" y="40" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">😍 ++ NADŠENÝ</text>
+            <text x="470" y="40" textAnchor="end" fontSize="11" fill="#fff" fontFamily="Inter Tight">brand evangelista, doporučuje</text>
+            <rect x="20" y="58" width="460" height="32" rx="6" fill={VSE.fmv} opacity="0.85"/>
+            <text x="35" y="78" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">😊 + S KLADNÝM VZTAHEM</text>
+            <text x="470" y="78" textAnchor="end" fontSize="11" fill="#fff" fontFamily="Inter Tight">spokojený, znovu nakoupí</text>
+            <rect x="20" y="96" width="460" height="32" rx="6" fill={VSE.warning} opacity="0.85"/>
+            <text x="35" y="116" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">😐 0 LHOSTEJNÝ</text>
+            <text x="470" y="116" textAnchor="end" fontSize="11" fill="#fff" fontFamily="Inter Tight">je mu to jedno, zaměnitelný</text>
+            <rect x="20" y="134" width="460" height="32" rx="6" fill={VSE.fph} opacity="0.85"/>
+            <text x="35" y="154" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">😠 − SE ZÁPORNÝM VZTAHEM</text>
+            <text x="470" y="154" textAnchor="end" fontSize="11" fill="#fff" fontFamily="Inter Tight">nespokojený, hledá alternativy</text>
+            <rect x="20" y="172" width="460" height="32" rx="6" fill={VSE.danger} opacity="0.85"/>
+            <text x="35" y="192" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">😡 −− NEPŘÁTELSKÝ</text>
+            <text x="470" y="192" textAnchor="end" fontSize="11" fill="#fff" fontFamily="Inter Tight">aktivně poškozuje, hate</text>
+          </svg>
+        </div>
+        <Bullet items={[
+          "<b>Cíl mkt:</b> Posunout zákazníky <b>směrem nahoru</b> — z 0 (lhostejní) na + (kladní), nebo + na ++ (nadšení = evangelisté).",
+          "<b>Anti-vzor:</b> Nezvládnutý komplaint posune zákazníka z 0 na − nebo dokonce −−. Negativní WOM = horší než žádný.",
+          "<b>NPS metrika (M1):</b> % promoters (++) − % detractors (−, −−). Standard 30+ = výborný, 0-30 ok, pod 0 katastrofa.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "dynamika", title: "Dynamika vnímání + diverzifikace + mkt strategie", subtitle: "Jak se mění vnímání v čase + diverzifikace produktů", color: VSE.fis, emoji: "refresh",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Vnímání produktu se mění v čase</b> — bezprostředně, dlouhodobě, kulturně. Komise <b>Kolouchová, Machek</b> chtějí <b>diverzifikaci</b> + spojení s mkt strategií.
+        </Def>
+        <Tag color={VSE.fis}>3 typy změn vnímání v čase</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "⚡ BEZPROSTŘEDNĚ", d: "Co spotřebitel cítí ihned po nákupu. Unboxing experience (Apple), první dojem z prostředí restaurace." },
+            { c: VSE.warning, t: "📅 V PRŮBĚHU ŽIVOTA", d: "Jak se mění vztah k produktu během používání. Auto první rok × po 5 letech, oblečení po praní." },
+            { c: VSE.success, t: "🌍 V KULTUŘE", d: "Dlouhodobá změna vnímání v dané společnosti. Plastové láhve = pohodlí (90s) → ekologický problém (dnes)." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Diverzifikace — 3 typy (Ansoffova matice)</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "📦 HORIZONTÁLNÍ", d: "Nové produkty pro existující zákazníky. Coca-Cola → Coca-Cola Zero, Sprite. Stejný kanál, stejní zákazníci." },
+            { c: VSE.warning, t: "🔗 VERTIKÁLNÍ", d: "Pohyb v hodnotovém řetězci. Tesla = auta + baterie + Supercharger. Apple = telefony + čipy + App Store." },
+            { c: VSE.fph, t: "🌐 KONGLOMERÁTNÍ", d: "Nesouvisející byznys. Berkshire Hathaway, Virgin (letadla + telekom + alba). Risk diverzifikace." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Spojení produktu s marketingovou strategií</Tag>
+        <Bullet items={[
+          "<b>Komoditní produkt</b> → <b>Cost Leadership</b> (M5). Cena = klíč. Lidl, Walmart.",
+          "<b>Diferencovaný produkt</b> → <b>Differentiation</b> (M5). Brand + kvalita = klíč. Apple, BMW.",
+          "<b>Speciální produkt</b> → <b>Focus / Niche</b> (M5). Specializace = klíč. Rolex, Patagonia.",
+          "<b>Nehledaný produkt</b> → <b>Push marketing</b> + agresivní prodej. Pojistka, pohřební služby.",
+          "<b>Vrstvy produktu řídí komunikaci:</b> Komodita komunikuje jádro+základ, premium komunikuje vylepšení+potenciál.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsMkt6 = [
+    { term: "Produkt", def: "Cokoliv, co může být nabídnuto na trhu pro uspokojení potřeby zákazníka. Klíčový prvek 4P.", tag: "POJEM" },
+    { term: "Kompletní výrobek", def: "Souhrn všech typických psychologických vlastností. Ne jen fyzická věc, ale i image, značka, servis.", tag: "POJEM" },
+    { term: "Komoditní × Diferencované", def: "Komodita = standardizovaná, zaměnitelná, cena (sůl, benzín). Diferencovaný = unikátní, branding, kvalita (Apple, BMW).", tag: "TYPY" },
+    { term: "Symbolický náboj", def: "Co produkt vyjadřuje u lidí — status, identita, hodnoty. Rolex = úspěch, Tesla = inovace.", tag: "POJEM" },
+    { term: "Kotler 5 vrstev produktu", def: "1) Jádro (benefit) → 2) Základní (fyzická forma) → 3) Očekávaný (standard kategorie) → 4) Vylepšený (diferenciace) → 5) Potenciální (budoucnost).", tag: "VRSTVY" },
+    { term: "Jádro produktu", def: "Co zákazník reálně kupuje. Hotel = noc spánku, Auto = doprava A do B. Ne fyzický předmět, ale benefit.", tag: "VRSTVY" },
+    { term: "Očekávaný produkt", def: "Co zákazník očekává jako standard v kategorii. Hotel = WiFi + ručníky, Auto = klimatizace + airbagy.", tag: "VRSTVY" },
+    { term: "Vylepšený produkt", def: "Co dělá produkt jiný a lepší než konkurence. Hotel = lázně + concierge, Tesla = autopilot + OTA. KLÍČ DIFERENCIACE.", tag: "VRSTVY" },
+    { term: "Potenciální produkt", def: "Budoucí možnosti rozšíření. Tesla full self-driving 2030. Strategický horizont.", tag: "VRSTVY" },
+    { term: "6 charakteristik výrobku", def: "Technické (specs) / Funkční (co umí) / Smyslové (vzhled, vůně) / Identifikační (značka, logo) / Ekonomické (cena, životnost) / Obal.", tag: "CHARAKTER" },
+    { term: "5 funkcí obalu", def: "Ochranná / Prezentační (reklama) / Informační (návod) / Přeprava / Ukládání. Klíčový pro logistiku i marketing.", tag: "OBAL" },
+    { term: "Klasifikace dle trvanlivosti", def: "Netrvanlivé (potraviny — dny/týdny) / Trvanlivé (oblečení, elektronika — roky) / Služby (nehmotné — Log2).", tag: "KLASIFIKACE" },
+    { term: "4 typy spotřebitelského zboží", def: "Denní spotřeby (chleba — convenience) / Dlouhodobé (oblečení — shopping) / Speciální (luxus — specialty) / Nehledané (pojistka — unsought).", tag: "KLASIFIKACE" },
+    { term: "Denní spotřeby (Convenience)", def: "Časté nákupy, nízká cena, malé úsilí. Chléb, mléko. Intensivní distribuce všude.", tag: "KLASIFIKACE" },
+    { term: "Shopping zboží", def: "Porovnává se před nákupem (cena, kvalita). Oblečení, elektronika. Selektivní distribuce.", tag: "KLASIFIKACE" },
+    { term: "Specialty zboží", def: "Unikátní, zákazník je ochoten cestovat. Luxus, exkluzivní značky. Exkluzivní distribuce.", tag: "KLASIFIKACE" },
+    { term: "Unsought (nehledané)", def: "Zákazník o nich neuvažuje (pojistka, pohřební). Agresivní reklama, push prodej.", tag: "KLASIFIKACE" },
+    { term: "B2B průmyslové výrobky", def: "Materiály (suroviny) / Kapitálové vybavení (stroje) / Pomocné materiály a služby. Racionálnější rozhodování než B2C.", tag: "KLASIFIKACE" },
+    { term: "6 cest diferenciace produktu", def: "Forma / Kvalita / Vlastnosti / Spolehlivost / Trvanlivost / Design. Kotlerovy klasické dimenze.", tag: "DIFERENCIACE" },
+    { term: "Diferenciace výrobku × služby", def: "Výrobek (hmotný) = vlastnosti, kvalita, design. Služba (nehmotná — Log2) = rychlost, empatie, personalizace.", tag: "DIFERENCIACE" },
+    { term: "4 faktory volby spotřebitele (Kotler)", def: "Kulturní (kultura, sociální třída) / Sociální (rodina, status) / Osobní (věk, příjem) / Psychologické (motivace, postoje).", tag: "VOLBA" },
+    { term: "5 úrovní zainteresovanosti", def: "++ Nadšený (evangelista) / + Kladný / 0 Lhostejný / − Záporný / −− Nepřátelský (hate). Cíl posunout nahoru.", tag: "VOLBA" },
+    { term: "NPS (Net Promoter Score)", def: "% promoters (++) − % detractors (−, −−). 30+ = výborný, 0-30 ok, pod 0 katastrofa.", tag: "VOLBA" },
+    { term: "3 typy změn vnímání v čase", def: "Bezprostředně po nákupu (unboxing) / V průběhu života (auto první rok × 5. rok) / V kultuře (plast 90s → eko problém dnes).", tag: "DYNAMIKA" },
+    { term: "Diverzifikace — 3 typy", def: "Horizontální (nové produkty stejným zákazníkům) / Vertikální (pohyb v řetězci) / Konglomerátní (nesouvisející byznys — Virgin).", tag: "DIVERZIFIKACE" },
+    { term: "Horizontální diverzifikace", def: "Nové produkty pro existující zákazníky. Coca-Cola → Sprite, Coke Zero. Stejný kanál.", tag: "DIVERZIFIKACE" },
+    { term: "Vertikální diverzifikace", def: "Pohyb v hodnotovém řetězci. Tesla = auta + baterie + Supercharger. Apple = telefony + čipy.", tag: "DIVERZIFIKACE" },
+  ];
+
+  const quizMkt6 = [
+    { q: "Co je definice produktu?", opts: ["Fyzická věc", "Cokoliv, co může být nabídnuto na trhu pro uspokojení potřeby zákazníka", "Pouze zboží", "Reklamní slogan"], correct: 1 },
+    { q: "Co je kompletní výrobek?", opts: ["Velký produkt", "Souhrn všech typických psychologických vlastností — image, značka, servis", "Vyrobený za 100 %", "Bez záruky"], correct: 1 },
+    { q: "Kolik vrstev produktu definuje Kotler?", opts: ["3", "4", "5 (jádro / základní / očekávaný / vylepšený / potenciální)", "7"], correct: 2 },
+    { q: "Co je JÁDRO produktu?", opts: ["Vnitřní část fyzicky", "Co zákazník reálně kupuje — benefit (hotel = noc spánku)", "Cena", "Logo"], correct: 1 },
+    { q: "Která vrstva je klíčová pro diferenciaci?", opts: ["Jádro", "Základní", "Očekávaný", "Vylepšený"], correct: 3 },
+    { q: "Kolik charakteristik výrobku rozlišujeme?", opts: ["3", "4", "6 (technické / funkční / smyslové / identifikační / ekonomické / obal)", "8"], correct: 2 },
+    { q: "Která NENÍ funkce obalu?", opts: ["Ochranná", "Prezentační", "Reklamní", "Návratová"], correct: 3 },
+    { q: "Které kategorii patří mléko a chléb?", opts: ["Speciální zboží", "Denní spotřeby (Convenience)", "Shopping zboží", "Unsought"], correct: 1 },
+    { q: "Luxus a Rolex jsou:", opts: ["Convenience", "Shopping", "Specialty zboží", "Unsought"], correct: 2 },
+    { q: "Která NENÍ z 6 cest diferenciace produktu?", opts: ["Forma", "Kvalita", "Design", "Reklamní rozpočet"], correct: 3 },
+    { q: "Jaký je rozdíl diferenciace výrobku × služby?", opts: ["Není rozdíl", "Výrobek = vlastnosti/kvalita/design. Služba = rychlost/empatie/personalizace.", "Výrobek je dražší", "Služba je novější"], correct: 1 },
+    { q: "Kolik faktorů volby spotřebitele definuje Kotler?", opts: ["3", "4 (kulturní / sociální / osobní / psychologické)", "5", "7"], correct: 1 },
+    { q: "Kolik úrovní zainteresovanosti spotřebitele existuje?", opts: ["3", "4", "5 (++/+/0/−/−−)", "6"], correct: 2 },
+    { q: "Co je NPS?", opts: ["Net Product Sales", "Net Promoter Score — % promoters − % detractors", "New Product Strategy", "Não tem"], correct: 1 },
+    { q: "Co je horizontální diverzifikace?", opts: ["Pohyb v řetězci", "Nové produkty pro existující zákazníky (Coca-Cola → Sprite)", "Nesouvisející byznys", "Cenová strategie"], correct: 1 },
+    { q: "Co je vertikální diverzifikace?", opts: ["Nové produkty", "Pohyb v hodnotovém řetězci (Tesla auta + baterie + Supercharger)", "Konglomerát", "Outsourcing"], correct: 1 },
+  ];
+
+  const praxeMkt6 = {
+    caseStudy: {
+      company: "Apple iPhone — etalon 5 vrstev produktu + holistický mkt",
+      subtitle: "Jak Apple dělá z telefonu komplexní produkt",
+      content: (<>
+        <b>Apple iPhone</b> je <b>učebnicový příklad kompletního produktu</b>. Telefon (commodity) → komplexní zážitek (premium). Tržby 200+ mld. USD/rok jen z iPhone.<br/><br/>
+        <b style={{ color: VSE.success }}>5 vrstev iPhone:</b><br/>
+        • <b>💎 JÁDRO:</b> Komunikace + přístup k informacím + digital identity<br/>
+        • <b>📦 ZÁKLADNÍ:</b> Telefon s displejem, kamerou, OS<br/>
+        • <b>✓ OČEKÁVANÝ:</b> 5G, App Store, Face ID, dlouhá baterie (standard kategorie)<br/>
+        • <b>⚡ VYLEPŠENÝ:</b> Vlastní A17 čip, ProRes video, MagSafe, integrace s Mac/Watch (DIFERENCIACE!)<br/>
+        • <b>🚀 POTENCIÁLNÍ:</b> Vision Pro integrace, AI features, satellite communication, future health sensors<br/><br/>
+        <b style={{ color: VSE.warning }}>6 charakteristik:</b><br/>
+        • <b>⚙️ Technické:</b> A17 Pro čip (industry-leading benchmark), Ceramic Shield display<br/>
+        • <b>🎯 Funkční:</b> Foto/video pro profi, gaming, AI tasks, payment<br/>
+        • <b>👁️ Smyslové:</b> Unboxing experience (Tiffany blue podobně), titanium feel, haptika<br/>
+        • <b>🏷️ Identifikační:</b> Apple logo, design jazyk (rounded corners, notch), iOS UI<br/>
+        • <b>💰 Ekonomické:</b> 800-1600 USD upfront. Resale value 60 % po 2 letech (vs Android 30 %).<br/>
+        • <b>📦 Obal:</b> Minimalistický bílý box, recyklované materiály — sám o sobě brand experience<br/><br/>
+        <b style={{ color: VSE.danger }}>Diferenciace:</b><br/>
+        • <b>Forma:</b> Premium materiály (titanium), nejtenčí v branži<br/>
+        • <b>Kvalita:</b> Sběr testů kvality, 0,1 % return rate<br/>
+        • <b>Spolehlivost:</b> 5+ let podpora OS updates (vs Android 2-3 roky)<br/>
+        • <b>Design:</b> Industry-defining (každý telefon teď vypadá jako iPhone)<br/><br/>
+        <b style={{ color: VSE.fph}}>Diverzifikace:</b><br/>
+        • <b>Vertikální:</b> Apple vlastní čipy (M-series), MacBooky, Apple Watch, AirPods → ecosystem<br/>
+        • <b>Horizontální:</b> iPhone SE (cheaper), iPhone Pro Max (premium) → segmenty<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Apple drží <b>80 % premium smartphone profitu</b> (i přes 20 % market share). Klasický důkaz, že kompletní produkt + diferenciace porazí masovou cenu.
+      </>),
+      lessons: "Apple je <b>etalon holistického přístupu k produktu</b>. Pro PS firmu doporuč: <b>identifikovat 5 vrstev produktu</b>, <b>aplikovat 6 charakteristik</b>, <b>najít 2-3 cesty diferenciace</b>, <b>spojit s mkt strategií</b> (komodita → cost / diferencovaný → premium). Alternativy: <b>Tesla (auto + ecosystem), BMW (driving experience), Patagonia (purpose-driven), IKEA (affordable design)</b>."
+    },
+    miniExamples: [
+      { tag: "VRSTVY", color: VSE.fmv, company: "Starbucks — třetí místo (jádro = ne káva)", content: "Starbucks <b>jádro</b> není káva (commodity), ale <b>třetí místo</b> mezi domovem a prací — místo, kde se setkat, pracovat, být sám. <b>Vylepšený produkt:</b> WiFi, židle, hudba, „my name on cup\u201D experience. Klasický příklad jak <b>jádro definuje value proposition</b>." },
+      { tag: "DIFERENCIACE", color: VSE.warning, company: "Dyson — Forma + Funkčnost", content: "Dyson <b>diferencoval</b> staré kategorie přes <b>radikální design</b>. Vysavač bez sáčku, fén bez větráku, ventilátor bez lopatek. Klíčové: <b>forma</b> (futuristický look) + <b>funkce</b> (cyklonová technologie). Premium cena 5-10× nad konkurencí." },
+      { tag: "KLASIFIKACE", color: VSE.success, company: "Tesla — Specialty → Mainstream", content: "Tesla v 2008 byla <b>specialty</b> (Roadster za 110k USD pro early adopters). 2017 Model 3 přesunul Teslu do <b>shopping kategorie</b> (35-55k USD, srovnává se s BMW). 2024 Cybertruck = zpátky k <b>specialty</b> (extrémní design)." },
+      { tag: "VERTIKÁLNÍ DIVERZIFIKACE", color: VSE.fph, company: "Amazon — z e-shopu na ecosystem", content: "Amazon začal jako <b>e-shop knih</b>. <b>Vertikální diverzifikace</b>: AWS (cloud), Kindle (HW), Prime Video (content), Whole Foods (retail), Amazon Logistics. Každá vrstva podporuje core. Klasický příklad propojené diverzifikace." },
+    ]
+  };
+
+  const examQuestionsMkt6 = [
+    { komise: "2025-01-29 — Vávra + Mládková + Svobodová (Prádlo a.s.)", otazka: "Produkt, klasifikace, charakteristiky, diferenciace, úrovně produktu, faktory ovlivňující chování spotřebitele", pozn: "Kompletní balík Mkt6. Začni definicí → 5 vrstev (Kotler) → 6 charakteristik → klasifikace (trvanlivost, 4 typy) → 6 cest diferenciace → 4 faktory volby (kulturní/sociální/osobní/psychologické)." },
+    { komise: "2025-01-28 — Tahal + Kuděj + Nový (Sanace)", otazka: "Rozhodování o výrobku. Marketingová strategie, charakteristiky, co má vliv na volbu spotřebitele. Diferenciace služeb a výrobku.", pozn: "Tahal chytá <b>diferenciaci výrobku × služeb</b>. Pro sanaci: výrobek = chemikálie (kvalita, eko), služba = rychlost, garance, profesionalita. Hybrid produkt." },
+    { komise: "2026-02-02 — Schönfeld + Legnerová + Zamazalová (Prádlo)", otazka: "Rozhodování o výrobku. Klasifikace výrobku a její vztah k marketingové strategii.", pozn: "Schönfeld chce <b>vazbu klasifikace → strategie</b>. Pracovní oděvy = B2B trvanlivé shopping goods → selektivní distribuce + důraz na kvalitu + customizace, ne masová reklama." },
+    { komise: "2025-09-12 — Nový + Bočková + Tahal (Výroba kol)", otazka: "Výrobek, charakteristika výrobku, výrobková řada", pozn: "Standardní Nový otázka — 6 charakteristik + 5 vrstev + odkaz na výrobkové řady (M7). Pro kola: technické (rám, převody), funkční (silniční × MTB), design, kvalita." },
+    { komise: "2025-06-05 — Kolouchová + Viktora + Honig (Nádobí)", otazka: "Výrobky, služby, klasifikace, rozhodovací procesy při nákupu, diverzifikace", pozn: "Kolouchová chce <b>diverzifikaci</b> (3 typy — horizontální/vertikální/konglomerát). Hodně podotázek — naučit kompletně. Pro nádobí: horizontální (různé řady), vertikální (vlastní výroba?)." },
+    { komise: "2025-06-10 — Double Stříteský + Müllerová (Neziskovka)", otazka: "Výrobek, charakteristiky, typy výrobku a návaznost na marketingové strategie, diferenciace výrobku a služeb", pozn: "Stříteský chce <b>typy výrobku → mkt strategie</b>. Komodita → Cost Leadership. Diferencovaný → Differentiation. Specialty → Focus." },
+    { komise: "2025-06-12 — Machek + Kolouchová + Legnerová (Kuchyňské nádobí)", otazka: "Výrobek (charakteristiky), jeho spojení s marketingovou strategií firmy, diverzifikace", pozn: "Machek chce <b>charakteristiky + spojení se strategií + diverzifikace</b>. Pro nádobí: 6 charakteristik (technické = materiál, design, kvalita), diferenciace (premium × budget), diverzifikace (horizontální — různé řady)." },
+    { komise: "2025-06-13 — Cejthamr + Machek + Heřman (Tchibo)", otazka: "Produkt", pozn: "Klasický Cejthamr — chce všechno o produktu. Pro Tchibo (káva + retail): kompletní balík vrstev + charakteristik + klasifikace + diferenciace + diverzifikace (káva → retail → cestovní)." },
+  ];
+
+  const podcastMkt6 = { title: "Marketing 6 — Produkt/výrobek", description: "Definice produktu + kompletní výrobek + symbolický náboj. Komoditní × diferencované produkty. Kotler 5 vrstev (jádro → základní → očekávaný → vylepšený → potenciální). 6 charakteristik výrobku (technické/funkční/smyslové/identifikační/ekonomické/obal) + 5 funkcí obalu. Klasifikace (trvanlivost, 4 typy spotřebitelského, B2B kategorie). 6 cest diferenciace + diferenciace výrobku × služeb. 4 faktory volby (Kotler) + 5 úrovní zainteresovanosti + NPS. 3 typy změn vnímání v čase + diverzifikace (horizontální, vertikální, konglomerátní). Apple iPhone, Starbucks, Dyson, Tesla, Amazon.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt6 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>produkt = cokoliv pro uspokojení potřeby zákazníka (4P)</b>.<br/>
+    <b style="color:#A82A5F">2.</b> Kompletní výrobek + komoditní × diferencované + symbolický náboj.<br/>
+    <b style="color:#A82A5F">3.</b> ⚠️ <b>Kotlerových 5 vrstev</b> (jádro → základní → očekávaný → vylepšený → potenciální) — Vávra chce!<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>6 charakteristik</b> — technické / funkční / smyslové / identifikační / ekonomické / obal.<br/>
+    <b style="color:#A82A5F">5.</b> 5 funkcí obalu — ochranná, prezentační, informační, přeprava, ukládání.<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>Klasifikace</b> — trvanlivost (netrv/trv/služby) + 4 typy spotřebitelského (convenience/shopping/specialty/unsought) + B2B kategorie.<br/>
+    <b style="color:#A82A5F">7.</b> Vztah klasifikace → mkt strategie (Schönfeld chytá!).<br/>
+    <b style="color:#A82A5F">8.</b> ⚠️ <b>6 cest diferenciace</b> — forma, kvalita, vlastnosti, spolehlivost, trvanlivost, design.<br/>
+    <b style="color:#A82A5F">9.</b> Diferenciace výrobku × služeb (Tahal chytá!).<br/>
+    <b style="color:#A82A5F">10.</b> 4 faktory volby spotřebitele (Kotler) — kulturní / sociální / osobní / psychologické.<br/>
+    <b style="color:#A82A5F">11.</b> 5 úrovní zainteresovanosti + NPS.<br/>
+    <b style="color:#A82A5F">12.</b> 3 typy změn vnímání v čase.<br/>
+    <b style="color:#A82A5F">13.</b> ⚠️ <b>Diverzifikace</b> — horizontální / vertikální / konglomerátní (Kolouchová, Machek!).<br/>
+    <b style="color:#A82A5F">14.</b> Aplikace na PS — 5 vrstev → 6 charakteristik → klasifikace → strategie.
+  `;
+
+  const caseStudyMkt6 = {
+    title: "Tereza — Brand Manager NORDIC, českého výrobce premium kuchyňského nádobí (95 mil. Kč)",
+    subtitle: "Identifikuj vrstvy produktu + diferenciaci + diverzifikační příležitosti",
+    scenario: "Tereza (35 let) vede brand v NORDIC 3 roky. Český výrobce kuchyňského nádobí (pánve, hrnce, nože, příbory). 50 zaměstnanců, tržby 95 mil. Kč, růst 10 %. Skandinávský design, vyrobeno v Boskovicích.\n\nProdukty NORDIC:\n\n• NORDIC Pro — premium řada pánví (1500-3500 Kč). Tytanové nepřilnavé povrchy, indukce, doživotní záruka. Hlavní produkt, 60 % obratu.\n\n• NORDIC Home — middle range hrnce, pánve (500-1500 Kč). 30 % obratu.\n\n• NORDIC Steel — nožíky a příbory (200-2000 Kč). 10 % obratu.\n\nKonkurence:\n\n• Tefal — masový premium, mainstream price, masová reklama. Lídr v retailu.\n\n• Le Creuset — francouzský luxus, 3-5× dražší než NORDIC. Specialty zboží.\n\n• IKEA — cost leadership, basic kvalita, masový trh.\n\nProblémy:\n\n• Zákazníci si pamatují jen pánve (NORDIC Pro). Hrnce a nože jsou v stínu.\n\n• Branding nekonzistentní — každá řada má jiný typ obalu, jiný design.\n\n• Komunikace pouze přes Instagram + retail (Globus, Tesco). Žádný vlastní e-shop.\n\n• Diferenciace nejasná — co dělá NORDIC jiný než Tefal? Skandinávský design jako USP, ale málo komunikováno.\n\n• Diverzifikace? CEO uvažuje o expanzi do hot beverages (varné konvice, kávovary), ale neví jestli to dává smysl.\n\nKlíčové vstupy:\n\n• NORDIC vyrábí 100 % v ČR (Boskovice), 12 řemeslníků s 15+ lety praxe\n\n• Materiály: 80 % EU (Itálie, Německo), 20 % Asie (čínský titanium)\n\n• Klienti: 70 % B2C (online + retail), 30 % B2B (restaurace, hotely)\n\n• 1 patent na tytanový povlak (Inimitable z VRIO M5)\n\n• Sustainability story: recyklované hliníky, lokální výroba — málo komunikováno\n\n• 2 designeři ze Skandinávie (Aalto Design Studio, Helsinki)\n\nTereza má 6 měsíců + rozpočet 800k Kč na rebranding + strategický plán produktu.",
+    signals: [
+      { text: "Zákazníci si pamatují jen pánve (NORDIC Pro). Hrnce a nože jsou v stínu", color: VSE.danger, reason: "Chybí <b>konzistence napříč produktovými řadami</b>. Klíčová mkt chyba — každá řada potřebuje stejný brand recall. Možný portfolio fix." },
+      { text: "Branding nekonzistentní — každá řada má jiný typ obalu, jiný design", color: VSE.danger, reason: "Klasický problém — chybí <b>brand architecture</b>. Obal je 1 ze 6 charakteristik produktu + 5 funkcí (M6). Nekonzistence ničí brand awareness." },
+      { text: "Diferenciace nejasná — co dělá NORDIC jiný než Tefal?", color: VSE.danger, reason: "Chybí jasné <b>6 cest diferenciace</b>. Skandinávský design + lokální výroba + patent na povlak = 3 silné páky, ale málo komunikované." },
+      { text: "1 patent na tytanový povlak", color: VSE.warning, reason: "<b>Inimitable</b> z VRIO (M5). Konkurence to nemůže napodobit. Silná diferenciace přes <b>kvalitu</b>." },
+      { text: "Sustainability story: recyklované hliníky, lokální výroba — málo komunikováno", color: VSE.warning, reason: "Skrytý <b>symbolický náboj produktu</b>. Mladí spotřebitelé (25-40 let, premium segment) milují eco brand. CSRD od 2026 to vyžaduje od B2B klientů." },
+      { text: "2 designeři ze Skandinávie", color: VSE.warning, reason: "Klíč pro <b>USP a positioning</b> (M4). „Skandinávský design vyrobený v Česku\u201D = unikátní příběh. Klasický příklad diferenciace přes <b>design</b> (1 z 6 cest)." },
+      { text: "CEO uvažuje o expanzi do hot beverages", color: VSE.fph, reason: "Klasická úvaha o <b>diverzifikaci</b> (M6). Horizontální (varné konvice = stále kuchyně + B2C zákazník) vs konglomerátní. Klíčová strategická volba." },
+      { text: "Žádný vlastní e-shop", color: VSE.warning, reason: "Chybí <b>vertikální integrace forward</b> (M5 + Log 1). Direct-to-consumer e-shop = lepší marže + customer data + brand control." },
+    ],
+    quiz1: {
+      question: "Co je hlavní problém NORDIC v rovině produktu?",
+      options: [
+        "Špatná kvalita",
+        "Vysoká cena",
+        "Nekonzistentní branding napříč řadami + nejasná diferenciace + slabá komunikace silných stránek",
+        "Příliš mnoho produktů",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Tereza měla udělat pro rozvoj produktové strategie NORDIC?",
+      options: [
+        { text: "Vrstvy produktu: posílit VYLEPŠENÝ (titanium patent + lifetime warranty) + POTENCIÁLNÍ (eco materials roadmap 2027)", correct: true, reason: "✓ Vylepšený = klíč diferenciace. Patent + záruka jsou silné, ale málo komunikované." },
+        { text: "6 cest diferenciace: Design (skandinávský) + Kvalita (patent) + Trvanlivost (doživotní záruka) = trojice klíčových odlišovačů", correct: true, reason: "✓ 3 silné páky z 6 cest. Tefal nemá. Le Creuset je dražší. NORDIC mezi = sweet spot." },
+        { text: "Branding konzistence: jednotný design obalu napříč všemi řadami (Pro/Home/Steel) + sjednocená komunikace skandinávského příběhu", correct: true, reason: "✓ Obal jako klíčová charakteristika (1 z 6). 5 funkcí obalu + brand architecture." },
+        { text: "Vertikální integrace forward: launchovat vlastní e-shop nordic.cz pro D2C prodej + sběr customer data", correct: true, reason: "✓ Direct-to-consumer kanál = lepší marže (no retail margin), brand control, customer relationship. Standard moderního premium brandu." },
+        { text: "Symbolický náboj: budovat „skandinávský design vyrobený v Česku\u201D + sustainability story (eco materials, lokální výroba)", correct: true, reason: "✓ Symbolický náboj = klíč pro premium positioning. Mladí milují story + eco." },
+        { text: "Horizontální diverzifikace: launchnout hot beverages řadu (varné konvice, kávovary) — stejní zákazníci, stejný kanál", correct: true, reason: "✓ Horizontální má smysl — kuchyně + premium + design. Ne konglomerát." },
+        { text: "Specialty positioning: cena 3000-5000 Kč za pánev jako Le Creuset — eliminovat NORDIC Home (middle range)", correct: false, reason: "✗ Příliš radikální. NORDIC Home je 30 % obratu. Místo eliminace = lepší propozice (premium ale dostupný = sweet spot mezi Tefalem a Le Creuset)." },
+        { text: "Cost Leadership: snížit ceny pod Tefal masovou výrobou v Číně", correct: false, reason: "✗ Sebevražda — ztratí premium positioning + skandinávský příběh + patent advantage. Tefal v Cost Leadership lépe vybavený." },
+        { text: "Konglomerátní diverzifikace: vstup do nábytku jako IKEA (skandinávský design)", correct: false, reason: "✗ Příliš velký skok. Konglomerát = high risk. Lepší zůstat v kuchyni a horizontálně rozšířit." },
+      ],
+    },
+    summary: "<b>NORDIC má skvělý produkt, ale slabou komunikaci a roztříštěnou strategii.</b> Klíč: <b>konzistentní brand architecture + komunikace diferenciace + horizontální diverzifikace</b>.<br/><br/><b>Plán 6 měsíců:</b><br/>• <b>Q1-Q2:</b> Brand architecture — sjednocený design obalů napříč řadami (Pro/Home/Steel) + brand book<br/>• <b>Q2:</b> Komunikace 3 differentiatorů — Design (Skandinávie) + Kvalita (patent) + Trvanlivost (lifetime záruka)<br/>• <b>Q2-Q3:</b> E-shop launch (nordic.cz) — D2C kanál + customer data + lepší marže<br/>• <b>Q3:</b> Symbolický náboj — „Czech-made Scandinavian design\u201D + sustainability story (CSRD ready)<br/>• <b>Q3-Q4:</b> Horizontální diverzifikace — launch NORDIC Brew (hot beverages: konvice, kávovary) pro stejnou cílovku<br/><br/><b>Pro komisi:</b> Klasický B2C premium brand s product strategy gaps. <b>Apple, Dyson, Le Creuset</b> jako benchmark holistického přístupu k produktu. <b>Kotlerových 5 vrstev</b> jako framework. <b>6 charakteristik + 6 cest diferenciace</b> jako diagnostika. <b>Diverzifikace horizontálně</b> (ne konglomerát) = bezpečná cesta. Anti-vzor: Cost Leadership proti Tefalu = sebevražda.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={6} title="Produkt/výrobek — charakteristiky, vrstvy, klasifikace"
+      subtitle="Kotler 5 vrstev + 6 charakteristik + klasifikace + 6 cest diferenciace + diverzifikace"
+      color={VSE.fis}
+      questionText="Produkt/výrobek — charakteristiky, vrstvy, klasifikace."
+      questionDesc="Definice produktu + kompletní výrobek + symbolický náboj. Komoditní × diferencované. Kotlerových 5 vrstev (jádro → základní → očekávaný → vylepšený → potenciální). 6 charakteristik (technické/funkční/smyslové/identifikační/ekonomické/obal) + 5 funkcí obalu. Klasifikace (trvanlivost — netrv/trv/služby; 4 typy spotřebitelského — convenience/shopping/specialty/unsought; B2B kategorie). Vztah klasifikace → mkt strategie. 6 cest diferenciace + diferenciace výrobku × služeb. 4 faktory volby (Kotler) + 5 úrovní zainteresovanosti + NPS. 3 typy změn vnímání v čase. Diverzifikace (horizontální/vertikální/konglomerátní). Apple iPhone, Starbucks, Dyson, Tesla, Amazon."
+      sloz={2} roz={3} freq={5}
+      examStrategy={examStrategyMkt6}
+      studySections={studySectionsMkt6}
+      flashcards={flashcardsMkt6}
+      quiz={quizMkt6}
+      praxe={praxeMkt6}
+      examQuestions={examQuestionsMkt6}
+      podcast={podcastMkt6}
+      caseStudy={caseStudyMkt6}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 7 — Výrobkové řady, šířka/délka/hloubka, cenotvorba mixu
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt7Panel() {
+  const studySectionsMkt7 = [
+    { id: "intro", title: "Výrobková řada × Výrobkový mix — definice", subtitle: "Klíčové pojmy + návaznost na M6", color: VSE.fis, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fis}>
+          M6 řešil <b>jednotlivý produkt</b>. M7 řeší <b>portfolio produktů firmy</b> — jak je organizovat do řad a celkového mixu. Komise <b>Nový, Stříteský, Štamfestová</b> chtějí přesné pojmy.
+        </Def>
+        <Tag color={VSE.fis}>3 úrovně organizace produktů</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🍞 PRODUKT (Item)", d: "Jednotlivá položka — konkrétní SKU. iPhone 15 Pro 256GB Titanium. Mkt6." },
+            { c: VSE.warning, t: "📦 VÝROBKOVÁ ŘADA (Product Line)", d: "Skupina příbuzných produktů řešících podobnou potřebu. iPhone řada (SE, 15, 15 Pro, 15 Pro Max)." },
+            { c: VSE.success, t: "🌐 VÝROBKOVÝ MIX (Product Mix)", d: "Celé portfolio firmy — všechny řady. Apple: iPhone + iPad + Mac + Watch + AirPods." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Příklad — Coca-Cola Company</Tag>
+        <Bullet items={[
+          "<b>Produkt (item):</b> Coca-Cola Classic 0,5 l plastová láhev.",
+          "<b>Výrobková řada:</b> Coca-Cola family (Classic, Zero, Light, Cherry, Vanilla).",
+          "<b>Výrobkový mix:</b> Coca-Cola Company — Coca-Cola family + Sprite + Fanta + Powerade + Smartwater + Costa Coffee + 200+ značek napříč 4 kategoriemi.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Stříteský + Schönfeld + Cejthamr 2025 (Lázně)"
+          what="Stříteský chce přesné definice 3 úrovní + konkrétní příklad. Bez vysvětlení rozdílu mezi řadou a mixem neuděláš."
+        />
+      </div>) },
+
+    { id: "ctyri_dimenze", title: "4 dimenze výrobkového mixu (Kotler)", subtitle: "Šířka × Délka × Hloubka × Konzistence — KLÍČOVÁ otázka!", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Kotlerových 4 dimenzí výrobkového mixu</b> je <b>nejklíčovější framework</b> M7. Komise <b>Štamfestová, Vrbová, Stříteský</b> CHTĚJÍ explicitně všechny 4 + příklady.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 520 320" style={{ width: "100%", maxWidth: 520, height: "auto" }}>
+            <defs>
+              <linearGradient id="dimW" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor={VSE.fmv} stopOpacity="0.9"/>
+                <stop offset="100%" stopColor={VSE.fmv} stopOpacity="0.7"/>
+              </linearGradient>
+            </defs>
+            {/* Šířka - horizontální osa s 4 sloupci */}
+            <text x="260" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight">⬅️ ŠÍŘKA — počet různých řad ➡️</text>
+            <rect x="40" y="35" width="100" height="30" rx="6" fill={VSE.fmv} opacity="0.85"/>
+            <text x="90" y="55" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">iPhone</text>
+            <rect x="150" y="35" width="100" height="30" rx="6" fill={VSE.warning} opacity="0.85"/>
+            <text x="200" y="55" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">iPad</text>
+            <rect x="260" y="35" width="100" height="30" rx="6" fill={VSE.fph} opacity="0.85"/>
+            <text x="310" y="55" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">Mac</text>
+            <rect x="370" y="35" width="100" height="30" rx="6" fill={VSE.success} opacity="0.85"/>
+            <text x="420" y="55" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">Watch</text>
+            {/* Délka - pod každou řadou produkty */}
+            <text x="20" y="155" fontSize="13" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight" transform="rotate(-90, 20, 155)">⬆ DÉLKA ⬇</text>
+            <rect x="40" y="75" width="100" height="22" rx="4" fill={VSE.fmv} opacity="0.5"/>
+            <text x="90" y="91" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">iPhone 15</text>
+            <rect x="40" y="100" width="100" height="22" rx="4" fill={VSE.fmv} opacity="0.5"/>
+            <text x="90" y="116" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">iPhone 15 Plus</text>
+            <rect x="40" y="125" width="100" height="22" rx="4" fill={VSE.fmv} opacity="0.5"/>
+            <text x="90" y="141" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">iPhone 15 Pro</text>
+            <rect x="40" y="150" width="100" height="22" rx="4" fill={VSE.fmv} opacity="0.5"/>
+            <text x="90" y="166" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">iPhone 15 Pro Max</text>
+            <rect x="40" y="175" width="100" height="22" rx="4" fill={VSE.fmv} opacity="0.5"/>
+            <text x="90" y="191" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">iPhone SE</text>
+            <rect x="150" y="75" width="100" height="22" rx="4" fill={VSE.warning} opacity="0.5"/>
+            <text x="200" y="91" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">iPad</text>
+            <rect x="150" y="100" width="100" height="22" rx="4" fill={VSE.warning} opacity="0.5"/>
+            <text x="200" y="116" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">iPad Air</text>
+            <rect x="150" y="125" width="100" height="22" rx="4" fill={VSE.warning} opacity="0.5"/>
+            <text x="200" y="141" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">iPad Pro</text>
+            <rect x="260" y="75" width="100" height="22" rx="4" fill={VSE.fph} opacity="0.5"/>
+            <text x="310" y="91" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">MacBook Air</text>
+            <rect x="260" y="100" width="100" height="22" rx="4" fill={VSE.fph} opacity="0.5"/>
+            <text x="310" y="116" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">MacBook Pro</text>
+            <rect x="260" y="125" width="100" height="22" rx="4" fill={VSE.fph} opacity="0.5"/>
+            <text x="310" y="141" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">iMac</text>
+            <rect x="370" y="75" width="100" height="22" rx="4" fill={VSE.success} opacity="0.5"/>
+            <text x="420" y="91" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">Series 9</text>
+            <rect x="370" y="100" width="100" height="22" rx="4" fill={VSE.success} opacity="0.5"/>
+            <text x="420" y="116" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">Ultra</text>
+            <rect x="370" y="125" width="100" height="22" rx="4" fill={VSE.success} opacity="0.5"/>
+            <text x="420" y="141" textAnchor="middle" fontSize="10" fill="var(--text, #333)" fontFamily="Inter Tight">SE</text>
+            {/* Hloubka - varianty */}
+            <text x="260" y="225" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight">🔍 HLOUBKA — varianty 1 produktu (paměť, barva, velikost)</text>
+            <text x="260" y="247" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="Inter Tight">např. iPhone 15 Pro = 128/256/512/1TB × 4 barvy = 16 variant</text>
+            {/* Konzistence */}
+            <text x="260" y="285" textAnchor="middle" fontSize="13" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight">🔗 KONZISTENCE — jak se řady navzájem doplňují (Apple ecosystem)</text>
+            <text x="260" y="305" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="Inter Tight">Apple = max. konzistence: iPhone, iPad, Mac sdílí design, OS, ekosystém</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fmv}>1. ŠÍŘKA (Width / Breadth) — kolik různých řad</Tag>
+        <Bullet items={[
+          "<b>Definice:</b> Počet různých výrobkových řad ve firmě.",
+          "<b>Apple:</b> Šířka = 4 hlavní řady (iPhone, iPad, Mac, Watch) + audio (AirPods, HomePod) + služby.",
+          "<b>P&G:</b> Šířka ~80 brandů napříč 4 kategoriemi (Beauty, Grooming, Health, Home).",
+          "<b>Niche brand:</b> Šířka = 1 řada (Patagonia outdoor jackets, Rolex hodinky).",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>2. DÉLKA (Length) — kolik produktů celkově</Tag>
+        <Bullet items={[
+          "<b>Definice:</b> Celkový počet produktů ve všech řadách dohromady.",
+          "<b>Průměrná délka řady</b> = celková délka / počet řad. iPhone řada má průměrnou délku 5 (SE, 15, 15 Plus, 15 Pro, 15 Pro Max).",
+          "<b>Strategie:</b> Délku rozšiřujeme když chceme pokrýt více segmentů (cenových, použití).",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>3. HLOUBKA (Depth) — kolik variant 1 produktu</Tag>
+        <Bullet items={[
+          "<b>Definice:</b> Počet variant 1 konkrétního produktu — barvy, velikosti, paměť, materiály.",
+          "<b>Příklad:</b> iPhone 15 Pro má 4 paměti (128/256/512/1TB) × 4 barvy = 16 variant.",
+          "<b>Coca-Cola Classic:</b> hloubka = lahve 0,33 / 0,5 / 1 / 2 l + plech + sklo = ~12 variant.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>4. KONZISTENCE (Consistency) — jak se řady propojují</Tag>
+        <Bullet items={[
+          "<b>Definice:</b> Vztah mezi výrobkovými řadami — distribuce, použití, výroba, cílovka.",
+          "<b>Vysoká konzistence:</b> Apple (vše premium tech, sdílený OS/design/ekosystém). P&G FMCG (vše do supermarketů).",
+          "<b>Nízká konzistence:</b> Virgin (letadla + telekom + alba) = konglomerát. Berkshire Hathaway.",
+          "<b>Důsledek:</b> Vysoká konzistence = jednodušší marketing + lock-in. Nízká = diverzifikované riziko.",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "rozhodovani", title: "Rozhodování o výrobkové řadě — délka, modernizace", subtitle: "Rozšíření × redukce + 4 strategie modernizace", color: VSE.fis, emoji: "refresh",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Rozhodování o výrobkové řadě</b> = klíčová strategická volba. Komise <b>Vrbová, Mikovcová</b> chtějí explicitně typy rozhodnutí + aplikaci na PS.
+        </Def>
+        <Tag color={VSE.fis}>Rozšiřování výrobkové řady — 3 směry</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "⬇️ EXTENZE DOLŮ (Downward)", d: "Levnější varianta. iPhone SE, Mercedes A-Class. Risk: kanibalizace premium řady." },
+            { c: VSE.warning, t: "⬆️ EXTENZE NAHORU (Upward)", d: "Premium varianta. iPhone Pro Max, Lexus (Toyota). Otevírá vyšší segment." },
+            { c: VSE.success, t: "↔️ EXTENZE DO STRAN (Two-way)", d: "Obě cesty najednou. Apple: iPhone SE + Pro Max. Kompletní pokrytí trhu." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Vyplňování (Line Filling)</Tag>
+        <Bullet items={[
+          "<b>Co to je:</b> Přidání nových produktů <b>uvnitř existující řady</b> (mezi stávající cenové body).",
+          "<b>Cíl:</b> Pokrýt mezery, blokovat konkurenci, navýšit obrat.",
+          "<b>Risk:</b> Příliš mnoho produktů = matení zákazníka, kanibalizace, vyšší náklady.",
+          "<b>Příklad:</b> Toyota Camry mezi Corolla a Avalon. Nutella malé sklenice mezi 200 g a 800 g.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Modernizace výrobkové řady — 4 strategie</Tag>
+        <Bullet items={[
+          "<b>Postupná modernizace</b> (Apple): Každý rok update modelu. Stabilní cashflow, ale konkurence se přizpůsobí.",
+          "<b>Razantní změna</b> (Tesla Cybertruck): Radikální redesign. High risk, high reward.",
+          "<b>Up-selling:</b> Posun zákazníků na vyšší modely. iPhone Pro nahradil iPhone X.",
+          "<b>Cross-selling:</b> Doporučování doplňků (Apple Watch k iPhone, AirPods, kryt).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Redukce výrobkové řady (Line Pruning)</Tag>
+        <Bullet items={[
+          "<b>Kdy:</b> Slabé prodeje, nízká marže, odvádí pozornost od ziskových produktů.",
+          "<b>Pareto pravidlo:</b> Často 80 % obratu z 20 % produktů. Zbytek lze zrušit.",
+          "<b>Příklad:</b> Steve Jobs 1997 zrušil 70 % produktů Apple → focus → záchrana firmy.",
+          "<b>Risk:</b> Loyální zákazníci ztracených produktů → negativní WOM.",
+        ]} color={VSE.danger} />
+        <ExamAlert
+          komise="Vrbová + Špaček + Machek 2025 (Lázně)"
+          what="Vrbová chce <b>rozhodování o výrobkové řadě + délka + hloubka sortimentu + stanovení ceny</b>. Pro lázně: pokojové kategorie (standard/superior/suite) = hloubka × wellness procedury (masáže/sauny/koupele) = šířka."
+        />
+      </div>) },
+
+    { id: "ceny_mixu", title: "Cenotvorba výrobkového mixu — 5 strategií (Kotler)", subtitle: "Tahal: cena výrobkového mixu — KLÍČ M7!", color: VSE.fis, emoji: "coins",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Komise <b>Tahal, Mikovcová, Nový</b> CHTĚJÍ explicitně <b>cenotvorbu výrobkového mixu</b>. Jiná logika než pro 1 produkt — musíme řešit, jak se ceny vzájemně ovlivňují uvnitř mixu.
+        </Def>
+        <Tag color={VSE.fis}>5 strategií cenotvorby výrobkového mixu (Kotler)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "1️⃣ CENA VÝROBKOVÉ ŘADY (Product Line Pricing)", d: "Stupňování cen v řadě. iPhone SE 500 USD → iPhone 15 Pro Max 1600 USD. Cenové body komunikují kvalitu." },
+            { c: VSE.warning, t: "2️⃣ CENA DOPLŇKOVÝCH PRODUKTŮ (Optional Pricing)", d: "Hlavní produkt + příplatky. BMW základ + paket Sport + kožené sedačky. Auto je za 600k, výbava za dalších 200k." },
+            { c: VSE.fph, t: "3️⃣ CENA NEZBYTNÝCH PRODUKTŮ (Captive Pricing)", d: "Levný hlavní + drahý spotřební. Holicí strojek Gillette 200 Kč + náhradní hlavice 700 Kč. Tiskárna 2000 Kč + cartridge 1500 Kč." },
+            { c: VSE.success, t: "4️⃣ CENA DVOUSLOŽKOVÁ (Two-part Pricing)", d: "Vstupní + spotřební cena. Mobil paušál 500 Kč + roaming. Disneyland vstupné + jídlo + atrakce. Restaurace cover + meals." },
+            { c: VSE.danger, t: "5️⃣ CENA VEDLEJŠÍCH PRODUKTŮ (By-product Pricing)", d: "Hlavní produkt + odpadní využití. Maso (hlavní) + kosti, kůže, krev (vedlejší). Olej + glycerin z rafinace." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Bundle Pricing (cenové balíčky) — 6. nejčastější strategie</Tag>
+        <Bullet items={[
+          "<b>Pure bundling:</b> Lze koupit jen v balíčku. Microsoft Office (Word + Excel + PowerPoint).",
+          "<b>Mixed bundling:</b> Lze koupit balíček (sleva) NEBO samostatně. McDonald's menu = burger + hranolky + cola za 169 Kč vs 220 Kč zvlášť.",
+          "<b>Cíl bundlingu:</b> Up-sell (větší koš) + introduction (nový produkt v bundle).",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Tahal + Cejthamr + Schönfeld 2025 (Kolo)"
+          what="Tahal chce <b>výrobkový mix + řady + stanovení ceny mixu</b>. Pro výrobce kol: cena řady (gravel 25k → road 65k → MTB 90k) + optional (lepší kola, brzdy) + captive (servisní díly, gumy)."
+        />
+        <Tag color={VSE.fph}>Praktické otázky pro cenotvorbu mixu</Tag>
+        <Bullet items={[
+          "<b>Cenové rozpětí v řadě:</b> Min × max — pokud rozpětí příliš úzké = matení zákazníka. Příliš široké = chybějící střední segment.",
+          "<b>Kanibalizace:</b> Pokud iPhone SE moc levný, jí prodeje iPhone 15. Klíč: <b>jasná diferenciace</b> mezi cenovými body.",
+          "<b>Psychologické cenotvorba:</b> 999 Kč místo 1000. Premium ceny v rovných číslech (Rolex 5000 EUR, ne 4999).",
+          "<b>Reference price:</b> Vždycky existuje. Pokud chybí, zákazník neví, zda je cena fair.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "specifika", title: "Specifika výrobkové řady + aplikace na PS", subtitle: "B2B × B2C + služby + checklist pro komisi", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Komise <b>Nový</b> chce <b>specifika výrobkové řady</b> + <b>specifika stanovení cen</b>. Klíčové: <b>jiná logika pro B2B × B2C × služby</b>.
+        </Def>
+        <Tag color={VSE.fis}>Specifika podle typu trhu</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🛒 B2C (spotřebitelský)", d: "Široká hloubka (barvy, velikosti), psychologická cena (999 Kč), bundle pricing, sezónní variace. Apple, P&G." },
+            { c: VSE.warning, t: "🏭 B2B (podnikový)", d: "Customizace pro klienta, množstevní slevy, dlouhodobé kontrakty, transparentní pricing (open book). Siemens, Caterpillar." },
+            { c: VSE.success, t: "💆 SLUŽBY", d: "Tier pricing (Basic/Pro/Enterprise), subscription model, dynamic pricing. SaaS, lázně, hotely, Spotify." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Metriky výrobkového mixu</Tag>
+        <Bullet items={[
+          "<b>Stupeň pokrytí trhu:</b> Jaké procento cílového trhu firma pokrývá svým mixem.",
+          "<b>Mozaika (Pareto):</b> Top 20 % produktů typicky generuje 80 % obratu — který produkty to jsou?",
+          "<b>Loyalty index:</b> Kolik zákazníků kupuje >1 produkt z mixu (cross-sell metrika).",
+          "<b>Average order value (AOV):</b> Průměrná cena 1 transakce — roste s bundle pricingem.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.danger}>Checklist pro komisi — aplikace na PS</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj <b>výrobkové řady</b> firmy v PS — kolik jich je (šířka).",
+          "<b>2.</b> Spočítej <b>délku</b> (celkový počet produktů) + <b>průměrnou délku řady</b>.",
+          "<b>3.</b> Identifikuj <b>hloubku</b> klíčové řady — kolik variant 1 produktu.",
+          "<b>4.</b> Vyhodnoť <b>konzistenci</b> — sdílejí řady kanál, technologii, cílovku?",
+          "<b>5.</b> Doporuč úpravy mixu — rozšíření/redukce/modernizace.",
+          "<b>6.</b> Navrhni <b>cenovou strategii mixu</b> — která z 5 strategií Kotlera (+ bundling) se hodí.",
+        ]} color={VSE.danger} />
+      </div>) },
+  ];
+
+  const flashcardsMkt7 = [
+    { term: "Produkt × Výrobková řada × Mix", def: "Produkt (SKU) → Výrobková řada (skupina příbuzných) → Výrobkový mix (celé portfolio firmy).", tag: "POJEM" },
+    { term: "Výrobková řada (Product Line)", def: "Skupina příbuzných produktů řešících podobnou potřebu. iPhone řada, Coca-Cola family.", tag: "POJEM" },
+    { term: "Výrobkový mix (Product Mix)", def: "Celé portfolio firmy — všechny řady. Apple = iPhone + iPad + Mac + Watch + AirPods.", tag: "POJEM" },
+    { term: "4 dimenze mixu (Kotler)", def: "Šířka (kolik řad) / Délka (kolik produktů celkem) / Hloubka (kolik variant 1 produktu) / Konzistence (jak se řady propojují).", tag: "DIMENZE" },
+    { term: "ŠÍŘKA výrobkového mixu", def: "Počet různých výrobkových řad ve firmě. Apple šířka = 4-5 hlavních řad. P&G ~80 brandů.", tag: "DIMENZE" },
+    { term: "DÉLKA výrobkového mixu", def: "Celkový počet produktů ve všech řadách dohromady. Průměrná délka řady = celková délka / počet řad.", tag: "DIMENZE" },
+    { term: "HLOUBKA výrobkového mixu", def: "Počet variant 1 produktu — barvy, velikosti, paměť. iPhone 15 Pro = 4 paměti × 4 barvy = 16 variant.", tag: "DIMENZE" },
+    { term: "KONZISTENCE výrobkového mixu", def: "Vztah mezi řadami — distribuce, použití, výroba, cílovka. Apple = vysoká (ecosystem). Virgin = nízká (konglomerát).", tag: "DIMENZE" },
+    { term: "Extenze dolů (Downward)", def: "Přidání levnější varianty. iPhone SE, Mercedes A-Class. Risk: kanibalizace premium.", tag: "ROZHODOVÁNÍ" },
+    { term: "Extenze nahoru (Upward)", def: "Přidání premium varianty. iPhone Pro Max, Lexus (od Toyoty). Otevírá vyšší segment.", tag: "ROZHODOVÁNÍ" },
+    { term: "Extenze do stran (Two-way)", def: "Obě cesty najednou. Apple iPhone SE + Pro Max. Kompletní pokrytí trhu.", tag: "ROZHODOVÁNÍ" },
+    { term: "Line Filling (vyplňování)", def: "Přidávání produktů UVNITŘ existující řady. Cíl: pokrýt mezery, blokovat konkurenci. Risk: matení zákazníka.", tag: "ROZHODOVÁNÍ" },
+    { term: "Modernizace řady — 4 strategie", def: "Postupná (Apple yearly updates) / Razantní (Tesla Cybertruck) / Up-selling (posun na vyšší modely) / Cross-selling (doplňky).", tag: "ROZHODOVÁNÍ" },
+    { term: "Line Pruning (redukce)", def: "Eliminace slabých produktů. Steve Jobs 1997 zrušil 70 % Apple produktů → focus → záchrana firmy.", tag: "ROZHODOVÁNÍ" },
+    { term: "Cena výrobkové řady (Product Line Pricing)", def: "Stupňování cen v řadě. iPhone SE 500 → 15 Pro Max 1600 USD. Cenové body komunikují kvalitu.", tag: "CENY" },
+    { term: "Cena doplňkových produktů (Optional)", def: "Hlavní produkt + příplatky. BMW základ + Sport paket + kožené sedačky.", tag: "CENY" },
+    { term: "Captive Pricing (nezbytné)", def: "Levný hlavní + drahý spotřební. Gillette strojek 200 Kč + náhradní hlavice 700 Kč. Tiskárna + cartridge.", tag: "CENY" },
+    { term: "Two-part Pricing", def: "Vstupní + spotřební. Mobil paušál + roaming. Disneyland vstupné + atrakce. Restaurace cover + meals.", tag: "CENY" },
+    { term: "By-product Pricing", def: "Hlavní + odpadní využití. Maso (hlavní) + kosti/kůže/krev (vedlejší). Olej + glycerin.", tag: "CENY" },
+    { term: "Bundle Pricing", def: "Pure (jen v balíčku — MS Office) × Mixed (balíček se slevou NEBO samostatně — McDonald's menu).", tag: "CENY" },
+    { term: "Psychologická cenotvorba", def: "999 Kč místo 1000. Premium značky často rovné ceny (Rolex 5000 EUR).", tag: "CENY" },
+    { term: "Kanibalizace", def: "Levnější produkt jí prodeje dražšímu v stejné řadě. iPhone SE vs iPhone 15. Klíč: jasná diferenciace mezi cenovými body.", tag: "CENY" },
+    { term: "Specifika B2B vs B2C výrobkový mix", def: "B2C = široká hloubka, psychologická cena, bundle. B2B = customizace, množstevní slevy, dlouhodobé kontrakty.", tag: "SPECIFIKA" },
+    { term: "Specifika služeb", def: "Tier pricing (Basic/Pro/Enterprise), subscription, dynamic pricing. SaaS, lázně, Spotify.", tag: "SPECIFIKA" },
+    { term: "Mozaika (Pareto)", def: "Top 20 % produktů generuje 80 % obratu. Identifikace klíčových produktů + redukce slabých.", tag: "METRIKY" },
+    { term: "Cross-sell × Up-sell", def: "Cross-sell = doporučení doplňků (AirPods k iPhone). Up-sell = posun na vyšší model (Pro místo basic).", tag: "STRATEGIE" },
+  ];
+
+  const quizMkt7 = [
+    { q: "Co je výrobková řada (product line)?", opts: ["Jeden produkt", "Skupina příbuzných produktů řešících podobnou potřebu", "Celé portfolio firmy", "Cenová strategie"], correct: 1 },
+    { q: "Co je výrobkový mix?", opts: ["Mixování barev", "Celé portfolio firmy — všechny řady (Apple = iPhone + iPad + Mac + Watch)", "Reklamní mix", "Cenová strategie"], correct: 1 },
+    { q: "Kolik dimenzí výrobkového mixu definuje Kotler?", opts: ["3", "4 (šířka / délka / hloubka / konzistence)", "5", "6"], correct: 1 },
+    { q: "Co je ŠÍŘKA výrobkového mixu?", opts: ["Velikost produktu", "Počet různých výrobkových řad ve firmě", "Cena", "Geografické pokrytí"], correct: 1 },
+    { q: "Co je HLOUBKA výrobkového mixu?", opts: ["Cena", "Počet variant 1 produktu (paměť, barva, velikost)", "Počet řad", "Geografie"], correct: 1 },
+    { q: "Co je KONZISTENCE výrobkového mixu?", opts: ["Stejná cena", "Vztah mezi řadami — distribuce, použití, technologie, cílovka", "Stejná velikost", "Stejná barva"], correct: 1 },
+    { q: "Co je extenze řady DOLŮ?", opts: ["Zmenšení produktu", "Přidání levnější varianty (iPhone SE, Mercedes A-Class)", "Snížení kvality", "Likvidace produktu"], correct: 1 },
+    { q: "Co je Line Pruning?", opts: ["Rozšíření řady", "Eliminace slabých produktů (Steve Jobs 1997 zrušil 70 % Apple)", "Reklama", "Cenová sleva"], correct: 1 },
+    { q: "Kolik strategií cenotvorby mixu definuje Kotler?", opts: ["3", "5 (řada, doplňky, captive, two-part, by-product)", "7", "10"], correct: 1 },
+    { q: "Gillette = strojek 200 Kč + náhradní hlavice 700 Kč je příkladem:", opts: ["Bundle pricing", "Captive pricing", "Two-part pricing", "By-product"], correct: 1 },
+    { q: "BMW základ + Sport paket + kožené sedačky je:", opts: ["Captive", "Optional pricing (doplňkové)", "Bundle", "Line"], correct: 1 },
+    { q: "McDonald's menu (burger + hranolky + cola za sníženou cenu) je:", opts: ["Captive", "Mixed bundling", "Pure bundling", "By-product"], correct: 1 },
+    { q: "Co je kanibalizace v rámci výrobkového mixu?", opts: ["Maso od zákazníků", "Levnější produkt jí prodeje dražšímu v stejné řadě (iPhone SE × 15)", "Útok konkurence", "Recyklace produktů"], correct: 1 },
+    { q: "Co je Pareto / Mozaika v mixu?", opts: ["Italská zmrzlina", "Top 20 % produktů generuje 80 % obratu — identifikace klíčových", "Geografická segmentace", "Cena výrobků"], correct: 1 },
+    { q: "Apple je příkladem KONZISTENCE jaké?", opts: ["Nízká (jako Virgin)", "Vysoká — sdílený OS, design, ekosystém napříč iPhone/iPad/Mac/Watch", "Žádné konzistence", "Záleží na roku"], correct: 1 },
+  ];
+
+  const praxeMkt7 = {
+    caseStudy: {
+      company: "Apple — etalon všech 4 dimenzí výrobkového mixu",
+      subtitle: "Šířka 5 × Délka 25 × Hloubka 16 × Konzistence maxima",
+      content: (<>
+        <b>Apple</b> je <b>učebnicový příklad sofistikovaného mixu</b>. Z 1 produktu (Mac, 1984) na 5 řad + 200 mld. USD obrat z hardware.<br/><br/>
+        <b style={{ color: VSE.success }}>4 dimenze Apple mixu (2024):</b><br/>
+        • <b>ŠÍŘKA = 5 hlavních řad:</b> iPhone, iPad, Mac, Watch, AirPods (+ HomePod, Apple TV, Vision Pro)<br/>
+        • <b>DÉLKA ~ 25 produktů celkem.</b> Průměrná délka řady = 5 produktů.<br/>
+        • <b>HLOUBKA = 16+ variant na top produkt.</b> iPhone 15 Pro = 4 paměti × 4 barvy = 16. MacBook Pro = 2 velikosti × 3 čipy × 4 paměti × 4 SSD = ~96 variant.<br/>
+        • <b>KONZISTENCE = MAXIMÁLNÍ:</b> Sdílený OS (iOS/iPadOS/macOS/watchOS), Apple ID, iCloud, App Store, M-čipy, design language.<br/><br/>
+        <b style={{ color: VSE.warning }}>Cenotvorba mixu Apple:</b><br/>
+        • <b>Product Line Pricing:</b> iPhone SE 500 USD → 15 Pro Max 1600 USD (rozpětí 3×).<br/>
+        • <b>Optional Pricing:</b> Apple Care+ (200-300 USD), Magic Mouse, Adapter, Cable.<br/>
+        • <b>Captive Pricing:</b> AirTags 30 USD, ale fungují JEN s iPhone. App Store revenue cut 15-30 %.<br/>
+        • <b>Two-part:</b> iPhone upfront + Apple One subscription (10-30 USD/měsíc).<br/>
+        • <b>Bundle:</b> Apple One = iCloud + Music + TV+ + Arcade za sníženou cenu.<br/><br/>
+        <b style={{ color: VSE.danger }}>Strategický evoluce Apple:</b><br/>
+        • <b>1997 (Steve Jobs comeback):</b> Line Pruning — zrušil 70 % produktů. 350 produktů → 4. Záchrana firmy.<br/>
+        • <b>2007 (iPhone):</b> Šířka extenze — nová řada, mobile.<br/>
+        • <b>2014 (Apple Watch):</b> Šířka extenze + wearables.<br/>
+        • <b>2024 (Vision Pro):</b> Nová řada — XR. Risk razantní inovace.<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Apple Services revenue 85 mld. USD/rok = důsledek konzistence + captive pricing. <b>1 zákazník iPhone</b> = pravděpodobně i Mac + AirPods + Watch (lock-in přes ecosystem).
+      </>),
+      lessons: "Apple je <b>etalon sofistikovaného mixu</b>. Pro PS firmu doporuč: <b>analyzovat 4 dimenze (šířka/délka/hloubka/konzistence)</b>, <b>identifikovat 1-2 strategie cenotvorby mixu</b> (typicky Product Line + Optional + Bundle), <b>posílit konzistenci přes ecosystem</b>. Alternativy: <b>Coca-Cola (široký mix napříč kategoriemi), Toyota (extenze nahoru Lexus), Patagonia (nízká šířka, vysoká hloubka), Microsoft Office (pure bundling)</b>."
+    },
+    miniExamples: [
+      { tag: "ŠÍŘKA", color: VSE.fmv, company: "P&G — ~80 brandů, šířka extrém", content: "P&G má <b>80+ brandů</b> napříč 4 kategoriemi (Beauty, Grooming, Health, Home). Šířka = klíčová strategie. Risk: kanibalizace mezi brandy (Tide × Gain — oba prací prášky). Klíč: každý brand má svůj segment." },
+      { tag: "HLOUBKA", color: VSE.warning, company: "Coca-Cola Classic — hloubka 12 variant", content: "Coca-Cola Classic má <b>hloubku ~12 variant</b>: lahve 0,33/0,5/1/2 l × plech 0,33/0,5 × sklo 0,2/0,33. Cíl: pokrýt VŠECHNY occasion (single, family, party, restaurant). Klasický masový mkt." },
+      { tag: "LINE PRUNING", color: VSE.danger, company: "Steve Jobs 1997 — záchrana Apple", content: "Když Jobs 1997 přišel zpět do Apple, firma měla <b>350 produktů</b> (Mac Performa, různé desktopy, software). Jobs nakreslil 4-kvadrantovou matici (consumer/pro × desktop/laptop) a všechno zrušil mimo. <b>350 → 4</b>. Záchrana." },
+      { tag: "BUNDLE", color: VSE.success, company: "McDonald's menu — mixed bundling", content: "McDonald's menu = klasické <b>mixed bundling</b>. Burger samostatně 130 Kč + hranolky 50 + cola 40 = 220 Kč. Menu (vše dohromady) = 169 Kč. Zákazník vyhrává 51 Kč slevu, McDonald's vyhrává větší koš a vyšší marže (cola má 80 % marži)." },
+      { tag: "CAPTIVE", color: VSE.fph, company: "Nespresso — kávovar + kapsle", content: "Nespresso kávovar 2-5 tis. Kč (skoro za náklady), ale kapsle 9-15 Kč/ks (200-400 % marže). Klasický <b>captive pricing</b>. Roční ARPU 8-15 tis. Kč z kapsle. <b>Razor-blade model</b>." },
+    ]
+  };
+
+  const examQuestionsMkt7 = [
+    { komise: "2025-06-16 — Štamfestová + Mládková + Vávra (Software)", otazka: "Výrobková řada, délka/šířka/hloubka, cena", pozn: "Štamfestová chce <b>4 dimenze Kotlera</b> explicitně + cenu. Pro software: šířka (CRM, ERP, marketing automation), délka (Basic/Pro/Enterprise tiery), hloubka (moduly), cena (tier pricing + bundle)." },
+    { komise: "2025-09-11 — Stříteský + Schönfeld + Cejthamr (Lázně)", otazka: "Rozhodování o výrobkových řadách (šířka, hloubka). Specifika výrobkové řady a stanovování cen mixu.", pozn: "Stříteský chce <b>4 dimenze + 5 cenových strategií Kotlera</b>. Pro lázně: šířka (wellness procedury × ubytování × restaurace), hloubka (kategorie pokojů). Cena: Two-part (vstupné + procedury)." },
+    { komise: "2025-02-04 — Nový + Müllerová + Vávra (Lázně)", otazka: "Rozhodování o výrobkových řadách a sortimentu. Specifika výrobkové řady a specifika stanovení cen výrobkové řady.", pozn: "Nový chce <b>specifika podle typu trhu</b> (B2B × B2C × služby). Pro lázně = služby, takže tier pricing (Basic/Premium/Luxury), bundle (procedura + ubytování + jídlo), subscription (roční membership)." },
+    { komise: "2025-01-28 — Tahal + Kuděj + Nový (Sanace)", otazka: "Výrobková řada, sortiment, stanovování cen", pozn: "Tahal chce kompletní balík. Pro sanační firmu (B2B): výrobková řada (chemikálie pro různé typy plísní/hub), sortiment služeb (diagnostika + sanace + monitoring), cena = optional + customizace." },
+    { komise: "2025-02-03 — Nový + Machek + Kolouchová (Kola)", otazka: "Rozhodování o výrobkových řadách a sortimentu. Specifika a stanovení cen.", pozn: "Pro kola: řady (gravel/road/MTB/E-bike), hloubka (velikosti rámu + barvy), cena = Product Line Pricing (25k → 90k), Optional (lepší kola, brzdy), Captive (gumy, servis)." },
+    { komise: "2025-06-04 — Tahal + Cejthamr + Schönfeld (Kolo)", otazka: "Výrobkový mix. Produktové řady. Stanovení ceny výrobkového mixu.", pozn: "Tahal explicitně chce všechny 3 — <b>mix, řady, cena mixu</b>. Pro kola: 5 strategií Kotlera + bundling (kolo + helma + brašna). Bez všech 3 NEUDĚLÍŠ." },
+    { komise: "2025-06-10 — Mikovcová + Vávra + Viktora (Lázně)", otazka: "Výrobkové řady, aplikace na PS, cenová politika s ohledem na výrobkový mix", pozn: "Mikovcová chce <b>cenovou politiku S OHLEDEM na mix</b>. Pro lázně: výrobkové řady (pokoje × procedury × restaurace), Two-part pricing (vstupné + extras), bundle packages (wellness víkend = ubytování + 3 procedury + jídlo)." },
+    { komise: "2025-01-27 — Vrbová + Špaček + Machek (Lázně)", otazka: "Rozhodování o výrobkové řadě, délka a hloubka sortimentu, rozhodování o výrobku a stanovení ceny", pozn: "Vrbová chce komplet — délka, hloubka, rozhodování (rozšíření/redukce/modernizace), stanovení ceny. Pro lázně: balík tier pricing + bundle + dynamic pricing podle sezóny." },
+  ];
+
+  const podcastMkt7 = { title: "Marketing 7 — Výrobkové řady, šířka/délka/hloubka, cenotvorba mixu", description: "Produkt × řada × mix (3 úrovně). Kotlerových 4 dimenzí mixu (šířka/délka/hloubka/konzistence). Rozhodování o řadě — extenze (dolů/nahoru/do stran), line filling, modernizace, line pruning. 5 strategií cenotvorby Kotler (Product Line / Optional / Captive / Two-part / By-product) + Bundle pricing. Specifika B2B × B2C × služby. Metriky mixu (Pareto, AOV, loyalty). Apple, P&G, Coca-Cola, McDonald's, Nespresso.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt7 = `
+    <b style="color:#A82A5F">1.</b> Začni 3 úrovněmi — produkt → řada → mix.<br/>
+    <b style="color:#A82A5F">2.</b> ⚠️ <b>Kotlerových 4 dimenzí</b> — šířka / délka / hloubka / konzistence (Štamfestová, Vrbová chytají!).<br/>
+    <b style="color:#A82A5F">3.</b> Konkrétní příklady — Apple (5/25/16/max konzistence) jako benchmark.<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>Rozhodování o řadě</b> — extenze dolů/nahoru/do stran + line filling + modernizace + pruning.<br/>
+    <b style="color:#A82A5F">5.</b> 4 strategie modernizace — postupná, razantní, up-sell, cross-sell.<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>5 strategií cenotvorby mixu (Kotler)</b> — Product Line / Optional / Captive / Two-part / By-product (Tahal chytá!).<br/>
+    <b style="color:#A82A5F">7.</b> Bundle Pricing — Pure (MS Office) × Mixed (McDonald's menu).<br/>
+    <b style="color:#A82A5F">8.</b> Kanibalizace + psychologická cenotvorba + reference price.<br/>
+    <b style="color:#A82A5F">9.</b> Specifika B2B × B2C × služby.<br/>
+    <b style="color:#A82A5F">10.</b> Metriky — Pareto/Mozaika, AOV, cross-sell loyalty.<br/>
+    <b style="color:#A82A5F">11.</b> Aplikace na PS — 4 dimenze + cenová strategie + 2-3 doporučení.
+  `;
+
+  const caseStudyMkt7 = {
+    title: "Štěpán — CEO LumenTech, výrobce LED osvětlení (105 mil. Kč, 65 zaměstnanců)",
+    subtitle: "Identifikuj problémy v mixu + navrhni 4 dimenze + cenovou strategii",
+    scenario: "Štěpán (41 let) vede LumenTech 6 let. Český výrobce LED osvětlení (interiér + exteriér + průmyslové). 65 zaměstnanců, tržby 105 mil. Kč, růst 6 %. B2B (60 %) + B2C přes Hornbach, OBI (40 %).\n\nAktuální mix:\n\n• Řada A — Interiérová LED svítidla (lustry, stropní, nástěnné) — 35 produktů, 50 % obratu\n\n• Řada B — Venkovní LED svítidla (zahradní, fasádní) — 18 produktů, 25 % obratu\n\n• Řada C — Průmyslová LED (haly, sklady) — 25 produktů, 20 % obratu\n\n• Řada D — Chytré LED s WiFi (smart home) — 8 produktů, 5 % obratu (nová řada 2024)\n\nProblémy:\n\n• Příliš mnoho produktů v řadě A (35) — některé prodávají 5 ks/měsíc, kanibalizace mezi sebou\n\n• Hloubka neuspořádaná — různé barvy/velikosti chaoticky, nelze najít „rodinu produktů\u201D\n\n• Řada D (smart) má potenciál, ale obrat tenký — nevidí na ní šanci\n\n• Konzistence chybí — každá řada má jiný design (industrial × moderní × klasický)\n\n• Cenotvorba ad hoc — žádná strategická logika, „cena minimum + marže 35 %\u201D\n\n• Žádný bundle pricing — zákazník koupí 1 lampu, ne sadu (lustr + nástěnné)\n\nKonkurence:\n\n• Philips Hue (smart) — ekosystém, premium, captive (mostek + žárovky)\n\n• OSRAM, IKEA — masový segment, cost leadership\n\n• Lokální výrobci — niche, customizace\n\nKlíčové vstupy:\n\n• Vlastní výroba v Hradci Králové, vlastní design tým 4 lidí\n\n• 2025 plánují vstup do hospitality (hotely, restaurace) — nový segment\n\n• ICT integrátoři (B2B partneři) tlačí na full ekosystem řešení (osvětlení + senzory + řízení)\n\n• Účetní data: top 10 produktů generuje 70 % obratu (Pareto signal)\n\nŠtěpán má 6 měsíců na restrukturalizaci mixu + nový pricing strategy.",
+    signals: [
+      { text: "Příliš mnoho produktů v řadě A (35) — některé prodávají 5 ks/měsíc, kanibalizace", color: VSE.danger, reason: "Klasický signál pro <b>Line Pruning</b>. Steve Jobs 1997 model — focus přes redukci. Pareto: top 20 % produktů = 70-80 % obratu." },
+      { text: "Hloubka neuspořádaná — různé barvy/velikosti chaoticky", color: VSE.danger, reason: "Chybí systematická hloubka. Klíč: definovat <b>matrici variant</b> (např. 3 velikosti × 4 barvy × 2 výkony) konzistentně napříč produkty." },
+      { text: "Řada D (smart) má potenciál, ale obrat tenký", color: VSE.warning, reason: "Strategická příležitost. Smart segment roste 25 % ročně. Filozofie Philips Hue (ecosystem + captive) = potenciál pro LumenTech." },
+      { text: "Konzistence chybí — každá řada má jiný design", color: VSE.warning, reason: "Nízká <b>konzistence</b> (1 ze 4 dimenzí Kotlera). Apple má max konzistenci → ecosystem. LumenTech ztrácí cross-sell potenciál." },
+      { text: "Cenotvorba ad hoc — žádná strategická logika", color: VSE.danger, reason: "Chybí Kotlerových <b>5 strategií cenotvorby mixu</b>. Cost-plus 35 % marže = neefektivní. Lepší: Product Line Pricing + Optional + Captive." },
+      { text: "Žádný bundle pricing", color: VSE.warning, reason: "Promarněná příležitost AOV. Bundle (lustr + nástěnné + stropní set pro pokoj) = up-sell + zjednodušení rozhodování pro B2C." },
+      { text: "Top 10 produktů generuje 70 % obratu (Pareto)", color: VSE.fph, reason: "<b>Klasický Pareto signál</b>. 86 % zbývajících produktů = 30 % obratu. Line Pruning na 30-40 produktů = focus + lepší marketing." },
+      { text: "ICT integrátoři tlačí na full ecosystem", color: VSE.warning, reason: "Příležitost pro <b>captive pricing</b> + <b>two-part</b> jako Philips Hue (controller + lights). Smart řada D = klíčová budoucnost." },
+    ],
+    quiz1: {
+      question: "Co je hlavní problém LumenTech v rovině výrobkového mixu?",
+      options: [
+        "Špatná kvalita produktů",
+        "Vysoké ceny",
+        "Příliš mnoho produktů bez systematické struktury (šířka/délka/hloubka/konzistence) + ad hoc cenotvorba",
+        "Málo marketingu",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Štěpán měl udělat pro restrukturalizaci mixu?",
+      options: [
+        { text: "Line Pruning řady A — z 35 produktů na 18-20 (zachovat top 70 % obratu, eliminovat slabé). Steve Jobs 1997 model.", correct: true, reason: "✓ Pareto je signal. Focus přes redukci = vyšší marketing budget na top produkty + zjednodušená výroba." },
+        { text: "Definovat systematickou hloubku: 3 velikosti × 4 barvy × 2 výkony konzistentně napříč produkty (24 variant na klíčový produkt)", correct: true, reason: "✓ Systematická hloubka = predikovatelná výroba + lepší skladování + zákazník snadno najde &quot;rodinu&quot;." },
+        { text: "Posílit řadu D (smart) — extenze nahoru přes ecosystem (controller + senzory + lampy). Philips Hue model.", correct: true, reason: "✓ Smart segment roste 25 %. Ecosystem = captive pricing + lock-in zákazníků + premium marže." },
+        { text: "Zavést Kotlerových 5 strategií ceny mixu: Product Line (basic 400 → premium 8000 Kč) + Optional (kontroler, RGB) + Captive (smart accessories)", correct: true, reason: "✓ Strategická cenotvorba = vyšší marže + lepší positioning. Cost-plus 35 % není mkt strategie." },
+        { text: "Bundle pricing pro B2C — &quot;Living Room Set&quot; (lustr + 2 nástěnné + dimmer) za 7000 Kč místo 9500 Kč samostatně. AOV +50 %.", correct: true, reason: "✓ Mixed bundling klasika. Zákazník vidí slevu, firma dostává větší koš + jednodušší decision-making." },
+        { text: "Posílit konzistenci přes jednotný design language — všechny řady share materiály, designové prvky, smart kompatibilita", correct: true, reason: "✓ Konzistence = ecosystem efekt. Cross-sell potenciál (zákazník koupí 1, pravděpodobně koupí 2-3 produkty)." },
+        { text: "Nový segment hospitality — řada E pro hotely/restaurace s B2B pricing (množstevní slevy, dlouhodobé kontrakty)", correct: true, reason: "✓ Specifika B2B mix. Hospitality = ~300 hotelů v ČR, projektový prodej, vyšší AOV." },
+        { text: "Zachovat všechno + přidat nové produkty pro pokrytí každé mezery", correct: false, reason: "✗ Anti-strategie. Místo focus → další chaos. Kanibalizace + matení zákazníka + roztříštěný marketing budget." },
+        { text: "Cost Leadership — snížit ceny pod IKEA a OSRAM masovým objemem", correct: false, reason: "✗ Sebevražda — IKEA má scale 1000×, LumenTech malá fabrika v Hradci. Lepší Differentiation Focus (premium smart segment)." },
+      ],
+    },
+    summary: "<b>LumenTech má klasický problém roztříštěného mixu bez strategické logiky.</b> Klíč: <b>4 dimenze Kotlera + Line Pruning + Kotlerových 5 strategií ceny mixu + Smart ecosystem (Philips Hue model)</b>.<br/><br/><b>Plán 6 měsíců:</b><br/>• <b>Měsíc 1-2:</b> Pareto analýza → Line Pruning (řada A z 35 → 18 produktů, eliminace dlouhého chvostu)<br/>• <b>Měsíc 2-3:</b> Systematická hloubka (3 velikosti × 4 barvy × 2 výkony) konzistentně napříč mixem<br/>• <b>Měsíc 3-4:</b> Pricing strategie — Product Line (basic → premium) + Optional (kontroler, RGB) + Captive (smart accessories)<br/>• <b>Měsíc 4:</b> Bundle Pricing — Living Room Set, Outdoor Garden Set, Smart Starter Kit (mixed bundling, +50 % AOV)<br/>• <b>Měsíc 5:</b> Smart řada D extenze (ecosystem) — Philips Hue model<br/>• <b>Měsíc 6:</b> Nová řada E (Hospitality B2B) — projektový prodej hotelům/restauracím<br/><br/><b>Pro komisi:</b> Klasický český B2B/B2C výrobce s ad hoc mixem. <b>Apple (4 dimenze + ecosystem), P&G (šířka), Philips Hue (captive + smart), McDonald's (mixed bundling)</b> jako benchmark. <b>Kotlerových 4 dimenzí</b> + <b>5 strategií ceny mixu</b> jako framework. Anti-vzor: Cost Leadership proti IKEA = sebevražda. Vzor: <b>Differentiation Focus</b> (premium smart segment).",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={7} title="Výrobkové řady, šířka/délka/hloubka, cenotvorba mixu"
+      subtitle="Kotlerových 4 dimenzí + rozhodování o řadě + 5 strategií ceny mixu + bundle"
+      color={VSE.fis}
+      questionText="Výrobkové řady — délka/šířka/hloubka/konzistence, cenotvorba mixu."
+      questionDesc="3 úrovně organizace (produkt × řada × mix). Kotlerových 4 dimenzí (šířka/délka/hloubka/konzistence) s konkrétními příklady. Rozhodování o řadě — extenze dolů/nahoru/do stran, line filling, 4 strategie modernizace, line pruning. 5 strategií cenotvorby Kotler (Product Line / Optional / Captive / Two-part / By-product) + Bundle Pricing (Pure × Mixed). Kanibalizace + psychologická cenotvorba + reference price. Specifika B2B × B2C × služby. Metriky mixu (Pareto/Mozaika, AOV, cross-sell). Apple, P&G, Coca-Cola, McDonald's, Nespresso, Philips Hue."
+      sloz={2} roz={3} freq={4}
+      examStrategy={examStrategyMkt7}
+      studySections={studySectionsMkt7}
+      flashcards={flashcardsMkt7}
+      quiz={quizMkt7}
+      praxe={praxeMkt7}
+      examQuestions={examQuestionsMkt7}
+      podcast={podcastMkt7}
+      caseStudy={caseStudyMkt7}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 8 — Životní cyklus výrobku (PLC) + fáze + strategie + modifikace
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt8Panel() {
+  const studySectionsMkt8 = [
+    { id: "intro", title: "Životní cyklus výrobku (PLC) — definice + S-křivka", subtitle: "5 fází + cíle PLC + klasická S-křivka", color: VSE.fis, emoji: "refresh",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Životní cyklus výrobku (Product Life Cycle, PLC)</b> = doba mezi <b>uvedením výrobku na trh a jeho stažením</b>. Každá fáze má svá <b>specifika prodejů, marží, konkurence a strategií</b>. Klíčový framework pro řízení produktového portfolia.
+        </Def>
+        <Tag color={VSE.fis}>5 fází životního cyklu — klasická S-křivka</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 620 340" style={{ width: "100%", maxWidth: 620, height: "auto" }}>
+            <defs>
+              <linearGradient id="plcCurve" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor={VSE.fph}/>
+                <stop offset="20%" stopColor={VSE.fmv}/>
+                <stop offset="50%" stopColor={VSE.success}/>
+                <stop offset="75%" stopColor={VSE.warning}/>
+                <stop offset="100%" stopColor={VSE.danger}/>
+              </linearGradient>
+            </defs>
+            {/* Osy */}
+            <line x1="50" y1="260" x2="585" y2="260" stroke="#888" strokeWidth="1.5"/>
+            <line x1="50" y1="260" x2="50" y2="30" stroke="#888" strokeWidth="1.5"/>
+            <polygon points="585,256 595,260 585,264" fill="#888"/>
+            <text x="20" y="150" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--text, #333)" fontFamily="Inter Tight" transform="rotate(-90, 20, 150)">Prodeje (ks/Kč)</text>
+            <text x="600" y="252" textAnchor="end" fontSize="12" fontWeight="600" fill="var(--text, #333)" fontFamily="Inter Tight">ČAS</text>
+            {/* S-křivka prodeje */}
+            <path d="M 50 250 Q 130 245 160 230 T 230 180 Q 290 90 350 70 Q 430 65 480 110 Q 530 200 570 245" stroke="url(#plcCurve)" strokeWidth="3.5" fill="none"/>
+            {/* Vertikální dělící čáry mezi fázemi */}
+            <line x1="160" y1="30" x2="160" y2="260" stroke="#bbb" strokeWidth="1" strokeDasharray="3,3"/>
+            <line x1="260" y1="30" x2="260" y2="260" stroke="#bbb" strokeWidth="1" strokeDasharray="3,3"/>
+            <line x1="380" y1="30" x2="380" y2="260" stroke="#bbb" strokeWidth="1" strokeDasharray="3,3"/>
+            <line x1="490" y1="30" x2="490" y2="260" stroke="#bbb" strokeWidth="1" strokeDasharray="3,3"/>
+            {/* Popisky fází nahoře */}
+            <text x="105" y="20" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.fph} fontFamily="Inter Tight">🧪 VÝVOJ</text>
+            <text x="210" y="20" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.fmv} fontFamily="Inter Tight">🚀 ZAVÁDĚNÍ</text>
+            <text x="320" y="20" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">📈 RŮST</text>
+            <text x="435" y="20" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.warning} fontFamily="Inter Tight">⛅ ZRALOST</text>
+            <text x="530" y="20" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.danger} fontFamily="Inter Tight">📉 ÚPADEK</text>
+            {/* Body na křivce — fáze characteristics */}
+            <circle cx="105" cy="252" r="5" fill={VSE.fph}/>
+            <circle cx="210" cy="200" r="5" fill={VSE.fmv}/>
+            <circle cx="320" cy="100" r="5" fill={VSE.success}/>
+            <circle cx="435" cy="80" r="5" fill={VSE.warning}/>
+            <circle cx="530" cy="220" r="5" fill={VSE.danger}/>
+            {/* Spodní popisky charakteristiky */}
+            <text x="105" y="280" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">žádné prodeje,</text>
+            <text x="105" y="293" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">vysoká investice</text>
+            <text x="210" y="280" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">nízké prodeje,</text>
+            <text x="210" y="293" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">vysoké N, ztráty</text>
+            <text x="320" y="280" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">rychlý růst,</text>
+            <text x="320" y="293" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">vstup konkurence</text>
+            <text x="435" y="280" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">max prodeje,</text>
+            <text x="435" y="293" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">max zisk, sycení</text>
+            <text x="530" y="280" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">prodeje klesají,</text>
+            <text x="530" y="293" textAnchor="middle" fontSize="10" fill="var(--text-muted, #666)" fontFamily="JetBrains Mono">substituce</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fph}>3 cíle PLC managementu</Tag>
+        <Bullet items={[
+          "<b>Dlouhodobý prodej</b> — prodloužení každé fáze, hlavně růstu a zralosti.",
+          "<b>Maximalizace zisku</b> — různé strategie ceny + nákladů v každé fázi.",
+          "<b>Plánování dalších produktů</b> — co po skončení tohoto cyklu? Nový product pipeline.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Heřman + Schovancová + Vávra 2026 (Výroba kol)"
+          what="Heřman explicitně chce <b>5 fází + strategie v každé fázi</b>. Bez konkrétních strategií pro každou fázi nedostaneš. Naučit zpaměti."
+        />
+      </div>) },
+
+    { id: "fazi_detail", title: "5 fází PLC — detail + strategie", subtitle: "Vývoj → Zavádění → Růst → Zralost → Úpadek", color: VSE.fis, emoji: "scroll",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Každá fáze má <b>jiné charakteristiky a vyžaduje jinou strategii</b>. Stříteský + Heřman to chytají často — naučit pro každou fázi: <b>prodej / zisk / konkurence / strategie / cena</b>.
+        </Def>
+        <Tag color={VSE.fph}>🧪 1. VÝVOJ (Development)</Tag>
+        <Bullet items={[
+          "<b>Charakteristika:</b> Žádné prodeje, jen výzkum a vývoj. Idea → koncept → prototyp → testování.",
+          "<b>Náklady:</b> Vysoké investice do R&D (Apple Vision Pro 5 mld. USD před launchem).",
+          "<b>Zisk:</b> Záporný (jen investice).",
+          "<b>Strategie:</b> Test trhu (MVP, focus groups), patentování (M5 VRIO), výběr cílového segmentu (M3).",
+          "<b>Klíčové rozhodnutí:</b> Pokračovat / zastavit (kill-or-fund gate).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.fmv}>🚀 2. ZAVÁDĚNÍ (Introduction)</Tag>
+        <Bullet items={[
+          "<b>Charakteristika:</b> Nízké prodeje, vysoké náklady na propagaci. Trh produkt nezná.",
+          "<b>Zisk:</b> Záporný nebo nízký (vysoké marketingové N).",
+          "<b>Konkurence:</b> Většinou žádná nebo malá.",
+          "<b>Strategie ceny:</b> 2 varianty:",
+          "&nbsp;&nbsp;<b>(a) Skimming (sbírání smetany):</b> Vysoká cena, premium segment. iPhone 1 v 2007, Tesla Roadster.",
+          "&nbsp;&nbsp;<b>(b) Penetration (penetrační):</b> Nízká cena, rychlé získání tržního podílu. Netflix 8 USD/měsíc, Uber dotace.",
+          "<b>Komunikace:</b> Awareness — informovat trh o existenci produktu. Heavy advertising.",
+          "<b>Distribuce:</b> Selektivní, postupné rozšíření.",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.success}>📈 3. RŮST (Growth)</Tag>
+        <Bullet items={[
+          "<b>Charakteristika:</b> Prodej rychle roste, produkt přijímán trhem.",
+          "<b>Zisk:</b> První profitabilní fáze — ekonomy of scale + nižší jednotkové N.",
+          "<b>Konkurence:</b> <b>Rychlá reakce konkurence</b> — vstupují me-too produkty.",
+          "<b>Strategie produktu:</b> Rozšíření o nové features, varianty, větší hloubku (M7).",
+          "<b>Strategie ceny:</b> Postupné snižování ceny (s nižšími N) — udržení premium positioningu × získání podílu.",
+          "<b>Komunikace:</b> Diferenciace — proč MY a ne konkurence. Heavy comparative advertising.",
+          "<b>Distribuce:</b> Rozšířená — intenzivní distribuce všude.",
+          "<b>Ansoff matrice (klíč pro růst):</b> Market penetration + Product development + Market development + Diversification.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>⛅ 4. ZRALOST (Maturity)</Tag>
+        <Bullet items={[
+          "<b>Charakteristika:</b> Maximální prodeje, ale tempo růstu zpomaluje až stagnuje. Trh nasycen.",
+          "<b>Zisk:</b> Maximální (cash cow z BCG matice).",
+          "<b>Konkurence:</b> Vrcholná. Cenové války, hluboká diferenciace.",
+          "<b>Strategie produktu — 3 cesty modifikace:</b>",
+          "&nbsp;&nbsp;<b>(a) Modifikace trhu</b> — nové segmenty, geografie, použití (M7 extenze nahoru/dolů).",
+          "&nbsp;&nbsp;<b>(b) Modifikace produktu</b> — kvalita, features, design (Apple yearly iPhone updates).",
+          "&nbsp;&nbsp;<b>(c) Modifikace mkt mixu</b> — promo, kanály, balení.",
+          "<b>Strategie ceny:</b> Konkurence cenová — sleva, akce, věrnostní programy.",
+          "<b>Komunikace:</b> Loyalty, reminder advertising (znáte mě? kupte znovu).",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.danger}>📉 5. ÚPADEK (Decline)</Tag>
+        <Bullet items={[
+          "<b>Charakteristika:</b> Prudký pokles prodejů, substituty převzaly trh.",
+          "<b>Zisk:</b> Klesá rychle, často ztráta.",
+          "<b>3 strategie pro úpadek:</b>",
+          "&nbsp;&nbsp;<b>(a) Maintain (udržet)</b> — bez investic, dojení do konce. Cigarety, sůl.",
+          "&nbsp;&nbsp;<b>(b) Harvest (sklízet)</b> — snížit N na minimum, max profit z existujícího cashflow.",
+          "&nbsp;&nbsp;<b>(c) Divest (ukončit)</b> — prodat divizi nebo zrušit. Apple iPod 2022.",
+          "<b>Reengineering / Sanace / Inovace</b> — pokus o revitalizaci (Coca-Cola Vanilla, Nintendo Switch po Wii U flopu).",
+        ]} color={VSE.danger} />
+        <ExamAlert
+          komise="Double Stříteský + Müllerová 2025 (Neziskovka)"
+          what="Stříteský chytá explicitně: <b>strategie v jednotlivých fázích cyklu</b>. Pro každou fázi musíš znát: prodej / zisk / konkurence / strategie / cena. Bez všech 5 dimenzí nedostaneš."
+        />
+      </div>) },
+
+    { id: "modifikace", title: "Modifikace cyklu — 3 modely + speciální cykly", subtitle: "Stříteský chytá modifikaci! Styl × Móda × Módní výstřelek", color: VSE.fis, emoji: "refresh",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Komise <b>Stříteský</b> se v 2026 hodně zaměřoval na <b>modifikaci výrobku</b>, klasický základ ho moc nezajímal. Pojďme pokrýt 3 hlavní modely + speciální cykly.
+        </Def>
+        <Tag color={VSE.fis}>3 hlavní modely PLC křivky</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 720 220" style={{ width: "100%", maxWidth: 720, height: "auto" }}>
+            {/* Model A — S-křivka s poklesem ve zralosti */}
+            <text x="120" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill={VSE.fmv} fontFamily="Inter Tight">a) S-křivka s poklesem</text>
+            <line x1="20" y1="180" x2="220" y2="180" stroke="#888"/>
+            <line x1="20" y1="180" x2="20" y2="40" stroke="#888"/>
+            <path d="M 20 175 Q 60 170 80 130 Q 100 70 130 60 Q 160 65 180 110 Q 200 165 220 170" stroke={VSE.fmv} strokeWidth="2.5" fill="none"/>
+            <text x="120" y="205" textAnchor="middle" fontSize="10" fill="var(--text-muted)" fontFamily="JetBrains Mono">→ klasický PLC</text>
+            
+            {/* Model B — Opakovaný cyklus */}
+            <text x="360" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill={VSE.warning} fontFamily="Inter Tight">b) Cyklus + opakovaný cyklus</text>
+            <line x1="260" y1="180" x2="460" y2="180" stroke="#888"/>
+            <line x1="260" y1="180" x2="260" y2="40" stroke="#888"/>
+            <path d="M 260 175 Q 290 170 310 130 Q 330 70 350 75 Q 370 110 380 150 Q 395 165 410 130 Q 425 80 440 90 Q 455 130 460 170" stroke={VSE.warning} strokeWidth="2.5" fill="none"/>
+            <text x="360" y="205" textAnchor="middle" fontSize="10" fill="var(--text-muted)" fontFamily="JetBrains Mono">→ relaunch, redesign</text>
+            
+            {/* Model C — Vlny */}
+            <text x="600" y="20" textAnchor="middle" fontSize="13" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">c) Model vln</text>
+            <line x1="500" y1="180" x2="700" y2="180" stroke="#888"/>
+            <line x1="500" y1="180" x2="500" y2="40" stroke="#888"/>
+            <path d="M 500 170 Q 520 130 540 145 Q 560 100 580 115 Q 600 70 620 80 Q 640 50 660 60 Q 680 40 700 55" stroke={VSE.success} strokeWidth="2.5" fill="none"/>
+            <text x="600" y="205" textAnchor="middle" fontSize="10" fill="var(--text-muted)" fontFamily="JetBrains Mono">→ nové trhy, segmenty</text>
+          </svg>
+        </div>
+        <Bullet items={[
+          "<b>a) S-křivka s poklesem (klasický PLC):</b> Vývoj → zavádění → růst → zralost → úpadek. Většina produktů.",
+          "<b>b) Cyklus a opakovaný cyklus:</b> Po úpadku přichází re-launch (redesign, nová generace). iPhone každé 2 roky velký redesign. Nintendo Switch po Wii U.",
+          "<b>c) Model vln:</b> Postupné vlny růstu díky vstupu do nových trhů, segmentů, použití. Coca-Cola napříč desítkami zemí + odvětvích.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Specifické cykly — Styl × Móda × Módní výstřelek</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🏛️ STYL", d: "Dlouhotrvající, opakovaně se vrací. Vlnové vzory. Bauhaus design, art deco, jeans Levi's 501. Cyklus desítky let." },
+            { c: VSE.warning, t: "👗 MÓDA", d: "Postupný růst, plateau, postupný pokles. Cyklus měsíce-roky. Fashion seasons, smartphone generations." },
+            { c: VSE.danger, t: "💥 MÓDNÍ VÝSTŘELEK (Fad)", d: "Extrémně rychlý vzestup a pád. Cyklus týdny-měsíce. Fidget spinners, Pokémon GO, TikTok dance trendy, Wordle 2022." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Speciální cykly (podle průběhu)</Tag>
+        <Bullet items={[
+          "<b>Dlouhotrvající (D-typ):</b> Po růstu dlouhá zralost. Klasické produkty (chleba, mléko).",
+          "<b>Neúplný:</b> Chybí některá fáze (sezónní produkty bez zralosti).",
+          "<b>Nepřerušený:</b> Coca-Cola — 130+ let bez výrazného úpadku. Dlouhodobé brandové investice.",
+          "<b>Zvláštní (sezónní):</b> Vánoční ozdoby, plavky, lyže. Cyklus se opakuje každý rok.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "adopcni", title: "Adopční proces — kdo, kdy, jak kupuje", subtitle: "5 typů adopcí + zvonová křivka Rogers", color: VSE.fis, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Adopční proces (Rogers 1962)</b> popisuje, <b>kdo a kdy přijímá nový produkt</b>. Klíčové pro launch strategy — pro každou skupinu jiná komunikace.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 620 280" style={{ width: "100%", maxWidth: 620, height: "auto" }}>
+            {/* Bell curve (Rogers) */}
+            <line x1="40" y1="220" x2="575" y2="220" stroke="#888" strokeWidth="1.5"/>
+            <line x1="40" y1="220" x2="40" y2="40" stroke="#888" strokeWidth="1.5"/>
+            <polygon points="575,216 585,220 575,224" fill="#888"/>
+            <text x="600" y="216" textAnchor="end" fontSize="12" fontWeight="600" fill="var(--text, #333)" fontFamily="Inter Tight">ČAS</text>
+            <text x="20" y="130" textAnchor="middle" fontSize="12" fontWeight="600" fill="var(--text, #333)" fontFamily="Inter Tight" transform="rotate(-90, 20, 130)">% trhu</text>
+            {/* Bell curve path */}
+            <path d="M 40 215 Q 90 210 110 200 Q 150 190 190 145 Q 240 80 300 60 Q 360 80 410 145 Q 450 190 490 200 Q 510 210 560 215" fill={VSE.fis} fillOpacity="0.15" stroke={VSE.fis} strokeWidth="2"/>
+            {/* Segments lines */}
+            <line x1="110" y1="220" x2="110" y2="200" stroke="#888" strokeWidth="1"/>
+            <line x1="190" y1="220" x2="190" y2="145" stroke="#888" strokeWidth="1"/>
+            <line x1="300" y1="220" x2="300" y2="60" stroke="#888" strokeWidth="1"/>
+            <line x1="410" y1="220" x2="410" y2="145" stroke="#888" strokeWidth="1"/>
+            <line x1="490" y1="220" x2="490" y2="200" stroke="#888" strokeWidth="1"/>
+            {/* Labels segments */}
+            <text x="75" y="240" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fmv} fontFamily="Inter Tight">🔬 Inovátoři</text>
+            <text x="75" y="252" textAnchor="middle" fontSize="9" fill="var(--text-muted)" fontFamily="JetBrains Mono">2,5 %</text>
+            <text x="150" y="240" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.warning} fontFamily="Inter Tight">⚡ Early Adopt</text>
+            <text x="150" y="252" textAnchor="middle" fontSize="9" fill="var(--text-muted)" fontFamily="JetBrains Mono">13,5 %</text>
+            <text x="245" y="240" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">👥 Early Maj.</text>
+            <text x="245" y="252" textAnchor="middle" fontSize="9" fill="var(--text-muted)" fontFamily="JetBrains Mono">34 %</text>
+            <text x="355" y="240" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fph} fontFamily="Inter Tight">👥 Late Maj.</text>
+            <text x="355" y="252" textAnchor="middle" fontSize="9" fill="var(--text-muted)" fontFamily="JetBrains Mono">34 %</text>
+            <text x="450" y="240" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.danger} fontFamily="Inter Tight">🐢 Laggards</text>
+            <text x="450" y="252" textAnchor="middle" fontSize="9" fill="var(--text-muted)" fontFamily="JetBrains Mono">16 %</text>
+            {/* Chasm marker */}
+            <line x1="190" y1="50" x2="190" y2="220" stroke={VSE.danger} strokeWidth="2" strokeDasharray="5,3"/>
+            <text x="190" y="40" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.danger} fontFamily="Inter Tight">⚠️ CHASM</text>
+            <text x="190" y="30" textAnchor="middle" fontSize="9" fill={VSE.danger} fontFamily="JetBrains Mono">propast</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fis}>5 typů adopcí (Rogers)</Tag>
+        <Bullet items={[
+          "<b>🔬 Inovátoři (2,5 %):</b> Tech entuziasti, riskují, ochotni platit premium za nový tech. Tesla Roadster 2008, Apple Vision Pro 2024.",
+          "<b>⚡ Early Adopters (13,5 %):</b> Názoroví lídři, ovlivňují ostatní. Trendsetters. Iniciální influenceři.",
+          "<b>👥 Early Majority (34 %):</b> Pragmatici. Čekají na ověření před adopcí. Klíčový segment pro mainstream.",
+          "<b>👥 Late Majority (34 %):</b> Skeptici. Adoptují až když je produkt dominantní. Cena rozhoduje.",
+          "<b>🐢 Laggards (16 %):</b> Tradicionalisté. Adoptují až když starý produkt zmizí. Vidí inovace jako risk.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.danger}>⚠️ Chasm — propast mezi Early Adopters a Early Majority (Geoffrey Moore)</Tag>
+        <Bullet items={[
+          "<b>Co to je:</b> Najtěžší přechod celého launchu. Early Adopters milují tech, ale mainstream čeká.",
+          "<b>Proč padají firmy:</b> Mají 100k early adopterů, ale neumějí oslovit 1M Early Majority. Jiný jazyk, jiné potřeby.",
+          "<b>Příklad fail:</b> Google Glass — early adopters milovali, ale mainstream nepřesvědčen.",
+          "<b>Příklad win:</b> Tesla Model 3 — překonal chasm díky cenové dostupnosti + Model S/X awareness.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "faktory", title: "Faktory ovlivňující průběh + strategie revitalizace", subtitle: "Co určuje rychlost cyklu + jak prodloužit zralost", color: VSE.fis, emoji: "lightbulb",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Délka a strmost fází závisí na <b>vnějších faktorech</b>. Klíč: <b>jak prodloužit zralost</b> nebo <b>resuscitovat úpadek</b>.
+        </Def>
+        <Tag color={VSE.fis}>3 hlavní faktory ovlivňující průběh PLC</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "👥 REAKCE SPOTŘEBITELŮ", d: "Jak rychle přijmou nový produkt. Kulturní faktory, age demografie, příjem, technologická gramotnost." },
+            { c: VSE.warning, t: "⚔️ KONKURENCE", d: "Jak rychle reagují me-too produkty. Vysoká konkurence = strmější cyklus. Patenty zpomalují (Apple, Pfizer)." },
+            { c: VSE.success, t: "📦 DRUH VÝROBKU", d: "Tech inovace = rychlý cyklus (smartphones). Komodity = dlouhý cyklus (cola, sůl). Móda = velmi krátký." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Strategie prodloužení cyklu — 4 cesty (klíč na zralost!)</Tag>
+        <Bullet items={[
+          "<b>1. Strategie prosperity</b> — využít maximální potenciál fáze zralosti (Coca-Cola, Toyota Corolla).",
+          "<b>2. Strategie revitalizace</b> — návrat do růstu přes inovaci, redesign (iPhone 4 → 5 designový skok).",
+          "<b>3. Strategie resuscitace</b> — záchrana z úpadku (Nintendo Switch, Coca-Cola Vanilla, Apple comeback po 1997).",
+          "<b>4. Delfíní skok (Dolphin Jump)</b> — radikální skok do nové fáze růstu přes disruption (Tesla, Netflix transformation, Spotify vs CDs).",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Aplikace na PS — checklist pro komisi</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj <b>aktuální fázi PLC</b> klíčových produktů firmy.",
+          "<b>2.</b> Vyhodnoť <b>charakteristiky fáze</b> — prodeje, zisk, konkurence.",
+          "<b>3.</b> Identifikuj <b>portfolio mix</b> — má firma produkty ve všech fázích (BCG matrix)?",
+          "<b>4.</b> Pro produkty v zralosti — která ze 3 modifikací? (trh / produkt / mkt mix).",
+          "<b>5.</b> Pro produkty v úpadku — Maintain / Harvest / Divest / nebo radikální resuscitace?",
+          "<b>6.</b> Plán nových produktů (R&D pipeline) — kdy nahradí stávající portfolio.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsMkt8 = [
+    { term: "Životní cyklus výrobku (PLC)", def: "Doba mezi uvedením výrobku na trh a jeho stažením. 5 fází: Vývoj → Zavádění → Růst → Zralost → Úpadek.", tag: "POJEM" },
+    { term: "3 cíle PLC managementu", def: "Dlouhodobý prodej (prodloužení fází) / Maximalizace zisku (různé strategie) / Plánování dalších produktů (pipeline).", tag: "POJEM" },
+    { term: "1. VÝVOJ fáze", def: "Žádné prodeje, jen R&D. Vysoké investice, záporný zisk. Test trhu (MVP), patentování, segmentace.", tag: "FÁZE" },
+    { term: "2. ZAVÁDĚNÍ fáze", def: "Nízké prodeje, vysoké N na propagaci, malá konkurence. Strategie: Skimming nebo Penetration. Awareness komunikace.", tag: "FÁZE" },
+    { term: "Skimming pricing", def: "Strategie zavádění — vysoká cena, premium segment. iPhone 1 v 2007, Tesla Roadster.", tag: "FÁZE" },
+    { term: "Penetration pricing", def: "Strategie zavádění — nízká cena, rychlý market share. Netflix 8 USD, Uber dotace.", tag: "FÁZE" },
+    { term: "3. RŮST fáze", def: "Rychlý růst prodejů, první zisk, vstup konkurence. Strategie: rozšíření features, diferenciace, snižování ceny, intensivní distribuce, Ansoff matice.", tag: "FÁZE" },
+    { term: "4. ZRALOST fáze", def: "Maximální prodeje (cash cow), trh nasycen, cenové války. 3 modifikace: trhu / produktu / mkt mixu. Loyalty komunikace.", tag: "FÁZE" },
+    { term: "3 modifikace ve zralosti", def: "Modifikace trhu (nové segmenty/geografie) / Modifikace produktu (Apple yearly updates) / Modifikace mkt mixu (promo, balení).", tag: "FÁZE" },
+    { term: "5. ÚPADEK fáze", def: "Prudký pokles prodejů, substituty. 3 strategie: Maintain (dojit) / Harvest (sklízet) / Divest (ukončit).", tag: "FÁZE" },
+    { term: "Maintain × Harvest × Divest", def: "Maintain = bez investic, dojení. Harvest = snížit N na minimum, max profit. Divest = prodat/zrušit (Apple iPod 2022).", tag: "FÁZE" },
+    { term: "3 modely PLC křivky", def: "a) S-křivka s poklesem (klasický PLC) / b) Cyklus + opakovaný cyklus (iPhone redesign) / c) Model vln (nové trhy, segmenty).", tag: "MODELY" },
+    { term: "Styl × Móda × Módní výstřelek", def: "Styl = dlouhotrvající, opakovaně se vrací (Bauhaus). Móda = měsíce-roky (fashion season). Módní výstřelek = týdny (fidget spinners).", tag: "MODELY" },
+    { term: "Specifické cykly", def: "Dlouhotrvající (D-typ — chleba), Neúplný (chybí fáze), Nepřerušený (Coca-Cola 130+ let), Sezónní (lyže, plavky).", tag: "MODELY" },
+    { term: "Adopční proces (Rogers)", def: "5 typů: Inovátoři (2,5 %) / Early Adopters (13,5 %) / Early Majority (34 %) / Late Majority (34 %) / Laggards (16 %).", tag: "ADOPCE" },
+    { term: "Inovátoři (2,5 %)", def: "Tech entuziasti, ochotni platit premium za nový tech. Tesla Roadster 2008, Apple Vision Pro 2024.", tag: "ADOPCE" },
+    { term: "Early Adopters (13,5 %)", def: "Názoroví lídři, ovlivňují ostatní. Trendsetters. Iniciální influenceři.", tag: "ADOPCE" },
+    { term: "Early Majority (34 %)", def: "Pragmatici. Čekají na ověření. Klíčový segment pro mainstream prosperitu.", tag: "ADOPCE" },
+    { term: "Late Majority (34 %)", def: "Skeptici. Adoptují až po dominanci produktu. Cena rozhoduje.", tag: "ADOPCE" },
+    { term: "Laggards (16 %)", def: "Tradicionalisté. Adoptují až když starý produkt zmizí. Inovace = risk.", tag: "ADOPCE" },
+    { term: "Chasm (Geoffrey Moore)", def: "Propast mezi Early Adopters a Early Majority. Najtěžší přechod launchu. Google Glass selhal, Tesla Model 3 překonal.", tag: "ADOPCE" },
+    { term: "3 faktory ovlivňující PLC", def: "Reakce spotřebitelů (kulturní, demo) / Konkurence (me-too speed) / Druh výrobku (tech = rychlý, komodita = pomalý).", tag: "FAKTORY" },
+    { term: "Strategie prosperity", def: "Využít maximální potenciál zralosti — Coca-Cola, Toyota Corolla. Loyalty + brand maintenance.", tag: "STRATEGIE" },
+    { term: "Strategie revitalizace", def: "Návrat do růstu přes inovaci, redesign. iPhone 4 → 5 designový skok.", tag: "STRATEGIE" },
+    { term: "Strategie resuscitace", def: "Záchrana z úpadku — Nintendo Switch po Wii U flopu, Apple comeback po 1997.", tag: "STRATEGIE" },
+    { term: "Delfíní skok (Dolphin Jump)", def: "Radikální skok do nové fáze přes disruption — Tesla, Netflix transformation, Spotify vs CDs.", tag: "STRATEGIE" },
+    { term: "Ansoff matice ve fázi RŮSTU", def: "Market penetration / Product development / Market development / Diversification (M6). Klíč pro růstovou strategii.", tag: "STRATEGIE" },
+  ];
+
+  const quizMkt8 = [
+    { q: "Co je životní cyklus výrobku?", opts: ["Doba výroby", "Doba mezi uvedením na trh a stažením z trhu", "Délka záruky", "Frekvence inovací"], correct: 1 },
+    { q: "Kolik fází má klasický PLC?", opts: ["3", "4", "5 (Vývoj / Zavádění / Růst / Zralost / Úpadek)", "6"], correct: 2 },
+    { q: "Ve které fázi je zisk nejvyšší?", opts: ["Zavádění", "Růst", "Zralost (cash cow)", "Úpadek"], correct: 2 },
+    { q: "Co je Skimming pricing?", opts: ["Velmi nízká cena", "Vysoká cena při zavádění, premium segment (iPhone 1, Tesla Roadster)", "Sleva pro studenty", "Bundle pricing"], correct: 1 },
+    { q: "Co je Penetration pricing?", opts: ["Vysoká cena", "Nízká cena při zavádění pro rychlý market share (Netflix, Uber dotace)", "Cenová válka", "Bundle"], correct: 1 },
+    { q: "Která fáze má rychlou reakci konkurence (me-too)?", opts: ["Vývoj", "Zavádění", "Růst — vstupují me-too produkty", "Zralost"], correct: 2 },
+    { q: "Kolik typů modifikace existuje ve fázi zralosti?", opts: ["2", "3 (modifikace trhu / produktu / mkt mixu)", "4", "5"], correct: 1 },
+    { q: "Která strategie úpadku znamená rychle ukončit produkt?", opts: ["Maintain", "Harvest", "Divest (prodat/zrušit — Apple iPod 2022)", "Růst"], correct: 2 },
+    { q: "Kolik typů adopcí definuje Rogers?", opts: ["3", "4", "5 (inovátoři / early adopters / early maj. / late maj. / laggards)", "7"], correct: 2 },
+    { q: "Kolik procent trhu tvoří Inovátoři?", opts: ["10 %", "5 %", "2,5 %", "15 %"], correct: 2 },
+    { q: "Co je Chasm v adopčním procesu?", opts: ["Africká poušť", "Propast mezi Early Adopters a Early Majority (Geoffrey Moore) — najtěžší přechod", "Cena", "Geografická bariéra"], correct: 1 },
+    { q: "Která NENÍ z modelů PLC křivky?", opts: ["S-křivka s poklesem", "Cyklus + opakovaný cyklus", "Model vln", "Lineární model"], correct: 3 },
+    { q: "Coca-Cola je příkladem:", opts: ["Klasického PLC", "Cyklu a opakovaného cyklu", "Nepřerušeného cyklu (130+ let bez úpadku)", "Sezónního cyklu"], correct: 2 },
+    { q: "Co je delfíní skok (Dolphin Jump)?", opts: ["Sportovní akce", "Radikální skok do nové fáze růstu přes disruption (Tesla, Netflix, Spotify)", "Sleva", "Reklamní kampaň"], correct: 1 },
+    { q: "Která Ansoffova strategie patří do fáze růstu?", opts: ["Žádná", "Market penetration + Product development + Market development + Diversification", "Pouze Cost Leadership", "Liquidation"], correct: 1 },
+  ];
+
+  const praxeMkt8 = {
+    caseStudy: {
+      company: "Apple iPhone — etalon řízení PLC 17 let",
+      subtitle: "Cyklus + opakovaný cyklus + adopční mistrovství",
+      content: (<>
+        <b>Apple iPhone</b> je <b>učebnicový příklad sofistikovaného PLC managementu</b>. 17 let na trhu, 200+ mld. USD obrat ročně, stále dominantní pozice.<br/><br/>
+        <b style={{ color: VSE.fph }}>🧪 VÝVOJ (2004-2007):</b><br/>
+        • Tajný projekt &quot;Purple&quot; v Apple<br/>
+        • Investice ~150 mil. USD do R&D<br/>
+        • Patenty na multi-touch, design, OS<br/>
+        • Steve Jobs odmítl několik prototypů<br/><br/>
+        <b style={{ color: VSE.fmv }}>🚀 ZAVÁDĚNÍ (2007-2008):</b><br/>
+        • <b>Skimming strategy</b> — 499/599 USD (premium, pouze AT&T exclusive)<br/>
+        • Cílovka: tech enthusiasts (Inovátoři + Early Adopters)<br/>
+        • Heavy PR — &quot;3 produkty v 1&quot; (iPod + phone + internet)<br/>
+        • Prodej 6 mil. ks v prvním roce<br/><br/>
+        <b style={{ color: VSE.success }}>📈 RŮST (2008-2015):</b><br/>
+        • <b>Cena snížena</b> — 199 USD s 2-year contract (penetration do mass market)<br/>
+        • App Store 2008 = ecosystem play<br/>
+        • iPhone 3G, 4, 5 — features extension<br/>
+        • <b>Překonali Chasm</b> 2010-2012 přes app ecosystem + carrier subsidies<br/>
+        • Prodej vyrostl na 200+ mil. ks/rok<br/><br/>
+        <b style={{ color: VSE.warning }}>⛅ ZRALOST (2015-dnes):</b><br/>
+        • <b>3 modifikace simultánně:</b><br/>
+        • <i>Modifikace produktu:</i> Yearly updates (iPhone 6 → 15 = 9 generací)<br/>
+        • <i>Modifikace trhu:</i> Expanze do Číny, Indie, Brazílie<br/>
+        • <i>Modifikace mkt mixu:</i> Apple Stores, financing (Apple Card)<br/>
+        • <b>Cyklus + opakovaný cyklus</b> — každé 2-3 roky velký design refresh (X, 14, 15)<br/>
+        • Services revenue 85 mld. USD = kompenzuje stagnaci HW prodejů<br/><br/>
+        <b style={{ color: VSE.danger }}>📉 ÚPADEK (budoucnost):</b><br/>
+        • Apple aktivně připravuje nástupce — <b>Vision Pro</b> (2024 launch = nový vývojový cyklus)<br/>
+        • Foldable iPhone v roadmapě (2026-2027 = revitalizace)<br/>
+        • <b>Delfíní skok</b> připraven přes XR/AR<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Apple drží <b>premium PLC management masterclass</b>. iPhone je v zralosti 10+ let, ale díky modifikacím + ecosystem stále roste.
+      </>),
+      lessons: "Apple je <b>etalon dlouhodobého PLC managementu</b>. Pro PS doporuč: <b>identifikovat aktuální fázi + 3 modifikace ve zralosti + plánovat nástupce 5-10 let dopředu</b>. Alternativy: <b>Coca-Cola (nepřerušený cyklus 130+ let), Nintendo (Switch comeback po Wii U), Microsoft Office (subscription pivot), Spotify (delfíní skok vs CDs)</b>."
+    },
+    miniExamples: [
+      { tag: "SKIMMING", color: VSE.fmv, company: "Tesla Roadster 2008 — premium skimming", content: "Tesla launchla Roadster za <b>110k USD</b> (skimming) — cílovka inovátoři + early adopters s velkým rozpočtem. Po stabilizaci ekonomy of scale přešla na Model S (premium, 75-130k), pak Model 3 (mainstream, 35-55k). Klasický skimming → penetration přechod." },
+      { tag: "RESUSCITACE", color: VSE.warning, company: "Nintendo Switch — comeback po Wii U flopu", content: "Wii U (2012) flop — prodáno jen 13 mil. ks. Nintendo na pokraji úpadku. <b>Switch (2017)</b> = strategie resuscitace přes hybrid console + portable + dock concept. Prodej 140+ mil. ks (vede gen 9). Klasický příklad reengineering + nový PLC start." },
+      { tag: "MÓDA × FAD", color: VSE.danger, company: "Fidget Spinners 2017 — módní výstřelek", content: "Fidget spinners 2017 = ukázkový <b>módní výstřelek</b>. Z 0 na 100 mil. USD obrat za 3 měsíce. Po 6 měsících totální pád, dnes prakticky neexistuje. Stejně dnes Wordle (2022 — z 0 na 3 mil. uživatelů za týden, NYT koupil za 1 mil. USD)." },
+      { tag: "NEPŘERUŠENÝ", color: VSE.success, company: "Coca-Cola — 130+ let bez úpadku", content: "Coca-Cola na trhu od 1886. <b>Nikdy nezažila skutečný úpadek</b> díky kontinuální revitalizaci (různé příchutě, balení, kampaně), expanze do nových zemí (model vln), brandové investice 4 mld. USD/rok. Učebnicový nepřerušený cyklus." },
+      { tag: "CHASM FAIL", color: VSE.fph, company: "Google Glass 2013 — selhání přechodu", content: "Google Glass 2013 = <b>selhání přechodu Chasm</b>. Early adopters (tech enthusiasts) milovali, ale Early Majority nepřesvědčen — appearance, privacy concerns, omezené use cases. 2015 stop. Lekce: nestačí jen wow produkt, mainstream chce praktickou hodnotu." },
+    ]
+  };
+
+  const examQuestionsMkt8 = [
+    { komise: "2026-02-06 — Heřman + Schovancová + Vávra (Výroba kol)", otazka: "Výrobní cyklus výrobku, strategie v jednotlivých fázích.", pozn: "Heřman chce <b>5 fází + strategie v každé</b>. Pro kola: u nové generace e-bike = zavádění (skimming 65k → mass 25k = penetration), zralost klasických kol = modifikace produktu (designové refresh)." },
+    { komise: "2026-01-28 — Stříteský + Sieber + Vítečková (Káva)", otazka: "Životní cyklus výrobku, hodně se zaměřoval na modifikaci výrobku", pozn: "<b>Stříteský chytá modifikaci!</b> Naučit explicitně 3 modifikace zralosti (trh / produkt / mkt mix) + 3 modely cyklu (S-křivka / opakovaný / vln) + specifické cykly (styl, móda, fad)." },
+    { komise: "2025-06-10 — Double Stříteský + Müllerová (Neziskovka)", otazka: "Životní cyklus výrobku, jeho modifikace a využití strategií v jednotlivých fází cyklu", pozn: "Stříteský chce kompletní balík. Klíč: <b>modifikace</b> jako klíčové slovo. Pro neziskovku: služby (např. fundraising kampaně) mají taky PLC — zavádění/růst/zralost." },
+    { komise: "2025-06-12 — Machek + Kolouchová + Legnerová (Kuchyňské nádobí)", otazka: "Životní cyklus výrobku", pozn: "Machek chce klasický balík. 5 fází + 3 cíle PLC + adopční proces (Rogers). Pro nádobí: většina produktů ve zralosti, klíč = modifikace produktu (designové refresh řad)." },
+    { komise: "2025-01-28 — Smrčka + Kolouchová + Říhová", otazka: "Segmentace, typy, fáze", pozn: "Smrčka chce <b>fáze</b> v širším pojetí — viz M3 segmentace fáze (postup) + případně i PLC fáze. Vysvětlit obojí." },
+  ];
+
+  const podcastMkt8 = { title: "Marketing 8 — Životní cyklus výrobku (PLC)", description: "Definice PLC + 3 cíle managementu. 5 fází detail (Vývoj/Zavádění/Růst/Zralost/Úpadek) + strategie v každé. Skimming × Penetration ve zavádění. 3 modifikace ve zralosti (trhu/produktu/mkt mixu). 3 strategie v úpadku (Maintain/Harvest/Divest). 3 modely PLC křivky (S-křivka/opakovaný/vln). Specifické cykly (styl/móda/módní výstřelek + dlouhotrvající/neúplný/nepřerušený/sezónní). Adopční proces Rogers (5 typů + Chasm Geoffrey Moore). 3 faktory ovlivňující průběh + 4 strategie revitalizace (prosperity/revitalizace/resuscitace/delfíní skok). Apple iPhone, Tesla, Nintendo Switch, Coca-Cola, Fidget Spinners, Google Glass.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt8 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>PLC = doba mezi uvedením a stažením</b>.<br/>
+    <b style="color:#A82A5F">2.</b> 3 cíle PLC managementu — prodej / zisk / pipeline nových produktů.<br/>
+    <b style="color:#A82A5F">3.</b> ⚠️ <b>5 fází PLC</b> — Vývoj / Zavádění / Růst / Zralost / Úpadek (Heřman, Stříteský chytají!).<br/>
+    <b style="color:#A82A5F">4.</b> Pro každou fázi: <b>prodej / zisk / konkurence / strategie / cena</b>.<br/>
+    <b style="color:#A82A5F">5.</b> Zavádění — Skimming (Tesla, iPhone) × Penetration (Netflix, Uber).<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>3 modifikace ve zralosti</b> (Stříteský chytá!) — trhu / produktu / mkt mixu.<br/>
+    <b style="color:#A82A5F">7.</b> 3 strategie úpadku — Maintain / Harvest / Divest.<br/>
+    <b style="color:#A82A5F">8.</b> ⚠️ <b>3 modely PLC křivky</b> — S-křivka / opakovaný / vln.<br/>
+    <b style="color:#A82A5F">9.</b> Specifické cykly — styl / móda / módní výstřelek + nepřerušený (Coca-Cola).<br/>
+    <b style="color:#A82A5F">10.</b> ⚠️ <b>Adopční proces Rogers</b> — 5 typů + Chasm.<br/>
+    <b style="color:#A82A5F">11.</b> 3 faktory ovlivňující PLC — spotřebitelé / konkurence / druh výrobku.<br/>
+    <b style="color:#A82A5F">12.</b> 4 strategie prodloužení — prosperity / revitalizace / resuscitace / delfíní skok.<br/>
+    <b style="color:#A82A5F">13.</b> Aplikace na PS — identifikuj fázi, vyhodnoť portfolio, doporuč strategie.
+  `;
+
+  const caseStudyMkt8 = {
+    title: "Patrik — CEO BeerCraft, českého pivovaru (45 mil. Kč, 35 zaměstnanců)",
+    subtitle: "Identifikuj fáze portfolia + navrhni strategie podle PLC",
+    scenario: "Patrik (38 let) vede BeerCraft 8 let. Český pivovar v Praze, 35 zaměstnanců, tržby 45 mil. Kč.\n\nPortfolio (3 produkty v různých fázích PLC):\n\n• Klasické světlé pivo &quot;Praga 11°&quot; — 20 let na trhu. Tržby stagnují 5 let na 18 mil. Kč/rok. Prodává se hlavně v hospodách (B2B, 80 %). Generuje 60 % obratu.\n\n• Craft IPA &quot;Hopstorm&quot; — 3 roky na trhu. Tržby vyrostly z 2 na 12 mil. Kč. Hipster cílovka 25-40 let. Prodává se v specializovaných barech + e-commerce. Konkurence rychle reaguje (5 nových IPA brewers v ČR za 2 roky).\n\n• Nealkoholický funkční nápoj &quot;HopBoost&quot; — 6 měsíců na trhu. Tržby 2 mil. Kč. Cílovka: fitness 25-35, premium price. Vysoké marketingové N (40 % obratu na propagaci). Inovátorská cílovka.\n\nProblémy:\n\n• Patrik neumí říct, ve které fázi PLC je každý produkt — řídí to intuitivně.\n\n• Praga 11° = většina obratu, ale roste pomalu nebo klesá. Patrik váhá investovat do redesignu.\n\n• Hopstorm má největší potenciál, ale konkurence rychle roste. Otázka: jak chránit pozici?\n\n• HopBoost = ztrátový (vysoké marketingové N, malé prodeje). CFO tlačí ho zrušit. Patrik váhá.\n\n• Žádný produktový roadmap — co po Hopstorm? Co po Praga?\n\nKonkurence:\n\n• Velké pivovary (Plzeňský Prazdroj, Budvar) — masový segment, scale, brand.\n\n• Mikropivovary craft (Matuška, Sibeeria) — niche, premium, loyalita.\n\n• Funkční nápoje (Hardwell, Mast Brewing) — nový segment, rychle roste.\n\nKlíčové vstupy:\n\n• Vlastní stáčírna v Praze, 8 sládků, 15+ let praxe.\n\n• 200 hospod jako dlouhodobí B2B klienti (loyalty 10+ let).\n\n• Vlastní e-shop pro craft + funkční (růst 30 % ročně).\n\n• Patrik má 12 měsíců + rozpočet 1,5 mil. Kč na portfolio strategy.",
+    signals: [
+      { text: "Patrik neumí říct, ve které fázi PLC je každý produkt — řídí to intuitivně", color: VSE.danger, reason: "Chybí <b>strategický framework</b>. Bez identifikace fáze nelze správně rozhodovat o investicích, cenách, marketingu." },
+      { text: "Praga 11° — 20 let na trhu, tržby stagnují 5 let", color: VSE.warning, reason: "Klasická <b>fáze zralosti</b>. Cash cow (60 % obratu), ale bez modifikace přejde do úpadku. Klíčové: 3 modifikace (trhu/produktu/mkt mixu)." },
+      { text: "Hopstorm — 3 roky, vyrostl z 2 na 12 mil. Kč, rychlá reakce konkurence", color: VSE.fmv, reason: "Typická <b>fáze růstu</b>. Profit roste, ale konkurence (5 nových IPA brewers) ohrožuje. Klíčové: diferenciace + intenzivní distribuce + Ansoff matice." },
+      { text: "HopBoost — 6 měsíců, 2 mil. Kč, vysoké N na propagaci, inovátoři", color: VSE.fph, reason: "Klasická <b>fáze zavádění</b>. Záporný profit normální. Klíčové: zda Skimming (premium fitness) nebo Penetration (mass health)." },
+      { text: "CFO tlačí HopBoost zrušit", color: VSE.danger, reason: "Klasická chyba — ukončit produkt v zavádění je předčasné. Bez 18-24 měsíců nelze posoudit potenciál. Geoffrey Moore Chasm hrozí, ale není fail." },
+      { text: "Konkurence Hopstorm — 5 nových IPA brewers v ČR za 2 roky", color: VSE.warning, reason: "Typická <b>charakteristika fáze růstu</b> — vstup me-too. Patrik musí budovat moat (značku, distribuci, loyalty) RYCHLE." },
+      { text: "Žádný produktový roadmap", color: VSE.danger, reason: "Chybí <b>plán nových produktů</b> (cíl PLC #3). Když Praga klesne, co ji nahradí? Pipeline R&D je klíčový." },
+      { text: "200 hospod jako loyal B2B klienti 10+ let", color: VSE.fph, reason: "Silné aktivum pro <b>modifikaci trhu</b> u Pragy (nové geografie, nové segmenty hospod) + cross-sell Hopstorm." },
+    ],
+    quiz1: {
+      question: "Ve které fázi PLC je &quot;Praga 11°&quot; (20 let, stagnující tržby 18 mil. Kč)?",
+      options: [
+        "Vývoj — nový produkt",
+        "Zavádění — nízké prodeje",
+        "Zralost — maximální prodeje, stagnace, nasycený trh",
+        "Úpadek — prudký pokles",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Patrik měl udělat pro řízení 3 produktů podle PLC?",
+      options: [
+        { text: "Praga 11° (zralost): Modifikace produktu — nový design lahve + speciální edice (vánoční Praga, letní Praga) + zachovat 60 % obratu", correct: true, reason: "✓ Klasická modifikace produktu ve zralosti. Apple yearly updates model." },
+        { text: "Praga 11° (zralost): Modifikace trhu — expanze do Polska/Slovenska + nové segmenty (mikropivovary v menších městech)", correct: true, reason: "✓ Modifikace trhu = klíč k prodloužení zralosti. 200 hospod loyalty základ pro replication v okolních zemích." },
+        { text: "Hopstorm (růst): Intenzivní distribuce (z 50 na 200 barů) + rozšíření o varianty (Hopstorm Double, Hopstorm Session) + loyalty program pro craft entuziasty", correct: true, reason: "✓ Klasická strategie růstu — features extension + rozšířená distribuce. Ansoff Product Development." },
+        { text: "Hopstorm (růst): Diferenciace přes story (sládci, regionální chmel) + cena postupně směrem k mainstreamu (z 60 → 45 Kč/0,5 l)", correct: true, reason: "✓ Diferenciace + postupné snižování ceny = klasika fáze růstu. Konkurence ohrožuje, musíme budovat moat." },
+        { text: "HopBoost (zavádění): Vyhodnotit za 12-18 měsíců, ne 6. Skimming pricing (premium fitness segment) + heavy awareness komunikace + monitoring přechodu Chasm", correct: true, reason: "✓ Předčasné ukončení v zavádění = chyba. Apple Vision Pro je v zavádění 1+ rok. Vyhodnotit po 18 měsících." },
+        { text: "Pipeline nových produktů — začít R&D Praga Premium (craft variant Pragy) + alkohol-free pivo (zachycení trendu) pro nahrazení Pragy za 5-7 let", correct: true, reason: "✓ Cíl PLC #3 — plánování nových produktů. Začít teď, ne až Praga padne." },
+        { text: "Investovat do segmentace + brandové komunikace Hopstorm aby překonal Chasm (Geoffrey Moore) — z early adopters do early majority", correct: true, reason: "✓ Chasm je real risk u craft IPA. Mainstream piivaři jsou pragmatici, čekají na sociální proof." },
+        { text: "Zrušit HopBoost okamžitě podle CFO", correct: false, reason: "✗ Předčasné rozhodnutí. Inovátoři + early adopters jsou normální start. Trh funkčních nápojů roste 25 % ročně." },
+        { text: "Investovat všechno do Hopstorm, ignorovat Pragu", correct: false, reason: "✗ Praga = 60 % obratu = cash cow. Bez ní BeerCraft nepřežije. Potřeba balancovaný portfolio mix." },
+      ],
+    },
+    summary: "<b>BeerCraft má klasický 3-stage portfolio bez PLC strategie.</b> Klíč: <b>identifikovat fázi každého produktu + správnou strategii pro každou fázi + pipeline nových produktů</b>.<br/><br/><b>Plán 12 měsíců:</b><br/><br/>• <b>Praga 11° (Zralost):</b> Modifikace produktu (design refresh + speciální edice) + modifikace trhu (export do PL/SK) + loyalty pro hospody. Cíl: udržet 60 % obratu dalších 5 let.<br/><br/>• <b>Hopstorm (Růst):</b> Intenzivní distribuce + rozšíření variant + diferenciace přes story sládků + příprava na Chasm crossing. Cíl: z 12 mil. Kč na 25 mil. Kč.<br/><br/>• <b>HopBoost (Zavádění):</b> Vyhodnotit za 18 měsíců, Skimming + heavy awareness. Cíl: 5 mil. Kč obrat + ne-ztrátový do konce roku 2.<br/><br/>• <b>Pipeline:</b> R&D nové produkty — Praga Premium (craft variant) + alkohol-free pivo (trend) — launch 2026-2027.<br/><br/><b>Pro komisi:</b> Klasický český B2B/B2C pivovar bez PLC frameworku. <b>Apple iPhone</b> (17 let PLC management), <b>Coca-Cola</b> (nepřerušený cyklus), <b>Nintendo Switch</b> (resuscitace), <b>Tesla</b> (Skimming → Penetration) jako benchmark. <b>Stříteský 3 modifikace zralosti</b> + <b>Rogers adopční proces</b> + <b>Geoffrey Moore Chasm</b> jako klíčové frameworky.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={8} title="Životní cyklus výrobku (PLC)"
+      subtitle="5 fází + strategie v každé + 3 modifikace ve zralosti + Rogers adopční proces + Chasm"
+      color={VSE.fis}
+      questionText="Životní cyklus výrobku, strategie v jednotlivých fázích."
+      questionDesc="Definice PLC + 3 cíle managementu. 5 fází (Vývoj/Zavádění/Růst/Zralost/Úpadek) s detailem pro každou fázi (prodej/zisk/konkurence/strategie/cena). Skimming × Penetration ve zavádění. 3 modifikace ve zralosti (trhu/produktu/mkt mixu). 3 strategie v úpadku (Maintain/Harvest/Divest). 3 modely PLC křivky (S-křivka/opakovaný/vln). Specifické cykly (styl/móda/módní výstřelek + dlouhotrvající/neúplný/nepřerušený/sezónní). Adopční proces Rogers (5 typů + Chasm Geoffrey Moore). 3 faktory ovlivňující průběh + 4 strategie revitalizace. Apple iPhone, Tesla, Nintendo, Coca-Cola, Fidget Spinners, Google Glass."
+      sloz={2} roz={3} freq={4}
+      examStrategy={examStrategyMkt8}
+      studySections={studySectionsMkt8}
+      flashcards={flashcardsMkt8}
+      quiz={quizMkt8}
+      praxe={praxeMkt8}
+      examQuestions={examQuestionsMkt8}
+      podcast={podcastMkt8}
+      caseStudy={caseStudyMkt8}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 9 — Výrobkový výzkum, metody a techniky, uvedení nového výrobku na trh
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt9Panel() {
+  const studySectionsMkt9 = [
+    { id: "intro", title: "Výrobkový výzkum — definice + 4 typy inovací", subtitle: "Co testujeme + 4 typy nových výrobků", color: VSE.fis, emoji: "microscope",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Výrobkový výzkum (Product Research)</b> = systematický sběr a analýza dat <b>pro vývoj nového produktu nebo modifikaci existujícího</b>. Specifická aplikace marketingového výzkumu (M1) na produktovou inovaci. Komise <b>Stříteský, Machek, Mládková</b> chtějí explicitně <b>metody A techniky + uvedení na trh</b>.
+        </Def>
+        <Tag color={VSE.fis}>Návaznost na předchozí okruhy</Tag>
+        <Bullet items={[
+          "<b>M1</b> dal obecné metody MV (kvant × kval). <b>M9</b> je aplikuje <b>specificky na produkt</b>.",
+          "<b>M2</b> dal analytické metody. <b>M9</b> používá conjoint, faktorovou a další pro testování produktu.",
+          "<b>M6</b> definoval co produkt JE (vrstvy, charakteristiky). <b>M9</b> testuje, jak produkt CHCEME mít.",
+          "<b>M8</b> popsal fáze PLC. <b>M9</b> řeší <b>vývojovou + zaváděcí fázi</b> detailně.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>4 typy nových výrobků (podle míry novosti)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🌟 ZCELA NOVÉ (Disruptive)", d: "Vytváří nové trhy. Žádná existující kategorie. iPhone 2007, Tesla 2008, ChatGPT 2022. Vysoký risk, vysoký reward." },
+            { c: VSE.warning, t: "🔄 NOVÉ PRO FIRMU", d: "Trh existuje, ale firma vstupuje poprvé. Apple Vision Pro (XR), Tesla Cybertruck (pickup). Středně risk." },
+            { c: VSE.fph, t: "📈 ROZŠÍŘENÍ ŘADY", d: "Modifikace existujícího produktu. iPhone 15 Pro Max (z 15 Pro), Coca-Cola Cherry. Nízký risk." },
+            { c: VSE.success, t: "⬆️ ZLEPŠENÍ (Incremental)", d: "Drobné vylepšení. iPhone 15 → iPhone 16, lepší baterie, čip. Velmi nízký risk." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Cíle výrobkového výzkumu</Tag>
+        <Bullet items={[
+          "<b>Identifikovat potřeby trhu</b> — co zákazník chce a nemá.",
+          "<b>Snížit risk launche</b> — 70-80 % nových produktů selže bez výzkumu.",
+          "<b>Optimalizovat features</b> — co je must-have, nice-to-have, zbytečné.",
+          "<b>Stanovit cenu</b> — co je zákazník ochoten zaplatit (Van Westendorp, BPTO — M12).",
+          "<b>Předvídat tržní podíl</b> — odhad sales po launchi.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Mládková + Vávra + Hönig 2025 (Prádlo)"
+          what="Mládková chce <b>metody A nástroje výzkumu + způsob uvedení na trh</b>. Bez obojího nedostaneš. Spojit teorii + praktický launch (Stage-Gate)."
+        />
+      </div>) },
+
+    { id: "metody_vyzkumu", title: "Metody a techniky výrobkového výzkumu", subtitle: "Concept testing, IHUT, sensory, focus groups, Kano model", color: VSE.fis, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Komise <b>Stříteský</b> chce explicitně <b>METODY A TECHNIKY</b>. Naučit zpaměti 6-8 hlavních + příklady, kdy která.
+        </Def>
+        <Tag color={VSE.fis}>6 hlavních metod produktového výzkumu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "💡 CONCEPT TESTING", d: "Test ideje PŘED vývojem prototypu. Popis + obrázek + cena → respondent hodnotí zájem, intention to buy. CAWI 300-500 respondentů." },
+            { c: VSE.warning, t: "🏠 IHUT (In-Home Use Test)", d: "Respondent testuje produkt DOMA 2-4 týdny. Reálné použití > deklarace. Standard u P&G, Unilever. 50-200 účastníků." },
+            { c: VSE.fph, t: "👃 SENSORY TESTING", d: "Slepé testování chuti, vůně, dotyku, vzhledu. Pepsi Challenge klasika. 100-300 respondentů v lab nebo CLT." },
+            { c: VSE.success, t: "👥 FOCUS GROUPS", d: "6-10 lidí + moderátor, 1,5-3 h. Hloubková kvalitativní data, exploring potřeb a reakcí. 3-6 sessions standardně." },
+            { c: VSE.danger, t: "🔢 CONJOINT ANALYSIS", d: "Respondent srovnává kombinace atributů (cena × baterie × velikost). Výstup: důležitost každého atributu. M2 detail. 200-500 respondentů." },
+            { c: VSE.fis, t: "📊 KANO MODEL", d: "Klasifikuje features na 5 kategorií: must-have, performance, delighter, indifferent, reverse. Identifikuje co stojí investice." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Kano model — vizualizace 5 kategorií features</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 700 480" style={{ width: "100%", maxWidth: 700, height: "auto" }}>
+            {/* Osy — střed v (350, 240), graf zóna 50-650 × 60-420 */}
+            <line x1="50" y1="240" x2="660" y2="240" stroke="#888" strokeWidth="1.5"/>
+            <line x1="350" y1="60" x2="350" y2="430" stroke="#888" strokeWidth="1.5"/>
+            <polygon points="660,236 670,240 660,244" fill="#888"/>
+            <polygon points="346,60 350,50 354,60" fill="#888"/>
+            
+            {/* Labely os */}
+            <text x="668" y="258" textAnchor="end" fontSize="12" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight">Funkčnost →</text>
+            <text x="358" y="62" textAnchor="start" fontSize="12" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight">↑ Spokojenost</text>
+            <text x="358" y="428" textAnchor="start" fontSize="12" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight">↓ Nespokojenost</text>
+            
+            {/* Sub-labely os */}
+            <text x="60" y="258" textAnchor="start" fontSize="10" fill="var(--text-muted)" fontFamily="JetBrains Mono">nízká</text>
+            <text x="640" y="230" textAnchor="end" fontSize="10" fill="var(--text-muted)" fontFamily="JetBrains Mono">vysoká</text>
+
+            {/* MUST-HAVE (červená) — start vlevo dole (low funkce = nespokojenost), 
+                plateau na ose vpravo (high funkce = neutrální, ne spokojenost!) */}
+            <path d="M 60 410 Q 180 400 250 340 Q 300 280 340 250 Q 360 244 660 240" 
+                  stroke={VSE.danger} strokeWidth="3.5" fill="none"/>
+            
+            {/* PERFORMANCE (oranžová) — lineární diagonála od levého dolního do pravého horního přes střed */}
+            <line x1="60" y1="400" x2="660" y2="80" stroke={VSE.warning} strokeWidth="3.5"/>
+            
+            {/* DELIGHTER (zelená) — plateau na ose vlevo (low funkce = neutrální), 
+                exponenciální růst nahoru vpravo (high funkce = velká spokojenost) */}
+            <path d="M 60 242 Q 200 240 320 235 Q 400 225 480 180 Q 570 110 660 70" 
+                  stroke={VSE.success} strokeWidth="3.5" fill="none"/>
+            
+            {/* INDIFFERENT (šedá tečkovaná) — plochá čára na ose, mírně níž aby nebyla na ose */}
+            <line x1="60" y1="240" x2="660" y2="240" stroke={VSE.fph} strokeWidth="2.5" strokeDasharray="8,4" opacity="0.6"/>
+
+            {/* ════════════════ LABELY KŘIVEK ════════════════ */}
+            
+            {/* MUST-HAVE — label vlevo dole, vedle počátku křivky */}
+            <line x1="80" y1="395" x2="120" y2="370" stroke={VSE.danger} strokeWidth="1.5" strokeDasharray="2,2"/>
+            <rect x="50" y="370" width="170" height="42" rx="8" fill="#fff" stroke={VSE.danger} strokeWidth="1.5"/>
+            <text x="60" y="389" fontSize="13" fontWeight="700" fill={VSE.danger} fontFamily="Inter Tight">🛡️ Must-have</text>
+            <text x="60" y="404" fontSize="10" fill="#666" fontFamily="JetBrains Mono">(záruka, bezpečnost)</text>
+            
+            {/* PERFORMANCE — label vpravo nad křivkou v pravém středu */}
+            <line x1="540" y1="170" x2="520" y2="195" stroke={VSE.warning} strokeWidth="1.5" strokeDasharray="2,2"/>
+            <rect x="450" y="130" width="200" height="42" rx="8" fill="#fff" stroke={VSE.warning} strokeWidth="1.5"/>
+            <text x="460" y="149" fontSize="13" fontWeight="700" fill={VSE.warning} fontFamily="Inter Tight">📈 Performance</text>
+            <text x="460" y="164" fontSize="10" fill="#666" fontFamily="JetBrains Mono">(rychlost, kapacita)</text>
+            
+            {/* DELIGHTER — label vpravo úplně nahoře vedle vrcholu křivky */}
+            <line x1="580" y1="92" x2="600" y2="80" stroke={VSE.success} strokeWidth="1.5" strokeDasharray="2,2"/>
+            <rect x="410" y="70" width="170" height="42" rx="8" fill="#fff" stroke={VSE.success} strokeWidth="1.5"/>
+            <text x="420" y="89" fontSize="13" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">✨ Delighter</text>
+            <text x="420" y="104" fontSize="10" fill="#666" fontFamily="JetBrains Mono">(unboxing, AI wow)</text>
+            
+            {/* INDIFFERENT — label úplně dole pod osou v levé části (pod Performance) */}
+            <line x1="150" y1="260" x2="155" y2="245" stroke={VSE.fph} strokeWidth="1.5" strokeDasharray="2,2"/>
+            <rect x="60" y="260" width="150" height="22" rx="6" fill="#fff" stroke={VSE.fph} strokeWidth="1.5" strokeDasharray="3,2"/>
+            <text x="70" y="276" fontSize="11" fontWeight="700" fill={VSE.fph} fontFamily="Inter Tight">😐 Indifferent</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fph}>5 Kano kategorií — vysvětlení</Tag>
+        <Bullet items={[
+          "<b>🛡️ Must-have (Basic):</b> Zákazník to očekává automaticky. Bez nich nespokojenost, s nimi neutrální. Záruka, bezpečnost, klimatizace v autě.",
+          "<b>📈 Performance (One-dimensional):</b> Čím víc, tím lépe. Rychlost, kapacita, baterka. Lineární vztah funkčnost ↔ spokojenost.",
+          "<b>✨ Delighter (Attractive):</b> Nečekané vylepšení = wow efekt. Apple unboxing, Tesla autopilot v 2014. Časem se stávají must-have.",
+          "<b>😐 Indifferent:</b> Zákazníkovi je to jedno. Zbytečná investice. Color of internals, premium packaging pro B2B suroviny.",
+          "<b>🔄 Reverse:</b> Vlastnost, co zákazník NECHCE. Příliš mnoho funkcí, complicated UI, animace, které zdržují.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Doplňkové techniky (méně známé, ale komise oceňují)</Tag>
+        <Bullet items={[
+          "<b>MaxDiff (Maximum Difference Scaling):</b> Respondent vybírá MOST × LEAST important z 4-5 features. Lepší než ranking.",
+          "<b>Eye-tracking + facial coding:</b> Pasivní měření emocí při testování produktu nebo balení.",
+          "<b>A/B testing:</b> Klasika pro digital produkty (Netflix thumbnails, Amazon UX).",
+          "<b>Beta testing:</b> Předvydání produktu vybrané skupině uživatelů (software, hry).",
+          "<b>Co-creation workshops:</b> Spolupráce zákazníků na vývoji (Lego Ideas, IKEA hacks).",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "stage_gate", title: "Stage-Gate proces — 8 fází vývoje", subtitle: "Klasický framework NPD od konceptu k launchi", color: VSE.fis, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Stage-Gate proces (Robert Cooper 1988)</b> = nejpoužívanější framework <b>New Product Development (NPD)</b>. 8 fází se 7 rozhodovacími body (gates). Komise <b>Mládková</b> chce <b>způsob uvedení na trh</b> — Stage-Gate je odpověď.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 720 220" style={{ width: "100%", maxWidth: 720, height: "auto" }}>
+            <defs>
+              <marker id="arrowSG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+              </marker>
+            </defs>
+            {/* 8 fází jako obdélníky s šipkami mezi */}
+            {[
+              { x: 10, c: VSE.fph, icon: "💡", t: "1. IDEA" },
+              { x: 100, c: VSE.fmv, icon: "🔍", t: "2. SCOPING" },
+              { x: 190, c: VSE.fmv, icon: "💼", t: "3. BUSINESS" },
+              { x: 280, c: VSE.warning, icon: "🛠️", t: "4. DEVELOP" },
+              { x: 370, c: VSE.warning, icon: "🧪", t: "5. TESTING" },
+              { x: 460, c: VSE.success, icon: "🏭", t: "6. PRE-LAUNCH" },
+              { x: 550, c: VSE.success, icon: "🚀", t: "7. LAUNCH" },
+              { x: 640, c: VSE.danger, icon: "📊", t: "8. REVIEW" },
+            ].map((s, i) => (
+              <g key={i}>
+                <rect x={s.x} y="60" width="75" height="80" rx="8" fill={s.c} opacity="0.85"/>
+                <text x={s.x + 37} y="88" textAnchor="middle" fontSize="20" fill="#fff">{s.icon}</text>
+                <text x={s.x + 37} y="112" textAnchor="middle" fontSize="10" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t.split(" ")[0]}</text>
+                <text x={s.x + 37} y="125" textAnchor="middle" fontSize="9" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t.split(" ").slice(1).join(" ")}</text>
+              </g>
+            ))}
+            {/* Šipky mezi */}
+            {[85, 175, 265, 355, 445, 535, 625].map((x, i) => (
+              <line key={i} x1={x} y1="100" x2={x + 13} y2="100" stroke="#888" strokeWidth="2" markerEnd="url(#arrowSG)"/>
+            ))}
+            {/* Gates - červené kosočtverce mezi */}
+            {[85, 175, 265, 355, 445, 535, 625].map((x, i) => (
+              <g key={i}>
+                <text x={x + 7} y="50" textAnchor="middle" fontSize="12" fill={VSE.danger} fontWeight="700">⚑</text>
+                <text x={x + 7} y="40" textAnchor="middle" fontSize="9" fill={VSE.danger} fontFamily="JetBrains Mono">G{i+1}</text>
+              </g>
+            ))}
+            {/* Labels */}
+            <text x="190" y="180" fontSize="11" fontWeight="700" fill={VSE.fmv} fontFamily="Inter Tight">PŘEDVÝVOJ</text>
+            <text x="425" y="180" fontSize="11" fontWeight="700" fill={VSE.warning} fontFamily="Inter Tight">VÝVOJ</text>
+            <text x="610" y="180" fontSize="11" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">LAUNCH</text>
+            <text x="360" y="200" textAnchor="middle" fontSize="10" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">⚑ = Gate (kill-or-fund rozhodnutí)</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fis}>8 fází Stage-Gate procesu</Tag>
+        <Bullet items={[
+          "<b>💡 1. Idea Generation:</b> Brainstorming, customer feedback, trend analysis, R&D nápady. 100+ ideí na 1 launch.",
+          "<b>🔍 2. Scoping (Discovery):</b> Rychlé hodnocení nápadů (1-2 týdny per nápad). Eliminace 70-80 % nápadů.",
+          "<b>💼 3. Business Case:</b> Hluboká analýza top 5-10 nápadů. ROI, tržní velikost, riziko, technická proveditelnost.",
+          "<b>🛠️ 4. Development:</b> Tvorba prototypu. Iterativní design + engineering. Měsíce-roky práce.",
+          "<b>🧪 5. Testing & Validation:</b> Concept testing, IHUT, beta testing. Iterace prototypu na základě feedbacku.",
+          "<b>🏭 6. Pre-Launch (Trial Marketing):</b> Test trh na 1-2 městech/segmentech. Ověření go-to-market strategie.",
+          "<b>🚀 7. Launch:</b> Plný uvedení na trh. Marketing kampaň, distribuce, sales aktivace.",
+          "<b>📊 8. Post-Launch Review:</b> Vyhodnocení po 3-6-12 měsících. Učení pro další launch.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Gates (G1-G7) — kill-or-fund rozhodnutí</Tag>
+        <Bullet items={[
+          "<b>Co je gate:</b> Rozhodovací bod mezi fázemi. Manažerský review — pokračovat / zastavit / pivotovat.",
+          "<b>Účel:</b> Zabránit pokračování špatných projektů. <b>80 % budgetu</b> se utratí v Development + Launch, ale rozhodnutí o úspěchu se dělají v gates.",
+          "<b>Typická úmrtnost:</b> Z 100 nápadů projde Gate 1 = 30, Gate 2 = 10, Gate 3 = 5, Launch = 2. Z 2 launchů jen 1 úspěšný.",
+          "<b>Risk:</b> Příliš striktní gates = killing dobré nápady. Příliš volné = plýtvání budget na špatné projekty.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "go_to_market", title: "Go-to-Market strategie — způsob uvedení na trh", subtitle: "Launch strategy + 6 elementů + příklady", color: VSE.fis, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Go-to-Market (GTM) strategie</b> = konkrétní plán, JAK produkt uvést na trh. Mládková chce explicitně <b>způsob uvedení</b>. Bez GTM = neúspěšný launch i u dobrého produktu.
+        </Def>
+        <Tag color={VSE.fis}>6 elementů GTM strategie</Tag>
+        <Bullet items={[
+          "<b>🎯 Cílový segment:</b> KDO je první zákazník (M3). Inovátoři + Early Adopters (M8 Rogers).",
+          "<b>💎 Value Proposition:</b> CO konkrétně nabízíme. USP + ESP (M4 positioning).",
+          "<b>💰 Pricing Strategy:</b> Skimming × Penetration (M8). Premium = vysoká cena. Mass = nízká cena.",
+          "<b>📍 Distribuční kanály:</b> KDE prodáváme. Online × retail × B2B × hybrid (Log 1).",
+          "<b>📣 Marketing & Komunikace:</b> JAK informujeme trh. Awareness kampaně (M13-15).",
+          "<b>📊 Metriky & KPI:</b> JAK měříme úspěch. Sales, market share, NPS, ROI.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>3 typy GTM strategie</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "💥 BIG BANG", d: "Globální simultánní launch. Apple iPhone, Tesla Model 3, Microsoft Windows. Vysoký risk + reward, drahá komunikace." },
+            { c: VSE.warning, t: "📍 PHASED ROLL-OUT", d: "Postupné uvedení po regionech/segmentech. McDonald's nová položka v 1 zemi → po test rollout. Učení per region." },
+            { c: VSE.success, t: "🧪 SOFT LAUNCH", d: "Tichý start s vybranými zákazníky. SaaS produkty, hry, B2B. Sběr feedback před plným launchem." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>4 fáze launch kampaně</Tag>
+        <Bullet items={[
+          "<b>1. Pre-launch (Teasing) — 4-12 týdnů před:</b> Teasery, PR, influenceři, waitlist. Apple keynotes, Tesla Twitter teases.",
+          "<b>2. Launch Day — Den 0:</b> Velký event, PR coverage, sociální sítě, ad campaigns. Apple Stores opening.",
+          "<b>3. Post-launch (Reinforcement) — týdny 1-12:</b> Customer testimonials, reviewy, případové studie. Heavy advertising.",
+          "<b>4. Sustaining — měsíce 3-12:</b> Continuous komunikace, expansion na nové segmenty, retargeting.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "rizika_aplikace", title: "Risk faktory + aplikace na PS", subtitle: "Proč 70-80 % launchů selže + checklist", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          70-80 % nových produktů selže do 2 let. <b>Klíč: vědět PROČ a jak risk zmírnit</b>. Důležité pro aplikaci na PS firmu.
+        </Def>
+        <Tag color={VSE.danger}>5 nejčastějších důvodů selhání launche</Tag>
+        <Bullet items={[
+          "<b>🎯 Špatná segmentace</b> — produkt pro &quot;všechny&quot; = pro nikoho. Google Glass (M8) selhalo přes Chasm.",
+          "<b>💎 Slabá value proposition</b> — &quot;me-too&quot; produkt bez jasného důvodu volby. Tisíce SaaS startupů.",
+          "<b>💰 Špatná cena</b> — buď příliš drahá pro segment, nebo příliš levná = signál o kvalitě. Apple Newton 1993.",
+          "<b>⚡ Špatné načasování</b> — předčasně (Apple Newton 1993 vs iPhone 2007) nebo pozdě (Microsoft Zune vs iPod).",
+          "<b>📣 Slabá komunikace</b> — trh produkt nezná. Nedostatečný marketing budget, špatné kanály, špatné message.",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.warning}>Risk mitigation strategie</Tag>
+        <Bullet items={[
+          "<b>MVP (Minimum Viable Product):</b> Spustit s minimem features, učit se z dat. Lean Startup model.",
+          "<b>Pilot v 1 zemi/segmentu:</b> Test before full launch. McDonald's nový burger nejdřív 5 měst, pak globálně.",
+          "<b>Beta testing s loyal zákazníky:</b> Sběr feedback před plným launchem. Software, hry, Apple Vision Pro.",
+          "<b>Stage-Gate gates discipline:</b> Skutečně killing slabých projektů, ne &quot;sunk cost fallacy&quot;.",
+          "<b>Build-Measure-Learn cyklus:</b> Eric Ries Lean Startup — rychlé iterace na základě dat.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Checklist pro komisi — aplikace na PS</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj <b>typ inovace</b> v PS — disruptive / nový pro firmu / rozšíření řady / zlepšení.",
+          "<b>2.</b> Vyber <b>3-4 metody výrobkového výzkumu</b> vhodné pro produkt v PS.",
+          "<b>3.</b> Aplikuj <b>Stage-Gate framework</b> — kde je firma v 8 fázích?",
+          "<b>4.</b> Definuj <b>GTM strategii</b> — 6 elementů (segment, value, cena, kanály, mkt, KPI).",
+          "<b>5.</b> Vyber <b>typ launche</b> — Big Bang vs Phased vs Soft.",
+          "<b>6.</b> Identifikuj <b>3-5 hlavních rizik</b> + mitigation.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Stříteský 2025 + Machek 2025 (kuchyňské nádobí)"
+          what="Stříteský + Machek chtějí <b>metody A techniky</b>. Naučit 6+ metod (Concept testing, IHUT, sensory, focus groups, conjoint, Kano) + doplňky (MaxDiff, eye-tracking, A/B). Bez metod nedostaneš."
+        />
+      </div>) },
+  ];
+
+  const flashcardsMkt9 = [
+    { term: "Výrobkový výzkum", def: "Systematický sběr a analýza dat pro vývoj nového produktu nebo modifikaci existujícího. Specifická aplikace MV na produkt.", tag: "POJEM" },
+    { term: "4 typy nových výrobků", def: "Zcela nové (disruptive — iPhone, Tesla) / Nové pro firmu (Apple Vision Pro) / Rozšíření řady (iPhone Pro Max) / Zlepšení (yearly updates).", tag: "TYPY" },
+    { term: "5 cílů výrobkového výzkumu", def: "Identifikovat potřeby / Snížit risk launche / Optimalizovat features / Stanovit cenu / Předvídat tržní podíl.", tag: "POJEM" },
+    { term: "Concept Testing", def: "Test ideje PŘED vývojem prototypu. Popis + obrázek + cena → respondent hodnotí. CAWI 300-500 respondentů.", tag: "METODY" },
+    { term: "IHUT (In-Home Use Test)", def: "Respondent testuje produkt doma 2-4 týdny. P&G, Unilever standard. 50-200 účastníků. Reálné použití > deklarace.", tag: "METODY" },
+    { term: "Sensory Testing", def: "Slepé testování chuti, vůně, dotyku, vzhledu. Pepsi Challenge. 100-300 respondentů v lab nebo CLT.", tag: "METODY" },
+    { term: "Focus Groups", def: "6-10 lidí + moderátor, 1,5-3 h. Kvalitativní data, exploring potřeb. 3-6 sessions standardně.", tag: "METODY" },
+    { term: "Conjoint Analysis", def: "Respondent srovnává kombinace atributů (cena × baterie × velikost). Výstup: důležitost atributu. Detail v M2.", tag: "METODY" },
+    { term: "Kano model", def: "Klasifikuje features na 5 kategorií: Must-have / Performance / Delighter / Indifferent / Reverse. Identifikuje investice.", tag: "METODY" },
+    { term: "Must-have (Kano)", def: "Zákazník očekává automaticky. Bez nich nespokojenost. Záruka, bezpečnost, klimatizace v autě.", tag: "KANO" },
+    { term: "Performance (Kano)", def: "Čím víc, tím lépe. Rychlost, kapacita, baterka. Lineární vztah funkčnost ↔ spokojenost.", tag: "KANO" },
+    { term: "Delighter (Kano)", def: "Nečekané vylepšení = wow efekt. Apple unboxing, Tesla autopilot. Časem se stávají must-have.", tag: "KANO" },
+    { term: "MaxDiff (Maximum Difference)", def: "Respondent vybírá MOST × LEAST important z 4-5 features. Lepší než ranking.", tag: "DOPLŇKOVÉ" },
+    { term: "Eye-tracking + facial coding", def: "Pasivní měření emocí při testování produktu nebo balení. Bez deklaračního bias.", tag: "DOPLŇKOVÉ" },
+    { term: "A/B testing", def: "Klasika pro digital produkty. Netflix thumbnails, Amazon UX, e-commerce optimalizace.", tag: "DOPLŇKOVÉ" },
+    { term: "Beta testing", def: "Předvydání produktu vybrané skupině uživatelů. Software, hry, Apple Vision Pro early access.", tag: "DOPLŇKOVÉ" },
+    { term: "Co-creation workshops", def: "Spolupráce zákazníků na vývoji. Lego Ideas, IKEA hacks community.", tag: "DOPLŇKOVÉ" },
+    { term: "Stage-Gate proces", def: "Robert Cooper 1988. 8 fází NPD se 7 gates (kill-or-fund decisions). Idea → Scoping → Business → Development → Testing → Pre-launch → Launch → Review.", tag: "STAGE-GATE" },
+    { term: "Stage-Gate gates", def: "Rozhodovací body mezi fázemi. Manažerský review — pokračovat / zastavit / pivotovat. Z 100 nápadů → 2 launche → 1 úspěšný.", tag: "STAGE-GATE" },
+    { term: "Go-to-Market (GTM)", def: "Konkrétní plán JAK uvést produkt na trh. 6 elementů: cílový segment / value / pricing / kanály / komunikace / KPI.", tag: "GTM" },
+    { term: "3 typy GTM strategie", def: "Big Bang (globální simultánní — Apple) / Phased Roll-out (postupné — McDonald's) / Soft Launch (tichý — SaaS).", tag: "GTM" },
+    { term: "4 fáze launch kampaně", def: "Pre-launch (teasers 4-12 týdnů) / Launch Day / Post-launch (reinforcement týdny 1-12) / Sustaining (měsíce 3-12).", tag: "GTM" },
+    { term: "MVP (Minimum Viable Product)", def: "Lean Startup model. Spustit s minimem features, učit se z dat. Risk mitigation strategie.", tag: "RISK" },
+    { term: "5 důvodů selhání launche", def: "Špatná segmentace / Slabá value proposition / Špatná cena / Špatné načasování / Slabá komunikace. 70-80 % launchů selže.", tag: "RISK" },
+    { term: "Build-Measure-Learn", def: "Eric Ries Lean Startup cyklus. Rychlé iterace na základě dat. Pivot pokud nefunguje.", tag: "RISK" },
+  ];
+
+  const quizMkt9 = [
+    { q: "Co je výrobkový výzkum?", opts: ["Audit kvality", "Systematický sběr dat pro vývoj nového produktu nebo modifikaci existujícího", "Reklama na produkt", "Cenotvorba"], correct: 1 },
+    { q: "Kolik typů nových výrobků rozlišujeme podle míry novosti?", opts: ["2", "3", "4 (disruptive / nové pro firmu / rozšíření řady / zlepšení)", "5"], correct: 2 },
+    { q: "Co je Concept Testing?", opts: ["Test prototypu", "Test ideje PŘED vývojem prototypu (popis + obrázek → respondent hodnotí)", "Reklamní test", "QA testing"], correct: 1 },
+    { q: "Co je IHUT?", opts: ["Standard kvality", "In-Home Use Test — respondent testuje produkt doma 2-4 týdny", "Software audit", "Business case"], correct: 1 },
+    { q: "Která metoda byla použita u Pepsi Challenge?", opts: ["IHUT", "Sensory Testing (slepé testování chuti)", "Focus Groups", "Conjoint"], correct: 1 },
+    { q: "Co je Kano model?", opts: ["Japonský standard", "Klasifikace features na 5 kategorií: must-have / performance / delighter / indifferent / reverse", "Asijská marketing strategie", "BCG matice"], correct: 1 },
+    { q: "Která Kano kategorie způsobuje wow efekt?", opts: ["Must-have", "Performance", "Delighter", "Indifferent"], correct: 2 },
+    { q: "Co je MaxDiff?", opts: ["Maximum Difference Scaling — respondent vybírá MOST × LEAST important", "Maximální cenový rozdíl", "Statistický test", "ANOVA varianta"], correct: 0 },
+    { q: "Kdo definoval Stage-Gate proces?", opts: ["Philip Kotler", "Robert Cooper 1988", "Michael Porter", "Peter Drucker"], correct: 1 },
+    { q: "Kolik fází má Stage-Gate proces?", opts: ["5", "6", "8 (Idea / Scoping / Business / Development / Testing / Pre-launch / Launch / Review)", "10"], correct: 2 },
+    { q: "Co je gate v Stage-Gate procesu?", opts: ["Brána do trhu", "Rozhodovací bod (kill-or-fund) mezi fázemi", "Marketingový kanál", "Cena"], correct: 1 },
+    { q: "Kolik nápadů typicky končí úspěšným launchem (Stage-Gate)?", opts: ["50 z 100", "20 z 100", "5 z 100", "1-2 z 100 (z 2 launchů 1 úspěšný)"], correct: 3 },
+    { q: "Co je Big Bang GTM strategie?", opts: ["Vesmírná teorie", "Globální simultánní launch (Apple iPhone, Tesla Model 3)", "Cenová sleva", "Soft launch"], correct: 1 },
+    { q: "Co je Soft Launch?", opts: ["Pomalý prodej", "Tichý start s vybranými zákazníky před plným launchem (SaaS, B2B)", "Sleva", "Globální event"], correct: 1 },
+    { q: "Co je MVP?", opts: ["Most Valuable Player", "Minimum Viable Product — spustit s minimem features, učit se z dat", "Marketing Value Proposition", "Master Value Plan"], correct: 1 },
+    { q: "Která NENÍ z 5 důvodů selhání launche?", opts: ["Špatná segmentace", "Slabá value proposition", "Vysoké jméno firmy", "Špatné načasování"], correct: 2 },
+  ];
+
+  const praxeMkt9 = {
+    caseStudy: {
+      company: "Apple Vision Pro 2024 — etalon výrobkového výzkumu + 7letý Stage-Gate",
+      subtitle: "Z prototypu k launchi v 2024 — 7 let vývoje + 3,5 mld. USD",
+      content: (<>
+        <b>Apple Vision Pro</b> je <b>učebnicový příklad sofistikovaného produktového výzkumu + Stage-Gate procesu</b>. 7 let R&D, 3,5 mld. USD investice, kompletní 8-stage proces.<br/><br/>
+        <b style={{ color: VSE.fph }}>💡 1. IDEA (2015-2017):</b> Tim Cook vidí AR/VR potenciál. Akvizice startupů (Vrvana, NextVR, Emotient pro facial tracking). 100+ ideí zúženo na &quot;Apple VR headset&quot;.<br/><br/>
+        <b style={{ color: VSE.fmv }}>🔍 2. SCOPING (2017-2018):</b> Tým 1000+ engineers, code-name &quot;T288&quot;. Eliminace AR-only verze (málo content), Apple Glass odložen, focus na premium VR/XR mix.<br/><br/>
+        <b style={{ color: VSE.fmv }}>💼 3. BUSINESS CASE (2018-2019):</b> ROI modely, segmentace (developers + creative pros + early adopters), cena premium 3500 USD vs Meta Quest 500 USD. Approval od Cook.<br/><br/>
+        <b style={{ color: VSE.warning }}>🛠️ 4. DEVELOPMENT (2019-2022):</b> Vlastní M2 + R1 čipy, micro-OLED displeje (přes Sony partnership), eye-tracking + hand-tracking, 5K resolution per oko. 3 generace prototypů.<br/><br/>
+        <b style={{ color: VSE.warning }}>🧪 5. TESTING (2022-2023):</b><br/>
+        <br/>
+        • <b>Concept Testing:</b> Developers + content creators (selektivní cílovka)<br/>
+        <br/>
+        • <b>IHUT:</b> 100 employees + select partners, 6 týdnů doma<br/>
+        <br/>
+        • <b>Sensory Testing:</b> Comfort (váha headsetu), display quality, audio<br/>
+        <br/>
+        • <b>Beta:</b> Developers s VisionOS SDK od WWDC 2023<br/>
+        <br/>
+        <b style={{ color: VSE.success }}>🏭 6. PRE-LAUNCH (2023):</b> WWDC announcement (červen 2023) — keynote teaser. Developer preview, 100k vývojářů. Apple Store sloty pro try-on demos.<br/><br/>
+        <b style={{ color: VSE.success }}>🚀 7. LAUNCH (únor 2024):</b><br/>
+        <br/>
+        • <b>GTM:</b> Phased Roll-out (USA → June Europe → říjen Asia)<br/>
+        <br/>
+        • <b>Cena:</b> Skimming 3499 USD — premium signal<br/>
+        <br/>
+        • <b>Cílovka:</b> Innovators + Early Adopters (Rogers segments)<br/>
+        <br/>
+        • <b>Komunikace:</b> Apple keynote, demos in Apple Stores, influenceři<br/>
+        <br/>
+        • <b>Distribuce:</b> Apple Stores + apple.com only (exkluzivita)<br/>
+        <br/>
+        <b style={{ color: VSE.danger }}>📊 8. POST-LAUNCH REVIEW (2024-dnes):</b><br/>
+        <br/>
+        • Prodej 500k ks v prvním roce (pod očekáváním Apple)<br/>
+        <br/>
+        • Feedback: Cena vysoká + omezený content + váha headsetu<br/>
+        <br/>
+        • Vision Pro 2 v roadmapě 2026-2027 (50 % cena, lehčí)<br/>
+        <br/>
+        <b style={{ color: VSE.fph }}>Lessons learned:</b> Apple připravuje overcome Chasm (M8) — early adopters mají, ale mainstream čeká na cena + content. Stage-Gate Gate 8 (Review) = vstup do nového cyklu.<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Apple poprvé od iPhonu 2007 vstoupil do nové kategorie. Brand awareness 95 %, ale tržní úspěch zatím sporný. Klasický příklad <b>premium produktu v zavádění s plánovaným delfíním skokem</b>.
+      </>),
+      lessons: "Apple Vision Pro je <b>etalon sofistikovaného NPD</b>. Pro PS doporuč: <b>kompletní Stage-Gate proces + multi-method výzkum (concept + IHUT + sensory + beta) + Phased Roll-out + Skimming pricing + plán Vision Pro 2 jako delfíní skok (M8)</b>. Alternativy: <b>Tesla Cybertruck (concept testing + Beta + Big Bang), Netflix (A/B testing kontinuální), Lego Ideas (co-creation), Dyson (sensory testing + 5000+ prototypů na 1 produkt)</b>."
+    },
+    miniExamples: [
+      { tag: "CONCEPT TEST", color: VSE.fmv, company: "P&G Tide Pods — 5 let testování", content: "Tide Pods (pods místo prachu) prošly <b>5 let Stage-Gate procesem</b>. Concept testing (idea: pohodlí > velikost), IHUT (1000+ rodin × 6 týdnů — preference, dávkování, bezpečnost), sensory (vůně, vizuál), beta (vybraná města). Launch 2012, dnes 75 % market share v segmentu." },
+      { tag: "KANO MODEL", color: VSE.warning, company: "Tesla autopilot — z Delighter na Performance", content: "Tesla autopilot 2014 byl <b>Delighter</b> (wow efekt, žádná konkurence). 2020 už <b>Performance</b> (BMW, Mercedes mají taky, čím lepší tím lepší). 2025 cíl <b>Must-have</b> u premium aut. Klasický Kano shift přes čas." },
+      { tag: "STAGE-GATE FAIL", color: VSE.danger, company: "Google Glass 2013 — Gate skip", content: "Google Glass <b>přeskočil critical gates</b> — Concept testing s mainstream (jen tech early adopters), žádný IHUT s běžnými lidmi (privacy issues), žádný pilot region. <b>Big Bang launch</b> v 2013 → Chasm fail → 2015 stop. 1,5 mld. USD ztraceno." },
+      { tag: "MVP / LEAN", color: VSE.success, company: "Spotify — MVP přístup", content: "Spotify 2008 launch jako <b>MVP</b> ve Švédsku only — minimální features (jen streaming, žádné playlisty/discovery). Build-Measure-Learn cyklus. Postupné rozšíření (2011 USA, 2014 mobile, 2015 Discover Weekly). Dnes 600M users." },
+      { tag: "SOFT LAUNCH", color: VSE.fph, company: "ChatGPT 2022 — accidental success", content: "OpenAI <b>Soft Launch</b> ChatGPT v listopadu 2022 jako &quot;research preview&quot; — žádná velká marketingová kampaň. Cílovka: AI researchers. <b>Virálně se rozšířilo</b> — 1M uživatelů za 5 dní, 100M za 2 měsíce. Klasický soft launch který explodoval." },
+    ]
+  };
+
+  const examQuestionsMkt9 = [
+    { komise: "2025-06-18 — Mládková + Vávra + Hönig (Prádlo)", otazka: "Produktový výzkum, jeho metody a nástroje, způsob uvedení výrobku na trh", pozn: "Mládková chce <b>METODY A NÁSTROJE</b> (Concept testing, IHUT, sensory, focus groups, conjoint, Kano) + <b>ZPŮSOB UVEDENÍ</b> (Stage-Gate + GTM strategie + Big Bang/Phased/Soft). Pro prádlo: IHUT u testovacích rodin + Phased roll-out." },
+    { komise: "2025-06-10 — Double Stříteský + Müllerová (Neziskovka)", otazka: "Výzkum výrobku, metody a techniky", pozn: "Stříteský explicitně chce <b>METODY a TECHNIKY</b>. Naučit 6 hlavních (concept/IHUT/sensory/focus/conjoint/Kano) + 5 doplňkových (MaxDiff/eye-tracking/A-B/beta/co-creation). Bez sortimentu metod nedostaneš." },
+    { komise: "2025-06-12 — Machek + Kolouchová + Legnerová (Kuchyňské nádobí)", otazka: "Výrobkový výzkum — metody + techniky", pozn: "Machek stejně jako Stříteský — chce <b>methods & techniques</b> arsenal. Pro nádobí: sensory (materiál pánve, váha), IHUT (vaření doma), conjoint (cena × kvalita × design × velikost)." },
+    { komise: "2025-06-10 — 3 týpci (anonymní)", otazka: "Výzkum výrobku, metody a techniky, uvedení nového výrobku na trh", pozn: "Stejný balík jako Mládková — <b>metody + uvedení na trh</b>. Klíč: <b>Stage-Gate 8 fází + 6 elementů GTM + 3 typy launche</b>. Aplikace na PS firmu." },
+  ];
+
+  const podcastMkt9 = { title: "Marketing 9 — Výrobkový výzkum, metody a techniky, uvedení na trh", description: "Definice výrobkového výzkumu + 4 typy nových výrobků (disruptive/nové pro firmu/rozšíření řady/zlepšení). 6 hlavních metod (Concept testing/IHUT/Sensory/Focus groups/Conjoint/Kano model). 5 Kano kategorií (must-have/performance/delighter/indifferent/reverse). 5 doplňkových technik (MaxDiff/eye-tracking/A-B/beta/co-creation). Stage-Gate proces Cooper 1988 (8 fází + 7 gates). Go-to-Market strategie (6 elementů + 3 typy: Big Bang/Phased/Soft). 4 fáze launch kampaně. Risk faktory + 5 důvodů selhání + MVP + Build-Measure-Learn. Apple Vision Pro, P&G Tide Pods, Tesla autopilot, Google Glass fail, Spotify, ChatGPT.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt9 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>výrobkový výzkum = systematický sběr dat pro vývoj/modifikaci produktu</b>.<br/>
+    <b style="color:#A82A5F">2.</b> Návaznost na M1 (obecný MV), M2 (analytické metody), M6 (vrstvy produktu), M8 (PLC fáze).<br/>
+    <b style="color:#A82A5F">3.</b> 4 typy nových výrobků — disruptive / nové pro firmu / rozšíření řady / zlepšení.<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>6 hlavních metod</b> (Stříteský, Machek chytají!) — Concept testing / IHUT / Sensory / Focus groups / Conjoint / Kano model.<br/>
+    <b style="color:#A82A5F">5.</b> Kano model — 5 kategorií features (must-have / performance / delighter / indifferent / reverse).<br/>
+    <b style="color:#A82A5F">6.</b> Doplňkové techniky — MaxDiff / eye-tracking / A-B / beta / co-creation.<br/>
+    <b style="color:#A82A5F">7.</b> ⚠️ <b>Stage-Gate proces</b> (Cooper 1988) — 8 fází + 7 gates.<br/>
+    <b style="color:#A82A5F">8.</b> ⚠️ <b>Go-to-Market strategie</b> (Mládková chytá!) — 6 elementů + 3 typy (Big Bang/Phased/Soft).<br/>
+    <b style="color:#A82A5F">9.</b> 4 fáze launch kampaně — pre-launch / launch day / post-launch / sustaining.<br/>
+    <b style="color:#A82A5F">10.</b> 5 důvodů selhání + risk mitigation (MVP, pilot, beta).<br/>
+    <b style="color:#A82A5F">11.</b> Aplikace na PS — typ inovace + metody + Stage-Gate stage + GTM + risk.
+  `;
+
+  const caseStudyMkt9 = {
+    title: "Iva — Product Manager FreshBox, food-tech startup pro hotové meal kits (16 mil. Kč, 25 zaměstnanců)",
+    subtitle: "Identifikuj metody výzkumu + Stage-Gate plán pro launch nové řady",
+    scenario: "Iva (32 let) vede produkt v FreshBox 2 roky. Food-tech startup v Praze, 25 zaměstnanců, 16 mil. Kč tržby. Vyrábí hotové meal kits (ingredient boxy + recepty, 5-7 receptů týdně, doručení na adresu).\n\nProdukty:\n\n• FreshBox Family (2-4 osoby, klasické recepty) — 12 mil. Kč obratu, 70 % zákazníků\n\n• FreshBox Solo (1 osoba) — 3 mil. Kč obratu\n\n• FreshBox Sport (high-protein) — 1 mil. Kč obratu\n\nCEO chce launchnout 4. řadu — <b>FreshBox Healthy</b> (low-cal, plant-based, organic). Cílovka: zdraví uvědomělí 25-45 let, urban. Velký trend (+25 % YoY growth v ČR).\n\nProblémy:\n\n• Iva nemá strategický framework pro launch — předchozí 3 řady byly intuitivní (a Sport flopuje — proč?)\n\n• CEO chce launch za 4 měsíce (rychle, kvůli investorům). Iva váhá — málo času na výzkum?\n\n• Nemají vlastní výzkumný team — všechno jsou outsourcing nebo vlastní intuition\n\n• Budget na výzkum 400k Kč + launch 800k Kč = celkem 1,2 mil. Kč\n\nKonkurence:\n\n• HelloFresh ČR — Family meal kits, masový segment, agresivní pricing\n\n• Mealy.cz — premium meal kits, hipster cílovka\n\n• Goodylife (Slovinsko) — healthy/plant-based meal kits, vstoupil do ČR 2024\n\nKlíčové vstupy:\n\n• 25 000 stávajících zákazníků FreshBox v CRM — data o objednávkách, preferences, churn\n\n• Vlastní kuchyně + 5 šéfkuchařů (3 z nich vegetarian-friendly)\n\n• Dodavatelé organic surovin už existují (zdroj pro Sport řadu)\n\n• 2 design ambasador influencerky (zdraví+lifestyle, 50k+ follow each)\n\nIva má 4 měsíce + 1,2 mil. Kč na launch FreshBox Healthy.",
+    signals: [
+      { text: "Předchozí 3 řady byly intuitivní (a Sport flopuje — proč?)", color: VSE.danger, reason: "Chybí <b>Stage-Gate framework</b>. Sport řada selhala pravděpodobně kvůli scrip skipnutí kritických metod výzkumu (concept testing, IHUT před launch)." },
+      { text: "CEO chce launch za 4 měsíce", color: VSE.warning, reason: "Tlak na rychlost vs kvalita. <b>Stage-Gate light verze</b> možná — focus na critical methods (concept + IHUT + sensory) v komprimované time-line." },
+      { text: "FreshBox Healthy — low-cal, plant-based, organic", color: VSE.fph, reason: "Velký trend (+25 % YoY). Klasický typ inovace = <b>rozšíření řady</b> (M9 4 typy). Středně risk, ale silný market pull." },
+      { text: "Nemají vlastní výzkumný team — outsourcing nebo intuition", color: VSE.warning, reason: "Skill gap. Lepší <b>outsource klíčových metod</b> (Ipsos, Median) než intuition. Concept testing přes Median CAWI = 80k Kč." },
+      { text: "25 000 stávajících zákazníků v CRM — preferences, churn", color: VSE.fph, reason: "<b>Bohaté interní data!</b> Lze udělat <b>data mining</b> (M2) na existující zákazníky — kteří by upgradeli na Healthy, jaké features chtějí. Levné a rychlé." },
+      { text: "Goodylife (Slovinsko) — healthy/plant-based meal kits vstoupil do ČR 2024", color: VSE.danger, reason: "<b>First-mover ohrožení!</b> Konkurent už v segmentu. FreshBox musí mít jasnou diferenciaci, ne &quot;me-too&quot;. Risk Slow & Steady Big Bang." },
+      { text: "2 ambasadorky influencerky (zdraví+lifestyle, 50k+ follow each)", color: VSE.warning, reason: "Klíčový asset pro <b>GTM strategy</b> — pre-launch teaser kampaň + Early Adopter outreach (Rogers segments). Influencer-led launch." },
+      { text: "Vlastní kuchyně + 3 vegetarian šéfkuchaři", color: VSE.fph, reason: "Existující kapacita pro <b>plant-based recepty</b>. Lze rychle vyvinout 5-7 receptů pro Healthy řadu. Snižuje risk + náklady vývoje." },
+    ],
+    quiz1: {
+      question: "Jaká je hlavní příčina pravděpodobného flopu FreshBox Sport?",
+      options: [
+        "Špatná chuť",
+        "Vysoká cena",
+        "Absence systematického výzkumu před launchem — intuitivní rozhodování bez testování konceptu, segmentu, value proposition",
+        "Konkurence",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Iva měla udělat pro launch FreshBox Healthy v 4 měsících za 1,2 mil. Kč?",
+      options: [
+        { text: "Měsíc 1: Data mining CRM (25k zákazníků) — kteří by upgradeli na Healthy, demo + preference. Náklad 50k Kč interně.", correct: true, reason: "✓ Nejlevnější + rychlá metoda. Existující data > nové focus groups. Identifikuje target segment." },
+        { text: "Měsíc 1-2: Concept Testing přes CAWI (Median nebo Ipsos) — 500 respondentů z cílovky 25-45 zdraví uvědomělí. Náklad 150k Kč.", correct: true, reason: "✓ Otestuje koncept + value proposition + price sensitivity před investicí do vývoje. Klíčová Stage-Gate metoda." },
+        { text: "Měsíc 2-3: Sensory + IHUT testing — 50 respondentů z cílovky testuje 5 receptů doma 2 týdny + sensory hodnocení v lab. Náklad 200k Kč.", correct: true, reason: "✓ IHUT je nejlepší pro food produkty. Reálné použití > deklarace. Sensory pro chuťové optimalization." },
+        { text: "Měsíc 3: Pilot v Praze + Brně — 200 early adopters, 4 týdny, monitoring engagement, retention, NPS. Náklad 100k Kč.", correct: true, reason: "✓ Mini Phased Roll-out před plným launchem. Risk mitigation + učení z real data." },
+        { text: "Měsíc 4: GTM strategy — Soft Launch s influencer ambasadorkami + email campaign na CRM existujícím zákazníkům. Náklad 500k Kč.", correct: true, reason: "✓ Soft Launch + leverage influencers + existující customer base = perfektní startup-friendly GTM." },
+        { text: "Kano model na Healthy features — co je must-have (organic certifikace) × performance (kalorie) × delighter (recipe variety) × indifferent (packaging color)", correct: true, reason: "✓ Identifikace co investovat × co skipnout. Kritické pro 4-měsíční timeline." },
+        { text: "Big Bang launch — celá ČR + masová PR kampaň + Hornbach billboardy", correct: false, reason: "✗ Příliš drahá strategie pro startup s 1,2 mil. budgetem. Risk Big Bang = příliš velký pro nedotestovaný produkt." },
+        { text: "Pokračovat v intuitivním stylu jako u Family/Solo/Sport", correct: false, reason: "✗ Sport flopuje právě kvůli intuici. Healthy má větší stake (1,2 mil. Kč), nesmí selhat." },
+        { text: "Outsourcovat celý launch agentuře za 2 mil. Kč (přes budget)", correct: false, reason: "✗ Iva má 1,2 mil. budget. Hybrid přístup (mix internal + outsourced metod) je optimální." },
+      ],
+    },
+    summary: "<b>FreshBox potřebuje strukturovaný Stage-Gate proces pro launch Healthy — i v komprimovaných 4 měsících.</b><br/><br/><b>Plán 4 měsíců (1,2 mil. Kč):</b><br/><br/>• <b>Měsíc 1 (50k Kč):</b> Data mining CRM existujících zákazníků — identifikace target segmentu + preference + price sensitivity<br/><br/>• <b>Měsíc 1-2 (150k Kč):</b> Concept Testing CAWI (Median, 500 respondentů) — value proposition + segment fit<br/><br/>• <b>Měsíc 2-3 (200k Kč):</b> IHUT s 50 respondenty doma + sensory testing v lab — recept optimization<br/><br/>• <b>Měsíc 3 (100k Kč):</b> Pilot Praha + Brno — 200 early adopters, 4 týdny monitoring<br/><br/>• <b>Měsíc 4 (500k Kč):</b> Soft Launch — influencer ambassadors + email kampaň na CRM + Apple/Google Ads<br/><br/>• <b>Měsíc 4 (200k Kč):</b> Marketing & PR — content marketing, sociální sítě, partnerships<br/><br/><b>Pro komisi:</b> Klasický food-tech startup s typickými problémy — nedostatek frameworku + tlak na rychlost. <b>Apple Vision Pro</b> (kompletní Stage-Gate), <b>Spotify MVP</b>, <b>ChatGPT soft launch</b> jako benchmark. Kompromis: <b>komprimovaný Stage-Gate</b> (4 měsíce místo standard 12-24 měsíců) + <b>multi-method výzkum</b> (concept + IHUT + sensory + pilot) + <b>Soft Launch GTM</b> s leveraged influencer assets. Anti-vzor: <b>Big Bang launch bez výzkumu = Sport řada fail repeating</b>.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={9} title="Výrobkový výzkum, metody a techniky, uvedení nového výrobku na trh"
+      subtitle="6 metod + Kano model + Stage-Gate 8 fází + Go-to-Market 6 elementů"
+      color={VSE.fis}
+      questionText="Výrobkový výzkum, jeho metody a nástroje, způsob uvedení výrobku na trh."
+      questionDesc="Definice výrobkového výzkumu. 4 typy nových výrobků. 6 hlavních metod (Concept testing/IHUT/Sensory/Focus groups/Conjoint/Kano model). 5 Kano kategorií. 5 doplňkových technik (MaxDiff/eye-tracking/A-B/beta/co-creation). Stage-Gate proces Cooper (8 fází + 7 gates). Go-to-Market strategie (6 elementů + 3 typy: Big Bang/Phased/Soft). 4 fáze launch kampaně. 5 důvodů selhání + risk mitigation (MVP, Build-Measure-Learn). Apple Vision Pro, P&G Tide Pods, Tesla, Google Glass, Spotify, ChatGPT."
+      sloz={2} roz={3} freq={3}
+      examStrategy={examStrategyMkt9}
+      studySections={studySectionsMkt9}
+      flashcards={flashcardsMkt9}
+      quiz={quizMkt9}
+      praxe={praxeMkt9}
+      examQuestions={examQuestionsMkt9}
+      podcast={podcastMkt9}
+      caseStudy={caseStudyMkt9}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 10 — Značka (branding) — prvky, modely, strategie, měření, branding služeb
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt10Panel() {
+  const studySectionsMkt10 = [
+    { id: "intro", title: "Značka — definice + funkce + význam", subtitle: "Co je značka + funkce pro spotřebitele × firmu", color: VSE.fis, emoji: "sparkles",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Značka (Brand)</b> = jméno, symbol, design nebo kombinace, která <b>identifikuje produkty/služby firmy</b> a odlišuje je od konkurence (Kotler). <b>Marketingový kapitál</b> firmy. Komise <b>Smrčka, Honig, Machek, Bočková</b> chtějí kompletní balík: funkce + prvky + modely + strategie.
+        </Def>
+        <Tag color={VSE.fis}>Tvorba značky — proces (Honig chytá!)</Tag>
+        <Bullet items={[
+          "<b>1. Brand strategy:</b> Vize, mise, hodnoty, positioning (M4) — co značka chce být.",
+          "<b>2. Brand identity:</b> Jméno, logo, barvy, font, slogan — viditelné prvky.",
+          "<b>3. Brand communication:</b> Reklama, PR, sociální sítě, packaging — jak ji svět vidí.",
+          "<b>4. Brand experience:</b> Customer touchpoints, servis, app — jak ji zažíváme.",
+          "<b>5. Brand measurement:</b> Awareness, NPS, BrandZ — jak měříme úspěch.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Funkce značky pro SPOTŘEBITELE (4 hlavní)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🔍 IDENTIFIKAČNÍ", d: "Pomáhá rozpoznat produkt v záplavě nabídek. Logo Coca-Cola = okamžitě poznám. Reduces search costs." },
+            { c: VSE.warning, t: "🛡️ GARANČNÍ (Kvalita)", d: "Signál konzistentní kvality. Apple = vždy spolehlivé. Snižuje riziko nákupu." },
+            { c: VSE.fph, t: "💎 SYMBOLICKÁ", d: "Vyjadřuje status, identitu, hodnoty (M6 symbolický náboj). Rolex = úspěch. Patagonia = ekologie." },
+            { c: VSE.success, t: "🧠 KOGNITIVNÍ", d: "Šetří přemýšlení. Mental shortcut — víme, co od značky čekat. Default volba." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Funkce značky pro FIRMU (4 hlavní)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "💰 PREMIUM PRICING", d: "Možnost účtovat víc než generic. Apple +30-50 % nad Samsung. Marže 40 % vs 20 %." },
+            { c: VSE.warning, t: "🔒 BARIÉRA VSTUPU", d: "Konkurence musí investovat miliardy do brandu. Coca-Cola, Disney — neporazitelná pozice." },
+            { c: VSE.fph, t: "❤️ LOYALITA + CLV", d: "Loyální zákazník = vyšší Customer Lifetime Value. iPhone uživatel kupuje další Apple produkty." },
+            { c: VSE.success, t: "📈 ASSET VALUE", d: "Značka jako rozvahový asset. Coca-Cola brand value 100+ mld. USD (Interbrand). Lze prodat." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ExamAlert
+          komise="Bočková + Nový + Kolouchová 2025 (Software)"
+          what="Bočková chce <b>VÝZNAM brandu pro spotřebitele A pro firmu</b>. Bez obou stran nedostaneš — naučit 4+4 funkcí."
+        />
+      </div>) },
+
+    { id: "prvky", title: "Prvky značky — 6 viditelných elementů", subtitle: "Machek chytá: prvky + popis. Jméno/Logo/Slogan/Barvy/Font/Sound", color: VSE.fis, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Prvky značky (Brand Elements)</b> = viditelné a smyslové komponenty, které tvoří značku. Komise <b>Machek, Bočková, Tahal</b> chtějí <b>každý prvek + popis + příklad</b>. Bez kompletního výčtu nedostaneš.
+        </Def>
+        <Tag color={VSE.fis}>6 hlavních prvků značky</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📛 JMÉNO (Brand Name)", d: "Slovní označení. Apple, Google, Tesla. Kritérium: snadno vyslovit, zapamatovat, ne kontroverzní v jiných jazycích (Chevy Nova \u2192 \u201Cnevozí\u201D ve španělštině)." },
+            { c: VSE.warning, t: "🎨 LOGO", d: "Vizuální symbol. Apple jablko, Nike swoosh, Mercedes hvězda. Klíč: jednoduchý, škálovatelný, rozpoznatelný i bez textu." },
+            { c: VSE.fph, t: "💬 SLOGAN (Tagline)", d: "Krátká zapamatovatelná fráze. „Just Do It\u201D, „Think Different\u201D, „I'm Lovin' It\u201D. Komunikuje value proposition." },
+            { c: VSE.success, t: "🌈 BARVY", d: "Brand colors. Coca-Cola červená, Tiffany blue, McDonald's žlutá. Vyvolávají emoce + okamžité rozpoznání." },
+            { c: VSE.danger, t: "✍️ FONT (Typography)", d: "Specifické písmo. Apple SF Pro, Google Product Sans, Coca-Cola Spencerian. Posiluje identitu napříč kanály." },
+            { c: VSE.fis, t: "🔊 ZVUK (Sonic Branding)", d: "Audio identity. Intel jingle (5 not), McDonald's „ba-da-ba-ba-baa\u201D, Netflix „ta-dum\u201D. Vyvolává recall i bez vizuálu." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Doplňkové prvky (méně známé)</Tag>
+        <Bullet items={[
+          "<b>📦 Packaging (Obal):</b> Tiffany blue krabička, Apple unboxing experience. Detail v M6 — 5 funkcí obalu.",
+          "<b>🦁 Mascot (Maskot):</b> Geico gekon, M&M postavičky, Michelin man. Lidská tvář značky.",
+          "<b>🎬 Brand voice (Tone):</b> Jak značka mluví — formální/casual, humorný/seriozní. Wendy's na Twitteru = sassy.",
+          "<b>📍 Brand environment:</b> Apple Store design, Starbucks atmosféra. Fyzický zážitek značky.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Kritéria dobrých prvků značky (Kotler)</Tag>
+        <Bullet items={[
+          "<b>Memorability:</b> Snadno zapamatovat (krátké jméno, jednoduchý logo).",
+          "<b>Meaningfulness:</b> Komunikuje něco o produktu (Burger King = víme, co prodávají).",
+          "<b>Likability:</b> Líbí se cílovce, evokuje pozitivní emoce.",
+          "<b>Transferability:</b> Funguje napříč produktovými kategoriemi (Apple z PC \u2192 phones \u2192 watches) i jazyky.",
+          "<b>Adaptability:</b> Lze upravit pro různé éry (Pepsi logo update každých 10-15 let).",
+          "<b>Protectability:</b> Lze chránit ochrannou známkou (TM/®).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "modely_hodnoty", title: "Modely hodnoty značky — Aaker × Kotler × Keller", subtitle: "Bočková, Nový explicitně chtějí Aaker + Kotler!", color: VSE.fis, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Hodnota značky (Brand Equity)</b> = přidaná hodnota, kterou značka dává produktu/službě. Komise <b>Bočková, Nový</b> CHTĚJÍ explicitně <b>Aakerův + Kotlerův model</b>. Bez obou nedostaneš.
+        </Def>
+        <Tag color={VSE.fis}>1️⃣ AAKERŮV MODEL (Brand Equity Model, 1991)</Tag>
+        <Bullet items={[
+          "<b>5 dimenzí brand equity:</b>",
+          "&nbsp;&nbsp;<b>1. Brand Loyalty (Loyalita):</b> Opakované nákupy, switching resistance. Apple users 90 % loyalty.",
+          "&nbsp;&nbsp;<b>2. Brand Awareness (Povědomí):</b> Recall + Recognition. Aided × Unaided awareness.",
+          "&nbsp;&nbsp;<b>3. Perceived Quality (Vnímaná kvalita):</b> Subjektivní hodnocení kvality (i bez reálných testů).",
+          "&nbsp;&nbsp;<b>4. Brand Associations (Asociace):</b> Co se nám vybaví — Volvo = bezpečí, Disney = magie.",
+          "&nbsp;&nbsp;<b>5. Other Proprietary Assets:</b> Patenty, trademarks, kanály — vlastnické výhody.",
+          "<b>Vizualizace:</b> Pyramida nebo hvězdice 5 dimenzí. Aaker měřitel — má praktické metriky pro každou dimenzi.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>2️⃣ KOTLERŮV MODEL (Brand Resonance Pyramid / CBBE)</Tag>
+        <Bullet items={[
+          "<b>4 vrstvy pyramidy odspoda nahoru:</b>",
+          "&nbsp;&nbsp;<b>1. Brand Identity (Salience) — KDO jsi?</b> Brand awareness, recognition.",
+          "&nbsp;&nbsp;<b>2. Brand Meaning (Performance + Imagery) — CO jsi?</b> Funkční vlastnosti + emocionální asociace.",
+          "&nbsp;&nbsp;<b>3. Brand Response (Judgments + Feelings) — JAK na tebe reaguji?</b> Racionální hodnocení + emocionální reakce.",
+          "&nbsp;&nbsp;<b>4. Brand Resonance — JAKÝ vztah máme?</b> Loyalty, attachment, community, engagement. <b>Vrchol pyramidy</b> = brand love.",
+          "<b>Klíč Kotler:</b> Cesta od awareness ke skutečné brand love. Klasický framework pro brand building.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>3️⃣ KELLERŮV MODEL (CBBE — Customer Based Brand Equity)</Tag>
+        <Bullet items={[
+          "<b>Klíčový princip:</b> Síla značky je v <b>hlavě zákazníka</b> — co si pamatuje, cítí, věří.",
+          "<b>4 otázky které musí zákazník zodpovědět:</b>",
+          "&nbsp;&nbsp;<b>1. Kdo jsi?</b> (Identita)",
+          "&nbsp;&nbsp;<b>2. Co reprezentuješ?</b> (Smysl)",
+          "&nbsp;&nbsp;<b>3. Co si o tobě myslím?</b> (Reakce)",
+          "&nbsp;&nbsp;<b>4. Co máme společného?</b> (Vztah)",
+          "<b>Vztah ke Kotlerovi:</b> Kotler postavil pyramidu, Keller dal CBBE filozofii. Často zaměnitelné — i Bočková je popisuje společně.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Nový + Svobodová + Kolouchová 2025 (Neziskovka)"
+          what="Nový chce <b>Aakerův A Kotlerův model</b> explicitně. Naučit obojí — Aaker (5 dimenzí měřitelných) + Kotler (4 vrstvy pyramidy od awareness po resonance)."
+        />
+      </div>) },
+
+    { id: "strategie_typy", title: "Strategie značek + typy + brand architecture", subtitle: "Rodinná × Umbrella × Multi-brand + brand v retailu", color: VSE.fis, emoji: "dna",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Brand architecture</b> = jak firma organizuje portfolio značek. Komise <b>Bočková</b> chce <b>strategii značky — rodinná, umbrella</b>. <b>Tahal</b> chce <b>druhy značek</b>.
+        </Def>
+        <Tag color={VSE.fis}>4 hlavní strategie značek (Brand Architecture)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "👨‍👩‍👧 RODINNÁ ZNAČKA (House of Brands)", d: "Více nezávislých značek pod 1 firmou. P&G (Tide, Pampers, Gillette, Pantene) — žádné společné brandování. Risk: drahá údržba." },
+            { c: VSE.warning, t: "🏠 UMBRELLA ZNAČKA (Branded House)", d: "1 master brand pro všechny produkty. Apple, Google, FedEx, Virgin (Atlantic, Media, Galactic). Konzistence + scale efekt." },
+            { c: VSE.fph, t: "🌐 HYBRID (Endorsed Brands)", d: "Sub-brand + master brand visible. Toyota Lexus, Marriott Courtyard, Nestlé KitKat. Best of both worlds." },
+            { c: VSE.success, t: "🔢 MULTI-BRAND v stejné kategorii", d: "Více značek konkuruje sobě. P&G Tide + Gain (oba prací prášky). Cíl: max shelf space + segmentace." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Typy značek podle ROZSAHU (geografie)</Tag>
+        <Bullet items={[
+          "<b>🌍 Globální značky:</b> Stejné prvky po celém světě. Coca-Cola, Apple, McDonald's. Globální brand recognition.",
+          "<b>🇨🇿 Národní značky:</b> Pouze v 1 zemi. Pivovary, lokální retail (Albert v ČR, Edeka v Německu).",
+          "<b>📍 Regionální značky:</b> V rámci regionu. Plzeňský Prazdroj, Bohemia Sekt.",
+          "<b>🏪 Privátní značky (Private Labels):</b> Retail vlastní značky — Albert Excellence, Tesco Value, IKEA. <b>Brand v retailu!</b>",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.fph}>Typy značek podle ÚROVNĚ KVALITY</Tag>
+        <Bullet items={[
+          "<b>💎 Luxury / Premium:</b> Rolex, Ferrari, Louis Vuitton. Vysoké marže, exkluzivní distribuce.",
+          "<b>⭐ Premium:</b> Apple, BMW, Tesla. Vyšší marže, selektivní distribuce.",
+          "<b>📊 Mainstream / Mass:</b> Toyota, Coca-Cola, Samsung. Široký trh, masová distribuce.",
+          "<b>💵 Economy / Value:</b> Lidl Brand, Pepco. Cena = klíč, intensivní distribuce.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Brand v retailu (Bočková chytá!)</Tag>
+        <Bullet items={[
+          "<b>Private label (vlastní značka retailu):</b> Albert, Lidl, IKEA. Marže 40-60 % vs 20-30 % u národních. Klíčový profit engine.",
+          "<b>Shelf placement:</b> Brand fight o eye-level pozice. Vyšší cena za pozici v retailu.",
+          "<b>Brand experience in-store:</b> Apple Store, Tesla Showroom — značka řízená skrz prostředí.",
+          "<b>POS materiály:</b> Letáky, displaye, ochutnávky. Klíčové pro impulse buying.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "mereni", title: "Měření značky — NPS, BrandZ, Interbrand, Y&R", subtitle: "Nový chytá: NPS + BrandZ!", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Brand metrics</b> = kvantitativní měření brand equity. Komise <b>Nový</b> EXPLICITNĚ chce <b>NPS + BrandZ</b>. <b>Bočková</b> chce <b>metody oceňování značky</b>. Bez konkrétních metrik nedostaneš.
+        </Def>
+        <Tag color={VSE.fis}>1️⃣ NPS (Net Promoter Score)</Tag>
+        <Bullet items={[
+          "<b>Otázka:</b> „Na škále 0-10, jak pravděpodobně doporučíte XY příteli?\u201D",
+          "<b>Výpočet:</b> Promoters (9-10) − Detractors (0-6) = NPS. Passives (7-8) se nepočítají.",
+          "<b>Benchmarky:</b> 30+ = výborný, 50+ = world-class. Apple 75, Tesla 96, Netflix 64.",
+          "<b>Výhody:</b> Jednoduchý, srovnatelný napříč firmami, predictor loyalty + růstu.",
+          "<b>Nevýhody:</b> Jen 1 otázka — málo insight. Doporučuje se kombinovat s NPS+ (otevřená otázka „proč?\u201D).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>2️⃣ BrandZ (WPP / Millward Brown / Kantar)</Tag>
+        <Bullet items={[
+          "<b>Co to je:</b> Roční žebříček nejcennějších značek světa. WPP + Kantar publikují Top 100.",
+          "<b>5 úrovní pyramidy (BrandDynamics):</b>",
+          "&nbsp;&nbsp;<b>1. Presence:</b> Slyšel jsi o značce?",
+          "&nbsp;&nbsp;<b>2. Relevance:</b> Vyhovuje ti?",
+          "&nbsp;&nbsp;<b>3. Performance:</b> Funguje?",
+          "&nbsp;&nbsp;<b>4. Advantage:</b> Lepší než konkurence?",
+          "&nbsp;&nbsp;<b>5. Bonding:</b> Nepředstavitelné bez ní?",
+          "<b>Cíl:</b> Zjistit, kolik zákazníků je na vrcholu (Bonding) — to jsou nejcennější.",
+          "<b>Top 2024:</b> Apple 1 bil. USD, Google 753 mld., Microsoft 712 mld.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>3️⃣ Interbrand Best Global Brands</Tag>
+        <Bullet items={[
+          "<b>Co to je:</b> Konkurenční ranking k BrandZ. Roční Top 100 — finanční ocenění značek.",
+          "<b>Metodika:</b> Combine financial performance + role of brand v decisions + brand strength (10 faktorů).",
+          "<b>Top 2024 Interbrand:</b> Apple 488 mld. USD, Microsoft 352 mld., Amazon 298 mld.",
+          "<b>Rozdíl od BrandZ:</b> BrandZ víc consumer perception, Interbrand víc finanční model.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>4️⃣ Young & Rubicam BAV (Brand Asset Valuator)</Tag>
+        <Bullet items={[
+          "<b>4 pilíře brand health:</b>",
+          "&nbsp;&nbsp;<b>1. Differentiation:</b> Jak unikátní?",
+          "&nbsp;&nbsp;<b>2. Relevance:</b> Jak vhodná pro mě?",
+          "&nbsp;&nbsp;<b>3. Esteem:</b> Jak respektovaná?",
+          "&nbsp;&nbsp;<b>4. Knowledge:</b> Jak rozumím?",
+          "<b>Použití:</b> Diagnostika kde brand klade — silné × slabé stránky.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.danger}>Další metriky (méně známé, ale komise oceňují)</Tag>
+        <Bullet items={[
+          "<b>Brand awareness:</b> Aided (s nápovědou) × Unaided (spontánně) × Top-of-mind.",
+          "<b>Brand recall:</b> % zákazníků, co si značku vybaví v kategorii.",
+          "<b>Share of voice (SOV):</b> % brandových impressions vs konkurence.",
+          "<b>Customer Lifetime Value (CLV):</b> Předpokládaný profit z 1 zákazníka za celou dobu.",
+          "<b>Brand love score:</b> Net emotional attachment metric.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "branding_sluzeb", title: "Branding služeb — Špaček, Vávra, Mládková!", subtitle: "Specifika značky služeb + řízení + význam", color: VSE.fis, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Komise <b>Špaček, Vávra, Mládková</b> CHYTAJÍ EXPLICITNĚ <b>branding u služeb + řízení + význam</b> (LS 2025 4×). Specifika oproti produktům. Bez toho nedostaneš u služeb!
+        </Def>
+        <Tag color={VSE.fis}>Specifika značky služeb (vs produktu)</Tag>
+        <Bullet items={[
+          "<b>🌫️ Nehmotnost:</b> Služba není fyzický předmět. Klíč: <b>brand musí dělat službu &quot;hmatatelnou&quot;</b> — uniformy, branded prostory, certifikáty.",
+          "<b>👥 Lidé jsou součástí značky:</b> Zaměstnanci doručují brand promise (recepční hotelu, taxikář, kadeřník). HR a brand jsou propojené.",
+          "<b>⏰ Inseparability (neoddělitelnost):</b> Služba vzniká současně se spotřebou. Špatný zážitek = okamžitý brand damage.",
+          "<b>🎲 Variability (variabilita):</b> 2× stejný hotel, ale jiný zážitek (záleží na recepčním, čistotě). Brand = standardizace zážitku.",
+          "<b>🗓️ Pomíjivost:</b> Volné letadlové sedadlo dnes nezachráním. Brand musí komunikovat &quot;book now&quot;.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Řízení značky služeb — 5 klíčových pravidel</Tag>
+        <Bullet items={[
+          "<b>1. Brand promise = service delivery</b> — co slibujeme, to musíme dodat (Ritz-Carlton: „Ladies and gentlemen serving ladies and gentlemen\u201D).",
+          "<b>2. Empowering employees:</b> Frontline zaměstnanci jako brand ambassadors. Investice do trainingu a kultury.",
+          "<b>3. Physical evidence (servicescape):</b> Prostředí komunikuje brand. Apple Store design, Starbucks atmosféra.",
+          "<b>4. Standardization vs personalization balance:</b> McDonald's = standardizace, Ritz-Carlton = personalizace. Obojí brand strategie.",
+          "<b>5. Customer experience management (CX):</b> Mapování touchpointů, NPS po každém kontaktu.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Příklady silných service brandů</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🏨 Ritz-Carlton", d: "Personalized luxury. Každý zaměstnanec má pravomoc utratit 2000 USD na vyřešení problému zákazníka. Brand = empowerment + premium." },
+            { c: VSE.warning, t: "✈️ Singapore Airlines", d: "&quot;Singapore Girl&quot; jako brand icon (kontroverzní dnes, ale brand strength). Premium service při dlouhých letech." },
+            { c: VSE.fph, t: "☕ Starbucks", d: "&quot;Third place&quot; mezi domovem a prací. Brand experience > káva. Konzistence napříč 30k+ kavárnami." },
+            { c: VSE.success, t: "🚗 Uber", d: "Brand = předvídatelnost + jednoduchost. Race-to-bottom price, ale brand drží premium positioning vs taxíky." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ExamAlert
+          komise="Špaček + Kučera + Zamazalová 2025 (Víno) + 3× další 2025"
+          what="Špaček, Vávra, Mládková chytají <b>branding u služeb — význam + řízení + měření</b>. Naučit explicitně: 5 specifik (nehmotnost, lidé, inseparability, variability, pomíjivost) + 5 pravidel řízení + příklady (Ritz-Carlton, Starbucks)."
+        />
+      </div>) },
+  ];
+
+  const flashcardsMkt10 = [
+    { term: "Značka (Brand)", def: "Jméno, symbol, design nebo kombinace, která identifikuje produkty firmy a odlišuje je od konkurence (Kotler). Marketingový kapitál.", tag: "POJEM" },
+    { term: "Tvorba značky — 5 fází", def: "Brand strategy / Brand identity / Brand communication / Brand experience / Brand measurement.", tag: "POJEM" },
+    { term: "4 funkce značky pro spotřebitele", def: "Identifikační (rozpoznání) / Garanční (kvalita) / Symbolická (status) / Kognitivní (mental shortcut).", tag: "FUNKCE" },
+    { term: "4 funkce značky pro firmu", def: "Premium pricing / Bariéra vstupu / Loyalita + CLV / Asset value (rozvahový asset).", tag: "FUNKCE" },
+    { term: "6 prvků značky", def: "Jméno / Logo / Slogan / Barvy / Font / Zvuk (sonic branding). + doplňky: packaging, mascot, brand voice, environment.", tag: "PRVKY" },
+    { term: "Brand Name (jméno)", def: "Slovní označení. Apple, Google, Tesla. Snadno vyslovit, zapamatovat, bez kontroverze v jiných jazycích.", tag: "PRVKY" },
+    { term: "Logo", def: "Vizuální symbol. Apple jablko, Nike swoosh, Mercedes hvězda. Jednoduchý, škálovatelný, rozpoznatelný i bez textu.", tag: "PRVKY" },
+    { term: "Slogan", def: "Krátká zapamatovatelná fráze. „Just Do It\u201D, „Think Different\u201D, „I'm Lovin' It\u201D.", tag: "PRVKY" },
+    { term: "Sonic branding", def: "Audio identity. Intel jingle (5 not), McDonald's „ba-da-ba-ba-baa\u201D, Netflix „ta-dum\u201D.", tag: "PRVKY" },
+    { term: "Kritéria dobrých prvků (Kotler)", def: "Memorability / Meaningfulness / Likability / Transferability / Adaptability / Protectability.", tag: "PRVKY" },
+    { term: "Aakerův model — 5 dimenzí", def: "Brand Loyalty / Brand Awareness / Perceived Quality / Brand Associations / Other Proprietary Assets (patenty, trademarks).", tag: "MODELY" },
+    { term: "Brand Loyalty (Aaker)", def: "Opakované nákupy, switching resistance. Apple users 90 % loyalty. Klíčová dimenze brand equity.", tag: "MODELY" },
+    { term: "Brand Awareness", def: "Recall + Recognition. Aided × Unaided × Top-of-mind awareness.", tag: "MODELY" },
+    { term: "Kotlerův model — Brand Resonance Pyramid", def: "4 vrstvy odspoda: Identity (kdo?) → Meaning (co?) → Response (jak reaguji?) → Resonance (vztah, brand love).", tag: "MODELY" },
+    { term: "Brand Resonance", def: "Vrchol Kotlerovy pyramidy. Loyalty + attachment + community + engagement. Brand love.", tag: "MODELY" },
+    { term: "Kellerův CBBE model", def: "Customer Based Brand Equity — síla značky je v hlavě zákazníka. 4 otázky: Kdo jsi? Co reprezentuješ? Co si o tobě myslím? Co máme společného?", tag: "MODELY" },
+    { term: "Rodinná značka (House of Brands)", def: "Více nezávislých značek pod 1 firmou. P&G (Tide, Pampers, Gillette, Pantene) — žádné společné brandování.", tag: "STRATEGIE" },
+    { term: "Umbrella značka (Branded House)", def: "1 master brand pro všechny produkty. Apple, Google, FedEx, Virgin. Konzistence + scale efekt.", tag: "STRATEGIE" },
+    { term: "Endorsed Brands (Hybrid)", def: "Sub-brand + master brand visible. Toyota Lexus, Marriott Courtyard, Nestlé KitKat. Best of both worlds.", tag: "STRATEGIE" },
+    { term: "Multi-brand strategy", def: "Více značek konkuruje sobě. P&G Tide + Gain (oba prací prášky). Cíl: max shelf space + segmentace.", tag: "STRATEGIE" },
+    { term: "Globální × Národní × Regionální značka", def: "Coca-Cola (globální) × Albert (národní v ČR) × Plzeňský Prazdroj (regionální).", tag: "STRATEGIE" },
+    { term: "Private Label (privátní značka)", def: "Retail vlastní značky — Albert Excellence, Tesco Value, IKEA. Marže 40-60 % vs 20-30 % u národních. Brand v retailu.", tag: "STRATEGIE" },
+    { term: "NPS (Net Promoter Score)", def: "% Promoters (9-10) − % Detractors (0-6) = NPS. 30+ výborný, 50+ world-class. Apple 75, Tesla 96.", tag: "MĚŘENÍ" },
+    { term: "BrandZ", def: "WPP/Kantar roční žebříček. 5 úrovní pyramidy: Presence → Relevance → Performance → Advantage → Bonding. Top 2024: Apple 1 bil. USD.", tag: "MĚŘENÍ" },
+    { term: "Interbrand Best Global Brands", def: "Konkurenční ranking k BrandZ. Financial performance + role brand + brand strength. Top 2024: Apple 488 mld. USD.", tag: "MĚŘENÍ" },
+    { term: "Y&R BAV (Brand Asset Valuator)", def: "4 pilíře: Differentiation / Relevance / Esteem / Knowledge. Diagnostika brand health.", tag: "MĚŘENÍ" },
+    { term: "5 specifik služby (pro branding)", def: "Nehmotnost / Lidé jsou součástí značky / Inseparability / Variability / Pomíjivost.", tag: "SLUŽBY" },
+    { term: "Servicescape", def: "Physical evidence — prostředí, kde se služba odehrává. Apple Store, Starbucks atmosféra. Komunikuje brand.", tag: "SLUŽBY" },
+    { term: "Ritz-Carlton brand principle", def: "&quot;Ladies and gentlemen serving ladies and gentlemen.&quot; Každý zaměstnanec může utratit 2000 USD na problém.", tag: "SLUŽBY" },
+  ];
+
+  const quizMkt10 = [
+    { q: "Co je značka (brand) podle Kotlera?", opts: ["Logo", "Jméno/symbol/design, který identifikuje produkty firmy a odlišuje je od konkurence", "Reklama", "Cena"], correct: 1 },
+    { q: "Kolik funkcí značky pro spotřebitele rozlišujeme?", opts: ["2", "3", "4 (identifikační/garanční/symbolická/kognitivní)", "5"], correct: 2 },
+    { q: "Která funkce značky pro firmu umožňuje účtovat víc než konkurence?", opts: ["Loyalita", "Premium pricing", "Bariéra vstupu", "Asset value"], correct: 1 },
+    { q: "Kolik hlavních prvků značky rozlišujeme?", opts: ["3", "4", "6 (jméno/logo/slogan/barvy/font/zvuk)", "10"], correct: 2 },
+    { q: "Co je sonic branding?", opts: ["Reklamní hudba", "Audio identity — Intel jingle, McDonald's, Netflix ta-dum", "Hlasitý slogan", "Soundtrack"], correct: 1 },
+    { q: "Aakerův model brand equity má kolik dimenzí?", opts: ["3", "4", "5 (loyalty/awareness/perceived quality/associations/proprietary assets)", "6"], correct: 2 },
+    { q: "Co je vrchol Kotlerovy Brand Resonance Pyramid?", opts: ["Brand awareness", "Brand meaning", "Brand response", "Brand resonance (brand love)"], correct: 3 },
+    { q: "Kellerův CBBE model říká, že síla značky je:", opts: ["Ve velikosti reklamy", "V hlavě zákazníka — co si pamatuje, cítí, věří", "Ve výši rozpočtu", "V počtu poboček"], correct: 1 },
+    { q: "P&G (Tide, Pampers, Gillette, Pantene) je příkladem:", opts: ["Umbrella branding", "House of Brands (rodinná značka)", "Endorsed brands", "Private label"], correct: 1 },
+    { q: "Apple, Google, FedEx jsou příklady:", opts: ["House of Brands", "Branded House (umbrella značka)", "Multi-brand", "Endorsed"], correct: 1 },
+    { q: "Co je Private Label?", opts: ["Tajná značka", "Retail vlastní značka — Albert Excellence, Tesco Value, IKEA", "Premium značka", "Luxusní značka"], correct: 1 },
+    { q: "Jak se počítá NPS?", opts: ["Průměrné hodnocení", "% Promoters (9-10) − % Detractors (0-6)", "Počet prodejů", "Trend kvality"], correct: 1 },
+    { q: "Co je BrandZ?", opts: ["Druh značky", "WPP/Kantar roční žebříček + 5úrovňová pyramida (Presence→Bonding)", "Cenová strategie", "Logo design"], correct: 1 },
+    { q: "Kolik pilířů má Y&R BAV model?", opts: ["3", "4 (Differentiation/Relevance/Esteem/Knowledge)", "5", "6"], correct: 1 },
+    { q: "Která NENÍ specifikum služby pro branding?", opts: ["Nehmotnost", "Lidé jsou součástí značky", "Variabilita", "Hmotná podstata"], correct: 3 },
+    { q: "Co je servicescape?", opts: ["Mapa služeb", "Physical evidence — prostředí, kde se služba odehrává (Apple Store, Starbucks)", "Reklama", "Cena"], correct: 1 },
+  ];
+
+  const praxeMkt10 = {
+    caseStudy: {
+      company: "Apple — etalon umbrella brandu + premium pricing + brand resonance",
+      subtitle: "Od garážového projektu k 488 mld. USD brand value (Interbrand 2024 #1)",
+      content: (<>
+        <b>Apple</b> je <b>učebnicový příklad sofistikovaného brand managementu</b>. 488 mld. USD brand value (Interbrand 2024 #1), NPS 75, BrandZ #1 dlouhodobě.<br/><br/>
+        <b style={{ color: VSE.fmv }}>📛 6 prvků značky Apple:</b><br/><br/>
+        • <b>Jméno:</b> &quot;Apple&quot; — jednoduchý, ne tech-specific, transferabilní (z PC na phones na watches)<br/><br/>
+        • <b>Logo:</b> Jablko s ukousnutím — od 1977 (Rob Janoff). Minimalistický redesign 1998 (Steve Jobs comeback).<br/><br/>
+        • <b>Slogan:</b> &quot;Think Different&quot; (1997-2002), dnes bez stálého sloganu — produkty mluví samy<br/><br/>
+        • <b>Barvy:</b> Stříbrná, černá, bílá — minimalistická paleta. Konzistence napříč produkty.<br/><br/>
+        • <b>Font:</b> San Francisco (SF Pro) — vlastní typografie, navržená pro digital + retail<br/><br/>
+        • <b>Zvuk:</b> Mac startup chime, iPhone unlock, Apple Pay confirmation — sonic branding<br/><br/>
+        <b style={{ color: VSE.warning }}>🏠 Brand Architecture — Branded House (Umbrella):</b><br/><br/>
+        • <b>Master brand:</b> Apple<br/><br/>
+        • <b>Sub-brands:</b> iPhone, iPad, MacBook, Apple Watch, AirPods, Apple TV+, Apple Music, Apple Pay, Vision Pro<br/><br/>
+        • <b>Konzistence:</b> Všechno sdílí design language, OS principles, retail experience<br/><br/>
+        • <b>Scale efekt:</b> 1 brand investice slouží všem produktům<br/><br/>
+        <b style={{ color: VSE.fph }}>📊 Modely hodnoty Apple:</b><br/><br/>
+        • <b>Aakerův model:</b> Loyalty 92 %, Awareness 100 %, Perceived Quality #1 v premium tech, Associations (innovation, design, status, ecosystem), Proprietary (1000+ patentů, M-čipy)<br/><br/>
+        • <b>Kotlerova pyramida:</b> Resonance — 95 % iPhone users plan to buy další iPhone. Brand love score 8.7/10.<br/><br/>
+        <b style={{ color: VSE.success }}>📏 Brand metrics:</b><br/><br/>
+        • <b>NPS:</b> 75 (vs průměr industry 32) — world-class<br/><br/>
+        • <b>BrandZ 2024:</b> #1 — 1 bil. USD<br/><br/>
+        • <b>Interbrand 2024:</b> #1 — 488 mld. USD<br/><br/>
+        • <b>CLV:</b> Průměrný iPhone user kupuje 4 další Apple produkty = 8000 USD CLV<br/><br/>
+        <b style={{ color: VSE.danger }}>🏪 Brand v retailu:</b><br/><br/>
+        • <b>Apple Store:</b> 500+ poboček globálně. Genius Bar, Today at Apple workshopy.<br/><br/>
+        • <b>Servicescape:</b> Minimalistický design = brand identity. Sklo, dřevo, prostor.<br/><br/>
+        • <b>Premium positioning:</b> Žádné slevy, žádné shelf-fighting s konkurencí<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Apple je <b>nejcennější značka světa</b> (488 mld. USD), s premium marží 40 % (vs Samsung 20 %), 90 % loyalty rate, a customer ecosystem lock-in. Klasický důkaz síly <b>umbrella brandingu + premium positioningu + brand resonance</b>.
+      </>),
+      lessons: "Apple je <b>etalon premium umbrella brandu</b>. Pro PS doporuč: <b>6 prvků značky konzistentně + umbrella nebo endorsed architecture + Aaker+Kotler diagnostika + NPS+BrandZ měření + servicescape v retailu</b>. Alternativy: <b>Coca-Cola (globální brand, 100+ let), Nike (sonic + symbolic), Tesla (premium personal brand Musk), P&G (House of Brands strategy), Ritz-Carlton (service brand etalon), IKEA (private label + experience)</b>."
+    },
+    miniExamples: [
+      { tag: "PRVKY ZNAČKY", color: VSE.fmv, company: "Nike — &quot;Just Do It&quot; + Swoosh", content: "Nike má <b>6 prvků značky propojených do silné identity</b>: jméno (Greek god of victory), Swoosh logo (vytvořila studentka 1971 za 35 USD), slogan &quot;Just Do It&quot; (1988), barvy (černá/bílá/oranžová), Akzidenz-Grotesk font, sonic branding na TV ads. Brand value 53 mld. USD." },
+      { tag: "AAKER MODEL", color: VSE.warning, company: "Volvo — Brand Associations = bezpečí", content: "Volvo dominuje <b>1 brand association = bezpečí</b>. 50 let R&D zaměřené na bezpečnost (vynalezli 3-bodový pás 1959, free pro konkurenci). Brand awareness 100 %, perceived quality medium-premium, ale dimenze Associations je sila kategorie. Klasický Aaker příklad." },
+      { tag: "UMBRELLA", color: VSE.fph, company: "Virgin — extrémní umbrella brand", content: "Virgin Group má pod 1 brandem <b>40+ companies</b>: Atlantic (airlines), Media (telecom), Galactic (space tourism), Money (banking), Active (gyms). Richard Branson jako brand persona drží konzistenci. Risk: brand dilution, ale Virgin to zatím zvládá." },
+      { tag: "BRANDING SLUŽEB", color: VSE.success, company: "Ritz-Carlton — empowering employees", content: "Ritz-Carlton dává <b>každému zaměstnanci pravomoc utratit 2000 USD na vyřešení problému zákazníka</b> bez schvalování. Brand promise &quot;Ladies and gentlemen serving ladies and gentlemen&quot; = HR praktiky. NPS 85+ (luxury hotels průměr 45). Etalon service brandu." },
+      { tag: "PRIVATE LABEL", color: VSE.danger, company: "IKEA — branded house + private label hybrid", content: "IKEA je <b>private label retailer s brand strategy</b>. Vše vlastní značka, ale produkty mají specifická jména (BILLY, KALLAX, MALM) = mini brands pod IKEA. Marže 40-60 % (vs národní značky 25 %). Brand experience = showrooms + meatballs + kids playground." },
+    ]
+  };
+
+  const examQuestionsMkt10 = [
+    { komise: "2025-01-30 — Nový + Vávra + Heřman (Horská chata)", otazka: "Značka, prvky, měření/modely (NPS, BRANDZ), typy + aplikace na PS", pozn: "Nový chce EXPLICITNĚ <b>NPS + BrandZ</b>. Naučit obě metriky kompletně + Aakerův model + Kotlerova pyramida. Plus 6 prvků a typy značek (globální/národní, umbrella/rodinná)." },
+    { komise: "2025-06-10 — Nový + Svobodová + Kolouchová (Neziskovka)", otazka: "Branding na spotřebním trhu, modely hodnoty značky (Aakerův a Kotlerův)", pozn: "Nový opět chce <b>Aaker + Kotler explicitně</b>. Naučit obě modely kompletně. Pro neziskovku: brand drives donations + volunteer recruitment." },
+    { komise: "2025-02-03 — Bočková + Nový + Kolouchová (Software)", otazka: "Brand v retailu, faktory rozhodování — volby brandu, metoda oceňování značky, význam brandu pro spotřebitele a pro firmu, prvky značky, strategie značky (rodinná, umbrella)", pozn: "Bočková chce <b>KOMPLET</b>: význam pro spotřebitele + firmu, prvky, strategie (rodinná, umbrella), metody oceňování, brand v retailu. Nejširší otázka — naučit všechno." },
+    { komise: "2025-06-12 — Machek + Kolouchová + Legnerová (Kuchyňské nádobí)", otazka: "Značka, funkce značky, modely hodnoty značky, prvky značky a jejich popis", pozn: "Machek chce <b>prvky značky + popis</b> každého. Naučit 6 prvků + kritéria Kotler (memorability, transferability, atd.)." },
+    { komise: "2025-06-04 — Tahal + Cejthamr + Schönfeld (Kolo)", otazka: "Brand building, druhy značek, prvky a jejich metriky, hodnota značky", pozn: "Tahal chce <b>brand building proces</b> + druhy + prvky + metriky. Naučit 5 fází tvorby značky + typy podle geografie/kvality/architecture." },
+    { komise: "2026-01-30 — Honig + Kučera + Machek (Kuchyňské náčiní)", otazka: "Tvorba značky na spotřebních trzích. Funkce značky, metody", pozn: "Honig chce <b>TVORBA značky</b> jako proces. Naučit 5 fází tvorby + 4+4 funkce (spotřebitel + firma) + metody měření (NPS, BrandZ, Interbrand)." },
+    { komise: "2026-02-02 — Špaček + Nový + Machek (Káva) + 3× další 2025", otazka: "Služby, charakteristiky, řízení značky služeb, branding u služeb jeho význam", pozn: "<b>Špaček, Vávra, Mládková chytají branding služeb 4× v roce 2025</b>. Naučit explicitně: 5 specifik služby (nehmotnost, lidé, inseparability, variability, pomíjivost) + 5 pravidel řízení + příklady (Ritz-Carlton, Starbucks)." },
+    { komise: "2025-09-11 — Smrčka + Zamazalová + Kučera (Výroba kol)", otazka: "Produkt a branding", pozn: "Smrčka spojuje <b>M6 produkt + M10 branding</b>. Začni 5 vrstvami produktu (M6), pak 6 prvky značky, modely hodnoty, brand architecture. Pro kola: umbrella vs separate brand pro premium řadu." },
+  ];
+
+  const podcastMkt10 = { title: "Marketing 10 — Značka (branding)", description: "Definice značky (Kotler) + tvorba značky (5 fází) + funkce pro spotřebitele (identifikační/garanční/symbolická/kognitivní) + funkce pro firmu (premium pricing/bariéra vstupu/loyalita/asset value). 6 prvků značky (jméno/logo/slogan/barvy/font/zvuk) + kritéria Kotler. Modely hodnoty značky — Aakerův (5 dimenzí), Kotlerova Brand Resonance Pyramid (4 vrstvy), Kellerův CBBE. Brand architecture (House of Brands/Branded House/Endorsed/Multi-brand). Typy značek podle geografie a kvality. Brand v retailu + private label. Měření: NPS, BrandZ (5 úrovní pyramidy), Interbrand, Y&R BAV. Branding služeb — 5 specifik + řízení + Ritz-Carlton, Starbucks, Singapore Airlines. Apple, Nike, Volvo, Virgin, IKEA, P&G.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt10 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí Kotler — značka = jméno/symbol/design pro identifikaci + odlišení od konkurence.<br/>
+    <b style="color:#A82A5F">2.</b> 5 fází tvorby značky — strategy / identity / communication / experience / measurement.<br/>
+    <b style="color:#A82A5F">3.</b> ⚠️ <b>4+4 funkce značky</b> (Bočková chytá!) — pro spotřebitele × pro firmu.<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>6 prvků značky</b> (Machek chytá!) — jméno/logo/slogan/barvy/font/zvuk + popis každého.<br/>
+    <b style="color:#A82A5F">5.</b> Kritéria dobrých prvků (Kotler) — memorability/meaningfulness/likability/transferability/adaptability/protectability.<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>Aakerův model</b> (Nový chytá!) — 5 dimenzí: loyalty/awareness/perceived quality/associations/proprietary assets.<br/>
+    <b style="color:#A82A5F">7.</b> ⚠️ <b>Kotlerova Brand Resonance Pyramid</b> — 4 vrstvy: Identity → Meaning → Response → Resonance.<br/>
+    <b style="color:#A82A5F">8.</b> Kellerův CBBE — síla značky je v hlavě zákazníka.<br/>
+    <b style="color:#A82A5F">9.</b> ⚠️ <b>Brand Architecture</b> (Bočková chytá!) — House of Brands / Branded House / Endorsed / Multi-brand.<br/>
+    <b style="color:#A82A5F">10.</b> Typy značek podle geografie (globální/národní/regionální) + kvality (luxury/premium/mass/economy).<br/>
+    <b style="color:#A82A5F">11.</b> Brand v retailu + Private Label (Albert, Lidl, IKEA).<br/>
+    <b style="color:#A82A5F">12.</b> ⚠️ <b>NPS + BrandZ</b> (Nový chytá!) + Interbrand + Y&R BAV.<br/>
+    <b style="color:#A82A5F">13.</b> ⚠️ <b>Branding služeb</b> (Špaček, Vávra, Mládková chytají 4×!) — 5 specifik + 5 pravidel řízení + Ritz-Carlton.<br/>
+    <b style="color:#A82A5F">14.</b> Aplikace na PS — funkce + prvky + model + architecture + měření.
+  `;
+
+  const caseStudyMkt10 = {
+    title: "Lenka — Brand Manager Apatyka Group, sítě 38 lékáren v ČR (560 mil. Kč, 280 zaměstnanců)",
+    subtitle: "Vybudovat značku service-based businessu — branding lékáren",
+    scenario: "Lenka (37 let) je nová Brand Manager v Apatyka Group, sítí 38 lékáren v ČR. Firma 12 let, růst 8 % YoY, ale značka roztříštěná — každá lékárna vypadá jinak, různé názvy podle bývalých majitelů.\n\nAktuální situace:\n\n• 38 lékáren v 15 městech ČR. 25 fungují pod brandem &quot;Apatyka&quot;, 13 si zachovalo původní názvy (Lékárna U Anděla, Pharma Plus, Vita atd.)\n\n• Tržby 560 mil. Kč ročně, EBITDA 11 %\n\n• Cílovka: 25-65 let, urban + suburban, mix wellness-uvědomělí + chronický pacienti\n\n• Konkurence: Dr. Max (lídr trhu, 460 lékáren), BENU (200 lékáren), Lloyds Pharma, lokální nezávislé\n\nProblémy značky:\n\n• Inkonzistentní vizuální identita — různé logo, barvy, uniformy zaměstnanců napříč pobočkami\n\n• Žádná jednotná value proposition — co Apatyka znamená? Co odlišuje od Dr. Max?\n\n• Brand awareness 18 % (vs Dr. Max 89 %, BENU 67 %)\n\n• Žádné měření NPS, brand health, customer satisfaction\n\n• Lidé v lékárně si stěžují na různý styl rad lékárníků — neprofesionální zkušenost\n\n• Žádný umbrella brand pro 13 sub-značek — chaos\n\nKlíčové vstupy:\n\n• 280 zaměstnanců, z toho 95 farmaceutů (kvalifikovaní odborníci)\n\n• CEO chce do 18 měsíců rebrand + sjednocení do umbrella brand &quot;Apatyka&quot;\n\n• Rozpočet 4,5 mil. Kč na rebranding + 2 mil. Kč/rok na brand komunikaci\n\n• Apatyka má patenty na vlastní privátní řadu doplňků (8 produktů) — &quot;Apatyka Naturals&quot;\n\n• Lokace lékáren: 60 % v menších městech (15-50k obyv.), 40 % ve velkých (Praha, Brno, Ostrava)\n\n• Customer data: 120k aktivních zákazníků v loyalty programu\n\nLenka má 18 měsíců + 4,5 mil. Kč na kompletní brand transformation.",
+    signals: [
+      { text: "13 si zachovalo původní názvy (Lékárna U Anděla, Pharma Plus, Vita)", color: VSE.danger, reason: "Klasický problém <b>brand architecture</b> — chaos sub-značek. Bez umbrella brand strategy nelze budovat awareness. Potřeba <b>migrace na branded house</b>." },
+      { text: "Inkonzistentní vizuální identita — různé logo, barvy, uniformy", color: VSE.danger, reason: "Chybí jednotné <b>prvky značky</b> (M10) — logo, barvy, font, uniformy. Brand book + visual identity redesign = klíčová priorita." },
+      { text: "Žádná jednotná value proposition", color: VSE.danger, reason: "Bez USP a positioning (M4) zákazník neví, proč Apatyka místo Dr. Max. <b>Brand strategy</b> = fáze 1 tvorby značky." },
+      { text: "Brand awareness 18 % (vs Dr. Max 89 %)", color: VSE.warning, reason: "Slabá <b>awareness dimenze</b> (Aakerův model). Nutné <b>aided + unaided + top-of-mind</b> tracking + investice do brand awareness kampaní." },
+      { text: "Žádné měření NPS, brand health", color: VSE.warning, reason: "Bez <b>brand metrics</b> (NPS, BrandZ, Y&R BAV) nelze řídit brand investice. Klíčové nastavit baseline + pravidelný tracking." },
+      { text: "Lidé v lékárně si stěžují na různý styl rad lékárníků", color: VSE.danger, reason: "Klasický problém <b>brandingu služeb</b> (M10!) — variabilita služby. Lidé jsou součástí brandu. Potřeba <b>standardizace customer service</b> + training." },
+      { text: "95 farmaceutů (kvalifikovaní odborníci)", color: VSE.fph, reason: "Klíčové <b>brand asset pro service branding</b> — expertise může být USP. &quot;Apatyka — radí farmaceut, ne prodavač&quot; positioning." },
+      { text: "8 produktů Apatyka Naturals (vlastní privátní řada)", color: VSE.warning, reason: "<b>Private label</b> (M10 brand v retailu) = profit engine 40-60 % marže. Lze posílit jako sub-brand pod umbrella Apatyka." },
+      { text: "60 % v menších městech (15-50k obyv.)", color: VSE.fph, reason: "Strategická příležitost — <b>Dr. Max v menších městech méně dominantní</b>. Lokální branding + community focus = win against national chains." },
+      { text: "120k aktivních zákazníků v loyalty programu", color: VSE.fph, reason: "Bohatá data pro <b>brand research</b> — segmentace, preference, propose pro rebrand testing. CLV potenciál." },
+    ],
+    quiz1: {
+      question: "Co je hlavní brand problém Apatyka Group?",
+      options: [
+        "Špatné ceny",
+        "Špatná kvalita",
+        "Roztříštěná brand architecture + chybí umbrella brand + inkonzistentní service experience napříč 38 lékárnami",
+        "Špatná lokace lékáren",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Co by Lenka měla udělat pro brand transformation Apatyka Group?",
+      options: [
+        { text: "Fáze 1 (Měsíc 1-3): Brand strategy — definovat USP &quot;Apatyka radí farmaceut, ne prodavač&quot; + positioning vs Dr. Max (community + odbornost)", correct: true, reason: "✓ Fáze 1 ze 5 (tvorba značky). Jasné USP + positioning leverage 95 farmaceutů jako klíčové asset." },
+        { text: "Fáze 2 (Měsíc 3-6): Brand identity redesign — nové logo, barvy, font, brand book + visual standards pro 38 lékáren", correct: true, reason: "✓ Konzistentní 6 prvků značky (M10). Bez jednotné identity = chaos. Apple jako benchmark konzistence." },
+        { text: "Migrace 13 sub-značek na umbrella &quot;Apatyka&quot; (Branded House strategie) — postupný rebrand v 12 měsících", correct: true, reason: "✓ Branded House (M10) = scale efekt. Postupný rebrand minimalizuje risk customer confusion. Apple, FedEx model." },
+        { text: "Branding služeb — standardizace customer experience: školení 280 zaměstnanců, standardní greeting, ferramentová checklist", correct: true, reason: "✓ Klíčové pro service brand (M10 specifika služby). Ritz-Carlton model — zaměstnanci jako brand ambassadors." },
+        { text: "Servicescape design — nové uniformy, jednotný interiér lékáren, branded packaging pro receptury", correct: true, reason: "✓ Physical evidence = service brand (M10). Apple Store-style konzistence napříč 38 pobočkami." },
+        { text: "Brand metrics setup — baseline NPS + brand awareness tracking (aided/unaided) + quarterly brand health survey", correct: true, reason: "✓ Bez měření nelze řídit (Nový chytá NPS!). Baseline → cíl 50+ NPS + 60 % awareness v 18 měsících." },
+        { text: "Posílit &quot;Apatyka Naturals&quot; jako sub-brand pod umbrella — endorsed brand strategy + posílit private label (40-60 % marže)", correct: true, reason: "✓ Endorsed branding (M10) + private label profit engine. IKEA model — vlastní brand mini-brands." },
+        { text: "Lokální community focus v menších městech — sponsoring akcí, lokální PR, &quot;your neighborhood pharmacy&quot;", correct: true, reason: "✓ Differentiation proti Dr. Max národnímu brandu. Lokální branding leverage 60 % lokací v menších městech." },
+        { text: "Cost Leadership strategy — snížit ceny pod Dr. Max masovou velkoobchodní silou", correct: false, reason: "✗ Apatyka má 38 lékáren, Dr. Max 460 — scale válku prohraje. Lepší <b>Differentiation Focus</b> (odbornost + lokální)." },
+        { text: "Změnit jméno z &quot;Apatyka&quot; na něco modernějšího (například &quot;PharmaCare&quot;)", correct: false, reason: "✗ Apatyka má 18 % awareness — to je <b>brand equity to leverage</b>, ne to throw away. Rebranding name = drahý + risky." },
+      ],
+    },
+    summary: "<b>Apatyka Group potřebuje kompletní brand transformation — od chaosu k branded house s service brand excellence.</b><br/><br/><b>Plán 18 měsíců (4,5 mil. Kč):</b><br/><br/>• <b>Měsíc 1-3 (300k Kč):</b> Brand strategy — USP &quot;Radí farmaceut, ne prodavač&quot; + positioning (M4) vs Dr. Max + brand vision/mission/values<br/><br/>• <b>Měsíc 3-6 (1,5 mil. Kč):</b> Brand identity redesign — logo, barvy, font, uniformy, brand book. 6 prvků značky konzistentně.<br/><br/>• <b>Měsíc 6-12 (1,5 mil. Kč):</b> Brand architecture — migrace 13 sub-značek na umbrella &quot;Apatyka&quot; postupně. Branded House strategy.<br/><br/>• <b>Měsíc 6-18 (700k Kč):</b> Branding služeb — training 280 zaměstnanců na customer service standards, servicescape redesign napříč 38 lékárnami.<br/><br/>• <b>Měsíc 9-18 (500k Kč):</b> Apatyka Naturals — endorsed sub-brand pod umbrella, posílení private label communications.<br/><br/>• <b>Měsíc 1-18 (loyalty data + 2 mil. Kč/rok marketing):</b> Brand metrics — baseline NPS, awareness tracking, customer satisfaction quarterly + komunikace lokálního focus v menších městech.<br/><br/><b>Pro komisi:</b> Klasický service brand v retailu s roztříštěným portfoliem. <b>Apple (umbrella + premium), Ritz-Carlton (service brand), IKEA (private label + experience)</b> jako benchmark. <b>Kotlerova Brand Resonance Pyramid</b> + <b>Aakerův model</b> + <b>NPS+BrandZ</b> jako frameworky. <b>5 specifik služby</b> aplikováno na lékárenský retail. Anti-vzor: Cost Leadership proti Dr. Max = sebevražda. Vzor: <b>Differentiation Focus</b> (odbornost + lokální) + <b>Branded House</b> (Apple model).",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={10} title="Značka (branding) — prvky, modely, strategie, měření, branding služeb"
+      subtitle="6 prvků + Aaker × Kotler × Keller + 4 brand architecture + NPS/BrandZ + service branding"
+      color={VSE.fis}
+      questionText="Značka, prvky, modely hodnoty značky, strategie značky, měření, branding služeb."
+      questionDesc="Definice značky (Kotler). 5 fází tvorby značky. 4+4 funkce (pro spotřebitele/firmu). 6 prvků značky (jméno/logo/slogan/barvy/font/zvuk) + kritéria Kotler. Modely hodnoty značky — Aakerův (5 dimenzí), Kotlerova Brand Resonance Pyramid (4 vrstvy), Kellerův CBBE. Brand architecture (House of Brands/Branded House/Endorsed/Multi-brand). Typy značek podle geografie a kvality. Brand v retailu + Private Label. Měření: NPS, BrandZ (5 úrovní pyramidy), Interbrand, Y&R BAV. Branding služeb — 5 specifik + 5 pravidel řízení + Ritz-Carlton. Apple, Nike, Volvo, Virgin, IKEA, P&G."
+      sloz={3} roz={4} freq={5}
+      examStrategy={examStrategyMkt10}
+      studySections={studySectionsMkt10}
+      flashcards={flashcardsMkt10}
+      quiz={quizMkt10}
+      praxe={praxeMkt10}
+      examQuestions={examQuestionsMkt10}
+      podcast={podcastMkt10}
+      caseStudy={caseStudyMkt10}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 11 — Cenotvorba — faktory, postup, strategie, cenová diskriminace, efekty
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt11Panel() {
+  const studySectionsMkt11 = [
+    { id: "intro", title: "Cena — definice + role v marketing mixu", subtitle: "Co je cena + 4 funkce + vliv na firmu", color: VSE.fis, emoji: "coins",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Cena (Price)</b> = peněžní vyjádření hodnoty produktu/služby pro zákazníka. <b>Jediný prvek 4P, který tvoří příjmy</b> (ostatní jen náklady). Komise <b>Nový</b> chce explicitně cenu z pohledu mkt nástroje, ne z ekonomické teorie.
+        </Def>
+        <Tag color={VSE.fis}>4 role ceny v marketing mixu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "💵 GENERÁTOR PŘÍJMŮ", d: "Jediné P, které tvoří revenue. Ostatní P (produkt, distribuce, propagace) jsou jen náklady. Cena × množství = obrat." },
+            { c: VSE.warning, t: "📊 SIGNÁL KVALITY", d: "Vysoká cena = signál premium. Nízká cena = signál masového trhu. Rolex 5000 EUR ≠ Casio 30 EUR (i když oba ukazují čas)." },
+            { c: VSE.fph, t: "🎯 SEGMENTAČNÍ NÁSTROJ", d: "Cenové body filtrují cílovku. iPhone SE 500 USD (mainstream) × iPhone Pro Max 1600 USD (premium)." },
+            { c: VSE.success, t: "⚔️ KONKURENČNÍ ZBRAŇ", d: "Cenové války, akce, slevy. Lidl × Albert, Tesco × Penny. Klíčová pro Cost Leadership (M5)." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Specifika ceny vs ostatní P</Tag>
+        <Bullet items={[
+          "<b>Nejflexibilnější prvek mixu:</b> Lze změnit dnes, oproti produktu (měsíce-roky) nebo distribuci (smlouvy).",
+          "<b>Nejviditelnější:</b> Zákazník vždy porovnává. Konkurence reaguje rychle.",
+          "<b>Asymetrický dopad:</b> Snížení ceny o 10 % = max −10 % na profit. Zvýšení o 10 % = až +30 % na profit (operating leverage).",
+          "<b>Psychologie cen:</b> Cena ovlivňuje vnímanou kvalitu (referenční point).",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Nový + Svobodová + Kolouchová 2025 (Neziskovka)"
+          what="Kolouchová chce <b>cenu jako MARKETINGOVÝ nástroj</b>, ne ekonomickou teorii (poptávka × nabídka). Začni rolemi v mkt mixu, pak postup tvorby ceny."
+        />
+      </div>) },
+
+    { id: "faktory", title: "Faktory ovlivňující stanovení ceny", subtitle: "3 hlavní + Mikovcová chytá vnímání cen", color: VSE.fis, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>3 skupiny faktorů</b> ovlivňují finální cenu. Komise <b>Krause, Mikovcová, Špaček</b> chtějí explicitně faktory + postup. Naučit do hloubky.
+        </Def>
+        <Tag color={VSE.fis}>1️⃣ INTERNÍ FAKTORY (firma kontroluje)</Tag>
+        <Bullet items={[
+          "<b>Náklady (Costs):</b> Fixní + variabilní. Cena musí pokrýt N + marži.",
+          "<b>Cíle firmy:</b> Maximalizace zisku × Tržní podíl × Cash flow × Přežití × Image kvality.",
+          "<b>Strategie mkt mixu:</b> Differentiation = vyšší cena. Cost Leadership = nižší cena (M5).",
+          "<b>Životní cyklus produktu (M8):</b> Skimming (zavádění) × Penetration × Maturity cena × Decline harvest.",
+          "<b>Organizace:</b> Kdo rozhoduje o ceně — CEO, sales, marketing, finance.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>2️⃣ EXTERNÍ FAKTORY (firma neovlivní)</Tag>
+        <Bullet items={[
+          "<b>Trh a poptávka:</b> Elasticita (kolik změní poptávka při změně ceny). Soft drinks elastické × cigarety neelastické.",
+          "<b>Konkurence:</b> Co účtují konkurenti. Cenová válka × cenový mír.",
+          "<b>Ekonomické prostředí:</b> Inflace (2024 ČR 2 %), úroky, HDP, kupní síla.",
+          "<b>Vláda + regulace:</b> Antimonopolní zákony, cenová regulace (léky, energie, vodné).",
+          "<b>Distribuční kanály:</b> Marže pro retail, B2B partnery.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>3️⃣ FAKTORY VNÍMÁNÍ CEN ZÁKAZNÍKEM (Mikovcová chytá!)</Tag>
+        <Bullet items={[
+          "<b>Reference price (referenční cena):</b> Co zákazník očekává platit. Bez ní neumí posoudit, zda je cena fair.",
+          "<b>Price-quality inference:</b> Vyšší cena = vyšší vnímaná kvalita (Veblen effect).",
+          "<b>Loss aversion:</b> Slevy přitahují víc než vyšší kvalita za stejnou cenu (Kahneman).",
+          "<b>Anchoring:</b> První viděná cena nastaví anchor. Drahý menu položka udělá ostatní levnější.",
+          "<b>Bundling efekt:</b> Skupinová cena vypadá levnější než součet (McDonald's menu).",
+          "<b>Decoy effect:</b> Třetí (horší) varianta posune zákazníka k preferované volbě.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Cenová elasticita poptávky (klíč!)</Tag>
+        <Bullet items={[
+          "<b>Vzorec:</b> Elasticita = (% změna poptávky) / (% změna ceny).",
+          "<b>Elastické (E &gt; 1):</b> Změna ceny o 10 % způsobí změnu poptávky o víc než 10 %. Luxusní auta, restaurace.",
+          "<b>Neelastické (E &lt; 1):</b> Změna ceny málo ovlivní poptávku. Léky, cigarety, sůl, mléko.",
+          "<b>Klíč pro pricing:</b> U neelastické poptávky lze zvýšit cenu bez ztráty zákazníků. U elastické pozor.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "postup", title: "Postup stanovení ceny — 6 kroků (Kotler)", subtitle: "Klasika — Krause, Špaček, Vávra chtějí explicitně!", color: VSE.fis, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Kotlerových 6 kroků stanovení ceny</b> = standardní framework. Komise <b>Krause, Špaček, Vávra, Mikovcová</b> chtějí <b>POSTUP tvorby ceny</b>. Bez 6 kroků nedostaneš.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 720 200" style={{ width: "100%", maxWidth: 720, height: "auto" }}>
+            <defs>
+              <marker id="arrowPrice" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+              </marker>
+            </defs>
+            {[
+              { x: 10, c: VSE.fph, icon: "🎯", t: "1. CÍL", desc: "co chceme" },
+              { x: 130, c: VSE.fmv, icon: "📊", t: "2. POPTÁVKA", desc: "elasticita" },
+              { x: 250, c: VSE.warning, icon: "💵", t: "3. NÁKLADY", desc: "FC + VC" },
+              { x: 370, c: VSE.danger, icon: "⚔️", t: "4. KONKURENCE", desc: "benchmark" },
+              { x: 490, c: VSE.success, icon: "🛠️", t: "5. METODA", desc: "výpočet" },
+              { x: 610, c: VSE.fis, icon: "💰", t: "6. CENA", desc: "finální" },
+            ].map((s, i) => (
+              <g key={i}>
+                <rect x={s.x} y="50" width="100" height="100" rx="10" fill={s.c} opacity="0.85"/>
+                <text x={s.x + 50} y="80" textAnchor="middle" fontSize="24" fill="#fff">{s.icon}</text>
+                <text x={s.x + 50} y="105" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t}</text>
+                <text x={s.x + 50} y="125" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">{s.desc}</text>
+              </g>
+            ))}
+            {[110, 230, 350, 470, 590].map((x, i) => (
+              <line key={i} x1={x} y1="100" x2={x + 18} y2="100" stroke="#888" strokeWidth="2.5" markerEnd="url(#arrowPrice)"/>
+            ))}
+          </svg>
+        </div>
+        <Tag color={VSE.fis}>6 kroků postupu (Kotler) — detail</Tag>
+        <Bullet items={[
+          "<b>🎯 1. Stanovit CÍL pricingu:</b> Maximalizace zisku / tržního podílu / cash flow / přežití / leadership v kvalitě.",
+          "<b>📊 2. Odhadnout POPTÁVKU:</b> Křivka poptávky, elasticita, vnímaná hodnota (Van Westendorp v M12).",
+          "<b>💵 3. Vypočítat NÁKLADY:</b> Fixní + variabilní. Cena MUSÍ pokrýt náklady (pokud není dotace).",
+          "<b>⚔️ 4. Analyzovat KONKURENCI:</b> Benchmarking cen, value-for-money pozice. Vyšší/stejně/nižší než konkurence?",
+          "<b>🛠️ 5. Vybrat METODU stanovení:</b> Nákladová × poptávková × konkurenční × value-based (4 hlavní — viz další sekce).",
+          "<b>💰 6. Stanovit FINÁLNÍ CENU:</b> Včetně psychologie (999 vs 1000), zaokrouhlení, regional pricing.",
+        ]} color={VSE.fis} />
+      </div>) },
+
+    { id: "metody", title: "4 metody stanovení ceny", subtitle: "Nákladová × Poptávková × Konkurenční × Value-based", color: VSE.fis, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>4 hlavní metody stanovení ceny</b> — každá vhodná pro jiný kontext. Často se kombinují. Komise <b>Krause, Špaček</b> chtějí všechny 4 + příklady.
+        </Def>
+        <Tag color={VSE.fmv}>1️⃣ NÁKLADOVÁ METODA (Cost-plus pricing)</Tag>
+        <Bullet items={[
+          "<b>Vzorec:</b> Cena = Náklady + marže (typicky 20-50 %).",
+          "<b>Příklad:</b> Stavební firma (cena = materiál + práce + 25 % marže). Restaurace (cena = surovina × 3-4×).",
+          "<b>Výhody:</b> Jednoduchost, transparence, fair pro klienta.",
+          "<b>Nevýhody:</b> Ignoruje value pro zákazníka, konkurenci, poptávku. Nedoporučuje se pro brandy.",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>2️⃣ POPTÁVKOVÁ METODA (Demand-based pricing)</Tag>
+        <Bullet items={[
+          "<b>Princip:</b> Cena podle toho, kolik je ochoten zaplatit cílový segment.",
+          "<b>Příklad:</b> Letenky (dynamic pricing podle obsazenosti), Uber surge pricing (špička × off-peak).",
+          "<b>Klíč:</b> Cenový výzkum (M12 — Van Westendorp, BPTO).",
+          "<b>Výhody:</b> Maximalizuje revenue, reaguje na trh.",
+          "<b>Nevýhody:</b> Komplexní implementace, vyžaduje data + tech infrastructure.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>3️⃣ KONKURENČNÍ METODA (Competition-based pricing)</Tag>
+        <Bullet items={[
+          "<b>Princip:</b> Cena podle konkurence — stejně, výš, níž.",
+          "<b>Příklad:</b> Pepsi vs Coca-Cola (parita), Lidl vs Albert (pod konkurencí), Patagonia vs The North Face (nad konkurencí).",
+          "<b>Strategie:</b> Going rate (jdu s trhem) × Penetration (pod) × Premium (nad).",
+          "<b>Výhody:</b> Jednoduché, bezpečné.",
+          "<b>Nevýhody:</b> Ignoruje vlastní náklady + value. Vede k cenovým válkám.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>4️⃣ VALUE-BASED PRICING (Hodnotová metoda)</Tag>
+        <Bullet items={[
+          "<b>Princip:</b> Cena podle vnímané hodnoty pro zákazníka, ne podle nákladů.",
+          "<b>Příklad:</b> Tesla Model S (cena podle ušetřeného paliva + status), Software SaaS (per-user + per-feature), právní služby.",
+          "<b>Klíč:</b> Customer interviews, value mapping, willingness-to-pay studies.",
+          "<b>Výhody:</b> Nejvyšší marže, nejvíc strategický přístup.",
+          "<b>Nevýhody:</b> Náročné na výzkum, customer education.",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "strategie", title: "Cenové strategie — Skimming × Penetration + další", subtitle: "Stříteský chytá strategie pro fáze PLC!", color: VSE.fis, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Cenové strategie</b> = dlouhodobé přístupy k stanovení ceny. Většinou propojené s životním cyklem produktu (M8). Komise <b>Svobodová, Pichanič, Stříteský</b> chtějí strategie + příklady.
+        </Def>
+        <Tag color={VSE.fis}>Strategie podle fáze PLC (M8 návaznost)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🍒 SKIMMING (sbírání smetany)", d: "Vysoká cena při zavádění, premium segment. Tesla Roadster 110k USD (2008), iPhone 1 599 USD (2007), Sony Walkman. Postupně klesá." },
+            { c: VSE.warning, t: "🚀 PENETRATION (penetrační)", d: "Nízká cena pro rychlý market share. Netflix 8 USD/měsíc, Uber dotace, Spotify Premium 10 USD." },
+            { c: VSE.fph, t: "⚖️ GOING RATE (tržní cena)", d: "Cena podle konkurence. Pepsi/Coca, OMV/Shell benzín. Bezpečné, ale boring." },
+            { c: VSE.success, t: "💎 PREMIUM PRICING", d: "Trvale vysoká cena = signál exkluzivity. Rolex (5-50k EUR), Ferrari (300k+), Hermès." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Psychologická cenotvorba</Tag>
+        <Bullet items={[
+          "<b>Charm pricing (kouzelná cena):</b> 999 Kč místo 1000. Lidé čtou zleva doprava, vidí &quot;9&quot;. Funguje v retailu.",
+          "<b>Prestige pricing:</b> Rovné čísla = signál luxusu. Rolex 5000 EUR, ne 4999.",
+          "<b>Anchor pricing:</b> Velmi drahá kotva položka udělá ostatní levnější. Menu — &quot;Wagyu steak 2500 Kč&quot; vedle &quot;normal steak 800 Kč&quot;.",
+          "<b>Decoy pricing:</b> Třetí varianta nasměruje. Small popcorn 60 Kč, Medium 120, Large 130 — Medium vypadá draho, Large value.",
+          "<b>Round-down pricing:</b> 89,90 místo 90. Psychologická bariéra.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Dynamické cenové strategie</Tag>
+        <Bullet items={[
+          "<b>Dynamic pricing:</b> Cena se mění real-time podle poptávky. Uber surge, letenky, Airbnb peak season.",
+          "<b>Yield management:</b> Maximalizace revenue u perishable inventory. Hotely, letenky, koncerty.",
+          "<b>Auction pricing:</b> eBay, Christie's, Google Ads (real-time bidding).",
+          "<b>Subscription pricing:</b> Recurring revenue. Netflix, Spotify, SaaS, kávovary (Nespresso captive).",
+          "<b>Freemium:</b> Free tier + paid premium. Spotify, Zoom, LinkedIn.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Strategie pro výrobkový mix (M7 odkaz)</Tag>
+        <Bullet items={[
+          "<b>Product Line:</b> Stupňování cen v řadě (iPhone SE → Pro Max).",
+          "<b>Optional:</b> Hlavní + doplňky (BMW + Sport paket).",
+          "<b>Captive:</b> Levný hlavní + drahý spotřební (Gillette + náhradní hlavice, Nespresso + kapsle).",
+          "<b>Two-part:</b> Vstupní + spotřební (mobil paušál + roaming).",
+          "<b>Bundle:</b> Balíček se slevou (McDonald's menu).",
+          "<b>Detail viz M7.</b>",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "diskriminace_efekty", title: "Cenová diskriminace + cenové efekty", subtitle: "5× chytaná diskriminace + Veblen, Snob, Bandwagon efekty", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Komise <b>Krause, Mikovcová, Nový, Pichanič, Vávra</b> CHYTAJÍ EXPLICITNĚ <b>cenovou diskriminaci</b> (5× v 2025!). <b>Stříteský, Vrbová</b> chtějí <b>cenové efekty</b>. Naučit perfektně.
+        </Def>
+        <Tag color={VSE.fis}>3 stupně cenové diskriminace (Pigou)</Tag>
+        <Bullet items={[
+          "<b>1° (1. stupeň — perfect):</b> Každému zákazníkovi jiná cena podle willingness-to-pay. Aukce, B2B vyjednávání, právní služby. Maximalizuje firma celý spotřebitelský přebytek.",
+          "<b>2° (2. stupeň — quantity-based):</b> Cena podle množství. Slevy za objem, &quot;3+1 zdarma&quot;, bundle pricing. Captive pricing (Nespresso).",
+          "<b>3° (3. stupeň — group-based):</b> Cena podle skupiny — studentská, seniorská, geografická. <b>Nejčastější forma!</b> Kino studentská 99 Kč, normální 199 Kč.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Praktické techniky cenové diskriminace</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "👨‍🎓 SEGMENT BASED", d: "Slevy pro studenty, seniory, ZTP, učitele. Disney+ student 50 % off, Spotify student 4 USD vs 10 USD." },
+            { c: VSE.warning, t: "🌍 GEOGRAFICKÁ", d: "Stejný produkt, různá cena podle země. Big Mac index — McDonald's v Norsku 6 EUR, ve Vietnamu 2 EUR." },
+            { c: VSE.fph, t: "⏰ ČASOVÁ", d: "Off-peak vs peak. Letenky úterý levnější než pátek. Hotely sezónně. Happy hours v barech." },
+            { c: VSE.success, t: "📦 PRODUKTOVÁ", d: "Stejný produkt s drobnou změnou = jiná cena. Coca-Cola Light vs Classic (stejná výroba), iPhone Pro vs Pro Max." },
+            { c: VSE.danger, t: "🎫 KUPÓNY + SLEVY", d: "Kdo má čas hledat = nižší cena (cenově citliví). Albert Klub, slevomat, voucher kódy." },
+            { c: VSE.fis, t: "💼 B2B vs B2C", d: "Firmám velkoobchod, normálním klientům retail. Cisco, Adobe enterprise pricing." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Cenové efekty (Pichanič, Stříteský, Vrbová!) — KLÍČ</Tag>
+        <Bullet items={[
+          "<b>👑 Veblenův efekt:</b> Vyšší cena = vyšší poptávka u luxusních statků. Rolex za 1000 EUR by nikdo nekoupil — značí status. Hermès Birkin záměrně limitovaná dostupnost.",
+          "<b>🦚 Snob efekt:</b> Snížení poptávky když produkt &quot;každý má&quot;. Originální iPhone 3GS 2010 byl status, dnes není. Klesající luxus.",
+          "<b>🚌 Bandwagon efekt (Stádový):</b> Vyšší poptávka když ostatní kupují. TikTok dance trendy, Crocs comeback 2020, GameStop stock 2021.",
+          "<b>💸 Giffen efekt:</b> Anomálie — vyšší cena chleba způsobí vyšší poptávku (chudí lidé nemůžou jíst maso, kupují víc chleba). Vzácný, jen u základních potravin.",
+          "<b>👻 Placebo efekt v ceně:</b> Dražší víno chutná líp (i když je stejné). Ariely experiment — &quot;30 USD víno&quot; zelektronikalo příjemnější než &quot;10 USD víno&quot; (stejná láhev).",
+          "<b>⚓ Anchor efekt:</b> První viděná cena nastaví reference. &quot;Bylo 2000, teď 1500&quot; vypadá lépe než &quot;cena 1500&quot;.",
+        ]} color={VSE.danger} />
+        <ExamAlert
+          komise="Pichanič + Kuděj + Zamazalová 2025 (Víno) + 6× další 2025"
+          what="Pichanič chce <b>cenotvorba + strategie + cenové diskriminace + efekty</b>. Naučit 3 stupně diskriminace + 6 efektů (Veblen, Snob, Bandwagon, Giffen, Placebo, Anchor)."
+        />
+      </div>) },
+  ];
+
+  const flashcardsMkt11 = [
+    { term: "Cena (Price)", def: "Peněžní vyjádření hodnoty produktu/služby. JEDINÝ prvek 4P, který tvoří příjmy. Ostatní jsou náklady.", tag: "POJEM" },
+    { term: "4 role ceny v mkt mixu", def: "Generátor příjmů / Signál kvality / Segmentační nástroj / Konkurenční zbraň.", tag: "POJEM" },
+    { term: "Asymetrický dopad ceny", def: "Snížení o 10 % = max −10 % profit. Zvýšení o 10 % = až +30 % profit (operating leverage).", tag: "POJEM" },
+    { term: "3 skupiny faktorů ceny", def: "Interní (firma kontroluje — náklady, cíle, strategie) / Externí (trh, konkurence, regulace) / Vnímání zákazníka.", tag: "FAKTORY" },
+    { term: "Cenová elasticita poptávky", def: "Vzorec: % změna poptávky / % změna ceny. E>1 elastické (luxus, restaurace), E<1 neelastické (léky, sůl).", tag: "FAKTORY" },
+    { term: "Reference price", def: "Co zákazník očekává platit. Bez ní neumí posoudit, zda je cena fair.", tag: "FAKTORY" },
+    { term: "Price-quality inference", def: "Vyšší cena = vyšší vnímaná kvalita. Klíč pro premium positioning. Souvisí s Veblen efektem.", tag: "FAKTORY" },
+    { term: "Anchoring (kotvení)", def: "První viděná cena nastaví referenční bod. Drahá kotva položka udělá ostatní levnější.", tag: "FAKTORY" },
+    { term: "6 kroků postupu (Kotler)", def: "1. Cíl / 2. Poptávka / 3. Náklady / 4. Konkurence / 5. Metoda / 6. Finální cena.", tag: "POSTUP" },
+    { term: "Nákladová metoda (Cost-plus)", def: "Cena = Náklady + marže (20-50 %). Stavební firmy, restaurace. Jednoduché, ale ignoruje value.", tag: "METODY" },
+    { term: "Poptávková metoda", def: "Cena podle willingness-to-pay. Letenky, Uber surge. Vyžaduje cenový výzkum (M12).", tag: "METODY" },
+    { term: "Konkurenční metoda", def: "Cena podle konkurence — stejně, výš, níž. Going rate (Pepsi/Coca), Penetration, Premium.", tag: "METODY" },
+    { term: "Value-based pricing", def: "Cena podle vnímané hodnoty pro zákazníka. Tesla, SaaS, právní služby. Nejvyšší marže, nejnáročnější.", tag: "METODY" },
+    { term: "Skimming pricing", def: "Vysoká cena při zavádění, premium segment. Tesla Roadster 110k USD, iPhone 1, Sony Walkman. Postupně klesá.", tag: "STRATEGIE" },
+    { term: "Penetration pricing", def: "Nízká cena pro rychlý market share. Netflix, Uber dotace, Spotify Premium 10 USD.", tag: "STRATEGIE" },
+    { term: "Premium pricing", def: "Trvale vysoká cena = signál exkluzivity. Rolex, Ferrari, Hermès, Patek Philippe.", tag: "STRATEGIE" },
+    { term: "Charm pricing", def: "999 Kč místo 1000. Lidé čtou zleva. Funguje v retailu (Lidl, Tesco).", tag: "PSYCHOL" },
+    { term: "Prestige pricing", def: "Rovné čísla = signál luxusu. Rolex 5000 EUR, ne 4999. Anti-charm.", tag: "PSYCHOL" },
+    { term: "Decoy pricing", def: "Třetí varianta nasměruje. Small 60 / Medium 120 / Large 130 — Large vypadá value.", tag: "PSYCHOL" },
+    { term: "Dynamic pricing", def: "Cena se mění real-time podle poptávky. Uber surge, letenky, Airbnb peak season.", tag: "STRATEGIE" },
+    { term: "Cenová diskriminace 1° (perfect)", def: "Každému zákazníkovi jiná cena podle willingness-to-pay. Aukce, B2B vyjednávání.", tag: "DISKRIM" },
+    { term: "Cenová diskriminace 2° (quantity)", def: "Slevy za objem, &quot;3+1 zdarma&quot;, bundle pricing, captive (Nespresso).", tag: "DISKRIM" },
+    { term: "Cenová diskriminace 3° (group)", def: "Studentská, seniorská, geografická. Nejčastější forma. Kino, Spotify Student.", tag: "DISKRIM" },
+    { term: "Geografická diskriminace", def: "Big Mac v Norsku 6 EUR, ve Vietnamu 2 EUR. Stejný produkt, různé trhy.", tag: "DISKRIM" },
+    { term: "Časová diskriminace", def: "Off-peak vs peak. Letenky úterý vs pátek, hotely sezónně, happy hours.", tag: "DISKRIM" },
+    { term: "Veblenův efekt", def: "Vyšší cena = vyšší poptávka u luxusu. Rolex za 1000 EUR by nikdo nekoupil — značí status.", tag: "EFEKTY" },
+    { term: "Snob efekt", def: "Snížení poptávky když produkt &quot;každý má&quot;. iPhone 3GS 2010 byl status, dnes není.", tag: "EFEKTY" },
+    { term: "Bandwagon efekt", def: "Vyšší poptávka když ostatní kupují. TikTok trendy, Crocs comeback, GameStop 2021.", tag: "EFEKTY" },
+    { term: "Giffen efekt", def: "Anomálie — vyšší cena chleba = vyšší poptávka (chudí nemůžou jíst maso). Vzácný.", tag: "EFEKTY" },
+    { term: "Placebo efekt v ceně (Ariely)", def: "Dražší víno chutná líp i když je stejné. Cena ovlivňuje vnímanou kvalitu i u stejných produktů.", tag: "EFEKTY" },
+  ];
+
+  const quizMkt11 = [
+    { q: "Co je cena podle marketingové definice?", opts: ["Peněžní vyjádření hodnoty + jediný prvek 4P tvořící příjmy", "Cost + margin", "Maximální zaplatitelná částka", "Náklady firmy"], correct: 0 },
+    { q: "Která NENÍ ze 4 rolí ceny v mkt mixu?", opts: ["Generátor příjmů", "Signál kvality", "Segmentační nástroj", "Účetní záznam"], correct: 3 },
+    { q: "Co znamená cenově elastická poptávka?", opts: ["E < 1", "E > 1 — změna ceny vyvolá větší změnu poptávky (luxus, restaurace)", "E = 0", "E = 1"], correct: 1 },
+    { q: "Léky, cigarety a sůl jsou příklady:", opts: ["Elastické poptávky", "Neelastické poptávky (E < 1)", "Giffen statků", "Veblen statků"], correct: 1 },
+    { q: "Kolik kroků má Kotlerův postup stanovení ceny?", opts: ["4", "5", "6 (cíl/poptávka/náklady/konkurence/metoda/finální)", "8"], correct: 2 },
+    { q: "Která metoda počítá: Cena = Náklady + marže?", opts: ["Value-based", "Cost-plus (nákladová)", "Demand-based", "Penetration"], correct: 1 },
+    { q: "Která metoda se používá pro Teslu, SaaS, právní služby?", opts: ["Cost-plus", "Going rate", "Value-based (podle vnímané hodnoty)", "Penetration"], correct: 2 },
+    { q: "Co je Skimming pricing?", opts: ["Slevy", "Vysoká cena při zavádění, premium segment (Tesla Roadster, iPhone 1)", "Nízká cena", "Dynamic pricing"], correct: 1 },
+    { q: "Netflix 8 USD/měsíc, Uber dotace, Spotify 10 USD je příklad:", opts: ["Skimming", "Penetration pricing", "Premium", "Cost-plus"], correct: 1 },
+    { q: "Co je Charm pricing?", opts: ["Sleva", "999 místo 1000 — lidé čtou zleva doprava, vidí &quot;9&quot;", "Premium značka", "Diskriminace"], correct: 1 },
+    { q: "Kolik stupňů cenové diskriminace definuje Pigou?", opts: ["2", "3 (perfect / quantity-based / group-based)", "4", "5"], correct: 1 },
+    { q: "Studentská sleva kina (99 vs 199 Kč) je:", opts: ["Diskriminace 1°", "Diskriminace 2°", "Diskriminace 3° (group-based)", "Premium pricing"], correct: 2 },
+    { q: "Nespresso kávovar + drahé kapsle je:", opts: ["Diskriminace 1°", "Diskriminace 2° (quantity-based + captive)", "Diskriminace 3°", "Premium"], correct: 1 },
+    { q: "Co je Veblenův efekt?", opts: ["Snížení ceny zvedne poptávku", "Vyšší cena = vyšší poptávka u luxusních statků (Rolex, Hermès)", "Dynamic pricing", "Cenová elasticita"], correct: 1 },
+    { q: "Co je Bandwagon efekt?", opts: ["Snížení poptávky", "Vyšší poptávka když ostatní kupují (TikTok trendy, Crocs comeback)", "Diskriminace", "Cenová válka"], correct: 1 },
+    { q: "Co je Snob efekt?", opts: ["Vysoká cena", "Snížení poptávky když produkt &quot;každý má&quot; (iPhone 3GS 2010 status, dnes ne)", "Cenová diskriminace", "Skimming"], correct: 1 },
+  ];
+
+  const praxeMkt11 = {
+    caseStudy: {
+      company: "Tesla — etalon Skimming → Penetration tranzice + value-based pricing",
+      subtitle: "Z premium $110k k mainstream $35k za 10 let",
+      content: (<>
+        <b>Tesla</b> je <b>učebnicový příklad sofistikované cenotvorby</b> kombinující 4 metody + 3 strategie cenotvorby + dynamic pricing.<br/><br/>
+        <b style={{ color: VSE.fmv }}>🍒 SKIMMING (2008-2012) — Roadster:</b><br/><br/>
+        • Cena 110 000 USD<br/><br/>
+        • Cílovka: Inovátoři + Early Adopters (Rogers M8)<br/><br/>
+        • Cíl: brand awareness + R&D financing<br/><br/>
+        • Prodej 2400 ks (omezený)<br/><br/>
+        <b style={{ color: VSE.warning }}>💎 PREMIUM (2012-2017) — Model S:</b><br/><br/>
+        • Cena 75-100k USD<br/><br/>
+        • Value-based pricing — luxury sedan benchmark (BMW 7 series, Mercedes S)<br/><br/>
+        • Performance + range = unique value<br/><br/>
+        • Prodej 200k ks ročně<br/><br/>
+        <b style={{ color: VSE.success }}>🚀 PENETRATION (2017+) — Model 3:</b><br/><br/>
+        • Cena 35 000 USD (původní cíl) — později 40-50k podle konfigurace<br/><br/>
+        • Cílovka: mass market (Early Majority — Rogers M8)<br/><br/>
+        • Cíl: market share, scale economies<br/><br/>
+        • Prodej 500k+ ks/rok<br/><br/>
+        <b style={{ color: VSE.danger }}>📊 DYNAMIC PRICING (2022+):</b><br/><br/>
+        • Tesla mění ceny <b>real-time</b> podle poptávky a inventory<br/><br/>
+        • Únor 2023: snížení o 20 % (Model Y z 65k na 53k) pro stimulaci poptávky<br/><br/>
+        • Q4 2023: zvýšení po vyprodání. Klasický yield management.<br/><br/>
+        <b style={{ color: VSE.fph }}>🎯 CENOVÁ DISKRIMINACE Tesla:</b><br/><br/>
+        • <b>Produktová (2° + 3°):</b> Standard Range vs Long Range vs Performance = různé batteries za různé ceny (stejný car body)<br/><br/>
+        • <b>Geografická:</b> Model Y v USA 53k USD, v Číně 35k EUR (lokální výroba Šanghaj)<br/><br/>
+        • <b>Časová:</b> End-of-quarter discounts pro hitting sales targets<br/><br/>
+        • <b>Optional pricing (M7):</b> Autopilot 6000 USD, FSD 12000 USD — captive premium features<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Tesla z premium niche brandu na <b>mainstream EV lídra</b> za 10 let. Klasický Skimming → Penetration tranzice + value-based + dynamic pricing kombinace.
+      </>),
+      lessons: "Tesla je <b>etalon sophisticated pricing strategy</b>. Pro PS doporuč: <b>identifikovat fázi PLC (M8) + vybrat strategii (Skimming/Penetration/Premium) + value-based metoda + dynamic adjustment + cenová diskriminace přes produkty/geografii/čas</b>. Alternativy: <b>Lidl (Cost Leadership + Cost-plus), Ryanair (Penetration + dynamic + ancillary pricing), Apple (Skimming + premium maintenance), Spotify (Penetration + freemium + tier pricing)</b>."
+    },
+    miniExamples: [
+      { tag: "DYNAMIC PRICING", color: VSE.fmv, company: "Ryanair — etalon yield management", content: "Ryanair má <b>nejsofistikovanější dynamic pricing v aviation</b>. Cena letenky se mění <b>každých 15 minut</b> podle obsazenosti, weekday/weekend, urgency (booking 6 měsíců vs 2 dny). Stejné sedadlo: cena se může lišit 20-300 EUR. Optional pricing (M7): zavazadla, místa, jídlo — ancillary revenue 30 % obratu." },
+      { tag: "VEBLEN EFEKT", color: VSE.warning, company: "Hermès Birkin — luxusní paradox", content: "Hermès Birkin bag stojí <b>10 000 - 500 000 USD</b>. Místo standardního luxury pricing Hermès <b>záměrně omezuje dostupnost</b> — waitlist 3-5 let, nelze jen tak koupit. Klasický Veblen efekt — kdyby snížili cenu/zvýšili produkci, brand by ztratil status. Resale value 100-200 % retail." },
+      { tag: "VALUE-BASED", color: VSE.fph, company: "Salesforce — SaaS per-user pricing", content: "Salesforce CRM má <b>4 tiery: Essentials 25 USD/user, Professional 75, Enterprise 165, Unlimited 330</b>. Stejný kód, různé features (umělé omezení). Value-based — větší firma = víc value = vyšší cena. Diskriminace 2° (quantity) + 3° (group enterprise vs SMB). Marže 80 %." },
+      { tag: "CENOVÁ DISKRIMINACE", color: VSE.success, company: "Spotify — Student × Family × Duo", content: "Spotify má <b>4 cenové tiery se stejnou službou</b>: Individual 9,99 USD, Student 4,99 (50 % off!), Duo 12,99 (2 účty), Family 15,99 (6 účtů). Klasická 3° diskriminace + 2° (bundling). Cílovka: studenti (price-sensitive) + rodiny (per-user cheaper)." },
+      { tag: "ANCHOR + DECOY", color: VSE.danger, company: "The Economist — slavný 3-tier experiment", content: "The Economist experiment z 2008: <b>Online 59 USD / Print 125 / Print+Online 125</b>. Sám experimentátor Ariely zjistil: 16 % vybírá Online, 0 % Print, 84 % Print+Online. <b>Print tier je decoy</b> — slouží jako anchor, aby Print+Online vypadal value. Bez decoy: 68 % Online, 32 % Print+Online. Zisk 30 % rozdíl." },
+    ]
+  };
+
+  const examQuestionsMkt11 = [
+    { komise: "2025-01-30 — Krause + Lorencová + Zamazalová (Developer)", otazka: "Tvorba ceny, metody, klíčové faktory, postup stanovení ceny, cenová diskriminace", pozn: "Krause chce KOMPLET: <b>postup (6 kroků Kotler) + 4 metody + 3 skupiny faktorů + 3 stupně diskriminace</b>. Naučit všechno. Pro developera: value-based (luxury bytů) + geografická diskriminace (centrum vs periferie)." },
+    { komise: "2025-06-12 — Pichanič + Kuděj + Zamazalová (Víno)", otazka: "Cenotvorba, strategie nastavení ceny, cenové diskriminace, efekty", pozn: "Pichanič chce <b>strategie + diskriminace + EFEKTY</b>. Naučit 6 cenových efektů (Veblen, Snob, Bandwagon, Giffen, Placebo, Anchor). Pro víno: Veblen + Placebo (Ariely studie) silně relevantní." },
+    { komise: "2026-02-02 — Stříteský + Lorencová + Pernica (Neziskovka handicap.)", otazka: "Stanovení ceny, cenové strategie, cenové efekty", pozn: "Stříteský chytá <b>strategie + efekty</b>. Naučit Skimming/Penetration/Premium + 6 efektů. Pro neziskovku: psychologická cena dárcovství (anchor — &quot;500 / 1000 / 5000 Kč&quot;)." },
+    { komise: "2025-01-28 — Tahal + Kuděj + Nový (Sanace)", otazka: "Cenotvorba (chtěl navíc Van Westerndorp)", pozn: "Tahal chce <b>cenotvorba + Van Westendorp</b> (M12 cenový výzkum). Připravit obojí. Pro sanaci: value-based + B2B negotiation pricing." },
+    { komise: "2025-06-10 — Nový + Svobodová + Kolouchová (Neziskovka)", otazka: "Cena definice (jako mkt nástroj), postup, faktory vnímání, cenová diskriminace, strategie", pozn: "<b>Kolouchová chce cenu jako MARKETINGOVÝ nástroj, ne ekonomickou teorii!</b> Začni 4 rolemi v mkt mixu, ne nabídkou × poptávkou. Pak postup + faktory + diskriminace + strategie." },
+    { komise: "2025-02-04 — Mikovcová + Kolouchová + Viktora (Hrnce)", otazka: "Tvorba ceny, proces, vliv spotřebitele, cenová diskriminace", pozn: "Mikovcová chytá <b>vnímání ceny spotřebitelem</b>. Naučit reference price, price-quality inference, anchoring, decoy effect + 3 stupně diskriminace." },
+    { komise: "2025-06-04 — Mikovcová + Viktora + Kolouchová (Horská bouda)", otazka: "Cena — faktory ovlivňující vnímání cen, postup, strategie", pozn: "Mikovcová chce kompletní <b>vnímání + postup + strategie</b>. Naučit psychological pricing + 6 efektů + Skimming/Penetration." },
+    { komise: "2025-09-11 — Stříteský + Schönfeld + Cejthamr (Lázně)", otazka: "Specifika výrobkové řady a stanovování cen výrobkového mixu", pozn: "Toto je z M7 (5 strategií Kotler pro mix) — Product Line / Optional / Captive / Two-part / By-product + Bundle. Spojit M7 a M11." },
+  ];
+
+  const podcastMkt11 = { title: "Marketing 11 — Cenotvorba", description: "Definice ceny (mkt nástroj) + 4 role v mixu. 3 skupiny faktorů (interní/externí/vnímání). Cenová elasticita poptávky. Kotlerův postup 6 kroků (cíl/poptávka/náklady/konkurence/metoda/finální). 4 metody stanovení ceny (cost-plus/demand-based/competition-based/value-based). Cenové strategie podle PLC (Skimming/Penetration/Going rate/Premium). Psychologická cenotvorba (charm/prestige/anchor/decoy). Dynamic pricing + freemium + subscription. 3 stupně cenové diskriminace (Pigou) + praktické techniky (segment/geo/čas/produkt/kupóny/B2B-B2C). 6 cenových efektů (Veblen/Snob/Bandwagon/Giffen/Placebo/Anchor). Tesla, Ryanair, Hermès, Salesforce, Spotify, The Economist.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt11 = `
+    <b style="color:#A82A5F">1.</b> Začni cenou jako <b>marketingovým nástrojem</b> (Kolouchová chytá!) — 4 role v mkt mixu.<br/>
+    <b style="color:#A82A5F">2.</b> Specifika ceny — nejflexibilnější prvek, asymetrický dopad na profit.<br/>
+    <b style="color:#A82A5F">3.</b> ⚠️ <b>3 skupiny faktorů</b> (Krause, Mikovcová chytají!) — interní / externí / vnímání zákazníka.<br/>
+    <b style="color:#A82A5F">4.</b> Cenová elasticita — elastické (luxus) × neelastické (léky, sůl).<br/>
+    <b style="color:#A82A5F">5.</b> ⚠️ <b>Kotlerův postup 6 kroků</b> (Špaček, Vávra chytají!) — cíl/poptávka/náklady/konkurence/metoda/finální.<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>4 metody stanovení ceny</b> — Cost-plus / Demand-based / Competition-based / Value-based.<br/>
+    <b style="color:#A82A5F">7.</b> Cenové strategie — Skimming (Tesla Roadster) × Penetration (Netflix) × Going rate × Premium.<br/>
+    <b style="color:#A82A5F">8.</b> Psychologická cenotvorba — charm (999), prestige (5000), anchor, decoy.<br/>
+    <b style="color:#A82A5F">9.</b> Dynamic pricing — Uber, letenky, Ryanair yield management.<br/>
+    <b style="color:#A82A5F">10.</b> ⚠️ <b>3 stupně cenové diskriminace</b> (5× chytaná!) — 1° perfect / 2° quantity / 3° group + 6 praktických technik.<br/>
+    <b style="color:#A82A5F">11.</b> ⚠️ <b>6 cenových efektů</b> (Pichanič, Stříteský chytají!) — Veblen / Snob / Bandwagon / Giffen / Placebo / Anchor.<br/>
+    <b style="color:#A82A5F">12.</b> Spojení s mixem pricingu (M7) — Product Line / Optional / Captive / Two-part / Bundle.<br/>
+    <b style="color:#A82A5F">13.</b> Aplikace na PS — fáze PLC + strategie + metoda + 1-2 diskriminace + identifikace efektů.
+  `;
+
+  const caseStudyMkt11 = {
+    title: "Klára — CMO českého streamovacího startupu PrahaTV (40 mil. Kč, 18 zaměstnanců)",
+    subtitle: "Nastavit pricing strategii pro launch + budoucí škálování",
+    scenario: "Klára (34 let) zatlačila na čelo a podívala se z okna kanceláře v Karlíně. Za 4 měsíce má PrahaTV oficiálně launch a ona pořád nemá pricing strategii. Vede marketing rok, předtím dělala brand v O2. Před 18 měsíci zakladatelé Tomáš a Honza přesvědčili českou skupinu investorů, že trh potřebuje konkurenta Voya — raised 80 mil. Kč seed, postavili platformu s 200 originálních titulů, cílí na česky-mluvící diváky 25-55 let kteří chtějí kvalitní obsah.\n\nProblém je, že konkurence je krvavá. Netflix CZ má 1,5 milionu uživatelů a tři tiery 269-449 Kč. Voyo od Novy 199 Kč, HBO Max 249 Kč, Apple TV+ 169 Kč. PrahaTV je neznačka. Klára objednala výzkum a výsledky ji vyplašily: 65 % cílovky už platí za Netflix (budget vyčerpaný), ale 34 % by zvážilo druhou službu, pokud má kvalitní český content. A 22 % studentů (25-30 let, omezený příjem) chce slevu.\n\nKlára celý víkend prolítávala excel s 4 možnostmi: Skimming 449 Kč jako Netflix Premium? Nemá brand pro premium. Penetration 99 Kč? CFO Petr jí řekl, že produkce jednoho originálního seriálu stojí 8-15 milionů, a investoři chtějí 200 tisíc uživatelů za 18 měsíců. Going rate 199 Kč jako Voyo? Bez clear odlišení by zmizela. Tier pricing (Basic/Pro/Family)? Komplexnější, ale captures víc segmentů.\n\nDo všeho ráno přišel Tomáš s otázkou ohledně free tier s reklamami — Spotify model. Honza souhlasil, ale upozornil, že to vyžaduje jinou tech infrastructure a může kanibalizovat paid. Klára má 4 měsíce na finalizaci pricing + go-to-market. Včera večer si zapsala tři otázky: Jak nacenit, aby Netflix users přidali PrahaTV jako druhou službu? Jak zachytit price-sensitive studenty? A jak nezabít cashflow první rok?",
+    signals: [
+      { text: "65 % cílovky už platí za Netflix", color: VSE.warning, reason: "Bandwagon efekt + reference price kotva — lidé porovnávají s Netflix. Klíč: <b>být alternativní</b> nebo <b>komplementární</b>, ne přímý konkurent. Většina subscription budget je už alokovaná." },
+      { text: "34 % by zvážilo druhou službu, pokud má kvalitní český content", color: VSE.fph, reason: "<b>Komplementární positioning</b>! PrahaTV jako druhá služba k Netflix, ne náhrada. Cena pak může být nižší (psychologický rozpočet sekundární služby)." },
+      { text: "22 % studentů (25-30 let, omezený příjem) chce slevu", color: VSE.fph, reason: "Příležitost pro <b>cenovou diskriminaci 3° stupně</b> (group-based). Studentský tier = price-sensitive segment, ale loyal long-term + brand ambassadors." },
+      { text: "Skimming 449 Kč jako Netflix Premium? Nemá brand pro premium", color: VSE.danger, reason: "Pro neznačku bez brand equity = sebevražda. PrahaTV nemá awareness pro premium pricing. Žádná hodnota nepřesvědčí o 449 Kč/měs." },
+      { text: "produkce jednoho originálního seriálu stojí 8-15 milionů, a investoři chtějí 200 tisíc uživatelů za 18 měsíců", color: VSE.danger, reason: "Vysoké fixní náklady + agresivní growth target → potřeba <b>scale economies</b>. Penetration pricing může být cesta, ale risk likvidity. Klíčová finanční úvaha." },
+      { text: "Going rate 199 Kč jako Voyo? Bez clear odlišení by zmizela", color: VSE.warning, reason: "Me-too strategie bez diferenciace. Bez clear value proposition vs Voyo (který má Nova catalog) zmizí. Potřeba jasné diferenciace." },
+      { text: "Tier pricing (Basic/Pro/Family)? Komplexnější, ale captures víc segmentů", color: VSE.warning, reason: "Klasická 2° diskriminace + bundling (M7). Salesforce/Spotify model. Lepší než single price = capture různé willingness-to-pay." },
+      { text: "free tier s reklamami — Spotify model", color: VSE.fph, reason: "<b>Freemium model</b> — Spotify, YouTube. Free + ads přitáhne masu, premium konvertují 5-10 %. Risk: free může kanibalizovat paid, vyžaduje jinou tech infrastructure." },
+    ],
+    quiz1: {
+      question: "Jaký je hlavní pricing dilema PrahaTV?",
+      options: [
+        "Příliš nízká kvalita obsahu",
+        "Špatná konkurence",
+        "Single-price strategy vs tier pricing + balance mezi rychlým growth (Penetration) a financial sustainability (Skimming/Premium)",
+        "Žádná cílovka",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Jakou pricing strategii by Klára měla zvolit pro PrahaTV?",
+      options: [
+        { text: "TIER PRICING — Basic 99 Kč (s reklamami) / Standard 169 Kč / Family 269 Kč. Diskriminace 2° + 3° kombinace.", correct: true, reason: "✓ Salesforce/Spotify model. Capture různé willingness-to-pay. Family 269 = stejně jako Netflix Basic, ale s českým contentem = lepší value." },
+        { text: "Student tier 79 Kč/měsíc (50 % off Standard) — 3° diskriminace pro 22 % price-sensitive students", correct: true, reason: "✓ Spotify Student model. Studenti loyální dlouhodobě, low CAC, brand ambassadors." },
+        { text: "Penetration pricing v launch fázi — first 6 měsíců promo cena (Standard 99 Kč místo 169) pro získání 100k uživatelů rychle", correct: true, reason: "✓ Klasické Netflix/Uber model — get traction first, raise prices later. Risk: anchor effect, lidé pak vidí 169 jako drahé." },
+        { text: "Komplementární positioning vs Netflix — &quot;Second screen + český content&quot;. Cena pod Voyo (159 Kč/měsíc Standard) pro snadnou adopci jako druhá služba.", correct: true, reason: "✓ Využití insightu 34 % cílovky chce druhou službu. Lower price barrier pro adoption ve 2-subscription scenario." },
+        { text: "Family Plan multi-device 269 Kč (až 4 současně) — diskriminace 2° (quantity-based) + targeting families", correct: true, reason: "✓ Spotify Family model. Reálně cena per-user 67 Kč = bargain. Capture family willingness-to-pay." },
+        { text: "Annual discount — pay 12 měsíců upfront s 16 % slevou (~1700 Kč místo 2028) — boost cashflow + retention", correct: true, reason: "✓ Klasický cashflow accelerator. Roční předplatné má 80 % retention vs monthly 50 %." },
+        { text: "Skimming 449 Kč/měsíc — premium positioning vs Netflix Premium", correct: false, reason: "✗ Pro nový brand bez awareness = sebevražda. PrahaTV nemá brand equity pro premium pricing. Žádná hodnota nepřesvědčí o 449 Kč/měs." },
+        { text: "Single low price 99 Kč/měsíc pro všechny segmenty", correct: false, reason: "✗ Promarněná příležitost. Tier pricing capture více willingness-to-pay = vyšší ARPU. Single price = leaving money on the table." },
+        { text: "Going rate 199 Kč jako Voyo + bez diferenciace", correct: false, reason: "✗ Me-too strategie. Bez clear value proposition vs Voyo (který má Nova catalog) ztratí. Potřeba jasné diferenciace." },
+      ],
+    },
+    summary: "<b>PrahaTV potřebuje TIER PRICING + komplementární positioning + freemium element pro maximalizaci adoption a ARPU.</b><br/><br/><b>Doporučená pricing strategy:</b><br/><br/>• <b>Free (s reklamami):</b> 0 Kč/měsíc, limit 5 hodin/měs — freemium funnel, 5-10 % converze na paid<br/><br/>• <b>Basic:</b> 99 Kč/měsíc (1 device, HD, s reklamami) — penetration tier<br/><br/>• <b>Standard:</b> 169 Kč/měsíc (2 devices, HD, no ads) — main offering<br/><br/>• <b>Family:</b> 269 Kč/měsíc (4 devices, 4K, no ads, downloads) — quantity-based diskriminace<br/><br/>• <b>Student:</b> 79 Kč/měsíc (1 device, HD, no ads) — 3° diskriminace<br/><br/>• <b>Annual discount:</b> 16 % off pro roční předplatné — cashflow accelerator<br/><br/><b>Launch fáze (6 měsíců):</b> Standard 99 Kč promo (jako Penetration), pak postupně na 169 Kč. Anchor pricing pro reference setting.<br/><br/><b>Pro komisi:</b> Klasická pricing dilema pro SaaS/subscription business. <b>Spotify (tier + student + family)</b>, <b>Netflix (skimming → penetration tranzice)</b>, <b>Salesforce (B2B tier pricing)</b> jako benchmark. <b>Kotlerův postup 6 kroků</b> + <b>4 metody (value-based primárně)</b> + <b>3° diskriminace (student + family) + 2° (quantity-based) + freemium</b>. <b>Cenové efekty</b>: anchor pricing (proti Netflix), bandwagon (sociální proof), placebo (premium 4K). Anti-vzor: Skimming pro nový brand = sebevražda. Vzor: <b>Complementary positioning</b> + <b>Tier pricing</b> + <b>Freemium funnel</b>.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={11} title="Cenotvorba — faktory, postup, strategie, diskriminace, efekty"
+      subtitle="Kotlerův postup 6 kroků + 4 metody + 3 stupně diskriminace + 6 cenových efektů"
+      color={VSE.fis}
+      questionText="Cenotvorba — faktory, postup tvorby ceny, strategie, cenová diskriminace, efekty."
+      questionDesc="Cena jako marketingový nástroj (4 role). 3 skupiny faktorů (interní/externí/vnímání). Cenová elasticita. Kotlerův postup 6 kroků (cíl/poptávka/náklady/konkurence/metoda/finální). 4 metody stanovení (cost-plus/demand-based/competition-based/value-based). Cenové strategie podle PLC (Skimming/Penetration/Going rate/Premium). Psychologická cenotvorba (charm/prestige/anchor/decoy). Dynamic pricing. 3 stupně cenové diskriminace (Pigou) + 6 praktických technik. 6 cenových efektů (Veblen/Snob/Bandwagon/Giffen/Placebo/Anchor). Tesla, Ryanair, Hermès, Salesforce, Spotify, The Economist."
+      sloz={3} roz={4} freq={5}
+      examStrategy={examStrategyMkt11}
+      studySections={studySectionsMkt11}
+      flashcards={flashcardsMkt11}
+      quiz={quizMkt11}
+      praxe={praxeMkt11}
+      examQuestions={examQuestionsMkt11}
+      podcast={podcastMkt11}
+      caseStudy={caseStudyMkt11}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 12 — Cenový výzkum — Van Westendorp, Gabor-Granger, BPTO, conjoint
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt12Panel() {
+  const studySectionsMkt12 = [
+    { id: "intro", title: "Cenový výzkum — proč a co testujeme", subtitle: "5 metod cenového výzkumu + návaznost na M11", color: VSE.fis, emoji: "microscope",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Cenový výzkum (Price Research)</b> = systematický sběr dat o tom, <b>kolik je zákazník ochoten platit</b> za produkt/službu. Specifická aplikace MV (M1) na pricing rozhodnutí. Komise <b>Tahal</b> chce explicitně <b>Van Westendorp</b>, <b>Mládková</b> chce <b>BPTO</b>.
+        </Def>
+        <Tag color={VSE.fis}>Návaznost na předchozí okruhy</Tag>
+        <Bullet items={[
+          "<b>M1</b> dal obecné metody MV (kvant × kval). <b>M12</b> je aplikuje na cenu.",
+          "<b>M2</b> dal analytické metody. <b>M12</b> používá conjoint, regresní analýzu pro cenová data.",
+          "<b>M9</b> dal Kano model pro features. <b>M12</b> testuje cenu těch features.",
+          "<b>M11</b> dal teorii cenotvorby. <b>M12</b> dá data pro rozhodování.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Co cenový výzkum zjišťuje (4 hlavní otázky)</Tag>
+        <Bullet items={[
+          "<b>1. Optimální cena</b> — kolik zákazník ochoten zaplatit (Van Westendorp).",
+          "<b>2. Cenová elasticita</b> — jak změna ceny ovlivní poptávku (Gabor-Granger).",
+          "<b>3. Konkurenční pozice</b> — jak je naše cena vnímána vs konkurenti (BPTO).",
+          "<b>4. Trade-offs</b> — jakou cenu si zákazník vybere za jaké features (Conjoint, MaxDiff).",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>5 hlavních metod cenového výzkumu (přehled)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📊 GABOR-GRANGER", d: "Pravděpodobnost nákupu při různých cenách. Klasická křivka poptávky. Jednoduchá, ale ignoruje konkurenci." },
+            { c: VSE.warning, t: "🎯 VAN WESTENDORP (PSM)", d: "4 otázky → 2 křivky průniky → optimální cena + cenové pásmo. Psycho pricing standard." },
+            { c: VSE.fph, t: "🔄 BPTO (Brand-Price Trade-Off)", d: "Respondent vidí značky + ceny, vybírá nejlepší. Simuluje real-world purchase decision. Konkurence integrated." },
+            { c: VSE.success, t: "⚖️ CONJOINT ANALYSIS", d: "Respondent srovnává kombinace atributů (cena × features × značka). Výstup: cenová elasticita každého atributu." },
+            { c: VSE.danger, t: "🥇 MAXDIFF (Best-Worst Scaling)", d: "Respondent vybírá MOST × LEAST important z balíku. Pro pricing: které features stojí za co. Lepší než ranking." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "van_westendorp", title: "Van Westendorp (PSM) — 4 otázky + 2 křivky", subtitle: "TAHAL CHYTÁ explicitně! Standardní metoda psycho pricing", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Van Westendorp Price Sensitivity Meter (PSM)</b> = nejpoužívanější metoda <b>psychologického pricingu</b> (1976). 4 otázky → křivky → optimální cena + akceptovatelné pásmo. Komise <b>Tahal</b> explicitně chce!
+        </Def>
+        <Tag color={VSE.fis}>4 klíčové otázky Van Westendorpa</Tag>
+        <Bullet items={[
+          "<b>🟢 Q1 — TOO CHEAP (příliš levné):</b> &quot;Při jaké ceně byste si řekli, že produkt je tak levný, až máte pochybnosti o kvalitě?&quot;",
+          "<b>🔵 Q2 — BARGAIN (výhodné):</b> &quot;Při jaké ceně byste si řekli, že produkt je výhodný — dobrá hodnota za peníze?&quot;",
+          "<b>🟡 Q3 — EXPENSIVE (drahé):</b> &quot;Při jaké ceně byste si řekli, že produkt začíná být drahý, ale stále byste ho zvážili?&quot;",
+          "<b>🔴 Q4 — TOO EXPENSIVE (příliš drahé):</b> &quot;Při jaké ceně byste si řekli, že produkt je tak drahý, že byste ho už nekoupili?&quot;",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Vizualizace Van Westendorpových křivek</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 640 400" style={{ width: "100%", maxWidth: 640, height: "auto" }}>
+            {/* Osy */}
+            <line x1="60" y1="340" x2="600" y2="340" stroke="#888" strokeWidth="1.5"/>
+            <line x1="60" y1="40" x2="60" y2="340" stroke="#888" strokeWidth="1.5"/>
+            <polygon points="600,336 610,340 600,344" fill="#888"/>
+            <polygon points="56,40 60,30 64,40" fill="#888"/>
+            <text x="608" y="358" textAnchor="end" fontSize="11" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight">Cena →</text>
+            <text x="40" y="180" textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight" transform="rotate(-90, 40, 180)">% respondentů</text>
+            
+            {/* 4 křivky */}
+            {/* Too cheap - klesající od levé strany (čím vyšší cena, tím méně lidí myslí "too cheap") */}
+            <path d="M 80 60 Q 200 120 320 200 Q 440 280 580 330" stroke={VSE.success} strokeWidth="2.5" fill="none"/>
+            {/* Bargain - klesající ale později */}
+            <path d="M 80 320 Q 180 200 280 100 Q 380 60 580 50" stroke={VSE.fmv} strokeWidth="2.5" fill="none" strokeDasharray="6,3"/>
+            {/* Expensive - rostoucí postupně */}
+            <path d="M 80 330 Q 220 280 320 200 Q 420 120 580 60" stroke={VSE.warning} strokeWidth="2.5" fill="none" strokeDasharray="6,3"/>
+            {/* Too expensive - rostoucí prudce na vysokých cenách */}
+            <path d="M 80 340 Q 280 320 380 240 Q 480 120 580 50" stroke={VSE.danger} strokeWidth="2.5" fill="none"/>
+            
+            {/* Průniky a klíčové body */}
+            {/* OPP (Optimal Price Point) = intersection too cheap + too expensive */}
+            <circle cx="320" cy="200" r="6" fill={VSE.fis} stroke="#fff" strokeWidth="2"/>
+            <line x1="320" y1="200" x2="320" y2="340" stroke={VSE.fis} strokeWidth="1" strokeDasharray="3,3"/>
+            <text x="320" y="358" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">OPP</text>
+            <text x="320" y="372" textAnchor="middle" fontSize="9" fill={VSE.fis} fontFamily="JetBrains Mono">Optimální</text>
+            
+            {/* IPP (Indifference Price Point) = intersection bargain + expensive */}
+            <circle cx="285" cy="180" r="6" fill={VSE.warning} stroke="#fff" strokeWidth="2"/>
+            
+            {/* Range markers - PMC (Point of Marginal Cheapness) + PME (Marginal Expensiveness) */}
+            <line x1="180" y1="40" x2="180" y2="340" stroke={VSE.fph} strokeWidth="1" strokeDasharray="2,4"/>
+            <line x1="450" y1="40" x2="450" y2="340" stroke={VSE.fph} strokeWidth="1" strokeDasharray="2,4"/>
+            
+            {/* Labely křivek */}
+            <rect x="430" y="50" width="155" height="22" rx="4" fill="#fff" stroke={VSE.fmv} strokeWidth="1"/>
+            <text x="437" y="65" fontSize="10" fontWeight="700" fill={VSE.fmv} fontFamily="Inter Tight">🔵 Bargain (výhodné)</text>
+            
+            <rect x="430" y="78" width="155" height="22" rx="4" fill="#fff" stroke={VSE.warning} strokeWidth="1"/>
+            <text x="437" y="93" fontSize="10" fontWeight="700" fill={VSE.warning} fontFamily="Inter Tight">🟡 Expensive (drahé)</text>
+            
+            <rect x="430" y="328" width="170" height="22" rx="4" fill="#fff" stroke={VSE.success} strokeWidth="1"/>
+            <text x="437" y="343" fontSize="10" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">🟢 Too cheap</text>
+            
+            <rect x="60" y="40" width="180" height="22" rx="4" fill="#fff" stroke={VSE.danger} strokeWidth="1"/>
+            <text x="67" y="55" fontSize="10" fontWeight="700" fill={VSE.danger} fontFamily="Inter Tight">🔴 Too expensive</text>
+            
+            {/* OPP popisek */}
+            <rect x="240" y="142" width="100" height="38" rx="6" fill={VSE.fis} fillOpacity="0.15" stroke={VSE.fis} strokeWidth="1.5"/>
+            <text x="290" y="158" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">⭐ OPP</text>
+            <text x="290" y="172" textAnchor="middle" fontSize="9" fill={VSE.fis} fontFamily="JetBrains Mono">Optimal Price Point</text>
+            
+            {/* Akceptovatelné cenové pásmo */}
+            <text x="180" y="385" textAnchor="middle" fontSize="9" fontWeight="700" fill={VSE.fph} fontFamily="JetBrains Mono">PMC</text>
+            <text x="450" y="385" textAnchor="middle" fontSize="9" fontWeight="700" fill={VSE.fph} fontFamily="JetBrains Mono">PME</text>
+            <text x="315" y="395" textAnchor="middle" fontSize="9" fill={VSE.fph} fontFamily="JetBrains Mono">← akceptovatelné cenové pásmo →</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fph}>Klíčové body z Van Westendorp křivek</Tag>
+        <Bullet items={[
+          "<b>OPP (Optimal Price Point):</b> Průnik křivek &quot;too cheap&quot; a &quot;too expensive&quot;. Cena, kdy stejně lidí říká &quot;moc levné&quot; jako &quot;moc drahé&quot; → balanced.",
+          "<b>IPP (Indifference Price Point):</b> Průnik křivek &quot;bargain&quot; a &quot;expensive&quot;. Cena, kdy zákazník neví, jestli je výhodná nebo drahá.",
+          "<b>PMC (Point of Marginal Cheapness):</b> Průnik &quot;too cheap&quot; a &quot;expensive&quot; = dolní hranice cenového pásma. Pod tím podezření na kvalitu.",
+          "<b>PME (Point of Marginal Expensiveness):</b> Průnik &quot;bargain&quot; a &quot;too expensive&quot; = horní hranice. Nad tím masivní ztráty.",
+          "<b>Akceptovatelné cenové pásmo:</b> Mezi PMC a PME. Optimální cena (OPP) typicky uvnitř.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Výhody × nevýhody Van Westendorpa</Tag>
+        <Bullet items={[
+          "<b>✓ Výhody:</b> Jednoduchý, levný (CAWI 300-500 respondentů, ~80k Kč), psychologicky validní, jasné výstupy pro management.",
+          "<b>✗ Nevýhody:</b> Ignoruje konkurenci (nezná benchmarky), spoléhá na deklarace (lidé nelžou v rate, ale lžou v intent-to-buy), nereflektuje skutečné nákupní rozhodnutí.",
+          "<b>Kombinace:</b> V praxi se Van Westendorp kombinuje s Gabor-Granger nebo BPTO pro robustní výsledek.",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Tahal + Kuděj + Nový 2025 (Sanace)"
+          what="Tahal explicitně chce <b>Van Westendorp</b> — naučit 4 otázky + 2 hlavní křivky (OPP, IPP) + 2 hranice (PMC, PME) + akceptovatelné cenové pásmo."
+        />
+      </div>) },
+
+    { id: "gabor_granger", title: "Gabor-Granger — křivka pravděpodobnosti nákupu", subtitle: "Klasická metoda od 60. let, jednoduchá ale účinná", color: VSE.fis, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Gabor-Granger metoda</b> (Andre Gabor + Clive Granger, 1965) = nejstarší a nejjednodušší cenový test. Respondent dostane <b>seznam cen</b> a u každé říká, zda by koupil. Výstup: <b>křivka poptávky</b>.
+        </Def>
+        <Tag color={VSE.fis}>Postup Gabor-Granger metody</Tag>
+        <Bullet items={[
+          "<b>1.</b> Připrav 5-8 cenových bodů (např. 99, 149, 199, 249, 299, 349 Kč).",
+          "<b>2.</b> Pro každý bod ukáže respondent: &quot;Koupili byste produkt za XX Kč?&quot;",
+          "<b>3.</b> Respondent odpovídá YES/NO (binární) nebo na škále 1-5 (pravděpodobnost).",
+          "<b>4.</b> Agregace přes 300-500 respondentů → křivka.",
+          "<b>5.</b> Výpočet: <b>cena × pravděpodobnost × velikost trhu = predikce obratu</b>.",
+          "<b>6.</b> Optimální cena = ta, která maximalizuje revenue (ne nutně nejvíc kupujících!).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Vizualizace Gabor-Granger křivky</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 600 320" style={{ width: "100%", maxWidth: 600, height: "auto" }}>
+            {/* Osy */}
+            <line x1="60" y1="260" x2="560" y2="260" stroke="#888" strokeWidth="1.5"/>
+            <line x1="60" y1="40" x2="60" y2="260" stroke="#888" strokeWidth="1.5"/>
+            <polygon points="560,256 570,260 560,264" fill="#888"/>
+            <polygon points="56,40 60,30 64,40" fill="#888"/>
+            <text x="568" y="278" textAnchor="end" fontSize="11" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight">Cena (Kč) →</text>
+            <text x="40" y="150" textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--text, #333)" fontFamily="Inter Tight" transform="rotate(-90, 40, 150)">% kupujících</text>
+            
+            {/* Křivka poptávky - klesající */}
+            <path d="M 80 70 Q 200 100 300 150 Q 400 200 540 245" stroke={VSE.fmv} strokeWidth="3" fill="none"/>
+            
+            {/* Body cen */}
+            {[[80, 70, "99", "85 %"], [180, 95, "149", "72 %"], [280, 140, "199", "55 %"], [380, 190, "249", "32 %"], [480, 225, "299", "18 %"], [540, 245, "349", "9 %"]].map((p, i) => (
+              <g key={i}>
+                <circle cx={p[0]} cy={p[1]} r="5" fill={VSE.fmv} stroke="#fff" strokeWidth="2"/>
+                <text x={p[0]} y="280" textAnchor="middle" fontSize="9" fontWeight="700" fill="var(--text, #333)" fontFamily="JetBrains Mono">{p[2]}</text>
+                <text x={p[0]} y={p[1] - 10} textAnchor="middle" fontSize="9" fontWeight="700" fill={VSE.fmv} fontFamily="JetBrains Mono">{p[3]}</text>
+              </g>
+            ))}
+            
+            {/* Optimum marker - revenue maximization */}
+            <circle cx="280" cy="140" r="9" fill="none" stroke={VSE.success} strokeWidth="3"/>
+            <rect x="200" y="55" width="160" height="38" rx="6" fill={VSE.success} fillOpacity="0.15" stroke={VSE.success} strokeWidth="1.5"/>
+            <text x="280" y="71" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">⭐ Optimum: 199 Kč</text>
+            <text x="280" y="86" textAnchor="middle" fontSize="9" fill={VSE.success} fontFamily="JetBrains Mono">55 % × 199 = nejvyšší revenue</text>
+            
+            {/* Revenue calculation table */}
+            <text x="60" y="305" fontSize="9" fill="var(--text-muted)" fontFamily="JetBrains Mono">Revenue per 1000 respondentů: 99 → 84k | 149 → 107k | 199 → 109k ✓ | 249 → 80k | 299 → 54k</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fph}>Výhody × nevýhody Gabor-Granger</Tag>
+        <Bullet items={[
+          "<b>✓ Výhody:</b> Velmi jednoduchý, lze udělat za 1 týden, jasný výstup (optimální cena pro max revenue).",
+          "<b>✗ Nevýhody:</b> Lidé nadhodnocují willingness-to-pay (deklarují, ne kupují), ignoruje konkurenci, nedává cenovou strukturu (jen 1 bod).",
+          "<b>Použití:</b> Dobré pro <b>první aproximaci</b>, ne pro finální rozhodnutí. Často kombinováno s Van Westendorpem.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "bpto", title: "BPTO + Conjoint + MaxDiff — sofistikovanější metody", subtitle: "Mládková chytá BPTO! + komplexnější výzkumné nástroje", color: VSE.fis, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Pokročilejší metody, které <b>integrují konkurenci</b> (BPTO) nebo <b>features × cenu</b> (Conjoint, MaxDiff). Komise <b>Mládková</b> chytá BPTO.
+        </Def>
+        <Tag color={VSE.fis}>1️⃣ BPTO — Brand-Price Trade-Off</Tag>
+        <Bullet items={[
+          "<b>Co to je:</b> Respondent vidí <b>všechny značky v kategorii s cenami</b> a vybírá, kterou by koupil. Pak zvýšíme cenu vítěze a opakujeme.",
+          "<b>Příklad:</b> &quot;Vyberte si: Coca-Cola 25 Kč, Pepsi 22 Kč, Kofola 20 Kč.&quot; Respondent vybere Coca → příště zvedneme na 28 Kč → respondent možná přejde na Pepsi.",
+          "<b>Výstup:</b> Cenová elasticita značky + cross-elasticity (jak na zvýšení mé ceny reagují volby jiných značek).",
+          "<b>Výhody:</b> <b>Simuluje real-world rozhodnutí</b>, integruje konkurenci, nejrealističtější.",
+          "<b>Nevýhody:</b> Komplexní design (potřeba 20-40 trade-off scenarios per respondent), nákladnější (200-500 respondentů × delší dotazník).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>2️⃣ CONJOINT ANALYSIS (M2 návaznost)</Tag>
+        <Bullet items={[
+          "<b>Co to je:</b> Respondent srovnává <b>kombinace atributů</b> (cena × baterie × velikost × značka).",
+          "<b>Příklad iPhone:</b> &quot;Vyberte: iPhone 128GB Pro 27k Kč × iPhone 256GB Plus 25k × iPhone 256GB Pro 32k...&quot;",
+          "<b>Výstup:</b> <b>Importance score pro každý atribut</b> + part-worth utility per level + cenová elasticita.",
+          "<b>Použití:</b> Optimalizace produktu (které features stojí za cenu?) + competitive analysis + new product launch.",
+          "<b>Nákladnost:</b> Drahý — vyžaduje 500+ respondentů, statistický expert pro analýzu. 200-500k Kč.",
+          "<b>Použití pro pricing:</b> Conjoint dá <b>willingness-to-pay per feature</b> — kolik si připlatí za 4K, Family plan, atd.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>3️⃣ MAXDIFF (Best-Worst Scaling)</Tag>
+        <Bullet items={[
+          "<b>Co to je:</b> Respondent vidí <b>balík 4-5 features/cen</b> a vybírá MOST important + LEAST important.",
+          "<b>Příklad:</b> &quot;Z 5 features (Netflix kvalita / český content / cena / family plan / offline) která je MOST × LEAST?&quot;",
+          "<b>Výstup:</b> Rank order všech features podle preference, with statistical confidence.",
+          "<b>Výhody:</b> Lepší než ranking nebo rating — donutí respondenta trade-off, anti-respondent fatigue.",
+          "<b>Použití pro pricing:</b> Které tier features stojí za premium cenu (4K vs HD, multi-device vs single)?",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>4️⃣ TURF test (komplementární)</Tag>
+        <Bullet items={[
+          "<b>TURF = Total Unduplicated Reach and Frequency.</b>",
+          "<b>Co to je:</b> Test komplementárnosti — kolik unikátních zákazníků pokryjeme s různými kombinacemi produktů.",
+          "<b>Použití:</b> Optimalizace produktového mixu (M7). Které 3 příchutě Coca-Coly pokryjí 85 % trhu?",
+          "<b>Pro pricing:</b> Které kombinace tierů (Basic + Family) pokryjí maximum cílovky?",
+        ]} color={VSE.success} />
+        <ExamAlert
+          komise="Mládková + Kolouchová + Mikan 2026 (Horská chata)"
+          what="Mládková chytá <b>BPTO</b> explicitně v rámci analytických nástrojů. Naučit BPTO + spojit s ANOVA + Conjoint + cluster analýza (M2)."
+        />
+      </div>) },
+
+    { id: "servqual", title: "SERVQUAL — měření kvality služeb (5 mezer)", subtitle: "Doplňková metoda pro service businesses (lázně, hotely, SaaS)", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>SERVQUAL</b> (Parasuraman, Zeithaml, Berry 1985) = standardní metoda <b>měření kvality služeb přes GAP analýzu</b>. Důležitá pro service brands (M10 branding služeb).
+        </Def>
+        <Tag color={VSE.fis}>Princip — 5 GAP mezer ve kvalitě služby</Tag>
+        <Bullet items={[
+          "<b>GAP 1 — Knowledge Gap:</b> Rozdíl mezi tím, co zákazník očekává, a co si management myslí, že očekává. (&quot;Myslíme si, že chce rychlost, ale chce empatii.&quot;)",
+          "<b>GAP 2 — Standards Gap:</b> Rozdíl mezi vnímáním očekávání zákazníka (od managementu) a stanovenými standardy služby. (&quot;Víme, že chce rychlost, ale standardy stanoveny špatně.&quot;)",
+          "<b>GAP 3 — Delivery Gap:</b> Rozdíl mezi standardy a skutečným doručením. (&quot;Standard 5 min, ale dělají 8 min.&quot;)",
+          "<b>GAP 4 — Communication Gap:</b> Rozdíl mezi co slibujeme (reklama) a co reálně dodáváme. (&quot;V reklamě „rychlý servis 24/7&quot;, reálně otevřeno 9-17.&quot;)",
+          "<b>GAP 5 — Customer Gap:</b> Rozdíl mezi očekáváním a vnímáním zákazníka. <b>Tento gap je výsledek ostatních 4!</b> Tady se měří NPS, customer satisfaction.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>5 dimenzí kvality služby (RATER framework)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🛡️ RELIABILITY", d: "Spolehlivost — dodáme to, co slíbíme. Letadlo letí na čas, software funguje." },
+            { c: VSE.warning, t: "🤝 ASSURANCE", d: "Záruka — kompetence a důvěra zaměstnanců. Doctor, lawyer, banker." },
+            { c: VSE.fph, t: "👁️ TANGIBLES", d: "Hmatatelné prvky — prostředí, vzhled, vybavení. Apple Store design, hotel lobby." },
+            { c: VSE.success, t: "❤️ EMPATHY", d: "Empatie — individuální přístup, péče. Personalized service, Ritz-Carlton model." },
+            { c: VSE.danger, t: "⚡ RESPONSIVENESS", d: "Vstřícnost — rychlá reakce na potřeby. Response time, customer service quality." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Použití SERVQUAL v praxi</Tag>
+        <Bullet items={[
+          "<b>Dotazník 22 otázek</b> — pro každou dimenzi 4-5 otázek.",
+          "<b>2 sety otázek:</b> 1) Co očekáváte od ideální služby? 2) Co jste reálně dostali?",
+          "<b>Výpočet GAP score:</b> Reálně − Očekávání = negativní (nedoručujeme) × pozitivní (over-deliver).",
+          "<b>Použití:</b> Lázně, hotely, banking, telco, SaaS, B2B služby.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "aplikace", title: "Aplikace na PS + kombinace metod", subtitle: "Které metody kdy + jak je kombinovat + checklist", color: VSE.fis, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fis}>
+          V praxi se metody <b>kombinují</b> pro robustní výsledek. Single method = single point of failure.
+        </Def>
+        <Tag color={VSE.fis}>Doporučená kombinace metod podle situace</Tag>
+        <Bullet items={[
+          "<b>🚀 Launch nového produktu:</b> Van Westendorp (kolik?) + Conjoint (které features?) + Gabor-Granger (validace).",
+          "<b>📈 Optimalizace stávající ceny:</b> Gabor-Granger (rychlý) + BPTO (vs konkurence) = robust pricing rozhodnutí.",
+          "<b>💎 Premium positioning:</b> Conjoint + MaxDiff (které features podpoří premium cenu?).",
+          "<b>🏨 Service business:</b> SERVQUAL (kvalita) + Van Westendorp (cena) + NPS (loyalty).",
+          "<b>🌍 Mezinárodní expanze:</b> BPTO per zemi (konkurence se liší) + Van Westendorp (cultural willingness-to-pay).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Kombinace s ne-cenovým výzkumem</Tag>
+        <Bullet items={[
+          "<b>Focus groups</b> (M9) = qualitative kontext pro cenový výzkum (proč jsou ochotni platit?).",
+          "<b>Concept testing</b> (M9) = test feasibility před cenovým testem.",
+          "<b>A/B testing</b> = validace v real-world (Netflix, Amazon dělají kontinuálně).",
+          "<b>Mystery shopping</b> = jak prodává konkurence (Mládková chytala!) — vstupní pricing intel.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Adopční difúzní proces (Rogers, M8 odkaz)</Tag>
+        <Bullet items={[
+          "Cenový výzkum musí <b>segmentovat podle Rogersových typů</b>: Inovátoři/Early Adopters platí premium, Late Majority/Laggards chtějí slevu.",
+          "<b>5 fází adopce:</b> Povědomí → Zájem → Vyhodnocení → Vyzkoušení → Přijetí.",
+          "Cena ovlivňuje hlavně Vyhodnocení fázi — zde cenový výzkum dává klíčový vstup.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Checklist pro komisi — aplikace na PS</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj <b>fázi PLC produktu</b> v PS (M8) → vyber strategii pricingu (Skimming/Penetration).",
+          "<b>2.</b> Vyber <b>1-2 metody cenového výzkumu</b> vhodné pro situaci (Van Westendorp pro launch, Gabor-Granger pro opt., BPTO pro konkurenční trh).",
+          "<b>3.</b> Definuj <b>sample size + budget</b> — typicky 300-500 respondentů za 80-300k Kč.",
+          "<b>4.</b> Spoj cenový výzkum s <b>brand metrics</b> (NPS, BrandZ M10) + customer satisfaction.",
+          "<b>5.</b> Pro service business: <b>doplň SERVQUAL</b> pro GAP analýzu.",
+          "<b>6.</b> Plán validace v <b>real-world A/B testem</b> před plným rolloutem.",
+        ]} color={VSE.danger} />
+      </div>) },
+  ];
+
+  const flashcardsMkt12 = [
+    { term: "Cenový výzkum (Price Research)", def: "Systematický sběr dat o tom, kolik je zákazník ochoten platit. Specifická aplikace MV (M1) na pricing.", tag: "POJEM" },
+    { term: "4 otázky cenového výzkumu", def: "Optimální cena / Cenová elasticita / Konkurenční pozice / Trade-offs (cena vs features).", tag: "POJEM" },
+    { term: "5 hlavních metod", def: "Gabor-Granger / Van Westendorp / BPTO / Conjoint / MaxDiff.", tag: "POJEM" },
+    { term: "Van Westendorp PSM", def: "Price Sensitivity Meter (1976). 4 otázky → 2 křivky → optimální cena. Standard psycho pricingu.", tag: "VAN WESTENDORP" },
+    { term: "4 otázky Van Westendorpa", def: "Too cheap (kvalita?) / Bargain (výhodné) / Expensive (drahé ale zvážím) / Too expensive (nekoupím).", tag: "VAN WESTENDORP" },
+    { term: "OPP (Optimal Price Point)", def: "Průnik křivek too cheap + too expensive. Cena, kdy stejně lidí říká &quot;moc levné&quot; jako &quot;moc drahé&quot;. Optimální balanced cena.", tag: "VAN WESTENDORP" },
+    { term: "IPP (Indifference Price Point)", def: "Průnik křivek bargain + expensive. Cena, kdy zákazník neví, jestli je výhodná nebo drahá.", tag: "VAN WESTENDORP" },
+    { term: "PMC (Point of Marginal Cheapness)", def: "Průnik too cheap + expensive = dolní hranice akceptovatelného cenového pásma.", tag: "VAN WESTENDORP" },
+    { term: "PME (Point of Marginal Expensiveness)", def: "Průnik bargain + too expensive = horní hranice akceptovatelného cenového pásma.", tag: "VAN WESTENDORP" },
+    { term: "Akceptovatelné cenové pásmo", def: "Mezi PMC a PME. Cena uvnitř je akceptovatelná, mimo masivní ztráty.", tag: "VAN WESTENDORP" },
+    { term: "Gabor-Granger metoda", def: "Gabor + Granger 1965. Respondent dostane seznam cen → křivka pravděpodobnosti nákupu → optimum = max revenue.", tag: "GABOR-GRANGER" },
+    { term: "Gabor-Granger postup", def: "5-8 cenových bodů → respondent říká YES/NO za každou → křivka přes 300-500 respondentů → cena × pravděp × trh = revenue.", tag: "GABOR-GRANGER" },
+    { term: "BPTO (Brand-Price Trade-Off)", def: "Respondent vidí všechny značky s cenami, vybírá nejlepší. Pak zvýšíme cenu vítěze. Simuluje real-world rozhodnutí + integruje konkurenci.", tag: "BPTO" },
+    { term: "BPTO výstup", def: "Cenová elasticita značky + cross-elasticity (jak na zvýšení ceny reagují volby jiných značek).", tag: "BPTO" },
+    { term: "Conjoint Analysis", def: "Respondent srovnává kombinace atributů (cena × features × značka). Výstup: importance per atribut + cenová elasticita per feature.", tag: "CONJOINT" },
+    { term: "MaxDiff (Best-Worst Scaling)", def: "Respondent vybírá MOST × LEAST important z 4-5 features. Lepší než ranking. Pro pricing: které features stojí za premium.", tag: "MAXDIFF" },
+    { term: "TURF test", def: "Total Unduplicated Reach and Frequency. Test komplementárnosti — kolik unikátních zákazníků pokryjeme různými kombinacemi.", tag: "TURF" },
+    { term: "SERVQUAL", def: "Parasuraman, Zeithaml, Berry 1985. Měření kvality služeb přes 5 GAP mezer + 5 dimenzí (RATER).", tag: "SERVQUAL" },
+    { term: "5 GAP mezer SERVQUAL", def: "Knowledge / Standards / Delivery / Communication / Customer gap. Posledni je výsledek prvních 4.", tag: "SERVQUAL" },
+    { term: "5 dimenzí RATER", def: "Reliability / Assurance / Tangibles / Empathy / Responsiveness. Standardní dimenze kvality služby.", tag: "SERVQUAL" },
+    { term: "Knowledge Gap (GAP 1)", def: "Rozdíl mezi tím, co zákazník očekává, a co si management myslí, že očekává.", tag: "SERVQUAL" },
+    { term: "Delivery Gap (GAP 3)", def: "Rozdíl mezi standardy a skutečným doručením. Standard 5 min, ale dělají 8 min.", tag: "SERVQUAL" },
+    { term: "Communication Gap (GAP 4)", def: "Rozdíl mezi co slibujeme (reklama) a co reálně dodáváme. Klíčový risk overpromising.", tag: "SERVQUAL" },
+    { term: "Kombinace metod pro launch", def: "Van Westendorp (kolik?) + Conjoint (které features?) + Gabor-Granger (validace).", tag: "APLIKACE" },
+    { term: "Kombinace metod pro service business", def: "SERVQUAL (kvalita) + Van Westendorp (cena) + NPS (loyalty).", tag: "APLIKACE" },
+  ];
+
+  const quizMkt12 = [
+    { q: "Co je cenový výzkum?", opts: ["Audit cen", "Systematický sběr dat o tom, kolik je zákazník ochoten platit", "Cenová politika", "Sleva výzkum"], correct: 1 },
+    { q: "Kolik metod cenového výzkumu rozlišujeme jako hlavní?", opts: ["3", "5 (Gabor-Granger / Van Westendorp / BPTO / Conjoint / MaxDiff)", "7", "10"], correct: 1 },
+    { q: "Kdy vznikla Van Westendorpova metoda?", opts: ["1965", "1976", "1985", "2000"], correct: 1 },
+    { q: "Kolik otázek má Van Westendorp PSM?", opts: ["2", "3", "4 (too cheap / bargain / expensive / too expensive)", "6"], correct: 2 },
+    { q: "Co je OPP ve Van Westendorpovi?", opts: ["Originální Pricing Point", "Optimal Price Point — průnik křivek too cheap + too expensive", "Open Price Policy", "Operating Profit Plan"], correct: 1 },
+    { q: "Co je PMC v Van Westendorpovi?", opts: ["Premium Marketing Cost", "Point of Marginal Cheapness — dolní hranice akceptovatelného cenového pásma", "Pricing Method Code", "Product Master Catalog"], correct: 1 },
+    { q: "Kdo definoval Gabor-Granger metodu?", opts: ["Kotler 1960", "Van Westendorp", "Andre Gabor + Clive Granger 1965", "Porter 1980"], correct: 2 },
+    { q: "Co je hlavní výhoda Gabor-Granger?", opts: ["Konkurence integrated", "Velmi jednoduchý, rychlý, jasný výstup", "Trade-offs", "Empathy measurement"], correct: 1 },
+    { q: "Co je BPTO?", opts: ["Brand Price Test Option", "Brand-Price Trade-Off — respondent vidí všechny značky s cenami, vybírá nejlepší", "Best Pricing To Offer", "Buy-Price Trade-Out"], correct: 1 },
+    { q: "Co je hlavní výhoda BPTO?", opts: ["Jednoduchost", "Simuluje real-world rozhodnutí + integruje konkurenci", "Levný", "Rychlý"], correct: 1 },
+    { q: "Co je Conjoint Analysis?", opts: ["Sloučení dat", "Respondent srovnává kombinace atributů (cena × features × značka)", "Cenový průměr", "Test reklamy"], correct: 1 },
+    { q: "Co je MaxDiff?", opts: ["Maximální cena", "Best-Worst Scaling — respondent vybírá MOST × LEAST important z balíku", "Maximální slevy", "Diff testing"], correct: 1 },
+    { q: "Kdo definoval SERVQUAL?", opts: ["Kotler", "Porter", "Parasuraman, Zeithaml, Berry 1985", "Kano"], correct: 2 },
+    { q: "Kolik GAP mezer definuje SERVQUAL?", opts: ["3", "4", "5 (Knowledge / Standards / Delivery / Communication / Customer)", "6"], correct: 2 },
+    { q: "Co znamená RATER ve SERVQUAL?", opts: ["Pojištění", "Reliability / Assurance / Tangibles / Empathy / Responsiveness — 5 dimenzí kvality služby", "Rating systém", "Rate of Return"], correct: 1 },
+    { q: "Která NENÍ z 5 dimenzí RATER?", opts: ["Reliability", "Empathy", "Profitability", "Tangibles"], correct: 2 },
+  ];
+
+  const praxeMkt12 = {
+    caseStudy: {
+      company: "Spotify — kombinace 3 metod pro tier pricing optimization",
+      subtitle: "Jak Spotify nastavil 4 tiery pomocí Van Westendorp + Conjoint + BPTO",
+      content: (<>
+        <b>Spotify</b> je <b>učebnicový příklad sofistikovaného cenového výzkumu</b>. 4 tiery + studentské × family slevy nejsou náhoda — stojí za nimi roky výzkumu a A/B testů.<br/><br/>
+        <b style={{ color: VSE.fmv }}>🎯 VAN WESTENDORP (2010) — Setup individual tier:</b><br/><br/>
+        • Spotify zadal CAWI survey 2000 respondentům<br/><br/>
+        • 4 otázky pro &quot;music streaming service&quot;<br/><br/>
+        • OPP (Optimal Price Point) = $9.99/měsíc<br/><br/>
+        • PMC = $6.99 (pod = pochybnosti o kvalitě)<br/><br/>
+        • PME = $14.99 (nad = masivní ztráty)<br/><br/>
+        • Spotify nasadil $9.99 jako Individual tier — drží 14 let<br/><br/>
+        <b style={{ color: VSE.warning }}>⚖️ CONJOINT ANALYSIS — Tier features design:</b><br/><br/>
+        • 1500 respondentů srovnávalo kombinace: cena × audio quality × offline × multi-device × ad-free<br/><br/>
+        • Výstup: <b>Multi-device je delighter pro families</b> (60 % importance pro family segment), <b>offline = must-have</b> pro Premium (45 % importance), audio quality marginální (12 %)<br/><br/>
+        • Design: Family tier 4 účty × multi-device (capture family willingness-to-pay $15.99)<br/><br/>
+        • Duo tier (2 účty, $12.99) — addressing couples segment<br/><br/>
+        <b style={{ color: VSE.fph }}>🔄 BPTO (2015+) — Competitive positioning:</b><br/><br/>
+        • Respondent vidí: Spotify $9.99 vs Apple Music $9.99 vs YouTube Premium $11.99 vs Tidal $9.99<br/><br/>
+        • Když Spotify zvýší cenu na $10.99 → 12 % uživatelů přejde na Apple Music (cross-elasticity)<br/><br/>
+        • Spotify <b>záměrně drží $9.99</b> v USA (Apple Music match) ale zvedl na €10.99 v Evropě (Apple Music = $9.99 jen v USA)<br/><br/>
+        <b style={{ color: VSE.success }}>👨‍🎓 STUDENT TIER — 3° cenová diskriminace via výzkum:</b><br/><br/>
+        • Q3 2014 výzkum identifikoval <b>22 % studentů cenově vyloučených</b> z $9.99<br/><br/>
+        • Van Westendorp na student segment → OPP $4.99 (50 % discount)<br/><br/>
+        • Launch 2014: Student tier $4.99. Conversion rate u 18-24 let z 3 % na 18 %<br/><br/>
+        • <b>LTV student → standard:</b> 60 % studentů zůstane platit $9.99 po promoci<br/><br/>
+        <b style={{ color: VSE.danger }}>📊 A/B TESTING (continuous) — Real-world validation:</b><br/><br/>
+        • Spotify dělá <b>A/B testy cen v real-time</b> v různých zemích<br/><br/>
+        • Test 2023: Premium $9.99 → $10.99 v USA. Churn vzrostl jen 0.8 % (předpoklad 3 %), revenue +8 %<br/><br/>
+        • Klasická validace research výsledků v praxi<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Spotify má <b>600 milionů uživatelů</b>, z toho 240 milionů premium, ARPU $5.5. Klasický důkaz síly <b>multi-method cenového výzkumu + kontinuální validace</b>.
+      </>),
+      lessons: "Spotify je <b>etalon multi-method cenového výzkumu</b>. Pro PS doporuč: <b>kombinace Van Westendorp (initial pricing) + Conjoint (tier design) + BPTO (competitive) + A/B testing (validation)</b>. Alternativy: <b>Netflix (A/B testing intensive), Adobe (Conjoint pro Creative Cloud subscriptions), Salesforce (BPTO vs HubSpot/Pipedrive), Disney+ (Van Westendorp pro launch pricing 2019)</b>."
+    },
+    miniExamples: [
+      { tag: "VAN WESTENDORP", color: VSE.fmv, company: "Disney+ launch 2019 — research-driven pricing", content: "Disney před launchem v 2019 udělal Van Westendorp na 5000 respondentech. <b>OPP = $6.99/měsíc</b>, výrazně pod Netflix $12.99. Strategický signál: <b>family-friendly pricing</b> + content moat (Star Wars, Marvel, Pixar). Výsledek: 130 milionů uživatelů za 16 měsíců, nejrychlejší růst v history streaming." },
+      { tag: "GABOR-GRANGER", color: VSE.warning, company: "Apple iPhone 1 pricing 2007", content: "Před launchem iPhone 1 Apple dělal Gabor-Granger study s 2500 respondentů. Cenové body: $299, $399, $499, $599, $699. Pravděpodobnost nákupu při $499 = 8 % vs $399 = 14 %. <b>Revenue max při $499</b> (8 % × $499 = $40 per respondent) vs $399 (14 % × $399 = $56). Apple nakonec nastavil $499 (8GB) / $599 (16GB) Skimming + premium signal." },
+      { tag: "CONJOINT", color: VSE.fph, company: "Toyota — feature pricing for Camry", content: "Toyota dělala Conjoint analysis před launchem Camry 2018. Kombinace: trim level × engine × infotainment × safety package × cena. Výstup: <b>safety package má 38 % importance</b> (klíčový atribut pro family segment), engine size jen 12 %. Pricing decision: <b>safety package standardní v základu</b> (eliminace volby), engine size as optional pricing. Camry sales +14 % YoY po launch." },
+      { tag: "BPTO", color: VSE.success, company: "Coca-Cola Czech Republic — Pepsi pricing war", content: "V 2022 Coca-Cola CZ dělala BPTO study na 1500 respondentů. Setup: Coca 25 Kč vs Pepsi 22 Kč vs Kofola 20 Kč. <b>Když Coca zvedne na 28 Kč → 22 % uživatelů přejde na Pepsi</b> (cross-elasticity high). Strategický závěr: nezveda cenu nad Pepsi o víc než 15 %. Coca drží 18-22 % premium over Pepsi konzistentně." },
+      { tag: "SERVQUAL", color: VSE.danger, company: "Marriott — service quality measurement", content: "Marriott implementoval SERVQUAL globálně 2010+. 22-otázkový dotazník po každém pobytu. <b>GAP analysis identifikoval: GAP 3 (Delivery) největší u check-in</b> (standard 3 min, reálně 8 min). Investice $50 mil. do mobile check-in 2018. <b>Check-in time 1 min, NPS +14 bodů</b>, marriott.com bookings +22 %." },
+    ]
+  };
+
+  const examQuestionsMkt12 = [
+    { komise: "2025-01-28 — Tahal + Kuděj + Nový (Sanace)", otazka: "Cenotvorba (chtěl navíc Van Westerndorp)", pozn: "Tahal EXPLICITNĚ chce <b>Van Westendorp</b> jako přidanou hodnotu nad cenotvorbou. Naučit 4 otázky + 2 klíčové křivky (OPP, IPP) + 2 hranice (PMC, PME) + akceptovatelné cenové pásmo. Pro sanaci: B2B Van Westendorp na velkých klientech." },
+    { komise: "2026-02-06 — Mládková + Kolouchová + Mikan (Horská chata)", otazka: "Marketingové analytické nástroje. Primární a sekundární výzkum. Anova, Conjoint, shluková analýza, BPTO, mystery shopping", pozn: "Mládková chytá <b>BPTO</b> jako součást analytických nástrojů (M2 + M12). Naučit BPTO postup + výstup + propojení s ostatními metodami. Mystery shopping = doplňková metoda." },
+    { komise: "2026-01-29 — Svobodová + Nový + Machek (Horská chata)", otazka: "Cenový výzkum, cenové strategie, cenové testy", pozn: "Svobodová chce <b>5 metod cenového výzkumu</b> + propojení s cenovými strategiemi (M11). Klasický komplex." },
+    { komise: "2025-02-04 — Vrbová + Tahal + Svobodová (Víno)", otazka: "Cenové testy a cenové efekty", pozn: "Vrbová chce <b>cenové testy + efekty</b> (M11). Naučit 5 metod cenového výzkumu + 6 cenových efektů (Veblen, Snob, Bandwagon, Giffen, Placebo, Anchor) z M11." },
+    { komise: "2025-06-04 — Mikovcová + Viktora + Kolouchová (Horská bouda)", otazka: "Cenový výzkum, cenové testy", pozn: "Mikovcová chce <b>komplet</b>. Pro horskou boudu: SERVQUAL (service quality) + Van Westendorp (cena pokoje) + Conjoint (features: snídaně, wellness, parking)." },
+    { komise: "2025-06-09 — Abíková + Kolouchová + Smrčka", otazka: "Cenový výzkum", pozn: "Otevřená otázka — naučit <b>5 metod kompletně</b> + příklady (Spotify, Disney+, Coca-Cola)." },
+    { komise: "2025-06-10 — Double Stříteský + Müllerová (Neziskovka)", otazka: "Cenový výzkum, metodiky, testy, efekty (Veblenův)", pozn: "Stříteský chce <b>metodiky + testy + EFEKTY</b>. Spojit M11 (efekty) + M12 (metody). Pro neziskovku: Van Westendorp pro donation pricing (50/100/500/1000 Kč anchors)." },
+  ];
+
+  const podcastMkt12 = { title: "Marketing 12 — Cenový výzkum", description: "Definice cenového výzkumu + 4 hlavní otázky (cena, elasticita, konkurence, trade-offs). 5 hlavních metod: Gabor-Granger (křivka poptávky), Van Westendorp PSM (4 otázky → OPP, IPP, PMC, PME), BPTO (brand-price trade-off, integruje konkurenci), Conjoint Analysis (kombinace atributů), MaxDiff (best-worst scaling). TURF test (komplementárnost). SERVQUAL (5 GAP mezer + 5 dimenzí RATER: Reliability/Assurance/Tangibles/Empathy/Responsiveness). Kombinace metod podle situace. Adopční difúzní proces. Spotify (multi-method), Disney+, Apple iPhone, Toyota Camry, Coca-Cola, Marriott.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt12 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>cenový výzkum = systematický sběr dat o willingness-to-pay</b>.<br/>
+    <b style="color:#A82A5F">2.</b> Návaznost na M1 (obecný MV), M2 (analytické metody), M11 (teorie cenotvorby).<br/>
+    <b style="color:#A82A5F">3.</b> 4 hlavní otázky cenového výzkumu — cena / elasticita / konkurence / trade-offs.<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>Van Westendorp PSM</b> (Tahal chytá!) — 4 otázky + OPP + IPP + PMC + PME + akceptovatelné pásmo.<br/>
+    <b style="color:#A82A5F">5.</b> Gabor-Granger — křivka pravděpodobnosti nákupu × cena = revenue maximization.<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>BPTO</b> (Mládková chytá!) — brand-price trade-off, integruje konkurenci, simuluje real-world.<br/>
+    <b style="color:#A82A5F">7.</b> Conjoint Analysis — kombinace atributů, importance per feature.<br/>
+    <b style="color:#A82A5F">8.</b> MaxDiff — best-worst scaling, lepší než ranking pro feature prioritization.<br/>
+    <b style="color:#A82A5F">9.</b> TURF test — komplementárnost produktového mixu.<br/>
+    <b style="color:#A82A5F">10.</b> ⚠️ <b>SERVQUAL</b> — 5 GAP mezer + 5 dimenzí RATER. Pro service businesses.<br/>
+    <b style="color:#A82A5F">11.</b> Kombinace metod — Van Westendorp + Conjoint + Gabor-Granger (launch), SERVQUAL + Van Westendorp + NPS (service).<br/>
+    <b style="color:#A82A5F">12.</b> A/B testing v real-world jako validace research.<br/>
+    <b style="color:#A82A5F">13.</b> Aplikace na PS — vybrat 2 metody + sample + budget + propojení s brand metrics.
+  `;
+
+  const caseStudyMkt12 = {
+    title: "Petr — Head of Pricing v ZdravěPlus, českém pojišťovacím startupu (250 mil. Kč, 80 zaměstnanců)",
+    subtitle: "Cenový výzkum pro disruptive product v konzervativním trhu",
+    scenario: "Petr (39 let) sedí ve své kanceláři v ZdravěPlus a otevírá email od CEO Jakuba: &quot;Pricing strategy meeting tomorrow 9 AM — připrav data&quot;. Na pozici 3 měsíce, předtím dělal pricing v Komerční bance. ZdravěPlus je 5letý český insurtech startup, který za rok launchne &quot;Health Plus&quot; — balíček doplňkového zdravotního pojištění s digital-first přístupem. Cílovka: mileniálové 28-42 let, kteří chtějí komplexnější péči než státní pojištění, ale nechtějí platit 8-15 tisíc/měsíc soukromým pojišťovnám.\n\nProblém je, že tento segment nikdo nemá produkt. VZP/ZP MV ČR jsou státní a basic. Soukromé doplňkové pojištění (Allianz, Generali) je drahé a má dlouhé čekací lhůty. Health Plus by byl první svého druhu v ČR. Customer development calls (50 interviews) ukázaly, že lidé chtějí: rychlé objednání lékaře, telemedicínu 24/7, preventivní péči, second opinion. Ale neví, kolik za to chtějí platit. Někdo řekl 500 Kč/měsíc, jiný 2000 Kč/měsíc, jeden ekonom nabídl &quot;klidně 5000 Kč&quot;.\n\nCFO Tereza tlačí na rychlost: každý měsíc bez launch = 5 milionů burn rate. Investoři chtějí product-market fit do 12 měsíců. Výzkum na 200 mileniálů: 78 % vnímá stávající zdravotní péči jako problém, ale 91 % nikdy nepřemýšlelo nad placeným doplňkovým pojištěním. Brand awareness ZdravěPlus mezi cílovkou = 12 %. Konkurence v doplňkovém pojištění mlčí o cenách (B2B prodeje), nelze srovnat na web.\n\nPetr má 30 dní + budget 600 tisíc Kč na cenový výzkum. Health Plus má 6 features: online objednání lékaře, telemedicína 24/7, preventivní balíček, second opinion, mental health support, cestovní pojištění. Petr musí zjistit, kolik každá feature stojí pro zákazníka, kolik je optimální cena tieru, a jak konkurovat — i když přímá konkurence neexistuje, alternativa je &quot;nic nedělat&quot; — což je vlastně největší konkurent.",
+    signals: [
+      { text: "Health Plus by byl první svého druhu v ČR", color: VSE.warning, reason: "Bez referenčního cenového benchmarku <b>Gabor-Granger pomůže najít cenovou křivku from scratch</b>. Pro disruptive produkty Van Westendorp je problematický (lidé neumí cenu odhadnout)." },
+      { text: "neví, kolik za to chtějí platit. Někdo řekl 500 Kč/měsíc, jiný 2000 Kč/měsíc, jeden ekonom nabídl 5000 Kč", color: VSE.danger, reason: "Klasický signál pro <b>Van Westendorp PSM</b> — široký rozptyl willingness-to-pay vyžaduje 4 otázky pro identifikaci OPP + akceptovatelného pásma. Single number z customer interviews je nespolehlivý." },
+      { text: "alternativa je nic nedělat — což je vlastně největší konkurent", color: VSE.fph, reason: "Klíčový insight — <b>BPTO je nepoužitelný</b> (žádní pojmenovaní konkurenti). Místo toho <b>Van Westendorp + Conjoint</b> pro identifikaci willingness-to-pay vs status quo." },
+      { text: "Health Plus má 6 features: online objednání lékaře, telemedicína 24/7, preventivní balíček, second opinion, mental health support, cestovní pojištění", color: VSE.success, reason: "Klasický setup pro <b>Conjoint Analysis</b> — 6 features × 4 cenové úrovně = identifikace importance per feature + willingness-to-pay per feature." },
+      { text: "30 dní + budget 600 tisíc Kč", color: VSE.warning, reason: "Tight budget vyžaduje <b>strategická volba 2-3 metod</b>, ne všech 5. Doporučení: Van Westendorp (200k) + Conjoint (350k) + 50k qualitative follow-up." },
+      { text: "78 % vnímá stávající zdravotní péči jako problém, ale 91 % nikdy nepřemýšlelo nad placeným doplňkovým pojištěním", color: VSE.fph, reason: "<b>Pain point je real, ale awareness je nízká</b>. Cenový výzkum musí kombinovat s concept testing (M9) — respondent nejdřív pochopit produkt, pak hodnotit cenu." },
+      { text: "Brand awareness ZdravěPlus mezi cílovkou = 12 %", color: VSE.warning, reason: "Nízká awareness = lidé nemají <b>reference price kotvu</b>. Van Westendorp výsledky budou volnější — důležité je <b>kombinovat s edukací respondentů</b> před cenovými otázkami." },
+      { text: "každý měsíc bez launch = 5 milionů burn rate", color: VSE.danger, reason: "Časová tlak vyžaduje <b>komprimovaný research timeline</b>. 30 dní = realistický pro Van Westendorp + Conjoint (CAWI 2 týdny + analýza 1 týden + presentation 1 týden)." },
+    ],
+    quiz1: {
+      question: "Jaký je hlavní pricing výzkumný challenge pro Health Plus?",
+      options: [
+        "Nedostatek respondentů",
+        "Vysoké náklady na výzkum",
+        "Disruptive produkt bez referenčního cenového benchmarku + low awareness + status quo jako konkurent",
+        "Příliš mnoho konkurentů",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Jakou kombinaci metod by Petr měl použít pro Health Plus pricing v 30 dnech + 600k Kč?",
+      options: [
+        { text: "Van Westendorp PSM (4 otázky, 500 respondentů, CAWI) — identifikace OPP + akceptovatelného cenového pásma. Náklad ~200k Kč.", correct: true, reason: "✓ Klasická metoda pro launch nového produktu. 4 otázky dají optimální cenu i hranice. Tahal chytá!" },
+        { text: "Conjoint Analysis (6 features × 4 cenové úrovně, 400 respondentů) — importance per feature + willingness-to-pay per feature. Náklad ~350k Kč.", correct: true, reason: "✓ Klíčové pro feature-based pricing. Zjistí, které features stojí za premium, které jsou must-have free." },
+        { text: "Concept testing PŘED cenovým výzkumem (200 respondentů, 50k Kč) — edukace o produktu PŘED Van Westendorp otázkami", correct: true, reason: "✓ Kritické! Bez pochopení produktu jsou cenové odpovědi nesmyslné. M9 návaznost." },
+        { text: "Tier design založen na Conjoint výsledcích — Basic / Standard / Premium s features differentiation (must-have ve všech, delighters jen v Premium)", correct: true, reason: "✓ Spotify model. Conjoint identifikuje, které features stojí za premium tier (telemedicína, mental health). Diskriminace 2° z M11." },
+        { text: "Pilot v 1 segmentu po launchi — A/B test ceny 990 Kč vs 1290 Kč na 1000 early adopters, monitoring conversion + churn 3 měsíce", correct: true, reason: "✓ Real-world validace research výsledků. Netflix/Spotify model. Lean approach." },
+        { text: "Qualitative follow-up po Van Westendorpu (15-20 in-depth interviews) — proč jsou ochotni / nejsou platit zjištěnou cenu?", correct: true, reason: "✓ Doplnění kvantitativních dat o kontext. Insight: někdo platí pro telemedicínu, jiný pro second opinion = persona-based marketing." },
+        { text: "BPTO (Brand-Price Trade-Off) s konkurenty Allianz, Generali, VZP", correct: false, reason: "✗ Nepoužitelný — Health Plus má jinou cílovku a jinou hodnotu než Allianz/Generali (10-25 tis/měs). Status quo je konkurent, ne pojmenované značky." },
+        { text: "Gabor-Granger jako jediná metoda", correct: false, reason: "✗ Pro disruptive produkt single-method = single point of failure. Lidé bez kontextu produktu budou střílet od pasu. Lepší kombinace 2-3 metod." },
+        { text: "Skipnut research, jet podle gut feeling", correct: false, reason: "✗ Sebevražda v insurtech. 5 mil. Kč/měsíc burn rate × špatná cena = totální fail. Research za 600k = pojistka pro 60 mil. roční investici do launch." },
+      ],
+    },
+    summary: "<b>Petr potřebuje multi-method research v 30 dnech: Van Westendorp + Conjoint + pilot, s edukací respondentů PŘED cenovými otázkami.</b><br/><br/><b>Detailní plán (30 dní + 600k Kč):</b><br/><br/>• <b>Týden 1-2 (200k Kč):</b> Van Westendorp PSM — 500 respondentů z cílovky 28-42 let, 4 otázky po 5-min product video (concept testing před cenou). Cíl: OPP, IPP, PMC, PME.<br/><br/>• <b>Týden 2-3 (350k Kč):</b> Conjoint Analysis — 400 respondentů × 6 features × 4 cenové úrovně. Cíl: importance per feature + willingness-to-pay per feature → tier design.<br/><br/>• <b>Týden 3-4 (50k Kč):</b> Qualitative follow-up — 15 in-depth interviews z top quartile willingness-to-pay. Cíl: persona insights + value proposition refinement.<br/><br/>• <b>Týden 4:</b> Analýza + recommendation pro Jakuba a board. Tier design: Basic 690 Kč / Standard 1290 Kč / Premium 2490 Kč (předpoklad).<br/><br/>• <b>Post-launch:</b> A/B test cen na pilot kohorte 1000 early adopters první 3 měsíce. Real-world validace research.<br/><br/><b>Pro komisi:</b> Klasický challenge — disruptive produkt v konzervativním trhu bez benchmarku. <b>Spotify (multi-method)</b>, <b>Disney+ (Van Westendorp 5000 respondentů 2019)</b>, <b>Apple iPhone 1 (Gabor-Granger)</b> jako benchmark. <b>Van Westendorp 4 otázky</b> + <b>Conjoint per feature</b> + <b>Concept testing PŘED cenou</b>. Anti-vzor: BPTO bez konkurence + single method. Vzor: <b>komprimovaný multi-method research s post-launch A/B validací</b>.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={12} title="Cenový výzkum — Van Westendorp, Gabor-Granger, BPTO, conjoint"
+      subtitle="5 metod + SERVQUAL pro služby + kombinace metod + adopční difúzní proces"
+      color={VSE.fis}
+      questionText="Cenový výzkum — metody, testy, aplikace."
+      questionDesc="Definice cenového výzkumu + 4 hlavní otázky. 5 hlavních metod: Gabor-Granger (křivka poptávky), Van Westendorp PSM (4 otázky → OPP, IPP, PMC, PME), BPTO (brand-price trade-off, integruje konkurenci), Conjoint Analysis (kombinace atributů), MaxDiff (best-worst scaling). TURF test (komplementárnost). SERVQUAL (5 GAP mezer + 5 dimenzí RATER). Kombinace metod podle situace. Adopční difúzní proces. Spotify, Disney+, Apple iPhone, Toyota Camry, Coca-Cola, Marriott."
+      sloz={3} roz={4} freq={4}
+      examStrategy={examStrategyMkt12}
+      studySections={studySectionsMkt12}
+      flashcards={flashcardsMkt12}
+      quiz={quizMkt12}
+      praxe={praxeMkt12}
+      examQuestions={examQuestionsMkt12}
+      podcast={podcastMkt12}
+      caseStudy={caseStudyMkt12}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 13 — Integrovaná mkt komunikace + AIDA + makro/mikro modely + 6 nástrojů + 5M
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt13Panel() {
+  const studySectionsMkt13 = [
+    { id: "intro", title: "Integrovaná mkt komunikace (IMK) — definice + úrovně", subtitle: "Co je IMK + úrovně + zdroje + efektivní komunikace", color: VSE.fis, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Integrovaná marketingová komunikace (IMK)</b> = <b>jednotný a koordinovaný způsob, jakým firma komunikuje se svým okolím</b>. Sjednocení všech komunikačních nástrojů, kanálů a sdělení tak, aby působily <b>jednotně, konzistentně a srozumitelně</b>. Komise <b>Svobodová, Stříteský, Pichanič, Bočková</b> chtějí IMK 4× explicitně.
+        </Def>
+        <Tag color={VSE.fis}>Co IMK přináší</Tag>
+        <Bullet items={[
+          "<b>Jednotné poselství</b> napříč všemi kanály — TV reklama, social media, sales, PR mluví stejně.",
+          "<b>Synergický efekt</b> — 1+1 = 3. Více kanálů se vzájemně posiluje (TV vidí, pak ho zaujme banner online, pak slyší podcast).",
+          "<b>Multi-platform přístup</b> — Coca-Cola Christmas kampaň: TV + billboardy + social + experience (Christmas truck tour).",
+          "<b>Spojení se značkou</b> — IMK posiluje brand awareness, brand image, positioning (M10).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>7 úrovní mkt komunikace (cíl ovlivnit zákazníka)</Tag>
+        <Bullet items={[
+          "<b>1. Poslat informaci</b> — máme nový produkt.",
+          "<b>2. Dostat informaci</b> — zákazník ji přijal.",
+          "<b>3. Povědomí o značce</b> — &quot;Slyšel jsem o XYZ&quot;.",
+          "<b>4. Znalost značky</b> — &quot;Víme co XYZ dělá&quot;.",
+          "<b>5. Image značky</b> — &quot;Co si o XYZ myslím&quot;.",
+          "<b>6. Úmysl koupit</b> — &quot;Příště koupím XYZ&quot;.",
+          "<b>7. Koupit</b> — finální transakce.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>3 zdroje IMK</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "📢 FIREMNÍ KOMUNIKACE", d: "Plánovaná komunikace — reklama, PR, sales, social media. Co firma řekne." },
+            { c: VSE.warning, t: "👀 VIZUÁLNÍ TVÁŘ FIRMY", d: "Logo, barvy, font, design, packaging, prostory (M10 prvky značky). Co firma ukáže." },
+            { c: VSE.fph, t: "🌟 FIREMNÍ IMAGE", d: "Pověst, hodnoty, reputace, kultura. Co si o firmě myslí veřejnost (uncontrollable)." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.success}>4 znaky efektivní mkt komunikace</Tag>
+        <Bullet items={[
+          "<b>Branding effect</b> — komunikace posílí brand awareness a brand image.",
+          "<b>Joint společné</b> — sdělení rezonuje napříč kanály a kohortami.",
+          "<b>Originalita</b> — odlišení od konkurence (Old Spice 2010 — &quot;I'm on a horse&quot;).",
+          "<b>Líbivost</b> — emotional/funny appeal, ne otravná opakování.",
+        ]} color={VSE.success} />
+        <ExamAlert
+          komise="Svobodová + Nový + Machek 2026 (Horská chata) + 3× další 2025"
+          what="<b>4 komise CHTĚJÍ IMK + MAKRO a MIKRO MODEL</b>. Naučit detail: IMK definice, 6 nástrojů komunikačního mixu, makromodel (Shannon-Weaver), mikromodel (AIDA + hierarchie reakcí)."
+        />
+      </div>) },
+
+    { id: "modely", title: "Komunikační modely — Makromodel + Mikromodel", subtitle: "TAHAL chytá AIDA! Svobodová+Stříteský chtějí oba modely", color: VSE.fis, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Komunikační modely</b> popisují, jak komunikace technicky funguje. <b>Makromodel</b> = jak se posílá zpráva (Shannon-Weaver). <b>Mikromodel</b> = jak ji příjemce zpracovává (AIDA). Komise <b>Tahal</b> CHYTÁ EXPLICITNĚ <b>AIDA</b>!
+        </Def>
+        <Tag color={VSE.fis}>1️⃣ MAKROMODEL komunikace (Shannon-Weaver 1949)</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 720 280" style={{ width: "100%", maxWidth: 720, height: "auto" }}>
+            <defs>
+              <marker id="arrowMacro" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+              </marker>
+            </defs>
+            {/* Sender */}
+            <rect x="20" y="90" width="110" height="60" rx="8" fill={VSE.fmv} opacity="0.85"/>
+            <text x="75" y="115" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">📤 ODESÍLATEL</text>
+            <text x="75" y="135" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="Inter Tight">(firma)</text>
+            
+            {/* Encoding */}
+            <rect x="160" y="90" width="100" height="60" rx="8" fill={VSE.warning} opacity="0.85"/>
+            <text x="210" y="115" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">🔠 KÓDOVÁNÍ</text>
+            <text x="210" y="135" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">(creative)</text>
+            
+            {/* Message + Media */}
+            <rect x="290" y="90" width="110" height="60" rx="8" fill={VSE.fph} opacity="0.85"/>
+            <text x="345" y="115" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">📺 SDĚLENÍ</text>
+            <text x="345" y="135" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">(přes média)</text>
+            
+            {/* Decoding */}
+            <rect x="430" y="90" width="100" height="60" rx="8" fill={VSE.warning} opacity="0.85"/>
+            <text x="480" y="115" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff" fontFamily="Inter Tight">🔓 DEKÓDOVÁNÍ</text>
+            <text x="480" y="135" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">(interpretace)</text>
+            
+            {/* Receiver */}
+            <rect x="560" y="90" width="110" height="60" rx="8" fill={VSE.success} opacity="0.85"/>
+            <text x="615" y="115" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff" fontFamily="Inter Tight">📥 PŘÍJEMCE</text>
+            <text x="615" y="135" textAnchor="middle" fontSize="11" fill="#fff" fontFamily="Inter Tight">(zákazník)</text>
+            
+            {/* Arrows */}
+            {[135, 265, 405, 535].map((x, i) => (
+              <line key={i} x1={x} y1="120" x2={x + 20} y2="120" stroke="#666" strokeWidth="2.5" markerEnd="url(#arrowMacro)"/>
+            ))}
+            
+            {/* Noise */}
+            <rect x="280" y="20" width="160" height="40" rx="6" fill={VSE.danger} opacity="0.2" stroke={VSE.danger} strokeWidth="1.5"/>
+            <text x="360" y="38" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.danger} fontFamily="Inter Tight">⚠️ ŠUM (Noise)</text>
+            <text x="360" y="52" textAnchor="middle" fontSize="9" fill={VSE.danger} fontFamily="JetBrains Mono">konkurence, rozptýlení, špatný kanál</text>
+            <line x1="345" y1="62" x2="345" y2="86" stroke={VSE.danger} strokeWidth="1.5" strokeDasharray="3,3"/>
+            
+            {/* Feedback loop */}
+            <path d="M 615 155 Q 615 230 75 230 Q 75 230 75 155" stroke={VSE.fis} strokeWidth="2.5" fill="none" markerEnd="url(#arrowMacro)" strokeDasharray="5,3"/>
+            <rect x="290" y="218" width="120" height="24" rx="6" fill="#fff" stroke={VSE.fis} strokeWidth="1.5"/>
+            <text x="350" y="235" textAnchor="middle" fontSize="12" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">🔄 FEEDBACK</text>
+            
+            <text x="360" y="265" textAnchor="middle" fontSize="10" fill="var(--text-muted)" fontFamily="JetBrains Mono">Shannon-Weaver 1949 — základ moderní komunikace</text>
+          </svg>
+        </div>
+        <Bullet items={[
+          "<b>Odesílatel (firma):</b> Má sdělení, které chce předat. Záměr komunikace.",
+          "<b>Kódování:</b> Převod sdělení do formy — reklamní spot, banner, sales pitch. Creative work.",
+          "<b>Sdělení + Média:</b> Co + Kanal (TV, social, email, billboard).",
+          "<b>Dekódování:</b> Příjemce interpretuje sdělení podle své zkušenosti.",
+          "<b>Příjemce (zákazník):</b> Konečný cíl. Pochopí sdělení tak, jak ho odesílatel zamýšlel?",
+          "<b>Šum:</b> Vše, co narušuje komunikaci — konkurence, rozptýlení, špatný kanál, jazyk.",
+          "<b>Feedback:</b> Reakce příjemce — koupil? Otevřel email? Klikl?",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>2️⃣ MIKROMODEL — AIDA (Lewis 1898)</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 700 280" style={{ width: "100%", maxWidth: 700, height: "auto" }}>
+            <defs>
+              <marker id="arrowAIDA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+              </marker>
+            </defs>
+            {/* Funnel shape */}
+            <polygon points="50,50 650,50 580,220 120,220" fill="none" stroke="#ccc" strokeWidth="1.5" strokeDasharray="6,3"/>
+            
+            {/* 4 stages */}
+            {[
+              { x: 100, w: 130, c: VSE.fmv, icon: "👁️", t: "ATTENTION", desc: "Upoutej pozornost", h: 90 },
+              { x: 245, w: 130, c: VSE.warning, icon: "💡", t: "INTEREST", desc: "Vyvolej zájem", h: 105 },
+              { x: 390, w: 130, c: VSE.fph, icon: "❤️", t: "DESIRE", desc: "Probuď touhu", h: 120 },
+              { x: 535, w: 130, c: VSE.success, icon: "🛒", t: "ACTION", desc: "Vyvolej akci", h: 135 },
+            ].map((s, i) => (
+              <g key={i}>
+                <rect x={s.x} y={75 + i * 8} width={s.w} height={s.h} rx="10" fill={s.c} opacity="0.85"/>
+                <text x={s.x + s.w/2} y={100 + i * 8} textAnchor="middle" fontSize="22" fill="#fff">{s.icon}</text>
+                <text x={s.x + s.w/2} y={125 + i * 8} textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t}</text>
+                <text x={s.x + s.w/2} y={143 + i * 8} textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">{s.desc}</text>
+              </g>
+            ))}
+            
+            {/* Arrows */}
+            {[230, 375, 520].map((x, i) => (
+              <line key={i} x1={x} y1={135 + i * 8} x2={x + 17} y2={143 + i * 8} stroke="#666" strokeWidth="2.5" markerEnd="url(#arrowAIDA)"/>
+            ))}
+            
+            <text x="350" y="35" textAnchor="middle" fontSize="14" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">🎯 AIDA — klasický persuasion model</text>
+            <text x="350" y="255" textAnchor="middle" fontSize="10" fill="var(--text-muted)" fontFamily="JetBrains Mono">Elias St. Elmo Lewis 1898 — používá se 125+ let</text>
+          </svg>
+        </div>
+        <Bullet items={[
+          "<b>A — Attention (Pozornost):</b> Headlinev banner, hero shot v TV reklamě, scroll-stopping content. &quot;Pohne&quot; zákazníkem.",
+          "<b>I — Interest (Zájem):</b> Pochopení produktu — co dělá, pro koho. Storytelling, copywriting, benefit-focused.",
+          "<b>D — Desire (Touha):</b> Emocionální nebo racionální důvod, proč to chce. FOMO, social proof, transformation.",
+          "<b>A — Action (Akce):</b> Konkrétní krok — koupit, registrovat, kliknout. Strong CTA, urgency, simplification.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Další mikromodely (komise oceňují přidanou hodnotu)</Tag>
+        <Bullet items={[
+          "<b>AIDA → AIDAS:</b> + Satisfaction (spokojenost po nákupu = retention).",
+          "<b>AIDA → AIDCAS:</b> + Conviction (přesvědčení) + Action + Satisfaction.",
+          "<b>Hierarchy of Effects (Lavidge-Steiner 1961):</b> Awareness → Knowledge → Liking → Preference → Conviction → Purchase. Sofistikovanější než AIDA.",
+          "<b>Innovation Adoption Model (Rogers — M8):</b> Awareness → Interest → Evaluation → Trial → Adoption. Pro nové produkty.",
+          "<b>Communication Model (Kotler):</b> Exposure → Reception → Cognitive Response → Attitude → Intention → Behavior.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Vrbová + Tahal + Svobodová 2025 (Vinařská firma)"
+          what="Tahal CHYTÁ AIDA explicitně! Naučit 4 písmena + příklady (Attention = headline, Interest = body, Desire = benefits, Action = CTA). Plus znalost rozšíření (AIDAS, hierarchie reakcí Lavidge-Steiner)."
+        />
+      </div>) },
+
+    { id: "komunikacni_mix", title: "Komunikační mix — 6 hlavních nástrojů", subtitle: "Reklama / Podpora prodeje / Události / PR / Osobní prodej / Direct", color: VSE.fis, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Komunikační mix</b> = soubor nástrojů, které firma používá pro komunikaci se zákazníkem. <b>Kotler definuje 6 hlavních.</b> Komise <b>Bočková</b> chytá explicitně <b>kdy se používá jaký druh médií (B2B osobní prodej, B2C reklama)</b>.
+        </Def>
+        <Tag color={VSE.fis}>6 nástrojů komunikačního mixu (Kotler)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📺 1. REKLAMA (Advertising)", d: "Placená nepersonální komunikace. TV, print, online, billboardy, plakáty. Vhodné pro masu, brand awareness." },
+            { c: VSE.warning, t: "🎁 2. PODPORA PRODEJE (Sales Promotion)", d: "Krátkodobé pobídky. Soutěže, hry, slevy, kupóny, vzorky, ochutnávky, věrnostní programy. Pro rychlý sales push." },
+            { c: VSE.fph, t: "🎪 3. UDÁLOSTI A ZÁŽITKY (Events)", d: "Sport, zábava, festivaly, umění, příležitosti. Red Bull Air Race, Heineken UEFA. Brand experience." },
+            { c: VSE.success, t: "📰 4. PUBLIC RELATIONS (PR)", d: "Vztahy s veřejností. Tiskové zprávy, projevy, semináře, výroční zprávy, sponzoring. Nepřímé, věrohodnější než reklama." },
+            { c: VSE.danger, t: "🤝 5. OSOBNÍ PRODEJ (Personal Selling)", d: "Face-to-face komunikace. Prodejní prezentace, schůzky, demos. Vhodné pro B2B + high-value B2C (auta, nemovitosti)." },
+            { c: VSE.fis, t: "📧 6. DIRECT MARKETING", d: "Přímá komunikace. Katalogy, email, telemarketing, hlasová pošta, fax. Měřitelné, targetované." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>3 faktory výběru komunikačního mixu (Bočková chytá!)</Tag>
+        <Bullet items={[
+          "<b>1. Typ výrobkového trhu (B2B × B2C):</b>",
+          "&nbsp;&nbsp;<b>B2C</b> (spotřebitelské):</b> Podpora prodeje + reklama. Coca-Cola TV + slevy v Lidlu.",
+          "&nbsp;&nbsp;<b>B2B</b> (firmy):</b> Osobní prodej + PR + direct. Cisco, IBM, Salesforce — sales schůzky + white papers.",
+          "<b>2. Připravenost spotřebitele (úroveň povědomí):</b>",
+          "&nbsp;&nbsp;<b>Iniciální fáze:</b> reklama, publicita pro awareness.",
+          "&nbsp;&nbsp;<b>Pokročilejší:</b> osobní prodej, podpora prodeje pro action.",
+          "<b>3. Stadium ŽC produktu (M8):</b>",
+          "&nbsp;&nbsp;<b>Zavádění:</b> reklama + PR (awareness).",
+          "&nbsp;&nbsp;<b>Růst:</b> reklama + akce (akvizice).",
+          "&nbsp;&nbsp;<b>Zralost:</b> reklama + osobní prodej + podpora (loyalty).",
+          "&nbsp;&nbsp;<b>Úpadek:</b> podpora prodeje (vyprodání zásob).",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Push × Pull komunikační strategie</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.danger, t: "👉 PUSH strategie", d: "Výrobce TLAČÍ produkt skrz distribuční kanál. Reklama na distributory, slevy retailerům, osobní prodej. B2B + komodity." },
+            { c: VSE.success, t: "🧲 PULL strategie", d: "Výrobce TÁHNE zákazníky reklamou → zákazníci ji žádají v retailu. Coca-Cola, Apple — masová reklama vytvoří poptávku." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "planovani_5m", title: "Plánování komunikační kampaně — 5M (Heřman chytá!)", subtitle: "Mission / Money / Message / Media / Measurement", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>5M framework</b> = Kotlerův klasický model pro plánování kampaně. Komise <b>Heřman, Schovancová, Vávra</b> chytá <b>5M + aplikace na PS + měření PR</b>.
+        </Def>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 720 200" style={{ width: "100%", maxWidth: 720, height: "auto" }}>
+            <defs>
+              <marker id="arrow5M" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+              </marker>
+            </defs>
+            {[
+              { x: 20, c: VSE.fph, icon: "🎯", t: "MISSION", desc: "co chceme" },
+              { x: 160, c: VSE.warning, icon: "💰", t: "MONEY", desc: "rozpočet" },
+              { x: 300, c: VSE.fmv, icon: "💬", t: "MESSAGE", desc: "sdělení" },
+              { x: 440, c: VSE.success, icon: "📺", t: "MEDIA", desc: "kanály" },
+              { x: 580, c: VSE.fis, icon: "📊", t: "MEASUREMENT", desc: "měření" },
+            ].map((s, i) => (
+              <g key={i}>
+                <rect x={s.x} y="55" width="120" height="100" rx="10" fill={s.c} opacity="0.85"/>
+                <text x={s.x + 60} y="88" textAnchor="middle" fontSize="26" fill="#fff">{s.icon}</text>
+                <text x={s.x + 60} y="112" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t}</text>
+                <text x={s.x + 60} y="130" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">{s.desc}</text>
+              </g>
+            ))}
+            {[140, 280, 420, 560].map((x, i) => (
+              <line key={i} x1={x} y1="105" x2={x + 18} y2="105" stroke="#666" strokeWidth="2.5" markerEnd="url(#arrow5M)"/>
+            ))}
+            <text x="360" y="180" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">5M framework (Kotler) — plánování kampaně</text>
+          </svg>
+        </div>
+        <Tag color={VSE.fph}>5M detail</Tag>
+        <Bullet items={[
+          "<b>🎯 1. MISSION (cíle kampaně):</b> Awareness × Consideration × Conversion × Loyalty. Co konkrétně chceme dosáhnout? +20 % awareness, +500k revenue, atd.",
+          "<b>💰 2. MONEY (rozpočet):</b> 4 metody: % z obratu (industry standard 5-15 %), competitive parity (jako konkurence), affordable (kolik můžeme utratit), objective-and-task (co je potřeba na cíl).",
+          "<b>💬 3. MESSAGE (sdělení):</b> Co řekneme? Headline + body copy + CTA. Rational × emotional appeal. Storytelling × benefit-focused × comparative.",
+          "<b>📺 4. MEDIA (kanály):</b> TV vs social vs out-of-home. Reach (kolik lidí?) × Frequency (kolikrát?) × Impact (kvalita kontaktu). Mediální plán + strategie.",
+          "<b>📊 5. MEASUREMENT (měření):</b> Pre-test (před launchem) × Post-test (po). Brand awareness lift, CTR, conversion rate, NPS, sales lift, ROI kampaně.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Komunikační plán — od strategie k execution</Tag>
+        <Bullet items={[
+          "<b>Komunikační cíle:</b> Konkrétní, měřitelné — &quot;+30 % unaided awareness do 6 měsíců&quot;.",
+          "<b>Mediální strategie:</b> Jaká média + kdy + frekvence.",
+          "<b>Mediální plán:</b> Konkrétní allocation: 40 % TV / 30 % social / 20 % outdoor / 10 % print.",
+          "<b>Mediální mix:</b> Kombinace různých nástrojů pro maximální efekt.",
+          "<b>Mediální brief:</b> Detailní zadání pro agentury.",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Heřman + Schovancová + Vávra 2026 (Výroba kol)"
+          what="Heřman EXPLICITNĚ chce: <b>5M + aplikace na PS + Možnosti PR (co to je, typy, jak se měří úspěšnost)</b>. Naučit 5M + PR detail + měření (AVE, share of voice, sentiment, reach)."
+        />
+      </div>) },
+
+    { id: "pr_mereni", title: "PR + měření komunikace + výzkum komunikace", subtitle: "Heřman + Mikovcová chytá PR typy + měření!", color: VSE.fis, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Public Relations (PR)</b> = systematické budování vztahů s veřejností. <b>Více věrohodný než reklama</b> (3rd party endorsement). Komise <b>Heřman</b> chytá <b>typy PR + měření úspěšnosti</b>. <b>Mikovcová</b> chytá <b>výzkum komunikace</b>.
+        </Def>
+        <Tag color={VSE.fis}>Typy PR</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📰 MEDIA RELATIONS", d: "Tiskové zprávy, novinářské briefingy, interview s CEO. Apple tiskové konference, Tesla Twitter announcements." },
+            { c: VSE.warning, t: "🤝 CORPORATE PR", d: "Komunikace s investory, výroční zprávy, ESG reporting. Pro listed companies kritické (Q4 earnings calls)." },
+            { c: VSE.fph, t: "🏆 EVENT PR", d: "Konference, eventy, výročí firmy. Apple WWDC, Google I/O, Microsoft Ignite — kombinace product launch + PR." },
+            { c: VSE.success, t: "🌱 CSR / ESG PR", d: "Sustainability, charita, společenská odpovědnost. Patagonia &quot;Don't buy this jacket&quot;, IKEA carbon-negative goals." },
+            { c: VSE.danger, t: "⚡ CRISIS PR", d: "Krize management. Tesla recall, KFC chicken shortage 2018 (mistrovský apology), Boeing 737 MAX." },
+            { c: VSE.fis, t: "👥 INTERNAL PR", d: "Komunikace se zaměstnanci. Town halls, internal magazines, CEO messages. Vliv na firemní kulturu." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Měření úspěšnosti PR (Heřman chytá!)</Tag>
+        <Bullet items={[
+          "<b>AVE (Advertising Value Equivalent):</b> Hodnota mediálního pokrytí přepočítaná na ekvivalent placené reklamy. PR článek na Forbes = 50k USD ekvivalent ad space.",
+          "<b>Reach (dosah):</b> Kolik lidí vidělo PR sdělení. Impressions, čtenost článku.",
+          "<b>Share of Voice (SOV):</b> % mediálních zmínek značky vs konkurence v dané kategorii.",
+          "<b>Sentiment analysis:</b> Pozitivní / negativní / neutrální zmínky. Brandwatch, Mention, Talkwalker.",
+          "<b>Brand recall lift:</b> Pre × Post PR kampaň awareness research.",
+          "<b>Engagement metrics:</b> Social shares, comments, time on page.",
+          "<b>Lead generation:</b> Kolik PR vygenerovalo inquiries/leads.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Výzkum mkt komunikace (Mikovcová + Stříteský chytá!)</Tag>
+        <Bullet items={[
+          "<b>1. Pre-testing (před spuštěním kampaně):</b>",
+          "&nbsp;&nbsp;Concept testing — co respondent myslí o creative.",
+          "&nbsp;&nbsp;Focus groups — emocionální reakce.",
+          "&nbsp;&nbsp;A/B testing variant — 2 verze headlinev banner.",
+          "<b>2. Pre-test + Post-test (klasická metoda):</b>",
+          "&nbsp;&nbsp;Měření brand awareness/recall PŘED a PO kampani.",
+          "&nbsp;&nbsp;Klasické: aided + unaided + top-of-mind recall.",
+          "<b>3. Trackingové studie (kontinuální):</b>",
+          "&nbsp;&nbsp;Brand health tracker — měsíčně/kvartálně awareness, image, NPS.",
+          "&nbsp;&nbsp;TOTE model — funnel awareness → consideration → purchase.",
+          "<b>4. Effectiveness studies:</b>",
+          "&nbsp;&nbsp;Marketing Mix Modeling (MMM) — atribuce sales na různé kanály.",
+          "&nbsp;&nbsp;Multi-touch attribution (MTA) — digital journey tracking.",
+          "<b>5. Mystery shopping:</b>",
+          "&nbsp;&nbsp;Kontrola execution — jaký je real-world zážitek se značkou.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "trendy", title: "Moderní trendy v mkt komunikaci", subtitle: "Pichanič + Cejthamr chytá trendy!", color: VSE.fis, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Klasický 6-nástrojový mix se rozšířil o <b>digital trendy</b>. Komise <b>Pichanič, Cejthamr, Machek</b> chytá moderní trendy.
+        </Def>
+        <Tag color={VSE.fis}>Hlavní digital trendy</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🌐 ONLINE MKT", d: "Performance marketing (Google/Meta Ads), SEO, content marketing, programmatic buying. Měřitelné, real-time optimization." },
+            { c: VSE.warning, t: "📱 SOCIÁLNÍ SÍTĚ", d: "Instagram, TikTok, LinkedIn, YouTube. Organic + paid. Klíčový kanál pro Gen Z + millennials." },
+            { c: VSE.fph, t: "🌟 INFLUENCER MKT", d: "Mikro/makro/mega influenceři. Authenticity, trust, scale. Růst 30 % YoY globálně." },
+            { c: VSE.success, t: "🎬 PRODUCT PLACEMENT", d: "Značka v obsahu — Coca-Cola v Idolu, Aston Martin v Bondovi, Tesla v iCarly. Nenarušuje user experience." },
+            { c: VSE.danger, t: "🎯 RETARGETING + PROGRAMMATIC", d: "Real-time bidding na ad spots, retargeting opuštěných košíků, lookalike audiences. Google, Meta, TikTok ad networks." },
+            { c: VSE.fis, t: "💬 WORD-OF-MOUTH (WOM)", d: "Doporučení od přátel = nejdůvěryhodnější zdroj (90 % lidí). Generuje 13× větší konverze než paid. Referral programy (Dropbox 2008)." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Specializované moderní formáty</Tag>
+        <Bullet items={[
+          "<b>🎮 Guerilla marketing:</b> Neočekávané, kreativní street kampaně. IKEA bedroom v Paris metro, Coca-Cola HappinessMachine.",
+          "<b>🦠 Viral marketing:</b> Obsah, který se šíří organicky. ALS Ice Bucket Challenge 2014, Dollar Shave Club video 2012 (25M views).",
+          "<b>🏟️ Sponzoring + event mkt:</b> Red Bull (extreme sports), Heineken (UEFA Champions League), Tesla (sustainability events).",
+          "<b>📰 Native advertising:</b> Reklama vypadá jako obsah (Forbes BrandVoice, NYT sponsored articles). Nenarušuje, ale je transparentně označená.",
+          "<b>🎙️ Podcast advertising:</b> Host-read ads, sponsored episodes. Vysoká engagement, niche targeting (Stuff You Should Know, Joe Rogan).",
+          "<b>🎯 ABM (Account-Based Marketing):</b> B2B targeting konkrétních enterprise klientů. Salesforce, HubSpot, Demandbase model.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Aplikace na PS — checklist pro komisi</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj <b>typ trhu</b> v PS (B2B vs B2C) → výchozí mix nástrojů.",
+          "<b>2.</b> Vyhodnoť <b>fázi PLC produktu</b> (M8) → priorita nástrojů (awareness vs conversion).",
+          "<b>3.</b> Aplikuj <b>5M framework</b> — Mission, Money, Message, Media, Measurement.",
+          "<b>4.</b> Vyber <b>3-4 nástroje komunikačního mixu</b> vhodné pro situaci.",
+          "<b>5.</b> Definuj <b>komunikační message</b> přes AIDA (Attention/Interest/Desire/Action).",
+          "<b>6.</b> Nastav <b>měření</b> (brand recall, sales lift, AVE, SOV, ROI).",
+          "<b>7.</b> Zahrň <b>moderní trendy</b> (digital, social, influencer) pokud relevant.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsMkt13 = [
+    { term: "IMK (Integrovaná mkt komunikace)", def: "Jednotný a koordinovaný způsob komunikace firmy s okolím. Sjednocení nástrojů, kanálů a sdělení pro jednotnost a synergii.", tag: "POJEM" },
+    { term: "4 přínosy IMK", def: "Jednotné poselství / Synergický efekt (1+1=3) / Multi-platform přístup / Spojení se značkou.", tag: "POJEM" },
+    { term: "7 úrovní mkt komunikace", def: "Poslat info → Dostat info → Povědomí → Znalost → Image → Úmysl koupit → Koupit.", tag: "POJEM" },
+    { term: "3 zdroje IMK", def: "Firemní komunikace (plánovaná) / Vizuální tvář firmy (logo, design) / Firemní image (pověst).", tag: "POJEM" },
+    { term: "4 znaky efektivní komunikace", def: "Branding effect / Joint společné / Originalita / Líbivost.", tag: "POJEM" },
+    { term: "Makromodel (Shannon-Weaver 1949)", def: "Odesílatel → Kódování → Sdělení (přes média) → Dekódování → Příjemce. + šum + feedback.", tag: "MODELY" },
+    { term: "Šum v komunikaci", def: "Vše, co narušuje komunikaci — konkurence, rozptýlení, špatný kanál, jazyková bariéra.", tag: "MODELY" },
+    { term: "Mikromodel — AIDA (Lewis 1898)", def: "Attention (pozornost) → Interest (zájem) → Desire (touha) → Action (akce). Klasický persuasion model, 125+ let.", tag: "MODELY" },
+    { term: "AIDA Attention", def: "Upoutej pozornost — headline, hero shot v TV, scroll-stopping content. &quot;Pohne&quot; zákazníkem.", tag: "AIDA" },
+    { term: "AIDA Interest", def: "Vyvolej zájem — pochopení produktu, co dělá pro koho. Storytelling, benefit-focused copywriting.", tag: "AIDA" },
+    { term: "AIDA Desire", def: "Probuď touhu — emocionální/racionální důvod. FOMO, social proof, transformation messaging.", tag: "AIDA" },
+    { term: "AIDA Action", def: "Vyvolej akci — koupit, registrovat, kliknout. Strong CTA, urgency, simplification.", tag: "AIDA" },
+    { term: "AIDAS, AIDCAS rozšíření", def: "AIDA + Satisfaction (spokojenost) + Conviction (přesvědčení). Modernější varianty pro retention focus.", tag: "AIDA" },
+    { term: "Hierarchy of Effects (Lavidge-Steiner 1961)", def: "Awareness → Knowledge → Liking → Preference → Conviction → Purchase. Sofistikovanější než AIDA.", tag: "MODELY" },
+    { term: "Innovation Adoption Model (Rogers)", def: "Awareness → Interest → Evaluation → Trial → Adoption. Pro nové produkty. Detail v M8.", tag: "MODELY" },
+    { term: "6 nástrojů komunikačního mixu (Kotler)", def: "Reklama / Podpora prodeje / Události / PR / Osobní prodej / Direct marketing.", tag: "MIX" },
+    { term: "Reklama (Advertising)", def: "Placená nepersonální komunikace. TV, print, online, billboardy. Pro masu, brand awareness.", tag: "MIX" },
+    { term: "Podpora prodeje (Sales Promotion)", def: "Krátkodobé pobídky — soutěže, slevy, kupóny, vzorky, věrnostní programy. Pro rychlý sales push.", tag: "MIX" },
+    { term: "PR (Public Relations)", def: "Vztahy s veřejností. Nepřímé, věrohodnější než reklama (3rd party endorsement). Tiskové zprávy, projevy, sponzoring.", tag: "MIX" },
+    { term: "Osobní prodej", def: "Face-to-face komunikace. Prodejní prezentace, schůzky, demos. Pro B2B + high-value B2C (auta, nemovitosti).", tag: "MIX" },
+    { term: "Direct marketing", def: "Přímá komunikace — katalogy, email, telemarketing. Měřitelné, targetované.", tag: "MIX" },
+    { term: "B2B komunikační mix", def: "Osobní prodej + PR + direct marketing. Cisco, IBM, Salesforce model. Komplexní long sales cycle.", tag: "MIX" },
+    { term: "B2C komunikační mix", def: "Podpora prodeje + reklama. Coca-Cola TV + slevy v Lidlu. Masa, rychlá konverze.", tag: "MIX" },
+    { term: "Push strategie", def: "Výrobce TLAČÍ produkt skrz distribuční kanál. Reklama na distributory, slevy retailerům. B2B + komodity.", tag: "STRATEGIE" },
+    { term: "Pull strategie", def: "Výrobce TÁHNE zákazníky reklamou → žádají v retailu. Coca-Cola, Apple — masová reklama vytvoří poptávku.", tag: "STRATEGIE" },
+    { term: "5M framework (Kotler)", def: "Mission / Money / Message / Media / Measurement. Klasický model pro plánování kampaně.", tag: "5M" },
+    { term: "Mission v 5M", def: "Cíle kampaně — awareness × consideration × conversion × loyalty. Konkrétní a měřitelné.", tag: "5M" },
+    { term: "Money v 5M (4 metody)", def: "% z obratu (5-15 %) / Competitive parity / Affordable / Objective-and-task.", tag: "5M" },
+    { term: "Message v 5M", def: "Co řekneme? Headline + body + CTA. Rational × emotional appeal. Storytelling × benefits × comparative.", tag: "5M" },
+    { term: "Media v 5M", def: "Kanály — TV vs social vs OOH. Reach × Frequency × Impact. Mediální plán + strategie.", tag: "5M" },
+    { term: "Measurement v 5M", def: "Pre-test × Post-test. Brand awareness lift, CTR, conversion, NPS, sales lift, ROI.", tag: "5M" },
+    { term: "6 typů PR", def: "Media Relations / Corporate PR / Event PR / CSR-ESG / Crisis PR / Internal PR.", tag: "PR" },
+    { term: "AVE (Advertising Value Equivalent)", def: "Hodnota PR pokrytí přepočítaná na ekvivalent placené reklamy. Forbes článek = 50k USD ad equivalent.", tag: "PR" },
+    { term: "Share of Voice (SOV)", def: "% mediálních zmínek značky vs konkurence v dané kategorii. Klíčové PR + brand metric.", tag: "PR" },
+    { term: "Trendy v komunikaci", def: "Online mkt / Sociální sítě / Influencer mkt / Product placement / Retargeting / WOM / Guerilla / Viral / Native / Podcast / ABM.", tag: "TRENDY" },
+    { term: "WOM (Word-of-Mouth)", def: "Doporučení od přátel = nejdůvěryhodnější zdroj (90 % lidí). 13× větší konverze než paid. Dropbox 2008 referral.", tag: "TRENDY" },
+  ];
+
+  const quizMkt13 = [
+    { q: "Co je IMK?", opts: ["Internal Marketing Communications", "Integrovaná marketingová komunikace — jednotný a koordinovaný způsob komunikace firmy", "International Marketing Kraj", "Integrated Media Korporace"], correct: 1 },
+    { q: "Kolik je úrovní mkt komunikace?", opts: ["3", "5", "7 (poslat → dostat → povědomí → znalost → image → úmysl → koupit)", "10"], correct: 2 },
+    { q: "Kdo definoval makromodel komunikace?", opts: ["Kotler 1960", "Shannon-Weaver 1949", "Lewis 1898", "Lavidge-Steiner 1961"], correct: 1 },
+    { q: "Co znamená šum v makromodelu?", opts: ["Hlasitá reklama", "Vše, co narušuje komunikaci — konkurence, rozptýlení, špatný kanál, jazyk", "Audio v reklamě", "Volume"], correct: 1 },
+    { q: "Kdo definoval AIDA?", opts: ["Kotler", "Porter", "Elias St. Elmo Lewis 1898", "Lavidge-Steiner"], correct: 2 },
+    { q: "Co znamená A v AIDA?", opts: ["Awareness", "Attention (pozornost — upoutej zákazníka)", "Adoption", "Action"], correct: 1 },
+    { q: "Která NENÍ z AIDA?", opts: ["Attention", "Interest", "Decision", "Action"], correct: 2 },
+    { q: "AIDAS znamená:", opts: ["AIDA + Service", "AIDA + Satisfaction (spokojenost — retention focus)", "AIDA + Strategy", "AIDA + Sales"], correct: 1 },
+    { q: "Kolik nástrojů má Kotlerův komunikační mix?", opts: ["4", "5", "6 (reklama/podpora prodeje/události/PR/osobní prodej/direct)", "8"], correct: 2 },
+    { q: "Pro B2B se primárně používá:", opts: ["Reklama + podpora prodeje", "Osobní prodej + PR + direct (Cisco, IBM, Salesforce)", "TV reklama", "Influencer marketing"], correct: 1 },
+    { q: "Pro B2C se primárně používá:", opts: ["Osobní prodej + direct", "Podpora prodeje + reklama (Coca-Cola TV + slevy)", "Cold calling", "ABM"], correct: 1 },
+    { q: "Push strategie znamená:", opts: ["Reklama na zákazníky", "Výrobce TLAČÍ produkt skrz distribuční kanál (slevy retailerům, B2B selling)", "Sociální sítě", "Influencer"], correct: 1 },
+    { q: "Pull strategie znamená:", opts: ["B2B prodej", "Výrobce TÁHNE zákazníky reklamou → žádají v retailu (Coca-Cola, Apple)", "Sleva", "Direct mail"], correct: 1 },
+    { q: "Co znamená 5M v plánování kampaně?", opts: ["5 médií", "Mission / Money / Message / Media / Measurement (Kotler)", "5 metrik", "5 měsíců"], correct: 1 },
+    { q: "Co je AVE?", opts: ["Average Value Estimate", "Advertising Value Equivalent — hodnota PR přepočítaná na ekvivalent placené reklamy", "Annual Value Earnings", "Advanced Visual Engine"], correct: 1 },
+    { q: "WOM (Word-of-Mouth) je:", opts: ["Reklama na World of Mouth", "Doporučení od přátel — nejdůvěryhodnější zdroj (90 % lidí), 13× větší konverze", "Cena reklamy", "Social media kampaň"], correct: 1 },
+  ];
+
+  const praxeMkt13 = {
+    caseStudy: {
+      company: "Dollar Shave Club — etalon viral video + integrované komunikace",
+      subtitle: "Z 0 na 1 mld. USD prodej Unileveru za 5 let díky 1 viralnímu videu",
+      content: (<>
+        <b>Dollar Shave Club (DSC)</b> je <b>učebnicový příklad sofistikované IMK a moderních trendů</b>. 2012 launch, 2016 prodej Unileveru za 1 mld. USD. Stálo to 4500 USD videa + sofistikovaný customer journey.<br/><br/>
+        <b style={{ color: VSE.fmv }}>🎯 5M FRAMEWORK aplikováno:</b><br/><br/>
+        • <b>Mission:</b> Disrupt Gillette monopol (60 % market share). Cíl: 1000 paying subs první rok.<br/><br/>
+        • <b>Money:</b> Total launch budget 35k USD (40× méně než Gillette).<br/><br/>
+        • <b>Message:</b> &quot;Our blades are f***ing great.&quot; Anti-establishment humor vs Gillette korporátnosti.<br/><br/>
+        • <b>Media:</b> 1 viralní YouTube video. Žádné TV, žádné print.<br/><br/>
+        • <b>Measurement:</b> Sign-ups in real-time, video views, social shares.<br/><br/>
+        <b style={{ color: VSE.warning }}>👁️ AIDA aplikováno v videu (1.5 minuty):</b><br/><br/>
+        • <b>Attention (0-5s):</b> CEO Michael Dubin: &quot;Hi, I'm Mike, founder of Dollar Shave Club&quot; — direct, no BS.<br/><br/>
+        • <b>Interest (5-30s):</b> &quot;You like spending 20 USD a month on brand-name razors? 19 go to Roger Federer&quot; — humor + insight.<br/><br/>
+        • <b>Desire (30-60s):</b> Pokud Roger Federer není v tvojí koupelně, nepotřebuješ. Practical messaging.<br/><br/>
+        • <b>Action (60-90s):</b> &quot;Stop paying for shave tech you don't need. DollarShaveClub.com&quot; — strong CTA.<br/><br/>
+        <b style={{ color: VSE.fph }}>📊 VÝSLEDKY 1. ROK:</b><br/><br/>
+        • Video 12 milionů views v prvním měsíci (organicky, $0 paid promotion)<br/><br/>
+        • 12 000 sign-ups za 48 hodin po launch<br/><br/>
+        • 60 % servery padly přetížením<br/><br/>
+        • Media coverage: TechCrunch, Forbes, Today Show, Late Show with David Letterman — masivní PR<br/><br/>
+        • SOV (Share of Voice) skok z 0 na 15 % v men's grooming<br/><br/>
+        <b style={{ color: VSE.success }}>🔄 INTEGRACE komunikačního mixu (post-launch):</b><br/><br/>
+        • <b>Reklama:</b> YouTube + Facebook video ads (po viral hit)<br/><br/>
+        • <b>Podpora prodeje:</b> Referral program (zdarma měsíc za doporučení), trial offers<br/><br/>
+        • <b>Události:</b> SXSW příchod 2013, eventy v Austin TX, LA<br/><br/>
+        • <b>PR:</b> CEO Dubin se stal media darling, 20+ interview ročně<br/><br/>
+        • <b>Osobní prodej:</b> B2B partnerships s gyms, salons<br/><br/>
+        • <b>Direct marketing:</b> Email kampaně, personalized box content<br/><br/>
+        <b style={{ color: VSE.danger }}>🚀 MODERNÍ TRENDY využity:</b><br/><br/>
+        • <b>Viral marketing:</b> 1 video = $200M brand value (Unilever ocenění)<br/><br/>
+        • <b>WOM (Word-of-Mouth):</b> Referral program — 30 % nových users skrz doporučení<br/><br/>
+        • <b>Influencer mkt:</b> Joe Rogan, Comedy Bang Bang podcast partnerships<br/><br/>
+        • <b>Sociální sítě:</b> Twitter, Instagram personality CEO Dubin<br/><br/>
+        • <b>Native advertising:</b> Branded content na BuzzFeed, Mashable<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Z 0 na 3 miliony platících subs (2015). 2016 koupil Unilever za <b>1 miliardu USD</b>. Klasický důkaz, že <b>perfektně integrovaná komunikace + viral content + AIDA-driven creative + moderní trendy</b> může porazit 60-leté incumbenty (Gillette).
+      </>),
+      lessons: "Dollar Shave Club je <b>etalon moderní IMK pro malé budgety</b>. Pro PS doporuč: <b>5M framework + AIDA-driven creative + 6 nástrojů komunikačního mixu + viral video jako hero asset + post-launch integrované systém</b>. Alternativy: <b>Old Spice 2010 (&quot;I'm on a horse&quot; viral + AIDA mistrovství), Patagonia (CSR-led IMK), Slack (B2B influencer + WOM growth), Tesla (Twitter-only PR strategy), Mailchimp (podcast advertising + sponzoring Serial), Nike (event mkt + sport sponsoring + Just Do It IMK)</b>."
+    },
+    miniExamples: [
+      { tag: "AIDA + VIRAL", color: VSE.fmv, company: "Old Spice 2010 — &quot;I'm on a horse&quot; renaissance", content: "Old Spice byl <b>umírající brand</b> 2010 (15 % share). Wieden+Kennedy vyrobilo viral spot &quot;The Man Your Man Could Smell Like&quot; — perfektní AIDA: <b>Attention</b> (random transitions), <b>Interest</b> (humor + speed), <b>Desire</b> (aspirational masculinity), <b>Action</b> (try the product). 40M views v týdnu. Sales +27 % YoY, recovery z umírání na market lídra." },
+      { tag: "5M + B2B", color: VSE.warning, company: "Salesforce — ABM komunikace pro Fortune 500", content: "Salesforce dělá <b>Account-Based Marketing (ABM)</b> pro Fortune 500 klienty. 5M: Mission (3 enterprise wins/Q), Money (50k USD per cílový account), Message (personalized to industry), Media (LinkedIn ABM + direct mail + events), Measurement (pipeline generated, deal velocity). Win rate 3× vyšší než traditional marketing." },
+      { tag: "PR + CRISIS", color: VSE.fph, company: "KFC UK 2018 — &quot;FCK&quot; ostáva mistrovství", content: "Únor 2018: KFC v UK <b>nemělo kuřata</b> (supply chain fail) → 750 z 870 restaurací zavřeno. Reakce: full-page ad v The Sun a Metro s rearranged logo &quot;FCK&quot; + humorný apology copy. <b>Crisis PR mistrovství</b>. Brand sentiment vyrostl, ne klesl. Cannes Lions Grand Prix 2018." },
+      { tag: "PUSH + B2B", color: VSE.success, company: "Cisco — push strategy přes channel partners", content: "Cisco prodává <b>90 % přes channel partners</b> (resellers, system integrators). Push komunikační mix: osobní prodej (sales reps na partner schůzky), partner program (incentives, training), PR pro decision makers (Forrester, Gartner reports), direct mail s case studies. Žádná masová TV reklama — B2B doesn't need." },
+      { tag: "MODERNÍ TRENDY", color: VSE.danger, company: "Glossier — community-driven IMK", content: "Glossier (beauty brand) postavil 1.2 mld. USD valuation <b>bez tradiční reklamy</b>. <b>100 % moderní trendy</b>: Instagram influencers + WOM + UGC (user-generated content) + experiential pop-up shops + podcast sponzorování. Reviews od reálných zákaznic > celebrity endorsements. CAC 5× nižší než L'Oreal." },
+    ]
+  };
+
+  const examQuestionsMkt13 = [
+    { komise: "2026-01-29 — Svobodová + Nový + Machek (Horská chata)", otazka: "Integrovaná marketingová komunikace. Chtěl slyšet hlavně makro a mikro model", pozn: "Svobodová EXPLICITNĚ chce <b>makromodel (Shannon-Weaver) + mikromodel (AIDA)</b>. Naučit detail obou + příklady. Bez modelů nedostaneš." },
+    { komise: "2026-02-02 — Stříteský + Lorencová + Pernica (Neziskovka)", otazka: "Integrovaná marketingová komunikace — chtěl slyšet makro a mikro model", pozn: "Stříteský stejně jako Svobodová chce <b>oba modely</b>. Pro neziskovku: makromodel — donor komunikace, mikromodel AIDA — fundraising kampaně." },
+    { komise: "2025-02-04 — Vrbová + Tahal + Svobodová (Vinařská firma)", otazka: "Integrovaná marketingová komunikace, komunikační mix, Tahal se ptal na model AIDA", pozn: "<b>Tahal CHYTÁ AIDA explicitně!</b> Naučit 4 písmena + příklady (Old Spice, Dollar Shave Club). Pro vinařskou firmu: AIDA-driven storytelling kampaně." },
+    { komise: "2026-02-06 — Heřman + Schovancová + Vávra (Výroba kol)", otazka: "Hromadná marketingová komunikace — plánování a řízení marketingové kampaně, 5M, aplikace na PS, Možnosti PR (co to je a typy, jak se měří úspěšnost)", pozn: "Heřman chce <b>5M + PR typy + měření</b>. Naučit 5M (Mission/Money/Message/Media/Measurement) + 6 typů PR + AVE + SOV + sentiment." },
+    { komise: "2025-09-12 — Nový + Bočková + Tahal (Výroba kol)", otazka: "Hromadná marketingová komunikace, reklama, PR", pozn: "Nový chce <b>hromadnou komunikaci</b> = TV/print/online reklama + PR. Naučit klasický komunikační mix + 6 typů PR." },
+    { komise: "2025-02-03 — Bočková + Nový + Kolouchová (Software)", otazka: "Integrovaná komunikace, kdy se používá jaký druhy médií (B2B osobní prodej, B2C reklama)", pozn: "Bočková CHYTÁ B2B × B2C komunikační mix. Naučit faktory výběru: typ trhu (B2B/B2C), fáze PLC, připravenost zákazníka. Příklady: Cisco (B2B), Coca-Cola (B2C)." },
+    { komise: "2025-02-03 — Stříteský + Bočková + Lorenzová (Horská chata)", otazka: "Osobní komunikace (Direct Marketing a Osobní prodej)", pozn: "Stříteský chytá osobní komunikaci. Naučit direct marketing (katalogy, email, telemarketing) + osobní prodej (B2B, high-value B2C). Principy SPIN selling, AIDA aplikace." },
+    { komise: "2025-06-02 — Nový + Müllerová + Kolouchová (Prádlo)", otazka: "Osobní marketingová komunikace, nástroje direct marketingu, principy osobního prodeje", pozn: "Nový chce <b>direct marketing nástroje</b> (katalogy/email/telemarketing/SMS/social DM) + <b>principy osobního prodeje</b> (consultative selling, AIDA, SPIN)." },
+    { komise: "2025-06-04 — Mikovcová + Viktora + Kolouchová (Horská bouda)", otazka: "Výzkum marketingové komunikace", pozn: "Mikovcová chce <b>výzkum komunikace</b>. Naučit: pre-testing (concept), post-test (awareness lift), tracking studies (brand health), MMM, multi-touch attribution, A/B testing." },
+    { komise: "2025-06-10 — Stříteský + Andera + Kučera (Developerská společnost)", otazka: "Výzkum marketingové komunikace, šlo dobře aplikovat na PS", pozn: "Stříteský chce <b>výzkum + aplikaci</b>. Pro developera: pre-test creative ads (lifestyle vs investiční), brand tracker, lead generation attribution." },
+    { komise: "2025-06-12 — Pichanič + Kuděj + Machek (Káva)", otazka: "Integrovaná marketingová komunikace, komunikační mix, komunikační modely (mikro a makro), trendy v marketingu", pozn: "Pichanič chce <b>KOMPLET</b>: IMK + mix + modely + trendy. Nejširší otázka. Naučit všechno + moderní trendy (digital, social, influencer, WOM, guerilla, viral)." },
+    { komise: "2025-06-13 — Cejthamr + Machek + Heřman (Tchibo)", otazka: "Marketingový komunikační mix, trendy", pozn: "Cejthamr chce <b>mix + trendy</b>. Pro Tchibo: klasický mix (TV+retail) + moderní (Instagram + e-commerce + loyalty program)." },
+    { komise: "2026-02-06 — Stříteský + Krause + Zamazalová (Realitní firma)", otazka: "Integrovaná komunikace", pozn: "Stříteský otevřená otázka. Naučit IMK komplet. Pro realitní firmu: kombinace OOH + online performance + osobní prodej (high-value B2C) + content (blog, YouTube)." },
+  ];
+
+  const podcastMkt13 = { title: "Marketing 13 — Integrovaná mkt komunikace + AIDA + 5M", description: "Definice IMK + 7 úrovní komunikace + 3 zdroje + 4 znaky efektivní komunikace. Makromodel (Shannon-Weaver 1949): odesílatel/kódování/sdělení/dekódování/příjemce + šum + feedback. Mikromodel AIDA (Lewis 1898): Attention/Interest/Desire/Action + rozšíření (AIDAS, Hierarchy of Effects Lavidge-Steiner, Innovation Adoption Rogers). 6 nástrojů komunikačního mixu Kotler: reklama/podpora prodeje/události/PR/osobní prodej/direct marketing. 3 faktory výběru mixu: typ trhu (B2B vs B2C), připravenost spotřebitele, fáze PLC. Push × Pull strategie. 5M framework (Kotler): Mission/Money/Message/Media/Measurement. 6 typů PR + měření (AVE, SOV, sentiment). Výzkum komunikace (pre-test, post-test, tracking, MMM, A/B). Moderní trendy: online mkt, sociální sítě, influencer, product placement, retargeting, WOM, guerilla, viral, native, podcast, ABM. Dollar Shave Club, Old Spice, Salesforce, KFC FCK, Cisco, Glossier.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt13 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>IMK = jednotný a koordinovaný způsob komunikace</b>.<br/>
+    <b style="color:#A82A5F">2.</b> ⚠️ <b>3 zdroje IMK</b> + 7 úrovní komunikace + 4 znaky efektivní.<br/>
+    <b style="color:#A82A5F">3.</b> ⚠️ <b>MAKROMODEL</b> Shannon-Weaver 1949 (Svobodová, Stříteský chytají!) — odesílatel/kódování/sdělení/dekódování/příjemce + šum + feedback.<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>MIKROMODEL AIDA</b> Lewis 1898 (Tahal chytá!) — Attention/Interest/Desire/Action.<br/>
+    <b style="color:#A82A5F">5.</b> Rozšíření AIDA — AIDAS, AIDCAS, Hierarchy of Effects (Lavidge-Steiner), Innovation Adoption (Rogers).<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>6 nástrojů komunikačního mixu</b> (Kotler) — reklama/podpora prodeje/události/PR/osobní prodej/direct.<br/>
+    <b style="color:#A82A5F">7.</b> ⚠️ <b>Faktory výběru mixu</b> (Bočková chytá!) — typ trhu (B2B vs B2C), připravenost, fáze PLC.<br/>
+    <b style="color:#A82A5F">8.</b> Push × Pull komunikační strategie.<br/>
+    <b style="color:#A82A5F">9.</b> ⚠️ <b>5M framework</b> (Heřman chytá!) — Mission/Money/Message/Media/Measurement.<br/>
+    <b style="color:#A82A5F">10.</b> ⚠️ <b>6 typů PR + měření</b> (Heřman chytá!) — AVE, SOV, sentiment, reach, recall lift.<br/>
+    <b style="color:#A82A5F">11.</b> Výzkum komunikace — pre-test, post-test, tracking, MMM, A/B testing.<br/>
+    <b style="color:#A82A5F">12.</b> Moderní trendy — online, social, influencer, WOM, guerilla, viral, native, podcast, ABM.<br/>
+    <b style="color:#A82A5F">13.</b> Aplikace na PS — identifikuj typ trhu, fázi PLC, mix nástrojů, 5M plán, message přes AIDA.
+  `;
+
+  const caseStudyMkt13 = {
+    title: "Adéla — Marketing Manager v BistroFood, českém food-delivery startupu (95 mil. Kč, 65 zaměstnanců)",
+    subtitle: "Postavit IMK kampaň pro launch B2B segmentu firemního stravování",
+    scenario: "Adéla (31 let) vyšla z pondělního stand-up meetingu a okamžitě jí volal CEO David: &quot;Board mi včera potvrdil ten B2B pivot. Tři měsíce, 8 milionů budget, 150 firem v Praze. Máš to.&quot; Vede marketing v BistroFood dva roky, dosud čistě B2C — food-delivery app pro 12 tisíc Pražáků. Teď má rozjet úplně novou věc: BistroFood B2B (interní kódový název &quot;Cantine&quot;), firemní stravovací benefit pro pražské firmy 50-500 zaměstnanců. Zaměstnanec si přes app vybere oběd z 200 restaurací, firma platí 80 %.\n\nProblém je, že Adéla má zkušenosti hlavně z B2C. Dva roky dělala Instagram kampaně, influenceři, Spotify ads. Teď má prodat B2B produkt, kde rozhoduje HR manager nebo CFO, ne hladový student v 11:45. Decision-making cycle 3-6 měsíců, multi-stakeholder (HR + CFO + někdy CEO). 73 % HR manažerů netuší, že BistroFood existuje, ale 82 % by zvážilo změnu, kdyby měli moderní digital benefit. HR rozhodují v Q4 (rozpočtové cykly).\n\nCíl od boardu: 30 podepsaných smluv do 3 měsíců (5 % cílovky). Průměrná smlouva 18-25k Kč/měsíc. Sales team má 4 lidi, ale tři jsou junior, jen jeden má enterprise zkušenost. Aktiva firmy: 12 firem, kde už mají B2C users (warm leads), databáze 50k B2C uživatelů s LinkedIn enrichmentem, CEO David známý v pražské scéně (2× na ČT24, Forbes Conference). Žádný PR specialist v týmu.\n\nKlíčové kanály pro HR: LinkedIn (pasivní scroll), HR konference Q2 a Q4 v Praze, peer recommendations (HR komunita malá). Adéla má dva týdny na pitch boardu. Tři otázky si zapsala: Jaký komunikační mix pro 150 enterprise firem? Jak postavit message pro HR v Q4? A jak měřit, jestli 8 milionů přineslo 30 smluv?",
+    signals: [
+      { text: "Tři měsíce, 8 milionů budget, 150 firem v Praze", color: VSE.danger, reason: "Klíčové parametry kampaně — <b>5M Mission a Money</b> definované. Tři měsíce + 150 cílových firem = vysoce targetovaná ABM kampaň, ne masová reklama." },
+      { text: "Adéla má zkušenosti hlavně z B2C. Dva roky dělala Instagram kampaně, influenceři, Spotify ads", color: VSE.warning, reason: "<b>Skill gap</b> — B2B komunikační mix je fundamentálně jiný než B2C. Podle Bočková: B2B = osobní prodej + PR + direct, B2C = reklama + podpora prodeje. Adéla musí pivotovat playbook." },
+      { text: "rozhoduje HR manager nebo CFO, ne hladový student v 11:45", color: VSE.fph, reason: "<b>Multi-stakeholder decision making</b> = ABM (Account-Based Marketing) přístup. Komunikační mix musí oslovit HR (uživatel benefit) + CFO (cost-benefit) + CEO (strategický fit)." },
+      { text: "12 firem, kde už mají B2C users (warm leads)", color: VSE.success, reason: "<b>Warm leads přes existující B2C aktivu</b>. Klíčové pro <b>Push strategy</b> — existing relationships → upsell na corporate. Insider product validation." },
+      { text: "CEO David známý v pražské scéně (2× na ČT24, Forbes Conference)", color: VSE.fph, reason: "<b>CEO as a brand asset</b> pro PR + thought leadership. Heřman chytá: PR Media Relations typu — využít existující media presence pro corporate awareness." },
+      { text: "73 % HR manažerů netuší, že BistroFood existuje", color: VSE.warning, reason: "<b>Awareness gap</b> — fáze 3 v 7 úrovních komunikace (povědomí). Klíčová fáze AIDA = Attention. Bez awareness žádná akce." },
+      { text: "Decision-making cycle 3-6 měsíců, multi-stakeholder (HR + CFO + někdy CEO)", color: VSE.danger, reason: "<b>Dlouhý sales cycle</b> = potřeba <b>multi-touch nurturing</b>. 7-12 touchpointů PŘED konverzí. Direct marketing (email sequences) + content (white papers) + osobní prodej." },
+      { text: "LinkedIn (pasivní scroll), HR konference Q2 a Q4 v Praze, peer recommendations", color: VSE.fph, reason: "<b>3 klíčové kanály pro B2B</b>: LinkedIn Ads (paid + organic CEO content), event marketing (HR konference Q4 timing!), WOM přes peer references." },
+      { text: "30 podepsaných smluv do 3 měsíců (5 % cílovky)", color: VSE.warning, reason: "<b>5M Measurement</b> jasně definované — KPI je 30 deals. Konverzní funnel: 150 firem → 75 engagovaných → 30 deals = 20 % konverze (B2B benchmark)." },
+      { text: "Sales team má 4 lidi, ale tři jsou junior, jen jeden má enterprise zkušenost", color: VSE.danger, reason: "<b>Sales execution risk</b>. Junior sales potřebují <b>strong marketing nurturing</b> pre-meeting (warmed leads + objection handling materials)." },
+    ],
+    quiz1: {
+      question: "Jaký je hlavní rozdíl mezi B2C a B2B komunikací, který musí Adéla pochopit?",
+      options: [
+        "B2B je dražší",
+        "B2B funguje na sociálních sítích",
+        "B2B se soustředí na osobní prodej + PR + direct marketing (long sales cycle, multi-stakeholder), zatímco B2C primárně reklama + podpora prodeje (mass, rychlá konverze)",
+        "B2B nepotřebuje brand",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Jakou IMK strategii by Adéla měla zvolit pro 30 B2B smluv v 3 měsících + 8 mil. Kč?",
+      options: [
+        { text: "5M framework: Mission (30 deals), Money (8 mil. Kč), Message (Daňově výhodný moderní benefit), Media (LinkedIn ABM + events + email + sales), Measurement (deals + pipeline value)", correct: true, reason: "✓ Strukturovaný plán dle Kotlera. Heřman chytá 5M! Konkrétní KPI v každém M." },
+        { text: "Account-Based Marketing (ABM) — vytvoř seznam 150 cílových firem, personalize content per firma, multi-touch (LinkedIn + email + direct mail) sekvence per account. Salesforce model.", correct: true, reason: "✓ ABM je standard pro B2B s definovanou cílovkou. 150 firem = manageable account list. Personalizace zvyšuje response rate 5×." },
+        { text: "Komunikační mix: Osobní prodej (junior sales nurtured by marketing) + PR (CEO David thought leadership) + Direct marketing (LinkedIn ads + email sequences) + Events (HR konference Q4)", correct: true, reason: "✓ Klasický B2B mix dle Bočková (B2B = osobní prodej + PR + direct). Push strategie skrz channel sales." },
+        { text: "Content marketing pro thought leadership: 3 white papers (modern benefits, ROI of food benefit, cost comparison), 8 case studies (existing B2C → B2B convertions), 12 LinkedIn posts CEO Davida měsíčně", correct: true, reason: "✓ B2B se rozhoduje na základě obsahu (white papers, case studies). CEO content = social proof + authority. HubSpot model." },
+        { text: "AIDA aplikované na HR persona — Attention (LinkedIn ad: '73 % HR neví o moderním food benefitu'), Interest (white paper: ROI kalkulátor), Desire (case studies), Action (demo + free trial 30 days)", correct: true, reason: "✓ Tahal chytá AIDA! HR-specific funnel — pain point → value → social proof → low-friction CTA. Strong B2B execution." },
+        { text: "Event marketing — sponzoring 2 HR konferencí v Q4 (Praha) + vlastní executive breakfast pro 30 HR managerů + booth při Forbes Future Of Work", correct: true, reason: "✓ Q4 timing align s budgeting cycly HR. Events = high-trust, high-conversion B2B channel. Direct contact." },
+        { text: "Warm leads přes Customer Success team — start s 12 firmami, kde už máme B2C users (existing relationship → upsell). Quick wins první měsíc.", correct: true, reason: "✓ Push strategy přes existing relationships. Warm leads konvertují 5-10× lépe než cold. 12 firem = realistická first cohort." },
+        { text: "Měření: LinkedIn impressions, event attendance, white paper downloads, demo sign-ups, deals pipeline value, attribution per channel (multi-touch)", correct: true, reason: "✓ Full-funnel measurement. Multi-touch attribution kritická pro B2B (3-6 měsíc cycle). MMM + tracking analytics." },
+        { text: "Masová TV reklama pro HR managery", correct: false, reason: "✗ B2C masová reklama nefunguje pro B2B targeting (150 firem). Naprosté plýtvání rozpočtu. Heřman: B2B = osobní prodej + PR." },
+        { text: "Instagram influencer marketing", correct: false, reason: "✗ HR managery nelze oslovit přes Instagram influenceři. B2C playbook nepřenosný na B2B. LinkedIn je správný kanál." },
+        { text: "TikTok kampaň pro mladé HR", correct: false, reason: "✗ HR decision-makers jsou 35-55 let. TikTok cílovka je 16-30 let. Wrong channel + wrong demographic." },
+      ],
+    },
+    summary: "<b>Adéla potřebuje kompletní B2B IMK pivot — od mass B2C reklamy k ABM přístupu s emphasis na osobní prodej, PR a content marketing.</b><br/><br/><b>3-měsíční plán (8 mil. Kč):</b><br/><br/>• <b>Měsíc 1 (3 mil. Kč):</b> Account list 150 firem (research, enrichment, segmentace) + content asset development (3 white papers, 8 case studies, ROI calculator) + CEO David content kalendář (12 LinkedIn posts/měsíc) + sales enablement materials pro junior team.<br/><br/>• <b>Měsíc 1-3 (2,5 mil. Kč):</b> ABM kampaň přes LinkedIn (paid + organic) + email sequences personalized per account + warm calls od customer success na 12 existujících klientů + direct mail s ROI report personalized.<br/><br/>• <b>Měsíc 2 (1,5 mil. Kč):</b> Event marketing — sponzoring 2 HR konferencí Q4 + vlastní Executive Breakfast pro top 30 HR managerů + booth při Forbes Future Of Work.<br/><br/>• <b>Měsíc 1-3 (1 mil. Kč):</b> PR strategy — CEO David interviews (E15, Forbes, HN), 3 thought leadership op-eds, sponsored content na HR.cz.<br/><br/><b>AIDA aplikace pro HR persona:</b><br/><br/>• <b>Attention:</b> LinkedIn ad &quot;73 % HR neví o moderním food benefitu&quot; + CEO post o post-pandemic benefits<br/><br/>• <b>Interest:</b> White paper &quot;ROI of modern food benefits&quot; — gated content lead capture<br/><br/>• <b>Desire:</b> Case studies (12 existujících firem) + ROI calculator personalized<br/><br/>• <b>Action:</b> Demo booking + 30-day free trial pro qualified leads<br/><br/><b>Měření (5M Measurement):</b> LinkedIn impressions + engagement rate / event attendance / white paper downloads / demo bookings / deals pipeline value / multi-touch attribution per channel / final KPI = 30 podepsaných smluv.<br/><br/><b>Pro komisi:</b> Klasický B2C → B2B komunikační pivot. <b>Salesforce (ABM mistrovství)</b>, <b>HubSpot (content marketing + inbound)</b>, <b>Cisco (push přes channel)</b> jako benchmark. <b>5M framework (Heřman!)</b> + <b>AIDA mikromodel (Tahal!)</b> + <b>B2B komunikační mix (Bočková!)</b> + <b>PR + měření (AVE, SOV)</b>. Anti-vzor: B2C playbook (Instagram + masová reklama) pro B2B = sebevražda. Vzor: <b>ABM + osobní prodej + content marketing + PR + events + multi-touch attribution</b>.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={13} title="Integrovaná mkt komunikace + AIDA + komunikační modely + 5M"
+      subtitle="IMK + makro/mikro modely + 6 nástrojů mixu + AIDA + 5M + PR + moderní trendy"
+      color={VSE.fis}
+      questionText="Integrovaná marketingová komunikace, komunikační mix, makro a mikro modely, AIDA, 5M, PR."
+      questionDesc="Definice IMK + 7 úrovní + 3 zdroje + 4 znaky efektivní komunikace. Makromodel (Shannon-Weaver 1949): odesílatel/kódování/sdělení/dekódování/příjemce + šum + feedback. Mikromodel AIDA (Lewis 1898): Attention/Interest/Desire/Action + rozšíření. 6 nástrojů komunikačního mixu (Kotler). Faktory výběru (B2B vs B2C, fáze PLC, připravenost). Push × Pull. 5M framework (Mission/Money/Message/Media/Measurement). 6 typů PR + měření (AVE, SOV). Výzkum komunikace. Moderní trendy: online, social, influencer, WOM, guerilla, viral, native, podcast, ABM. Dollar Shave Club, Old Spice, Salesforce, KFC FCK, Cisco, Glossier."
+      sloz={3} roz={4} freq={5}
+      examStrategy={examStrategyMkt13}
+      studySections={studySectionsMkt13}
+      flashcards={flashcardsMkt13}
+      quiz={quizMkt13}
+      praxe={praxeMkt13}
+      examQuestions={examQuestionsMkt13}
+      podcast={podcastMkt13}
+      caseStudy={caseStudyMkt13}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 14 — Hromadná marketingová komunikace (reklama, PR, sponzoring, event mkt, mediální výzkum)
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt14Panel() {
+  const studySectionsMkt14 = [
+    { id: "intro", title: "Hromadná komunikace — definice + nástroje", subtitle: "Mass komunikace vs osobní (M15) + 4 hlavní nástroje", color: VSE.fis, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Hromadná marketingová komunikace (Mass Marketing Communication)</b> = nepersonální komunikace zaměřená na <b>masu zákazníků</b>. Cíl: maximum awareness, brand image, reach. Komise <b>Nový, Heřman</b> chytá explicitně.
+        </Def>
+        <Tag color={VSE.fis}>Hromadná × Osobní komunikace</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📢 HROMADNÁ (M14)", d: "Mass reach, jednosměrná, nepersonální. Reklama TV/online, PR, sponzoring, event mkt. Pro B2C, brand building, awareness." },
+            { c: VSE.success, t: "🤝 OSOBNÍ (M15)", d: "1-on-1, obousměrná, personální. Direct mkt, osobní prodej, telemarketing. Pro B2B, high-value B2C, konverze." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>4 hlavní nástroje hromadné komunikace</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📺 REKLAMA (Advertising)", d: "Placená nepersonální komunikace. TV, print, online, OOH (out-of-home), rádio, kino. Největší rozpočtová položka v B2C." },
+            { c: VSE.warning, t: "📰 PUBLIC RELATIONS (PR)", d: "Budování vztahů s veřejností. Media relations, krize management, CSR, internal PR. Věrohodnější než reklama." },
+            { c: VSE.fph, t: "🏆 SPONZORING", d: "Investice do sponzorovaného subjektu (sport, kultura, charita). Brand association + visibility. Red Bull, Heineken Champions League." },
+            { c: VSE.success, t: "🎪 EVENT MARKETING", d: "Vlastní eventy + experience. Apple WWDC, Google I/O, Tesla Battery Day. Brand experience + PR coverage." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Kdy použít hromadnou komunikaci</Tag>
+        <Bullet items={[
+          "<b>Masová cílovka:</b> Coca-Cola, McDonald's, Lidl — cílí miliony zákazníků.",
+          "<b>Brand building:</b> Tvorba awareness, image, asociací. Long-term.",
+          "<b>Zavádění nového produktu:</b> Apple keynote = 100M+ lidí. Pro launch awareness.",
+          "<b>Maintain awareness:</b> Konkurence komunikuje, musíš taky (share of voice).",
+          "<b>Loyalty + emotional bond:</b> Nike, Patagonia — emocionální storytelling.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Nový + Bočková + Tahal 2025 (Výroba kol) + Heřman 2026"
+          what="Nový + Heřman chytají <b>hromadnou komunikaci = reklama + PR</b>. Naučit všechny 4 nástroje (reklama, PR, sponzoring, event) + kdy se používá který."
+        />
+      </div>) },
+
+    { id: "reklama_typy", title: "Reklama — typy, média, formáty", subtitle: "Klasifikace reklamy + media mix + advertising appeals", color: VSE.fis, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Reklama</b> je placená nepersonální komunikace o produktu/službě/myšlence prostřednictvím masmédií. Největší rozpočtová položka v hromadné komunikaci (typicky 60-80 % budget).
+        </Def>
+        <Tag color={VSE.fis}>Klasifikace reklamy</Tag>
+        <Bullet items={[
+          "<b>Podle CÍLE:</b>",
+          "&nbsp;&nbsp;<b>Informativní</b> — uvádění nového produktu (M8 zavádění). &quot;Apple Vision Pro is here&quot;.",
+          "&nbsp;&nbsp;<b>Přesvědčovací</b> — diferenciace vs konkurence (M8 růst). &quot;Pepsi Challenge&quot;.",
+          "&nbsp;&nbsp;<b>Připomínací</b> — udržení awareness (M8 zralost). Coca-Cola Christmas.",
+          "&nbsp;&nbsp;<b>Posilující</b> — utvrzení existujících zákazníků (post-purchase). Apple loyalty content.",
+          "<b>Podle ZAMĚŘENÍ:</b>",
+          "&nbsp;&nbsp;<b>Produktová</b> — konkrétní produkt (Tide Pods).",
+          "&nbsp;&nbsp;<b>Značková</b> — celá značka (Apple &quot;Think Different&quot;).",
+          "&nbsp;&nbsp;<b>Institucionální</b> — firma jako instituce (Patagonia &quot;Don't buy this jacket&quot;).",
+          "&nbsp;&nbsp;<b>Sociální</b> — pro CSR / společenskou věc (Always &quot;Like a Girl&quot;).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Reklamní média (kanály)</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📺 TELEVIZE", d: "Klasika pro mass reach. Vysoká cena (ČT 1 prime-time 30s = 150-400k Kč). Klesající mladá cílovka, rostoucí 50+." },
+            { c: VSE.warning, t: "📰 PRINT (noviny, časopisy)", d: "Klesající. Pro premium cílovku (Vogue, Forbes). MF Dnes 1 strana 600k Kč." },
+            { c: VSE.fph, t: "📻 RÁDIO", d: "Lokální dosah, řidičská cílovka, ranní/odpolední peaky. Cena cca 30-80k Kč/spot prime time." },
+            { c: VSE.success, t: "🌐 ONLINE (Google, Meta)", d: "Dominantní (60 % budget 2024). Performance marketing, search, social, display, programmatic." },
+            { c: VSE.danger, t: "🏙️ OOH (outdoor)", d: "Billboardy, MHD, CLV. Brand visibility, contextual targeting. Praha CLV: 80-200k/měsíc." },
+            { c: VSE.fis, t: "🎬 KINO + STREAMING", d: "Vyšší engagement (forced viewing). Netflix ads tier (2022+), HBO Max ads. Captive audience." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Advertising Appeals — emocionální × racionální</Tag>
+        <Bullet items={[
+          "<b>RACIONÁLNÍ appeals:</b> Fakty, benefity, čísla. &quot;Tide pere 20× účinněji&quot;. Pro high-involvement nákupy (auta, B2B, finance).",
+          "<b>EMOCIONÁLNÍ appeals:</b> Pocity, příběhy. Coca-Cola happiness, Nike inspirace. Pro low-involvement nákupy + brand building.",
+          "<b>HUMOR:</b> Old Spice, Dollar Shave Club, Geico. Pamatovatelnost, ale risk overshadowing.",
+          "<b>STRACH (Fear appeals):</b> Pojištění, bezpečnost, zdraví. &quot;Nesedněte za volant opilí&quot;.",
+          "<b>SOCIAL PROOF:</b> Testimonials, reviews, &quot;1 milion satisfied customers&quot;.",
+          "<b>CELEBRITY endorsement:</b> Michael Jordan + Nike, Charlize Theron + Dior.",
+          "<b>SLICE-OF-LIFE:</b> Reálné situace (P&G &quot;Thank You Mom&quot;, Mastercard &quot;Priceless&quot;).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "mediální_plán", title: "Mediální plánování — Reach × Frequency × GRP × CPP", subtitle: "Klíčové metriky mediálního plánování", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Mediální plán</b> = konkrétní rozdělení rozpočtu mezi média + termíny + frekvence. Klíčové metriky: <b>Reach × Frequency × GRP × CPP × CPM</b>.
+        </Def>
+        <Tag color={VSE.fis}>Klíčové metriky mediálního plánování</Tag>
+        <Bullet items={[
+          "<b>📊 Reach (Dosah):</b> Kolik unikátních lidí vidělo reklamu. 1M reach = 1M lidí. Cíl: maximální coverage cílovky.",
+          "<b>🔁 Frequency (Frekvence):</b> Kolikrát průměrně viděl jeden člověk. Optimum 3-5× pro recall. Pod 3 = málo, nad 7 = wear-out.",
+          "<b>📈 GRP (Gross Rating Points):</b> Reach × Frequency. 200 GRP = např. 50 % cílovky × 4× viděno. Měří tlak kampaně.",
+          "<b>💰 CPP (Cost Per Point):</b> Cena za 1 GRP. Pomáhá srovnat efektivitu kanálů.",
+          "<b>💰 CPM (Cost Per Mille):</b> Cena za 1000 impressions. Standard pro digital media. Google Ads, Meta Ads.",
+          "<b>👁️ Impressions:</b> Celkový počet zobrazení (může zhlédnout stejný člověk vícekrát). Reach × Frequency.",
+          "<b>👆 CTR (Click-Through Rate):</b> % kliklo na ad. Digital metric. Benchmark 1-3 %.",
+          "<b>💸 CPC (Cost Per Click):</b> Cena za klik. Google Ads, Meta Ads. Vyhledávání drahší než display.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Mediální strategie — Reach vs Frequency trade-off</Tag>
+        <Bullet items={[
+          "<b>🌐 REACH strategie:</b> Oslovit maximum lidí, méně často. Vhodné pro brand awareness (Coca-Cola Christmas).",
+          "<b>🔁 FREQUENCY strategie:</b> Oslovit menší cílovku víckrát. Vhodné pro persuasion + new product launch.",
+          "<b>🎯 EFFECTIVE FREQUENCY:</b> Optimum kontaktů s reklamou = 3-7×. Klíč pro decision o GRP.",
+          "<b>💸 BUDGET:</b> Reach + frequency dohromady = budget. Trade-off: víc reach × méně frequency × více měsíců.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Postup mediálního plánování (5 kroků)</Tag>
+        <Bullet items={[
+          "<b>1.</b> Definuj <b>cíle kampaně</b> (z 5M Mission).",
+          "<b>2.</b> Identifikuj <b>cílovku</b> (M3 segmentace) + její media behavior.",
+          "<b>3.</b> Vyber <b>media mix</b> — TV vs digital vs OOH atd. Podle reach + cílovky + budget.",
+          "<b>4.</b> Stanov <b>mediální plán</b> — konkrétní GRP, frekvence, timing (pulsing × continuous × flighting).",
+          "<b>5.</b> Měření a optimalizace — pre-test, mid-campaign adjustments, post-test.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "sponzoring_event", title: "Sponzoring + Event marketing", subtitle: "Brand association přes 3rd party + brand experience", color: VSE.fis, emoji: "trophy",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Sponzoring</b> = finanční nebo věcná podpora sponzorovaného subjektu (sport, kultura, charita) <b>výměnou za brand visibility + association</b>. <b>Event marketing</b> = vlastní eventy.
+        </Def>
+        <Tag color={VSE.fis}>Typy sponzoringu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "⚽ SPORTOVNÍ", d: "Champions League (Heineken, Mastercard), F1 (Red Bull, Rolex), Tennis Grand Slam (Rolex, Wilson). Highest visibility, premium ceny." },
+            { c: VSE.warning, t: "🎨 KULTURNÍ", d: "Muzea, divadla, koncerty. Apatyka v Národním muzeu, Komerční banka v Národním divadle. Prestige + CSR." },
+            { c: VSE.fph, t: "❤️ CSR / CHARITA", d: "Sponzorování charit, neziskovek, environmentálních projektů. Patagonia (1 % obratu na životní prostředí)." },
+            { c: VSE.success, t: "🏆 EVENT-BASED", d: "Konkrétní event — Olympics (Coca-Cola, P&G), Eurovision, Masters golf turnaj." },
+            { c: VSE.danger, t: "📺 MEDIÁLNÍ", d: "Sponzoring TV pořadů, podcastů, YouTube channels. &quot;This Old House sponsored by State Farm&quot;." },
+            { c: VSE.fis, t: "🎓 VZDĚLÁVACÍ", d: "Univerzity, scholarships, research grants. Google Faculty Awards, Microsoft Research." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Event Marketing — typy</Tag>
+        <Bullet items={[
+          "<b>🎪 Trade shows (B2B):</b> CES Las Vegas, MWC Barcelona, FOR ARCH Praha. Networking + product launches.",
+          "<b>🎤 Product launches:</b> Apple WWDC keynotes, Tesla Battery Day, Samsung Unpacked. Brand spectacle.",
+          "<b>👥 Conferences:</b> Salesforce Dreamforce (170k attendees), Adobe Summit, AWS re:Invent.",
+          "<b>🎉 Brand experiences:</b> Red Bull Air Race, Coca-Cola Truck Tour, IKEA pop-up sleepovers.",
+          "<b>🏃 Sport events:</b> Coca-Cola Olympic Run, Color Run sponsored by brands.",
+          "<b>📱 Virtual events (post-COVID):</b> Apple keynotes 100 % digital, GitHub Universe online.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Měření sponzoringu</Tag>
+        <Bullet items={[
+          "<b>AVE (Advertising Value Equivalent):</b> Kolik by stála placená reklama za stejnou expozici. Red Bull Stratos = 6 mld. USD AVE.",
+          "<b>Brand recall:</b> % lidí, kteří si pamatují sponzora po eventu.",
+          "<b>Sentiment analysis:</b> Pozitivní × negativní zmínky social media + tisk.",
+          "<b>Sales lift:</b> Bezprostřední sales impact po eventu.",
+          "<b>Audience engagement:</b> Sociální shares, hashtag použití, user-generated content.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "medialni_vyzkum", title: "Mediální výzkum — měření reklamy a komunikace", subtitle: "Smrčka + Stříteský chytá MĚŘENÍ reklamy + online metriky", color: VSE.fis, emoji: "microscope",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Mediální výzkum</b> = systematické měření efektivity reklamních kampaní a mediálních investic. Komise <b>Smrčka, Stříteský</b> chytají EXPLICITNĚ <b>jak měříme reklamu + online metriky</b>.
+        </Def>
+        <Tag color={VSE.fis}>3 fáze měření reklamní kampaně</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🧪 PRE-TEST (před spuštěním)", d: "Concept testing, focus groups, A/B test creative. Cíl: vybrat nejsilnější verzi PŘED investicí." },
+            { c: VSE.warning, t: "📊 MID-CAMPAIGN (během)", d: "Tracking awareness, CTR, sales lift weekly. Cíl: real-time optimization, allocate budget na top kanály." },
+            { c: VSE.success, t: "📈 POST-TEST (po skončení)", d: "Brand recall lift, NPS změna, sales attribution, ROI. Cíl: učení pro další kampaň." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Tradiční metriky (TV, print, OOH)</Tag>
+        <Bullet items={[
+          "<b>Reach:</b> Počet unikátních lidí, kteří viděli reklamu. Měřeno přes panel data (Nielsen, Kantar).",
+          "<b>Frequency:</b> Průměrný počet kontaktů jednoho diváka.",
+          "<b>GRP (Gross Rating Points):</b> Reach × Frequency. Klasická TV metric.",
+          "<b>TRP (Target Rating Points):</b> GRP jen v cílovce.",
+          "<b>Brand recall:</b> Aided + Unaided recall research po kampani.",
+          "<b>Top-of-Mind awareness:</b> Která značka první napadne v kategorii.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Online metriky (digital, programmatic)</Tag>
+        <Bullet items={[
+          "<b>Impressions:</b> Počet zobrazení reklamy (může zhlédnout stejný uživatel vícekrát).",
+          "<b>CTR (Click-Through Rate):</b> Impressions → kliky. Benchmark 1-3 %. Search 5-10 %.",
+          "<b>CPC (Cost Per Click):</b> Google Ads ČR: search 5-50 Kč/klik podle kategorie. Display 1-5 Kč.",
+          "<b>CPM (Cost Per Mille):</b> 1000 impressions = standard pricing. ČR: display 30-100 Kč, video 80-300 Kč.",
+          "<b>Conversion rate:</b> % kliků → konverze (sale, signup). E-commerce benchmark 2-3 %.",
+          "<b>CPA (Cost Per Acquisition):</b> Cena za získání jednoho zákazníka. Klíčový metric.",
+          "<b>ROAS (Return On Ad Spend):</b> Revenue / Ad Spend. Benchmark 3-5×.",
+          "<b>View-through rate:</b> % video reklam dosledovaných do konce.",
+          "<b>Engagement rate:</b> Likes + comments + shares / impressions (sociální média).",
+          "<b>Attribution models:</b> Last click × First click × Linear × Time-decay × Data-driven.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Pokročilé metody měření</Tag>
+        <Bullet items={[
+          "<b>Marketing Mix Modeling (MMM):</b> Statistická analýza vlivu jednotlivých kanálů na sales. Top-down pohled.",
+          "<b>Multi-Touch Attribution (MTA):</b> Sledování customer journey napříč kanály. Bottom-up.",
+          "<b>Incrementality testing:</b> A/B test geographic regions s a bez reklamy. Pravá kauzální analýza.",
+          "<b>Brand Lift Study:</b> Survey-based měření brand metrics (recall, consideration) pre vs post kampaň.",
+          "<b>Media Mix Optimization:</b> Algoritmus doporučí optimální budget allocation napříč kanály.",
+        ]} color={VSE.danger} />
+        <ExamAlert
+          komise="Smrčka + Kolouchová + Říhová 2025 (případovka)"
+          what="Smrčka chytá <b>mediální výzkum</b>. Naučit 3 fáze (pre/mid/post) + tradiční metriky (GRP, reach, frequency) + online metriky (CTR, CPC, CPM, CPA, ROAS) + pokročilé (MMM, MTA, incrementality)."
+        />
+      </div>) },
+
+    { id: "trendy", title: "Trendy v hromadné komunikaci + aplikace na PS", subtitle: "Programmatic, video, sociální, native + checklist", color: VSE.fis, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Hromadná komunikace se rychle digitalizuje a personalizuje. <b>Programmatic + video + native</b> jsou klíčové trendy 2024-2026.
+        </Def>
+        <Tag color={VSE.fis}>Hlavní trendy 2024+</Tag>
+        <Bullet items={[
+          "<b>📊 Programmatic advertising:</b> Algoritmické nákupy ad spots v real-time. 80 % digital display je programmatic. Google DV360, The Trade Desk.",
+          "<b>🎬 Video first:</b> YouTube, TikTok, Instagram Reels. Krátký video (15-30s) dominuje. Brand storytelling.",
+          "<b>📱 Social commerce:</b> TikTok Shop, Instagram Shopping, Pinterest Shopping. Integrace e-commerce a reklamy.",
+          "<b>📰 Native advertising:</b> Reklama vypadá jako obsah (Forbes BrandVoice, NYT sponsored). Less intrusive.",
+          "<b>🎯 Hyper-personalizace:</b> Dynamic creative optimization (DCO) — reklama se mění real-time podle uživatele.",
+          "<b>🔊 Audio renaissance:</b> Podcast advertising (Spotify, Joe Rogan), smart speaker ads (Alexa Voice Ads).",
+          "<b>🌐 Connected TV (CTV):</b> Netflix Ads (2022+), Disney+ Ads, HBO Max Ads. TV reach + digital targeting.",
+          "<b>🤖 AI v reklamě:</b> AI-generated creative (Midjourney ads), AI-driven media buying, ChatGPT pro copywriting.",
+          "<b>🔐 Cookie-less era:</b> Apple ATT, Google sunset 3rd party cookies. Shift k 1st party data + contextual.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Reach × Frequency × Cost trade-off podle médií</Tag>
+        <Bullet items={[
+          "<b>TV:</b> Max reach, vysoká cena, slabé targeting. Pro broad awareness (FMCG, telco).",
+          "<b>Online display:</b> Střední reach, nízká cena, dobré targeting. Performance kampaně.",
+          "<b>Sociální sítě:</b> Hyper-targeting, střední cena, vysoký engagement. Brand building + performance.",
+          "<b>Search (Google):</b> Demand capture, dražší ale konverzní. Bottom-of-funnel.",
+          "<b>OOH:</b> Lokální reach, fixní náklady, dobré pro brand. Praha CLV: 80-200k/měsíc.",
+          "<b>Podcast:</b> Niche reach, vysoký engagement, brand association. Host-read ads 3-5× lepší recall.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Checklist pro PS</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj <b>cíle kampaně</b> — awareness × consideration × conversion × loyalty.",
+          "<b>2.</b> Vyber <b>nástroje hromadné komunikace</b> — reklama × PR × sponzoring × events.",
+          "<b>3.</b> Definuj <b>media mix</b> — TV vs online vs OOH podle cílovky.",
+          "<b>4.</b> Stanov <b>reach + frequency + GRP</b> pro masová média, <b>CTR + CPC + CPA</b> pro digital.",
+          "<b>5.</b> Vyber <b>advertising appeals</b> — racionální × emocionální × humor podle produktu.",
+          "<b>6.</b> Plán <b>měření</b> — pre/mid/post-test + atribution model.",
+          "<b>7.</b> Aplikuj <b>5M framework</b> (M13) + <b>AIDA</b> (M13) v creative.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsMkt14 = [
+    { term: "Hromadná mkt komunikace", def: "Nepersonální komunikace zaměřená na masu zákazníků. Cíl: maximum awareness, brand image, reach.", tag: "POJEM" },
+    { term: "4 hlavní nástroje hromadné komunikace", def: "Reklama / Public Relations (PR) / Sponzoring / Event marketing.", tag: "POJEM" },
+    { term: "Hromadná × Osobní komunikace", def: "Hromadná = mass, jednosměrná, nepersonální (TV, PR). Osobní = 1-on-1, obousměrná (sales, direct).", tag: "POJEM" },
+    { term: "4 cíle reklamy", def: "Informativní (zavádění) / Přesvědčovací (růst) / Připomínací (zralost) / Posilující (loyalty).", tag: "REKLAMA" },
+    { term: "4 typy reklamy podle zaměření", def: "Produktová / Značková / Institucionální / Sociální (CSR).", tag: "REKLAMA" },
+    { term: "Reklamní média", def: "TV / Print / Rádio / Online (Google, Meta) / OOH (outdoor) / Kino + streaming.", tag: "REKLAMA" },
+    { term: "Racionální × Emocionální appeals", def: "Racionální = fakty, benefity (high-involvement). Emocionální = pocity, příběhy (low-involvement, brand).", tag: "APPEALS" },
+    { term: "Advertising appeals — typy", def: "Racionální / Emocionální / Humor / Strach / Social proof / Celebrity / Slice-of-life.", tag: "APPEALS" },
+    { term: "Reach (Dosah)", def: "Počet unikátních lidí, kteří viděli reklamu. 1M reach = 1M lidí.", tag: "MEDIA" },
+    { term: "Frequency (Frekvence)", def: "Průměrný počet kontaktů jednoho diváka. Optimum 3-5× pro recall.", tag: "MEDIA" },
+    { term: "GRP (Gross Rating Points)", def: "Reach × Frequency. 200 GRP = např. 50 % cílovky × 4× viděno. Měří tlak kampaně.", tag: "MEDIA" },
+    { term: "CPP (Cost Per Point)", def: "Cena za 1 GRP. Pomáhá srovnat efektivitu kanálů.", tag: "MEDIA" },
+    { term: "CPM (Cost Per Mille)", def: "Cena za 1000 impressions. Standard pro digital. Google, Meta Ads.", tag: "MEDIA" },
+    { term: "CTR (Click-Through Rate)", def: "% kliklo na ad. Digital metric. Benchmark 1-3 %, search 5-10 %.", tag: "DIGITAL" },
+    { term: "CPC (Cost Per Click)", def: "Cena za klik. ČR: search 5-50 Kč, display 1-5 Kč.", tag: "DIGITAL" },
+    { term: "CPA (Cost Per Acquisition)", def: "Cena za získání 1 zákazníka. Klíčový metric pro performance.", tag: "DIGITAL" },
+    { term: "ROAS (Return On Ad Spend)", def: "Revenue / Ad Spend. Benchmark 3-5×.", tag: "DIGITAL" },
+    { term: "Effective Frequency", def: "Optimum kontaktů 3-7×. Pod 3 = málo, nad 7 = wear-out.", tag: "MEDIA" },
+    { term: "Reach vs Frequency strategie", def: "Reach = maximum lidí, méně často (awareness). Frequency = menší cílovka víckrát (persuasion).", tag: "MEDIA" },
+    { term: "Sponzoring", def: "Finanční/věcná podpora sponzorovaného subjektu výměnou za brand visibility + association.", tag: "SPONZ" },
+    { term: "6 typů sponzoringu", def: "Sportovní / Kulturní / CSR-charita / Event-based / Mediální / Vzdělávací.", tag: "SPONZ" },
+    { term: "Event marketing", def: "Vlastní eventy + experience. Apple WWDC, Salesforce Dreamforce (170k attendees), Tesla Battery Day.", tag: "SPONZ" },
+    { term: "AVE (Advertising Value Equivalent)", def: "Kolik by stála placená reklama za stejnou expozici. Red Bull Stratos = 6 mld. USD AVE.", tag: "MĚŘENÍ" },
+    { term: "3 fáze měření kampaně", def: "Pre-test (před spuštěním) / Mid-campaign (během) / Post-test (po skončení).", tag: "MĚŘENÍ" },
+    { term: "Marketing Mix Modeling (MMM)", def: "Statistická analýza vlivu kanálů na sales. Top-down pohled, klasický pro velké firmy.", tag: "MĚŘENÍ" },
+    { term: "Multi-Touch Attribution (MTA)", def: "Sledování customer journey napříč kanály. Bottom-up. Pro digital.", tag: "MĚŘENÍ" },
+    { term: "Incrementality testing", def: "A/B test geographic regions s a bez reklamy. Pravá kauzální analýza.", tag: "MĚŘENÍ" },
+    { term: "Brand Lift Study", def: "Survey-based měření brand metrics (recall, consideration) pre vs post kampaň.", tag: "MĚŘENÍ" },
+    { term: "Programmatic advertising", def: "Algoritmické nákupy ad spots v real-time. 80 % digital display. Google DV360, The Trade Desk.", tag: "TRENDY" },
+    { term: "Connected TV (CTV)", def: "Netflix Ads, Disney+ Ads, HBO Max Ads. Kombinace TV reach + digital targeting.", tag: "TRENDY" },
+    { term: "Cookie-less era", def: "Apple ATT, Google sunset 3rd party cookies. Shift k 1st party data + contextual.", tag: "TRENDY" },
+  ];
+
+  const quizMkt14 = [
+    { q: "Co je hromadná mkt komunikace?", opts: ["Personální komunikace", "Nepersonální komunikace zaměřená na masu zákazníků (TV, PR, sponzoring, events)", "B2B sales", "Direct mail"], correct: 1 },
+    { q: "Kolik je hlavních nástrojů hromadné komunikace?", opts: ["2", "3", "4 (reklama / PR / sponzoring / event marketing)", "6"], correct: 2 },
+    { q: "Která NENÍ ze 4 cílů reklamy?", opts: ["Informativní", "Přesvědčovací", "Připomínací", "Likvidační"], correct: 3 },
+    { q: "Co je informativní reklama?", opts: ["Reklama o akci", "Uvádění nového produktu, awareness fáze (M8 zavádění)", "Sleva", "PR"], correct: 1 },
+    { q: "Co je GRP?", opts: ["Gross Revenue Profit", "Gross Rating Points — Reach × Frequency. Klasická TV metric.", "Google Rating Process", "Gross Reach Period"], correct: 1 },
+    { q: "Optimální effective frequency je:", opts: ["1×", "2×", "3-7×", "10+×"], correct: 2 },
+    { q: "Reach × Frequency = ?", opts: ["CPM", "GRP (Gross Rating Points)", "CPA", "CTR"], correct: 1 },
+    { q: "Co je CTR?", opts: ["Cost Through Rate", "Click-Through Rate — % kliklo na ad", "Cost Trade Ratio", "Click Time Reach"], correct: 1 },
+    { q: "Co je CPM?", opts: ["Cost Per Million", "Cost Per Mille — cena za 1000 impressions", "Click Per Minute", "Conversion Per Month"], correct: 1 },
+    { q: "Co je ROAS?", opts: ["Rate Of Ad Spend", "Return On Ad Spend = Revenue / Ad Spend. Benchmark 3-5×.", "Return Of Annual Sales", "Reach Of All Sources"], correct: 1 },
+    { q: "Která NENÍ ze 6 typů sponzoringu?", opts: ["Sportovní", "Kulturní", "CSR / charita", "Politický"], correct: 3 },
+    { q: "Red Bull, Heineken Champions League jsou příklady:", opts: ["PR", "Sportovní sponzoring", "Direct marketing", "Native advertising"], correct: 1 },
+    { q: "Co je AVE?", opts: ["Average Value Estimate", "Advertising Value Equivalent — hodnota PR/sponzoringu přepočítaná na ekvivalent placené reklamy", "Annual Visibility Earnings", "Audio-Visual Element"], correct: 1 },
+    { q: "Kolik fází má měření reklamní kampaně?", opts: ["2", "3 (pre-test / mid-campaign / post-test)", "4", "5"], correct: 1 },
+    { q: "Co je Marketing Mix Modeling (MMM)?", opts: ["Mix produktů", "Statistická analýza vlivu kanálů na sales (top-down)", "4P koncept", "Brand model"], correct: 1 },
+    { q: "Co je programmatic advertising?", opts: ["Software reklama", "Algoritmické nákupy ad spots v real-time (80 % digital display)", "TV program", "Programming language ads"], correct: 1 },
+  ];
+
+  const praxeMkt14 = {
+    caseStudy: {
+      company: "Red Bull — etalon hromadné komunikace přes sponzoring + event marketing",
+      subtitle: "Z 0 na 12 mld. USD obrat díky &quot;Red Bull Gives You Wings&quot; + extreme sports",
+      content: (<>
+        <b>Red Bull</b> je <b>učebnicový příklad nelineární hromadné komunikace</b>. Místo tradiční TV reklamy investuje 30 % obratu (3+ mld. USD ročně) do sponzoringu + vlastních eventů.<br/><br/>
+        <b style={{ color: VSE.fmv }}>📺 REKLAMNÍ STRATEGIE — minimal TV, maximum content:</b><br/><br/>
+        • <b>Reklamní budget &lt; 20 %</b> total marketing (vs Coca-Cola 60 %+)<br/><br/>
+        • Klasický slogan &quot;Red Bull Gives You Wings&quot; od 1987<br/><br/>
+        • Animované TV spoty (low budget, charakteristické)<br/><br/>
+        • <b>Apellové:</b> Humor + slice-of-life situace<br/><br/>
+        <b style={{ color: VSE.warning }}>🏆 SPONZORING — sport jako brand asset:</b><br/><br/>
+        • <b>F1:</b> Red Bull Racing (2 vlastní týmy — Red Bull + AlphaTauri). 150 mil. EUR ročně.<br/><br/>
+        • <b>Extreme sports:</b> Cliff diving, freerunning, motocross. 600+ sponzorovaných sportovců.<br/><br/>
+        • <b>Esports:</b> Red Bull League of Legends, gaming tournaments.<br/><br/>
+        • <b>Music:</b> Red Bull Music Academy, festivals.<br/><br/>
+        <b style={{ color: VSE.fph }}>🎪 EVENT MARKETING — vlastní spektakulární eventy:</b><br/><br/>
+        • <b>Red Bull Stratos 2012:</b> Felix Baumgartner skok ze stratosféry. Stálo 65 mil. USD, <b>AVE = 6 mld. USD</b> (92× ROI). 8 milionů live diváků na YouTube.<br/><br/>
+        • <b>Red Bull Cliff Diving World Series:</b> Roční tournament 8 destinací.<br/><br/>
+        • <b>Red Bull Air Race:</b> Aerobatic závody nad městy.<br/><br/>
+        • <b>Wings for Life World Run:</b> Charitativní běh ve 53 zemích současně.<br/><br/>
+        <b style={{ color: VSE.success }}>📰 PR / OWNED MEDIA — Red Bull Media House:</b><br/><br/>
+        • Red Bull TV — vlastní streaming platforma s extreme sports content<br/><br/>
+        • Red Bull Bulletin — vlastní magazine 4 mil. čtenářů/měsíc<br/><br/>
+        • YouTube kanál 11 mil. subs, Instagram 18 mil.<br/><br/>
+        <b style={{ color: VSE.danger }}>📊 MĚŘENÍ — atypické metriky:</b><br/><br/>
+        • <b>AVE z PR/sponzoringu:</b> 3-5× vyšší než ROI z paid ads<br/><br/>
+        • <b>Brand recall:</b> 95 % aided awareness globálně<br/><br/>
+        • <b>Brand association &quot;extreme&quot;:</b> 87 % spontánně asociuje<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Red Bull prodává 12 mld. plechovek/rok, obrat 12 mld. USD (2023). 41 % market share v energy drinks. <b>Bez tradiční dominantní TV reklamy</b> — místo toho <b>sponzoring + event mkt + owned media</b>.
+      </>),
+      lessons: "Red Bull je <b>etalon non-traditional hromadné komunikace</b>. Pro PS doporuč: <b>sponzoring + event mkt + owned content media place reklamy + AVE jako klíčová metrika</b>. Alternativy: <b>Coca-Cola (max reach TV + Olympic sponsoring), Heineken (UEFA Champions League sponsoring), Apple (event marketing — keynotes 100M views), Patagonia (CSR + film content), McDonald's (mass TV + Olympic + lokální events)</b>."
+    },
+    miniExamples: [
+      { tag: "MEDIA MIX", color: VSE.fmv, company: "Coca-Cola Christmas — klasický mass reach", content: "Coca-Cola Christmas kampaň (od 1995, &quot;Holidays Are Coming&quot;) — <b>klasická hromadná komunikace</b>. Media mix: 40 % TV (mass reach 80 %+ populace), 25 % OOH (Christmas truck tour), 20 % sociální sítě, 15 % event mkt. GRP 1200+, frequency 6×. Brand recall 95 %, sales lift +18 % v Q4." },
+      { tag: "APPEALS", color: VSE.warning, company: "Nike &quot;Just Do It&quot; — emocionální appeal mistrovství", content: "Nike používá <b>emocionální appeals</b> 30+ let. Slogan &quot;Just Do It&quot; (1988) + storytelling kampaně (Michael Jordan, Serena Williams, Colin Kaepernick). Místo benefitů (Nike má lepší boty než Adidas) komunikuje aspirace. Brand value 53 mld. USD, NPS 75." },
+      { tag: "PROGRAMMATIC", color: VSE.fph, company: "Amazon Display — programmatic mistrovství", content: "Amazon investuje <b>40 % marketing budget</b> do programmatic display ads. Real-time bidding přes Amazon DSP, targeting podle browsing history (1st party data). CPM nižší než Google, ale 3× vyšší conversion. CPA 5-15 USD per zákazník v US." },
+      { tag: "AVE + STRATOS", color: VSE.success, company: "Red Bull Stratos 2012 — etalon ROI z eventu", content: "Red Bull Stratos: Felix Baumgartner skočil z 39 km výšky. <b>Investment 65 mil. USD, AVE 6 mld. USD = 92× ROI</b>. 8 milionů live diváků YouTube (rekord 2012). 500+ TV stanic broadcast. Brand recall +13 % během 1 dne. Klasický důkaz síly event marketingu vs tradiční reklamy." },
+      { tag: "MMM", color: VSE.danger, company: "Procter & Gamble — Marketing Mix Modeling", content: "P&G provozuje <b>MMM jako standardní praxe</b> u všech 80+ značek. Statistická analýza zhodnotí: TV přinese 25 % sales lift, digital 40 %, retail in-store 25 %, sponzoring 10 %. <b>Reallocation budget</b>: digital +30 %, TV −15 %. Sales +12 % YoY 2022." },
+    ]
+  };
+
+  const examQuestionsMkt14 = [
+    { komise: "2025-09-12 — Nový + Bočková + Tahal (Výroba kol)", otazka: "Hromadná marketingová komunikace, reklama, PR", pozn: "Nový chce <b>hromadnou komunikaci = reklama + PR</b>. Naučit 4 nástroje (reklama + PR + sponzoring + events) + typy reklamy + media mix." },
+    { komise: "2026-02-06 — Heřman + Schovancová + Vávra (Výroba kol)", otazka: "Hromadná marketingová komunikace — plánování a řízení marketingové kampaně, 5M, aplikovat na PS, Možnosti PR (co to je, typy, jak se měří úspěšnost)", pozn: "Heřman chce <b>5M + PR typy + měření</b>. Detail v M13, ale tady aplikovat na hromadnou kampaň: GRP, reach, frequency, AVE." },
+    { komise: "2025-01-28 — Smrčka + Kolouchová + Říhová (PS firma)", otazka: "Výzkum marketingového výzkumu. Mediální výzkumy.", pozn: "Smrčka chytá <b>mediální výzkum</b>. Naučit 3 fáze (pre/mid/post-test) + tradiční metriky (GRP, reach, frequency) + online metriky (CTR, CPC, CPM, CPA, ROAS) + pokročilé (MMM, MTA)." },
+    { komise: "2025-06-10 — Stříteský + Müllerová (Neziskovka)", otazka: "Mediální výzkum — jak měříme reklamu, online, naučit se různý metriky", pozn: "Stříteský EXPLICITNĚ chce <b>online metriky + jak měříme reklamu</b>. Naučit kompletní digital metrics: CTR, CPC, CPM, CPA, ROAS, conversion rate, view-through rate, attribution models." },
+    { komise: "2025-02-03 — Bočková + Nový + Kolouchová (Software)", otazka: "Integrovaná komunikace, kdy se používá jaký druhy médií (B2B osobní prodej, B2C reklama)", pozn: "Bočková chytá <b>volbu média podle B2B/B2C</b>. Pro B2C = mass reklama + sociální + sponzoring. Pro B2B = trade shows + LinkedIn + content." },
+  ];
+
+  const podcastMkt14 = { title: "Marketing 14 — Hromadná marketingová komunikace", description: "Definice hromadné komunikace + rozdíl vs osobní (M15). 4 hlavní nástroje: Reklama / PR / Sponzoring / Event marketing. Klasifikace reklamy (4 cíle, 4 typy podle zaměření, 6 médií). Advertising appeals (racionální × emocionální × humor × strach × social proof × celebrity × slice-of-life). Mediální plánování: Reach × Frequency × GRP × CPP × CPM × CTR × CPC × CPA × ROAS. Sponzoring (6 typů) + Event marketing. Mediální výzkum: 3 fáze (pre/mid/post-test) + tradiční metriky + online metriky + pokročilé (MMM, MTA, incrementality, Brand Lift). Trendy 2024+: programmatic, video first, social commerce, native, hyper-personalizace, audio, CTV, AI, cookie-less. Red Bull, Coca-Cola Christmas, Nike, Amazon, P&G.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt14 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>hromadná komunikace = nepersonální mass komunikace</b> vs osobní (M15).<br/>
+    <b style="color:#A82A5F">2.</b> ⚠️ <b>4 hlavní nástroje</b> (Nový, Heřman chytají!) — reklama / PR / sponzoring / events.<br/>
+    <b style="color:#A82A5F">3.</b> Klasifikace reklamy — 4 cíle (informativní/přesvědčovací/připomínací/posilující) × 4 zaměření (produktová/značková/institucionální/sociální).<br/>
+    <b style="color:#A82A5F">4.</b> Reklamní média — TV / Print / Rádio / Online / OOH / Kino+streaming.<br/>
+    <b style="color:#A82A5F">5.</b> Advertising appeals — racionální × emocionální × humor × strach × social proof × celebrity × slice-of-life.<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>Mediální plánování</b> — Reach × Frequency × GRP × CPP × CPM × effective frequency 3-7×.<br/>
+    <b style="color:#A82A5F">7.</b> ⚠️ <b>Online metriky</b> (Stříteský chytá!) — CTR / CPC / CPM / CPA / ROAS / conversion rate / attribution models.<br/>
+    <b style="color:#A82A5F">8.</b> Sponzoring (6 typů) + Event marketing (Apple WWDC, Red Bull Stratos).<br/>
+    <b style="color:#A82A5F">9.</b> ⚠️ <b>Mediální výzkum</b> (Smrčka chytá!) — 3 fáze (pre/mid/post-test) + tradiční + online + pokročilé (MMM, MTA).<br/>
+    <b style="color:#A82A5F">10.</b> Trendy 2024+ — programmatic, video first, social commerce, native, CTV, AI, cookie-less era.<br/>
+    <b style="color:#A82A5F">11.</b> Aplikace na PS — cíle + media mix + reach/frequency + GRP/CPA + měření.
+  `;
+
+  const caseStudyMkt14 = {
+    title: "Lukáš — CMO ZdravýOběd, food-tech startupu pro retail brand awareness (35 mil. Kč budget)",
+    subtitle: "Postavit hromadnou kampaň pro launch retail produktu (do Albertu a Lidlu)",
+    scenario: "Lukáš (38 let) sedí v Karlíně před prezentací pro board. ZdravýOběd právě podepsal smlouvu s Albertem a Lidlem — od září budou prodávat jejich hotové polévky a saláty ve 800 obchodech. Cíl: do 6 měsíců dostat alespoň 50 % cílovky (zdraví uvědomělí Pražáci + Brňáci 28-45 let) na úroveň aided awareness 60 %.\n\nLukáš má 35 mil. Kč budget na hromadnou kampaň. Z předchozího výzkumu ví: cílovka tráví průměrně 3,5 h denně online (60 % mobile), sleduje TV večer 18-22 h (40 % populace), v MHD ráno 7-9 h (35 % cílovky v Praze). Konkurence (Vitalité, BistroFresh, Crocodille) investuje 20-50 mil. Kč ročně do reklamy.\n\nMarketing tým má 4 lidi + Lukáš. Předchozí kampaně byly hlavně online performance (Google + Meta), brand awareness slabá (8 % aided). CEO David chce do reportu pro board konkrétní mediální plán: GRP, reach, frequency, allocation per kanál, + jak budou měřit úspěšnost kampaně. Tři otázky si Lukáš zapsal: Jaký media mix pro mass awareness? Jaké GRP / reach / frequency targets? A jak měřit, jestli kampaň dovedla cílovku z 8 % na 60 % aided awareness?",
+    signals: [
+      { text: "do 6 měsíců dostat 50 % cílovky na aided awareness 60 %", color: VSE.danger, reason: "<b>5M Mission</b> jasně definované — awareness goal. Z 8 % na 60 % = velký lift, vyžaduje masivní mass kampaň + vysoký GRP." },
+      { text: "35 mil. Kč budget na hromadnou kampaň", color: VSE.warning, reason: "<b>5M Money</b> — significantní budget umožňuje multi-channel kampaň včetně TV (která je drahá, ale dává reach). Lukáš musí ale alokovat efektivně." },
+      { text: "cílovka tráví 3,5 h denně online (60 % mobile), TV večer 18-22 h (40 %), v MHD ráno 7-9 h (35 %)", color: VSE.fph, reason: "<b>Media behavior</b> dává media mix recommendation: online (primary), TV (večer), OOH (MHD prime). Multi-touch potential." },
+      { text: "Konkurence (Vitalité, BistroFresh, Crocodille) investuje 20-50 mil. Kč ročně", color: VSE.warning, reason: "<b>Share of Voice</b> benchmark — ZdravýOběd s 35 mil. má comparable SOV. Musí být <b>kreativnější + frequency-focused</b> aby vyniknul." },
+      { text: "Předchozí kampaně byly hlavně online performance (Google + Meta), brand awareness slabá (8 % aided)", color: VSE.danger, reason: "<b>Performance ≠ brand building</b>. Pro mass awareness potřebuje shift od performance (Google search) k brand reach kanálům (TV, OOH, video)." },
+      { text: "konkrétní mediální plán: GRP, reach, frequency, allocation per kanál", color: VSE.fph, reason: "Klíčové <b>mediální KPI</b>. Pro mass awareness optimum 200-400 GRP, 70-80 % reach v cílovce, frequency 4-6×." },
+      { text: "jak budou měřit úspěšnost kampaně", color: VSE.warning, reason: "<b>5M Measurement</b> + mediální výzkum. Pre-test (concept + 8 % baseline) → mid-campaign tracking → post-test (aided awareness 60 %). Brand Lift Study standardní." },
+    ],
+    quiz1: {
+      question: "Jaký je hlavní strategický challenge Lukáše?",
+      options: [
+        "Špatný produkt",
+        "Příliš mnoho konkurentů",
+        "Shift od performance marketing (Google + Meta) k mass brand building (TV + OOH + video) pro brand awareness lift z 8 % na 60 %",
+        "Nedostatek budget",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Jakou hromadnou kampaň by Lukáš měl postavit pro 35 mil. Kč budget + 60 % awareness goal v 6 měsících?",
+      options: [
+        { text: "Media mix: 40 % TV (mass reach 60-70 % cílovky), 25 % online video (YouTube + sociální video), 20 % OOH (MHD + CLV Praha/Brno), 10 % rádio (drive-time peaks), 5 % print premium (Reflex, Marianne)", correct: true, reason: "✓ Klasický mass mix pro brand awareness. TV maximizes reach, OOH brand visibility, video engagement. Reklama dominuje budget." },
+        { text: "Mediální plán: 300 GRP v Q1 (launch) + 200 GRP Q2-Q3 (maintenance), reach 75 % cílovky × frequency 4-5×, effective frequency 3-7× kontaktů", correct: true, reason: "✓ High GRP launch + maintenance pulsing. Effective frequency hit pro brand recall. Klasický awareness pattern." },
+        { text: "Advertising appeals: emocionální storytelling + slice-of-life (zdravý život, family, work-life balance) + lokální CZ celebrity endorsement", correct: true, reason: "✓ Pro low-involvement category (food) emocionální appeals fungují lépe než racionální. Celebrity zvyšuje recall." },
+        { text: "Měření: Pre-test (concept + baseline 8 % awareness), Mid-campaign brand tracking (weekly recall), Post-test Brand Lift Study (aided + unaided awareness, NPS, purchase intent)", correct: true, reason: "✓ 3 fáze (pre/mid/post). Smrčka, Stříteský chytá! Brand Lift Study standardní pro awareness kampaně." },
+        { text: "Sponzoring + event marketing: ZdravýOběd Prague Marathon partner + sponzoring zdravotních akcí + vlastní lifestyle eventy &quot;Zdravý oběd na dvorku&quot;", correct: true, reason: "✓ Sponzoring posiluje brand association (zdraví) + AVE metric. Event mkt brand experience + UGC." },
+        { text: "PR strategie: tiskové zprávy o launchu (E15, Lidové noviny, ELLE), influencer outreach (zdraví influenceři 50k+ followers), CEO David v Forbes podcastech", correct: true, reason: "✓ PR věrohodnější než reklama. Heřman chytá PR + měření AVE + SOV. Complementary k paid kampani." },
+        { text: "Programmatic display + retargeting pro lower-funnel — visitors retargeted across web s product ads", correct: true, reason: "✓ Programmatic naplnit funnel po awareness phase. Retargeting + dynamic creative pro conversion (e-shop + retail finder)." },
+        { text: "100 % budget na Google Search Ads + Meta Performance", correct: false, reason: "✗ Performance marketing nedělá brand building. Awareness vyžaduje reach kanály (TV, OOH, video). Z 8 % na 60 % nelze dostat search ads." },
+        { text: "100 % budget na influencer marketing TikTok", correct: false, reason: "✗ Cílovka 28-45 nemá TikTok jako dominant kanál. Single-channel strategy = vysoký risk. Multi-channel mix lepší." },
+        { text: "Nedělat hromadnou kampaň, místo toho B2B sales k Albert + Lidl ředitelům", correct: false, reason: "✗ Smlouva s retailery už podepsaná. Hromadná kampaň cílí na end consumers (B2C), aby produkt v shelfu byl koupený." },
+      ],
+    },
+    summary: "<b>Lukáš potřebuje multi-channel mass kampaň s TV + online video + OOH dominantní, plus měření přes Brand Lift Study.</b><br/><br/><b>6-měsíční plán (35 mil. Kč):</b><br/><br/>• <b>Media mix:</b> 40 % TV (14 mil. — Nova, Prima prime time + reklamní bloky 18-22 h) / 25 % online video (8,75 mil. — YouTube + Instagram Reels + TikTok pro mladší cílovku) / 20 % OOH (7 mil. — CLV Praha + Brno + MHD prime hours) / 10 % rádio (3,5 mil. — drive-time 7-9 + 16-18) / 5 % print premium (1,75 mil. — Reflex, ELLE, Forbes).<br/><br/>• <b>Mediální KPI:</b> 300 GRP Q1 (launch heavy) + 200 GRP Q2-Q3 (maintenance) + 150 GRP Q4 (Christmas push). Reach 75 % cílovky × Frequency 4-5×.<br/><br/>• <b>Creative:</b> Emocionální storytelling (slice-of-life rodina, work-life balance), CZ celebrity (Eva Burešová nebo Tomáš Klus) endorsement, 3 verze TV spotu (30s hero + 15s cutdown + 6s bumper), social media adaptations.<br/><br/>• <b>Sponzoring + events:</b> Prague Marathon partner (Q2), &quot;Zdravý oběd na dvorku&quot; tour 10 měst (Q2-Q3), pop-up tasting v Albertech a Lidlech.<br/><br/>• <b>PR:</b> Launch press release, influencer outreach (15 zdraví influenceři 50k+ followers), CEO David v Forbes/ČT podcastech.<br/><br/>• <b>Měření (5M Measurement):</b> Pre-test (baseline 8 % aided awareness, concept testing creative), Mid-campaign monthly brand health tracker, Post-test Brand Lift Study (aided + unaided awareness, NPS, purchase intent, attribution analysis MMM).<br/><br/><b>Pro komisi:</b> Klasický B2C food-tech mass kampaň pro retail launch. <b>Coca-Cola Christmas (TV-led mass reach)</b>, <b>Red Bull (sponzoring + events)</b>, <b>Nike (emocionální storytelling)</b> jako benchmark. <b>5M framework (Heřman!)</b> + <b>media metrics GRP/Reach/Frequency</b> + <b>online metriky CPM/CTR/CPA</b> + <b>3 fáze měření (pre/mid/post) + Brand Lift Study (Smrčka!)</b>. Anti-vzor: 100 % performance marketing = neudělá awareness. Vzor: <b>mass reach kanály + emocionální appeals + sponzoring + multi-fázové měření</b>.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={14} title="Hromadná marketingová komunikace"
+      subtitle="4 nástroje (reklama/PR/sponzoring/events) + mediální plán + online metriky + měření"
+      color={VSE.fis}
+      questionText="Hromadná marketingová komunikace — nástroje, plánování, měření."
+      questionDesc="Definice hromadné komunikace + rozdíl vs osobní. 4 hlavní nástroje: Reklama / PR / Sponzoring / Event marketing. Klasifikace reklamy (4 cíle, 4 zaměření, 6 médií). Advertising appeals (racionální × emocionální). Mediální plánování: Reach × Frequency × GRP × CPP × CPM × CTR × CPC × CPA × ROAS. Sponzoring (6 typů) + Event marketing. Mediální výzkum: 3 fáze + tradiční + online metriky + pokročilé (MMM, MTA, Brand Lift). Trendy: programmatic, video first, social commerce, native, CTV, AI, cookie-less. Red Bull, Coca-Cola Christmas, Nike, Amazon, P&G."
+      sloz={3} roz={4} freq={4}
+      examStrategy={examStrategyMkt14}
+      studySections={studySectionsMkt14}
+      flashcards={flashcardsMkt14}
+      quiz={quizMkt14}
+      praxe={praxeMkt14}
+      examQuestions={examQuestionsMkt14}
+      podcast={podcastMkt14}
+      caseStudy={caseStudyMkt14}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MARKETING 15 — Osobní komunikace (Direct marketing + Osobní prodej + Sales force management)
+   ════════════════════════════════════════════════════════ */
+function OkruhMkt15Panel() {
+  const studySectionsMkt15 = [
+    { id: "intro", title: "Osobní × Direct marketing — odlišení", subtitle: "Stříteský chytá: definice + rozdíl + okamžitá akce", color: VSE.fis, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Osobní marketingová komunikace</b> = personalizovaná, obousměrná komunikace zaměřená na <b>individuálního zákazníka</b>. Cíl: konverze, vztah, retention. Komise <b>Stříteský</b> CHYTÁ explicitně <b>odlišení osobního a direct marketingu</b>.
+        </Def>
+        <Tag color={VSE.fis}>Osobní marketing × Direct marketing — Stříteského odlišení</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🤝 OSOBNÍ MARKETING (širší pojem)", d: "Pojetí osobních vztahů se zákazníky. Zahrnuje osobní prodej, direct mkt, telemarketing, vztahový mkt. Nepřímo ponouká k okamžité akci." },
+            { c: VSE.warning, t: "📧 DIRECT MARKETING (užší — subkategorie)", d: "Přímá komunikace s předem definovanou cílovkou. <b>Přímo ponouká k okamžité akci</b> — koupit teď, kliknout, zavolat. Telemarketing, email, SMS." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Hromadná × Osobní komunikace (M14 vs M15)</Tag>
+        <Bullet items={[
+          "<b>Hromadná (M14):</b> Nepersonální, jednosměrná, mass reach. TV reklama, PR, sponzoring. Pro B2C brand awareness.",
+          "<b>Osobní (M15):</b> Personalizovaná, obousměrná, individual reach. Direct mkt, osobní prodej. Pro B2B + high-value B2C conversion.",
+          "<b>IMK kombinuje obojí:</b> Hromadná pro top-of-funnel awareness, osobní pro bottom-of-funnel konverze.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Kdy použít osobní komunikaci</Tag>
+        <Bullet items={[
+          "<b>B2B kontext:</b> Multi-stakeholder rozhodování, long sales cycle, komplexní produkty (Cisco, Salesforce, IBM).",
+          "<b>High-value B2C:</b> Nemovitosti, auta, finanční služby, luxury items.",
+          "<b>Existující zákazníci:</b> Cross-sell + upsell (CRM databáze).",
+          "<b>Komplexní produkty:</b> Vyžadují vysvětlení (B2B SaaS, enterprise software).",
+          "<b>Vyšší marže:</b> Osobní mkt je dražší per kontakt, ale konverzní rate vyšší.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Stříteský + Sieber + Vítečková 2026 (Káva)"
+          what="Stříteský EXPLICITNĚ chytá <b>odlišení osobního a direct marketingu</b>. Naučit: direct mkt = subkategorie osobního, přímo ponouká k akci (telemarketing). Osobní = širší pojem."
+        />
+      </div>) },
+
+    { id: "direct_marketing", title: "Direct marketing — nástroje + organizace", subtitle: "Stříteský chytá organizaci (region/zákazník/zboží/premium)", color: VSE.fis, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Direct marketing</b> = přímá adresovaná komunikace s předem definovanou cílovkou s cílem vyvolat okamžitou reakci (klik, hovor, koupě). Měřitelné, targetované. Komise <b>Nový</b> chce <b>nástroje direct marketingu</b>.
+        </Def>
+        <Tag color={VSE.fis}>9 hlavních nástrojů direct marketingu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📧 EMAIL MARKETING", d: "Hromadné personalizované emaily. Mailchimp, Ecomail (ČR), HubSpot. CTR 2-5 %, ROI 36:1 (DMA studie)." },
+            { c: VSE.warning, t: "📱 SMS / WHATSAPP MARKETING", d: "Krátké zprávy s CTA. Open rate 98 % (vs email 20 %). Vhodné pro flash sales, urgent updates. GDPR compliance!" },
+            { c: VSE.fph, t: "📞 TELEMARKETING", d: "Telefonické oslovení. Inbound (customer service) × Outbound (sales calls). Stále efektivní pro B2B leads." },
+            { c: VSE.success, t: "📬 DIRECT MAIL (poštovní)", d: "Tištěné katalogy, brožury, personalizované letáky. Klesající trend, ale stále funkční pro premium B2C (IKEA katalog, luxury)." },
+            { c: VSE.danger, t: "📰 KATALOGY", d: "Tištěné nebo digital. IKEA klasický katalog (210 mil. kopií ročně do 2020), Amazon weekly digital." },
+            { c: VSE.fis, t: "🎯 RETARGETING + REMARKETING", d: "Online ads zaměřené na lidi co už navštívili web. Google + Meta retargeting. Conversion 5-10× vyšší než cold ads." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Doplňkové direct nástroje</Tag>
+        <Bullet items={[
+          "<b>📺 Teleshopping:</b> TV shopping kanály (HSN, QVC). Klesá, ale pořád 5 mld. USD market v US.",
+          "<b>🤖 Chatboty:</b> WhatsApp, Messenger, web chatboty. Automated direct conversation 24/7.",
+          "<b>📱 Push notifications:</b> Mobile app notifications, web push. Pro retention, re-engagement.",
+          "<b>🎫 Voucher / kupón marketing:</b> Slevomat, voucher kódy přes email/SMS. Direct response.",
+          "<b>📨 LinkedIn DM / Sales Navigator:</b> B2B direct outreach. Account-based marketing.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>⚠️ Organizace direct marketingu (Stříteský chytá EXPLICITNĚ!)</Tag>
+        <Bullet items={[
+          "<b>📍 Podle REGIONU (geografie):</b> Sales reps pro Prahu, Brno, Ostravu. Lokální specifika, doprava efektivnější.",
+          "<b>👥 Podle TYPU ZÁKAZNÍKA:</b> Enterprise vs SMB, B2B vs B2C, government vs commercial. Specializace na segment.",
+          "<b>📦 Podle ZBOŽÍ (produktu):</b> Sales reps specializovaní na konkrétní produkt linii. Hluboká produktová expertise.",
+          "<b>💎 Podle PREMIA (klíčových účtů):</b> Klíčoví zákazníci dostávají dedikovaného Key Account Managera. Cisco, Microsoft model.",
+          "<b>🔄 Hybridní organizace:</b> Kombinace 2-3 dimenzí. Region × typ zákazníka × produkt = matrix organization.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Stříteský + Sieber + Vítečková 2026 (Káva)"
+          what="Stříteský EXPLICITNĚ chytá <b>organizaci direct marketingu</b>. Naučit 4 hlavní dimenze: region / typ zákazníka / zboží / premium. Plus hybridní organizace."
+        />
+      </div>) },
+
+    { id: "osobni_prodej", title: "Osobní prodej — typy + 7-step proces + SPIN", subtitle: "Klasický B2B sales framework + consultative selling", color: VSE.fis, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Osobní prodej (Personal Selling)</b> = face-to-face komunikace mezi prodejcem a zákazníkem. <b>Nejdražší, ale nejefektivnější</b> komunikační nástroj. Konverze 30-50 % (vs reklama 1-5 %).
+        </Def>
+        <Tag color={VSE.fis}>Typy osobního prodeje</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🏢 B2B FIELD SALES", d: "Sales reps navštěvují klienty. Cisco, IBM, Salesforce. Long sales cycle (3-12 měsíců), high-value deals (50k+ USD)." },
+            { c: VSE.warning, t: "💼 B2B INSIDE SALES", d: "Telefonický / video prodej z office. Levnější než field sales, ale méně relationship. SaaS startupy." },
+            { c: VSE.fph, t: "🛍️ MALOOBCHODNÍ PRODEJ", d: "Apple Store Genius, parfumerie consultants, automobile dealers. High-value B2C." },
+            { c: VSE.success, t: "🚪 DOOR-TO-DOOR", d: "Klesající (regulace, no-call lists). Stále existuje u energií, telco, pojištění. ČR: pojišťováci, ESET sales." },
+            { c: VSE.danger, t: "🤝 KEY ACCOUNT MANAGEMENT", d: "Dedikovaní sales managers pro top zákazníky. Microsoft pro Apple, Google pro Procter & Gamble." },
+            { c: VSE.fis, t: "🎯 ACCOUNT-BASED SELLING", d: "Targeted approach na konkrétní účty. Marketing + sales spolu pracují. HubSpot, Demandbase model." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>7-krokový sales proces (klasika)</Tag>
+        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
+          <svg viewBox="0 0 720 200" style={{ width: "100%", maxWidth: 720, height: "auto" }}>
+            <defs>
+              <marker id="arrowSales" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
+              </marker>
+            </defs>
+            {[
+              { x: 10, c: VSE.fph, icon: "🔍", t: "1. PROSPECT" },
+              { x: 105, c: VSE.fmv, icon: "📞", t: "2. APPROACH" },
+              { x: 200, c: VSE.warning, icon: "❓", t: "3. NEEDS" },
+              { x: 295, c: VSE.warning, icon: "📊", t: "4. PRESENT" },
+              { x: 390, c: VSE.danger, icon: "🛡️", t: "5. OBJECT" },
+              { x: 485, c: VSE.success, icon: "🤝", t: "6. CLOSE" },
+              { x: 580, c: VSE.fis, icon: "♻️", t: "7. FOLLOW" },
+            ].map((s, i) => (
+              <g key={i}>
+                <rect x={s.x} y="60" width="85" height="90" rx="8" fill={s.c} opacity="0.85"/>
+                <text x={s.x + 42} y="92" textAnchor="middle" fontSize="22" fill="#fff">{s.icon}</text>
+                <text x={s.x + 42} y="120" textAnchor="middle" fontSize="10" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t.split('. ')[0]}.</text>
+                <text x={s.x + 42} y="134" textAnchor="middle" fontSize="9" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t.split('. ')[1]}</text>
+              </g>
+            ))}
+            {[95, 190, 285, 380, 475, 570].map((x, i) => (
+              <line key={i} x1={x} y1="105" x2={x + 13} y2="105" stroke="#666" strokeWidth="2" markerEnd="url(#arrowSales)"/>
+            ))}
+            <text x="360" y="180" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">Klasický 7-krokový sales proces</text>
+          </svg>
+        </div>
+        <Bullet items={[
+          "<b>🔍 1. Prospecting:</b> Identifikace potenciálních zákazníků. Cold lists, LinkedIn, referrals, inbound leads.",
+          "<b>📞 2. Approach (Pre-approach + Approach):</b> Research o klientovi + první kontakt. Telefonát, email, schůzka.",
+          "<b>❓ 3. Needs Analysis:</b> Pochopení potřeb klienta. SPIN selling klíčový framework (viz dále).",
+          "<b>📊 4. Presentation:</b> Prezentace řešení. Tailored na klientovy potřeby z fáze 3. Demo, ROI calculator.",
+          "<b>🛡️ 5. Handling Objections:</b> Odpovědi na námitky (cena, čas, autorita, potřeba). LAARC framework (Listen, Acknowledge, Assess, Respond, Confirm).",
+          "<b>🤝 6. Closing:</b> Uzavření obchodu. Closing techniques: Assumptive close, Alternative close, Summary close.",
+          "<b>♻️ 7. Follow-up + Retention:</b> Po-prodejní servis, cross-sell/upsell, referrals. CRM systém klíčový.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>SPIN Selling (Neil Rackham 1988) — Needs Analysis framework</Tag>
+        <Bullet items={[
+          "<b>S — Situation:</b> &quot;Jak řešíte X dnes?&quot; Pochopení současné situace.",
+          "<b>P — Problem:</b> &quot;Co vás na tom trápí?&quot; Identifikace problému.",
+          "<b>I — Implication:</b> &quot;Co se stane, když to nevyřešíte?&quot; Eskalace dopadů.",
+          "<b>N — Need-payoff:</b> &quot;Jak by vám pomohlo, kdyby to bylo vyřešeno?&quot; Vize budoucnosti.",
+          "<b>Použití:</b> Standard v B2B sales. Salesforce, IBM, HubSpot trénují své sales na SPIN.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Další sales metodiky</Tag>
+        <Bullet items={[
+          "<b>Consultative Selling:</b> Prodejce jako poradce, ne pusher. Long-term relationship focus.",
+          "<b>Challenger Sale:</b> Dillon Adamson 2011. Vyzývatelský přístup — prodejce učí klienta o problémech, kterých si není vědom.",
+          "<b>Solution Selling:</b> Mike Bosworth. Fokus na řešení komplexních problémů, ne prodej produktu.",
+          "<b>Sandler Sales Method:</b> Reverse psychology, qualification heavy. Hodně populární v US.",
+          "<b>MEDDIC framework:</b> Metrics / Economic buyer / Decision criteria / Decision process / Identified pain / Champion. Pro enterprise sales.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "sales_force", title: "Sales Force Management — návrh + řízení prodejních týmů", subtitle: "Svobodová + Mikovcová chytá ŘÍZENÍ prodejních sil!", color: VSE.fis, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Sales Force Management</b> = strategické a operativní řízení prodejních týmů. Komise <b>Svobodová, Mikovcová</b> CHYTÁ EXPLICITNĚ <b>návrh a řízení prodejních sil</b>. Naučit detail.
+        </Def>
+        <Tag color={VSE.fis}>6 fází Sales Force Managementu (Kotler)</Tag>
+        <Bullet items={[
+          "<b>1. STANOVENÍ CÍLŮ prodejní síly:</b> Akvizice nových zákazníků × udržení × cross-sell × průzkum trhu × poradenství.",
+          "<b>2. STRATEGIE prodejní síly:</b> Direct sales × indirect (distribuce) × hybrid. In-house × outsourced.",
+          "<b>3. STRUKTURA prodejní síly:</b> Podle území / produktu / zákazníka / komplexní. Region, segment, key accounts.",
+          "<b>4. VELIKOST prodejní síly:</b> Workload approach — počet zákazníků × frekvence návštěv × čas na návštěvu / čas dostupný = počet salesů.",
+          "<b>5. KOMPENZACE:</b> Plat + provize + bonusy. Typický poměr 60 % plat + 30 % provize + 10 % bonusy v B2B.",
+          "<b>6. NÁBOR + TRAINING + MOTIVACE + EVALUACE:</b> Lifecycle managementu sales týmu.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>4 struktury prodejní síly</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📍 ÚZEMNÍ (geographic)", d: "Sales rep zodpovídá za vše v daném regionu. Jednoduchá struktura, nízké náklady. Vhodné pro homogenní portfolio." },
+            { c: VSE.warning, t: "📦 PRODUKTOVÁ", d: "Sales reps specializovaní na konkrétní produktovou linii. Hluboká expertise. Pro firmy s diversified portfolio (J&J, P&G)." },
+            { c: VSE.fph, t: "👥 ZÁKAZNICKÁ (vertical)", d: "Sales reps specializovaní na typ zákazníka (banking vs healthcare). Pro B2B s komplexními sektory (IBM, Cisco vertical sales)." },
+            { c: VSE.success, t: "🔄 KOMPLEXNÍ (matrix)", d: "Kombinace 2-3 dimenzí. Region × produkt × zákazník. Pro velké korporace (Microsoft, Salesforce)." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Kompenzační schémata sales</Tag>
+        <Bullet items={[
+          "<b>Straight Salary (jen plat):</b> Pro nové sales reps, dlouhé sales cycles, customer service-heavy. Nemotivační pro top performers.",
+          "<b>Straight Commission (jen provize):</b> Realitní makléři, finanční poradci. Maximální motivace, ale risk pro sales reps.",
+          "<b>Salary + Commission (kombinace):</b> Standard v B2B. 60-70 % plat + 30-40 % provize. Balance security + motivation.",
+          "<b>Salary + Bonus:</b> Bonus za specifické cíle (quarterly quota, new accounts). Pro key account managery.",
+          "<b>Salary + Commission + Bonus:</b> Komplexní schéma pro enterprise sales (Salesforce, Oracle).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Evaluace sales týmu — KPIs</Tag>
+        <Bullet items={[
+          "<b>Quota attainment:</b> % cílů splněných. Standard goal 80-90 % team meets quota.",
+          "<b>Sales velocity:</b> Rychlost movement deals přes pipeline. Days to close.",
+          "<b>Win rate:</b> % oslovených dealů uzavřených. B2B benchmark 20-30 %.",
+          "<b>Average Deal Size:</b> Velikost průměrné smlouvy. Trend roste = upselling funguje.",
+          "<b>Pipeline coverage:</b> Pipeline value / quarterly quota = 3-4× (B2B benchmark).",
+          "<b>Customer Acquisition Cost (CAC):</b> Náklad na získání 1 zákazníka. Sales + marketing budget / new customers.",
+          "<b>Customer Lifetime Value (CLV):</b> Předpokládaný profit z 1 zákazníka. CLV/CAC ratio ideálně 3:1+.",
+        ]} color={VSE.danger} />
+        <ExamAlert
+          komise="Svobodová + Nový + Machek 2026 (Horská chata) + Mikovcová 2026 (Vinařství)"
+          what="Svobodová + Mikovcová chytají <b>navrhování a řízení prodejních sil</b>. Naučit 6 fází Kotler + 4 struktury + kompenzace + KPIs (quota, win rate, CAC, CLV)."
+        />
+      </div>) },
+
+    { id: "crm_b2b", title: "CRM + B2B mkt + budování vztahů", subtitle: "Stříteský chytá CRM + B2B + navrhnout doporučení!", color: VSE.fis, emoji: "construction",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>CRM (Customer Relationship Management)</b> = strategie + systém pro řízení vztahů se zákazníky. Komise <b>Stříteský</b> chytá <b>CRM + B2B mkt + doporučení</b>.
+        </Def>
+        <Tag color={VSE.fis}>CRM — 3 dimenze</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "💻 OPERATIVNÍ CRM", d: "Software pro denní práci — sales pipeline, ticketing, marketing automation. Salesforce, HubSpot, Pipedrive." },
+            { c: VSE.warning, t: "📊 ANALYTICKÝ CRM", d: "Data + insights — customer segmentation, churn prediction, LTV analysis. Tableau, PowerBI integrace." },
+            { c: VSE.fph, t: "🤝 KOLABORATIVNÍ CRM", d: "Sdílení dat napříč týmy (sales + marketing + service). 360° pohled na zákazníka." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>B2B Marketing — specifika vs B2C</Tag>
+        <Bullet items={[
+          "<b>Multi-stakeholder rozhodování:</b> CFO + CTO + CEO + end user. Min 3-7 osob v B2B nákupu.",
+          "<b>Long sales cycle:</b> 3-12 měsíců (vs B2C dny-týdny). Komplexní nákupní proces.",
+          "<b>Vysoká hodnota deals:</b> 50k+ USD per smlouva (vs B2C průměr 50-500 USD).",
+          "<b>Racionální appeals:</b> ROI, productivity, cost saving. Méně emocionální.",
+          "<b>Relationship-driven:</b> Trust + reputation kritické. WOM v B2B velmi důležitý.",
+          "<b>Less consumers, more impact:</b> Menší množina zákazníků, ale velký individual revenue.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Vztahový marketing (Relationship Marketing)</Tag>
+        <Bullet items={[
+          "<b>Akvizice × Retence:</b> 5× dražší získat nového než udržet stávajícího (HBR studie).",
+          "<b>Customer Lifecycle:</b> Awareness → Consideration → Purchase → Onboarding → Retention → Loyalty → Advocacy.",
+          "<b>Customer Lifetime Value (CLV):</b> Suma profitu z 1 zákazníka za celou dobu spolupráce. Klíčový metric.",
+          "<b>NPS (Net Promoter Score, M10):</b> Měření loyality + advocacy potenciálu.",
+          "<b>Loyalty programy:</b> Body, levels, exkluzivní benefity. Air miles, Starbucks Rewards.",
+          "<b>Cross-sell + Upsell:</b> Prodej dalších produktů existujícím zákazníkům. Amazon &quot;Customers who bought&quot;.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>Klíčoví CRM hráči v B2B</Tag>
+        <Bullet items={[
+          "<b>Salesforce:</b> Market lídr, 23 % market share. Cena: 25-330 USD/user/month. Enterprise standard.",
+          "<b>HubSpot:</b> Inbound + CRM all-in-one. Free tier + paid tiers. Mid-market favorite.",
+          "<b>Microsoft Dynamics 365:</b> Integrace s Office 365 + Teams. Pro Microsoft ecosystem firmy.",
+          "<b>Pipedrive:</b> Sales-focused, levnější. SMB friendly. ČR oblíbený.",
+          "<b>Zoho CRM:</b> Komplexní suite za nižší cenu. Asijský origin, rostoucí v EU.",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "trendy_aplikace", title: "Trendy v osobní komunikaci + aplikace na PS", subtitle: "AI sales, ABM, video selling + checklist", color: VSE.fis, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Osobní komunikace se digitalizuje a personalizuje. <b>AI + automation + video</b> jsou klíčové trendy. ABM (Account-Based Marketing) dominuje B2B.
+        </Def>
+        <Tag color={VSE.fis}>Hlavní trendy 2024+</Tag>
+        <Bullet items={[
+          "<b>🎯 Account-Based Marketing (ABM):</b> B2B targeting konkrétních enterprise klientů. Spolupráce sales + marketing. Salesforce, Demandbase, HubSpot.",
+          "<b>🤖 AI v sales:</b> Lead scoring (predikce konverze), conversation intelligence (Gong, Chorus), AI copywriting (chatGPT pro emails).",
+          "<b>🎥 Video selling:</b> Loom, Vidyard, Sendspark — personalizovaná video zpráva místo email. Open rate 70 %+.",
+          "<b>📊 Sales engagement platforms:</b> Outreach, SalesLoft — multi-channel sequence automation. Email + LinkedIn + telefon koordinovaně.",
+          "<b>🔍 Intent data:</b> Bombora, ZoomInfo — predikce, kdo má buying intent. Targeting přes signály (job changes, web searches).",
+          "<b>📱 LinkedIn Sales Navigator:</b> Standard pro B2B prospecting. 80M+ profesionálů, advanced search.",
+          "<b>🤝 Customer Success teams:</b> Po-prodejní role pro retention + upsell. Mezi sales a support. Standard v SaaS.",
+          "<b>🎙️ Podcast advertising:</b> Host-read ads, podcast sponsoring. Pro thought leadership + B2B awareness.",
+          "<b>📲 WhatsApp Business + Conversational Commerce:</b> Direct customer messaging. Klíčový v Asii, rostoucí v Evropě.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Etika + GDPR v osobní komunikaci</Tag>
+        <Bullet items={[
+          "<b>GDPR (EU 2018):</b> Explicit consent před email/SMS marketing. Right to be forgotten. Pokuty až 4 % global obratu.",
+          "<b>CAN-SPAM Act (US):</b> Identifikace odesílatele, unsubscribe link, no deceptive headers.",
+          "<b>ePrivacy Directive:</b> Cookies consent banner. Tracking limitations.",
+          "<b>Do Not Call lists:</b> Telemarketing regulace. ČR — Úřad pro ochranu osobních údajů (ÚOOÚ).",
+          "<b>Apple ATT (App Tracking Transparency):</b> 2021+. Klesající přesnost tracking u iOS users.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Checklist pro PS</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj <b>typ trhu</b> (B2B vs B2C) → mix osobní × hromadná komunikace.",
+          "<b>2.</b> Vyber <b>nástroje direct marketingu</b> — email, SMS, telemarketing, retargeting, katalogy.",
+          "<b>3.</b> Pro B2B — definuj <b>sales force strukturu</b> (region/produkt/zákazník/matrix).",
+          "<b>4.</b> Implementuj <b>CRM systém</b> (Salesforce, HubSpot, Pipedrive).",
+          "<b>5.</b> Aplikuj <b>SPIN selling</b> nebo jinou sales metodiku.",
+          "<b>6.</b> Nastav <b>kompenzaci sales</b> (plat + provize + bonus).",
+          "<b>7.</b> Měření — quota attainment, win rate, CAC, CLV, CLV/CAC ratio.",
+          "<b>8.</b> Zahrň <b>moderní trendy</b> — ABM, AI, video selling, intent data.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsMkt15 = [
+    { term: "Osobní mkt komunikace", def: "Personalizovaná, obousměrná komunikace zaměřená na individuálního zákazníka. Cíl: konverze, vztah, retention.", tag: "POJEM" },
+    { term: "Direct marketing (vs osobní)", def: "Subkategorie osobního — přímá komunikace s definovanou cílovkou. PŘÍMO ponouká k OKAMŽITÉ AKCI (telemarketing).", tag: "POJEM" },
+    { term: "Hromadná × Osobní", def: "Hromadná = nepersonální, jednosměrná, mass. Osobní = personalizovaná, obousměrná, individual. IMK kombinuje obojí.", tag: "POJEM" },
+    { term: "Kdy osobní komunikace", def: "B2B kontext / High-value B2C / Existující zákazníci / Komplexní produkty / Vyšší marže.", tag: "POJEM" },
+    { term: "Nástroje direct marketingu", def: "Email / SMS-WhatsApp / Telemarketing / Direct mail / Katalogy / Retargeting / Teleshopping / Chatboty / Push notif / LinkedIn DM.", tag: "DIRECT" },
+    { term: "Email marketing", def: "Hromadné personalizované emaily. CTR 2-5 %, ROI 36:1 (DMA studie). Mailchimp, Ecomail, HubSpot.", tag: "DIRECT" },
+    { term: "SMS marketing", def: "Open rate 98 % (vs email 20 %). Flash sales, urgent updates. GDPR compliance!", tag: "DIRECT" },
+    { term: "Telemarketing", def: "Telefonické oslovení. Inbound (customer service) × Outbound (sales calls). Efektivní pro B2B leads.", tag: "DIRECT" },
+    { term: "Retargeting + Remarketing", def: "Online ads pro lidi co už navštívili web. Google + Meta retargeting. Conversion 5-10× vyšší než cold.", tag: "DIRECT" },
+    { term: "4 dimenze organizace direct mktu (Stříteský!)", def: "Region (geografie) / Typ zákazníka / Zboží (produkt) / Premium (key accounts).", tag: "DIRECT" },
+    { term: "Osobní prodej (Personal Selling)", def: "Face-to-face komunikace prodejce-zákazník. Nejdražší, ale nejefektivnější. Konverze 30-50 %.", tag: "PRODEJ" },
+    { term: "Typy osobního prodeje", def: "B2B Field / B2B Inside / Maloobchodní / Door-to-door / Key Account Management / Account-Based Selling.", tag: "PRODEJ" },
+    { term: "7-krokový sales proces", def: "Prospecting / Approach / Needs Analysis / Presentation / Handling Objections / Closing / Follow-up.", tag: "PRODEJ" },
+    { term: "SPIN Selling (Neil Rackham 1988)", def: "Situation / Problem / Implication / Need-payoff. Standard v B2B sales (Salesforce, IBM, HubSpot).", tag: "PRODEJ" },
+    { term: "Consultative Selling", def: "Prodejce jako poradce, ne pusher. Long-term relationship focus. Vhodné pro komplexní B2B produkty.", tag: "PRODEJ" },
+    { term: "Challenger Sale", def: "Dillon Adamson 2011. Vyzývatelský přístup — prodejce učí klienta o problémech, kterých si není vědom.", tag: "PRODEJ" },
+    { term: "MEDDIC framework", def: "Metrics / Economic buyer / Decision criteria / Decision process / Identified pain / Champion. Pro enterprise sales.", tag: "PRODEJ" },
+    { term: "Sales Force Management — 6 fází", def: "Cíle / Strategie / Struktura / Velikost / Kompenzace / Nábor + Training + Motivace + Evaluace.", tag: "SFM" },
+    { term: "4 struktury prodejní síly", def: "Územní (geographic) / Produktová / Zákaznická (vertical) / Komplexní (matrix).", tag: "SFM" },
+    { term: "Kompenzace sales — standard", def: "60-70 % plat + 30-40 % provize + bonusy. Balance security + motivation. B2B standard.", tag: "SFM" },
+    { term: "Quota attainment", def: "% cílů splněných sales rep. Goal 80-90 % team meets quota.", tag: "SFM" },
+    { term: "Win rate", def: "% oslovených dealů uzavřených. B2B benchmark 20-30 %.", tag: "SFM" },
+    { term: "Pipeline coverage", def: "Pipeline value / quarterly quota = 3-4× (B2B benchmark).", tag: "SFM" },
+    { term: "CAC (Customer Acquisition Cost)", def: "Náklad na získání 1 zákazníka. Sales + marketing budget / new customers.", tag: "SFM" },
+    { term: "CLV/CAC ratio", def: "Customer Lifetime Value / Customer Acquisition Cost. Ideální 3:1+.", tag: "SFM" },
+    { term: "CRM (Customer Relationship Management)", def: "Strategie + systém pro řízení vztahů se zákazníky. Salesforce, HubSpot, Pipedrive.", tag: "CRM" },
+    { term: "3 dimenze CRM", def: "Operativní (denní práce) / Analytický (data) / Kolaborativní (sdílení).", tag: "CRM" },
+    { term: "B2B specifika", def: "Multi-stakeholder / Long cycle 3-12 měs / High value 50k+ / Racionální appeals / Relationship-driven.", tag: "B2B" },
+    { term: "Customer Lifetime Value (CLV)", def: "Suma profitu z 1 zákazníka za celou dobu spolupráce. Klíčový metric pro retention focus.", tag: "B2B" },
+    { term: "Akvizice × Retence", def: "5× dražší získat nového než udržet stávajícího (HBR studie). Klíč relationship marketingu.", tag: "B2B" },
+    { term: "ABM (Account-Based Marketing)", def: "B2B targeting konkrétních enterprise klientů. Marketing + sales spolupráce. Salesforce, Demandbase, HubSpot.", tag: "TRENDY" },
+    { term: "Video selling", def: "Loom, Vidyard — personalizovaná video zpráva místo email. Open rate 70 %+.", tag: "TRENDY" },
+    { term: "Intent data", def: "Bombora, ZoomInfo — predikce, kdo má buying intent přes signály (job changes, web searches).", tag: "TRENDY" },
+    { term: "GDPR (EU 2018)", def: "Explicit consent před email/SMS marketing. Right to be forgotten. Pokuty 4 % global obratu.", tag: "GDPR" },
+  ];
+
+  const quizMkt15 = [
+    { q: "Co je rozdíl mezi osobním a direct marketingem (Stříteský)?", opts: ["Žádný", "Osobní = širší pojem, direct = subkategorie, přímo ponouká k OKAMŽITÉ AKCI (telemarketing)", "Direct je dražší", "Osobní je online"], correct: 1 },
+    { q: "Která NENÍ z nástrojů direct marketingu?", opts: ["Email marketing", "SMS marketing", "Telemarketing", "TV reklama"], correct: 3 },
+    { q: "Kolik je hlavních dimenzí organizace direct marketingu (Stříteský chytá!)?", opts: ["2", "3", "4 (region / typ zákazníka / zboží / premium)", "6"], correct: 2 },
+    { q: "Email marketing ROI je:", opts: ["1:1", "10:1", "36:1 (DMA studie)", "100:1"], correct: 2 },
+    { q: "Open rate SMS marketingu:", opts: ["20 %", "50 %", "98 % (vs email 20 %)", "10 %"], correct: 2 },
+    { q: "Kolik kroků má klasický sales proces?", opts: ["3", "5", "7 (prospect/approach/needs/present/object/close/follow)", "10"], correct: 2 },
+    { q: "Kdo definoval SPIN Selling?", opts: ["Kotler 1960", "Neil Rackham 1988", "Porter 1980", "Adamson 2011"], correct: 1 },
+    { q: "Co znamená S v SPIN?", opts: ["Sales", "Situation — pochopení současné situace klienta", "Strategy", "Solution"], correct: 1 },
+    { q: "Kolik je struktur prodejní síly?", opts: ["2", "3", "4 (územní / produktová / zákaznická / komplexní matrix)", "5"], correct: 2 },
+    { q: "Standard kompenzace B2B sales:", opts: ["100 % plat", "100 % provize", "60-70 % plat + 30-40 % provize + bonusy", "50/50"], correct: 2 },
+    { q: "Win rate B2B benchmark:", opts: ["5-10 %", "20-30 %", "50-70 %", "80-90 %"], correct: 1 },
+    { q: "Ideální CLV/CAC ratio:", opts: ["1:1", "2:1", "3:1+ (CLV minimálně 3× CAC)", "10:1"], correct: 2 },
+    { q: "Kolik je dražší získat nového vs udržet stávajícího zákazníka?", opts: ["2×", "3×", "5× (HBR studie)", "10×"], correct: 2 },
+    { q: "Co je ABM?", opts: ["Account Brand Marketing", "Account-Based Marketing — B2B targeting konkrétních enterprise klientů, spolupráce sales + marketing", "Annual Business Meeting", "Advanced Brand Management"], correct: 1 },
+    { q: "Která NENÍ z 3 dimenzí CRM?", opts: ["Operativní", "Analytický", "Kolaborativní", "Reklamní"], correct: 3 },
+    { q: "GDPR pokuty mohou být až:", opts: ["1 mil. EUR", "10 mil. EUR", "4 % global obratu firmy", "100 mil. EUR fixed"], correct: 2 },
+  ];
+
+  const praxeMkt15 = {
+    caseStudy: {
+      company: "Salesforce — etalon B2B osobního prodeje + ABM + CRM",
+      subtitle: "Z 0 na 35 mld. USD obrat díky sofistikované sales force + ABM",
+      content: (<>
+        <b>Salesforce</b> je <b>učebnicový příklad sofistikovaného B2B osobního prodeje</b>. 1999 založeno, 2024 obrat 35 mld. USD, 80 000 zaměstnanců (z toho 40 % sales).<br/><br/>
+        <b style={{ color: VSE.fmv }}>🎯 ABM (Account-Based Marketing) strategie:</b><br/><br/>
+        • Targetují konkrétní <b>Fortune 500</b> klienty (top 50 = 40 % obratu)<br/><br/>
+        • Marketing + sales <b>úzce spolupracují</b> per account (1 SDR + 1 AE + 1 SE per deal)<br/><br/>
+        • Personalizovaný content per account — case studies, ROI calculators, custom demos<br/><br/>
+        • Win rate u ABM accounts 3× vyšší než traditional inbound<br/><br/>
+        <b style={{ color: VSE.warning }}>🏢 SALES FORCE STRUKTURA — matrix model:</b><br/><br/>
+        • <b>Region:</b> AMER, EMEA, APAC, Japan (4 mega regiony)<br/><br/>
+        • <b>Segment:</b> Enterprise (1000+ employees), Commercial (100-1000), SMB (&lt;100)<br/><br/>
+        • <b>Industry:</b> Financial Services, Healthcare, Government, Retail, atd. (15 vertikálů)<br/><br/>
+        • <b>Product:</b> Sales Cloud / Service Cloud / Marketing Cloud / Tableau / MuleSoft<br/><br/>
+        • Matrix = region × segment × industry. Komplexní, ale precizní coverage.<br/><br/>
+        <b style={{ color: VSE.fph }}>📞 7-STEP SALES PROCES s SPIN selling:</b><br/><br/>
+        • <b>1. Prospect:</b> LinkedIn Sales Navigator + intent data (ZoomInfo, Bombora)<br/><br/>
+        • <b>2. Approach:</b> SDR (Sales Development Rep) cold outreach — email + LinkedIn + call<br/><br/>
+        • <b>3. Needs (SPIN):</b> Discovery call — Situation, Problem, Implication, Need-payoff<br/><br/>
+        • <b>4. Presentation:</b> Tailored demo + ROI calculator + custom integration plan<br/><br/>
+        • <b>5. Objection handling:</b> LAARC framework + reference calls (existing customers)<br/><br/>
+        • <b>6. Close:</b> Multi-stakeholder negotiation, MEDDIC qualification, contract signing<br/><br/>
+        • <b>7. Follow-up:</b> Onboarding manager → Customer Success Manager → renewal/upsell<br/><br/>
+        <b style={{ color: VSE.success }}>💰 KOMPENZACE — sophisticated structure:</b><br/><br/>
+        • <b>SDR (entry):</b> 60k USD plat + 30k USD OTE bonusy = 90k OTE<br/><br/>
+        • <b>Account Executive:</b> 100-150k plat + 100-200k provize = 200-350k OTE<br/><br/>
+        • <b>Enterprise AE (Fortune 500 deals):</b> 150-200k plat + 500k-2M provize = 650k-2M OTE<br/><br/>
+        • <b>Quota multipliers:</b> Po splnění 100 % quota → 2× provize na overachievement<br/><br/>
+        <b style={{ color: VSE.danger }}>📊 KPIs + EVALUACE:</b><br/><br/>
+        • Quota attainment 100 % target, 30 % AEs hit President's Club (top performers)<br/><br/>
+        • Win rate 28 % (B2B SaaS benchmark)<br/><br/>
+        • Average Deal Size enterprise 250k-2M USD<br/><br/>
+        • Pipeline coverage 4× quarterly quota<br/><br/>
+        • CAC payback 18 měsíců, CLV/CAC ratio 5:1<br/><br/>
+        <b style={{ color: VSE.success }}>Výsledek:</b> Salesforce drží <b>23 % market share v CRM</b> globálně. 150 000 enterprise klientů. Klasický důkaz síly <b>ABM + matrix struktury + SPIN selling + sophisticated CRM-driven proces</b>.
+      </>),
+      lessons: "Salesforce je <b>etalon B2B osobního prodeje a sales force management</b>. Pro PS doporuč: <b>ABM strategie + matrix sales struktura + SPIN selling proces + sophisticated CRM + multi-tier kompenzace + KPI-driven evaluace</b>. Alternativy: <b>Cisco (channel partner sales), HubSpot (inbound + ABM hybrid), Microsoft (vertical sales), Mediafly (Challenger Sale framework), Pipedrive (SMB sales), Oracle (enterprise key accounts)</b>."
+    },
+    miniExamples: [
+      { tag: "DIRECT EMAIL", color: VSE.fmv, company: "Mailchimp — etalon email marketing platform", content: "Mailchimp (acq. Intuit 2021 za 12 mld. USD) postavil business na <b>email direct marketing</b>. 13 milionů uživatelů. Email marketing ROI 36:1. Klíčové features: segmentace, automation flows, A/B testing, personalized templates. ČR alternative: Ecomail.cz." },
+      { tag: "TELEMARKETING", color: VSE.warning, company: "ESET — door-to-door + outbound sales", content: "ESET (slovenský antivirus) historicky budoval B2B sales přes <b>outbound telemarketing</b> a door-to-door v SMB segmentu. 30 sales reps v ČR, kompenzace 60 % plat + 40 % provize. Win rate 22 %. Klíčový kanál pre-internet (1990s-2010s), dnes hybrid s digital." },
+      { tag: "SPIN SELLING", color: VSE.fph, company: "IBM — etalon SPIN selling enterprise", content: "IBM trénuje 12 000 sales reps na <b>SPIN selling</b> jako standard. Pro enterprise deals (500k-50M USD) prochází SPIN discovery sessions s 5-15 stakeholdery per account. Win rate 30 %, average deal size 1,2M USD. Klasický příklad consultative B2B prodeje." },
+      { tag: "ABM", color: VSE.success, company: "Demandbase — ABM pioneer platform", content: "Demandbase (1 mld. USD valuation) je <b>ABM platform standard</b>. Klienti targetují 50-500 konkrétních enterprise accounts. Multi-channel campaigns per account (LinkedIn + display + email + sales). Win rate u ABM 3-5× vyšší než inbound. CAC dvakrát vyšší, ale ARPU 10× vyšší = lepší unit economics." },
+      { tag: "VIDEO SELLING", color: VSE.danger, company: "Loom — etalon video selling", content: "Loom (acq. Atlassian 2023 za 975 mil. USD) revolucionizoval <b>video selling</b>. Místo text emailů sales reps posílají 1-2 min personalizovaná videa. <b>Open rate 70 %+, response rate 3× vyšší než text email</b>. Klíčové pro warm outreach a follow-ups. ČR rostoucí trend." },
+    ]
+  };
+
+  const examQuestionsMkt15 = [
+    { komise: "2026-01-28 — Stříteský + Sieber + Vítečková (Káva)", otazka: "Osobní marketing a direct marketing, organizace direct marketingu (region/typ zákazníka/zboží/premium), odlišení osobního a direct mktu (osobní přímo ponouká k okamžité akci viz telemarketing)", pozn: "Stříteský chytá KOMPLET: <b>odlišení osobního/direct + organizace direct mktu (4 dimenze)</b>. Naučit explicitně Stříteského strukturu." },
+    { komise: "2026-01-29 — Svobodová + Nový + Machek (Horská chata)", otazka: "Osobní marketing, zdroje direct marketingu a NAVRHOVÁNÍ A ŘÍZENÍ PRODEJNÍCH SIL", pozn: "Svobodová chytá <b>NAVRHOVÁNÍ A ŘÍZENÍ prodejních sil</b> — &quot;celkem na tom trvali&quot;. Naučit 6 fází Kotler SFM + 4 struktury + kompenzace + KPIs." },
+    { komise: "2026-02-04 — Mikovcová + Viktora + Vávra (Vinařství)", otazka: "Osobní a direct marketing. Řízení prodejních týmů", pozn: "Mikovcová chytá <b>řízení prodejních týmů</b>. Naučit sales force management + KPIs (quota, win rate, CAC, CLV) + kompenzace." },
+    { komise: "2026-02-06 — Stříteský + Krause + Zamazalová (Realitní firma)", otazka: "Osobní a direct MKT — navázat na PS, CRM a B2B mkt a navrhnout doporučení", pozn: "Stříteský chytá <b>CRM + B2B mkt + DOPORUČENÍ</b>. Naučit 3 dimenze CRM + B2B specifika + relationship marketing. Pro realitní firmu: ABM key accounts." },
+    { komise: "2026-02-03 — Bočková + Nový + Kolouchová (Software)", otazka: "Direct marketing", pozn: "Bočková chce <b>direct mkt</b>. Naučit 9 nástrojů + 4 dimenze organizace + nástroje (email/SMS/tele/retargeting/katalogy)." },
+    { komise: "2025-06-02 — Nový + Müllerová + Kolouchová (Prádlo)", otazka: "Osobní marketingová komunikace, nástroje direct marketingu, principy osobního prodeje", pozn: "Nový chce <b>NÁSTROJE direct mktu + PRINCIPY osobního prodeje</b>. Naučit nástroje + 7-krokový sales proces + SPIN selling + consultative selling." },
+    { komise: "2025-02-03 — Stříteský + Bočková + Lorenzová (Horská chata)", otazka: "Osobní komunikace (Direct Marketing a Osobní prodej)", pozn: "Stříteský chce kompletní balík <b>direct mkt + osobní prodej</b>. Naučit obojí + odlišení (Stříteského definice)." },
+    { komise: "2025-02-04 — Tahal + Cejthamr + Svobodová (Prádlo)", otazka: "Osobní prodej a direct marketing", pozn: "Tahal chce kompletní obraz. Naučit obojí + B2B vs B2C aplikace." },
+  ];
+
+  const podcastMkt15 = { title: "Marketing 15 — Osobní komunikace (Direct + Osobní prodej)", description: "Odlišení osobního a direct marketingu (Stříteský chytá — direct přímo ponouká k akci). 9 nástrojů direct mktu (email/SMS/telemarketing/direct mail/katalogy/retargeting/teleshopping/chatboty/push). 4 dimenze organizace direct mktu (region/zákazník/zboží/premium). 6 typů osobního prodeje (B2B Field/Inside/Retail/Door/KAM/ABM). 7-krokový sales proces. SPIN Selling (Neil Rackham 1988). Consultative + Challenger + Solution + Sandler + MEDDIC frameworks. Sales Force Management 6 fází Kotler + 4 struktury (územní/produktová/zákaznická/matrix) + kompenzace + KPIs (quota, win rate, CAC, CLV). CRM (3 dimenze) + B2B specifika + relationship marketing. Trendy: ABM, AI sales, video selling, intent data, LinkedIn Sales Navigator. Salesforce, Mailchimp, ESET, IBM, Demandbase, Loom.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyMkt15 = `
+    <b style="color:#A82A5F">1.</b> Začni definicí — <b>osobní mkt = personalizovaná obousměrná komunikace</b> vs hromadná (M14).<br/>
+    <b style="color:#A82A5F">2.</b> ⚠️ <b>Odlišení osobního × direct mktu</b> (Stříteský chytá!) — direct je subkategorie, přímo ponouká k okamžité akci.<br/>
+    <b style="color:#A82A5F">3.</b> 9 nástrojů direct mktu — email / SMS / telemarketing / direct mail / katalogy / retargeting / teleshopping / chatboty / push.<br/>
+    <b style="color:#A82A5F">4.</b> ⚠️ <b>4 dimenze organizace direct mktu</b> (Stříteský chytá!) — region / typ zákazníka / zboží / premium.<br/>
+    <b style="color:#A82A5F">5.</b> 6 typů osobního prodeje + 7-krokový sales proces (prospect/approach/needs/present/object/close/follow).<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>SPIN Selling</b> (Neil Rackham 1988) — Situation/Problem/Implication/Need-payoff. Standard v B2B.<br/>
+    <b style="color:#A82A5F">7.</b> Další sales metodiky — Consultative / Challenger / Solution / Sandler / MEDDIC.<br/>
+    <b style="color:#A82A5F">8.</b> ⚠️ <b>Sales Force Management 6 fází Kotler</b> (Svobodová, Mikovcová chytají!) — cíle/strategie/struktura/velikost/kompenzace/lifecycle.<br/>
+    <b style="color:#A82A5F">9.</b> 4 struktury prodejní síly — územní / produktová / zákaznická / matrix.<br/>
+    <b style="color:#A82A5F">10.</b> Kompenzace + KPIs — plat + provize + bonus / quota / win rate / CAC / CLV / pipeline coverage.<br/>
+    <b style="color:#A82A5F">11.</b> ⚠️ <b>CRM + B2B mkt</b> (Stříteský chytá!) — 3 dimenze CRM + B2B specifika + relationship mkt.<br/>
+    <b style="color:#A82A5F">12.</b> Trendy — ABM, AI sales, video selling, intent data, LinkedIn Sales Navigator.<br/>
+    <b style="color:#A82A5F">13.</b> Aplikace na PS — sales struktura + CRM + ABM + kompenzace + KPIs.
+  `;
+
+  const caseStudyMkt15 = {
+    title: "Filip — Sales Director v Krones CZ, českém B2B dodavateli HR softwaru pro enterprise (98 mil. Kč, 45 zaměstnanců)",
+    subtitle: "Restrukturalizovat sales tým pro enterprise expanze do Polska a Slovenska",
+    scenario: "Filip (42 let) vede sales tým v Krones CZ 4 roky. Firma je český B2B SaaS dodavatel HR software (mzdy, docházka, performance management) — 280 enterprise klientů v ČR, obrat 98 mil. Kč, růst 18 % YoY. CEO Marek právě oznámil, že firma získala investici 80 mil. Kč na expansi do Polska a Slovenska — Filip má za úkol postavit sales tým pro tyto trhy a restructurovat český tým, který je teď nestrukturovaný.\n\nAktuální stav českého sales týmu: 12 sales reps, organizovaní geograficky (Praha 5, Brno 3, Ostrava 2, Plzeň 1, Hradec 1). Všichni prodávají všechny produkty (mzdy, docházka, performance), všechny segmenty (SMB 50-200 employees i Enterprise 1000+). Win rate 22 % (B2B benchmark 20-30 %), průměrný deal size 380k Kč/rok, ale enterprise deals (1M+) má jen 8 % konverzi. CRM používají Pipedrive, ale data nepravidelně updatovaná. Kompenzace: 100 % plat fixní 50-80k/měsíc, bez provize — Filip ví, že to demotivuje top performery.\n\nKonkurence v ČR: ATTIS Software (lídr, 35 % share), AGEMA (15 %), Vema (10 %), pak menší. Krones drží 8 %, ale rychle rostou. Pro Polsko/Slovensko cílovka 2000+ enterprise firem (500+ employees), ale konkurence (SAP SuccessFactors, Workday) je silnější — vyžaduje sofistikovaný sales přístup. Marek očekává 50 mil. Kč new revenue z Polsko/Slovensko v prvním roce.\n\nFilip má 6 měsíců na restrukturalizaci + nábor 8 nových sales reps (4 pro Polsko, 4 pro Slovensko). Tři otázky si zapsal: Jak strukturovat sales tým pro multi-country + multi-segment + multi-product? Jaký kompenzační model nasadit, aby motivoval top performery? A jak zajistit, že enterprise deals (>1M Kč/rok) mají vyšší win rate než 8 %?",
+    signals: [
+      { text: "12 sales reps, organizovaní geograficky", color: VSE.warning, reason: "Aktuální <b>územní struktura</b> (M15 — geographic). Funguje pro homogenní portfolio, ale Krones má 3 produkty + 2 segmenty = příliš komplexní pro pure územní." },
+      { text: "Všichni prodávají všechny produkty (mzdy, docházka, performance), všechny segmenty", color: VSE.danger, reason: "Klasický problém — <b>jacks of all trades, masters of none</b>. Bez specializace nemá nikdo deep expertise. Enterprise sales potřebuje hluboké pochopení produktu + zákaznického segmentu." },
+      { text: "Win rate 22 %, ale enterprise deals (1M+) má jen 8 % konverzi", color: VSE.danger, reason: "Silný signál pro <b>vertical/segment specializaci</b>. Enterprise vyžaduje SPIN selling + MEDDIC + multi-stakeholder management. Generic sales rep nedokáže." },
+      { text: "Kompenzace: 100 % plat fixní 50-80k/měsíc, bez provize", color: VSE.danger, reason: "<b>Demotivační model</b> pro top performers. B2B standard: 60-70 % plat + 30-40 % provize. Top sales může generovat 5-10× value, ale dostane stejnou kompenzaci jako průměrný." },
+      { text: "CRM používají Pipedrive, ale data nepravidelně updatovaná", color: VSE.warning, reason: "<b>CRM hygiene problém</b> (Stříteský chytá CRM!). Bez čistých dat nelze měřit pipeline, win rate, forecasting. Klíčová investice pro Filipa." },
+      { text: "expanze do Polska a Slovenska", color: VSE.fph, reason: "Multi-country expansion vyžaduje <b>matrix strukturu</b> (region × segment × produkt). Salesforce model. Nelze pokračovat s pure územní strukturou." },
+      { text: "konkurence (SAP SuccessFactors, Workday) je silnější — vyžaduje sofistikovaný sales přístup", color: VSE.warning, reason: "Proti enterprise behemothům Krones potřebuje <b>ABM (Account-Based Marketing)</b> — koncentrovat zdroje na 50-100 top enterprise klientů s personalizovaným přístupem." },
+      { text: "Marek očekává 50 mil. Kč new revenue z Polsko/Slovensko v prvním roce", color: VSE.danger, reason: "Agresivní revenue target = 50 mil. / 8 sales reps = 6,25 mil. Kč/rep/rok. Při 380k průměrném dealu = 16 deals/rep ročně. Realistické jen s <b>správnou strukturou + kompenzací</b>." },
+      { text: "nábor 8 nových sales reps (4 pro Polsko, 4 pro Slovensko)", color: VSE.warning, reason: "Nábor + onboarding zabere 6+ měsíců na productivity. Filipovi nutné <b>strukturovaný onboarding program</b> + sales training (SPIN, produktové znalosti)." },
+    ],
+    quiz1: {
+      question: "Jaký je hlavní strukturální problém Filipova sales týmu?",
+      options: [
+        "Příliš málo lidí",
+        "Špatná lokace",
+        "Generic struktura — všichni prodávají všechny produkty všem segmentům, chybí specializace pro enterprise deals (kde win rate je jen 8 %)",
+        "Špatné CRM",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Jak by Filip měl restructurovat sales tým + nastavit kompenzaci?",
+      options: [
+        { text: "Matrix struktura: Region (ČR/PL/SK) × Segment (SMB/Enterprise) × Product (HR core/payroll/performance). Pro 20 reps total = 4 reps per segment kombinaci.", correct: true, reason: "✓ Salesforce matrix model. Pro multi-country + multi-product nezbytné. Specializace zvyšuje win rate (zejména enterprise)." },
+        { text: "Vytvořit dedikovaný Enterprise Account Executive (EAE) tým — 4 EAE specializovaní jen na deals 1M+ Kč. Jiný kompenzační model než SMB sales.", correct: true, reason: "✓ Enterprise vyžaduje specifický skill set (SPIN, MEDDIC, multi-stakeholder). Dedikované AE zvedne win rate z 8 % na 25-30 % (benchmark)." },
+        { text: "Kompenzace: SMB sales 60 % plat + 30 % provize + 10 % bonus. Enterprise AE 50 % plat + 35 % provize + 15 % bonus. Quota multipliers (2× provize na overachievement).", correct: true, reason: "✓ B2B standard 60-70 % plat. Quota multipliers motivují top 30 % performers. Salesforce model." },
+        { text: "Implementovat ABM (Account-Based Marketing) pro top 100 enterprise accounts (50 ČR + 30 PL + 20 SK). Marketing + sales spolupracují per account.", correct: true, reason: "✓ ABM 3-5× vyšší win rate než inbound. Pro enterprise targeting konkrétních firem nezbytné. Stříteský chytá!" },
+        { text: "SPIN Selling training pro celý sales tým (2-week intensive). Plus MEDDIC framework pro enterprise AE. CRM hygiene rules (weekly updates, deal stage discipline).", correct: true, reason: "✓ SPIN je B2B standard. MEDDIC pro enterprise qualifikaci. CRM data klíčové pro forecasting + management." },
+        { text: "Nábor 8 nových reps — 4 pro Polsko (Warszawa lokace) + 4 pro Slovensko (Bratislava). Lokální native speakers + B2B SaaS zkušenost (5+ let).", correct: true, reason: "✓ Lokální sales reps essential pro relationship-driven B2B. Lokalizace produktu + komunikace." },
+        { text: "Customer Success team (3 lidi) pro post-sales — onboarding, renewals, upsell. Klíčové pro retention v SaaS (mezi sales a support).", correct: true, reason: "✓ SaaS standard. CSM zvedá CLV o 30-50 % přes upsell + retention. Cross-sell mezi 3 produkty (HR core/payroll/performance)." },
+        { text: "Pokračovat s územní strukturou + 100 % fixním platem", correct: false, reason: "✗ Územní struktura nefunguje pro multi-country + multi-product. 100 % plat demotivuje top performers — top quartile generuje 50 % revenue." },
+        { text: "Outsourcovat sales agentuře pro Polsko + Slovensko", correct: false, reason: "✗ B2B SaaS vyžaduje deep product knowledge + long-term relationships. Outsourced sales nemůže poskytnout. In-house jediná cesta." },
+      ],
+    },
+    summary: "<b>Filip potřebuje matrix sales strukturu + dedikované enterprise AE + ABM strategie + kompenzace s provizí + SPIN/MEDDIC training.</b><br/><br/><b>6-měsíční restrukturalizační plán:</b><br/><br/>• <b>Měsíc 1-2 (Struktura):</b> Matrix model: Region (ČR/PL/SK) × Segment (SMB/Enterprise) × Product. Vytvořit dedikovaný Enterprise team (4 EAE pro deals 1M+ Kč). Approval CEO Marek + board.<br/><br/>• <b>Měsíc 2-3 (Nábor):</b> 8 nových sales reps — 4 Polsko (Warszawa) + 4 Slovensko (Bratislava). Lokální B2B SaaS background, 5+ let zkušeností. Plus 2-3 CSM (Customer Success Managers) pro retention.<br/><br/>• <b>Měsíc 3-4 (Kompenzace):</b> Restructure: SMB sales 60/30/10 (plat/provize/bonus), Enterprise AE 50/35/15. Quota multipliers (2× provize na overachievement). President's Club pro top 10 % performers.<br/><br/>• <b>Měsíc 4-5 (Training):</b> SPIN Selling intensive 2-week training pro celý tým. MEDDIC framework pro enterprise AE. CRM hygiene rules (weekly updates, deal stage discipline). Sales playbook s case studies.<br/><br/>• <b>Měsíc 5-6 (ABM):</b> Implementace ABM pro top 100 enterprise accounts. Marketing + sales joint planning per account. LinkedIn Sales Navigator + Bombora intent data. Personalized content per account.<br/><br/>• <b>Měření (KPIs):</b> Quota attainment, win rate (target enterprise 25 %+, SMB 30 %+), CAC payback 18-24 měsíců, CLV/CAC 3:1+, pipeline coverage 4× quota, customer NPS.<br/><br/><b>Pro komisi:</b> Klasický B2B SaaS sales restructure pro multi-country expansion. <b>Salesforce (matrix struktura + ABM)</b>, <b>HubSpot (inbound + outbound hybrid)</b>, <b>SAP (enterprise vertical sales)</b> jako benchmark. <b>4 dimenze organizace direct mktu (Stříteský!)</b> + <b>SFM 6 fází Kotler (Svobodová/Mikovcová!)</b> + <b>SPIN selling + MEDDIC</b> + <b>CRM + ABM + B2B specifika (Stříteský!)</b>. Anti-vzor: generic geographic structure + 100 % fixní plat = demotivace top performers + slabý enterprise win rate. Vzor: <b>matrix struktura + dedikované enterprise team + variabilní kompenzace + ABM + sophisticated training</b>.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Marketing" subjectId="marketing" number={15} title="Osobní komunikace — Direct mkt + Osobní prodej + SFM"
+      subtitle="Odlišení osobní/direct + organizace + 7-step sales + SPIN + Sales Force Management + CRM + ABM"
+      color={VSE.fis}
+      questionText="Osobní marketingová komunikace — direct marketing, osobní prodej, řízení prodejních sil."
+      questionDesc="Odlišení osobního a direct mktu (Stříteský — direct přímo ponouká k akci). 9 nástrojů direct mktu (email/SMS/telemarketing/direct mail/katalogy/retargeting/teleshopping/chatboty/push). 4 dimenze organizace direct mktu (region/zákazník/zboží/premium). 6 typů osobního prodeje. 7-krokový sales proces. SPIN Selling (Rackham 1988). Consultative/Challenger/Solution/Sandler/MEDDIC frameworks. Sales Force Management 6 fází Kotler + 4 struktury + kompenzace + KPIs. CRM (3 dimenze) + B2B specifika + relationship mkt. Trendy: ABM, AI sales, video selling, intent data. Salesforce, Mailchimp, ESET, IBM, Demandbase, Loom."
+      sloz={3} roz={4} freq={5}
+      examStrategy={examStrategyMkt15}
+      studySections={studySectionsMkt15}
+      flashcards={flashcardsMkt15}
+      quiz={quizMkt15}
+      praxe={praxeMkt15}
+      examQuestions={examQuestionsMkt15}
+      podcast={podcastMkt15}
+      caseStudy={caseStudyMkt15}
+    />
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function OkruhyTab({ navTarget, clearNavTarget }) {
@@ -14079,10 +22283,10 @@ function Dashboard({ onSelectOkruh }) {
   }[streak.status] || "";
 
   return (
-    <div style={{ flex: 1, overflowY: "auto", height: "calc(100vh - 105px)", padding: "40px 32px 60px", background: t.bg }}>
+    <div data-dashboard-container style={{ flex: 1, overflowY: "auto", height: "calc(100vh - 105px)", padding: "40px 32px 60px", background: t.bg }}>
       <div style={{ maxWidth: 1120, margin: "0 auto" }}>
         {/* Hero — Bombík + welcome */}
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32, marginBottom: 36, flexWrap: "wrap" }}>
+        <div data-dashboard-hero style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 32, marginBottom: 36, flexWrap: "wrap" }}>
           <div style={{ flex: "1 1 480px", minWidth: 0 }}>
             <div style={{ fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 600, letterSpacing: "1.6px", textTransform: "uppercase", marginBottom: 12 }}>Nabombuj státnice</div>
             <h1 style={{ margin: "0 0 10px", fontSize: 56, fontWeight: 600, fontFamily: fontSans, color: t.text, letterSpacing: "-0.03em", lineHeight: 1.02, textWrap: "balance" }}>
@@ -14098,7 +22302,7 @@ function Dashboard({ onSelectOkruh }) {
         </div>
 
         {/* Top row: Streak + Quiz + Cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr", gap: 12, marginBottom: 24 }}>
+        <div data-dashboard-stats style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr", gap: 12, marginBottom: 24 }}>
           <div style={{ ...cardStyle(t), padding: 24 }}>
             <div style={{ fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 600, letterSpacing: "1.6px", textTransform: "uppercase", marginBottom: 12 }}>Streak</div>
             <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 8 }}>
@@ -14135,7 +22339,7 @@ function Dashboard({ onSelectOkruh }) {
         {/* Předměty progress */}
         <div style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 22, fontWeight: 600, color: t.text, fontFamily: fontSans, marginBottom: 14, letterSpacing: "-0.02em" }}>Pokrok per předmět</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 10 }}>
+          <div data-dashboard-subjects style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 10 }}>
             {progressBySubject.map(subj => (
               <div key={subj.id} onClick={() => onSelectOkruh && onSelectOkruh(subj.id, null)} style={{
                 ...cardStyle(t), padding: 18, cursor: "pointer", transition: "all 0.15s",
@@ -14338,7 +22542,7 @@ function StreakModal({ open, onClose }) {
   const mood = s.status === "today" ? "happy" : s.status === "broken" ? "sad" : "think";
 
   return (
-    <div onClick={onClose} style={{
+    <div onMouseDown={(e) => { if (e.target === e.currentTarget) e.currentTarget.dataset.startedOnBackdrop = "1"; }} onClick={(e) => { if (e.target === e.currentTarget && e.currentTarget.dataset.startedOnBackdrop === "1") onClose(); e.currentTarget.dataset.startedOnBackdrop = ""; }} style={{
       position: "fixed", inset: 0, zIndex: 1000,
       background: "rgba(15, 17, 22, 0.55)",
       display: "flex", alignItems: "center", justifyContent: "center", padding: 20,
@@ -14845,7 +23049,7 @@ function SearchModal({ open, onClose, onNavigate }) {
   ];
 
   return (
-    <div onClick={onClose} style={{
+    <div onMouseDown={(e) => { if (e.target === e.currentTarget) e.currentTarget.dataset.startedOnBackdrop = "1"; }} onClick={(e) => { if (e.target === e.currentTarget && e.currentTarget.dataset.startedOnBackdrop === "1") onClose(); e.currentTarget.dataset.startedOnBackdrop = ""; }} style={{
       position: "fixed", inset: 0, zIndex: 1000,
       background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
       display: "flex", alignItems: "flex-start", justifyContent: "center",
@@ -15005,7 +23209,7 @@ function App() {
       <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
       <style>{`
         /* MOBILE RESPONSIVE */
-        @media (max-width: 720px) {
+        @media (max-width: 900px) {
           /* Top nav padding scale-down */
           [data-skool-nav] { padding-left: 14px !important; padding-right: 14px !important; flex-wrap: wrap; gap: 8px; }
           /* Skool layout: stack sidebar over content */
@@ -15014,15 +23218,28 @@ function App() {
             height: auto !important;
             min-height: calc(100vh - 105px);
           }
-          /* Sidebar -> nahoře, collapsovatelná */
+          /* Sidebar -> nahoře, větší výška + sticky předmět selector */
           [data-skool-sidebar] {
             width: 100% !important;
             max-width: 100% !important;
             border-right: none !important;
-            border-bottom: 1px solid var(--border) !important;
-            max-height: 35vh !important;
+            border-bottom: 2px solid var(--border) !important;
+            max-height: 60vh !important;
+            min-height: 320px !important;
             overflow-y: auto !important;
           }
+          /* Dashboard layout mobile fixes */
+          [data-dashboard-stats] { grid-template-columns: 1fr !important; gap: 10px !important; }
+          [data-dashboard-stats] > div { padding: 18px !important; }
+          [data-dashboard-stats] > div > div:nth-child(2) {
+            font-size: 44px !important;
+          }
+          [data-dashboard-hero] { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; margin-bottom: 24px !important; }
+          [data-dashboard-hero] h1 { font-size: 40px !important; }
+          [data-dashboard-hero] [data-bombik-img] { align-self: center; }
+          [data-dashboard-subjects] { grid-template-columns: 1fr !important; }
+          /* Dashboard container padding aligned with edges */
+          [data-dashboard-container] { padding-left: 16px !important; padding-right: 16px !important; padding-top: 24px !important; padding-bottom: 32px !important; }
           /* Content -> roztáhnout */
           [data-okruh-content], [data-skool-content] {
             width: 100% !important;
