@@ -455,9 +455,9 @@ const SUBJECTS = [
   {
     id: "logistika", name: "Logistika", color: BOMBIK.success, icon: "truck",
     okruhy: [
-      { n: 1, title: "Distribuce, distribuční kanály, log. řetězce u výrobních a obchodních podniků", status: "done", difficulty: 2 },
-      { n: 2, title: "Marketing služeb, řízení kvality a role distribuce služeb v logistice (outsourcing)", status: "done", difficulty: 2 },
-      { n: 3, title: "MIS a pohyb informací v logistice (zdroje, složky), logistický systém", status: "done", difficulty: 2 },
+      { n: 1, title: "Distribuce, distribuční kanály, strategie a Incoterms", status: "done", difficulty: 2 },
+      { n: 2, title: "SCM, materiálové strategie a řízení zásob (JIT, KANBAN, cross-docking)", status: "done", difficulty: 3 },
+      { n: 3, title: "Logistický řetězec, nákup a informační systémy (ERP, WMS, TMS, MIS)", status: "done", difficulty: 3 },
     ],
   },
   {
@@ -472,17 +472,17 @@ const SUBJECTS = [
       { n: 7, title: "Proces strategie + Mintzberg 5P + Plánování × Emergence", status: "done", difficulty: 3 },
       { n: 8, title: "Strategická změna — Evoluce × Revoluce", status: "done", difficulty: 2 },
       { n: 9, title: "Strategie inovací — Exploate × Explore + modrý oceán", status: "done", difficulty: 2 },
-      { n: 10, title: "Kontextový rozměr + Globální × Lokální", status: "todo", difficulty: 3 },
+      { n: 10, title: "Kontextový rozměr + Globální × Lokální", status: "done", difficulty: 3 },
     ],
   },
   {
     id: "roz", name: "Manažerské rozhodování", color: VSE.fm, icon: "compass",
     okruhy: [
-      { n: 1, title: "Rozhodovací problém, Kepner-Tregoe", status: "todo", difficulty: 3 },
-      { n: 2, title: "Cíle, stakeholdery, kritéria, varianty", status: "todo", difficulty: 2 },
-      { n: 3, title: "Rizika, závažnost, opatření, MEAT", status: "todo", difficulty: 3 },
-      { n: 4, title: "Metody rozhodování (Monte Carlo, strom, scénáře)", status: "todo", difficulty: 3 },
-      { n: 5, title: "Postaudit, vyhodnocení rozhodnutí", status: "todo", difficulty: 2 },
+      { n: 1, title: "Rozhodovací problém, Kepner-Tregoe", status: "done", difficulty: 3 },
+      { n: 2, title: "Cíle, stakeholdery, kritéria, varianty", status: "done", difficulty: 2 },
+      { n: 3, title: "Rizika, závažnost, opatření, MEAT", status: "done", difficulty: 3 },
+      { n: 4, title: "Metody rozhodování (Monte Carlo, strom, scénáře)", status: "done", difficulty: 3 },
+      { n: 5, title: "Postaudit, vyhodnocení rozhodnutí", status: "done", difficulty: 2 },
     ],
   },
   {
@@ -2045,7 +2045,6 @@ function OkruhMng1Panel() {
     <OkruhPanel
       subject="Management" subjectId="mng" number={1} title="Současné přístupy k managementu" subtitle="BM × MM / Birkinshaw / BMC vs LC / Inovace mng" color={VSE.ffu}
       questionText="Současné přístupy k managementu, business model a management model, inovace managementu."
-      questionDesc="Definuj management, fáze vývoje, Birkinshaw 4 dimenze. Rozliš BM vs MM. BMC vs Lean Canvas. Gassmann. Pyramida inovací mng."
       sloz={2} roz={3} freq={2}
       examStrategy={examStrategy1}
       studySections={studySections1}
@@ -2426,7 +2425,6 @@ function OkruhMng2Panel() {
     <OkruhPanel
       subject="Management" subjectId="mng" number={2} title="Výzvy 21. století" subtitle="Paradigmata / Birkinshaw / Průmysl 4.0 / CSR vs CSV" color={VSE.ffu}
       questionText="Výzvy 21. století, porovnat tradiční a postmoderní paradigmata. Aplikovat na případovku."
-      questionDesc="Co je paradigma. Najít výzvy 21. století v PS. Identifikovat paradigma v PS. Říct výhody a nevýhody. Průmysl 4.0. CSR vs CSV."
       sloz={2} roz={3} freq={2}
       examStrategy={examStrategy2}
       studySections={studySections2}
@@ -2820,7 +2818,6 @@ function OkruhMng5Panel() {
 
   return (<OkruhPanel subject="Management" subjectId="mng" number={5} title="Plánování" subtitle="Alignment × Obliquity / 4 modely (Planning, Discovery, Science, Quest)" color={VSE.ffu}
     questionText="Plánování (alignment × obliquity) — principy, limity, aplikace na případovku a doporučit zlepšení."
-    questionDesc="Popiš oba póly. Vysvětli nástroje (MBO vs OKR). 4 modely Birkinshaw matice. Identifikuj v PS a navrhni změnu."
     sloz={2} roz={2} freq={2}
     examStrategy={examStrategy5}
     studySections={studySections5} flashcards={flashcards5} quiz={quiz5}
@@ -3205,7 +3202,6 @@ function OkruhMng6Panel() {
 
   return (<OkruhPanel subject="Management" subjectId="mng" number={6} title="Modely a systémy řízení" subtitle="Měkké × tvrdé prvky / 7S McKinsey / CSF" color={VSE.ffu}
     questionText="Modely a systémy řízení (management model), tvrdé a měkké prvky."
-    questionDesc="4 modely řízení (Taylor→humanismus). Tvrdé vs měkké prvky prosperity. 7S McKinsey. CSF. Aplikuj na PS — co funguje, co ne."
     sloz={3} roz={3} freq={3}
     examStrategy={examStrategy6}
     studySections={studySections6} flashcards={flashcards6} quiz={quiz6}
@@ -3891,7 +3887,6 @@ function OkruhMng7Panel() {
 
   return (<OkruhPanel subject="Management" subjectId="mng" number={7} title="Performance Management" subtitle="KPI / BSC / MBO / Six Sigma / Check-in vs Check-out" color={VSE.ffu}
     questionText="Performance Management, jeho nástroje + aplikovat na případovku, co dělají špatně, co dobře."
-    questionDesc="Definuj PM. Check-out vs Check-in. Nástroje (KPI, BSC, MBO, Six Sigma, ERP). Na PS identifikuj nástroje, navrhni doplnění."
     sloz={2} roz={3} freq={3}
     examStrategy={examStrategy7}
     studySections={studySections7} flashcards={flashcards7} quiz={quiz7}
@@ -4641,7 +4636,6 @@ function OkruhMng8Panel() {
 
   return (<OkruhPanel subject="Management" subjectId="mng" number={8} title="Change Management" subtitle="Kotter / Lewin / Teorie U / Program vs Platform" color={VSE.ffu}
     questionText="Change management, modely, rozdíly, bariéry, metody a postupy, proč to potřebujeme."
-    questionDesc="Proč change management. 3 modely (Lewin, Kotter, Teorie U) + rozdíly. Change Program vs Change Platform. Bariéry (3 odpory + 4 lock-in). Aplikace na PS."
     sloz={3} roz={3} freq={3}
     examStrategy={examStrategy8}
     studySections={studySections8} flashcards={flashcards8} quiz={quiz8}
@@ -5412,7 +5406,6 @@ function OkruhMng9Panel() {
 
   return (<OkruhPanel subject="Management" subjectId="mng" number={9} title="Trendy v managementu + Birkinshaw modely" subtitle="4 modely / MEANS × ENDS / Inovace managementu = KV" color={VSE.ffu}
     questionText="Trendy v managementu, management modely (Birkinshaw), vztáhnout na případovku, inovace managementu, proč přinášejí KV."
-    questionDesc="4 základní otázky Birkinshaw. 4 modely (Planning/Discovery/Science/Quest) na matici MEANS × ENDS. Moderní trendy. Proč inovace managementu dává silnější KV než produktová. Aplikace na PS."
     sloz={3} roz={3} freq={3}
     examStrategy={examStrategy9}
     studySections={studySections9} flashcards={flashcards9} quiz={quiz9}
@@ -6029,7 +6022,6 @@ function OkruhMng10Panel() {
 
   return (<OkruhPanel subject="Management" subjectId="mng" number={10} title="Globální × Lokální řízení firmy" subtitle="Globalizace / Lokalizace / Glokalizace + 4 strategie" color={VSE.ffu}
     questionText="Globální a lokální řízení firmy."
-    questionDesc="3 pojmy (globalizace, lokalizace, glokalizace). 4 strategie (Global/Transnational/International/Multinational). Paradox + řešení přes glokalizaci. 5 hnacích sil internacionalizace. Aplikace na PS."
     sloz={2} roz={3} freq={3}
     examStrategy={examStrategy10}
     studySections={studySections10} flashcards={flashcards10} quiz={quiz10}
@@ -6718,7 +6710,7 @@ const flashcards11 = [
   { term: "Eco-effectiveness", def: "Dělat správné věci. Cradle-to-cradle, regenerativní ekonomický růst.", tag: "UDRŽITELNOST" },
   { term: "Kulturní absolutismus", def: "Existují univerzální etické principy (lidská práva). Riziko: vnucování západních hodnot.", tag: "KULTURA" },
   { term: "Kulturní relativismus", def: "Etika závisí na kultuře a kontextu. Riziko: ospravedlnění čehokoli kulturou.", tag: "KULTURA" },
-  { term: "Hofstede 5 dimenzí", def: "Maskulinita/Femininita · Individualismus/Kolektivismus · Vztah k nejistotě · Vzdálenost od moci · Dlouhodobost.", tag: "KULTURA" },
+  { term: "Hofstede 6 dimenzí", def: "Vzdálenost moci (PDI) · Individualismus/Kolektivismus (IDV) · Maskulinita/Femininita (MAS) · Vztah k nejistotě (UAI) · Dlouhodobá orientace (LTO) · Požitkářství/Zdrženlivost (IND, přidána 2010).", tag: "KULTURA" },
   { term: "Nemorální × Amorální × Morální", def: "3 kategorie manažerů: Schválně špatně / Nezvažuje etiku / Etika je cíl.", tag: "TYPY" },
 ];
 
@@ -6734,7 +6726,7 @@ const quiz11 = [
   { q: "Eco-effectiveness znamená:", opts: ["Dělat víc s méně", "Dělat správné věci (cradle-to-cradle)", "Šetřit peníze", "Marketing udržitelnosti"], correct: 1 },
   { q: "Která firma je extrémním idealistou?", opts: ["Apple", "Tesla", "Patagonia", "Coca-Cola"], correct: 2 },
   { q: "VW Dieselgate je příklad:", opts: ["Eco-efficiency", "Idealismu", "Nemorálního managementu", "Reformismu"], correct: 2 },
-  { q: "Hofstede 5 dimenzí NEZAHRNUJE:", opts: ["Maskulinita/Femininita", "Individualismus/Kolektivismus", "Vzdálenost od moci", "Tržní orientace"], correct: 3 },
+  { q: "Hofstede 6 dimenzí NEZAHRNUJE:", opts: ["Maskulinita/Femininita", "Individualismus/Kolektivismus", "Vzdálenost od moci", "Tržní orientace"], correct: 3 },
   { q: "V mezinárodní firmě je nejlepší kombinace:", opts: ["Pouze absolutismus", "Pouze relativismus", "Univerzální základ + lokální přizpůsobení", "Jen lokální zákony"], correct: 2 },
   { q: "Friedman (1970) tvrdil, že:", opts: ["Firma má odpovědnost vůči všem stakeholderům", "Jediná odpovědnost firmy je zisk akcionářů", "CSR je důležitější než zisk", "ESG je povinné"], correct: 1 },
   { q: "Která etapa je nejnovější v evoluci CSR?", opts: ["Friedman shareholder", "CSR (filantropie)", "CSV (sdílená hodnota)", "ESG (měřitelný dopad)"], correct: 3 },
@@ -6836,7 +6828,6 @@ function OkruhMng11Panel() {
 
   return (<OkruhPanel subject="Management" subjectId="mng" number={11} title="Etika v managementu, CSR/ESG" subtitle="3P · Carrollova pyramida · Friedman × Freeman · Hofstede" color={VSE.ffu}
     questionText="Etika v managementu, proč se tím zabývat. Morální dilemata na případovku, jak je řešit. Udržitelný management. ESG. Kulturní absolutismus a relativismus."
-    questionDesc="Etika a etické dilema. 4 typy manažerů. 3P / Triple Bottom Line. Carrollova pyramida. Friedman × Freeman. Evoluce CSR → CSV → ESG. Udržitelnost. Kulturní rozdíly. Aplikace na PS."
     sloz={2} roz={3} freq={3}
     examStrategy={examStrategy11}
     studySections={studySections11} flashcards={flashcards11} quiz={quiz11}
@@ -7145,6 +7136,12 @@ function OkruhContent({ subjectId, okruhN }) {
   if (subjectId === "str" && okruhN === 7) return <OkruhStr7Panel />;
   if (subjectId === "str" && okruhN === 8) return <OkruhStr8Panel />;
   if (subjectId === "str" && okruhN === 9) return <OkruhStr9Panel />;
+  if (subjectId === "str" && okruhN === 10) return <OkruhStr10Panel />;
+  if (subjectId === "roz" && okruhN === 1) return <OkruhRoz1Panel />;
+  if (subjectId === "roz" && okruhN === 2) return <OkruhRoz2Panel />;
+  if (subjectId === "roz" && okruhN === 3) return <OkruhRoz3Panel />;
+  if (subjectId === "roz" && okruhN === 4) return <OkruhRoz4Panel />;
+  if (subjectId === "roz" && okruhN === 5) return <OkruhRoz5Panel />;
 
   return null;
 }
@@ -7714,7 +7711,7 @@ function PodcastTab({ data, color }) {
   );
 }
 
-function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questionText, questionDesc, sloz, roz, freq, studySections, flashcards, quiz, checklist, praxe, examQuestions, podcast, examStrategy, caseStudy }) {
+function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questionText, sloz, roz, freq, studySections, flashcards, quiz, checklist, praxe, examQuestions, podcast, examStrategy, caseStudy }) {
   const t = useTheme();
   const [tab, setTab] = useState("study");
   const [open, setOpen] = useState(new Set([studySections[0]?.id]));
@@ -7777,7 +7774,6 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
         <div style={{ ...cardStyle(t, "muted"), padding: "16px 20px", marginBottom: 12, marginTop: 18, borderLeft: `3px solid ${t.cta}` }}>
           <div style={{ fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 600, letterSpacing: "1.6px", marginBottom: 6, textTransform: "uppercase" }}>Znění otázky</div>
           <div style={{ fontSize: 15, color: t.text, fontFamily: fontSans, lineHeight: 1.55, fontWeight: 500, textWrap: "pretty" }}>{questionText}</div>
-          {questionDesc && <div style={{ fontSize: 14.5, color: t.textMuted, fontFamily: fontSans, marginTop: 8, lineHeight: 1.55, textWrap: "pretty" }}>{questionDesc}</div>}
         </div>
 
         <Difficulty sloz={sloz} roz={roz} freq={freq} />
@@ -7900,7 +7896,6 @@ function OkruhMng3Panel() {
     <OkruhPanel
       subject="Management" subjectId="mng" number={3} title="Koordinace aktivit" subtitle="Byrokracie x Emergence / Hybridní modely" color={VSE.ffu}
       questionText="Koordinování (byrokracie × emergence)"
-      questionDesc="Popiš přístupy ke koordinaci aktivit. Vysvětli byrokracii a emergenci. Uveď hybridní modely. Aplikuj na případovku."
       sloz={2} roz={3} freq={2}
       examStrategy={examStrategy3}
       studySections={studySections3}
@@ -8010,7 +8005,6 @@ function OkruhMng4Panel() {
     <OkruhPanel
       subject="Management" subjectId="mng" number={4} title="Rozhodování + distribuce moci" subtitle="Hierarchie x Collective Wisdom / French-Raven / Org. struktury" color={VSE.ffu}
       questionText="Rozhodování (Hierarchie × collective wisdom) a distribuce moci"
-      questionDesc="Popiš oba přístupy. Vysvětli zdroje moci (Weber, French-Raven). Moderní org. struktury. Identifikuj v PS, doporuč modernější variantu."
       sloz={3} roz={3} freq={3}
       examStrategy={examStrategy4}
       studySections={studySections4}
@@ -8378,7 +8372,7 @@ function OkruhLead1Panel() {
       { company: "Steve Jobs (Apple)", tag: "CHARISMATICKÝ", color: VSE.warning, content: "<b>Charismatický leadership v plné síle.</b> Vize iPhonu, iPadu — produkty, které si lidé nepředstavovali. Ale temná stránka: toxic culture, vyhazoval lidi na schodech, šikanoval inženýry. Klasický příklad <b>zneužitelnosti charismatu</b>. Po jeho smrti převzal firmu Tim Cook, který do roku 2025 implementoval kombinaci servant + operational excellence stylu (Cook odstoupil 2026, je to historický příklad)." },
       { company: "Tomáš Baťa (česká klasika)", tag: "TRANSFORMAČNÍ", color: VSE.success, content: "Předchůdce moderního transformačního leadershipu. <b>Idealizovaný vliv</b> — sám pracoval ve fabrice. <b>Inspirativní motivování</b> — Baťovo motto „<i>Naším zákazníkům</i>”. <b>Intelektuální stimulace</b> — zaváděl montážní linky a pásovou výrobu (inovace 1920s). <b>Individualizované uznání</b> — Baťovy domky pro zaměstnance, vzdělávání. Zlín se stal globální centrum obuvnictví." },
       { company: "Patagonia / Yvon Chouinard", tag: "SERVANT", color: VSE.success, content: "Klasický <b>servant leadership</b>. Chouinard v 2022 daroval celou firmu (cca $3 mld) ekologickému trustu. Politika „<i>let my people go surfing</i>” — flexibilní pracovní doba. Záruka oprav produktů na celý život. <b>Lídr, který slouží planetě a zaměstnancům, ne akcionářům.</b>" },
-      { company: "Andrej Babiš (Agrofert)", tag: "AUTORITÁŘSKÝ 9.1", color: VSE.danger, content: "Příklad <b>autoritářského stylu 9.1</b> a <b>oportunistického stylu</b>. Vysoký zájem o úkoly (efektivita, čísla), nízký o lidi. Vysoká fluktuace top managementu — Babiš je častý zdroj konfliktů. Adaptuje styl podle situace (před volbami populista, ve firmě tvrdý šéf). Krátkodobě úspěšné (růst Agrofertu), dlouhodobě riziko (závislost na jednom člověku)." }
+      { company: "Travis Kalanick (Uber)", tag: "AUTORITÁŘSKÝ 9.1", color: VSE.danger, content: "Příklad <b>autoritářského stylu 9.1</b>. Vysoký zájem o úkoly (růst za každou cenu, agresivní expanze), nízký o lidi (toxická firemní kultura, skandály). Krátkodobě extrémně úspěšné (Uber se stal globálním gigantem), ale styl vedl k odchodu zakladatele — investoři ho v roce 2017 donutili rezignovat kvůli kultuře a sériím skandálů. Ukázka, že čistě úkolový styl bez péče o lidi je dlouhodobě neudržitelný." }
     ]
   };
 
@@ -8473,7 +8467,6 @@ function OkruhLead1Panel() {
     <OkruhPanel
       subject="Leadership" subjectId="lead" number={1} title="Kompetence a rozvoj lídra" subtitle="Teorie rysů / Dovednosti / GRID / Situační / Transformační 4I / Rozvoj" color={VSE.fmv}
       questionText="Kompetence/dovednosti a další vlastnosti a nástroje leadera v případovce, navržení vhodných metod rozvoje lídra dle případovky"
-      questionDesc="Definuj leadership × management. Northouse 5 + Big Five. Model 4 kompetencí (Hogan & Warrenfeltz). GRID 9×9. Situační leadership (Hersey-Blanchard). Transformační 4I. Servant. Rozvoj on/off the job. GROW model. Talent management (9-grid, DDC)."
       sloz={2} roz={3} freq={3}
       examStrategy={examStrategyLead1}
       studySections={studySectionsLead1}
@@ -8981,7 +8974,7 @@ function OkruhLead2Panel() {
     },
     miniExamples: [
       { company: "Tomáš Baťa (česká klasika)", tag: "TRANSFORMAČNÍ 9.9", color: VSE.success, content: "Předchůdce moderního <b>transformačního leadershipu</b> + týmového stylu 9.9. <b>Idealizovaný vliv</b> — sám pracoval ve fabrice. <b>Inspirativní motivování</b> — Baťovo motto „<i>Naším zákazníkům</i>”. <b>Intelektuální stimulace</b> — montážní linky, pásová výroba (1920s). <b>Individualizované uznání</b> — Baťovy domky pro zaměstnance. Vysoký zájem o lidi i úkoly = perfektní 9.9. Zlín se stal globálním centrem obuvnictví." },
-      { company: "Andrej Babiš (Agrofert) — CZ", tag: "AUTORITÁŘSKÝ 9.1 + OPORTUNISTICKÝ", color: VSE.danger, content: "Klasický příklad <b>autoritářského stylu 9.1</b> a <b>oportunistického stylu</b>. Vysoký zájem o úkoly (efektivita, čísla), nízký o lidi. Vysoká fluktuace top managementu — Babiš je častý zdroj konfliktů. <b>Adaptuje styl podle situace</b> (před volbami populista = 1.9, ve firmě tvrdý šéf = 9.1). Krátkodobě úspěšné (růst Agrofertu na největší český holding), dlouhodobě riziko závislosti na jednom člověku." },
+      { company: "Travis Kalanick (Uber)", tag: "AUTORITÁŘSKÝ 9.1 + OPORTUNISTICKÝ", color: VSE.danger, content: "Příklad <b>autoritářského stylu 9.1</b>: vysoký zájem o úkoly, nízký o lidi. Toxická kultura, vysoká fluktuace. Krátkodobě úspěšný růst, ale donucovací styl vedl k vynucenému odchodu zakladatele v roce 2017." },
       { company: "Pavel Maurer (TopGastro) — CZ", tag: "SERVANT", color: VSE.success, content: "Příklad <b>servant leadershipu</b> v česku. Maurer buduje gastronomickou komunitu nad rámec své firmy — Maurer's Grand Restaurant Toplist, podpora mladých kuchařů, mentoring. Slouží <b>celé branži</b>, ne jen sobě. Nízká fluktuace v jeho firmách, dlouhodobá loajalita." },
       { company: "Microsoft — Satya Nadella", tag: "TRANSFORMAČNÍ 4I", color: VSE.success, content: "Přechod ze <b>Steve Ballmera (9.1 autoritář, stack ranking, toxic culture)</b> k Nadelovi (9.9 + transformační 4I). Stock $38 → $400+. Ukazuje, že přechod stylu jde i v ohromné korporaci. Klíč: <b>growth mindset, learn-it-all</b>, ne know-it-all. Empatie + vize + odvaha riskovat (cloud, AI partnership s OpenAI)." },
     ]
@@ -9063,7 +9056,6 @@ function OkruhLead2Panel() {
       subject="Leadership" subjectId="lead" number={2} title="Styly leadershipu" subtitle="Klasická teorie / Likert 4S / GRID / Hersey-Blanchard / Transformační"
       color={VSE.fmv}
       questionText="Leadership a styly vedení. Styly leadershipů. Popsat, jak to je v případovce a navrhnout změny."
-      questionDesc="Vývoj teorií. Klasická teorie 3 stylů. Likert 4S. Leadership GRID 9×9 + 5 stylů + 2 přechodové. Hersey-Blanchard situační. Path-Goal. Transformační 4I. Transakční. Servant. Versatilní leadership. Aplikace na PS + doporučení."
       sloz={2} roz={2} freq={3}
       examStrategy={examStrategyLead2}
       studySections={studySectionsLead2}
@@ -9418,7 +9410,7 @@ function OkruhLead3Panel() {
       { company: "3M (Post-it Notes)", tag: "TOLERANCE NEÚSPĚCHU", color: VSE.success, content: "<b>Post-it Notes</b> vznikly ze <b>selhaného experimentu</b>. Spencer Silver hledal silné lepidlo, vyrobil naopak slabé. 3M ho ale nevyhodila — udržela 6 let v rezervě. Pak ho Art Fry využil pro záložky do zpěvníku. <b>Klíč: 3M netrestal neúspěch.</b> 15% rule (předchůdce Google 20%) dává inženýrům prostor experimentovat. Kreativní klima v praxi." },
       { company: "Avast / Pavel Baudiš (CZ)", tag: "TRANSFORMAČNÍ + INOVACE", color: VSE.success, content: "Český <b>kreativní lídr</b> v IT. Baudiš a Kučera začali jako garážová firma, vyrostli na globálního leadera v cybersecurity (Avast = $9.4B akvizice NortonLifeLock 2021). <b>Kreativní klima</b>: hodně technické svobody, plochá hierarchie, podpora experimentů. Avast inovoval v ML detekci hrozeb dřív než kdokoliv jiný. Inspirace pro české firmy: i v ČR se dá budovat kreativní organizace." },
       { company: "Pixar (Brad Bird, Ed Catmull)", tag: "KREATIVNÍ KLIMA", color: VSE.success, content: "<b>Pixar Animation</b> — knižní příklad kreativní organizace. Catmull popisuje principy v knize „<i>Creativity Inc.</i>”: <b>Braintrust</b> (otevřená kritika nápadů bez hierarchie), <b>tolerance neúspěchu</b> (Toy Story 2 byl katastrofa, restartovali), <b>fyzické prostředí</b> (Steve Jobs designoval kampus tak, aby se lidé potkávali). 27× Oscar = výsledek systému, ne náhody." },
-      { company: "Lázně z Anetiny PS", tag: "PRAKTICKÝ TIP", color: VSE.warning, content: "Příklad ze státnicového testu (Stříteský): „Týpka s bahnem v lázních motivuje, že za <b>kreativní nápad dostane peníze</b>.” To je <b>tipický příklad finančního motivátoru pro kreativitu</b>. Funguje, ale POZOR na paradox vnějších odměn — pro vnitřně motivované to může být kontraproduktivní. Lepší: kombinace finanční bonus + uznání + autonomie." },
+      { company: "Odměna za kreativní nápad", tag: "PRAKTICKÝ TIP", color: VSE.warning, content: "Příklad ze státnicového testu (Stříteský): „Týpka s bahnem v lázních motivuje, že za <b>kreativní nápad dostane peníze</b>.” To je <b>tipický příklad finančního motivátoru pro kreativitu</b>. Funguje, ale POZOR na paradox vnějších odměn — pro vnitřně motivované to může být kontraproduktivní. Lepší: kombinace finanční bonus + uznání + autonomie." },
     ]
   };
 
@@ -9496,7 +9488,6 @@ function OkruhLead3Panel() {
       subject="Leadership" subjectId="lead" number={3} title="Kreativní klima v organizaci" subtitle="Kreativita × inovace / 4 faktory klimatu / Design Thinking / Brainstorming"
       color={VSE.fmv}
       questionText="Kreativní klima v organizaci, kreativní organizace, jaké metody použít pro rozvoj kreativity, aplikovat na případovku."
-      questionDesc="Kreativita × inovace. 3 faktory kreativního potenciálu (Amabile). 4 faktory kreativního klimatu. Bariéry. Manažerské metody (CPS, Design Thinking, Synektika, TRIZ). Metody generování (Brainstorming, Brainwriting, 635, 6 hats, WOIS). Model organizační kreativity. Aplikace + doporučení."
       sloz={2} roz={2} freq={2}
       examStrategy={examStrategyLead3}
       studySections={studySectionsLead3}
@@ -9989,7 +9980,7 @@ function OkruhLead4Panel() {
       { company: "Tomáš Baťa (CZ klasika)", tag: "VŠECHNY ÚROVNĚ MASLOWA", color: VSE.success, content: "Baťa pokryl <b>všech 5 úrovní Maslowovy pyramidy</b>: <b>1.</b> Plat (fyziologické). <b>2.</b> Stálé zaměstnání + Baťovy domky (bezpečí). <b>3.</b> Tým + Zlín jako komunita (sounáležitost). <b>4.</b> Povýšení podle výsledků + interní soutěže (uznání). <b>5.</b> Baťova škola práce + možnost kariéry až na vrchol (sebe-realizace). Klasický <b>holistický motivační systém</b> dlouho před Maslowem." },
       { company: "Avast / Pavel Baudiš (CZ)", tag: "JOB CRAFTING + AUTONOMIE", color: VSE.success, content: "Avast je v ČR příklad <b>moderního motivačního prostředí</b>. Plochá hierarchie, autonomie pro inženýry, <b>Job Crafting</b> — lidi si můžou volit projekty. Avast platí top sazby (hygienické faktory OK), ale skutečně motivátorem je <b>technická excelence + smysl</b> (chrání svět před hackery). Acquire — IPO 2018 + akvizice $9.4B. Bond — silná tech komunita." },
       { company: "Patagonia / Yvon Chouinard", tag: "SMYSL > PENÍZE", color: VSE.success, content: "Patagonia je důkaz, že <b>vnitřní motivace přebije vnější</b>. Politika „<i>let my people go surfing</i>” — flexibilní hodiny. Lidé pracují, protože věří v misi (klimatická změna). 2022: Chouinard daroval celou firmu ($3 mld) ekologickému trustu. <b>Sebedeterminace v praxi</b> — autonomie + smysl + komunita. Fluktuace v Patagonia je extrémně nízká navzdory nižšímu platu než konkurence." },
-      { company: "Andrej Babiš (Agrofert) — CZ", tag: "ANTI-PŘÍKLAD", color: VSE.danger, content: "Babiš ukazuje, jak <b>NEMOTIVOVAT</b>. Striktní kontrolu (X-pohled na zaměstnance), motivace strachem, vysoká fluktuace top managementu. Hygienické faktory OK (dobře zaplatí), ale motivátory chybí — <b>žádný smysl, žádná autonomie, žádné vztahy</b>. Lidé pracují jen pro peníze. Krátkodobě efektivní, dlouhodobě závislé na 1 člověku. <b>Anti-Pixar</b>." },
+      { company: "Amazon — sklady (kritika)", tag: "ANTI-PŘÍKLAD", color: VSE.danger, content: "Amazon byl kritizován za to, jak <b>NEMOTIVOVAT</b> ve skladech: striktní kontrola (sledování každé minuty), tlak na výkon, vysoká fluktuace. Čistě X-pohled na zaměstnance (lidé jako zdroj, ne partner). Krátkodobě efektivní výkon, dlouhodobě problém s retencí a reputací zaměstnavatele." },
     ]
   };
 
@@ -10084,7 +10075,6 @@ function OkruhLead4Panel() {
       subtitle="Maslow / Herzberg / Vroom / Adams / 4 drivers / Sebedeterminace / Stimulace"
       color={VSE.fmv}
       questionText="Teorie motivace, ovlivňování, motivace. Aplikuj na případovku — jaké styly leadershipu zde jsou + jaké teorie motivace znáš."
-      questionDesc="Motivace + 3 složky + vnitřní × vnější. Lewinovy konflikty motivů. Maslowova pyramida. Yerkes-Dodson. Herzberg dvoufaktorová. Vroom očekávání. Adams spravedlnost. McGregor X-Y. Skinner. White kompetence. 4 drivery. Sebedeterminace. SMART cíle. Stimulace × motivace. Job Design × Job Crafting. Aplikace na PS + doporučení."
       sloz={3} roz={3} freq={3}
       examStrategy={examStrategyLead4}
       studySections={studySectionsLead4}
@@ -10465,7 +10455,7 @@ function OkruhLead5Panel() {
     },
     miniExamples: [
       { company: "Tomáš Baťa (CZ klasika)", tag: "EXPERTNÍ + REFERENČNÍ", color: VSE.success, content: "Baťa kombinoval <b>4 z 5 zdrojů</b>. <b>Expertní moc</b> — sám pracoval ve fabrice, znal každý detail výroby. <b>Referenční</b> — Zlín ho zbožňoval, lidé chtěli být jako on. <b>Legitimní</b> — vlastník firmy. <b>Odměňovací</b> — Baťovy domky, podíly na zisku. <b>Donucovací</b> minimalizoval — místo trestu osvěta a vzdělávání. Klasický <b>socializovaný</b> přístup k moci." },
-      { company: "Andrej Babiš (Agrofert)", tag: "LEGITIMNÍ + DONUCOVACÍ", color: VSE.danger, content: "Babiš stojí na <b>2 zdrojích</b>: <b>Legitimní</b> (vlastník) + <b>Donucovací</b> (vysoká fluktuace, strach). Expertní moc menší (deleguje), referenční slabá (lidé ho neberou jako vzor). <b>Personalizovaná moc</b> — pro vlastní prospěch. Krátkodobě efektivní, dlouhodobě riziko." },
+      { company: "Travis Kalanick (Uber)", tag: "LEGITIMNÍ + DONUCOVACÍ", color: VSE.danger, content: "Kalanick stál na <b>2 zdrojích moci</b>: <b>Legitimní</b> (zakladatel a CEO) + <b>Donucovací</b> (tlak, strach, agresivní kultura). Chyběla referenční a expertní opora vůči lidem. Krátkodobě hnal růst, ale donucovací moc bez respektu vedla k jeho vynucenému odchodu." },
       { company: "Steve Jobs (Apple)", tag: "REFERENČNÍ + DONUCOVACÍ", color: VSE.warning, content: "Jobs měl extrémní <b>referenční moc</b> (kult osobnosti) + extrémní <b>donucovací</b> (vyhazoval lidi na schodech). Plus <b>expertní</b> (rozuměl designu). <b>Mikropolitika</b> — používal nátlak, dominantní vystupování, koalice. Funkční jen díky charismatu — kdyby chyběla referenční moc, byl by tyran." },
       { company: "Kongregační rozhodování / Pixar Braintrust", tag: "KOLEKTIVNÍ MOUDROST", color: VSE.success, content: "<b>Pixar Braintrust</b> = ukázka <b>kolektivní moudrosti v praxi</b>. Top tvůrci se setkávají, otevřeně kritizují nápady, bez hierarchie. Catmull (CEO) tam <b>není legitimní šéf</b> — všichni jsou si rovni. <b>Distribuce moci</b> = horizontální. Fungovalo by tohle v armádě? Ne. Funguje to v kreativním byznysu? Ano — výsledek 27 Oscarů." },
     ]
@@ -10551,7 +10541,6 @@ function OkruhLead5Panel() {
       subtitle="French-Raven 5 zdrojů / Hierarchie × kolektivní moudrost / Org. struktury / Mikropolitika"
       color={VSE.fmv}
       questionText="Moc, distribuce moci (hierarchie × kolektivní moudrost), zdroje moci a aplikace na případovku + zvolit organizační strukturu."
-      questionDesc="Moc × pravomoc × autorita. Personalizovaná × socializovaná. 3 podoby moci (trestající / kompenzační / podmíněná). ⭐ French-Raven 5 zdrojů (Legitimní / Donucovací / Odměňovací / Expertní / Referenční). Distribuce moci - hierarchie × kolektivní moudrost. 4 formy participace. Planning × Discovery. Organizační struktury. Mikropolitika. Aplikace na PS + doporučení."
       sloz={2} roz={2} freq={3}
       examStrategy={examStrategyLead5}
       studySections={studySectionsLead5}
@@ -10916,7 +10905,7 @@ function OkruhLead6Panel() {
       { company: "Pixar Braintrust", tag: "ATMOSFÉRA + STANDARDY", color: VSE.success, content: "<b>Pixar Braintrust</b> = ukázka <b>charakteristik 4 (atmosféra spolupráce) + 6 (standardy excelence)</b>. Top tvůrci se setkávají, otevřeně kritizují nápady. <b>Bez hierarchie, ale se standardy</b> — výsledek = 27 Oscarů. <b>Kompetentní členové</b> — Pete Docter, Brad Bird, Andrew Stanton — top experti. Jednotný závazek = vyrobit nejlepší animovaný film." },
       { company: "Tomáš Baťa Zlín (CZ)", tag: "VŠECH 8 BODŮ + UDRŽITELNOST", color: VSE.success, content: "Baťa pokryl <b>všech 8 charakteristik</b> + <b>9. udržitelnost</b>. <b>Cíl</b>: „Naším zákazníkům.” <b>Struktura</b>: jasná hierarchie, ale lidé měli prostor. <b>Externí podpora</b>: Baťovy domky, škola, nemocnice. <b>Udržitelnost</b>: Zlín fungoval desítky let, lidé si pamatují Baťovu kulturu dodnes. Vzor pro celé Československo." },
       { company: "Avast / Pavel Baudiš (CZ)", tag: "KOMPETENTNÍ + STANDARDY", color: VSE.success, content: "Avast — moderní příklad <b>Team Excellence v IT</b>. <b>Kompetentní členové</b> = top tech talent. <b>Standardy excelence</b> = nejnižší false-positive rate v branži. <b>Atmosféra</b> = plochá hierarchie, technický respekt. <b>Externí podpora</b> = IPO 2018, akvizice $9.4B. <b>Udržitelnost</b> = postupně budovaná, dnes součást NortonLifeLock." },
-      { company: "Andrej Babiš (Agrofert) — anti-vzor", tag: "CHYBÍ ATMOSFÉRA + UDRŽITELNOST", color: VSE.danger, content: "Agrofert je <b>anti-vzor Team Excellence</b>. Má jasný cíl (růst, zisk), strukturu, externí podporu (peníze). Ale <b>chybí atmosféra spolupráce</b> (vysoká fluktuace top managementu), <b>chybí standardy excelence</b> (proměnlivé), <b>chybí udržitelnost</b> (vše závisí na Babišovi). Krátkodobě efektivní, dlouhodobě riziko. <b>Když je v PS firma, která se chová jako Agrofert, doporuč Baťovský model.</b>" },
+      { company: "WeWork / Adam Neumann (anti-vzor)", tag: "CHYBÍ ATMOSFÉRA + UDRŽITELNOST", color: VSE.danger, content: "WeWork pod Adamem Neumannem: charisma a vize, ale <b>chyběla atmosféra důvěry a udržitelnost</b> — vše záviselo na jednom nepředvídatelném zakladateli. Proměnlivé chování, kult osobnosti. Krátkodobě nafouklá valuace, dlouhodobě kolaps IPO a Neumannův odchod." },
     ]
   };
 
@@ -10998,7 +10987,6 @@ function OkruhLead6Panel() {
       subtitle="Skupina × tým / Tuckman / Belbin / 8 charakteristik + udržitelnost"
       color={VSE.fmv}
       questionText="Team excellence (Larson, Le Fasto) — vyjmenovat všechny body a jejich aplikace na CS, které chybí a které tam jsou."
-      questionDesc="Pracovní skupina × tým. Hillův model. Tuckman 5 fází (Forming/Storming/Norming/Performing/Adjourning). Belbinovy role (3 oblasti, 9 rolí). ⭐ Larson, LaFasto — 8 charakteristik Team Excellence + 9. bod udržitelnost. Hackman 6 podmínek. Jevy v týmu (sociální facilitace, lenost, groupthink). Followership (Kelly). 3 úrovně ovlivňování. Aplikace na PS + doporučení."
       sloz={2} roz={2} freq={2}
       examStrategy={examStrategyLead6}
       studySections={studySectionsLead6}
@@ -11278,7 +11266,7 @@ function OkruhHr1Panel() {
     { company: "Patagonia", tag: "MISSION-DRIVEN KULTURA", color: VSE.success, content: "<b>Patagonia</b> = ukázka <b>Mission kultury</b> v Denison modelu. Strategie: „We're in business to save our home planet.” Struktura: plochá, decentralizovaná. Kultura: silné hodnoty (udržitelnost, aktivismus). Motivace: smysl > peníze. Lidé tam jdou pracovat ze smyslu, ne z platu." },
     { company: "Avast (CZ) — Pavel Baudiš", tag: "ADAPTABILITY KULTURA", color: VSE.fmv, content: "<b>Avast</b> = Adaptability culture. Tech firma, plochá hierarchie, soustředění na zákazníka (rychlé reakce na hrozby). Strategie: být první v branži. Struktura: plochá, agilní týmy. Kultura: technický respekt, low ego. Motivace: výzvy + akciový plán." },
     { company: "McDonald's", tag: "CONSISTENCY KULTURA", color: VSE.warning, content: "<b>McDonald's</b> = Consistency culture. Vše standardizováno celosvětově. Strategie: stejná zkušenost všude. Struktura: striktní hierarchie. Kultura: procesy, manuály, kontrola. Motivace: kariéra (z brigádníka na manažera). Hofstede: vysoká UAI, nízká IDV (týmovost)." },
-    { company: "Babiš Agrofert (CZ) — anti-vzor", tag: "NESOULAD 4 PRVKŮ", color: VSE.danger, content: "<b>Agrofert</b> = anti-vzor. Strategie: růst + zisk. Struktura: striktní hierarchie. Kultura: kontrola, low trust, vysoká fluktuace. Motivace: pouze materiální. <b>Nesoulad:</b> kultura nedrží strategii dlouhodobě. Vysoké náklady na retence, špatná reputace zaměstnavatele. Doporučení: změnit kulturu — víc důvěry, smyslu, sociálních vazeb." },
+    { company: "Sears — kolaps (anti-vzor)", tag: "NESOULAD 4 PRVKŮ", color: VSE.danger, content: "Sears je učebnicový anti-vzor nesouladu strategie/struktury/kultury/motivace. Vedení nutilo divize soutěžit mezi sebou (vnitřní konkurence), což rozbilo spolupráci a kulturu. Strategie říkala jedno, motivační systém odměňoval opak. Výsledek: bankrot kdysi největšího amerického retailera." },
   ]
 };
 
@@ -11306,9 +11294,9 @@ function OkruhHr1Panel() {
   `;
 
   const caseStudyHr1 = {
-    title: "Lucie — HR ředitelka česko-slovenské konzultingové firmy ConsulTech, 250 lidí",
-    subtitle: "Identifikuj nesoulad 4 prvků (strategie/struktura/kultura/motivace) a navrhni propojení",
-    scenario: "Lucie (40 let) je 2 roky HR ředitelka v ConsulTech, B2B IT konzulting (SAP, Salesforce, AWS) působící v ČR a SK. 250 zaměstnanců: 200 konzultantů na projektech u klientů, 30 partnerů/seniorů, 20 podpůrných (HR, finance, sales). Tržby 600 mil. Kč ročně, růst 18 %.\n\nStrategie firmy (kterou stanovil CEO Pavel): být premium B2B konzultingem zaměřeným na enterprise klientelu (ČSOB, T-Mobile, Škoda). Diferenciace přes hloubku expertízy + senior konzultanty. Cíl: 25% marže, top employer brand. Struktura: ploché 3 úrovně (Konzultant → Senior → Partner), partnerský model (15 % zisků pro partnery).\n\nProblém: kultura a motivační systém nesedí se strategií. Bonus konzultantů se odvíjí výhradně od fakturovaných hodin (utilization 85 % target). Pavel chválí na all-hands kolegy s nejvíc hodinami. Result: konzultanti se snaží nafakturovat každou minutu, kvalita klesá, klienti si stěžují. Mladí senioři odcházejí, protože nevidí cestu k partnerství (15 % zisků jde jen 8 partnerům, ostatní 22 senioři se tlačí o zbytek).\n\nKultura (Schein): artefakty = open space, ping-pong, beer fridge — like a tech startup. Normy = nepsaná, pracuje se 50+ hodin týdně, kdo odejde v 17:00 je slabý. Předpoklady = svoboda + odpovědnost, ale ve skutečnosti = strach + presetí. Denison: vypadá jako Adaptability culture, ale chová se jako Consistency (kontrola hodin, papírování). Klienti říkají: chválí senior expertízu, ale dostávají juniory. Top investor zvažuje exit, employer brand padá v Glassdoor z 4,2 na 3,4.",
+    title: "Hanka a její rodinná pekárna",
+    subtitle: "Firma vyrostla, ale duch se vytrácí",
+    scenario: "Hanka vede rodinnou pekárnu, kterou založili její rodiče. Když byla malá, znali se v ní všichni jménem. Peklo se s láskou, lidé chodili rádi do práce a zákazníci to cítili. Bylo jasné, proč firma existuje — dělat poctivé pečivo a starat se o lidi.\n\nFirma za posledních pár let pořádně vyrostla. Otevřela nové provozovny, přijala spoustu nových lidí, koupila modernější pece. Jenže s růstem se něco vytratilo. Noví zaměstnanci nevědí, proč se věci dělají tak, jak se dělají. Starší pekaři reptají, že už to není jako dřív. Lidé chodí do práce jen odbýt směnu a odejít.\n\nHanka cítí, že firma ztratila duši. Kdysi měla jasnou kulturu — nepsaná pravidla, hodnoty, společný smysl. Teď je to jen továrna na rohlíky. Fluktuace roste, lidé nejsou zapálení, kvalita kolísá podle toho, kdo má zrovna směnu.\n\nNa poradě jí provozní řekl: 'Hanko, my nemáme problém s pecemi ani s recepturami. My máme problém s lidmi a s tím, čemu věří.' Hanka si uvědomila, že strategie firmy, její kultura a to, jak jsou lidé motivovaní, spolu nějak souvisí — ale neumí to dát dohromady.\n\nVíkend strávila přemýšlením. Jak propojit to, kam firma směřuje, s tím, jak se uvnitř chová a co lidi žene dopředu? Cítí, že pokud to nevyřeší, firma sice poroste v číslech, ale uvnitř bude prázdná.",
     signals: [
       { text: "Strategie firmy … být premium B2B konzultingem zaměřeným na enterprise klientelu", color: VSE.success, reason: "Jasná strategie — premium B2B, senior konzultanti. Dobrá pozice na trhu." },
       { text: "Bonus konzultantů se odvíjí výhradně od fakturovaných hodin (utilization 85 % target)", color: VSE.danger, reason: "Klasický nesoulad strategie × motivace. Premium strategie chce kvalitu, motivace odměňuje kvantitu (hodiny). Goodhart law." },
@@ -11351,7 +11339,6 @@ function OkruhHr1Panel() {
       subtitle="Motivační systém propojený se strategií a kulturou"
       color={VSE.fmv}
       questionText="Strategie, struktura organizace, kultura ve vztahu k motivaci. Stanovit doporučení k případovce, jak lépe motivovat zaměstnance. Scheinův model a Denisonův model organizační kultury. Aplikace na případovku. Jak se vyvinula organizační kultura v případovce? Jaký typ organizační kultury byste doporučila?"
-      questionDesc="4 propojené prvky (strategie/struktura/kultura/motivace). Scheinův model 3 vrstev kultury (artefakty, normy, předpoklady — Aneta povinně!). Denison 4 typy kultury (Adaptability, Mission, Involvement, Consistency — Aneta povinně!). Hofstede 6 dimenzí (PDI, IDV, MAS, UAI, LTO, IND). HR strategie (vize, mise, hodnoty). 3 zdroje motivace (materiální, sociální, personální) + motivační trojúhelník. ⚠️ U PS musíš říct: jak se kultura vyvíjela + jaký typ kultury doporučuješ."
       sloz={3} roz={3} freq={3}
       examStrategy={examStrategyHr1}
       studySections={studySectionsHr1}
@@ -11637,7 +11624,7 @@ function OkruhHr2Panel() {
       { company: "Tomáš Baťa Zlín (CZ)", tag: "VŠECHNY 4 KVADRANTY ODMĚN", color: VSE.success, content: "<b>Baťa</b> pokryl všechny 4 kvadranty modelu celkové odměny. <b>Peněžní:</b> Účast na zisku (dělník-akcionář), nadprůměrný plat. <b>Benefity:</b> Baťovy domky, nemocnice. <b>Rozvoj:</b> Baťovský systém vzdělávání. <b>Prostředí:</b> Komunita Zlína, smysl práce. Anti-vzor pro firmy, co dávají jen plat." },
       { company: "Google 20% rule", tag: "JOB CRAFTING + AUTONOMIE", color: VSE.fmv, content: "<b>Google</b> zavedl <b>20% rule</b> — zaměstnanci mohli 20% času pracovat na vlastním projektu (Job Crafting). Vznikl Gmail, AdSense. Naplňuje sebedeterminaci (autonomie + kompetence) i 4 drivery (Acquire kariéru, Comprehend nové věci)." },
       { company: "Avast Pavel Baudiš (CZ)", tag: "MODERNÍ MOTIVACE V IT", color: VSE.success, content: "<b>Avast</b> používá <b>moderní teorie motivace</b>. Tech respekt (kompetence), plochá hierarchie (autonomie), akciový program (Acquire). Po IPO 2018 mnoho zaměstnanců stalo milionáři — efekt na motivaci. Job Crafting v R&D týmech." },
-      { company: "Babiš Agrofert (CZ) — anti-vzor", tag: "POUZE PENĚŽNÍ KVADRANT", color: VSE.danger, content: "<b>Agrofert</b> = anti-vzor. Motivace pouze přes plat + bonusy. Žádné benefity navíc, žádný smysl práce, žádný rozvoj kariéry. Výsledek: vysoká fluktuace, špatná reputace zaměstnavatele. Doporučení: doplnit zbylé 3 kvadranty modelu celkové odměny. Job Crafting nemožný kvůli kontrolní kultuře." },
+      { company: "Wells Fargo — skandál (anti-vzor)", tag: "POUZE PENĚŽNÍ KVADRANT", color: VSE.danger, content: "Wells Fargo ukazuje past pouze peněžní motivace. Agresivní prodejní cíle + bonusy jen za počet otevřených účtů vedly k tomu, že zaměstnanci zakládali fiktivní účty klientům. Čistě peněžní kvadrant bez etiky a vnitřní motivace = obrovský skandál a pokuty v miliardách dolarů." },
     ]
   };
 
@@ -11666,9 +11653,9 @@ function OkruhHr2Panel() {
   `;
 
   const caseStudyHr2 = {
-    title: "Daniel — Compensation & Benefits manažer výrobní firmy IndustryTech, 800 zaměstnanců",
-    subtitle: "Identifikuj chybějící kvadranty Modelu celkové odměny a navrhni propojení motivace × odměňování",
-    scenario: "Daniel (37 let) je C&B manažer v IndustryTech, českém výrobci průmyslové elektroniky (senzory, řídicí systémy). 800 zaměstnanců: 500 dělníků ve výrobě (3 směny), 150 inženýrů ve vývoji, 80 administrativa, 70 sales/služby zákazníkům. Tržby 2,2 mld. Kč ročně. Firma má 25letou tradici.\n\nMotivační systém je tvrdě zaměřený na peníze. Plat (peněžní kvadrant) tvoří 95 % celkové odměny. Bonus podle splnění individuálních KPI (cca 15-25 % platu). Benefity (2. kvadrant) jsou minimální: stravenky 100 Kč, 5 týdnů dovolené, ne MultiSport, ne home office (dělníkům to nedávalo smysl, takže pro nikoho). Rozvoj (3. kvadrant) prakticky neexistuje — kdo chce kurz, musí si ho zaplatit sám. Pracovní prostředí (4. kvadrant): stará továrna z 90. let, jídelna katastrofa, klimatizace nefunguje.\n\nProblém: výroba má 28% fluktuaci ročně, dělníci odcházejí ke konkurenci (Foxconn, Bosch) za o 10 % vyšší plat — Daniel nemůže ani víc, marže výroby je tenká. Inženýři odcházejí (15 % ročně) do tech firem (Avast, Honeywell), kde mají MultiSport, vzdělávací rozpočet 50 tis. Kč/rok, krásné kanceláře. Nový CEO (Klára, 44 let, přišla z Microsoftu) říká: nemůžeme bojovat jen platem, musíme nabízet celkovou hodnotu.\n\nKlára zadala Danielovi za úkol: navrhnout do 3 měsíců redesign motivačního systému využívající Model celkové odměny (4 kvadranty). Budget na nákladovou neutralitu — bez navýšení mzdových nákladů. Daniel se podívá na Lorencovou (moderní teorie motivace, sebedeterminace) a uvažuje, jak propojit motivaci × stimulaci × odměňování.",
+    title: "Petr a jeho IT tým, který přestal hořet",
+    subtitle: "Přidal lidem peníze, ale nadšení se nevrátilo",
+    scenario: "Petr vede vývojářský tým ve střední softwarové firmě. Před pár lety to byla parta nadšenců, kteří dělali skvělé věci a bavilo je to. Chodili s nápady, zůstávali dlouho, protože je práce táhla.\n\nPostupně se to změnilo. Lidé začali odcházet ke konkurenci. Petr na to zareagoval logicky — přidal platy, dal vyšší bonusy, zařídil dražší notebooky. Čekal, že se nadšení vrátí. Nevrátilo se. Lidé zůstali, protože se jim zvedl plat, ale jiskra je pryč. Dělají, co musí, nic víc.\n\nPetra to mate. Dal jim přesně to, o co žádali — víc peněz. A přesto tým působí unaveně a otráveně. Jeden seniorní vývojář mu při odchodu řekl něco, co mu nejde z hlavy: 'Petře, mně nešlo o peníze. Mně chyběl pocit, že to, co dělám, má smysl a že si toho někdo všimne.'\n\nPetr začal tušit, že peníze nejsou všechno. Že existuje rozdíl mezi tím, když člověka něco motivuje zevnitř (baví ho to, dává mu to smysl), a když ho ženou jen vnější odměny (plat, bonus). A že možná zaměňoval jedno za druhé.\n\nTeď přemýšlí, jak tým znovu nadchnout. Tuší, že odpověď nebude další přidání peněz. Ale neví, čím nahradit to, co se vytratilo — a jak nastavit odměňování tak, aby lidi opravdu táhlo dopředu, ne jen drželo na místě.",
     signals: [
       { text: "Plat (peněžní kvadrant) tvoří 95 % celkové odměny", color: VSE.danger, reason: "Kvadrant 1 (peněžní) dominuje, ostatní 3 kvadranty marginální. Klasická nerovnováha Modelu celkové odměny." },
       { text: "Benefity (2. kvadrant) jsou minimální: stravenky 100 Kč, 5 týdnů dovolené", color: VSE.warning, reason: "Kvadrant 2 (benefity) slabý. Konkurenti nabízejí výrazně víc, lidé to vidí jako hygienický faktor (Herzberg)." },
@@ -11711,7 +11698,6 @@ function OkruhHr2Panel() {
       subtitle="Teorie motivace + Stimulace + Model celkové odměny + Mzdová politika"
       color={VSE.success}
       questionText="Motivace a ovlivnění zaměstnanců, odměňování, vztažené na případovku, co bych firmě doporučila atd."
-      questionDesc="Motivace × stimulace + 7 stimulů. Klasické teorie (Maslow, Herzberg, Vroom, Adams, McGregor X-Y). Moderní teorie (4 drivery, sebedeterminace, SMART) — pro Lorencovou! Motivační profil — pro Nového. Job Design × Job Crafting. Model celkové odměny (4 kvadranty: peníze, benefity, rozvoj, prostředí). Mzdová politika. ⚠️ U PS musíš dát konkrétní doporučení pro firmu."
       sloz={3} roz={3} freq={3}
       examStrategy={examStrategyHr2}
       studySections={studySectionsHr2}
@@ -11821,7 +11807,7 @@ function OkruhHr3Panel() {
     { id: "eprg", title: "🎯 EPRG model + 3 typy pracovníků", subtitle: "Etnocentric / Polycentric / Regiocentric / Geocentric — orientace firmy", color: VSE.fph, emoji: "compass",
       content: (<div>
         <Def color={VSE.fph}>
-          <b>EPRG model</b> (Howard Perlmutter, 1969) popisuje 4 orientace mezinárodní firmy v HR. Aneta to chce explicitně — jedna z taženek 2024.
+          <b>EPRG model</b> (Howard Perlmutter, 1969) popisuje 4 orientace mezinárodní firmy v HR. Objevuje se v tažených otázkách 2024.
         </Def>
         <Tag color={VSE.fph}>4 orientace EPRG</Tag>
         <ResponsiveGrid cols2>
@@ -11996,7 +11982,7 @@ function OkruhHr3Panel() {
   const examStrategyHr3 = `
     <b style="color:#245373">1.</b> Začni 3 pojmy: globalizace × lokalizace × glokalizace — 1 věta každý.<br/>
     <b style="color:#245373">2.</b> 4 strategie Bartlett & Ghoshal — matice cost × local responsiveness.<br/>
-    <b style="color:#245373">3.</b> ⚠️ EPRG model (Aneta chce!) — Etnocentric / Polycentric / Regiocentric / Geocentric.<br/>
+    <b style="color:#245373">3.</b> ⚠️ EPRG model (komise chce!) — Etnocentric / Polycentric / Regiocentric / Geocentric.<br/>
     <b style="color:#245373">4.</b> 3 typy pracovníků v zahraničí — lokální / expat / třetí národnost.<br/>
     <b style="color:#245373">5.</b> Konvergence × Divergence (pojmový pár).<br/>
     <b style="color:#245373">6.</b> Hofstede 6 dimenzí (PDI, IDV, MAS, UAI, LTO, IND) — vyjmenovat + 2-3 detailně.<br/>
@@ -12008,9 +11994,9 @@ function OkruhHr3Panel() {
   `;
 
   const caseStudyHr3 = {
-    title: "Aleš — HR ředitel českého strojaře MachinTech expandujícího do Číny a USA, 1200 zaměstnanců",
-    subtitle: "Identifikuj globální × lokální mismatch a navrhni glokalizaci",
-    scenario: "Aleš (44 let) je HR ředitel MachinTech, českého výrobce CNC strojů. Firma má 1200 zaměstnanců: 800 v Brně (centrála a hlavní výroba), 200 v Šanghaji (od 2022, montáž pro asijský trh) a 200 v Detroitu (od 2024, sales a service pro Severní Ameriku). Tržby 4 mld. Kč ročně, růst 18 % díky expanzi.\n\nProblém: Aleš zavedl v zahraničních pobočkách stejné HR praktiky jako v ČR. Stejný onboarding (5 dní v Brně osobně, all-Czech materials), stejné performance management (roční 360° hodnocení s anonymními komentáři podřízených na šéfa), stejná struktura odměn (13. plat, 25 dní dovolené, stravenky). Vize firmy: Být kvalitní český strojař. Hodnoty nikde sepsané.\n\nV Šanghaji vznikl odpor. Lokální manažeři si stěžují, že 360° hodnocení nefunguje — podřízení odmítají kritizovat šéfa (vysoká PDI), je to v Číně neslušné. Onboarding v Brně je drahý a Číňané se cítí trapně, když musí mluvit česky/anglicky na výjezdu. Stravenky v Číně neexistují, místo toho chtějí food card. 13. plat považují za málo — v Šanghaji je standard 14. plat plus bonusy 2-3 měsíčních platů.\n\nV Detroitu jiný problém. Američané chtějí 401k pension plan, ne 13. plat. 25 dní dovolené je víc než standard (15 dní v USA), ale chybí flexibilní home office. Sales lidé chtějí individuální bonusy podle prodejů (vysoká IDV), ne týmové. Vize Být kvalitní český strojař je v USA nesrozumitelná, sales lidi nemůžou prodávat něco bez emocionálního purpose.\n\nFluktuace v Šanghaji 28 % za první rok, v Detroitu 35 %. CEO chce řešení — Aleš teď čte Hofstede a Bartlett & Ghoshal a uvažuje, jak transformovat HR strategii.",
+    title: "Aleš a expanze do zahraničí",
+    subtitle: "Co fungovalo doma, v cizině najednou nefunguje",
+    scenario: "Aleš má na starost lidi v české technologické firmě, která se rozhodla expandovat do zahraničí. Nejdřív otevřeli pobočku v Německu, pak v Polsku, chystají se i dál. Doma firma funguje skvěle — Aleš zná lidi, ví, jak je motivovat, má vyladěné benefity i nábor.\n\nProblém nastal, když ten samý systém zkopíroval do zahraničí. V Německu lidé nechtěli jeho oblíbené benefity, stěžovali si na málo dovolené a odešli první čtyři lidé během půl roku. V Polsku zaměstnanci nechápali flexibilní pracovní dobu, chtěli jasně daný začátek a konec. Co fungovalo v Praze, jinde vůbec neplatilo.\n\nAleš si uvědomil, že každá země má jinou kulturu, jiné zvyklosti, jiná očekávání od zaměstnavatele. Nemůže prostě vzít český model a nakopírovat ho. Ale zároveň nechce v každé zemi vymýšlet všechno od nuly — to by bylo strašně drahé a firma by ztratila jednotnou identitu.\n\nNavíc řeší praktickou věc: do nové pobočky v Polsku potřebuje dosadit někoho, kdo zná firmu a její způsoby. Má tam poslat osvědčeného člověka z Prahy, nebo najmout místního, který zná tamní prostředí? Obojí má svá pro a proti.\n\nAleš hledá rovnováhu. Co nechat jednotné pro celou firmu napříč zeměmi, a co naopak přizpůsobit místním poměrům? A koho posílat řídit zahraniční pobočky? Cítí, že odpověď leží někde mezi 'všude stejně' a 'všude jinak'.",
     signals: [
       { text: "stejné performance management (roční 360° hodnocení s anonymními komentáři podřízených na šéfa)", color: VSE.danger, reason: "Hofstede PDI vysoká v Číně — podřízený nesmí kritizovat šéfa. Klasická chyba Global strategy bez glokalizace." },
       { text: "Vize firmy: Být kvalitní český strojař", color: VSE.danger, reason: "Vize závislá na národnosti — nelokalizovatelná. V USA nesrozumitelná, demotivující. Lepší: univerzální (Quality, Precision)." },
@@ -12052,7 +12038,6 @@ function OkruhHr3Panel() {
       subtitle="3 pojmy + 4 strategie + Hofstede + expat lifecycle"
       color={VSE.fph}
       questionText="HR globální × lokální, Specifika a aplikace na případovku."
-      questionDesc="3 pojmy (globalizace, lokalizace, glokalizace). 4 strategie Bartlett & Ghoshal (Global/Multidomestic/International/Transnational). EPRG model (Etnocentric/Polycentric/Regiocentric/Geocentric — Aneta chce!). 3 typy pracovníků (lokál/expat/třetí národnost). Konvergence × divergence. Hofstede 6 dimenzí v HR. Expat lifecycle (4 fáze). Co globalizovat × co lokalizovat. McDonald's, IKEA, Walmart anti-vzor."
       sloz={2} roz={3} freq={2}
       examStrategy={examStrategyHr3}
       studySections={studySectionsHr3}
@@ -12277,9 +12262,9 @@ function OkruhHr4Panel() {
   `;
 
   const caseStudyHr4 = {
-    title: "Kateřina — HR ředitelka softwarové firmy CodeFlow, 350 zaměstnanců",
-    subtitle: "Identifikuj fázi diverzity a navrhni transformaci na Inclusion",
-    scenario: "Kateřina (39 let) je HR ředitelka CodeFlow, B2B SaaS firmy v Praze. Tým má 350 zaměstnanců: 240 vývojářů (88 % muži), 60 sales (75 % muži), 30 marketing a support (60 % ženy), 20 management (jen 3 ženy). Tržby 800 mil. Kč ročně, růst 25 %.\n\nFirma má klasické DEI problémy. 360° hodnocení odhalilo, že ženy v engineering teamu se necítí součástí, mnoho odchází po 2-3 letech. CEO Pavel říká: U nás je rovnost, kdo je dobrý, postupuje. Realita: gender pay gap 18 % v engineering, 6 % v marketing. Nikdo to formálně neměří. Pavel odmítá diverzity initiatives slovy: To je americký koncept, nepotřebujeme to.\n\nProblémy ve firmě: Mladý vývojář napsal interní email o stereotypech žen v IT, vyvolalo to bouři. 3 ženy z engineering podaly výpověď současně, jedna v exit interview řekla: Nikdo mě v meetingach neposlouchá. Senior architekt (muž) byl povýšen místo seniornější ženy. Žádné parental leave benefits, otec si vzal 1 týden volna při narození dítěte (zákonné minimum). Firma žádná zaměstnanecká skupina, žádný bias training, recruiteur píšou job descriptions s ninja code rockstar developer (mužský jazyk podle studií).\n\nLetos klesl employer brand score z 75 % na 58 %. Glassdoor reviews zmiňují bro culture. Top klient (banka v Německu) se ptá: Můžete prokázat ESG/DEI praktiky? CodeFlow nemůže — žádné metriky. Konkurent (Productboard) má 45 % žen v engineering a vyhrává talent war. Kateřina má 6 měsíců na transformaci.",
+    title: "Kateřina a stejnorodý tým",
+    subtitle: "Všichni jsou si podobní — a firmě dochází nápady",
+    scenario: "Kateřina vede personální oddělení v softwarové firmě. Když se rozhlédne po kanceláři, vidí překvapivě stejnorodou partu — většinou mladí muži podobného věku, podobného vzdělání, podobného pohledu na svět. Léta nabírali 'lidi, co k nám zapadnou', a výsledek je tým, kde si všichni rozumí, ale taky všichni myslí stejně.\n\nProblém se začal projevovat. Na poradách všichni rychle souhlasí, nikdo nepřijde s něčím jiným. Když firma vyvíjela produkt pro starší zákazníky, nikdo z týmu nechápal jejich potřeby. Když dělali aplikaci pro maminky s dětmi, tým netušil, co takové ženy řeší. Firmě docházejí nové úhly pohledu.\n\nKateřina ví, že rozmanitější tým — různý věk, pohlaví, zázemí, zkušenosti — by přinesl nové nápady a lepší pochopení zákazníků. Výzkumy to potvrzují. Ale když to nadhodila vedení, narazila. 'My nikoho nediskriminujeme, bereme nejlepší lidi,' řekl jí šéf. 'Proč bychom to měli řešit?'\n\nNavíc cítí riziko. Když začne cíleně nabírat různorodé lidi, část stávajícího týmu se může cítit ohrožená nebo to brát jako že kvalita jde stranou. Diverzita sama o sobě nestačí — pokud se noví lidé budou cítit jako nevítaní, stejně odejdou.\n\nKateřina hledá způsob, jak tým otevřít novým lidem a pohledům, aniž by to rozbila. Tuší, že přijmout různorodé lidi je jen první krok — těžší je vytvořit prostředí, kde se všichni cítí vítaní a můžou doopravdy přispět.",
     signals: [
       { text: "240 vývojářů (88 % muži)", color: VSE.warning, reason: "Klasická IT struktura. Není v sobě problém, ale když chybí inkluze, vede k bro culture a odchodu žen." },
       { text: "20 management (jen 3 ženy)", color: VSE.danger, reason: "Glass ceiling v praxi. 15 % v managementu vs 31 % v celé firmě = bariéra postupu." },
@@ -12324,7 +12309,6 @@ function OkruhHr4Panel() {
       subtitle="Diverzita × Inkluze × Equity + 4 fáze Thomas + DEI nástroje"
       color={VSE.fph}
       questionText="Diverzita — popsat na případovce."
-      questionDesc="Diverzita × inkluze × equity (3 pojmy). Dimenze (primární × sekundární). 4 fáze Roosevelt Thomas. 3 strategie (kompenzační/kulturní/strategická). Pasti (tokenism, glass ceiling, unconscious bias). Nástroje (Diversity Council, blind recruitment, ERGs, bias training, mentoring, pay audit). ⚠️ U PS popsat situaci, identifikovat fázi, doporučit konkrétní nástroje."
       sloz={2} roz={3} freq={2}
       examStrategy={examStrategyHr4}
       studySections={studySectionsHr4}
@@ -12573,9 +12557,9 @@ function OkruhHr5Panel() {
   `;
 
   const caseStudyHr5 = {
-    title: "Eva — VP People v české tech firmě DataPulse, 400 zaměstnanců",
-    subtitle: "Identifikuj talent drain a navrhni talent management systém",
-    scenario: "Eva (41 let) nastoupila před 3 měsíci jako VP People v DataPulse, B2B SaaS firmy pro data analytics. Firma má 400 zaměstnanců: 250 engineering, 60 sales, 50 customer success, 20 marketing, 20 management. Tržby 30 mil. EUR ARR, růst 40 % ročně.\n\nProblém: 25 % fluktuace v engineering za rok (industry standard 12-15 %). Odcházejí specificky senior engineers s 5+ lety. Exit interviews říkají: Nikdy nevím, jak postoupit, Šéf mě neumí coachovat, Žádné stretch projekty. Firma má jen 6 senior engineers (Staff level), z toho 3 chtějí odejít.\n\nDosavadní praxe: žádný formální talent management. Yearly performance review (4 strany formuláře, manažer vyplní za 1 hodinu). Žádný 9-Box, žádné succession planning. Trainings: 5 000 EUR/rok per FTE na online kurzy (Pluralsight, Coursera) — málo využité (10 %). Žádný mentoring program. Career path: pro juniory jasný (Junior → Mid → Senior za 2-3 roky), pro seniors mlha (Staff level neexistuje formálně, jen ad-hoc).\n\nKompetenční model neformálně exists v hlavě CTO, ale není sepsán. Promotion rozhoduje CTO na základě pocitu. Před měsícem byl povýšen vývojář, který je technicky skvělý, ale nemá leadership skills — má teď 8 lidí pod sebou a tým je nešťastný. Žádný kompetenční model pro lidi management = chybné promotion rozhodnutí.\n\nCEO chce, aby Eva snížila fluktuaci na 12 % do roka. Konkurence (Productboard, Workday) má sofistikované talent management programy. Eva má 12 měsíců na transformaci a budget 1 mil. EUR.",
+    title: "Eva a talent, který odešel",
+    subtitle: "Nejlepší lidé odcházejí, protože nevidí budoucnost",
+    scenario: "Eva vede lidi v rychle rostoucí firmě. Před měsícem jí dal výpověď jeden z nejlepších lidí — šikovný, chytrý, firma s ním počítala do budoucna. Když se ho ptala proč, řekl jí: 'Nevidím tu, kam bych mohl růst. Dělám pořád to samé, nikdo se mnou neřešil, co bude dál. Konkurence mi nabídla jasnou cestu nahoru.'\n\nEva si uvědomila, že to není první takový případ. Firma umí lidi přijmout, ale neumí se starat o ty nejlepší. Nemá přehled o tom, kdo má potenciál růst, kdo by mohl jednou vést tým, kdo potřebuje novou výzvu. Talentovaní lidé se nudí, nikdo s nimi neplánuje budoucnost, a tak odcházejí.\n\nVedení to dlouho nebralo vážně. 'Když někdo odejde, najmeme nového,' znělo heslo. Jenže najít a zaučit nového šikovného člověka trvá měsíce a stojí spoustu peněz. A hlavně — s odcházejícími lidmi mizí i znalosti a zkušenosti, které si odnášejí ke konkurenci.\n\nEva chce zavést systém, jak se o talenty starat. Jak poznat, kdo má potenciál. Jak s těmito lidmi mluvit o jejich rozvoji a budoucnosti. Jak je připravovat na vyšší role. A jak je rozvíjet tak, aby cítili, že má smysl ve firmě zůstat.\n\nTuší, že talent se nedá jen 'koupit' vyšším platem. Musí se objevit, rozvíjet a hlavně mu ukázat cestu. Jinak nejlepší lidé budou dál odcházet tam, kde tu cestu vidí.",
     signals: [
       { text: "25 % fluktuace v engineering za rok (industry standard 12-15 %)", color: VSE.danger, reason: "2× nadprůměrná. Tvrdý důkaz talent drain. Klasický signál absence talent managementu." },
       { text: "Odcházejí specificky senior engineers s 5+ lety", color: VSE.danger, reason: "Nejhorší skupina k ztrátě — největší know-how, drahé nahrazení (1-2× roční plat). Klasická retention crisis." },
@@ -12620,7 +12604,6 @@ function OkruhHr5Panel() {
       subtitle="9-Box + DDC + 70-20-10 + GROW + KSA"
       color={VSE.fph}
       questionText="Talent management, rozvoj zaměstnanců, aplikovat na případovku."
-      questionDesc="9-Box Grid (Performance × Potential). DDC model (Develop/Deploy/Connect). 70-20-10 rule. Kompetenční model KSA + Attitudes (4 složky!). GROW coaching (Whitmore). On the job × off the job. Succession planning. Talent retention. ⚠️ U PS identifikovat top talenty + navrhnout konkrétní rozvojový plán."
       sloz={2} roz={3} freq={3}
       examStrategy={examStrategyHr5}
       studySections={studySectionsHr5}
@@ -12640,60 +12623,52 @@ function OkruhHr5Panel() {
    ════════════════════════════════════════════════════════ */
 function OkruhHr6Panel() {
   const studySectionsHr6 = [
-    { id: "intro", title: "HR se radikálně mění — proč se ptají", subtitle: "Digitalizace, AI, hybrid, Gen Z, mental health, ESG", color: VSE.fph, emoji: "sparkles",
+    { id: "intro", title: "Moderní trendy v HR — proč se personalistika mění", subtitle: "Z papírování partnerem firmy", color: VSE.fph, emoji: "growth",
       content: (<div>
         <Def color={VSE.fph}>
-          HR v 2024-2026 je radikálně jiné než HR v 2010. <b>Stříteský, Bočková, Tahal, Kuděj</b> se na trendy ptají, protože očekávají, že student rozumí <b>moderním praktikám</b>, ne jen klasické teorii. Tato otázka je o aktuálnosti.
+          <b>Moderní trendy v HR</b> ukazují, jak se personalistika posunula z administrativy (vyplácení mezd, hlídání docházky) k roli, která pomáhá firmě růst. Dnes HR řeší technologie, péči o lidi, image zaměstnavatele a zapojení do strategie.
         </Def>
-        <Tag color={VSE.fph}>HR strategie — 3 charakteristiky kvalitní HR strategie (Bočková!)</Tag>
-        <ResponsiveGrid cols3>
-          {[
-            { c: VSE.fmv, t: "SPECIFICKÁ", d: "Zaměřená na konkrétní činnost (nábor, rozvoj, retence). Ne vše obecně. Měřitelná." },
-            { c: VSE.warning, t: "KOMPLEXNÍ", d: "Transformační, mění kulturu firmy. Ne jen administrativní opatření, ale strategický posun." },
-            { c: VSE.success, t: "PROVÁZANÁ", d: "Odměňování, komunikace, participace propojené. Konzistence napříč všemi HR procesy." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-      </div>) },
-
-    { id: "digitalizace", title: "💻 Trend 1-2: Digitalizace HR + AI", subtitle: "HRIS, ATS, e-learning, prediktivní analytika", color: VSE.fph, emoji: "tools",
-      content: (<div>
-        <Def color={VSE.fph}>
-          HR přestává být administrativní oddělení s papíry. Moderní HR má <b>HRIS systém</b> (Workday, SAP SuccessFactors), <b>ATS</b> (Greenhouse, Lever), <b>e-learning platformy</b> (Coursera, LinkedIn Learning) a stále víc <b>AI features</b>.
-        </Def>
-        <Tag color={VSE.fph}>Digitalizace HR</Tag>
+        <Tag color={VSE.fph}>Globální trendy HR — co je dnes jinak</Tag>
         <Bullet items={[
-          "<b>HRIS (Human Resources Information System):</b> Workday, SAP SuccessFactors, Personio. Centrální systém pro payroll, benefits, performance, learning.",
-          "<b>ATS (Applicant Tracking System):</b> Greenhouse, Lever, Recruitee. Sleduje kandidáty od aplikace po hire. Funnel analytics.",
-          "<b>E-learning platformy:</b> Coursera for Business, LinkedIn Learning, Udemy Business. Self-paced kurzy, microlearning.",
-          "<b>People Analytics dashboards:</b> Visier, Workday Analytics. Real-time data o fluktuaci, engagement, pay equity.",
+          "<b>Flexibilní týmy</b> — lidé pracují pružněji, ne jen od devíti do pěti na jednom místě.",
+          "<b>Učení ze zkušeností</b> — firma se učí a předává znalosti dál.",
+          "<b>Freelanceři</b> — firmy víc spolupracují s lidmi na volné noze.",
+          "<b>Diverzita a transparentnost</b> — různorodost lidí a otevřenost.",
+          "<b>CSR, HR marketing a HR controlling</b> — společenská odpovědnost, péče o značku zaměstnavatele a měření HR.",
         ]} color={VSE.fph} />
-        <Tag color={VSE.warning}>AI v HR (2024-2026)</Tag>
-        <Bullet items={[
-          "<b>Automatický CV screening:</b> AI projíždí 1000+ CV za pár minut. ⚠️ Bias risk (Amazon AI 2018 — diskriminace žen kvůli historickým datům).",
-          "<b>Chatboti pro kandidáty:</b> Mya, Olivia — odpovídají na FAQs, schedulují interview.",
-          "<b>Prediktivní analytika:</b> Predikce fluktuace (kdo pravděpodobně odejde), engagement risk.",
-          "<b>AI-generated job descriptions:</b> ChatGPT/Claude tvoří JD na základě vstupů. Konzistence, méně bias.",
-          "<b>Performance management AI:</b> Sentiment analýza komunikace, automatický feedback summary.",
-        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="HR 6 — Nové trendy v HR a strategie HR"
+          what="Komise chce přehled <b>moderních trendů</b> + <b>Ulrichův model 4 role HR</b> + <b>EFQM model</b> + napojení na případovku. Klíč: rozpoznat v PS zastaralé prvky a doporučit moderní přístup."
+        />
       </div>) },
 
-    { id: "hybrid", title: "🏠 Trend 3: Hybrid work + Employee Experience", subtitle: "Microsoft, Spotify, Twitter modely + EX lifecycle", color: VSE.fph, emoji: "people",
+    { id: "trendy", title: "Hlavní trendy v HR — co dnes firmy řeší", subtitle: "CSR, HR marketing, controlling, technologie, diverzita, talenti", color: VSE.fph, emoji: "compass",
       content: (<div>
         <Def color={VSE.fph}>
-          Po COVIDu (2020) se hybrid work stal standardem. Spotify, Microsoft, GitLab, Atlassian definují novou normu. <b>Employee Experience (EX)</b> nahrazuje klasický employee engagement — pohlížíme na zaměstnance jako na zákazníka.
+          Moderní HR stojí na několika trendech. Není potřeba je biflovat jako seznam — stačí pochopit, čeho se každý týká, a umět ho najít v případovce.
         </Def>
-        <Tag color={VSE.fph}>Hybrid work modely</Tag>
+        <Tag color={VSE.fph}>Klíčové trendy v HR</Tag>
+        <Bullet items={[
+          "<b>CSR (společenská odpovědnost)</b> — vyšší smysl práce, dobrovolnictví, rovnováha práce a života, akce jako 'do práce na kole'. Základem je <b>Compliance</b> = dodržování zákonů firmou.",
+          "<b>HR marketing</b> — využití marketingu na přilákání a udržení zaměstnanců. Buduje <b>image zaměstnavatele</b> (aby u nás lidé chtěli pracovat).",
+          "<b>HR controlling</b> — koordinační koncept, který sleduje a usměrňuje chod HR (podrobně v HR 7).",
+          "<b>Technologie a IS/IT</b> — sociální sítě, cloud, online školení, psychometrické testy (logika, paměť, koncentrace), intranet (propojuje lidi a rychlé info).",
+          "<b>Management diverzity</b> — zapojení různorodých lidí: věk, pohlaví, rasa, jazyk, zkušenosti, způsob myšlení (podrobně v HR 4).",
+          "<b>Talent management</b> — firma přitahuje, udržuje a rozvíjí talenty (podrobně v HR 5).",
+          "<b>Business partner</b> — HR jako jeden z pilířů strategie, důležitý pro všechny zainteresované strany.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Co dnes zaměstnanci chtějí</Tag>
+        <Bullet items={[
+          "<b>Flexibilní úvazky a práce z domova</b> (home office).",
+          "<b>Možnost vycestovat do zahraničí</b> (expatrianti).",
+          "<b>Prostor na vlastní nápady</b> — někde lidé můžou věnovat část času vlastním projektům.",
+          "<b>Smysl, motivaci a týmovost</b> — nejprve KDO (lidé), potom CO (úkoly). Firma pro lidi, ne lidé pro firmu.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Vzdělávací centra — assessment × development</Tag>
         <ResponsiveGrid cols2>
           {[
-            { c: VSE.success, t: "REMOTE-FIRST", d: "GitLab, Buffer, Doist. Kanceláře jsou volitelné, default je remote. Async komunikace primary." },
-            { c: VSE.warning, t: "HYBRID-FLEXIBLE", d: "Spotify Work From Anywhere, Microsoft. 2-3 dny v office (na výběr), zbytek remote." },
-            { c: VSE.fmv, t: "OFFICE-FIRST + REMOTE OPT", d: "Apple, Goldman Sachs. Default office, remote výjimečně. Konzervativní přístup." },
-            { c: VSE.danger, t: "FULL RETURN-TO-OFFICE", d: "Amazon, Tesla 2023. 5 dní v týdnu office. Riziko ztráty talentů (Gen Z odmítá)." },
+            { c: VSE.fmv, t: "🔍 ASSESSMENT centrum", d: "Hodnotí, jak člověk jedná v určitých situacích. Sleduje charakter, sociální a komunikační dovednosti. Používá se při výběru a hodnocení." },
+            { c: VSE.success, t: "🌱 DEVELOPMENT centrum", d: "Podobné jako assessment, ale cílem je najít silné stránky a příležitosti k rozvoji + sestavit plán rozvoje. Zaměřené na růst člověka." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -12701,140 +12676,135 @@ function OkruhHr6Panel() {
             </GlassBox>
           ))}
         </ResponsiveGrid>
-        <Tag color={VSE.warning}>Employee Experience (EX) lifecycle</Tag>
+      </div>) },
+
+    { id: "hris", title: "HRIS — moderní uspořádání HR oddělení", subtitle: "Tři části: business partner, sdílené služby, centrum excelence", color: VSE.fph, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>HRIS (HR informační systém)</b> popisuje, jak je moderní HR oddělení uspořádané. Místo jednoho velkého oddělení se dělí na <b>tři části</b>, z nichž každá dělá něco jiného.
+        </Def>
+        <Tag color={VSE.fph}>Tři části moderního HR</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "1. HR BUSINESS PARTNER", d: "Spojka mezi HR a vedením firmy. Předává strategii, navrhuje řešení manažerům, strategicky řídí a může upravovat postupy. 'Tvář HR' navenek." },
+            { c: VSE.warning, t: "2. CENTRUM SDÍLENÝCH SLUŽEB", d: "Vše, co se dá automatizovat — mzdy, administrativa, benefitní systémy. Dá se outsourcovat (přenechat externí firmě)." },
+            { c: VSE.fph, t: "3. CENTRUM EXCELENCE (expertní)", d: "Odborníci na konkrétní HR postupy — třeba jak nabírat talenty. Určují metodiku, kterou pak business partner předá vedení. Dá se outsourcovat." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Jak to funguje dohromady</Tag>
         <Bullet items={[
-          "<b>1. Attract:</b> Employer brand, Glassdoor reviews, social media, careers page",
-          "<b>2. Recruit:</b> Application, interviews, offer — zkušenost kandidáta = první dojem značky",
-          "<b>3. Onboard:</b> První 90 dní kritických (50 % rozhodnutí o staying/leaving)",
-          "<b>4. Engage & Develop:</b> Daily experience, manager, growth opportunities, recognition",
-          "<b>5. Perform:</b> Goal setting, feedback, performance reviews",
-          "<b>6. Exit:</b> Offboarding, alumni network (často zanedbáváno)",
+          "<b>Centrum excelence</b> vymyslí, jak má vypadat třeba nábor talentů (metodika).",
+          "<b>HR business partner</b> to předá vedení, strategicky to řídí a může postupy upravovat.",
+          "<b>Centrum sdílených služeb</b> zajistí rutinu (mzdy, administrativa).",
+          "<b>Výhoda:</b> Každá část se soustředí na to, co umí nejlíp. Rutina se automatizuje, odborníci řeší metodiku, partner komunikuje s vedením.",
         ]} color={VSE.warning} />
       </div>) },
 
-    { id: "wellbeing", title: "🧠 Trend 4-5: Mental health & DEI", subtitle: "Wellbeing investice + DEI z compliance na strategii", color: VSE.fph, emoji: "growth",
+    { id: "ulrich", title: "Ulrichův model — 4 role HR ve firmě", subtitle: "Strategický partner / Agent změny / Administrativní expert / Advokát zaměstnanců", color: VSE.fph, emoji: "people",
       content: (<div>
         <Def color={VSE.fph}>
-          Po COVIDu boom mental health programů. Burnout a wellbeing už nejsou tabu. <b>DEI</b> se posunulo z compliance (jen ESG report) na <b>strategickou prioritu</b> (talent magnet, brand, ESG).
+          <b>Ulrichův model</b> = nejznámější pohled na to, jaké role má HR ve firmě hrát. Dave Ulrich popsal <b>4 základní role</b>. Dobré HR zvládá všechny čtyři, ne jen administrativu.
         </Def>
-        <Tag color={VSE.fph}>Mental Health & Wellbeing</Tag>
+        <Tag color={VSE.fph}>4 role HR podle Ulricha</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "🎯 STRATEGICKÝ PARTNER", d: "Pomáhá firmě plnit její strategii. Tvoří a realizuje HR strategii, je partnerem pro byznys. Strategické zaměření + procesy." },
+            { c: VSE.warning, t: "🔄 AGENT ZMĚNY", d: "Připravuje firmu na změny (change management). Ovlivňuje postoje lidí ke změnám, navrhuje organizaci, měří výkon. Strategické zaměření + lidé." },
+            { c: VSE.fph, t: "📋 ADMINISTRATIVNÍ EXPERT", d: "Buduje efektivní HR strukturu a procesy. Stará se o HR informační systém, právo a legislativu, dodržování zákonů. Operativní zaměření + procesy." },
+            { c: VSE.success, t: "🤝 ADVOKÁT ZAMĚSTNANCŮ (bojovník za lidi)", d: "Buduje vztahy se zaměstnanci, podporuje jejich motivaci a rozvoj. Zajišťuje bezpečnost a spokojenost, podporuje různorodost. Operativní zaměření + lidé." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Jak si 4 role zapamatovat — dvě osy</Tag>
         <Bullet items={[
-          "<b>EAP (Employee Assistance Programs):</b> 24/7 konfidenční telefon na psychologa. Standard v US firmách, roste v EU.",
-          "<b>Mental health apps:</b> Headspace for Work, Calm Business — firmy platí licence pro zaměstnance.",
-          "<b>Burnout prevence:</b> No-meeting Fridays (Asana), wellbeing days (Microsoft), 4day work week experiments (Microsoft Japan +40 % produktivita).",
-          "<b>Right to disconnect:</b> France 2017 — zaměstnanec nemusí odpovídat na emaily po 18h. Šíří se po EU.",
-          "<b>Family support:</b> Parental leave (Microsoft 20 týdnů), childcare benefits, fertility benefits.",
-        ]} color={VSE.fph} />
-        <Tag color={VSE.warning}>DEI jako strategický trend (návaznost HR 4)</Tag>
-        <Bullet items={[
-          "<b>EU CSRD direktiva (2025):</b> Povinné DEI reporty pro velké firmy. Compliance.",
-          "<b>Transparent pay reporting:</b> EU Pay Transparency Directive 2026 — povinné zveřejnění pay ranges v JD.",
-          "<b>DEI v top management:</b> Norway 40 % rule, California (zrušeno 2022), německé kvóty.",
-          "<b>Inclusion KPI v bonusech:</b> Microsoft, Salesforce — bonusy manažerů částečně závisí na DEI metrikách.",
+          "<b>Osa 1: strategické × operativní zaměření.</b> Strategický partner a agent změny jsou nahoře (strategie). Administrativní expert a advokát zaměstnanců dole (operativa).",
+          "<b>Osa 2: procesy × lidé.</b> Strategický partner a administrativní expert vlevo (procesy). Agent změny a advokát zaměstnanců vpravo (lidé).",
+          "<b>Pamatuj:</b> Dobré HR není jen 'administrativní expert' (papírování). Musí být i strategický partner, agent změny a advokát lidí.",
         ]} color={VSE.warning} />
-      </div>) },
-
-    { id: "skills_feedback", title: "🎓 Trend 6-7: Skills-based + Continuous feedback", subtitle: "Konec degree-based hiring a yearly reviews", color: VSE.fph, emoji: "compass",
-      content: (<div>
-        <Def color={VSE.fph}>
-          Dva propojené trendy: <b>Skills-based hiring</b> (nahrazuje degree-based) a <b>Continuous feedback</b> (nahrazuje yearly review). Oba jsou o agility a relevance.
-        </Def>
-        <Tag color={VSE.fph}>Skills-based hiring</Tag>
+        <Tag color={VSE.fph}>EFQM — Model excelence</Tag>
         <Bullet items={[
-          "<b>IBM:</b> Zrušil degree requirement pro 50 % rolí (2017). Skills, ne diplomy.",
-          "<b>Google, Apple:</b> Mnoho engineering rolí nepotřebuje VŠ — alternative credentials (Google Certificate, Apple Developer).",
-          "<b>Mikrokredity (microcredentials):</b> Coursera, edX, LinkedIn Learning certificates. Specific skill = certifikát.",
-          "<b>Skills passport:</b> EU iniciativa — digitální portfolio dovedností, ne degree centric.",
-          "<b>Důsledek:</b> Diverzifikuje talent pool, snižuje credentialism, posiluje praktické skills.",
-        ]} color={VSE.fph} />
-        <Tag color={VSE.warning}>Continuous feedback místo yearly review</Tag>
-        <Bullet items={[
-          "<b>Deloitte (2015):</b> Zrušil ratings a yearly reviews — týdenní check-ins. Ušetřil 2 mil hodin manažerského času.",
-          "<b>Adobe (2012):</b> Check-in místo annual review. Fluktuace klesla o 30 %.",
-          "<b>Microsoft pod Nadellou:</b> Nahradil stack ranking (bottom 10 % exit) za growth mindset feedback.",
-          "<b>GE (2016):</b> Zrušil 100letý systém ratings, zavedl PD@GE app pro continuous feedback.",
-          "<b>Pulse surveys:</b> Officevibe, CultureAmp, 15Five — weekly engagement check.",
-        ]} color={VSE.warning} />
-      </div>) },
-
-    { id: "ulrich", title: "🎯 Ulrich 4 role HR — krátký přehled", subtitle: "Detailně v HR 8 (Strategie ŘLZ)", color: VSE.fph, emoji: "compass",
-      content: (<div>
-        <Def color={VSE.fph}>
-          <b>Dave Ulrich (1997)</b> definoval 4 paralelní role HR. V HR 6 to zmiň jako moderní trend (HR jako business partner). <b>Detailní rozbor patří do HR 8</b> (Strategie ŘLZ).
-        </Def>
-        <Tag color={VSE.warning}>📎 Detailní teorie viz HR 8 (Strategie ŘLZ)</Tag>
-        <Bullet items={[
-          "<b>1. Admin Expert</b> — operativní HR (payroll, contracts). Tradiční role.",
-          "<b>2. Employee Champion</b> — advocate zaměstnanců, EX, engagement.",
-          "<b>3. Change Agent</b> — facilitátor transformací, kulturní změny.",
-          "<b>4. Strategic Partner</b> — HR u stolu strategického plánování. Rovnocenný CFO/COO/CMO.",
-          "<b>Pro HR 6 stačí:</b> trend posunu z 80 % admin na 80 % strategie. HRBP model + EFQM (excellence rámec) jako součást moderních trendů.",
+          "<b>EFQM (Model excelence)</b> = nástroj, který umožňuje firmě zhodnotit, <b>kde se nachází na cestě k dokonalosti</b> a jaké jsou její klíčové silné stránky.",
+          "Funguje na principu <b>bodování</b> — firma sbírá body v různých oblastech (vedení, strategie, lidé, partnerství, procesy → výsledky).",
+          "<b>K čemu to je:</b> Pomáhá firmě poznat, v čem je dobrá a co zlepšit. Často se používá při hodnocení kvality řízení.",
         ]} color={VSE.fph} />
       </div>) },
 
-    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro HR 6 — trendy v HR", color: VSE.success, emoji: "target",
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro HR 6", color: VSE.success, emoji: "target",
       content: (<div>
         <Def color={VSE.success}>
-          PS u HR 6 popisuje firmu s zastaralou HR strategií. Identifikuj, které trendy chybí, navrhni implementaci 3-5 klíčových (HRIS, AI v náboru, hybrid work, mental health, DEI, skills-based, continuous feedback).
+          Komise chce, abys v případovce <b>rozpoznal zastaralé HR</b> a <b>doporučil moderní přístup</b>. HR 6 je o tom ukázat, že rozumíš, kam se personalistika posunula.
         </Def>
-        <Tag color={VSE.success}>6 kroků na případovku</Tag>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
         <Bullet items={[
-          "1. <b>HR strategie</b> — 3 charakteristiky (specifická, komplexní, provázaná). Má firma kvalitní strategii?",
-          "2. <b>Audit digitalizace</b> — HRIS, ATS, e-learning? Co chybí?",
-          "3. <b>AI příležitosti</b> — kde by AI pomohlo (CV screening, prediktivní analytika)?",
-          "4. <b>Hybrid model</b> — Remote-first / Hybrid / Office-first? Co potřebují zaměstnanci?",
-          "5. <b>Wellbeing & DEI</b> — EAP, parental leave, DEI reporting (CSRD)?",
-          "6. <b>Performance management</b> — yearly review nebo continuous feedback?",
+          "<b>1.</b> Najdi v PS <b>zastaralé prvky HR</b> — papírování, žádný přehled o lidech, nábor přes inzerát, hodnocení jen formálně, žádná péče o lidi.",
+          "<b>2.</b> Posuď, jakou <b>roli HR ve firmě hraje</b> (Ulrich) — je to jen administrativní expert, nebo i strategický partner?",
+          "<b>3.</b> Doporuč <b>konkrétní moderní trendy</b>, které firmě sednou — technologie, HR marketing, talent management, péče o lidi.",
+          "<b>4.</b> Navrhni <b>posun role HR</b> — z papírování na partnera vedení (přes Ulrichovy 4 role).",
+          "<b>5.</b> Pokud to sedí, zmiň <b>HRIS uspořádání</b> nebo <b>EFQM</b> pro hodnocení kvality řízení.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Najít konkrétní zastaralý prvek v PS + doporučit moderní řešení.",
+          "<b>✅ Dobře:</b> Použít Ulrichovy 4 role k posouzení, kde HR ve firmě je.",
+          "<b>✅ Dobře:</b> Vysvětlit, proč moderní HR pomáhá firmě růst (ne jen 'protože je to trend').",
+          "<b>❌ Špatně:</b> Jen vyjmenovat trendy bez napojení na případovku.",
+          "<b>❌ Špatně:</b> Tvrdit, že každý trend je dobrý — vybírat podle toho, co firmě sedí.",
         ]} color={VSE.success} />
       </div>) },
   ];
 
   const flashcardsHr6 = [
-    { term: "Ulrich 4 role HR", def: "Dave Ulrich 1997. 4 paralelní role: Admin Expert / Employee Champion / Change Agent / Strategic Partner.", tag: "ULRICH" },
-    { term: "Admin Expert (Ulrich)", def: "Operativní HR — payroll, benefits, contracts. Efektivita procesů. Tradiční HR. Dnes digitalizováno.", tag: "ULRICH" },
-    { term: "Employee Champion (Ulrich)", def: "Advocate zaměstnanců. Engagement, wellbeing, fair treatment, voice of employees. Buduje EX.", tag: "ULRICH" },
-    { term: "Change Agent (Ulrich)", def: "Facilitátor transformací. Change management, kulturní změna, organizační development.", tag: "ULRICH" },
-    { term: "Strategic Partner (Ulrich)", def: "HR sedí u strategického plánování. Provázanost HR strategie s business strategií. Rovnocenný CFO/COO/CMO.", tag: "ULRICH" },
-    { term: "HRBP (HR Business Partner)", def: "Senior HR profesionál přiřazený k business jednotce. Reportuje CHRO + business leadovi. Strategický, ne admin.", tag: "ULRICH" },
-    { term: "Centers of Excellence", def: "Specialisté centralizovaně — Comp & Ben, Talent Acquisition, Learning. Podpora HRBP v expertních oblastech.", tag: "ULRICH" },
-    { term: "Shared Services HR", def: "Centralizovaná HR operations, payroll. Často outsourcing. Levné, efektivní pro rutinní procesy.", tag: "ULRICH" },
-    { term: "EFQM model", def: "European Foundation for Quality Management — excellence model. 9 kritérií: 5 enablers + 4 results. BMW, Bosch, IKEA, Siemens.", tag: "EFQM" },
-    { term: "HR strategie — 3 charakteristiky", def: "Specifická / Komplexní / Provázaná. Bočková chce VŠECHNY tři!", tag: "STRATEGIE" },
-    { term: "HRIS", def: "Human Resources Information System. Workday, SAP SuccessFactors, Personio. Centrální systém pro payroll, benefits, performance.", tag: "DIGI" },
-    { term: "ATS", def: "Applicant Tracking System. Greenhouse, Lever, Recruitee. Sleduje kandidáty od aplikace po hire.", tag: "DIGI" },
-    { term: "People Analytics", def: "Data-driven HR. Visier, Workday Analytics. Predikce fluktuace, engagement, pay equity.", tag: "DIGI" },
-    { term: "AI v HR — rizika", def: "Bias risk! Amazon 2018 — AI screening diskriminovala ženy (historická data). Vyžaduje audit.", tag: "AI" },
-    { term: "Remote-first", def: "GitLab, Buffer, Doist. Default je remote, kanceláře volitelné. Async komunikace primary.", tag: "HYBRID" },
-    { term: "Hybrid-flexible", def: "Spotify Work From Anywhere, Microsoft. 2-3 dny v office, zbytek remote.", tag: "HYBRID" },
-    { term: "Employee Experience (EX)", def: "Pohled na zaměstnance jako zákazníka. 6 fází: Attract → Recruit → Onboard → Engage → Perform → Exit.", tag: "EX" },
-    { term: "EAP", def: "Employee Assistance Program. 24/7 telefon na psychologa, konfidenční. Standard v US, roste v EU.", tag: "WELLBEING" },
-    { term: "4day work week", def: "Microsoft Japan experiment: +40 % produktivita. Iceland, UK pilots. Trend pro work-life balance.", tag: "WELLBEING" },
-    { term: "Right to disconnect", def: "France 2017 — zaměstnanec nemusí odpovídat na emaily po pracovní době. Šíří se po EU.", tag: "WELLBEING" },
-    { term: "EU CSRD direktiva (2025)", def: "Povinné ESG/DEI reporty pro velké firmy. Bez DEI = ztráta velkých B2B klientů.", tag: "DEI" },
-    { term: "Skills-based hiring", def: "IBM, Google, Apple — zrušení degree requirement. Skills > diplom. Microcredentials.", tag: "SKILLS" },
-    { term: "Microcredentials", def: "Coursera, edX, LinkedIn certificates. Specific skill = certifikát. Konkurence VŠ.", tag: "SKILLS" },
-    { term: "Continuous feedback", def: "Týdenní check-in místo yearly review. Deloitte ušetřil 2 mil hodin. Adobe -30 % fluktuace.", tag: "PM" },
-    { term: "Pulse surveys", def: "Officevibe, CultureAmp, 15Five. Weekly engagement check. Real-time data o náladě týmu.", tag: "PM" },
-    { term: "Growth mindset (Microsoft)", def: "Nadellova kulturní transformace. Z know-it-all na learn-it-all. Carol Dweck.", tag: "KULTURA" },
+    { term: "Moderní trendy HR", def: "Posun HR z administrativy na partnera firmy. Technologie, péče o lidi, image zaměstnavatele, zapojení do strategie.", tag: "ÚVOD" },
+    { term: "Globální trendy HR", def: "Flexibilní týmy, učení ze zkušeností, freelanceři, diverzita, transparentnost, CSR, HR marketing, HR controlling.", tag: "TRENDY" },
+    { term: "CSR v HR", def: "Společenská odpovědnost — vyšší smysl práce, dobrovolnictví, work-life balance, akce jako do práce na kole. Základ = Compliance.", tag: "TRENDY" },
+    { term: "Compliance", def: "Soubor opatření, která zajišťují dodržování zákonů firmou. Základ společenské odpovědnosti.", tag: "TRENDY" },
+    { term: "HR marketing", def: "Využití marketingu na přilákání a udržení zaměstnanců. Buduje image zaměstnavatele — aby u nás lidé chtěli pracovat.", tag: "TRENDY" },
+    { term: "HR controlling", def: "Koordinační koncept, který sleduje a usměrňuje chod HR a celého podniku. Podrobně v HR 7.", tag: "TRENDY" },
+    { term: "Technologie v HR", def: "Sociální sítě, cloud, online školení, psychometrické testy (logika, paměť), intranet (propojuje lidi a rychlé info).", tag: "TRENDY" },
+    { term: "Psychometrické testy", def: "Online nástroje na měření logiky, koncentrace, paměti. Pomocný nástroj při výběru a hodnocení lidí.", tag: "TRENDY" },
+    { term: "Požadavky zaměstnanců dnes", def: "Flexibilní úvazky, home office, vycestování do zahraničí, prostor na vlastní nápady, smysl a týmovost. Nejprve KDO, potom CO.", tag: "TRENDY" },
+    { term: "Assessment centrum", def: "Hodnotí, jak člověk jedná v určitých situacích. Sleduje charakter, sociální a komunikační dovednosti. Pro výběr a hodnocení.", tag: "VZDĚLÁVÁNÍ" },
+    { term: "Development centrum", def: "Podobné jako assessment, ale cílem je najít silné stránky a příležitosti k rozvoji + sestavit plán rozvoje. Zaměřené na růst.", tag: "VZDĚLÁVÁNÍ" },
+    { term: "HRIS", def: "HR informační systém. Moderní HR oddělení rozdělené na 3 části: business partner, centrum sdílených služeb, centrum excelence.", tag: "HRIS" },
+    { term: "HR Business Partner", def: "Spojka mezi HR a vedením. Předává strategii, navrhuje řešení manažerům, strategicky řídí. Tvář HR navenek.", tag: "HRIS" },
+    { term: "Centrum sdílených služeb", def: "Vše, co se dá automatizovat — mzdy, administrativa, benefity. Dá se outsourcovat.", tag: "HRIS" },
+    { term: "Centrum excelence (expertní)", def: "Odborníci na konkrétní HR postupy (např. nábor talentů). Určují metodiku. Dá se outsourcovat.", tag: "HRIS" },
+    { term: "Ulrichův model", def: "Nejznámější pohled na role HR. 4 role: strategický partner, agent změny, administrativní expert, advokát zaměstnanců.", tag: "ULRICH" },
+    { term: "Ulrich: Strategický partner", def: "Pomáhá firmě plnit strategii. Tvoří a realizuje HR strategii, partner pro byznys. Strategické zaměření + procesy.", tag: "ULRICH" },
+    { term: "Ulrich: Agent změny", def: "Připravuje firmu na změny. Ovlivňuje postoje lidí ke změnám, navrhuje organizaci, měří výkon. Strategie + lidé.", tag: "ULRICH" },
+    { term: "Ulrich: Administrativní expert", def: "Buduje efektivní HR strukturu a procesy. HR informační systém, právo, legislativa, dodržování zákonů. Operativa + procesy.", tag: "ULRICH" },
+    { term: "Ulrich: Advokát zaměstnanců", def: "Bojovník za lidi. Buduje vztahy, podporuje motivaci a rozvoj, zajišťuje bezpečnost a spokojenost. Operativa + lidé.", tag: "ULRICH" },
+    { term: "Ulrich — dvě osy", def: "Osa 1: strategické × operativní zaměření. Osa 2: procesy × lidé. Z toho vznikají 4 role.", tag: "ULRICH" },
+    { term: "EFQM (Model excelence)", def: "Nástroj, kterým firma zhodnotí, kde je na cestě k dokonalosti a jaké má silné stránky. Funguje na bodování.", tag: "EFQM" },
+    { term: "Business partner (trend)", def: "HR jako jeden z pilířů strategie organizace, důležitý pro všechny zainteresované strany. Dá se outsourcovat.", tag: "TRENDY" },
   ];
 
   const quizHr6 = [
-    { q: "Kolik rolí HR popsal Dave Ulrich (1997)?", opts: ["2", "3", "4", "5"], correct: 2 },
-    { q: "Která z Ulrichových 4 rolí je o transformacích a kulturní změně?", opts: ["Admin Expert", "Employee Champion", "Change Agent — facilitátor transformací, change management", "Strategic Partner"], correct: 2 },
-    { q: "Co je HRBP?", opts: ["HR Business Plan", "HR Business Partner — senior HR přiřazený k business jednotce, reportuje 2× (CHRO + business lead)", "HR Bonus Program", "HR Backup Person"], correct: 1 },
-    { q: "Co je EFQM model?", opts: ["European Financial Quality Management", "European Foundation for Quality Management — excellence model s 9 kritérii (5 enablers + 4 results)", "Employee Feedback Quality Model", "External Functional Quality Measurement"], correct: 1 },
-    { q: "Které jsou 3 charakteristiky kvalitní HR strategie podle Bočkové?", opts: ["Pružná, levná, rychlá", "Specifická, komplexní, provázaná", "Centralizovaná, kontrolovaná, měřitelná", "Lokální, globální, transnational"], correct: 1 },
-    { q: "Co je HRIS?", opts: ["Human Resources International Standards", "Human Resources Information System — centrální HR software (Workday, SAP)", "HR Implementation Strategy", "HR Inclusion System"], correct: 1 },
-    { q: "Co je ATS?", opts: ["Annual Talent Survey", "Applicant Tracking System — sleduje kandidáty (Greenhouse, Lever)", "Adaptive Training System", "Automatic Test Score"], correct: 1 },
-    { q: "Jaké je hlavní riziko AI v HR?", opts: ["Vysoká cena", "Bias — Amazon 2018 AI screening diskriminoval ženy kvůli historickým datům", "Pomalost", "AI v HR neexistuje"], correct: 1 },
-    { q: "Která firma je příklad remote-first?", opts: ["Apple", "GitLab", "Amazon", "Goldman Sachs"], correct: 1 },
-    { q: "Kolik fází má Employee Experience lifecycle?", opts: ["4", "5", "6", "8"], correct: 2 },
-    { q: "Co je EAP?", opts: ["Employee Annual Plan", "Employee Assistance Program — 24/7 telefon na psychologa", "Executive Action Plan", "Enterprise Application"], correct: 1 },
-    { q: "Co říká EU CSRD direktiva (2025)?", opts: ["Zakazuje hybrid work", "Povinné ESG/DEI reporty pro velké firmy", "Stanovuje min. plat", "Reguluje AI v HR"], correct: 1 },
-    { q: "Která firma zavedla skills-based hiring jako první ve velkém?", opts: ["Apple", "Google", "IBM (50 % rolí bez degree requirementu)", "Facebook"], correct: 2 },
-    { q: "Co je continuous feedback?", opts: ["Konstantní stres", "Týdenní/měsíční check-in místo yearly review (Deloitte, Adobe, Microsoft)", "Anonymní zpětná vazba", "360° hodnocení"], correct: 1 },
-    { q: "Kolik hodin ušetřil Deloitte zrušením yearly reviews?", opts: ["100 000", "500 000", "2 miliony hodin", "10 milionů hodin"], correct: 2 },
-    { q: "Co je pulse survey?", opts: ["Měření pulsu při interview", "Weekly engagement check (Officevibe, CultureAmp) — real-time data o náladě", "Roční dotazník", "Personality test"], correct: 1 },
+    { q: "Kam se moderní HR posunulo?", opts: ["Jen k administrativě", "Z administrativy (mzdy, docházka) na partnera, který pomáhá firmě růst", "K výrobě", "K účetnictví"], correct: 1 },
+    { q: "Co je základ CSR (společenské odpovědnosti)?", opts: ["Zisk", "Compliance — dodržování zákonů firmou", "Marketing", "Nábor"], correct: 1 },
+    { q: "Co je HR marketing?", opts: ["Reklama produktů", "Využití marketingu na přilákání a udržení zaměstnanců, budování image zaměstnavatele", "Prodej", "Účetnictví"], correct: 1 },
+    { q: "Co jsou psychometrické testy?", opts: ["Testy produktů", "Online nástroje na měření logiky, koncentrace, paměti při výběru lidí", "Mzdy", "Audit"], correct: 1 },
+    { q: "Rozdíl assessment × development centrum?", opts: ["Žádný", "Assessment hodnotí jednání v situacích, development hledá silné stránky a plán rozvoje", "Velikost", "Cena"], correct: 1 },
+    { q: "Co je HRIS?", opts: ["Mzdový software", "HR informační systém — moderní HR rozdělené na 3 části (partner, sdílené služby, centrum excelence)", "Nábor", "Audit"], correct: 1 },
+    { q: "Co dělá centrum sdílených služeb?", opts: ["Strategii", "Vše, co se dá automatizovat — mzdy, administrativa, benefity. Dá se outsourcovat.", "Nábor talentů", "Vedení"], correct: 1 },
+    { q: "Co dělá HR Business Partner?", opts: ["Mzdy", "Spojka mezi HR a vedením — předává strategii, navrhuje řešení manažerům, strategicky řídí", "Úklid", "Účetnictví"], correct: 1 },
+    { q: "Kolik rolí má Ulrichův model?", opts: ["2", "4 (strategický partner / agent změny / administrativní expert / advokát zaměstnanců)", "6", "8"], correct: 1 },
+    { q: "Co dělá Ulrich: Strategický partner?", opts: ["Mzdy", "Pomáhá firmě plnit strategii, tvoří a realizuje HR strategii, partner pro byznys", "Úklid", "Nábor"], correct: 1 },
+    { q: "Co dělá Ulrich: Agent změny?", opts: ["Mzdy", "Připravuje firmu na změny, ovlivňuje postoje lidí ke změnám", "Účetnictví", "Audit"], correct: 1 },
+    { q: "Co dělá Ulrich: Advokát zaměstnanců?", opts: ["Strategii", "Bojovník za lidi — buduje vztahy, podporuje motivaci, zajišťuje spokojenost a bezpečnost", "Mzdy", "Právo"], correct: 1 },
+    { q: "Na jakých dvou osách stojí Ulrichův model?", opts: ["Malý × velký", "Strategické × operativní zaměření a procesy × lidé", "Levný × drahý", "Rychlý × pomalý"], correct: 1 },
+    { q: "K čemu slouží EFQM (Model excelence)?", opts: ["K náboru", "Firma zhodnotí, kde je na cestě k dokonalosti a jaké má silné stránky (na bodování)", "K mzdám", "K výrobě"], correct: 1 },
+    { q: "Co chce zaměstnanec dnes?", opts: ["Jen vyšší plat", "Flexibilní úvazky, home office, smysl, týmovost, prostor na vlastní nápady", "Méně dovolené", "Více kontroly"], correct: 1 },
+    { q: "Co je centrum excelence v HRIS?", opts: ["Mzdy", "Odborníci na konkrétní HR postupy (např. nábor talentů), určují metodiku", "Úklid", "Vedení"], correct: 1 },
   ];
 
   const praxeHr6 = {
@@ -12886,25 +12856,23 @@ function OkruhHr6Panel() {
   const podcastHr6 = { title: "HR 6 — Nové trendy v HR a strategie HR", description: "HR strategie 3 charakteristiky (specifická/komplexní/provázaná), digitalizace (HRIS, ATS), AI v HR (bias risk!), hybrid work modely (Remote-first/Hybrid-flexible), Employee Experience lifecycle, mental health & wellbeing, DEI (CSRD 2025), skills-based hiring, continuous feedback. Microsoft pod Nadellou, GitLab, IBM.", audioUrl: null, notebookLmUrl: null };
 
   const examStrategyHr6 = `
-    <b style="color:#245373">1.</b> ⚠️ HR strategie — 3 charakteristiky (Bočková): SPECIFICKÁ + KOMPLEXNÍ + PROVÁZANÁ. NUTNĚ všechny tři!<br/>
-    <b style="color:#245373">2.</b> Digitalizace — HRIS (Workday), ATS (Greenhouse), e-learning, People Analytics.<br/>
-    <b style="color:#245373">3.</b> AI v HR — příležitosti (screening, predikce) + RIZIKA (bias, Amazon 2018).<br/>
-    <b style="color:#245373">4.</b> Hybrid work — 4 modely (Remote-first / Hybrid / Office / Full RTO) s firmami.<br/>
-    <b style="color:#245373">5.</b> Employee Experience — 6 fází (Attract / Recruit / Onboard / Engage / Perform / Exit).<br/>
-    <b style="color:#245373">6.</b> Mental health & wellbeing — EAP, 4day work week, right to disconnect.<br/>
-    <b style="color:#245373">7.</b> DEI jako strategie — EU CSRD 2025, transparent pay reporting, inclusion KPI.<br/>
-    <b style="color:#245373">8.</b> Skills-based hiring — IBM zrušil degree pro 50 % rolí. Microcredentials.<br/>
-    <b style="color:#245373">9.</b> Continuous feedback — Deloitte 2 mil hodin saved, Adobe -30 % fluktuace.<br/>
-    <b style="color:#245373">10.</b> ⚠️ Ulrich 4 role HR (Aneta chce!) — Admin Expert / Employee Champion / Change Agent / Strategic Partner.<br/>
-    <b style="color:#245373">11.</b> HRBP model + Centers of Excellence + Shared Services — moderní HR organizace.<br/>
-    <b style="color:#245373">12.</b> EFQM model — 9 kritérií excellence (5 enablers + 4 results), BMW/Bosch/IKEA.<br/>
-    <b style="color:#245373">13.</b> Doporučení pro PS — Microsoft pod Nadellou jako komplexní příklad transformace.
+    <b style="color:#245373">1.</b> Začni — moderní HR se posunulo z administrativy na <b>partnera firmy</b>.<br/>
+    <b style="color:#245373">2.</b> Globální trendy — flexibilní týmy, freelanceři, diverzita, CSR, HR marketing, controlling.<br/>
+    <b style="color:#245373">3.</b> <b>CSR</b> — vyšší smysl, dobrovolnictví, work-life balance. Základ = Compliance (dodržování zákonů).<br/>
+    <b style="color:#245373">4.</b> <b>HR marketing</b> — přilákání a udržení lidí, image zaměstnavatele.<br/>
+    <b style="color:#245373">5.</b> Technologie — sociální sítě, cloud, online školení, psychometrické testy, intranet.<br/>
+    <b style="color:#245373">6.</b> Vzdělávací centra — assessment (hodnotí jednání) × development (hledá silné stránky + plán rozvoje).<br/>
+    <b style="color:#245373">7.</b> ⚠️ <b>HRIS</b> — 3 části: HR business partner / centrum sdílených služeb / centrum excelence.<br/>
+    <b style="color:#245373">8.</b> ⚠️ <b>Ulrichův model — 4 role HR</b>: strategický partner / agent změny / administrativní expert / advokát zaměstnanců.<br/>
+    <b style="color:#245373">9.</b> Ulrich dvě osy — strategické × operativní + procesy × lidé.<br/>
+    <b style="color:#245373">10.</b> ⚠️ <b>EFQM (Model excelence)</b> — firma zhodnotí, kde je na cestě k dokonalosti (na bodování).<br/>
+    <b style="color:#245373">11.</b> ⚠️ V PS najít zastaralé prvky HR + doporučit moderní přístup.
   `;
 
   const caseStudyHr6 = {
-    title: "Martin — CHRO výrobní firmy ČeskoFurniture, 600 zaměstnanců",
-    subtitle: "Identifikuj chybějící trendy a navrhni transformaci HR strategie",
-    scenario: "Martin (47 let) je CHRO ve ČeskoFurniture, českém výrobci kancelářského nábytku. Firma má 600 zaměstnanců: 400 ve výrobě (Příbram), 100 administrativa + sales (Praha), 60 design + R&D (Praha), 40 management. Tržby 2,5 mld. Kč ročně, 70 % export do EU. Firma má 40letou tradici, rodinné vlastnictví, generační výměna v plánu na 2027.\n\nHR strategie zatím vypadá takto: žádný HRIS systém — payroll v Excelu, benefits management v Outlook tabulkách, performance reviews papírové. ATS chybí — recruitment přes inzeráty + LinkedIn ručně. E-learning žádný — pouze externí kurzy 1-2× ročně. Performance management: yearly review (1 hodina rozhovor + 4 strany formuláře), bez metrik, bez 360°.\n\nWork model: výroba 100 % v Příbrami (logicky), administrativa + design 5 dní v Praze (Martin trvá na office presence — kontrola). Žádný hybrid. Junior designeři si stěžují, že nemůžou pracovat z domova ani 1 den. 4 z 8 designerů odešlo k Albatros (konkurence) za poslední rok — Albatros má 3-2 hybrid.\n\nWellbeing & mental health: firma má smluvního psychologa (1× měsíčně 4 hodiny pro celou firmu, využití 5 %), žádný EAP, parental leave jen zákonné minimum (28 týdnů žena, 1 týden muž). DEI: 70 % zaměstnanců muži, ve výrobě 95 % muži, v managementu 0 žen. Žádný DEI report.\n\nPerformance management: zastaralý. Recruitment: vyžaduje VŠ pro design role (i pro 3 zkušené samouky odmítli), administrativa vyžaduje SŠ + 5 let praxe.\n\nVýsledky: fluktuace 22 % v administrativě (vs. industry 12 %), 35 % v designu, 8 % ve výrobě. Top 5 talent design designerů odešlo. EU CSRD direktiva přichází 2025 — firma nemůže reportovat ESG/DEI. Top klient IKEA (40 % tržeb) chce ESG report.\n\nMartin má 18 měsíců + 5 mil. Kč budget. Generační výměna vlastnictví v 2027 — nový vlastník (syn 32 let) chce moderní HR.",
+    title: "Martin a zastaralé HR",
+    subtitle: "Personální oddělení uvízlo v minulém století",
+    scenario: "Martin nastoupil jako nový personální ředitel do zavedené výrobní firmy. Hned první týden zjistil, že personální oddělení tu funguje jako za starých časů. Papírové složky, žádný přehled o lidech, nábor přes inzerát v novinách, hodnocení jednou ročně formulářem, který nikdo nečte.\n\nFirma přitom začíná mít problémy. Mladí lidé sem nechtějí nastupovat — konkurence nabízí práci z domova, moderní přístup, péči o zaměstnance. Lidé tu chodí do práce jako roboti, nikdo se neptá, jak se jim daří. Když Martin navrhl pružnější pracovní dobu, vedení se zhrozilo: 'To tady nikdy nebylo.'\n\nMartin ví, že svět HR se za poslední roky hodně změnil. Firmy dnes řeší úplně jiné věci než dřív — jak udržet lidi spokojené, jak využít technologie, jak se starat o duševní pohodu zaměstnanců, jak být atraktivní zaměstnavatel. Jeho firma nic z toho neřeší.\n\nNarazil ale na zeď. Vedení bere HR pořád jako oddělení, které vyplácí mzdy a hlídá docházku. Nikdo tam nevidí partnera, který by pomohl firmě růst. Martin přitom ví, že moderní personální oddělení by mohlo být klíčové pro celou strategii firmy.\n\nTeď přemýšlí, jak HR posunout z role 'papírování' do role skutečného partnera vedení. Které nové trendy dávají v jeho firmě smysl a které jsou jen módní vlna? A jak přesvědčit vedení, že investice do lidí se vyplatí?",
     signals: [
       { text: "žádný HRIS systém — payroll v Excelu, benefits management v Outlook tabulkách", color: VSE.danger, reason: "Digitalizace na úrovni 90. let. 600 zaměstnanců v Excelu = chaos, errors, žádné analytics." },
       { text: "performance reviews papírové", color: VSE.warning, reason: "Klasický check-out PM bez digitalizace. Žádná data, žádné trendy." },
@@ -12950,7 +12918,6 @@ function OkruhHr6Panel() {
       subtitle="Digitalizace + AI + Hybrid + EX + Wellbeing + DEI + Skills + Feedback"
       color={VSE.fph}
       questionText="Nové trendy v HR a strategie HR, aplikovat na případovku."
-      questionDesc="HR strategie 3 charakteristiky (specifická, komplexní, provázaná — Bočková!). Digitalizace (HRIS, ATS). AI v HR (bias risk!). Hybrid work (4 modely). Employee Experience (6 fází). Mental health & wellbeing (EAP, 4day, right to disconnect). DEI strategický (CSRD 2025). Skills-based hiring. Continuous feedback. Ulrich 4 role HR (Admin Expert/Employee Champion/Change Agent/Strategic Partner — Aneta!). HRBP model + EFQM. ⚠️ U PS najít zastaralé prvky + doporučit moderní trendy."
       sloz={2} roz={3} freq={3}
       examStrategy={examStrategyHr6}
       studySections={studySectionsHr6}
@@ -12966,9 +12933,6 @@ function OkruhHr6Panel() {
 
 
 /* ════════════════════════════════════════════════════════
-   HR 7-9 — PLACEHOLDERS (k dokončení v další session)
-   ════════════════════════════════════════════════════════ */
-/* ════════════════════════════════════════════════════════
    HR 7 — HR Canvas, HR controlling, ukazatele
    ════════════════════════════════════════════════════════ */
 function OkruhHr7Panel() {
@@ -12976,7 +12940,7 @@ function OkruhHr7Panel() {
     { id: "intro", title: "HR Controlling — co to je a proč to firmy potřebují", subtitle: "Provázanost HR procesů s finančními výsledky", color: VSE.fph, emoji: "scale",
       content: (<div>
         <Def color={VSE.fph}>
-          <b>HR controlling</b> = rozsáhlý koordinační koncept, který pomáhá vedení usměrňovat chod podniku. Sleduje <b>provázanost mezi efektivitou ŘLZ, finančními výsledky a celkovou produktivitou</b>. Aneta to chce <b>podrobně</b> — jedna z taženek 2024.
+          <b>HR controlling</b> = rozsáhlý koordinační koncept, který pomáhá vedení usměrňovat chod podniku. Sleduje <b>provázanost mezi efektivitou ŘLZ, finančními výsledky a celkovou produktivitou</b>. Komise to chce <b>podrobně</b> — jedna z taženek 2024.
         </Def>
         <Tag color={VSE.fph}>Hlavní cíle HR controllingu</Tag>
         <Bullet items={[
@@ -13076,10 +13040,38 @@ function OkruhHr7Panel() {
         ]} color={VSE.success} />
       </div>) },
 
-    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro HR 7 — Anetina otázka", color: VSE.success, emoji: "target",
+    { id: "retezec", title: "Hodnotový řetězec — jak HR vytváří hodnotu", subtitle: "Porter + speciální HR ukazatele výkonu", color: VSE.fph, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Hodnotový řetězec</b> = řetězec činností firmy, kterými vytváří hodnotu. Ukazuje, že firma se skládá z <b>hlavních činností</b> (výroba, prodej) a <b>podpůrných činností</b> (mezi nimi HR). Pomáhá pochopit, kde a jak HR přidává hodnotu.
+        </Def>
+        <Tag color={VSE.fph}>Hodnotový řetězec podle Portera</Tag>
+        <Bullet items={[
+          "<b>Hlavní (primární) činnosti</b> — to, co přímo vyrábí a prodává: vstupní logistika, výroba, výstupní logistika, marketing a prodej, služby.",
+          "<b>Podpůrné činnosti</b> — to, co hlavní činnosti umožňuje: firemní infrastruktura, <b>lidské zdroje (HR)</b>, technologický rozvoj, zajišťování zdrojů.",
+          "<b>HR je podpůrná činnost</b>, ale prochází celým řetězcem — bez lidí nefunguje žádná hlavní činnost.",
+          "<b>Cíl:</b> Rozložit firmu na jednotlivé činnosti, aby šlo pochopit, kde vzniká hodnota a kde náklady.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Jak HR vytváří hodnotu</Tag>
+        <Bullet items={[
+          "<b>HR mění procesy</b> → tím přidává hodnotu.",
+          "Hodnota vzniká <b>vyjádřením schopností firmy v podobě nehmotných aktiv</b> (znalosti, dovednosti, kultura lidí).",
+          "<b>Pamatuj:</b> HR není jen náklad. Dobře nastavené HR zvyšuje hodnotu celé firmy přes lepší lidi a procesy.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Speciální ukazatele výkonu HR</Tag>
+        <Bullet items={[
+          "Kromě běžných ukazatelů existují i pokročilé ukazatele, které měří, kolik hodnoty lidé firmě přinášejí:",
+          "<b>HEVA</b> (Human Economic Value Added) — ekonomická přidaná hodnota na člověka.",
+          "<b>HCROI</b> (Human Capital Return on Investment) — návratnost investice do lidí.",
+          "<b>HMVA</b> (Human Capital Market Value Added) — tržní přidaná hodnota lidského kapitálu.",
+          "<b>Pointa:</b> Tyto ukazatele dokazují vedení, že lidé jsou investice, ne jen náklad. Hodí se, když chce HR ukázat svou hodnotu v číslech.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+        { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro HR 7", color: VSE.success, emoji: "target",
       content: (<div>
         <Def color={VSE.success}>
-          Aneta chce <b>podrobně</b> Canvas + HR controlling + návaznost na strategii + ukazatele + nástroje + metriky. To je nejkonkrétnější HR otázka — připrav konkrétní čísla a metriky.
+          Komise chce <b>podrobně</b> Canvas + HR controlling + návaznost na strategii + ukazatele + nástroje + metriky. To je nejkonkrétnější HR otázka — připrav konkrétní čísla a metriky.
         </Def>
         <Tag color={VSE.success}>7 kroků na případovku</Tag>
         <Bullet items={[
@@ -13095,37 +13087,43 @@ function OkruhHr7Panel() {
   ];
 
   const flashcardsHr7 = [
-    { term: "HR controlling", def: "Koordinační koncept propojující ŘLZ s finančními výsledky a produktivitou. Sleduje provázanost HR procesů a business outcomes.", tag: "DEFINICE" },
-    { term: "3 hlavní cíle HR controllingu", def: "1) Flexibilita (early warning), 2) Integrační cíle (propojení plánovacích procesů), 3) Podpora adaptibility (predikce změn).", tag: "DEFINICE" },
-    { term: "HR controller", def: "Plánuje HR náklady, informuje HR o plnění plánu, radí ve finanční oblasti, kontroluje a schvaluje HR výdaje.", tag: "ROLE" },
-    { term: "Leading indikátory", def: "Předbíhající. Orientované na vstupy, těžko měřitelné, snadno ovlivnitelné. Engagement, kvalifikace, % talentů.", tag: "INDIKÁTORY" },
-    { term: "Lagging indikátory", def: "Zpožďující. Orientované na výstupy, snadno měřitelné, těžko ovlivnitelné. Fluktuace, náklady, zisk, productivity.", tag: "INDIKÁTORY" },
-    { term: "Time to hire", def: "Doba od inzerátu po hire kandidáta. Industry standard 30-45 dní. Klíčová metrika náboru.", tag: "METRIKA" },
-    { term: "Cost per hire", def: "Celkové náklady na nábor 1 zaměstnance. Industry: 4-7 tisíc EUR. Recruiter, inzeráty, čas managera.", tag: "METRIKA" },
-    { term: "Retention rate", def: "% zaměstnanců, kteří zůstali za rok. Inverzní k fluktuaci. Industry standard 85-90 %.", tag: "METRIKA" },
-    { term: "eNPS (Employee NPS)", def: "Net Promoter Score zaměstnanců — doporučili by firmu jako zaměstnavatele? -100 až +100. Top firmy 50+.", tag: "METRIKA" },
-    { term: "Compa-ratio", def: "Plat zaměstnance / market median platu. 1,0 = trh. Pod 0,9 = under-paid risk, nad 1,1 = over-paid.", tag: "METRIKA" },
-    { term: "Revenue per FTE", def: "Tržby / počet FTE. Klíčový productivity ukazatel. Google ~1,5M USD, klasická firma ~150k EUR.", tag: "METRIKA" },
-    { term: "HR Balanced Scorecard", def: "4 perspektivy: finanční / zaměstnanci jako zákazníci / procesy / učení a růst. Kaplan & Norton.", tag: "BSC" },
-    { term: "HR Canvas", def: "9 polí analogie BMC pro HR: partners / activities / resources / value props / relationships / channels / segments / costs / value.", tag: "CANVAS" },
-    { term: "Markovova analýza", def: "Kvantitativní metoda pohybu zaměstnanců. Přechodová matice (junior → mid → senior → exit). Talent pipeline forecasting.", tag: "ANALÝZA" },
-    { term: "Personální audit", def: "Externí HR audit — komplexní hodnocení HR procesů a praktik. Často před akvizicí nebo restrukturalizací.", tag: "NÁSTROJ" },
-    { term: "Návaznost HR controllingu na strategii", def: "KPI musí být odvozené od strategických cílů firmy. Bez strategie HR controlling = data bez kontextu.", tag: "STRATEGIE" },
+    { term: "HR controlling", def: "Koordinační koncept pro usměrňování chodu podniku — podpora, kontrola, měření, hledání odchylek, získávání informací. Nástroj na sledování klíčových ukazatelů HR.", tag: "DEFINICE" },
+    { term: "3 cíle HR controllingu", def: "Flexibilita (včasné varování, odhalení poruchy), adaptabilita (předvídání změn), integrace (propojení plánu s realitou).", tag: "CÍLE" },
+    { term: "HR controller", def: "Definuje mzdové skupiny a pravidla, navrhuje odměny a benefity, informuje HR o plnění plánu, hlídá finanční oblast, schvaluje výdaje.", tag: "ROLE" },
+    { term: "Leading indikátory", def: "Orientovány na vstupy. Těžko měřitelné, ale snadno ovlivnitelné. Zkoumají, jaké jsou strategie a jak se provádějí. Pomáhají plánovat budoucnost.", tag: "INDIKÁTORY" },
+    { term: "Lagging indikátory", def: "Orientovány na výstupy. Snadno měřitelné. Analyzují minulost (mzdy, zisk, fluktuace). Ukazují, co se už stalo.", tag: "INDIKÁTORY" },
+    { term: "Druhy ukazatelů HR", def: "Kvantitativní i kvalitativní. Taktické (procesy) i strategické (provázanost lidí a organizace). Znalosti a dovednosti mají ekonomickou hodnotu.", tag: "UKAZATELE" },
+    { term: "4 oblasti ukazatelů", def: "Nábor zaměstnanců, vzdělávání a rozvoj, stabilizace/fluktuace, HR procesy — u každé sledujeme náklady, čas, množství, kvalitu, reakce.", tag: "UKAZATELE" },
+    { term: "HR Scorecard", def: "Ukazatele interních procesů, rozvoje, odborů, fluktuace. Najdou klíčové faktory úspěšnosti a na jejich základě vytvoří vhodné ukazatele.", tag: "NÁSTROJE" },
+    { term: "Markovova analýza", def: "Kvantitativní metoda. Využívá zákonitost pohybu zaměstnanců v organizaci. Sleduje pohyb mezi pozicemi a vytváří přechodovou matici.", tag: "NÁSTROJE" },
+    { term: "Nástroje HR controllingu", def: "Personální statistiky, personální ukazatele, personální standardy, dotazování zaměstnanců, audit ŘLZ.", tag: "NÁSTROJE" },
+    { term: "Hodnotový řetězec", def: "Řetězec činností firmy, kterými tvoří hodnotu. Hlavní činnosti (výroba, prodej) + podpůrné činnosti (mezi nimi HR). Porterův model.", tag: "ŘETĚZEC" },
+    { term: "Hlavní × podpůrné činnosti", def: "Hlavní: vstupní logistika, výroba, výstupní logistika, marketing a prodej, služby. Podpůrné: infrastruktura, HR, technologie, zajišťování zdrojů.", tag: "ŘETĚZEC" },
+    { term: "Jak HR tvoří hodnotu", def: "HR mění procesy → přidává hodnotu. Hodnota vzniká vyjádřením schopností firmy v podobě nehmotných aktiv (znalosti, dovednosti, kultura).", tag: "ŘETĚZEC" },
+    { term: "HEVA", def: "Human Economic Value Added — ekonomická přidaná hodnota na člověka. Speciální ukazatel výkonu HR.", tag: "POKROČILÉ" },
+    { term: "HCROI", def: "Human Capital Return on Investment — návratnost investice do lidí. Speciální ukazatel výkonu HR.", tag: "POKROČILÉ" },
+    { term: "HMVA", def: "Human Capital Market Value Added — tržní přidaná hodnota lidského kapitálu. Speciální ukazatel výkonu HR.", tag: "POKROČILÉ" },
+    { term: "K čemu pokročilé ukazatele", def: "HEVA, HCROI, HMVA dokazují vedení, že lidé jsou investice, ne náklad. Hodí se, když chce HR ukázat svou hodnotu v číslech.", tag: "POKROČILÉ" },
+    { term: "HR Canvas", def: "Přehledné plátno, které na jednom místě ukáže, jak HR vytváří hodnotu — cíle, aktivity, zdroje, ukazatele. Pomáhá propojit HR se strategií.", tag: "NÁSTROJE" },
   ];
 
   const quizHr7 = [
-    { q: "Co je HR controlling?", opts: ["Pouze finanční kontrola HR oddělení", "Koordinační koncept propojující ŘLZ s finančními výsledky a produktivitou", "Audit zaměstnanců", "Synonymum pro HR analytics"], correct: 1 },
-    { q: "Které jsou 3 hlavní cíle HR controllingu?", opts: ["Profit / Growth / Cost", "Flexibilita / Integrační cíle / Podpora adaptibility", "Recruit / Develop / Retain", "Plan / Do / Check"], correct: 1 },
-    { q: "Co je leading indikátor?", opts: ["Indikátor minulosti", "Orientovaný na vstupy, predikuje budoucnost (engagement, % talentů)", "Pouze finanční ukazatel", "Indikátor pro vedoucí pozice"], correct: 1 },
-    { q: "Co je lagging indikátor?", opts: ["Indikátor budoucnosti", "Orientovaný na výstupy, reflektuje minulost (fluktuace, náklady)", "Pouze HR ukazatel", "Manuální indikátor"], correct: 1 },
-    { q: "Co měří time to hire?", opts: ["Délku interview", "Dobu od inzerátu po hire kandidáta (standard 30-45 dní)", "Dobu školení", "Dobu zkušební doby"], correct: 1 },
-    { q: "Co je eNPS?", opts: ["External Net Promoter Score", "Employee Net Promoter Score — zaměstnanecká doporučitelnost firmy (-100 až +100)", "Effective Number per Strategy", "Employee Network Performance Score"], correct: 1 },
-    { q: "Co znamená compa-ratio = 0,85?", opts: ["Zaměstnanec přesčas", "Zaměstnanec je placen 85 % market mediánu — risk under-paid", "Zaměstnanec má 85 % výkonu", "Zaměstnanec splnil 85 % cílů"], correct: 1 },
-    { q: "Kolik perspektiv má HR Balanced Scorecard?", opts: ["3", "4 (finanční / zaměstnanci / procesy / učení)", "5", "6"], correct: 1 },
-    { q: "Co je HR Canvas?", opts: ["Plakát na zeď HR oddělení", "9-polí analogie Business Model Canvas pro HR oddělení", "Externí HR audit", "Software pro HR"], correct: 1 },
-    { q: "K čemu slouží Markovova analýza?", opts: ["Měření engagement", "Predikce pohybu zaměstnanců přes pozice (junior → senior → exit) — talent pipeline", "Hodnocení výkonu", "Audit mezd"], correct: 1 },
-    { q: "Proč musí být HR ukazatele navázané na strategii?", opts: ["Není to potřeba", "Bez strategie HR controlling = data bez kontextu. KPI musí odrážet strategické cíle firmy.", "Kvůli auditu", "Kvůli zákonu"], correct: 1 },
-    { q: "Která metrika je leading indikátor?", opts: ["Fluktuace", "Engagement score (eNPS) — predikuje budoucí fluktuaci", "Náklady na zaměstnance", "Roční mzda"], correct: 1 },
+    { q: "Co je HR controlling?", opts: ["Kontrola docházky", "Koordinační koncept na usměrňování chodu podniku — sledování klíčových HR ukazatelů", "Mzdový software", "Nábor"], correct: 1 },
+    { q: "Jaké jsou 3 cíle HR controllingu?", opts: ["Zisk, růst, expanze", "Flexibilita (včasné varování), adaptabilita (předvídání změn), integrace (propojení plánu s realitou)", "Nábor, mzdy, audit", "Levně, rychle, kvalitně"], correct: 1 },
+    { q: "Co jsou leading indikátory?", opts: ["Výstupy z minulosti", "Orientované na vstupy, těžko měřitelné ale ovlivnitelné, pomáhají plánovat budoucnost", "Jen mzdy", "Fluktuace"], correct: 1 },
+    { q: "Co jsou lagging indikátory?", opts: ["Vstupy", "Orientované na výstupy, snadno měřitelné, analyzují minulost (mzdy, zisk, fluktuace)", "Plán budoucnosti", "Strategie"], correct: 1 },
+    { q: "Co je Markovova analýza?", opts: ["Mzdová tabulka", "Kvantitativní metoda — sleduje pohyb zaměstnanců mezi pozicemi, vytváří přechodovou matici", "Hodnocení výkonu", "Nábor"], correct: 1 },
+    { q: "Co je hodnotový řetězec?", opts: ["Mzdy", "Řetězec činností firmy, kterými tvoří hodnotu — hlavní + podpůrné činnosti (Porter)", "Audit", "Fluktuace"], correct: 1 },
+    { q: "Kam patří HR v hodnotovém řetězci?", opts: ["Hlavní činnost", "Podpůrná činnost — ale prochází celým řetězcem, bez lidí nefunguje nic", "Mimo řetězec", "Výroba"], correct: 1 },
+    { q: "Jak HR vytváří hodnotu?", opts: ["Snižováním mezd", "Mění procesy → přidává hodnotu vyjádřením schopností firmy v nehmotných aktivech", "Propouštěním", "Kontrolou"], correct: 1 },
+    { q: "Co je HEVA?", opts: ["Mzdový systém", "Human Economic Value Added — ekonomická přidaná hodnota na člověka", "Nábor", "Audit"], correct: 1 },
+    { q: "Co je HCROI?", opts: ["Software", "Human Capital Return on Investment — návratnost investice do lidí", "Mzdy", "Fluktuace"], correct: 1 },
+    { q: "K čemu slouží pokročilé ukazatele (HEVA, HCROI, HMVA)?", opts: ["Ke kontrole", "Dokazují vedení, že lidé jsou investice, ne náklad — ukazují hodnotu HR v číslech", "Ke mzdám", "K propouštění"], correct: 1 },
+    { q: "Co je HR Scorecard?", opts: ["Mzdová tabulka", "Ukazatele procesů, rozvoje, fluktuace — najde klíčové faktory úspěchu a vytvoří ukazatele", "Nábor", "Audit"], correct: 1 },
+    { q: "Co dělá HR controller?", opts: ["Uklízí", "Definuje mzdové skupiny, navrhuje odměny a benefity, hlídá finanční oblast HR", "Vyrábí", "Prodává"], correct: 1 },
+    { q: "Jaké jsou nástroje HR controllingu?", opts: ["Jen mzdy", "Personální statistiky, ukazatele, standardy, dotazování zaměstnanců, audit ŘLZ", "Jen audit", "Jen nábor"], correct: 1 },
+    { q: "Co sledujeme u 4 oblastí ukazatelů?", opts: ["Jen náklady", "Náklady, čas, množství, kvalitu, reakce (u náboru, vzdělávání, stabilizace, procesů)", "Jen čas", "Jen kvalitu"], correct: 1 },
+    { q: "Jaký je rozdíl leading × lagging?", opts: ["Žádný", "Leading = vstupy, plánují budoucnost. Lagging = výstupy, analyzují minulost.", "Velikost", "Cena"], correct: 1 },
   ];
 
   const praxeHr7 = {
@@ -13166,22 +13164,23 @@ function OkruhHr7Panel() {
   const podcastHr7 = { title: "HR 7 — HR Canvas, HR controlling, ukazatele", description: "HR controlling jako koordinační koncept, hlavní cíle (flexibilita/integrace/adaptibilita), role HR controllera, leading × lagging indikátory, klíčové metriky (time to hire, eNPS, compa-ratio, revenue per FTE), HR Balanced Scorecard (4 perspektivy), HR Canvas (9 polí), Markovova analýza, návaznost na firemní strategii. Google People Operations, Mobil Oil.", audioUrl: null, notebookLmUrl: null };
 
   const examStrategyHr7 = `
-    <b style="color:#245373">1.</b> Definice HR controllingu — koordinační koncept propojující ŘLZ s finančními výsledky.<br/>
-    <b style="color:#245373">2.</b> 3 hlavní cíle — flexibilita / integrační cíle / podpora adaptibility.<br/>
-    <b style="color:#245373">3.</b> Role HR controllera — plánuje náklady, informuje, radí, kontroluje.<br/>
-    <b style="color:#245373">4.</b> ⚠️ Leading × Lagging indikátory — KLÍČOVÝ rozdíl pro Mikovcovou!<br/>
-    <b style="color:#245373">5.</b> Klíčové metriky podle oblasti — nábor / retence / engagement / rozvoj / odměňování / productivity.<br/>
-    <b style="color:#245373">6.</b> HR Balanced Scorecard — 4 perspektivy (finanční / zaměstnanci / procesy / učení).<br/>
-    <b style="color:#245373">7.</b> HR Canvas — 9 polí analogie BMC pro HR oddělení.<br/>
-    <b style="color:#245373">8.</b> Markovova analýza — přechodová matice pro talent pipeline forecasting.<br/>
-    <b style="color:#245373">9.</b> ⚠️ Návaznost na firemní strategii — KPI odvozené ze strategických cílů.<br/>
-    <b style="color:#245373">10.</b> Doporučení pro PS — dashboard 5-7 metrik (3-5 leading + 3-5 lagging). Google model jako benchmark.
+    <b style="color:#245373">1.</b> <b>HR controlling</b> = koordinační koncept na usměrňování chodu podniku, sledování klíčových HR ukazatelů.<br/>
+    <b style="color:#245373">2.</b> 3 cíle — flexibilita (včasné varování) / adaptabilita (předvídání změn) / integrace (propojení plánu s realitou).<br/>
+    <b style="color:#245373">3.</b> <b>HR controller</b> — definuje mzdové skupiny, navrhuje odměny, hlídá finanční oblast.<br/>
+    <b style="color:#245373">4.</b> ⚠️ <b>Leading × Lagging indikátory</b> — leading (vstupy, budoucnost) × lagging (výstupy, minulost).<br/>
+    <b style="color:#245373">5.</b> 4 oblasti ukazatelů — nábor / vzdělávání / stabilizace / procesy (náklady, čas, množství, kvalita, reakce).<br/>
+    <b style="color:#245373">6.</b> <b>HR Scorecard</b> — klíčové faktory úspěchu → vhodné ukazatele.<br/>
+    <b style="color:#245373">7.</b> ⚠️ <b>Markovova analýza</b> — pohyb zaměstnanců mezi pozicemi, přechodová matice.<br/>
+    <b style="color:#245373">8.</b> Nástroje — personální statistiky, ukazatele, standardy, dotazování, audit ŘLZ.<br/>
+    <b style="color:#245373">9.</b> ⚠️ <b>Hodnotový řetězec</b> (Porter) — HR jako podpůrná činnost, mění procesy → přidává hodnotu.<br/>
+    <b style="color:#245373">10.</b> ⚠️ Pokročilé ukazatele — <b>HEVA / HCROI / HMVA</b> (lidé jako investice, ne náklad).<br/>
+    <b style="color:#245373">11.</b> ⚠️ Komise chce podrobně Canvas + napojení na PS + konkrétní ukazatele.
   `;
 
   const caseStudyHr7 = {
-    title: "Vendula — HR controller v české e-commerce firmě OnlineShop.cz, 300 zaměstnanců",
-    subtitle: "Navrhni HR dashboard a propojení s firemní strategií",
-    scenario: "Vendula (35 let) nastoupila před 6 měsíci jako HR controller v OnlineShop.cz, B2C e-commerce platformě (top 5 v ČR po Alza, Notino, Mall). 300 zaměstnanců: 150 customer support (call centrum), 50 logistics (sklad Praha), 60 IT (engineering + product), 30 marketing + sales, 10 management. Tržby 1,2 mld. Kč ročně, growth 18 % ročně, ziskovost 6 %.\n\nProblém: HR oddělení nemá žádný controlling. CHRO (Petra, 48 let) vede HR 12 let intuitivně. Žádné metriky kromě basic headcount. Fluktuace 38 % v call centru (catastrofická), 22 % v IT (vysoká), 12 % v logistics, 5 % v managementu. Žádné měření engagement (eNPS, Gallup Q12), žádný structured exit interview. CHRO říká: Vím to z rozhovorů, není potřeba měřit.\n\nNábor: time to hire neměřený (CTO odhaduje 60-90 dní pro engineery, ale není data), cost per hire neznámý. Recruitment hire rate (% offers accepted) neznámý — Vendula odhaduje 30 %, což je velmi slabé. Training: 800k Kč rozpočet ročně, ale využití neznámé.\n\nFiremní strategie 2025: zdvojnásobit tržby na 2,4 mld. Kč za 2 roky → potřeba +50 % FTE, primárně v IT a sales. Bez HR controllingu Vendula neví: kolik bude stát nábor, jak dlouho potrvá, jakou má firma capacity pro onboarding, kdo je v pipeline na povýšení.\n\nCFO (Pavel) tlačí na měření HR výdajů — vydáváme 280 mil. Kč ročně na lidi (mzdy + benefits + training), 23 % tržeb. Bez controllingu nelze optimalizovat. Pavel chce HR dashboard pro board do 6 měsíců. Vendula má 500k Kč budget a 6 měsíců.",
+    title: "Vendula a personální oddělení bez čísel",
+    subtitle: "Vedení se ptá: co nám HR vlastně přináší?",
+    scenario: "Vendula vede personální oddělení v obchodní firmě. Dělá svou práci poctivě — nabírá lidi, řeší jejich problémy, organizuje školení. Jenže na poslední poradě vedení dostala nepříjemnou otázku. Finanční ředitel se zeptal: 'Vendulo, my do HR sypeme nemalé peníze. Co nám to přináší? Ukaž mi to v číslech.'\n\nVendula zůstala zaskočená. Ona ví, že její práce má smysl, ale neumí to doložit. Nemá přehled, kolik stojí nábor jednoho člověka, jak dlouho lidem trvá, než se zapracují, kolik lidí odchází a proč. Všechno má v hlavě a v pocitech, ne v datech. A vedení chce čísla.\n\nProblém je, že bez čísel HR vždycky prohraje. Když přijde škrtání rozpočtů, ořežou nejdřív to, co se nedá změřit. Vendula tuší, že kdyby uměla ukázat, že její práce šetří firmě peníze a pomáhá jí růst, vedení by ji bralo úplně jinak.\n\nKamarádka z jiné firmy jí říkala o tom, jak sledují personální ukazatele — náklady, čas, kvalitu, fluktuaci. Jak měří, co funguje a co ne. Jak dokážou vedení ukázat, že lidé jsou investice, ne náklad. Vendula by to chtěla taky, ale neví, kde začít a co vlastně měřit.\n\nTeď přemýšlí, jak svoji práci převést do čísel, kterým vedení rozumí. Které ukazatele sledovat? Jak je propojit s tím, kam firma směřuje? A jak ukázat, že personální oddělení není černá díra na peníze, ale partner, který firmě pomáhá vydělávat?",
     signals: [
       { text: "HR oddělení nemá žádný controlling", color: VSE.danger, reason: "Klasická pasti střední firmy. 300 lidí v Excelu nelze řídit. Pavel (CFO) má pravdu — 280M Kč ročně bez měření = chaos." },
       { text: "Vím to z rozhovorů, není potřeba měřit", color: VSE.danger, reason: "Klasický anti-vzor pocitového HR. Petra je old-school, nevěří datům. V data-driven éře neudržitelné." },
@@ -13225,7 +13224,6 @@ function OkruhHr7Panel() {
       subtitle="HR controlling + BSC + Canvas + leading × lagging + metriky"
       color={VSE.fph}
       questionText="Podrobně Canvas, HR controlling, návaznost na strategii, ukazatele, nástroje, metriky."
-      questionDesc="HR controlling jako koordinační koncept. 3 cíle (flexibilita/integrační/adaptibilita). Role HR controllera. Leading × Lagging indikátory (Mikovcová!). Klíčové metriky podle oblasti (nábor/retence/engagement/rozvoj/odměňování). HR Balanced Scorecard (4 perspektivy). HR Canvas (9 polí). Markovova analýza. ⚠️ Návaznost na firemní strategii — KPI odvozené ze strategie."
       sloz={3} roz={3} freq={3}
       examStrategy={examStrategyHr7}
       studySections={studySectionsHr7}
@@ -13244,78 +13242,84 @@ function OkruhHr7Panel() {
    ════════════════════════════════════════════════════════ */
 function OkruhHr8Panel() {
   const studySectionsHr8 = [
-    { id: "intro", title: "Strategie řízení lidských zdrojů — vize a cíle", subtitle: "ŘLZ jako konkurenční výhoda + propojení s business strategií", color: VSE.fph, emoji: "target",
+    { id: "intro", title: "Strategie řízení lidských zdrojů — co to je a proč", subtitle: "ŘLZ jako most mezi firmou a jejími lidmi", color: VSE.fph, emoji: "target",
       content: (<div>
         <Def color={VSE.fph}>
-          <b>Strategie řízení lidských zdrojů (ŘLZ)</b> = dlouhodobý plán, jak HR podporuje strategické cíle firmy. <b>HR musí být business partner</b>, ne jen administrativa. Aneta chce u tohoto okruhu najít principy v PS + doporučení.
+          <b>Strategie řízení lidských zdrojů (ŘLZ)</b> = dlouhodobý plán, jak má firma pracovat se svými lidmi, aby naplnila své cíle. Není to soupis pravidel — je to <b>most mezi tím, kam firma směřuje, a tím, jak se stará o lidi</b>, kteří ji tam dovezou.
         </Def>
-        <Tag color={VSE.fph}>Vize HR podle Anety + TOP_Update</Tag>
+        <Tag color={VSE.fph}>Cíl řízení pracovního výkonu</Tag>
         <Bullet items={[
-          "<b>Vize HR:</b> Podílet se na strategii byznysu pomocí rozvoje talentů a tvorbou správné schopnosti organizace růst",
-          "<b>HR business partner:</b> Personalista, který rozumí fungování businessu a současně zná velmi dobře personalistiku",
-          "<b>HR jako rovnocenný partner</b> CFO, COO, CMO — Ulrich Strategic Partner role",
+          "<b>Mít správné lidi ve správný čas na správném místě.</b> To je jádro celého personálního řízení — jedna věta, kterou si zapamatuj.",
+          "Řízení výkonu má být <b>systematické, pravidelné, individuální, etické a objektivní</b> — a v souladu s vizí firmy.",
+          "Hlavní odpovědnost nese <b>liniový manažer</b> (přímý nadřízený), ne personální oddělení. HR mu jen pomáhá.",
+          "<b>HR doplňuje:</b> rozvoj lidí, motivaci, rozpoznání silných a slabých stránek, zpětnou vazbu, možnosti rozvoje a odměňování.",
         ]} color={VSE.fph} />
-        <Tag color={VSE.warning}>Strategické cíle HRM (4 pilíře)</Tag>
+        <Tag color={VSE.warning}>K čemu strategie ŘLZ slouží — 4 hlavní cíle</Tag>
         <Bullet items={[
-          "<b>Budování lidské kapacity</b> pro udržitelný byznys",
-          "<b>Zajištění talenty</b> pro současnost a budoucnost (succession planning)",
-          "<b>Přispění k organizační změně</b> (Ulrich Change Agent role)",
-          "<b>Formování vhodného leadershipu</b> — pipeline manažerů a lídrů",
+          "<b>1. Budovat kapacitu lidí</b> pro dlouhodobě udržitelné fungování firmy.",
+          "<b>2. Zajistit talenty</b> pro dnešek i budoucnost (včetně přípravy nástupců).",
+          "<b>3. Pomoct firmě se měnit</b> — HR je motorem změny, ne brzdou.",
+          "<b>4. Vychovávat lídry</b> — připravovat budoucí manažery a vedoucí.",
         ]} color={VSE.warning} />
+        <ExamAlert
+          komise="HR 8 — Strategie ŘLZ, nástroje, politiky"
+          what="Komise chce, abys uměl <b>najít v případovce, jakou strategii firma s lidmi má</b>, kde má slabinu, a doporučit konkrétní změny. Klíč: systém ŘLZ (koloběh) + 3 typy strategie + plánování lidí + propojení s vizí firmy."
+        />
       </div>) },
 
-    { id: "strategie", title: "📋 Strategie ŘLZ — co chceme + 2 typy strategie", subtitle: "4 oblasti + Komplexní × Specifická strategie", color: VSE.fph, emoji: "compass",
+    { id: "system", title: "Systém řízení lidských zdrojů — koloběh každého zaměstnance", subtitle: "Od přijetí po odchod — osm kroků", color: VSE.fph, emoji: "compass",
       content: (<div>
         <Def color={VSE.fph}>
-          Strategie ŘLZ má <b>2 základní typy</b> a <b>4 hlavní oblasti</b>. Aneta chce, abys uměl rozlišit, kterou strategii firma v PS používá.
+          <b>Systém ŘLZ</b> = koloběh, kterým prochází každý člověk ve firmě, od chvíle, kdy o něj firma stojí, až po jeho odchod. Když firma řídí každý krok vědomě, má spokojené a výkonné lidi. Když ne, jen hasí požáry.
         </Def>
-        <Tag color={VSE.fph}>Strategie lidských zdrojů — co chceme (4 oblasti)</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "1. ZÍSKÁVÁNÍ, ROZVOJ, STABILIZACE TALENTŮ", d: "Recruitment, talent management, retention. Klíčové pro rostoucí firmu." },
-            { c: VSE.warning, t: "2. POŽADOVANÉ ORGANIZAČNÍ KAPACITY", d: "Společný kompetenční model propojený s HR procesy. Obchodní kompetence předností." },
-            { c: VSE.fph, t: "3. VÝKON, ANGAŽOVANOST, INOVACE", d: "Systém řízení výkonu v celé organizaci + kultura inovací." },
-            { c: VSE.success, t: "4. ŽIVNÉ PROSTŘEDÍ", d: "Komunikace + odměňování + benefity. Buduje employee experience." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>2 typy strategie ŘLZ</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "KOMPLEXNÍ (transformační)", d: "Vytvořená k prosazení změny v organizaci jako celku. Cíl: přesměrovat myšlení a hodnoty + změnit kulturu. Microsoft pod Nadellou — growth mindset." },
-            { c: VSE.warning, t: "SPECIFICKÁ", d: "Zaměřená na určitou personální činnost. Cíl: změnit zavedenou praxi a metody. Příklady: strategie získávání pracovníků, strategie rozvoje, strategie pracovních vztahů." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-      </div>) },
-
-    { id: "nastroje", title: "🛠️ Nástroje realizace HR strategie + politiky", opacity: "Politika náboru, odměňování, rozvoje, performance, diverzity", color: VSE.fph, emoji: "tools",
-      content: (<div>
-        <Def color={VSE.fph}>
-          HR strategie se realizuje přes <b>HR politiky</b> (formální dokumenty) a <b>nástroje</b> (operativní, taktické, strategické). Aneta chce, abys uměl pojmenovat politiky a nástroje.
-        </Def>
-        <Tag color={VSE.fph}>5 klíčových HR politik</Tag>
+        <Tag color={VSE.fph}>Osm kroků koloběhu zaměstnance</Tag>
         <Bullet items={[
-          "<b>Politika náboru:</b> Job description, kanály, selekce, structured interviews, blind recruitment",
-          "<b>Politika odměňování:</b> Pay structure, bonusy, benefity, compa-ratio target, pay equity",
-          "<b>Politika rozvoje:</b> Training budget, kompetenční model, career paths, succession planning",
-          "<b>Politika performance:</b> Review cyklus, KPI, calibration, promotion criteria",
-          "<b>Politika diverzity:</b> DEI cíle, kvóty (pokud), bias training, ERGs",
+          "<b>1. Předvýběr</b> — koho vůbec chceme oslovit, jaký člověk k nám sedí.",
+          "<b>2. Výběr</b> — pohovory, výběr toho pravého z uchazečů.",
+          "<b>3. Adaptace</b> — zaučení, aby nový člověk co nejdřív zapadl a začal být užitečný.",
+          "<b>4. Stimulace a hodnocení</b> — motivování a pravidelné hodnocení výkonu.",
+          "<b>5. Rozvoj</b> — školení, růst dovedností, nové výzvy.",
+          "<b>6. Řízení kariéry</b> — kam člověk může růst, jaká je jeho cesta.",
+          "<b>7. Plánování pracovních míst</b> — jaké role bude firma potřebovat.",
+          "<b>8. Udržení a odchod</b> — jak si lidi udržet a jak se s nimi rozloučit.",
+          "<b>Klíč:</b> Není to jednorázová akce, ale <b>nikdy nekončící koloběh</b>. Když firma jeden krok zanedbá, projeví se to dál.",
         ]} color={VSE.fph} />
-        <Tag color={VSE.warning}>Nástroje realizace HR strategie</Tag>
+        <Tag color={VSE.warning}>Metody hodnocení výkonu</Tag>
+        <Bullet items={[
+          "<b>Sebehodnocení</b> — zaměstnanec ohodnotí sám sebe.",
+          "<b>360 stupňů</b> — hodnotí nadřízený, kolegové, podřízení i sám zaměstnanec. Nejucelenější pohled.",
+          "<b>Hodnotící stupnice</b> — známkování (A–C nebo body).",
+          "<b>Hodnocení od kolegů</b> (peer review).",
+          "<b>Plnění cílů a norem</b> — měřitelné výsledky.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.danger}>Časté chyby při hodnocení — pozor na ně</Tag>
+        <Bullet items={[
+          "<b>Špatně zvolený cíl</b> — měříme něco, co nevypovídá o skutečném výkonu.",
+          "<b>Všichni jsou průměrní</b> — hodnotitel se bojí dát extrémy, všem dá střed. Hodnocení ztrácí smysl.",
+          "<b>Halo efekt</b> — jedna výrazná vlastnost přebije celkový dojem. Sympatický člověk dostane lepší známku, i když nepracuje líp.",
+          "<b>Zaujatost</b> — osobní sympatie nebo antipatie ovlivní hodnocení.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "strategie", title: "Strategie ŘLZ — propojení s firmou a tři typy", subtitle: "Vize, mise, hodnoty + specifická / komplexní / pracovní vztahy", color: VSE.fph, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Strategie ŘLZ nestojí sama o sobě. Musí být <b>propojená s tím, kam firma směřuje a čemu věří</b>. Když chce firma růst a inovovat, potřebuje jiné lidi a jiný přístup, než když chce jen levně vyrábět.
+        </Def>
+        <Tag color={VSE.fph}>S čím musí být strategie ŘLZ propojená</Tag>
+        <Bullet items={[
+          "<b>S vizí</b> — čím chce firma být.",
+          "<b>S misí</b> — co firma je a co dělá.",
+          "<b>S hodnotami</b> — jak se k sobě lidé chovají.",
+          "<b>Se strategií firmy</b> — jakou cestou jde firma k cíli.",
+          "<b>Pamatuj:</b> Personální strategie není ostrov. Když je odtržená od firmy, lidé táhnou jiným směrem než byznys.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Tři typy strategie ŘLZ</Tag>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.warning, t: "OPERATIVNÍ", d: "Procesy, šablony, formuláře, HRIS systém, ATS, e-learning platforma. Day-to-day operations." },
-            { c: VSE.fph, t: "TAKTICKÉ", d: "Programy a kampaně — onboarding program, mentoring program, leadership development, engagement campaigns." },
-            { c: VSE.fmv, t: "STRATEGICKÉ", d: "Transformační projekty — kulturní změna, M&A integrace, digitální transformace HR, building global org." },
+            { c: VSE.fmv, t: "🎯 SPECIFICKÁ", d: "Zaměřená na jednu konkrétní personální činnost. Příklad: strategie získávání pracovníků nebo strategie odměňování. Řeší dílčí oblast." },
+            { c: VSE.warning, t: "🔄 KOMPLEXNÍ (transformační)", d: "Mění firmu jako celek — přesměrovává myšlení, hodnoty a kulturu. Velká změna napříč celou firmou. Příklad: změna z rigidní na inovativní kulturu." },
+            { c: VSE.fph, t: "🤝 STRATEGIE PRACOVNÍCH VZTAHŮ", d: "Dlouhodobá. Řeší vztahy mezi firmou a zaměstnanci (i odbory) v dlouhém horizontu. Stabilita a férovost." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -13323,107 +13327,130 @@ function OkruhHr8Panel() {
             </GlassBox>
           ))}
         </ResponsiveGrid>
-        <Tag color={VSE.danger}>Hard HRM × Soft HRM (Storey 1992)</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.danger, t: "HARD HRM", d: "Lidé jako ZDROJ. Optimalizace, kontrola, měření, KPI, exit fast. Amazon, McDonald's operations. Efektivita > vztahy." },
-            { c: VSE.success, t: "SOFT HRM", d: "Lidé jako HODNOTA. Rozvoj, kultura, motivace, engagement, retention. Patagonia, IKEA. Vztahy > efektivita." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.success}>Většina moderních firem = hybrid</Tag>
+        <Tag color={VSE.fph}>Konkrétní strategie podle činnosti — příklad rozvoje</Tag>
         <Bullet items={[
-          "Google: Soft HRM pro engineering (kultura, autonomie) + Hard HRM pro ads sales (KPI, quotas)",
-          "Microsoft pod Nadellou: posun z Hard (stack ranking) na Soft (growth mindset)",
-          "Toyota: Hard HRM v procesech + Soft HRM v lidech (kaizen, respect)",
-        ]} color={VSE.success} />
+          "Pro každou personální činnost lze nastavit konkrétní strategii. Příklad pro <b>rozvoj zaměstnanců</b>:",
+          "<b>Rotace</b> — člověk střídá různé pozice, učí se nové věci a chápe firmu z více stran.",
+          "<b>Následovnictví</b> — příprava nástupců na klíčové pozice, aby firma nezůstala bez lidí.",
+          "<b>Mentoring</b> — zkušený kolega vede mladšího, předává mu znalosti a zkušenosti.",
+          "<b>Přednášky a školení</b> — klasické vzdělávání, kurzy, semináře.",
+        ]} color={VSE.fph} />
       </div>) },
 
-    { id: "organizace", title: "🏗️ Organizace HR útvaru + plánování lidských zdrojů", subtitle: "Velikost, struktura, kompetence personalistů", color: VSE.fph, emoji: "tools",
+    { id: "planovani", title: "Plánování lidských zdrojů + úkol personálního útvaru", subtitle: "Kolik lidí, kdy a proč — a kdo se o ně stará", color: VSE.fph, emoji: "people",
       content: (<div>
         <Def color={VSE.fph}>
-          HR útvar je strukturovaný podle velikosti a strategie firmy. Klíčový mezník: <b>100-150 zaměstnanců</b> = první personalista. Pak roste struktura.
+          <b>Plánování lidských zdrojů</b> = předvídat dopředu, kolik a jakých lidí bude firma potřebovat. Bez něj firma řeší lidi až na poslední chvíli — a pak buď nestíhá, nebo má lidí zbytečně moc.
         </Def>
-        <Tag color={VSE.fph}>Faktory uspořádání HR útvaru</Tag>
+        <Tag color={VSE.fph}>Co plánování lidí řeší</Tag>
         <Bullet items={[
-          "<b>Velikost podniku</b> (100-150 zam-ců = první personalista)",
-          "<b>Strategie organizace</b> (growth-stage potřebuje silnější HR)",
-          "<b>Organizační kultura</b> (Soft HRM = větší HR investment)",
-          "<b>Obor činnosti</b> (knowledge intensive = víc HR investment)",
+          "<b>Kolik pracovníků</b> firma potřebuje a <b>k jakému termínu</b>.",
+          "<b>Předpovídá budoucí potřebu</b> — bude lidí nadbytek, nebo nedostatek?",
+          "<b>Nadbytek</b> = zbytečné náklady, někoho je třeba propustit nebo přesunout.",
+          "<b>Nedostatek</b> = nestíháme zakázky, je třeba nabírat (a to trvá měsíce).",
+          "<b>Pamatuj:</b> Lidi se plánují stejně jako peníze nebo výroba. Když firma plánuje všechno kromě lidí, dřív nebo později ji to dožene.",
         ]} color={VSE.fph} />
-        <Tag color={VSE.warning}>Organizace HR ve velkých firmách</Tag>
+        <Tag color={VSE.warning}>Úkoly personálního útvaru — co všechno HR dělá</Tag>
         <Bullet items={[
-          "<b>Liniově-štábní organizace</b> — členěná na oddělení specializovaná podle činností (recruitment, comp & ben, learning, employee relations)",
-          "<b>Front a back office</b> — front útvary přiděleny ke business units, back office centralizovaná administrativa",
-          "<b>Centers of Excellence (CoE)</b> — specializované týmy (talent acquisition, talent development, comp & ben)",
-          "<b>Shared Services</b> — centralizovaná HR operations, payroll, často outsourcing",
+          "<b>Vytváření pracovních míst</b> a popis rolí.",
+          "<b>Plánování lidských zdrojů</b> (kolik a kdy).",
+          "<b>Získávání a výběr</b> zaměstnanců + jejich adaptace.",
+          "<b>Organizace práce, bezpečnost</b> (BOZP).",
+          "<b>Hodnocení, vzdělávání</b> a péče o vztahy na pracovišti.",
         ]} color={VSE.warning} />
-        <Tag color={VSE.success}>Plánování lidských zdrojů (HRP)</Tag>
+        <Tag color={VSE.fph}>Dva přístupy k tvorbě pracovních míst</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.warning, t: "⚙️ MECHANISTICKÝ přístup", d: "Úzká specializace — člověk dělá pořád to samé. + Rychlé zaučení levné pracovní síly, vysoká produktivita. − Monotonie, člověk nemůže uplatnit schopnosti ani iniciativu. Typické pro pásovou výrobu." },
+            { c: VSE.success, t: "🌱 MOTIVAČNÍ přístup", d: "Pestrá a smysluplná práce. Člověk má autonomii (rozhoduje sám), vidí výsledky své práce, dostává zpětnou vazbu, učí se. Náročnější na řízení, ale lidé jsou spokojenější a zapálenější." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Odbory — nezapomeň na ně</Tag>
         <Bullet items={[
-          "<b>Procesně zaměřené rozhodování</b> — kolik dodatečných pracovníků organizace potřebuje a kdy",
-          "<b>Předpověď budoucích požadavků</b> z hlediska počtu a struktury (skills mix)",
-          "<b>Postup:</b> rozbor prostředí → předpověď poptávky a nabídky → identifikace rozdílů → harmonogram akcí → kontrola + vyhodnocení",
-          "<b>Nedostatek:</b> nábor (FT/PT/dohody), agentury, investice do rozvoje stávajících",
-          "<b>Nadbytek:</b> redukce přesčasů, ukončení DPP, neplacená dovolená, outplacement, dočasné přidělení",
-        ]} color={VSE.success} />
+          "<b>Odbory</b> = organizace hájící zájmy zaměstnanců. Jejich základní cíle:",
+          "<b>Zachování pracovních míst</b> a zvýšení jejich počtu.",
+          "<b>Zvýšení mezd</b> a zlepšení pracovních podmínek.",
+          "S odbory firma vede <b>kolektivní vyjednávání</b> — dohaduje mzdy a podmínky pro celé skupiny zaměstnanců.",
+        ]} color={VSE.danger} />
       </div>) },
 
-    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro HR 8 — Anetina otázka", color: VSE.success, emoji: "target",
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro HR 8", color: VSE.success, emoji: "target",
       content: (<div>
         <Def color={VSE.success}>
-          Aneta chce <b>najít principy v PS + doporučení</b>. To je analytická otázka — najdi, jakou strategii firma má, kde má gap, doporučte konkrétní změny.
+          HR 8 je analytická otázka. Komise chce, abys v případovce <b>našel, jak firma pracuje s lidmi</b>, kde má slabinu, a navrhl konkrétní zlepšení. Bez konkrétního doporučení padá hodnocení.
         </Def>
-        <Tag color={VSE.success}>7 kroků na případovku</Tag>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
         <Bullet items={[
-          "1. <b>Identifikuj typ strategie ŘLZ</b> firmy — Komplexní (transformační) × Specifická?",
-          "2. <b>4 oblasti</b> — kterou firma řeší, která chybí (talents, kapacity, výkon, prostředí)?",
-          "3. <b>Hard × Soft HRM</b> — orientace firmy. Většinou hybrid, ale s důrazem na jednu stranu.",
-          "4. <b>Ulrich 4 role</b> — která role HR oddělení převažuje (admin / champion / change agent / strategic)?",
-          "5. <b>HR politiky</b> — má firma formální politiky (nábor / odměňování / rozvoj / performance / diverzita)?",
-          "6. <b>Nástroje</b> — má firma operativní (HRIS), taktické (programs), strategické (transformace)?",
-          "7. <b>Doporučení</b> — konkrétně co změnit, aby HR podporovalo business strategii. Bez tohoto kroku Aneta dá trojku.",
+          "<b>1.</b> Najdi, <b>jakou strategii s lidmi firma má</b> — specifická, komplexní, nebo vztahová? Často to není napsané, musíš to odvodit z chování firmy.",
+          "<b>2.</b> Projdi <b>koloběh zaměstnance</b> (8 kroků) — který krok firma zanedbává? (Často chybí adaptace, rozvoj nebo příprava nástupců.)",
+          "<b>3.</b> Posuď <b>plánování lidí</b> — plánuje firma dopředu, nebo hasí požáry?",
+          "<b>4.</b> Ověř <b>propojení s vizí firmy</b> — táhne personální práce stejným směrem jako byznys?",
+          "<b>5.</b> Mrkni na <b>přístup k práci</b> — mechanistický (monotonie) nebo motivační (smysl)?",
+          "<b>6.</b> Najdi <b>chyby v hodnocení</b> — halo efekt, všichni průměrní, zaujatost?",
+          "<b>7.</b> <b>Doporuč konkrétně</b> — co změnit, aby lidé podporovali cíle firmy. Ne obecné fráze, ale konkrétní kroky.",
         ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Najít konkrétní slabinu v koloběhu zaměstnance + navrhnout řešení.",
+          "<b>✅ Dobře:</b> Ukázat, že personální práce má navazovat na strategii firmy.",
+          "<b>✅ Dobře:</b> Rozpoznat, jestli firma plánuje lidi, nebo jen reaguje.",
+          "<b>❌ Špatně:</b> Jen vyjmenovat teorii bez napojení na případovku.",
+          "<b>❌ Špatně:</b> Obecné doporučení typu 'měli by se víc starat o lidi' bez konkrétních kroků.",
+        ]} color={VSE.warning} />
       </div>) },
   ];
 
   const flashcardsHr8 = [
-    { term: "Strategie ŘLZ", def: "Dlouhodobý plán, jak HR podporuje strategické cíle firmy. HR jako business partner, ne jen administrativa.", tag: "DEFINICE" },
-    { term: "Vize HR (Aneta)", def: "Podílet se na strategii byznysu pomocí rozvoje talentů a tvorbou správné schopnosti organizace růst.", tag: "VIZE" },
-    { term: "HR Business Partner", def: "Personalista, který rozumí fungování businessu a současně zná personalistiku. Rovnocenný CFO, COO, CMO.", tag: "HRBP" },
-    { term: "4 strategické cíle HRM", def: "1) Budování lidské kapacity, 2) Zajištění talentů, 3) Přispění k org. změně, 4) Formování leadershipu.", tag: "STRATEGIE" },
-    { term: "Komplexní strategie ŘLZ", def: "Transformační — prosazuje změnu v organizaci jako celku. Mění myšlení a hodnoty, kulturu. Microsoft pod Nadellou.", tag: "TYPY" },
-    { term: "Specifická strategie ŘLZ", def: "Zaměřená na určitou personální činnost (nábor / rozvoj / odměňování / pracovní vztahy). Cíl: změnit zavedenou praxi.", tag: "TYPY" },
-    { term: "4 oblasti strategie ŘLZ", def: "1) Talents (získávání/rozvoj/stabilizace), 2) Kapacity (kompetenční model), 3) Výkon/angažovanost/inovace, 4) Živné prostředí.", tag: "OBLASTI" },
-    { term: "Hard HRM", def: "Lidé jako ZDROJ. Optimalizace, kontrola, KPI, exit fast. Amazon, McDonald's operations. Efektivita > vztahy.", tag: "HARD/SOFT" },
-    { term: "Soft HRM", def: "Lidé jako HODNOTA. Rozvoj, kultura, motivace, engagement. Patagonia, IKEA. Vztahy > efektivita.", tag: "HARD/SOFT" },
-    { term: "Storey 1992", def: "John Storey definoval Hard HRM × Soft HRM. Klasický rámec orientace HR strategie.", tag: "HARD/SOFT" },
-    { term: "5 HR politik", def: "Nábor, Odměňování, Rozvoj, Performance, Diverzita. Formální dokumenty implementující HR strategii.", tag: "POLITIKY" },
-    { term: "Operativní HR nástroje", def: "Procesy, šablony, formuláře, HRIS, ATS, e-learning. Day-to-day operations.", tag: "NÁSTROJE" },
-    { term: "Taktické HR nástroje", def: "Programy a kampaně — onboarding, mentoring, leadership development, engagement campaigns.", tag: "NÁSTROJE" },
-    { term: "Strategické HR nástroje", def: "Transformační projekty — kulturní změna, M&A integrace, digitální transformace HR.", tag: "NÁSTROJE" },
-    { term: "Centers of Excellence (CoE)", def: "Specializované HR týmy: talent acquisition, talent development, comp & ben, learning. Podpora HRBP.", tag: "ORGANIZACE" },
-    { term: "Shared Services HR", def: "Centralizovaná HR operations, payroll. Často outsourcing. Pro rutinní procesy.", tag: "ORGANIZACE" },
-    { term: "Plánování lidských zdrojů (HRP)", def: "Procesně zaměřené rozhodování — kolik pracovníků kdy. Předpověď poptávky/nabídky, identifikace gap, plán akcí.", tag: "PLÁNOVÁNÍ" },
-    { term: "Mezník 100-150 zaměstnanců", def: "Velikost firmy, kdy je potřeba vytvořit místo personalisty. Pod = manažeři si dělají HR sami.", tag: "ORGANIZACE" },
+    { term: "Strategie ŘLZ", def: "Dlouhodobý plán, jak firma pracuje s lidmi, aby naplnila své cíle. Most mezi strategií firmy a péčí o lidi.", tag: "DEFINICE" },
+    { term: "Cíl řízení výkonu", def: "Mít správné lidi ve správný čas na správném místě. Jedna věta, jádro celého personálního řízení.", tag: "DEFINICE" },
+    { term: "Kdo řídí výkon", def: "Hlavní odpovědnost má liniový manažer (přímý nadřízený), ne HR. HR mu pomáhá rozvojem, motivací a zpětnou vazbou.", tag: "DEFINICE" },
+    { term: "4 cíle strategie ŘLZ", def: "1) Budovat kapacitu lidí, 2) Zajistit talenty (i nástupce), 3) Pomoct firmě se měnit, 4) Vychovávat lídry.", tag: "CÍLE" },
+    { term: "Systém ŘLZ (koloběh)", def: "Předvýběr → výběr → adaptace → stimulace a hodnocení → rozvoj → řízení kariéry → plánování míst → udržení a odchod.", tag: "SYSTÉM" },
+    { term: "Předvýběr a výběr", def: "Předvýběr = koho oslovit, kdo k nám sedí. Výběr = pohovory a volba toho pravého z uchazečů.", tag: "SYSTÉM" },
+    { term: "Adaptace", def: "Zaučení nového člověka, aby co nejdřív zapadl a začal být užitečný. Často podceňovaný krok koloběhu.", tag: "SYSTÉM" },
+    { term: "Řízení kariéry", def: "Kam člověk může ve firmě růst, jaká je jeho cesta. Bez toho talenti odcházejí, protože nevidí budoucnost.", tag: "SYSTÉM" },
+    { term: "Metody hodnocení", def: "Sebehodnocení, 360 stupňů (nadřízený + kolegové + podřízení + sám), hodnotící stupnice, hodnocení od kolegů, plnění cílů.", tag: "HODNOCENÍ" },
+    { term: "360 stupňů", def: "Hodnotí nadřízený, kolegové, podřízení i sám zaměstnanec. Nejucelenější pohled na výkon člověka.", tag: "HODNOCENÍ" },
+    { term: "Chyba: halo efekt", def: "Jedna výrazná vlastnost přebije celkový dojem. Sympatický člověk dostane lepší známku, i když nepracuje líp.", tag: "CHYBY" },
+    { term: "Chyba: všichni průměrní", def: "Hodnotitel se bojí dát extrémy, všem dá střed. Hodnocení pak ztrácí smysl, nerozliší dobré od slabých.", tag: "CHYBY" },
+    { term: "Chyba: zaujatost", def: "Osobní sympatie nebo antipatie ovlivní hodnocení místo skutečného výkonu.", tag: "CHYBY" },
+    { term: "Chyba: špatný cíl", def: "Měříme něco, co nevypovídá o skutečném výkonu. Špatně zvolený standard zkreslí celé hodnocení.", tag: "CHYBY" },
+    { term: "Propojení strategie ŘLZ", def: "Musí být propojená s vizí (čím chce být), misí (co děláme), hodnotami (jak se chováme) a strategií firmy (cesta k cíli).", tag: "STRATEGIE" },
+    { term: "Specifická strategie ŘLZ", def: "Zaměřená na jednu personální činnost (získávání, odměňování). Řeší dílčí oblast.", tag: "TYPY" },
+    { term: "Komplexní strategie ŘLZ", def: "Transformační — mění firmu jako celek, přesměrovává myšlení, hodnoty a kulturu. Velká změna napříč firmou.", tag: "TYPY" },
+    { term: "Strategie pracovních vztahů", def: "Dlouhodobá. Řeší vztahy mezi firmou a zaměstnanci (i odbory) v dlouhém horizontu. Stabilita a férovost.", tag: "TYPY" },
+    { term: "Konkrétní strategie rozvoje", def: "Rotace (střídání pozic), následovnictví (příprava nástupců), mentoring (zkušený vede mladšího), přednášky a školení.", tag: "STRATEGIE" },
+    { term: "Plánování lidských zdrojů", def: "Předvídat dopředu, kolik a jakých lidí firma bude potřebovat a kdy. Bez něj firma hasí požáry.", tag: "PLÁNOVÁNÍ" },
+    { term: "Nadbytek × nedostatek lidí", def: "Nadbytek = zbytečné náklady. Nedostatek = nestíháme zakázky, nábor trvá měsíce. Plánování oboje předvídá.", tag: "PLÁNOVÁNÍ" },
+    { term: "Úkoly personálního útvaru", def: "Tvorba míst, plánování LZ, nábor a výběr, adaptace, organizace práce, BOZP, hodnocení, vzdělávání, vztahy.", tag: "ÚTVAR" },
+    { term: "Mechanistický přístup", def: "Úzká specializace, člověk dělá pořád to samé. + Rychlé zaučení, vysoká produktivita. − Monotonie, žádný rozvoj. Pásová výroba.", tag: "PŘÍSTUPY" },
+    { term: "Motivační přístup", def: "Pestrá smysluplná práce. Autonomie, viditelné výsledky, zpětná vazba, učení. Náročnější, ale lidé spokojenější.", tag: "PŘÍSTUPY" },
+    { term: "Odbory", def: "Organizace hájící zájmy zaměstnanců. Cíle: zachování pracovních míst, zvýšení mezd a lepší podmínky.", tag: "ODBORY" },
+    { term: "Kolektivní vyjednávání", def: "Firma s odbory dohaduje mzdy a podmínky pro celé skupiny zaměstnanců najednou, ne s každým zvlášť.", tag: "ODBORY" },
   ];
 
   const quizHr8 = [
-    { q: "Co je strategie ŘLZ?", opts: ["Pouze nábor a propouštění", "Dlouhodobý plán, jak HR podporuje strategické cíle firmy — HR jako business partner", "Roční HR rozpočet", "Synonymum pro HR controlling"], correct: 1 },
-    { q: "Jaká je vize HR podle Anety?", opts: ["Snížit náklady", "Podílet se na strategii byznysu pomocí rozvoje talentů a tvorbou schopnosti organizace růst", "Administrativní podpora", "Compliance s pracovním zákonem"], correct: 1 },
-    { q: "Které jsou 4 strategické cíle HRM?", opts: ["Hire / Fire / Pay / Train", "Budování kapacity / Zajištění talentů / Přispění k org. změně / Formování leadershipu", "Recruit / Develop / Retain / Exit", "Plan / Do / Check / Act"], correct: 1 },
-    { q: "Co je komplexní strategie ŘLZ?", opts: ["Strategie pro velké firmy", "Transformační — prosazuje změnu v organizaci jako celku (myšlení, hodnoty, kultura)", "Synonymum pro náborovou strategii", "Strategie s mnoha politikami"], correct: 1 },
-    { q: "Co je specifická strategie ŘLZ?", opts: ["Strategie pro CEO", "Zaměřená na určitou personální činnost (nábor / rozvoj / odměňování)", "Tajná HR strategie", "Strategie pro startup"], correct: 1 },
-    { q: "Které jsou 4 oblasti strategie ŘLZ podle Anety?", opts: ["Hire / Fire / Pay / Train", "Talents / Kapacity / Výkon-angažovanost-inovace / Živné prostředí", "K / S / A / Attitudes", "Strategie / Struktura / Kultura / Motivace"], correct: 1 },
-    { q: "Co je Hard HRM (Storey)?", opts: ["Tvrdá pravidla pro zaměstnance", "Lidé jako ZDROJ — optimalizace, kontrola, KPI, exit fast (Amazon, McDonald's)", "Synonymum pro tvrdé skills", "HRM bez emocí"], correct: 1 },
-    { q: "Co je Soft HRM (Storey)?", opts: ["Měkké pracovní podmínky", "Lidé jako HODNOTA — rozvoj, kultura, motivace, engagement (Patagonia, IKEA)", "Synonymum pro soft skills", "HRM zaměřený jen na hard skills"], correct: 1 },
-    { q: "Kolik HR politik typicky firma má?", opts: ["1 — všechno v jedné", "5 — nábor, odměňování, rozvoj, performance, diverzita", "10+", "Žádné — politiky nejsou potřeba"], correct: 1 },
-    { q: "Co je rozdíl mezi operativním, taktickým a strategickým HR nástrojem?", opts: ["Jen názvosloví, stejná věc", "Operativní = day-to-day (HRIS), Taktické = programy (mentoring), Strategické = transformace (kulturní změna)", "Jen velikost firmy", "Jen budget"], correct: 1 },
-    { q: "Co jsou Centers of Excellence v HR?", opts: ["Externí HR konzultanti", "Specializované HR týmy (talent acquisition, learning, comp & ben) — podpora HRBP", "Centra školení", "Award programs"], correct: 1 },
-    { q: "Při jaké velikosti firmy je obvykle potřeba první personalista?", opts: ["10 zaměstnanců", "50 zaměstnanců", "100-150 zaměstnanců", "500 zaměstnanců"], correct: 2 },
+    { q: "Co je jádro řízení pracovního výkonu?", opts: ["Maximalizovat zisk", "Mít správné lidi ve správný čas na správném místě", "Snížit náklady", "Vyplácet mzdy"], correct: 1 },
+    { q: "Kdo nese hlavní odpovědnost za řízení výkonu?", opts: ["Personální oddělení", "Liniový manažer (přímý nadřízený), HR mu pomáhá", "Ředitel", "Odbory"], correct: 1 },
+    { q: "Jak vypadá systém ŘLZ?", opts: ["Jednorázová akce", "Koloběh: předvýběr → výběr → adaptace → hodnocení → rozvoj → kariéra → plánování míst → odchod", "Jen nábor", "Jen mzdy"], correct: 1 },
+    { q: "Co je metoda hodnocení 360 stupňů?", opts: ["Jen sebehodnocení", "Hodnotí nadřízený, kolegové, podřízení i sám zaměstnanec — nejucelenější pohled", "Jen nadřízený", "Známkování A-C"], correct: 1 },
+    { q: "Co je halo efekt?", opts: ["Dobré hodnocení", "Jedna výrazná vlastnost přebije celkový dojem — sympatický dostane lepší známku", "Objektivní měření", "Sebehodnocení"], correct: 1 },
+    { q: "Co je chyba 'všichni jsou průměrní'?", opts: ["Správný postup", "Hodnotitel se bojí extrémů, všem dá střed — hodnocení ztrácí smysl", "Halo efekt", "Zaujatost"], correct: 1 },
+    { q: "S čím musí být propojená strategie ŘLZ?", opts: ["Jen s mzdami", "S vizí, misí, hodnotami a strategií firmy", "Jen s nábory", "S ničím"], correct: 1 },
+    { q: "Co je komplexní (transformační) strategie ŘLZ?", opts: ["Jedna činnost", "Mění firmu jako celek — přesměrovává myšlení, hodnoty a kulturu", "Jen odměňování", "Jen nábor"], correct: 1 },
+    { q: "Co je specifická strategie ŘLZ?", opts: ["Mění celou firmu", "Zaměřená na jednu personální činnost (např. získávání nebo odměňování)", "Dlouhodobé vztahy", "Kultura"], correct: 1 },
+    { q: "Co řeší plánování lidských zdrojů?", opts: ["Jen mzdy", "Kolik a jakých lidí firma bude potřebovat a kdy — předvídá nadbytek × nedostatek", "Jen hodnocení", "Odbory"], correct: 1 },
+    { q: "Co je mechanistický přístup k práci?", opts: ["Pestrá práce", "Úzká specializace, monotonie, ale rychlé zaučení a vysoká produktivita", "Autonomie", "Motivace"], correct: 1 },
+    { q: "Co je motivační přístup k práci?", opts: ["Monotonie", "Pestrá smysluplná práce s autonomií, výsledky, zpětnou vazbou a učením", "Pásová výroba", "Úzká specializace"], correct: 1 },
+    { q: "Jaké jsou cíle odborů?", opts: ["Zvýšit zisk firmy", "Zachování pracovních míst, zvýšení mezd a lepší podmínky", "Snížit náklady", "Propouštět"], correct: 1 },
+    { q: "Co je kolektivní vyjednávání?", opts: ["Pohovor", "Firma s odbory dohaduje mzdy a podmínky pro celé skupiny zaměstnanců", "Hodnocení", "Nábor"], correct: 1 },
+    { q: "Co je konkrétní strategie rozvoje?", opts: ["Propouštění", "Rotace, následovnictví, mentoring, přednášky a školení", "Mzdy", "Nábor"], correct: 1 },
+    { q: "Které jsou 4 cíle strategie ŘLZ?", opts: ["Hire/Fire/Pay/Train", "Budovat kapacitu lidí, zajistit talenty, pomoct firmě se měnit, vychovávat lídry", "Jen nábor", "Jen mzdy"], correct: 1 },
   ];
 
   const praxeHr8 = {
@@ -13467,59 +13494,55 @@ function OkruhHr8Panel() {
   const podcastHr8 = { title: "HR 8 — Strategie ŘLZ, nástroje, politiky", description: "Strategie ŘLZ jako business partner, 4 strategické cíle HRM, 2 typy strategie (Komplexní transformační × Specifická), 4 oblasti (talents/kapacity/výkon/prostředí), Hard HRM × Soft HRM (Storey), 5 HR politik, nástroje (operativní/taktické/strategické), organizace HR útvaru (Centers of Excellence, Shared Services), plánování LZ. Patagonia, Microsoft transformace, Amazon Hard HRM.", audioUrl: null, notebookLmUrl: null };
 
   const examStrategyHr8 = `
-    <b style="color:#245373">1.</b> Definice strategie ŘLZ — HR jako business partner, ne administrativa.<br/>
-    <b style="color:#245373">2.</b> Vize HR (Aneta) — podílet se na strategii byznysu přes rozvoj talentů.<br/>
-    <b style="color:#245373">3.</b> 4 strategické cíle HRM — kapacita / talenty / změna / leadership.<br/>
-    <b style="color:#245373">4.</b> 2 typy strategie — Komplexní (transformační) × Specifická (na činnost).<br/>
-    <b style="color:#245373">5.</b> 4 oblasti strategie — talents / kapacity / výkon-angažovanost-inovace / živné prostředí.<br/>
-    <b style="color:#245373">6.</b> ⚠️ Hard HRM × Soft HRM (Storey) — Bočková chce rozlišit! Amazon vs Patagonia.<br/>
-    <b style="color:#245373">7.</b> 5 HR politik — nábor / odměňování / rozvoj / performance / diverzita.<br/>
-    <b style="color:#245373">8.</b> Nástroje realizace — operativní (HRIS) / taktické (programy) / strategické (transformace).<br/>
-    <b style="color:#245373">9.</b> Organizace HR útvaru — liniově-štábní / front-back office / CoE / Shared Services.<br/>
-    <b style="color:#245373">10.</b> Plánování LZ (HRP) — předpověď, gap, akce. Nedostatek × nadbytek.<br/>
-    <b style="color:#245373">11.</b> ⚠️ Aneta chce KONKRÉTNÍ doporučení pro PS. Bez toho trojka.
+    <b style="color:#245373">1.</b> Začni jádrem — <b>mít správné lidi ve správný čas na správném místě</b>.<br/>
+    <b style="color:#245373">2.</b> Odpovědnost má <b>liniový manažer</b>, HR mu pomáhá (rozvoj, motivace, zpětná vazba).<br/>
+    <b style="color:#245373">3.</b> 4 cíle strategie ŘLZ — kapacita lidí / talenty / změna / výchova lídrů.<br/>
+    <b style="color:#245373">4.</b> ⚠️ <b>Systém ŘLZ (koloběh)</b> — předvýběr → výběr → adaptace → hodnocení → rozvoj → kariéra → plánování míst → odchod.<br/>
+    <b style="color:#245373">5.</b> Metody hodnocení — sebehodnocení, 360 stupňů, stupnice, plnění cílů.<br/>
+    <b style="color:#245373">6.</b> ⚠️ <b>Chyby hodnocení</b> — halo efekt, všichni průměrní, zaujatost, špatný cíl.<br/>
+    <b style="color:#245373">7.</b> Strategie ŘLZ propojená s <b>vizí, misí, hodnotami a strategií firmy</b>.<br/>
+    <b style="color:#245373">8.</b> 3 typy strategie — specifická (1 činnost) / komplexní (mění firmu) / pracovní vztahy (dlouhodobé).<br/>
+    <b style="color:#245373">9.</b> Konkrétní strategie rozvoje — rotace, následovnictví, mentoring, školení.<br/>
+    <b style="color:#245373">10.</b> ⚠️ <b>Plánování LZ</b> — kolik lidí a kdy, nadbytek × nedostatek.<br/>
+    <b style="color:#245373">11.</b> Mechanistický × motivační přístup k práci. Úkoly personálního útvaru. Odbory.<br/>
+    <b style="color:#245373">12.</b> ⚠️ Komise chce KONKRÉTNÍ doporučení pro PS. Najít slabinu v koloběhu + navrhnout řešení.
   `;
 
   const caseStudyHr8 = {
-    title: "Roman — CHRO výrobní firmy MetalWorks, 800 zaměstnanců, prochází akvizicí",
-    subtitle: "Identifikuj současnou strategii ŘLZ a navrhni transformaci po akvizici",
-    scenario: "Roman (49 let) je CHRO ve MetalWorks, českém výrobci kovových komponent pro automotive (Škoda, BMW, Hyundai). 800 zaměstnanců: 600 výroba (Plzeň), 80 R&D, 60 sales + customer support, 60 administrativa + management. Tržby 3 mld. Kč ročně, 25 letá tradice, do loňska rodinné vlastnictví.\n\nKlíčová situace: firmu právě koupil německý private equity fond (Schneider Capital) za 2 mld. Kč. Nový vlastník chce dvojnásobit ziskovost za 3 roky → klasická private equity hra. Roman dostal mandát od nového CEO (German Jürgen, 55 let): transformovat HR z reaktivního na strategického business partnera, snížit HR náklady o 15 %, ale neztratit klíčové talenty.\n\nSoučasná HR strategie (před akvizicí): klasický Hard HRM v výrobě (KPI per hour, exit fast for low performers, žádný engagement measurement), Soft HRM v R&D (autonomie, dobrá kultura, nízká fluktuace). HR funguje jako Ulrich Admin Expert — 95 % administrativa, 5 % strategie. Žádné HR Business Partnery, žádné Centers of Excellence.\n\nHR politiky: psaná pouze politika náboru (5 stran procedura) a politika odměňování (mzdové tabulky). Politika rozvoje, performance, diverzity NEEXISTUJÍ jako formální dokumenty. Nábor: outsourcing přes agentury (cena 25 % roční mzdy). Odměňování: fixed + 13. plat + výrobní bonus podle kvartálního výkonu. Žádné stock options ani long-term incentives.\n\nProblém po akvizici: 4 senior R&D lidi dali výpověď (boji se Hard HRM stylu od PE). German CEO chce zavést performance scorecards i v R&D — Roman ví, že to může zničit kulturu inovací. Komplexní transformační strategie ŘLZ je potřeba, ale jak nepoškodit talenty?\n\nRoman má 18 měsíců a 8 mil. Kč budget na transformaci. Schneider Capital posílá HR konzultanty (Mercer) na audit. Aneta v komisi Bočková by chtěla vidět: aktuální Hard × Soft, doporučenou strategii, konkrétní HR politiky + nástroje.",
+    title: "Roman a firma, která neplánuje lidi",
+    subtitle: "Zakázky rostou, ale chybí lidé — a nikdo to nečekal",
+    scenario: "Roman vede výrobní firmu, které se daří. Zakázek přibývá, firma roste, vedení je nadšené. Jenže Roman má čím dál větší starost. Firma plánuje výrobu, plánuje peníze, plánuje stroje — ale vůbec neplánuje lidi. A to se začíná vymstívat.\n\nMinulý měsíc firma podepsala velkou zakázku a teprve pak zjistila, že na ni nemá dost lidí. Nábor trval měsíce, výroba se zdržela, zákazník byl naštvaný. Zároveň několik klíčových lidí odešlo do důchodu a nikdo je nepřipravil nahradit. Jejich zkušenosti odešly s nimi.\n\nRoman si uvědomil, že firma řeší lidi vždycky až na poslední chvíli, hasí požáry. Když někdo chybí, honem hledá náhradu. Když je práce moc, narychlo nabírá. Chybí jakýkoli systém — od toho, jak lidi přijímat a zaučit, přes to, jak je rozvíjet, až po to, jak je udržet a připravit nástupce.\n\nNavíc Roman tuší, že personální práce by měla nějak navazovat na to, kam firma směřuje. Když chce firma růst a inovovat, potřebuje k tomu jiné lidi a jiný přístup, než když chce jen levně vyrábět. Ale ve firmě nikdo takhle o lidech nepřemýšlí.\n\nTeď chce Roman zavést pořádek. Promyslet celý koloběh, kterým člověk ve firmě prochází — od nástupu po odchod. Naučit se předvídat, kolik lidí a kdy bude firma potřebovat. A hlavně propojit personální práci se strategií firmy, aby lidé nebyli jen 'náklad', ale skutečná síla, na které firma stojí.",
     signals: [
-      { text: "klasická private equity hra", color: VSE.warning, reason: "PE typicky tlačí Hard HRM (cost cutting, efficiency, KPI). Roman musí balancovat tlak PE s retention talents." },
-      { text: "snížit HR náklady o 15 %, ale neztratit klíčové talenty", color: VSE.danger, reason: "Klasický paradox po PE akvizici. Nelze jen Hard HRM (talents odejdou) ani jen Soft (PE nesouhlasí)." },
-      { text: "klasický Hard HRM v výrobě ... Soft HRM v R&D", color: VSE.warning, reason: "Hybrid model — vhodný pro mixed firmu. Výroba = Hard funguje, R&D = Soft funguje. Storey rozdíl v praxi." },
-      { text: "HR funguje jako Ulrich Admin Expert — 95 % administrativa, 5 % strategie", color: VSE.danger, reason: "Klasický anti-vzor moderního HR. Ulrich vize: 20 % admin, 80 % strategie. Před akvizicí to fungovalo, teď ne." },
-      { text: "Žádné HR Business Partnery, žádné Centers of Excellence", color: VSE.warning, reason: "Strukturální problém. Bez HRBP nelze efektivně podporovat business strategy. Klíčový gap." },
-      { text: "Politika rozvoje, performance, diverzity NEEXISTUJÍ", color: VSE.danger, reason: "Klasický gap. 3 z 5 klíčových HR politik chybí. PE konzultanti Mercer budou tohle ostře sledovat." },
-      { text: "Nábor: outsourcing přes agentury (cena 25 % roční mzdy)", color: VSE.warning, reason: "Drahé. Pro 800 lidí ROI vlastního talent acquisition týmu by byl rychlý. Klasická optimalizace." },
-      { text: "Žádné stock options ani long-term incentives", color: VSE.warning, reason: "Pro retention klíčových talentů (R&D) kritické. Po PE akvizici typicky management equity plan zavedený." },
-      { text: "4 senior R&D lidi dali výpověď (boji se Hard HRM stylu od PE)", color: VSE.danger, reason: "Tvrdý důkaz risk talent drain. R&D = klíčové pro budoucnost. Bez R&D firma stagnuje." },
-      { text: "German CEO chce zavést performance scorecards i v R&D", color: VSE.danger, reason: "Klasický Hard HRM přístup. Pro inovační týmy = sabotáž kultury. Roman musí German edukovat." },
+      { text: "Firma plánuje výrobu, plánuje peníze, plánuje stroje — ale vůbec neplánuje lidi", color: VSE.danger, reason: "Chybí plánování lidských zdrojů (HR8). Firma neumí předvídat, kolik a jakých lidí bude potřebovat. Důsledek: nadbytek nebo nedostatek lidí ve špatnou chvíli." },
+      { text: "Podepsala velkou zakázku a teprve pak zjistila, že na ni nemá dost lidí", color: VSE.warning, reason: "Klasický důsledek chybějícího plánování LZ (HR8). Personální práce není propojená s plány firmy. Nábor trvá měsíce — musí se předvídat dopředu." },
+      { text: "Několik klíčových lidí odešlo do důchodu a nikdo je nepřipravil nahradit", color: VSE.danger, reason: "Chybí následovnictví — příprava nástupců (HR8). Jeden z kroků koloběhu zaměstnance (řízení kariéry, plánování míst) firma zanedbává." },
+      { text: "Chybí jakýkoli systém — od přijetí a zaučení, přes rozvoj, až po udržení", color: VSE.fph, reason: "Chybí systém ŘLZ — celý koloběh zaměstnance (HR8). Firma neřídí jednotlivé kroky (předvýběr → výběr → adaptace → rozvoj → kariéra → udržení) vědomě." },
+      { text: "Personální práce by měla navazovat na to, kam firma směřuje", color: VSE.success, reason: "Roman sám nahmatává propojení strategie ŘLZ se strategií firmy (HR8). Strategie s lidmi musí být propojená s vizí, misí a směřováním firmy." },
+      { text: "Aby lidé nebyli jen 'náklad', ale skutečná síla, na které firma stojí", color: VSE.fmv, reason: "Posun od reaktivního k strategickému pohledu na lidi (HR8). Lidé jako konkurenční výhoda, ne položka v rozpočtu, kterou se šetří." },
     ],
     quiz1: {
-      question: "Jaký typ strategie ŘLZ MetalWorks potřebuje po akvizici?",
+      question: "Jaký je hlavní problém Romanovy firmy?",
       options: [
-        "Jen Specifická — drobné úpravy stačí",
-        "Komplexní (transformační) — celková transformace HR z Admin Expert (Ulrich) na Strategic Partner, s respektem k Hard/Soft hybrid",
-        "Jen Hard HRM — PE chce výkon, zbytek nemá co řešit",
-        "Žádná strategie — nechat to plynout",
+        "Špatné stroje",
+        "Málo zakázek",
+        "Firma nemá systém řízení lidí ani plánování lidských zdrojů — řeší lidi až na poslední chvíli a personální práce není propojená se strategií firmy.",
+        "Vysoké mzdy",
       ],
-      correct: 1,
+      correct: 2,
     },
     quiz2: {
-      question: "Co by Roman měl zařadit do 18měsíčního transformačního plánu (8 mil Kč)?",
+      question: "Co by měl Roman ve firmě zavést?",
       options: [
-        { text: "Sepsat všechny 5 HR politik (nábor, odměňování, rozvoj, performance, diverzita) — formalizace HR. Bez toho Mercer audit = trojka.", correct: true, reason: "✓ Klíčové. 3 z 5 politik chybí — kritický gap. Mercer audit to bude ostře sledovat. Po akvizici PE chce formalizaci." },
-        { text: "Zachovat Hybrid Hard/Soft HRM — Hard ve výrobě (funguje), Soft v R&D (klíč pro talenty). Edukovat German CEO o riziku scorecards v R&D.", correct: true, reason: "✓ Klasický Storey hybrid v praxi. Roman musí German edukovat — performance scorecards v R&D = ztráta inovací." },
-        { text: "Transformovat HR z Admin Expert (Ulrich) na 4 paralelní role — Admin Expert + Employee Champion + Change Agent + Strategic Partner. Konkrétně: 2 HRBP (po 1 pro výrobu, 1 pro R&D+sales), CoE pro talent acquisition + learning, Shared Services pro payroll.", correct: true, reason: "✓ Klasický Ulrich model. 2 HRBP + CoE + Shared Services. Posun z 95 % admin na 50 % strategy. Klíč pro business partnership." },
-        { text: "Insourcovat talent acquisition — vlastní recruitment team místo agentur (25 % saving). ROI 12 měsíců.", correct: true, reason: "✓ Klasická optimalizace. Pro 800 lidí vlastní recruiter ekonomický. Zlevní nábor a zvýší quality of hire." },
-        { text: "Zavést Long-Term Incentive Plan (LTIP) pro top 20 R&D + sales talentů — vesting 4 roky, klíč pro retention v PE období", correct: true, reason: "✓ Klasické po PE akvizici. LTIP udrží klíčové talenty. Bez toho R&D další odejdou. Standard PE praxe." },
-        { text: "Engagement measurement (eNPS quarterly) + Project Aristotle replica pro R&D týmy", correct: true, reason: "✓ Leading indikátory. Bez engagement measurement = guess work. Pro R&D klíčové (psychological safety)." },
-        { text: "Plně přejít na Hard HRM napříč celou firmou — PE chce efficiency", correct: false, reason: "✗ Klasická chyba. Hard HRM v R&D = útěk talentů. R&D už 4 senior odešli, další budou. Bočková by trojku dala." },
-        { text: "Ignorovat Mercer audit — Roman ví líp", correct: false, reason: "✗ Klasické politické sebevražda po PE akvizici. Mercer reportuje PE. Roman musí spolupracovat." },
+        { text: "Plánování lidských zdrojů — předvídat dopředu, kolik a jakých lidí firma bude potřebovat a kdy. Sledovat hrozící nadbytek i nedostatek.", correct: true, reason: "✓ HR8 — plánování LZ. Lidi se plánují stejně jako výroba nebo peníze. Bez toho firma věčně hasí požáry." },
+        { text: "Promyslet celý koloběh zaměstnance (systém ŘLZ) — od předvýběru a adaptace přes rozvoj a kariéru až po udržení a odchod. Najít, který krok firma zanedbává.", correct: true, reason: "✓ HR8 — systém ŘLZ. Vědomé řízení každého kroku koloběhu. Firma teď zanedbává adaptaci, rozvoj i přípravu nástupců." },
+        { text: "Zavést následovnictví — připravovat nástupce na klíčové pozice, aby firma nezůstala bez lidí, když někdo odejde nebo jde do důchodu.", correct: true, reason: "✓ HR8 — konkrétní strategie rozvoje (následovnictví). Řeší přesně problém odcházejících klíčových lidí a ztráty jejich zkušeností." },
+        { text: "Propojit personální strategii se strategií firmy — s vizí, misí a směřováním. Když chce firma růst a inovovat, potřebuje k tomu odpovídající lidi a přístup.", correct: true, reason: "✓ HR8 — propojení strategie ŘLZ. Personální práce nesmí být ostrov. Musí táhnout stejným směrem jako byznys." },
+        { text: "Nechat to být, lidi se vždycky nějak najdou", correct: false, reason: "✗ Přesně tenhle reaktivní přístup způsobil problém. Bez plánování firma dál nestíhá zakázky a ztrácí klíčové lidi." },
+        { text: "Jen zvednout všem platy", correct: false, reason: "✗ Vyšší mzdy nevyřeší chybějící systém ani plánování. Problém není v penězích, ale v absenci řízení lidí." },
+        { text: "Outsourcovat všechen nábor agentuře", correct: false, reason: "✗ Agentura nevyřeší vnitřní chybějící systém — adaptaci, rozvoj, přípravu nástupců ani propojení se strategií firmy." },
       ],
     },
-    summary: "<b>MetalWorks potřebuje Komplexní (transformační) strategii ŘLZ.</b> Klíčem je respektovat Hybrid Hard/Soft (Storey) a transformovat HR z Admin Expert na Strategic Partner (Ulrich).<br/><br/><b>18měsíční plán (8 mil Kč, 3 fáze):</b><br/>• <b>Fáze 1 (měsíce 1-6) — Foundation:</b> Sepsat 5 HR politik, Audit Hard/Soft per organizational unit, Education German CEO o Storey × Ulrich rozdílech<br/>• <b>Fáze 2 (měsíce 7-12) — Organizational redesign:</b> 2 HRBP přiřazené k business units (výroba + R&D), Centers of Excellence (talent acquisition + learning), Shared Services pro payroll. Insource recruitment.<br/>• <b>Fáze 3 (měsíce 13-18) — Strategic enablement:</b> LTIP pro top 20 talentů, eNPS quarterly + Aristotle replica v R&D, HR Balanced Scorecard launch, Mercer audit completion.<br/><br/><b>Pro komisi (Bočková):</b> Klasický příklad firmy po PE akvizici s tlakem na efficiency, ale i retention. Hybrid Hard/Soft HRM v praxi (Storey). Patagonia Soft HRM jako benchmark pro R&D, Amazon Hard HRM pro výrobu — ale v jedné firmě. Komplexní transformační strategie přes Ulrich model. ⚠️ Aneta chce konkrétní doporučení — ne obecné fráze, ale specifické politiky, role, nástroje.",
+    summary: "<b>Romanova firma neřídí lidi systematicky a neplánuje je dopředu.</b> Plánuje výrobu, peníze i stroje, ale ne lidi — a to ji dohání v podobě zpožděných zakázek a ztracených zkušeností odcházejících lidí.<br/><br/><b>Co by měl Roman udělat:</b><br/><br/>• <b>Zavést plánování lidských zdrojů.</b> Předvídat dopředu, kolik a jakých lidí firma bude potřebovat a kdy. Sledovat hrozící nadbytek (zbytečné náklady) i nedostatek (nestíhání zakázek, nábor trvá měsíce). Lidi se plánují stejně jako výroba nebo peníze.<br/><br/>• <b>Promyslet celý systém ŘLZ — koloběh zaměstnance.</b> Od předvýběru a výběru, přes adaptaci (zaučení), stimulaci a hodnocení, rozvoj, řízení kariéry, plánování míst, až po udržení a odchod. Najít, který krok firma zanedbává — typicky adaptaci, rozvoj a přípravu nástupců.<br/><br/>• <b>Zavést následovnictví.</b> Připravovat nástupce na klíčové pozice, aby firma nezůstala bez lidí, když někdo odejde nebo jde do důchodu. K rozvoji využít i rotaci a mentoring, aby se zkušenosti předávaly dál.<br/><br/>• <b>Propojit personální strategii se strategií firmy.</b> Personální práce nesmí být ostrov. Musí navazovat na vizi, misi, hodnoty a směřování firmy. Když chce firma růst a inovovat, potřebuje k tomu odpovídající lidi a přístup (spíš motivační než mechanistický).<br/><br/>• <b>Změnit pohled na lidi.</b> Z 'nákladu, na kterém se šetří' na 'sílu, na které firma stojí'. Spokojení a rozvíjení lidé jsou konkurenční výhoda.<br/><br/><b>Pro komisi:</b> Klasický příklad firmy, která řídí všechno kromě lidí. Klíč: <b>systém ŘLZ (koloběh 8 kroků)</b> + <b>plánování lidských zdrojů (nadbytek × nedostatek)</b> + <b>propojení strategie ŘLZ s vizí firmy</b> + <b>konkrétní strategie rozvoje (rotace, následovnictví, mentoring)</b> + <b>mechanistický × motivační přístup k práci</b>. Komise chce KONKRÉTNÍ doporučení — najít zanedbaný krok v koloběhu a navrhnout řešení.",
   };
 
   return (
@@ -13528,7 +13551,6 @@ function OkruhHr8Panel() {
       subtitle="Strategie ŘLZ + Hard × Soft HRM + politiky + nástroje + organizace HR"
       color={VSE.fph}
       questionText="Strategie řízení lidských zdrojů, nástroje, politiky její realizace, najít principy v případovce, navrhnout doporučení na situaci v případovce."
-      questionDesc="Strategie ŘLZ jako business partner. Vize HR (Aneta!). 4 strategické cíle HRM. 2 typy strategie (Komplexní transformační × Specifická). 4 oblasti (talents/kapacity/výkon/prostředí). Hard × Soft HRM (Storey — Bočková!). 5 HR politik (nábor/odměňování/rozvoj/performance/diverzita). Nástroje (operativní/taktické/strategické). Organizace HR útvaru (Centers of Excellence, Shared Services). Plánování LZ. ⚠️ Aneta chce KONKRÉTNÍ doporučení pro PS."
       sloz={3} roz={3} freq={3}
       examStrategy={examStrategyHr8}
       studySections={studySectionsHr8}
@@ -13552,7 +13574,7 @@ function OkruhHr9Panel() {
         <Def color={VSE.fph}>
           <b>Intelektuální kapitál (IK)</b> = nehmotné vlastnictví organizace. <b>Galbraith:</b> kombinace lidského, strukturálního a vztahového kapitálu. V 21. století <b>80 % hodnoty firmy je v nehmotných aktivech</b> (lidi, know-how, brand, vztahy).
         </Def>
-        <Tag color={VSE.fph}>3 Anetiny subotázky u HR 9</Tag>
+        <Tag color={VSE.fph}>3 subotázky u HR 9</Tag>
         <Bullet items={[
           "<b>1. Jakým způsobem může HR ovlivňovat intelektuální kapitál organizace?</b>",
           "<b>2. Jak lze popsat strategické schopnosti firmy v případové studii?</b>",
@@ -13599,27 +13621,35 @@ function OkruhHr9Panel() {
         ]} color={VSE.danger} />
       </div>) },
 
-    { id: "kompetencni", title: "ð§ KompetenÄnÃ­ model + strategickÃ© kompetence", subtitle: "KSA + Attitudes detailnÄ v HR 5 â zde aplikace na strategickÃ© schopnosti", color: VSE.fph, emoji: "tools",
+    { id: "kompetencni", title: "Kompetenční model + strategické schopnosti firmy", subtitle: "Jak popsat schopnosti, na kterých firma staví", color: VSE.fph, emoji: "tools",
       content: (<div>
         <Def color={VSE.fph}>
-          <b>KompetenÄnÃ­ model</b> = 4 sloÅ¾ky (KSA + Attitudes). DetailnÃ­ rozbor patÅÃ­ do <b>HR 5 (Talent management)</b>. V HR 9 staÄÃ­ znÃ¡t strukturu a aplikovat ji na <b>strategickÃ© kompetence firmy</b> (Anetina subotÃ¡zka 2).
+          <b>Kompetenční model</b> = uspořádaný soupis schopností (znalosti, dovednosti, vlastnosti, zkušenosti), které firma od lidí potřebuje. V HR 9 ho používáme k popisu <b>strategických schopností firmy</b> — toho, na čem firma staví svou konkurenční výhodu.
         </Def>
-        <Tag color={VSE.warning}>ð DetailnÃ­ teorie KSA + Iceberg model v HR 5</Tag>
+        <Tag color={VSE.warning}>Kompetence = čtyři složky (detailně v HR 5)</Tag>
         <Bullet items={[
-          "<b>4 sloÅ¾ky:</b> Knowledge (co vÃ­Å¡) + Skills (co umÃ­Å¡) + Abilities (co dokÃ¡Å¾eÅ¡) + Attitudes (jakÃ½ jsi). â ï¸ BoÄkovÃ¡ chce VÅ ECHNY 4, ne 3!",
-          "<b>Iceberg model:</b> Knowledge + Skills viditelnÃ© a trÃ©novatelnÃ©. Abilities + Attitudes pod hladinou â vrozenÃ© nebo dlouhodobÃ©.",
-          "<b>PraktickÃ½ dÅ¯sledek:</b> Hire for attitude, train for skills.",
+          "<b>Znalosti</b> — co člověk ví.",
+          "<b>Dovednosti</b> — co umí.",
+          "<b>Vlastnosti</b> — jaký je (iniciativa, sebeřízení, schopnost řešit problémy).",
+          "<b>Zkušenosti</b> — co si vyzkoušel a zažil.",
+          "<b>Kompetenční model</b> spojuje business strategii a personální strategii — uspořádává kompetence, které firma požaduje.",
         ]} color={VSE.warning} />
-        <Tag color={VSE.success}>StrategickÃ© kompetence firmy (Anetina subotÃ¡zka 2)</Tag>
+        <Tag color={VSE.success}>Strategické schopnosti firmy (subotázka)</Tag>
         <Bullet items={[
-          "<b>StrategickÃ© kompetence</b> = unikÃ¡tnÃ­ schopnosti firmy, kterÃ© vytvÃ¡ÅejÃ­ konkurenÄnÃ­ vÃ½hodu",
-          "<b>PÅÃ­klady:</b> Apple = design + integrace HW/SW. Toyota = lean operations. Google = data + AI. Patagonia = sustainability.",
-          "<b>VRIO test:</b> Value, Rarity, Imitability, Organization â strategickÃ¡ schopnost musÃ­ splnit vÅ¡echny 4 kritÃ©ria.",
-          "<b>HR role v budovÃ¡nÃ­:</b> identifikace klÃ­ÄovÃ½ch kompetencÃ­ â kompetenÄnÃ­ model â hire/develop pro tyto kompetence (pÅes 9-Box a DDC z HR 5).",
+          "<b>Strategické schopnosti</b> = unikátní schopnosti firmy, které vytvářejí konkurenční výhodu. To, co firma umí líp než ostatní.",
+          "<b>Příklady:</b> Apple = propojení designu a techniky. Toyota = štíhlá výroba. Firma s know-how = unikátní postupy.",
+          "<b>Jak je v případovce popsat:</b> Najdi, co firma umí výjimečně dobře, a ověř to testem VRIO (viz Str4) — je to hodnotné, vzácné, těžko napodobitelné a firma to umí využít?",
         ]} color={VSE.success} />
+        <Tag color={VSE.fph}>Role HR při budování strategických schopností</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikovat klíčové kompetence, které firma potřebuje.",
+          "<b>2.</b> Sestavit kompetenční model — co od lidí požadujeme.",
+          "<b>3.</b> Nabírat a rozvíjet lidi přesně pro tyto kompetence.",
+          "<b>Pamatuj:</b> Strategické schopnosti firmy stojí na lidech a jejich znalostech — proto je intelektuální kapitál tak důležitý.",
+        ]} color={VSE.fph} />
       </div>) },
 
-        { id: "mereni", title: "📏 Měření intelektuálního kapitálu", subtitle: "Skandia Navigator, Intangible Assets Monitor, BSC, Tobinovo Q", color: VSE.fph, emoji: "scale",
+      { id: "mereni", title: "📏 Měření intelektuálního kapitálu", subtitle: "Skandia Navigator, Intangible Assets Monitor, BSC, Tobinovo Q", color: VSE.fph, emoji: "scale",
       content: (<div>
         <Def color={VSE.fph}>
           Měření IK je <b>obtížné</b>, ale ne nemožné. Existuje několik klasických metod. Mikovcová a Viktora chtějí, abys uměl 2-3 metody.
@@ -13653,10 +13683,10 @@ function OkruhHr9Panel() {
         ]} color={VSE.success} />
       </div>) },
 
-    { id: "hr_role", title: "🎯 Jak HR ovlivňuje intelektuální kapitál (Anetina otázka)", subtitle: "Konkrétní HR opatření pro budování strategických schopností", color: VSE.fph, emoji: "compass",
+    { id: "hr_role", title: "🎯 Jak HR ovlivňuje intelektuální kapitál", subtitle: "Konkrétní HR opatření pro budování strategických schopností", color: VSE.fph, emoji: "compass",
       content: (<div>
         <Def color={VSE.fph}>
-          Aneta v taženkách 2024 explicitně chce odpovědi na 3 subotázky. Toto je klíč okruhu — bez tohoto trojka.
+          Komise (Bočková 2024) explicitně chce odpovědi na 3 subotázky. Toto je klíč okruhu — bez tohoto trojka.
         </Def>
         <Tag color={VSE.fph}>1. Jakým způsobem může HR ovlivňovat IK?</Tag>
         <Bullet items={[
@@ -13681,10 +13711,10 @@ function OkruhHr9Panel() {
         ]} color={VSE.success} />
       </div>) },
 
-    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro HR 9 — Anetiny 3 subotázky", color: VSE.success, emoji: "target",
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro HR 9 — 3 subotázky", color: VSE.success, emoji: "target",
       content: (<div>
         <Def color={VSE.success}>
-          HR 9 je <b>nejkomplexnější HR otázka</b>. Aneta chce 3 konkrétní subotázky odpovědět. Připravte si rámec.
+          HR 9 je <b>nejkomplexnější HR otázka</b>. Komise chce 3 konkrétní subotázky odpovědět. Připravte si rámec.
         </Def>
         <Tag color={VSE.success}>8 kroků na případovku</Tag>
         <Bullet items={[
@@ -13692,10 +13722,10 @@ function OkruhHr9Panel() {
           "2. <b>3 typy znalostí</b> — explicitní (dokumenty) × implicitní (převoditelné) × tacitní (osobní)",
           "3. <b>Identifikuj IK v PS</b> — která složka je silná, která slabá",
           "4. <b>Kompetenční model</b> — KSA + Attitudes (4 složky!) pro klíčové role",
-          "5. <b>Strategické schopnosti</b> firmy v PS (Anetina subotázka 2)",
+          "5. <b>Strategické schopnosti</b> firmy v PS (subotázka 2)",
           "6. <b>Měření IK</b> — vyber metodu (Skandia, Intangible Assets, BSC) a aplikuj",
-          "7. <b>HR ovlivnění IK</b> (Anetina subotázka 1) — konkrétní opatření per 3 složky",
-          "8. <b>Doporučení nástrojů</b> (Anetina subotázka 3) — operativní/taktické/strategické",
+          "7. <b>HR ovlivnění IK</b> (subotázka 1) — konkrétní opatření per 3 složky",
+          "8. <b>Doporučení nástrojů</b> (subotázka 3) — operativní/taktické/strategické",
         ]} color={VSE.success} />
       </div>) },
   ];
@@ -13775,13 +13805,13 @@ function OkruhHr9Panel() {
   };
 
   const examQuestionsHr9 = [
-    { komise: "2024 — Bočková + Stříteský", otazka: "Intelektuální kapitál + 3 subotázky (HR vliv, strategické schopnosti, opatření)", pozn: "Klasická Anetina otázka 2024. Studenti museli odpovědět všechny 3 subotázky: 1) Jak HR ovlivňuje IK (per 3 složky), 2) Jak popsat strategické schopnosti v PS (VRIO + příklady firem), 3) Konkrétní nástroje pro posílení role HR. Bez všech 3 trojka." },
+    { komise: "2024 — Bočková + Stříteský", otazka: "Intelektuální kapitál + 3 subotázky (HR vliv, strategické schopnosti, opatření)", pozn: "Klasická otázka z roku 2024 (Bočková + Stříteský). Studenti museli odpovědět všechny 3 subotázky: 1) Jak HR ovlivňuje IK (per 3 složky), 2) Jak popsat strategické schopnosti v PS (VRIO + příklady firem), 3) Konkrétní nástroje pro posílení role HR. Bez všech 3 trojka." },
     { komise: "2023 — Bočková", otazka: "3 složky IK (Galbraith) + měření", pozn: "Klasický rámec. Lidský / strukturální / vztahový. Měření: Skandia Navigator (Edvinsson), Intangible Assets Monitor (Sveiby), BSC, Tobinovo Q. Bočková chce 2-3 metody." },
     { komise: "2024 — Stříteský", otazka: "Tacitní × explicitní znalosti + HR nástroje pro převod", pozn: "Komise chtěla rozlišit 3 typy znalostí (explicitní/implicitní/tacitní) a HR opatření pro převod tacit → explicit: mentoring, exit interviews, knowledge management systémy, Communities of Practice." },
     { komise: "2023 — Tahal", otazka: "Kompetenční model KSA + Attitudes — aplikace na PS", pozn: "Bočková ostře sleduje — 4 složky, ne 3 (Attitudes často chybí). Iceberg model. Hire for attitude, train for skills. Aplikace: jaká kompetence firmy chybí, jak rozvinout." },
   ];
 
-  const podcastHr9 = { title: "HR 9 — Intelektuální kapitál, kompetenční model", description: "Intelektuální kapitál (Galbraith — 3 složky: lidský/strukturální/vztahový), 3 typy znalostí (explicitní/implicitní/tacitní), kompetenční model KSA + Attitudes (4 složky!), Iceberg model, měření IK (Skandia Navigator/Sveiby Intangible Assets/BSC/Tobinovo Q), strategické kompetence firmy (VRIO), 3 Anetiny subotázky o HR vlivu. Microsoft pod Nadellou, Toyota Master Craftsmen, Apple ecosystem.", audioUrl: null, notebookLmUrl: null };
+  const podcastHr9 = { title: "HR 9 — Intelektuální kapitál, kompetenční model", description: "Intelektuální kapitál (Galbraith — 3 složky: lidský/strukturální/vztahový), 3 typy znalostí (explicitní/implicitní/tacitní), kompetenční model KSA + Attitudes (4 složky!), Iceberg model, měření IK (Skandia Navigator/Sveiby Intangible Assets/BSC/Tobinovo Q), strategické kompetence firmy (VRIO), 3 subotázky o HR vlivu. Microsoft pod Nadellou, Toyota Master Craftsmen, Apple ecosystem.", audioUrl: null, notebookLmUrl: null };
 
   const examStrategyHr9 = `
     <b style="color:#245373">1.</b> Definice IK — Galbraith: lidský + strukturální + vztahový.<br/>
@@ -13791,16 +13821,16 @@ function OkruhHr9Panel() {
     <b style="color:#245373">5.</b> Iceberg model — viditelné (K+S) × skryté (A+A). Hire for attitude.<br/>
     <b style="color:#245373">6.</b> Měření IK — Skandia Navigator (Edvinsson), Intangible Assets Monitor (Sveiby), BSC, Tobinovo Q.<br/>
     <b style="color:#245373">7.</b> Strategické kompetence firmy — VRIO analýza, konkrétní příklady (Apple, Google, Patagonia).<br/>
-    <b style="color:#245373">8.</b> ⚠️ Anetina subotázka 1: Jak HR ovlivňuje IK — per 3 složky (lidský/strukturální/vztahový).<br/>
-    <b style="color:#245373">9.</b> ⚠️ Anetina subotázka 2: Jak popsat strategické schopnosti firmy v PS.<br/>
-    <b style="color:#245373">10.</b> ⚠️ Anetina subotázka 3: Konkrétní HR nástroje (operativní/taktické/strategické).<br/>
+    <b style="color:#245373">8.</b> ⚠️ subotázka 1: Jak HR ovlivňuje IK — per 3 složky (lidský/strukturální/vztahový).<br/>
+    <b style="color:#245373">9.</b> ⚠️ subotázka 2: Jak popsat strategické schopnosti firmy v PS.<br/>
+    <b style="color:#245373">10.</b> ⚠️ subotázka 3: Konkrétní HR nástroje (operativní/taktické/strategické).<br/>
     <b style="color:#245373">11.</b> Doporučení: Microsoft model jako komplexní transformace IK.
   `;
 
   const caseStudyHr9 = {
-    title: "Veronika — CHRO biotech firmy CzechBio, 280 zaměstnanců",
-    subtitle: "Identifikuj intelektuální kapitál a navrhni HR opatření pro jeho posílení",
-    scenario: "Veronika (43 let) je CHRO ve CzechBio, českém biotech specializujícím se na cell therapy pro onkologii. 280 zaměstnanců: 120 vědců + lékařů + lab technicians (R&D), 50 výrobní operátoři (cleanroom), 40 quality assurance, 30 commercial, 20 regulatorní, 20 management. Tržby 800 mil. Kč ročně, ale 70 % je R&D investice → ztráta. Hodnota firmy: 5 mld. Kč (PE valuation 2024).\n\nKlíčový kontext: hodnota CzechBio je v intelektuálním kapitálu, ne fyzických aktivech. Tržní hodnota 5 mld. Kč, fyzická aktiva 800 mil. Kč → Tobinovo Q ~6. Co tvoří 4,2 mld. Kč nehmotné hodnoty?\n\nLidský kapitál: 25 senior vědců s PhD z top univerzit (Cambridge, Harvard, Charles University). 8 lidí publikujících v Nature, Cell. 3 patenty v procesu. CTO (Dr. Novák, 58 let) vede klíčový R&D program — kdyby odešel, projekt by mohl skončit. Žádné succession planning. Strukturální kapitál: 12 patentů (CAR-T technologie), 80 SOPs (standard operating procedures), dokumentovaný knowledge management v Notion. Cleanroom infrastruktura, ale tu lze koupit za peníze. Kapitál vztahů: 3 strategická partnerství s univerzitami (Univerzita Karlova, ETH Zurich, UCL London), 2 klinické trial partnerstvía s nemocnicemi (FN Motol, Charité Berlin), distribuční dohody se 4 farmací.\n\nProblém: Veronika nemá formální measurement IK, žádný kompetenční model pro klíčové role, žádný knowledge management process pro tacitní znalosti (jen Notion s explicit dokumenty). HR je v Ulrich Admin Expert role, žádný HRBP, žádné CoE. 2 senior vědci dali výpověď do konkurence (Novartis CAR-T tým) — jeden vzal 4 juniory s sebou. Klasický talent drain.\n\nNovi vlastníci (PE fond Index Ventures, 60 % equity) chtějí IPO za 3 roky a hodnotu 15 mld. Kč. Bez systematického budování IK = nedosáhnou. Veronika má 24 měsíců, budget 4 mil. Kč, a Aneta v komisi by chtěla vidět konkrétní odpovědi na 3 subotázky.",
+    title: "Veronika a firma, jejíž hodnota chodí domů ve čtyři odpoledne",
+    subtitle: "Největší bohatství firmy jsou znalosti lidí — a ty můžou odejít",
+    scenario: "Veronika vede lidi ve firmě, která vyvíjí léky. Když se zamyslí, co dělá firmu cennou, není to budova ani stroje. Je to to, co mají lidé v hlavách — znalosti vědců, jejich zkušenosti, patenty, vztahy s univerzitami a nemocnicemi. Celá hodnota firmy je nehmotná.\n\nA právě to Veronika trápí. Nedávno odešel jeden ze špičkových vědců ke konkurenci a vzal s sebou další tři mladé kolegy. S nimi odešly roky zkušeností a znalostí, které firma roky budovala. Bylo to, jako by firma přišla o část svého mozku.\n\nVeronika si uvědomila, jak je firma zranitelná. Klíčový vědec, který vede hlavní výzkum, má všechno v hlavě. Kdyby odešel nebo onemocněl, projekt by se mohl zastavit. Nikdo nemá zmapováno, kdo co umí, nikde nejsou zapsané postupy, znalosti se nepředávají dál.\n\nFirma má sice patenty a dokumentaci, ale to nejcennější — tichou zkušenost, kterou má vědec 'v rukou' a neumí ji ani popsat — nikde zachycené není. A přesně ta dělá rozdíl mezi průměrnou a špičkovou firmou.\n\nVeronika chce začít s tímhle neviditelným bohatstvím pracovat. Zmapovat, jaké znalosti firma má a kdo je nositelem. Najít způsob, jak je uchovat a předávat, aby neodešly s lidmi. A vytvořit prostředí, kde lidé chtějí zůstat a sdílet, co umí. Tuší, že kdo zvládne řídit znalosti svých lidí, ten vyhraje.",
     signals: [
       { text: "Tržní hodnota 5 mld. Kč, fyzická aktiva 800 mil. Kč → Tobinovo Q ~6", color: VSE.success, reason: "Klasický knowledge-intensive byznys. 84 % hodnoty v IK. Bez IK management = riziko devalvace." },
       { text: "25 senior vědců s PhD z top univerzit ... 8 lidí publikujících v Nature, Cell", color: VSE.success, reason: "Velmi silný lidský kapitál. Klíčový pro biotech. Ale: bez retention strategy odejdou ke konkurenci (Novartis, Pfizer)." },
@@ -13836,7 +13866,7 @@ function OkruhHr9Panel() {
         { text: "Zachovat jen explicit knowledge management v Notion — tacit knowledge se časem zachytí sám", correct: false, reason: "✗ To je current stav, který nefunguje. Tacit znalosti odcházejí s lidmi (jako Novartis exodus). Veronika musí proaktivně řešit." },
       ],
     },
-    summary: "<b>CzechBio je knowledge-intensive firma s Tobinovo Q ~6 — 84 % hodnoty v IK.</b> Klíčové problémy: talent drain (lidský), bus factor CTO (lidský), jen explicit knowledge management (strukturální). Strategický tlak: 3× hodnota za 3 roky pro IPO.<br/><br/><b>24měsíční plán (4 mil Kč, 3 fáze):</b><br/>• <b>Měsíce 1-6 (Foundation):</b> Kompetenční model (KSA + Attitudes) pro 10 klíčových rolí, succession planning pro CTO + 5 dalších, audit IK přes Intangible Assets Monitor<br/>• <b>Měsíce 7-18 (Strategic enablement):</b> 2 HRBP nábor (R&D + commercial), CoE pro talent acquisition + learning, LTIP launch pro top 30, Communities of Practice (CAR-T + regulatorní), structured exit interviews<br/>• <b>Měsíce 19-24 (Pre-IPO):</b> IK report pro investory, posílení univerzitních partnerství (5+ dalších), advisory board top scientists, video knowledge capture top vědců<br/><br/><b>Pro komisi (Aneta — 3 subotázky):</b><br/><i>1. Jak HR ovlivňuje IK:</i> Lidský — succession, LTIP, kompetenční model. Strukturální — Communities of Practice, knowledge capture, exit interviews. Vztahový — partnerships, advisory board, employer brand.<br/><i>2. Strategické schopnosti CzechBio (VRIO):</i> CAR-T expertise (V+R+I+O = ✓), regulatorní know-how (V+R+I+O = ✓), university partnerships (V+R = ✓ ale snadno imitovatelné).<br/><i>3. HR nástroje:</i> Operativní (HRIS, ATS, CoE), Taktické (mentoring, Communities of Practice), Strategické (kompetenční model, succession, LTIP, IK reporting).",
+    summary: "<b>CzechBio je knowledge-intensive firma s Tobinovo Q ~6 — 84 % hodnoty v IK.</b> Klíčové problémy: talent drain (lidský), bus factor CTO (lidský), jen explicit knowledge management (strukturální). Strategický tlak: 3× hodnota za 3 roky pro IPO.<br/><br/><b>24měsíční plán (4 mil Kč, 3 fáze):</b><br/>• <b>Měsíce 1-6 (Foundation):</b> Kompetenční model (KSA + Attitudes) pro 10 klíčových rolí, succession planning pro CTO + 5 dalších, audit IK přes Intangible Assets Monitor<br/>• <b>Měsíce 7-18 (Strategic enablement):</b> 2 HRBP nábor (R&D + commercial), CoE pro talent acquisition + learning, LTIP launch pro top 30, Communities of Practice (CAR-T + regulatorní), structured exit interviews<br/>• <b>Měsíce 19-24 (Pre-IPO):</b> IK report pro investory, posílení univerzitních partnerství (5+ dalších), advisory board top scientists, video knowledge capture top vědců<br/><br/><b>Pro komisi (3 subotázky):</b><br/><i>1. Jak HR ovlivňuje IK:</i> Lidský — succession, LTIP, kompetenční model. Strukturální — Communities of Practice, knowledge capture, exit interviews. Vztahový — partnerships, advisory board, employer brand.<br/><i>2. Strategické schopnosti CzechBio (VRIO):</i> CAR-T expertise (V+R+I+O = ✓), regulatorní know-how (V+R+I+O = ✓), university partnerships (V+R = ✓ ale snadno imitovatelné).<br/><i>3. HR nástroje:</i> Operativní (HRIS, ATS, CoE), Taktické (mentoring, Communities of Practice), Strategické (kompetenční model, succession, LTIP, IK reporting).",
   };
 
   return (
@@ -13845,7 +13875,6 @@ function OkruhHr9Panel() {
       subtitle="3 složky IK (Galbraith) + KSA + Attitudes + měření IK"
       color={VSE.fph}
       questionText="Intelektuální kapitál (+ kompetenční model), nástroje jeho řízení. Co to je, strategie, modely, aplikovat na případovce. Jakým způsobem může HR ovlivňovat intelektuální kapitál organizace? Jak lze popsat strategické schopnosti firmy v případové studii? Jaké opatření či nástroje je možné využít s cílem posílit roli HR při budování těchto strategických schopností?"
-      questionDesc="Definice IK (Galbraith). 3 složky (lidský/strukturální/vztahový). 3 typy znalostí (explicitní/implicitní/tacitní). Kompetenční model KSA + Attitudes (4 složky! Bočková sleduje). Iceberg model. Měření IK (Skandia Navigator, Intangible Assets Monitor, BSC, Tobinovo Q). VRIO analýza strategických schopností. ⚠️ Aneta chce 3 subotázky: 1) Jak HR ovlivňuje IK, 2) Jak popsat strategické schopnosti v PS, 3) Konkrétní nástroje."
       sloz={3} roz={3} freq={3}
       examStrategy={examStrategyHr9}
       studySections={studySectionsHr9}
@@ -13925,17 +13954,17 @@ function OkruhLog1Panel() {
         </ResponsiveGrid>
       </div>) },
 
-    { id: "retezec", title: "Logistický řetězec — Nákup × Výroba × Distribuce", subtitle: "3 bloky log. řetězce + podstata + typy toků", color: BOMBIK.success, emoji: "refresh",
+    { id: "retezec", title: "Distribuce jako součást logistického řetězce", subtitle: "Kde leží distribuce + odkaz na celý řetězec", color: BOMBIK.success, emoji: "refresh",
       content: (<div>
         <Def color={BOMBIK.success}>
-          <b>Logistický řetězec</b> spojuje tok surovin s trhem spotřebitelů. Pomáhá při plánování poptávky, výroby, skladování a dodávek. Cílem je efektivně řídit tok zboží i informací mezi jednotlivými články řetězce.
+          Distribuce je <b>třetí a poslední blok logistického řetězce</b>. Řetězec spojuje trh surovin s trhem spotřebitelů a dělí se na tři navazující bloky — <b>nákup, výroba, distribuce</b>. Tady se soustředíme na distribuční část; celý řetězec rozebíráme v Logistice 3.
         </Def>
-        <Tag color={BOMBIK.success}>3 hlavní bloky logistického řetězce</Tag>
+        <Tag color={BOMBIK.success}>3 bloky logistického řetězce — kde je distribuce</Tag>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.fmv, t: "1. NÁKUP", d: "Opatřovací logistika. Identifikace potřeby, výběr dodavatele, objednávka, doprava do firmy." },
-            { c: VSE.warning, t: "2. VÝROBA", d: "Produkční (výrobní) logistika. Vnitropodnikový tok materiálu mezi stadii výroby." },
-            { c: VSE.fph, t: "3. DISTRIBUCE", d: "Distribuční logistika. Skladování, doprava, dodání ke konečnému zákazníkovi." },
+            { c: VSE.fmv, t: "1. NÁKUP", d: "Opatřovací logistika. Pořízení surovin a materiálu od dodavatelů. (Detail viz Logistika 3.)" },
+            { c: VSE.warning, t: "2. VÝROBA", d: "Produkční logistika. Vnitropodnikový tok materiálu mezi stadii výroby." },
+            { c: VSE.fph, t: "3. DISTRIBUCE", d: "Distribuční logistika — NÁŠ FOKUS. Skladování, doprava a dodání hotového produktu konečnému zákazníkovi přes distribuční kanály." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -13943,25 +13972,16 @@ function OkruhLog1Panel() {
             </GlassBox>
           ))}
         </ResponsiveGrid>
-        <Tag color={VSE.warning}>3 pilíře podstaty řetězce</Tag>
+        <Def color={VSE.fph}>
+          📎 <b>Pozor na rozsah:</b> Celý logistický řetězec — jeho podstata (transparentnost, konektivita, agilnost), <b>pasivní × aktivní prvky</b>, <b>typy toků</b> (přetržité/kontinuální/synchronní) a technická základna — patří do <b>Logistiky 3</b>. Tady stačí vědět, že distribuce je jeho závěrečný blok, a soustředit se na distribuční kanály a strategie.
+        </Def>
+        <Tag color={VSE.warning}>Co řeší distribuční logistika</Tag>
         <Bullet items={[
-          "<b>Transparentnost</b> (průhlednost) podél celé délky řetězce — dodávková i odbytová situace musí být zřejmá pro všechny podniky.",
-          "<b>Konektivita</b> (propojenost) článků řetězce — schopnost vyměňovat, interpretovat a používat informace s přesahem úseků a funkcí.",
-          "<b>Agilnost partnerů</b> — usilovat o rychlé a cílené dosažení praktických změn na základě získaných informací.",
+          "<b>Distribuční kanály</b> — jakou cestou se produkt dostane k zákazníkovi (viz sekce Distribuce a Strategie).",
+          "<b>Skladování a doprava</b> hotových výrobků směrem k zákazníkovi.",
+          "<b>Řízení vztahů v kanále</b> — konflikty, integrace (viz sekce Integrace).",
+          "<b>Mezinárodní distribuce</b> — kdo nese náklady a riziko přepravy (viz sekce Incoterms).",
         ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Typy logistických řetězců</Tag>
-        <ResponsiveGrid cols3>
-          {[
-            { c: VSE.fmv, t: "S PŘETRŽITÝMI TOKY", d: "Doprava, skladování. Velké objednávky, mezisklady, vysoká produktivita. Dodací lhůta charakteristická pro výrobce." },
-            { c: VSE.warning, t: "S KONTINUÁLNÍMI TOKY", d: "Průběžné zásobení dle objednávek. Přizpůsobení aktuální poptávce. Delší doba dodávky." },
-            { c: VSE.fph, t: "SE SYNCHRONNÍMI TOKY", d: "Výroba na základě zakázky, s min. zásobou, automatizace v JIT. Toyota Production System, Kanban." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
       </div>) },
 
     { id: "integrace", title: "Vertikální × horizontální integrace + konflikty v kanále", subtitle: "Jak řešit vztahy v kanále + výhody/nevýhody integrace", color: BOMBIK.success, emoji: "scale",
@@ -13982,21 +14002,20 @@ function OkruhLog1Panel() {
           ))}
         </ResponsiveGrid>
         <Tag color={VSE.fph}>Vertikální integrace — výhody × nevýhody</Tag>
-        <PlusMinus
-          plus={[
+        <PlusMinus type="plus" items={[
             "Absorpce výkyvů v poptávce — vlastní řízení toků",
             "Možnost diferenciace produktů, pokrytí segmentů, které konkurence nepokrývá",
             "Využití reklamy konkurence — když ji slabší článek nepokrývá",
             "Kontrola nad výslednou cenou pro spotřebitele",
             "Možnost uplatňovat různou cenovou politiku v různých článcích",
-          ]}
-          minus={[
+          ]} />
+        <div style={{ height: 10 }} />
+        <PlusMinus type="minus" items={[
             "Vysoké náklady v některých částech hodnotového řetězce",
             "Nižší flexibilita — přechod na nový trh trvá déle",
             "Riziko ztráty fokusu (firma musí umět všechno)",
             "Blokovaný vstup do odvětví — nelze využít specializace",
-          ]}
-        />
+          ]} />
       </div>) },
 
     { id: "vyzkum", title: "Distribuční výzkum — výběr kanálů + postup", subtitle: "Co zkoumat a jak vybrat DC", color: BOMBIK.success, emoji: "target",
@@ -14039,71 +14058,36 @@ function OkruhLog1Panel() {
           "<b>Skupina C (Main Carriage Paid):</b> CFR, CIF, CPT, CIP — Prodávající platí hlavní dopravu, ale riziko přechází na kupujícího při nakládce.",
           "<b>Skupina D (Arrival):</b> DAP, DPU, DDP — Prodávající nese vše až do dodání kupujícímu. DDP = Delivered Duty Paid (max závazky pro prodávajícího).",
         ]} color={BOMBIK.success} />
-        <Tag color={VSE.warning}>Outsourcing v logistice — 2PL až 5PL</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "2PL — 2nd Party Logistics", d: "Najímá ředitel — jen část dopravy. Klasický speditér. Firma řídí vše, jen outsourcuje vozidla." },
-            { c: VSE.warning, t: "3PL — 3rd Party Logistics", d: "Poskytovatel komplex log. služeb: doprava, skladování, manipulace, administrativa. DHL, UPS, Geis. Mezi aplikační přístup." },
-            { c: VSE.fph, t: "4PL — 4th Party Logistics", d: "Kompletní převzetí řízení log. řetězce. Není jen poskytovatel — řídí, koordinuje, optimalizuje. Ztráta kontroly, ale max specializace." },
-            { c: VSE.danger, t: "5PL — 5th Party Logistics", d: "Vyšší stupeň využití zdrojů — snaha o propojení subjektů 3PL a 4PL v jeden integrovaný systém. Big data, AI, IoT." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.danger}>Make or Buy Decision — kdy outsourcovat</Tag>
-        <PlusMinus
-          plus={[
-            "Nákladově — outsourcing levnější než vlastní kapacity",
-            "Kapacitně — vlastní kapacity jsou plné",
-            "Kvalitativně — dodavatel zajistí vyšší kvalitu",
-            "Kapitálově — nemáme prostředky na investici",
-            "Know-how — nejsou zkušenosti, know-how",
-            "Právně — produkční práva nelze zajistit nebo jsou drahá",
-            "Rizikově — vlastní výroba přináší rizika (bezpečnost, výrobní)",
-          ]}
-          minus={[
-            "Ztráta kontroly nad částí log. řetězce",
-            "Závislost na partnerovi (lock-in)",
-            "Únik citlivých informací o klientech, objemech",
-            "Případná nižší flexibilita v krizi (dodavatel má svoje priority)",
-            "Riziko zhoršené kvality, pokud partner nedodrží SLA",
-          ]}
-        />
-      </div>) },
+        <Def color={VSE.fph}>
+          📎 <b>Outsourcing v logistice (2PL–5PL):</b> Při mezinárodní distribuci firma často nezajišťuje dopravu sama, ale využívá poskytovatele logistických služeb (2PL až 5PL) — rozhodnutí Make or Buy. Tohle téma je kompletně rozebráno v <b>Logistice 3</b> (sekce Outsourcing), kam logicky patří. Tady stačí vědět, že Incoterms určují, KDO z obchodních partnerů za dopravu a riziko odpovídá — a tu dopravu pak může zajistit interně nebo přes 3PL poskytovatele (DHL, Geis).
+        </Def>
+        </div>) },
 
-    { id: "naklady", title: "Náklady logistického řetězce a klíčové trendy", subtitle: "5 typů nákladů + moderní trendy (digitalizace, ESG)", color: BOMBIK.success, emoji: "coins",
+    { id: "naklady", title: "Distribuční náklady a trendy v distribuci", subtitle: "Náklady distribuce + last mile + odkaz na celkové náklady řetězce", color: BOMBIK.success, emoji: "coins",
       content: (<div>
         <Def color={BOMBIK.success}>
-          Logistický řetězec generuje <b>5 typů nákladů</b>. Pochopení struktury je klíčové pro <b>optimalizaci</b> a hledání úspor. Trendy jsou jasné: <b>digitalizace</b>, <b>udržitelnost</b>, <b>last mile</b>, <b>e-commerce</b>.
+          Distribuce je nákladově náročná část řetězce — <b>balení, doprava, pojištění, skladování hotových výrobků</b> a hlavně <b>poslední míle</b> k zákazníkovi. Tady se soustředíme na distribuční náklady a trendy; celkovou strukturu nákladů řetězce má Logistika 3.
         </Def>
-        <Tag color={BOMBIK.success}>5 hlavních typů nákladů</Tag>
-        <ResponsiveGrid cols3>
-          {[
-            { c: VSE.fmv, t: "PROCESNÍ", d: "Administrativa nákupu, papírování, IT systémy, koordinace." },
-            { c: VSE.warning, t: "NÁKUPNÍ", d: "Cena, sjedná, slevy, manipulace na vstupu." },
-            { c: VSE.fph, t: "FINANČNÍ", d: "Držba peněz v zásobách (cost of capital), platební podmínky." },
-            { c: VSE.danger, t: "VÝROBNÍ", d: "Materiál, režie, pracovní síla, údržba strojů." },
-            { c: VSE.success, t: "SKLADOVACÍ", d: "Zásoby, sklady, manipulační technika, pojištění zboží." },
-            { c: VSE.primary, t: "DISTRIBUČNÍ", d: "Balení, doprava, pojištění, last-mile." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>Klíčové trendy 2025+</Tag>
+        <Def color={VSE.fph}>
+          📎 <b>Pozor na rozsah:</b> Kompletní rozdělení nákladů logistického řetězce na <b>6 typů</b> (procesní, nákupní, finanční, výrobní, skladovací, distribuční) je v <b>Logistice 3</b>. Tady rozebíráme jen poslední z nich — distribuční náklady — a moderní trendy v distribuci.
+        </Def>
+        <Tag color={BOMBIK.success}>Distribuční náklady</Tag>
         <Bullet items={[
-          "<b>Digitalizace + IoT:</b> tracking zboží v reálném čase, automatizace skladů (Amazon, Alza), prediktivní analytika.",
-          "<b>Green logistika:</b> ISO 14001, redukce CO₂, elektromobilita, intermodalita (vlak místo kamion), kruhová ekonomika.",
-          "<b>Last mile fokus:</b> 50–70 % nákladů distribuce. Lockery (Zásilkovna), micro-hubs, drony, autonomní rozvážka.",
-          "<b>Resilient SCM:</b> diverzifikace dodavatelů (post-COVID, post-Ukrajina). Žádný single-source. Lokalizace klíčových surovin.",
-          "<b>Lean SCM:</b> JIT, Kanban, eliminace přítěží — minimální zásoby, max efektivita. Toyota model.",
-          "<b>SCM 4.0:</b> AI optimalizace tras (UPS ORION), digitální dvojčata, blockchain pro traceability.",
+          "<b>Doprava</b> — největší položka, hlavně u rozvozu na velké vzdálenosti.",
+          "<b>Skladování hotových výrobků</b> — sklady, manipulační technika, pojištění zboží.",
+          "<b>Balení a pojištění</b> přepravy.",
+          "<b>Last mile (poslední míle)</b> — doručení až k zákazníkovi. Často 50–70 % nákladů distribuce, nejdražší část.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Klíčové trendy v distribuci 2025+</Tag>
+        <Bullet items={[
+          "<b>Last mile fokus:</b> lockery (Zásilkovna, Alzaboxy), výdejní místa, micro-huby ve městech, drony, autonomní rozvážka — snaha zlevnit nejdražší úsek.",
+          "<b>Digitalizace + IoT:</b> sledování zásilky v reálném čase, prediktivní doručování, optimalizace tras přes AI (UPS ORION).",
+          "<b>Green distribuce:</b> elektromobilita, intermodalita (vlak místo kamionu), kruhová ekonomika, redukce CO2.",
+          "<b>E-commerce boom:</b> tlak na rychlost (dodání do druhého dne) a flexibilitu doručení.",
         ]} color={VSE.warning} />
+        <Def color={VSE.warning}>
+          📎 <b>Souvislost:</b> Moderní přístupy ke snižování nákladů řetězce — <b>Lean SCM (JIT, KANBAN), Resilient SCM, SCM 4.0</b> — jsou rozebrány v <b>Logistice 2</b> (typy SCM a řízení zásob).
+        </Def>
       </div>) },
   ];
 
@@ -14116,10 +14100,6 @@ function OkruhLog1Panel() {
     { term: "Push strategie", def: "Výrobce tlačí produkt přes kanál — slevy, promo, bonusy prodejcům. Typicky B2B, neznámé značky.", tag: "STRATEGIE" },
     { term: "Pull strategie", def: "Výrobce komunikuje přímo se spotřebitelem (TV, online), zákazník si žádá produkt v obchodě. Coca-Cola, Apple, FMCG.", tag: "STRATEGIE" },
     { term: "Logistický řetězec", def: "Spojuje tok surovin s trhem spotřebitelů přes 3 bloky: Nákup (opatřovací) — Výroba (produkční) — Distribuce (distribuční).", tag: "ŘETĚZEC" },
-    { term: "3 pilíře řetězce", def: "Transparentnost (průhlednost), Konektivita (propojenost), Agilnost (rychlé změny na základě informací).", tag: "ŘETĚZEC" },
-    { term: "Řetězec s přetržitými toky", def: "Doprava, skladování, velké objednávky, mezisklady. Vysoká produktivita, ale skladovací náklady.", tag: "TYPY TOKŮ" },
-    { term: "Řetězec s kontinuálními toky", def: "Průběžné zásobení dle aktuální poptávky. Delší doba dodávky.", tag: "TYPY TOKŮ" },
-    { term: "Řetězec se synchronními toky", def: "Výroba na zakázku, min zásoby, automatizace. JIT, Toyota Production System, Kanban.", tag: "TYPY TOKŮ" },
     { term: "Vertikální konflikt v kanále", def: "Mezi úrovněmi (výrobce × velkoobchod × maloobchod). O ceně, dostupnosti, marže.", tag: "KONFLIKTY" },
     { term: "Horizontální konflikt", def: "Mezi prodejci stejné úrovně (dva maloobchody se stejnou značkou). Tlak na ceny, výhradnost regionu.", tag: "KONFLIKTY" },
     { term: "Vertikální integrace", def: "Firma vlastní víc úrovní řetězce (Apple — design + výroba + Apple Store + e-shop). + kontrola / − náklady, fokus.", tag: "INTEGRACE" },
@@ -14129,38 +14109,22 @@ function OkruhLog1Panel() {
     { term: "EXW (Ex Works)", def: "Skupina E. Prodávající dá zboží k dispozici v sídle, kupující bere vše. Nejméně závazků pro prodávajícího.", tag: "INCOTERMS" },
     { term: "DDP (Delivered Duty Paid)", def: "Skupina D. Prodávající nese vše až po dodání kupujícímu. Max závazky pro prodávajícího.", tag: "INCOTERMS" },
     { term: "FOB / CIF", def: "FOB = Free on Board (skupina F). CIF = Cost, Insurance, Freight (skupina C). Klasika v námořní přepravě.", tag: "INCOTERMS" },
-    { term: "2PL", def: "2nd Party Logistics. Speditér — outsourcing jen části dopravy. Firma stále řídí celý řetězec.", tag: "OUTSOURCING" },
-    { term: "3PL", def: "3rd Party Logistics. Komplex log. služeb — doprava + skladování + manipulace + administrativa. DHL, UPS, Geis.", tag: "OUTSOURCING" },
-    { term: "4PL", def: "4th Party Logistics. Kompletní řízení log. řetězce. Klient ztrácí kontrolu, získává specializaci.", tag: "OUTSOURCING" },
-    { term: "5PL", def: "5th Party Logistics. Propojení 3PL a 4PL přes big data, AI, IoT. Integrovaný systém.", tag: "OUTSOURCING" },
-    { term: "Make or Buy Decision", def: "Rozhodnutí outsourcovat × dělat vlastní. Faktory: cena, kapacita, kvalita, kapitál, know-how, právo, riziko.", tag: "OUTSOURCING" },
-    { term: "Náklady log. řetězce", def: "5 typů: procesní (admin), nákupní, finanční (cost of capital v zásobách), výrobní, skladovací, distribuční.", tag: "NÁKLADY" },
-    { term: "Last mile", def: "Poslední úsek distribuce ke spotřebiteli — 50–70 % nákladů distribuce. Trend: lockery, micro-hubs, drony.", tag: "TRENDY" },
-    { term: "Green SCM", def: "Udržitelná logistika — ISO 14001, redukce CO₂, elektromobilita, intermodalita (vlak místo kamionu), kruhová ekonomika.", tag: "TRENDY" },
-    { term: "Resilient SCM", def: "Odolný řetězec proti turbulencím (COVID, válka). Diverzifikace dodavatelů, lokalizace klíčových surovin, žádný single-source.", tag: "TRENDY" },
-    { term: "JIT (Just-in-Time)", def: "Dodání zboží přesně v čas, kdy je potřeba, žádné pojistné zásoby. Toyota Production System. Riziko: malá odchylka = stop výroby.", tag: "ZÁSOBY" },
-    { term: "Kanban", def: "Kartičky s identifikací produktu, jeho potřeba se mezi sklady mění, řízeno principem pull. Toyota.", tag: "ZÁSOBY" },
   ];
 
   const quizLog1 = [
     { q: "Co je hlavní cíl distribuce v marketing mixu?", opts: ["Snížit cenu", "Dělat produkt fyzicky dostupný zákazníkovi v pravé množství, čas a místě", "Maximalizovat marže prodejců", "Generovat reklamu"], correct: 1 },
+    { q: "Co je exkluzivní distribuce?", opts: ["Co nejvíc prodejen", "Jediný nebo velmi málo prodejců v regionu — luxusní zboží (Rolex, Ferrari)", "Náhodný výběr", "Online prodej"], correct: 1 },
     { q: "Která distribuční strategie maximalizuje počet prodejen?", opts: ["Exkluzivní", "Selektivní", "Intenzivní", "Hybridní"], correct: 2 },
     { q: "Která distribuční strategie je typická pro Rolex nebo Ferrari?", opts: ["Intenzivní", "Selektivní", "Exkluzivní", "Pull"], correct: 2 },
     { q: "Co je push strategie?", opts: ["Reklama přímo spotřebiteli", "Výrobce tlačí produkt přes kanál slevy a bonusy prodejcům", "Outsourcing distribuce", "Snížení cen pro spotřebitele"], correct: 1 },
     { q: "Z kolika hlavních bloků se skládá logistický řetězec?", opts: ["2 (Výroba + Doprava)", "3 (Nákup + Výroba + Distribuce)", "4 (Plánování + Nákup + Výroba + Prodej)", "5"], correct: 1 },
-    { q: "Co jsou 3 pilíře podstaty logistického řetězce?", opts: ["Cena, kvalita, čas", "Transparentnost, konektivita, agilnost", "Doprava, sklad, prodej", "Plánování, nákup, distribuce"], correct: 1 },
-    { q: "Která Incoterms skupina znamená max závazky pro PRODÁVAJÍCÍHO?", opts: ["E (EXW)", "F (FOB)", "C (CIF)", "D (DDP)"], correct: 3 },
-    { q: "Co je 3PL?", opts: ["Speditér — jen doprava", "3rd Party Logistics — komplex služeb: doprava + sklad + manipulace + administrativa", "Vlastní logistika firmy", "5G logistika"], correct: 1 },
-    { q: "Jaký je rozdíl mezi 3PL a 4PL?", opts: ["Nejsou rozdíly", "3PL = poskytovatel komplex služeb. 4PL = kompletní řízení celého log. řetězce (vyšší abstrakce)", "3PL je dražší", "4PL je jen pro malé firmy"], correct: 1 },
-    { q: "Co znamená JIT?", opts: ["Just in Trouble", "Just-in-Time — dodání zboží přesně v čas, žádné pojistné zásoby", "Joint Inventory Tracking", "Job Inventory Test"], correct: 1 },
-    { q: "Která distribuční strategie má nejvyšší marže pro výrobce?", opts: ["Intenzivní (objemy)", "Selektivní", "Exkluzivní (premium image)", "Push"], correct: 2 },
+        { q: "Která Incoterms skupina znamená max závazky pro PRODÁVAJÍCÍHO?", opts: ["E (EXW)", "F (FOB)", "C (CIF)", "D (DDP)"], correct: 3 },
+                { q: "Která distribuční strategie má nejvyšší marže pro výrobce?", opts: ["Intenzivní (objemy)", "Selektivní", "Exkluzivní (premium image)", "Push"], correct: 2 },
     { q: "Co je horizontální konflikt v kanále?", opts: ["Mezi výrobcem a velkoobchodem", "Mezi dvěma prodejci stejné úrovně", "Mezi zákazníkem a prodejcem", "Mezi výrobcem a spotřebitelem"], correct: 1 },
     { q: "Která fáze postupu volby DC je první?", opts: ["Výběr strategie", "Analýza trhu (potřeba a NCH zákazníků)", "Řízení kanálů", "Hodnocení alternativ"], correct: 1 },
     { q: "Co je last mile?", opts: ["Poslední úsek výroby", "Poslední úsek distribuce ke spotřebiteli — 50–70 % nákladů distribuce", "Cena", "Sklad"], correct: 1 },
     { q: "Která Incoterms termíny patří do skupiny F?", opts: ["EXW", "FCA, FAS, FOB", "CIF, CFR, CPT", "DAP, DDP"], correct: 1 },
-    { q: "Co je největší riziko outsourcingu logistiky (4PL)?", opts: ["Vyšší náklady vždy", "Ztráta kontroly nad částí log. řetězce + závislost na partnerovi", "Lepší kvalita", "Není riziko"], correct: 1 },
-    { q: "Která firma je etalonem JIT a Kanban?", opts: ["Apple", "Toyota (Toyota Production System)", "Amazon", "Coca-Cola"], correct: 1 },
-  ];
+          ];
 
   const praxeLog1 = {
     caseStudy: {
@@ -14204,23 +14168,21 @@ function OkruhLog1Panel() {
     { komise: "2025 — Vávra + Lorencová + Krause", otazka: "Distribuce, řízení distribučních kanálů v marketingu spotřebního zboží, výzkum DC, logistické řetězce — Kola", pozn: "Bylo to dost rozepsané. Komise chce strukturovaný výklad: pojem → 3 strategie → push/pull → 3 bloky řetězce → konflikty → výzkum DC. Aplikovat na výrobce kol — pravděpodobně selektivní (kvalita)." },
   ];
 
-  const podcastLog1 = { title: "Logistika 1 — Distribuce, distribuční kanály, log. řetězce", description: "Distribuce jako P v 4P, 3 strategie (intenzivní/selektivní/exkluzivní), push × pull, logistický řetězec (3 bloky + 3 toky + 3 pilíře), vertikální × horizontální konflikty, distribuční výzkum (5 kroků), Incoterms 2020 (E/F/C/D), outsourcing 2PL–5PL. IKEA, Coca-Cola, Rolex, Apple, Alza.", audioUrl: null, notebookLmUrl: null };
+  const podcastLog1 = { title: "Logistika 1 — Distribuce, distribuční kanály, log. řetězce", description: "Distribuce a distribuční kanály u výrobních a obchodních podniků. Distribuce = složka marketingového mixu (Place ze 4P). 3 strategická rozhodnutí - kanály, intenzita, řízení. Typy cest - přímé, nepřímé, hybridní. 3 distribuční strategie - intenzivní (co nejvíc prodejen, Coca-Cola), selektivní (vybrané prodejny), exkluzivní (jediný prodejce v regionu, Rolex, Ferrari). Push strategie (tlačit zboží přes kanál) × Pull strategie (táhnout poptávku zákazníka, Apple). Distribuce je 3. blok logistického řetězce (celý řetězec, jeho prvky a typy toků viz Logistika 3). Vertikální × horizontální konflikty v kanále. Vertikální × horizontální integrace - výhody a nevýhody. Distribuční výzkum - 3 typy (kanál, trh, distributor) + 5 kroků volby distribuční cesty. Incoterms 2020 - 4 skupiny (E/F/C/D) - EXW, FOB, CIF, DDP - kdo platí dopravu, pojištění a nese riziko. Outsourcing v distribuci 2PL-5PL (detail viz Logistika 3). Distribuční náklady - doprava, skladování, balení, last mile (50-70 % nákladů distribuce). Trendy - last mile fokus (lockery, Zásilkovna), digitalizace, green distribuce, e-commerce. Příklady - IKEA, Coca-Cola, Rolex, Apple, Alza.", audioUrl: null, notebookLmUrl: null };
 
   const examStrategyLog1 = `
     <b style="color:#245373">1.</b> Začni definicí distribuce — 3 P v 4P (Place). 3 strategická rozhodnutí: kanály × intenzita × řízení.<br/>
     <b style="color:#245373">2.</b> 3 typy cest — přímé / nepřímé / hybridní + příklady.<br/>
     <b style="color:#245373">3.</b> ⚠️ <b>3 distribuční strategie</b> (intenzivní / selektivní / exkluzivní) — Tahal chce výhody A nevýhody!<br/>
     <b style="color:#245373">4.</b> Push × Pull strategie — kdy která, příklady.<br/>
-    <b style="color:#245373">5.</b> Logistický řetězec — 3 bloky (Nákup × Výroba × Distribuce).<br/>
-    <b style="color:#245373">6.</b> 3 pilíře řetězce — Transparentnost, Konektivita, Agilnost.<br/>
-    <b style="color:#245373">7.</b> 3 typy toků — přetržité / kontinuální / synchronní (JIT).<br/>
-    <b style="color:#245373">8.</b> Vertikální × horizontální konflikt v kanále + integrace (výhody/nevýhody).<br/>
-    <b style="color:#245373">9.</b> Distribuční výzkum — 3 typy (kanál/trh/distributor) + 5 kroků volby DC.<br/>
-    <b style="color:#245373">10.</b> ⚠️ Incoterms 2020 — 4 skupiny E/F/C/D + příklady EXW, FOB, CIF, DDP.<br/>
-    <b style="color:#245373">11.</b> Outsourcing 2PL–5PL + Make or Buy Decision.<br/>
-    <b style="color:#245373">12.</b> 5 typů nákladů řetězce + trendy (digitalizace, green, last mile, resilient).<br/>
-    <b style="color:#245373">13.</b> Aplikace na PS — která strategie (podle typu produktu), kdo prostředníci, jak řídit konflikty.<br/>
-    <b style="color:#245373">14.</b> Příklady firem — IKEA (vertikální), Coca-Cola (intenzivní), Rolex (exkluzivní), Apple (pull), Alza (3PL hybrid).
+    <b style="color:#245373">5.</b> Distribuce = 3. blok logistického řetězce (celý řetězec viz Logistika 3).<br/>
+    <b style="color:#245373">6.</b> ⚠️ Vertikální × horizontální konflikt v kanále + integrace (výhody/nevýhody).<br/>
+    <b style="color:#245373">7.</b> Distribuční výzkum — 3 typy (kanál/trh/distributor) + 5 kroků volby DC.<br/>
+    <b style="color:#245373">8.</b> ⚠️ Incoterms 2020 — 4 skupiny E/F/C/D + příklady EXW, FOB, CIF, DDP.<br/>
+    <b style="color:#245373">9.</b> Distribuční náklady + last mile + trendy (digitalizace, green, e-commerce).<br/>
+    <b style="color:#245373">10.</b> 📎 Outsourcing 2PL–5PL — detail v Logistice 3. SCM, JIT, KANBAN — v Logistice 2.<br/>
+    <b style="color:#245373">11.</b> Aplikace na PS — která strategie (podle typu produktu), kdo prostředníci, jak řídit konflikty.<br/>
+    <b style="color:#245373">12.</b> Příklady firem — IKEA (vertikální), Coca-Cola (intenzivní), Rolex (exkluzivní), Apple (pull), Alza (last mile).
   `;
 
   const caseStudyLog1 = {
@@ -14267,10 +14229,9 @@ function OkruhLog1Panel() {
   return (
     <OkruhPanel
       subject="Logistika" subjectId="logistika" number={1} title="Distribuce, distribuční kanály, log. řetězce"
-      subtitle="3 strategie distribuce + 3 bloky řetězce + Incoterms + outsourcing 2PL–5PL"
+      subtitle="Distribuční kanály + 3 strategie distribuce + konflikty/integrace + distribuční výzkum + Incoterms 2020"
       color={BOMBIK.success}
       questionText="Distribuce, Řízení distribučních kanálů v marketingu spotřebního zboží, výzkum distribučních kanálů, Distribuční články, Logistické řetězce u výrobních a obchodních podniků."
-      questionDesc="Distribuce jako P v 4P. 3 strategická rozhodnutí (kanály × intenzita × řízení). 3 typy cest (přímé/nepřímé/hybridní). 3 strategie intenzity (intenzivní/selektivní/exkluzivní + V/N). Push × Pull. Logistický řetězec — 3 bloky (Nákup/Výroba/Distribuce), 3 pilíře (Transparentnost/Konektivita/Agilnost), 3 typy toků. Vertikální × horizontální konflikty + integrace. Distribuční výzkum — 3 typy + 5 kroků postupu. Incoterms 2020 — 4 skupiny E/F/C/D. Outsourcing 2PL–5PL + Make or Buy. 5 typů nákladů + trendy. IKEA, Canyon, Coca-Cola, Rolex, Apple, Alza."
       sloz={2} roz={3} freq={3}
       examStrategy={examStrategyLog1}
       studySections={studySectionsLog1}
@@ -14285,49 +14246,21 @@ function OkruhLog1Panel() {
 }
 
 /* ════════════════════════════════════════════════════════
-   LOGISTIKA 2 — Marketing služeb, řízení kvality, outsourcing
+   LOGISTIKA 2 — SCM, materiálové strategie a řízení zásob
    ════════════════════════════════════════════════════════ */
 function OkruhLog2Panel() {
   const studySectionsLog2 = [
-    { id: "intro", title: "Marketing služeb — co je služba + 4 hlavní charakteristiky", subtitle: "Definice + nehmotnost, neoddělitelnost, proměnlivost, pomíjivost (4N)", color: BOMBIK.success, emoji: "sparkles",
+    { id: "scm", title: "Supply Chain Management — co to je a strategie v logistice", subtitle: "Cíl logistiky + plánovací oblasti SCM + konkurenční výhody", color: BOMBIK.success, emoji: "truck",
       content: (<div>
         <Def color={BOMBIK.success}>
-          <b>Služba</b> = aktivita nebo užitek, který jedna strana nabízí druhé. Je v zásadě <b>nehmotná</b> a nevzniká žádné vlastnictví. Komise <b>Špaček, Vávra, Mládková</b> tohle chtějí jako úvod — bez 4 charakteristik to neudělíš.
+          <b>Supply Chain Management (SCM)</b> = řízení celého dodavatelského řetězce od surovin až ke konečnému zákazníkovi. <b>Cíl logistiky:</b> uspokojit přání zákazníka — dodat <b>co, kdy, kam</b> a <b>v jakém množství</b> chce, při rozumných nákladech.
         </Def>
-        <Tag color={BOMBIK.success}>4N — 4 charakteristiky služeb (klasika!)</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "1. NEHMOTNOST (Intangibility)", d: "Službu nelze před koupí vidět, ohmatat, ochutnat, slyšet, voně. Kadeřník, lékař, právník — jen výsledek. Marketing musí vizualizovat: testimonials, certifikáty, prostředí." },
-            { c: VSE.warning, t: "2. NEODDĚLITELNOST (Inseparability)", d: "Služba se vyrábí a spotřebovává současně. Není jako mýdlo (vyrobí se → uskladní → prodá). Lékař ošetří pacienta v tom samém momentě. Vyžaduje osobní přítomnost." },
-            { c: VSE.fph, t: "3. PROMĚNLIVOST (Variability)", d: "Stejná služba se může výrazně lišit kvalitou — kdo, kdy, kde, komu. Stejný kadeřník v pondělí ráno × pátek večer. Standardizace přes procesy a školení." },
-            { c: VSE.danger, t: "4. POMÍJIVOST (Perishability)", d: "Služby nelze skladovat. Prázdné sedadlo v letadle dnes = ztracený příjem. Hotel pokoj, koncertní místo, doktorský slot — všechno mizí v čase." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.fph}>+ 2 další (rozšířená sada 6N)</Tag>
-        <Bullet items={[
-          "<b>Nepřevoditelné vlastnictví (No ownership):</b> Zákazník nezíská vlastnictví — jen právo užívat (let, masáž, právní rada).",
-          "<b>Mediadatelnost:</b> Některé služby vyžadují prostředníka (cestovka, broker, agent).",
-        ]} color={VSE.fph} />
-      </div>) },
-
-    { id: "klasifikace", title: "Klasifikace služeb — Kotler + dělení podle různých kritérií", subtitle: "5 typů produktové nabídky + dělení podle poskytovatele a cíle", color: BOMBIK.success, emoji: "scale",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          <b>Kotlerova klasifikace</b> rozdělí <b>5 typů produktové nabídky</b> podle <b>výše hmotné a nehmotné složky</b>. Klíčové pro pochopení, že čistá služba je vzácná — většina je hybrid.
-        </Def>
-        <Tag color={BOMBIK.success}>Kotler — 5 typů nabídky podle hmotnosti</Tag>
+        <Tag color={BOMBIK.success}>Plánovací oblasti SCM (Supply Chain Management)</Tag>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.fmv, t: "1. ČISTÝ HMOTNÝ PRODUKT", d: "Mýdlo, sůl, ocel. Žádná služba. Prodá a hotovo." },
-            { c: VSE.warning, t: "2. HMOTNÝ + DOPROVOD. SLUŽBA", d: "Auto + servis, počítač + technická podpora. Hmota dominuje." },
-            { c: VSE.fph, t: "3. HYBRID", d: "Restaurace — jídlo (hmota) + obsluha (služba). 50/50." },
-            { c: VSE.danger, t: "4. PŘEVAŽUJÍCÍ SLUŽBA + ZBOŽÍ", d: "Hotel (pokoj + jídlo), letecká doprava (let + jídlo). Služba dominuje." },
-            { c: VSE.success, t: "5. ČISTÁ SLUŽBA", d: "Masáž, právní rada, koučink. Žádné fyzické zboží." },
+            { c: VSE.fmv, t: "DLOUHODOBÉ", d: "Strategický návrh řetězce — materiálový program, výběr dodavatelů, umístění továren, produkční systém, distribuční řetězec, výrobní program, strategické plánování prodeje." },
+            { c: VSE.warning, t: "STŘEDNĚDOBÉ", d: "Hlavní plánování — plánování lidí, potřeby materiálu, kapacit, parametrizace služeb, plánování distribuce, poptávky, střednědobé plánování prodejů." },
+            { c: VSE.fph, t: "KRÁTKODOBÉ", d: "Operativní řízení — nákup a plánování materiálu, plánování výroby, lidí, dávek, rozvrhování strojů, řízení dílny, plánování přepravy, kompletace objednávek." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -14335,185 +14268,34 @@ function OkruhLog2Panel() {
             </GlassBox>
           ))}
         </ResponsiveGrid>
-        <Tag color={VSE.warning}>Další dělení služeb</Tag>
+        <Tag color={VSE.warning}>Konkurenční výhody v logistice</Tag>
         <Bullet items={[
-          "<b>Podle poskytovatele:</b> Lidé (právník, učitel) × Stroje (bankomat, parkovací automat, samoobsluha)",
-          "<b>Podle cíle poskytovatele:</b> Ziskový (banka, restaurace) × Neziskový (vzdělávání, zdravotnictví)",
-          "<b>Podle přítomnosti zákazníka:</b> Vyžaduje (zubař) × Nevyžaduje (čistírna, opravna)",
-          "<b>Podle způsobu dodání:</b> U dodavatele × U zákazníka (mobile services, on-site)",
-          "<b>Podle oblasti podnikání:</b> Doprava, finance, zdravotnictví, vzdělávání, retail, gastronomie...",
+          "<b>Cena</b> — nižší logistické náklady než konkurence.",
+          "<b>Kvalita</b> — spolehlivé, bezchybné dodávky.",
+          "<b>Rychlost a flexibilita</b> — krátké dodací lhůty, schopnost reagovat na změny.",
+          "<b>Globální dosažitelnost</b> — schopnost dodat kamkoliv.",
+          "<b>Individualizace, inovace, ekologie</b> — moderní výhody (customizace, zelená logistika).",
         ]} color={VSE.warning} />
-      </div>) },
-
-    { id: "kvalita", title: "Řízení kvality služeb — vnímaná × technická × funkční", subtitle: "3 pohledy na kvalitu + 5 standardů + GAP model", color: BOMBIK.success, emoji: "target",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          <b>Kvalita služby</b> je <b>subjektivně vnímaná</b> — záleží jak ji zákazník zažil vs co očekával. Tahal a Špaček chtějí 3 pohledy a 5 standardů.
-        </Def>
-        <Tag color={BOMBIK.success}>3 pohledy na kvalitu služby</Tag>
-        <ResponsiveGrid cols3>
-          {[
-            { c: VSE.fmv, t: "PŘEDPOKLÁDANÁ", d: "To, co zákazník očekává před koupí. Tvořena reklamou, WOM, minulou zkušeností." },
-            { c: VSE.warning, t: "VNÍMANÁ", d: "To, jak zákazník hodnotí službu během/po spotřebě. Subjektivní." },
-            { c: VSE.success, t: "SKUTEČNĚ POZNANÁ", d: "Objektivní kvalita (procesy, kompetence). Často se liší od vnímané." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.fph}>Technická × Funkční kvalita (Grönroos)</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "TECHNICKÁ — CO", d: "Výsledek služby. Jak dobře zubař vyspravil zub, jak dobrý hotel pokoj. Měřitelné." },
-            { c: VSE.warning, t: "FUNKČNÍ — JAK", d: "Proces dodání. Jak se zubař choval, jak rychle byl pokoj uklizený. Subjektivní." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.success}>5 standardů kvality služeb (klasika)</Tag>
-        <Bullet items={[
-          "<b>Spolehlivost (Reliability):</b> Schopnost poskytnout slibovanou službu spolehlivě a přesně. Letadlo včas, doktor objednaný čas.",
-          "<b>Ochota (Responsiveness):</b> Ochota pomoci zákazníkům a poskytnout rychlou službu. Čekací doba, reakční čas.",
-          "<b>Jistota (Assurance):</b> Znalosti a zdvořilost zaměstnanců + jejich schopnost vzbudit důvěru. Znalý lékař, profesionální advokát.",
-          "<b>Empatie (Empathy):</b> Individuální péče o zákazníky. Zapamatování si jména, preferencí.",
-          "<b>Hmotné prvky (Tangibles):</b> Vzhled prostředí, vybavení, personálu, materiálů. Čistý nemocniční pokoj, moderní vybavení.",
-        ]} color={VSE.success} />
-      </div>) },
-
-    { id: "servqual", title: "GAP analýza + SERVQUAL — měření kvality služeb", subtitle: "5 mezer mezi kvalitními + SERVQUAL nástroj", color: BOMBIK.success, emoji: "scale",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          <b>GAP model</b> (Parasuraman, Zeithaml, Berry, 1985) identifikuje <b>5 mezer (gaps)</b>, kvůli kterým může vzniknout rozdíl mezi <b>očekávanou a vnímanou kvalitou</b>. <b>SERVQUAL</b> je dotazníkový nástroj pro měření.
-        </Def>
-        <Tag color={BOMBIK.success}>5 GAPs — kde vznikají mezery</Tag>
-        <Bullet items={[
-          "<b>GAP 1 — Management nerozumí očekávání zákazníka.</b> Management myslí, že zákazník chce levně, ale chce rychle.",
-          "<b>GAP 2 — Management nepřevede očekávání do specifikací.</b> Ví, že chtějí rychle, ale nezavedl SLA 5 min.",
-          "<b>GAP 3 — Zaměstnanci nedodrží specifikace.</b> SLA 5 min existuje, ale zaměstnanci nemají kapacitu/motivaci.",
-          "<b>GAP 4 — Komunikace neodpovídá realitě.</b> Reklama slibuje VIP servis, realita je standard. Overpromise, underdeliver.",
-          "<b>GAP 5 — Vnímaná kvalita ≠ očekávaná kvalita.</b> Výsledný gap mezi tím, co zákazník čekal a zažil. Dáno GAPy 1-4.",
-        ]} color={BOMBIK.success} />
-        <Tag color={VSE.warning}>SERVQUAL — 7 dimenzí pro dotazník</Tag>
-        <Bullet items={[
-          "<b>Spolehlivost</b> (přesnost slibovaného plnění)",
-          "<b>Kompetence</b> (odborné znalosti a dovednosti)",
-          "<b>Ochota</b> (vstřícnost, rychlost reakce)",
-          "<b>Bezpečnost</b> (cítí se zákazník bezpečně)",
-          "<b>Přístupnost</b> (snadnost kontaktu, dosažitelnost)",
-          "<b>Komunikativnost</b> (informování v jazyce zákazníka)",
-          "<b>Porozumění zákazníkovi</b> (individuální péče)",
-          "<b>Dojem — Tangibles</b> (vzhled prostředí, lidí)",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Další metody měření kvality</Tag>
-        <Bullet items={[
-          "<b>Mystery shopping:</b> Falešný zákazník hodnotí službu (řetězce hotelů, banky, retail).",
-          "<b>NPS (Net Promoter Score):</b> Doporučili byste 0-10? % promoters − % detractors.",
-          "<b>CSI (Customer Satisfaction Index):</b> Komplex spokojenosti přes více otázek.",
-          "<b>Vyhodnocení reklamací:</b> Počet, typy, doba řešení, recovery rate.",
-          "<b>Posuzování výsledků mkt studií:</b> Pravidelné průzkumy + benchmarking s konkurencí.",
-        ]} color={VSE.fph} />
-      </div>) },
-
-    { id: "branding", title: "Branding služeb — proč je značka u služeb klíčová", subtitle: "Funkce značky u nehmotného + 3 strategie", color: BOMBIK.success, emoji: "sparkles",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          U služeb je <b>značka kritičtější</b> než u hmotných produktů, protože <b>nehmotnost = vyšší riziko</b>. Zákazník nevidí, co kupuje, proto se spoléhá na značku. Komise <b>Špaček, Mládková</b> chtějí tohle slyšet explicitně.
-        </Def>
-        <Tag color={BOMBIK.success}>Proč je branding u služeb klíčový</Tag>
-        <Bullet items={[
-          "<b>Snižuje vnímané riziko:</b> Zákazník nevidí službu před koupí. Značka (McDonald's, Marriott, KPMG) říká — víme co dostaneme.",
-          "<b>Vytváří image:</b> Důvěryhodnost, hodnoty, sympatičnost. Klíčové při výběru právníka, lékaře, finanční služby.",
-          "<b>Cenová prémie:</b> Známá značka může účtovat víc. McKinsey × neznámá poradenská firma.",
-          "<b>Loajalita zákazníků:</b> Známá značka = vyšší retention. Banka, telekom, pojišťovna.",
-          "<b>Snižuje cenu komunikace:</b> Word-of-mouth + reputace levnější než reklama.",
-        ]} color={BOMBIK.success} />
-        <Tag color={VSE.warning}>Prvky značky u služeb</Tag>
-        <Bullet items={[
-          "<b>Volba prvků značky:</b> Logo, slogan, název, barvy — zapamatovatelný motiv. Apple jablko, FedEx šipka v logu.",
-          "<b>Vytváření image:</b> Důvěryhodnost a sympatičnost. Patagonia (environmentální), Volvo (bezpečnost).",
-          "<b>Zhmotnění služby:</b> Fyzické důkazy (certifikáty, kanceláře, uniformy) — kompenzace nehmotnosti.",
-          "<b>Předávání brand strategie:</b> Hierarchie značky a portfolio pro řízení targeting a positioning.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Holistický marketing služeb (Kotler)</Tag>
-        <ResponsiveGrid cols3>
-          {[
-            { c: VSE.fmv, t: "EXTERNÍ MARKETING", d: "Klasický 4P — produkt, cena, distribuce, propagace SMĚREM K ZÁKAZNÍKOVI. Reklama, slogan, web." },
-            { c: VSE.warning, t: "INTERNÍ MARKETING", d: "Vůči zaměstnancům — trénink, motivace, kultura. Zaměstnanec = první zákazník služby." },
-            { c: VSE.success, t: "INTERAKTIVNÍ MARKETING", d: "Schopnost personálu při obsluze. Touchpoint zaměstnance × zákazníka. Klíč pro proměnlivost." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-      </div>) },
-
-    { id: "diferenciace", title: "Diferenciace služeb + komplementární služby", subtitle: "Jak se odlišit + value-added služby", color: BOMBIK.success, emoji: "sparkles",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          Komise <b>Tahal (sanace/plísně)</b> chtěla explicitně <b>diferenciaci výrobku × služby</b>. Komise <b>Stříteský</b> chtěl <b>návaznost na marketingovou strategii</b>. Klíčová oblast.
-        </Def>
-        <Tag color={BOMBIK.success}>10 způsobů diferenciace služeb</Tag>
-        <Bullet items={[
-          "<b>Snadnost objednání:</b> Web, app, telefon, chatbot 24/7. Booking.com, Uber.",
-          "<b>Rychlost dodání:</b> Stejný den (Amazon Prime), do 2 hodin (Wolt), do 30 min (Pizza Express).",
-          "<b>Customizace:</b> Přizpůsobení individuálním požadavkům. Personal training, custom catering.",
-          "<b>Přesnost a péče:</b> Premium prostředí, atentní obsluha. Ritz-Carlton, Mandarin Oriental.",
-          "<b>Digitální zážitek:</b> Self-service, automatizace. Amazon, Netflix, Spotify recommendations.",
-          "<b>Milý personál:</b> Soft skills, kultura, smiling staff. Disney parks, Zappos.",
-          "<b>Empatie:</b> Pochopení zákazníka, individuální přístup. Apple Genius Bar.",
-          "<b>Rady a poradenství:</b> Edukace + doporučení. Apothecary, Sephora consultants.",
-          "<b>Dostupnost:</b> Geografická + časová. Tesco 24/7, urgentní lékař na dovolané.",
-          "<b>Inovativní nabídka:</b> Nové služby, které konkurence nemá. Amazon Go (no checkout).",
-        ]} color={BOMBIK.success} />
-        <Tag color={VSE.warning}>Komplementární služby (value-added)</Tag>
-        <Bullet items={[
-          "<b>Rychlost a agilnost:</b> Express servis, on-demand modely. Tesla mobile service, Apple support 24/7.",
-          "<b>Individualizace, customizace:</b> Šitý servis na míru. Private banking, custom Nike sneakers.",
-          "<b>Ekologičnost:</b> Carbon-neutral varianta. DPD GoGreen, ČSOB Sustainable banking.",
-          "<b>Digitální služby:</b> App-only, self-service, online portal. Banking app, ČD app.",
-          "<b>Globální dosažitelnost:</b> Stejná služba kdekoliv. Marriott, AmEx Centurion, Hertz Gold.",
-        ]} color={VSE.warning} />
-      </div>) },
-
-    { id: "outsourcing", title: "Outsourcing v logistice — Make or Buy + 2PL až 5PL", subtitle: "Kdy outsourcovat + úrovně outsourcingu + problémy", color: BOMBIK.success, emoji: "scale",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          <b>Outsourcing v logistice</b> = svěření části nebo celé logistické funkce externímu poskytovateli. Komise <b>Tahal, Mládková, Vávra, Bočková</b> tohle vyžadují vždy — <b>logistika jako služba</b>.
-        </Def>
-        <Tag color={BOMBIK.success}>Make or Buy Decision — kdy outsourcovat</Tag>
-        <PlusMinus
-          plus={[
-            "Nákladově — outsourcing levnější než vlastní kapacity",
-            "Kapacitně — vlastní kapacity jsou plné",
-            "Kvalitativně — dodavatel zajistí vyšší kvalitu (specializace)",
-            "Kapitálově — nemáme prostředky na investici (sklady, technika)",
-            "Know-how — nejsou zkušenosti, know-how",
-            "Právně — produkční práva nelze zajistit nebo jsou drahá",
-            "Rizikově — vlastní výroba/sklady přinášejí rizika",
-          ]}
-          minus={[
-            "Cena je menší než vlastní náklady",
-            "Dodavatel je schopen zajistit vyšší kvalitu",
-            "Vlastní kapacity jsou zaplněné",
-            "Nejsou zajistitelná produkční práva nebo jsou příliš drahá",
-            "Vlastní výroba přináší rizika (bezpečnostní, výrobní)",
-            "Nejsou zkušenosti s řízením podobné výroby",
-          ]}
+        <ExamAlert
+          komise="Tažené: Marketingová strategie a strategie v logistice (Pichanič+Kuděj+Zamazalová), konkurenční strategie + logistické strategie (Cejthamr+Machek+Heřman)"
+          what="Komise chce: <b>strategii v logistice</b> + jak pomáhá ke konkurenční výhodě + plánovací oblasti SCM. Klíč je umět propojit cíl logistiky (dodat co/kdy/kam/kolik) s konkrétními výhodami."
         />
-        <Tag color={VSE.warning}>4 úrovně outsourcingu v logistice (2PL–5PL)</Tag>
+      </div>) },
+
+    { id: "scm_typy", title: "6 typů SCM — Mass, Lean, Agile, Resilient, Green, SCM 4.0", subtitle: "Různé přístupy k řízení dodavatelského řetězce", color: BOMBIK.success, emoji: "grid",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Podle toho, na co firma klade důraz, volí jeden ze <b>šesti přístupů k SCM</b>. Každý optimalizuje něco jiného — náklady, plýtvání, rychlost, odolnost, ekologii nebo digitalizaci.
+        </Def>
+        <Tag color={BOMBIK.success}>6 typů Supply Chain Managementu</Tag>
         <ResponsiveGrid cols2>
           {[
-            { c: VSE.fmv, t: "2PL — 2nd Party Logistics", d: "Speditér. Outsourcuji jen část dopravy. Firma řídí vše ostatní, jen pronájem vozidel. ČSAD, klasický přepravce." },
-            { c: VSE.warning, t: "3PL — 3rd Party Logistics", d: "Komplex log. služeb: doprava + skladování + manipulace + administrativa. DHL, UPS, Geis, Dachser. Většina firem volí 3PL." },
-            { c: VSE.fph, t: "4PL — 4th Party Logistics", d: "Kompletní převzetí řízení log. řetězce. Klient ztrácí kontrolu, získává specializaci. IBM, Accenture v B2B." },
-            { c: VSE.danger, t: "5PL — 5th Party Logistics", d: "Propojení 3PL a 4PL v jeden integrovaný systém. Big data, AI, IoT. Amazon Logistics, JD.com." },
+            { c: VSE.fmv, t: "MASS SCM", d: "Snižování nákladů zvyšováním objemu. Funkční řízení, direktivní řízení bez zapojení zaměstnanců, transakční vztah k dodavatelům. PUSH princip (tlačím zboží na trh)." },
+            { c: VSE.fph, t: "LEAN SCM", d: "Kontinuální vyhledávání a odstraňování plýtvání (mudá), zbytečností, poruch a neadekvátního využívání lidské síly. JIT a KANBAN technologie zásobování. Štíhlý řetězec." },
+            { c: VSE.warning, t: "AGILE SCM", d: "Spokojenost zákazníka, zvýšení kvality a úrovně služeb, rychlost dodání a minimalizace nákladů díky bodu rozpojení. Pružná reakce na poptávku." },
+            { c: VSE.danger, t: "RESILIENT SCM", d: "Odolný logistický řetězec má reagovat na turbulence na trhu. Aplikuje risk management do SCM, strategické zásoby a flexibilní zásoby dodavatelů, revenue management. ISO 9001:2015." },
+            { c: VSE.success, t: "GREEN SCM", d: "Snižování negativního vlivu na životní prostředí. ISO 20400:2017 (udržitelný nákup). Ekologie jako konkurenční výhoda." },
+            { c: VSE.primary, t: "SCM 4.0", d: "Vychází z Průmyslu 4.0. Reakce na zvyšující se mzdové náklady a nedostatek lidských zdrojů → automatizace. Požadavky na kratší dodací lhůty a nové technologie → nearshoring. Poskytování výrobků se mění na uspokojování potřeb." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -14521,188 +14303,321 @@ function OkruhLog2Panel() {
             </GlassBox>
           ))}
         </ResponsiveGrid>
-        <Tag color={VSE.danger}>Typické problémy outsourcingu</Tag>
+        <Tag color={VSE.warning}>Jak si je zapamatovat</Tag>
         <Bullet items={[
-          "<b>Řízení vztahů:</b> Komunikace s dodavatelem, eskalace, SLA management.",
-          "<b>Smlouvy:</b> SLA, KPI, sankce, exit clauses, ochrana dat.",
-          "<b>Pracovníci:</b> Co s vlastními zaměstnanci? Transfer, propuštění, retraining.",
-          "<b>Kvalita:</b> Dodavatel má vlastní priority, jeho kvalita ≠ naše kvalita.",
-          "<b>Zaměstnanci:</b> Pocit nejistoty, ztráta loyalty, kulturní mismatch.",
-        ]} color={VSE.danger} />
+          "<b>Mass</b> = masa, objem, levně (PUSH). <b>Lean</b> = štíhlost, žádné plýtvání (JIT/KANBAN).",
+          "<b>Agile</b> = hbitost, rychlá reakce na zákazníka. <b>Resilient</b> = odolnost vůči otřesům (krize, výpadky).",
+          "<b>Green</b> = ekologie. <b>SCM 4.0</b> = digitalizace, automatizace, nearshoring.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "materialove", title: "Materiálové strategie — ABC, XYZ, Kraljicova matice", subtitle: "Jak rozdělit položky a dodavatele podle důležitosti", color: BOMBIK.success, emoji: "chart",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Ne všechny položky a dodavatelé jsou stejně důležité. <b>Materiálové strategie</b> pomáhají rozdělit je do skupin a podle toho s nimi nakládat — kde šetřit pozornost a kde ji soustředit.
+        </Def>
+        <Tag color={BOMBIK.success}>ABC analýza (Paretovo pravidlo 80/20)</Tag>
+        <Bullet items={[
+          "<b>Princip:</b> 80 % nákupních nákladů tvoří 20 % položek. Soustředit pozornost na to podstatné.",
+          "<b>A — 20 % položek, 80 % spotřeby:</b> klíčové, sledovat nejpečlivěji.",
+          "<b>B — střední počet položek se střední průměrnou spotřebou:</b> běžná pozornost.",
+          "<b>C — velký počet položek s nízkou spotřebou:</b> minimální pozornost, jednoduché řízení.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>XYZ analýza (podle stability poptávky)</Tag>
+        <Bullet items={[
+          "<b>X — stabilní poptávka:</b> ideálně stálé položky, snadno predikovatelné.",
+          "<b>Y — jemné výkyvy (kolísavá poptávka):</b> sezónní nebo trendové výkyvy.",
+          "<b>Z — odborné výkyvy (nepravidelná poptávka):</b> jednorázové, těžko předvídatelné požadavky.",
+          "<b>Kombinace ABC + XYZ</b> dává devět skupin — např. AX = drahá + stabilní položka (řídit přes JIT), CZ = levná + nepravidelná (držet pojistnou zásobu).",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Kraljicova matice (nákupní portfoliová analýza)</Tag>
+        <Bullet items={[
+          "<b>Co je to:</b> rozdělení nakupovaných položek podle dvou os — <b>vliv na zisk</b> (dopad nákupu) × <b>zásobovací riziko</b> (jak těžké je položku sehnat).",
+          "<b>Pákové položky</b> (vysoký zisk, nízké riziko): tlačit na cenu, soutěžit dodavatele, substituovat.",
+          "<b>Strategické položky</b> (vysoký zisk, vysoké riziko): budovat partnerství, dlouhodobé smlouvy, 2 dodavatelé.",
+          "<b>Bezproblémové položky</b> (nízký zisk, nízké riziko): zjednodušit nákup, automatizovat, 1 dodavatel.",
+          "<b>Úzkoprofilové položky</b> (nízký zisk, vysoké riziko): zajistit dostupnost, držet zásobu, hledat alternativy.",
+        ]} color={VSE.fph} />
+        <ResponsiveSVG viewBox="0 0 460 360" maxHeight={380}>
+          <text x="230" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Kraljicova matice (nakupni portfolio)</text>
+          {/* 4 kvadranty */}
+          <rect x="90" y="45" width="160" height="120" fill={VSE.warning} opacity="0.18" stroke={VSE.warning} strokeWidth="1.5"/>
+          <rect x="250" y="45" width="160" height="120" fill={VSE.danger} opacity="0.18" stroke={VSE.danger} strokeWidth="1.5"/>
+          <rect x="90" y="165" width="160" height="120" fill={VSE.success} opacity="0.18" stroke={VSE.success} strokeWidth="1.5"/>
+          <rect x="250" y="165" width="160" height="120" fill={VSE.fmv} opacity="0.18" stroke={VSE.fmv} strokeWidth="1.5"/>
+          {/* labels */}
+          <text x="170" y="95" textAnchor="middle" fontFamily={fontSans} fontSize="12" fontWeight="800" fill={VSE.warning}>PAKOVE</text>
+          <text x="170" y="113" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">tlacit na cenu,</text>
+          <text x="170" y="126" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">soutezit dodavatele</text>
+          <text x="330" y="95" textAnchor="middle" fontFamily={fontSans} fontSize="12" fontWeight="800" fill={VSE.danger}>STRATEGICKE</text>
+          <text x="330" y="113" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">partnerstvi,</text>
+          <text x="330" y="126" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">2 dodavatele</text>
+          <text x="170" y="215" textAnchor="middle" fontFamily={fontSans} fontSize="12" fontWeight="800" fill={VSE.success}>BEZPROBLEMOVE</text>
+          <text x="170" y="233" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">zjednodusit,</text>
+          <text x="170" y="246" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">1 dodavatel</text>
+          <text x="330" y="215" textAnchor="middle" fontFamily={fontSans} fontSize="12" fontWeight="800" fill={VSE.fmv}>UZKOPROFILOVE</text>
+          <text x="330" y="233" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">zajistit dostupnost,</text>
+          <text x="330" y="246" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">drzet zasobu</text>
+          {/* osy */}
+          <text x="40" y="165" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill="var(--text)" transform="rotate(-90, 40, 165)">VLIV NA ZISK</text>
+          <text x="105" y="58" textAnchor="start" fontFamily={fontMono} fontSize="8" fill="var(--text-muted)">vysoky</text>
+          <text x="105" y="278" textAnchor="start" fontFamily={fontMono} fontSize="8" fill="var(--text-muted)">nizky</text>
+          <text x="250" y="310" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill="var(--text)">ZASOBOVACI RIZIKO</text>
+          <text x="100" y="300" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill="var(--text-muted)">nizke</text>
+          <text x="400" y="300" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill="var(--text-muted)">vysoke</text>
+          <text x="230" y="345" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill="var(--text-muted)" fontStyle="italic">rozdeleni nakupovanych polozek podle vlivu na zisk a zasobovaciho rizika</text>
+        </ResponsiveSVG>
+      </div>) },
+
+    { id: "zasoby", title: "Řízení zásob — JIT, KANBAN, Cross-docking", subtitle: "Tři klíčové metody řízení toku zboží", color: BOMBIK.success, emoji: "truck",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Zásoby vážou peníze a místo. Cílem moderní logistiky je <b>mít jich co nejméně, ale neohrozit plynulost</b>. K tomu slouží tři klíčové metody, které musíš umět — <b>JIT, KANBAN a cross-docking</b>.
+        </Def>
+        <Tag color={BOMBIK.success}>JIT — Just In Time</Tag>
+        <Bullet items={[
+          "<b>Princip:</b> dodání zásob <b>přesně v čas, kdy jsou potřeba</b> — ani dřív, ani později.",
+          "<b>Cíl:</b> držet jen <b>pojistnou zásobu</b>, ostatní materiál přichází právě včas do výroby.",
+          "<b>Výhoda:</b> minimální vázaný kapitál v zásobách, méně skladů, méně plýtvání.",
+          "<b>Riziko:</b> citlivost na výpadky — když dodavatel nedodá včas, výroba stojí (proto potřebuje spolehlivé dodavatele).",
+          "<b>Patří k Lean SCM</b> — štíhlý řetězec bez zbytečných zásob.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>KANBAN — řízení pomocí kartiček</Tag>
+        <Bullet items={[
+          "<b>Princip:</b> <b>kartičky s identifikací produktu</b> řídí doplňování. Když se materiál ze skladu spotřebuje (přijde kartička), automaticky se doplní.",
+          "<b>Jak to funguje:</b> kartička = signál 'potřebuju doplnit'. Žádná kartička = nic se nedoplňuje (PULL princip — táhne to poptávka, ne plán).",
+          "<b>Cíl:</b> plynulý tok bez nadbytečných zásob, jednoduchá vizuální kontrola.",
+          "<b>Vznik:</b> Toyota Production System — japonské 'kanban' = cedule/štítek.",
+          "<b>Patří k Lean SCM</b>, často jde ruku v ruce s JIT.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>CROSS-DOCKING — překladiště</Tag>
+        <Bullet items={[
+          "<b>Princip:</b> <b>překladiště (mezisklad)</b> pro příjem, naložení a odložení zboží — zboží se v něm prakticky neskladuje, jen překládá.",
+          "<b>Jak to funguje:</b> zboží přijede, rozdělí se podle cílů a hned se naloží na další vozidlo. Minimální čas v překladišti.",
+          "<b>Cíl:</b> zrychlit tok, snížit skladovací náklady — zboží 'protéká', neleží.",
+          "<b>Příklad:</b> obchodní řetězce (zboží z továren se v cross-dock centru přerozdělí do prodejen).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "dodavatele", title: "Výběr dodavatele", subtitle: "Kolik dodavatelů, nezávislost, síla dodavatele", color: BOMBIK.success, emoji: "people",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Výběr dodavatele je strategické rozhodnutí. Závisí na tom, jak důležitá je položka (viz Kraljicova matice) a jaké riziko si můžeme dovolit.
+        </Def>
+        <Tag color={BOMBIK.success}>Optimální počet dodavatelů</Tag>
+        <Bullet items={[
+          "<b>2 dodavatelé pro strategické položky</b> — zdravý konkurenční boj. (1. zvýší cenu → odebíráme víc od 2.). Pojistka proti výpadku jednoho.",
+          "<b>1 dodavatel pro bezproblémové položky</b> — zjednodušení, není potřeba komplikovat.",
+          "<b>Dodavatelé na sobě nezávislí</b> — kdyby se něco pokazilo (např. mít zdroj z Ameriky i z Číny), výpadek jednoho regionu nepoloží celý řetězec.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Matice dodavatelského portfolia</Tag>
+        <Bullet items={[
+          "<b>Osy:</b> síla poptávky (naše vyjednávací pozice) × síla dodavatelů.",
+          "<b>Sbírat smetanu</b> (silná poptávka, slabí dodavatelé): využít naši převahu, tlačit na podmínky.",
+          "<b>Rozvažovat</b> (vyrovnané síly): hledat rovnováhu, partnerství.",
+          "<b>Diverzifikovat</b> (slabá poptávka, silní dodavatelé): rozložit riziko mezi víc dodavatelů, snížit závislost.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Pozor na sílu dodavatele — Porter 5 sil</Tag>
+        <Bullet items={[
+          "Při výběru dodavatele <b>pozor na jeho vyjednávací sílu</b> (Porterových 5 sil — vyjednávací síla dodavatelů).",
+          "Silný dodavatel může diktovat cenu a podmínky → snažíme se ji oslabit (víc dodavatelů, substituty, vlastní výroba).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "segmentace", title: "Tržní segmentace v logistice", subtitle: "Jak segmentovat zákazníky podle logistických požadavků", color: BOMBIK.success, emoji: "target",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Tržní segmentace</b> je užitečná i v logistice, stejně jako v jiných oblastech podnikání. <b>Provádíme ji pro větší efektivnost</b> (promítá se i do zbytku řetězce) — různí zákazníci mají různé požadavky na logistické služby.
+        </Def>
+        <Tag color={BOMBIK.success}>Typy segmentace</Tag>
+        <Bullet items={[
+          "<b>Demografická</b> — podle pohlaví, stáří, zisku, služeb.",
+          "<b>Geografická</b> — jiná specifika v různých zemích (ČR, Německo, Polsko).",
+          "<b>Podle užívání</b> — jak zákazník produkt/službu používá.",
+          "<b>Podle chování</b> — nákupní chování zákazníka.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Klíčové faktory segmentace v logistice</Tag>
+        <Bullet items={[
+          "<b>Stabilita</b> — jak moc se mění objemy zásob v čase.",
+          "<b>Predikovatelnost</b> — jak přesně umíme předvídat přání zákazníka.",
+          "<b>SKU (Stock Keeping Unit)</b> — jedinečný kód přiřazený produktu pro identifikaci.",
+          "<b>Objem</b> — velikost objednávek.",
+          "<b>Další faktory:</b> dodací lhůta, frekvence, spolehlivost, kvalita, flexibilita, míra customizace.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Konkurenční výhoda + cíle ze segmentace</Tag>
+        <Bullet items={[
+          "<b>Konkurenční výhoda</b> se stanovuje na základě segmentace — <b>kvalita</b> (metrika <b>DIFOT</b> = Delivery In Full On Time, <b>OTIF</b> = On Time In Full, logistické KPI — dodání včas a bez chyb), cena, rychlost, flexibilita, globální dosažitelnost, customizace, inovace, ekologie.",
+          "<b>Výsledkem segmentace</b> můžeme stanovit cíle: konkurence cenou / customizací / inovací / kooperací.",
+          "<b>Specifika logistických služeb:</b> méně a větší zákazníci, úzké vztahy, vzájemná závislost, důraz na spolehlivost a profesionalitu.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro SCM, zásoby a segmentaci", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Tažené z logistiky se točí kolem: strategie v logistice, outsourcing, segmentace v logistice, řízení zásob. Tady je postup, jak na to.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Urči <b>cíl logistiky firmy z PS</b> — co/kdy/kam/kolik dodat a jaká je hlavní konkurenční výhoda (cena? rychlost? kvalita?).",
+          "<b>2.</b> Vyber vhodný <b>typ SCM</b> — Lean (štíhlá výroba, JIT), Agile (rychlá reakce), Resilient (odolnost vůči krizím), podle charakteru firmy.",
+          "<b>3.</b> U materiálu použij <b>ABC/XYZ analýzu</b> — co jsou klíčové položky (A) a jak stabilní je poptávka (X/Y/Z).",
+          "<b>4.</b> Navrhni <b>řízení zásob</b> — JIT a KANBAN pro výrobu, cross-docking pro distribuci.",
+          "<b>5.</b> U dodavatelů použij <b>Kraljicovu matici</b> a urči počet dodavatelů (2 strategické, 1 bezproblémové).",
+          "<b>6.</b> Pokud sedí, <b>segmentuj zákazníky</b> podle logistických požadavků (DIFOT/OTIF) a odvoď konkurenční výhodu.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Umět JIT, KANBAN a cross-docking konkrétně a rozlišit je.",
+          "<b>✅ Dobře:</b> Spojit typ SCM s charakterem firmy (rychlá móda → Agile, automobilka → Lean).",
+          "<b>✅ Dobře:</b> Kraljicova matice + počet dodavatelů na položky z PS.",
+          "<b>❌ Špatně:</b> Zaměnit JIT (časování) s KANBANem (kartičky/signál) — souvisí, ale nejsou totéž.",
+          "<b>❌ Špatně:</b> Mluvit obecně o 'dobré logistice' bez konkrétních metod.",
+        ]} color={VSE.warning} />
       </div>) },
   ];
 
   const flashcardsLog2 = [
-    { term: "Služba", def: "Aktivita nebo užitek, který jedna strana nabízí druhé. V zásadě nehmotná, nevzniká žádné vlastnictví.", tag: "POJEM" },
-    { term: "Nehmotnost", def: "Službu nelze před koupí vidět, ohmatat, ochutnat. Marketing musí vizualizovat — testimonials, certifikáty.", tag: "4N" },
-    { term: "Neoddělitelnost", def: "Služba se vyrábí a spotřebovává současně. Lékař ošetří pacienta v tom samém momentě.", tag: "4N" },
-    { term: "Proměnlivost", def: "Stejná služba se liší kvalitou — kdo, kdy, kde, komu. Standardizace přes procesy a školení.", tag: "4N" },
-    { term: "Pomíjivost", def: "Služby nelze skladovat. Prázdné sedadlo v letadle dnes = ztracený příjem.", tag: "4N" },
-    { term: "Nepřevoditelné vlastnictví", def: "Zákazník nezíská vlastnictví — jen právo užívat (let, masáž, právní rada).", tag: "4N" },
-    { term: "Mediadatelnost", def: "Některé služby vyžadují prostředníka (cestovka, broker, agent).", tag: "4N" },
-    { term: "Kotler 5 typů nabídky", def: "Čistý hmotný produkt → Hmotný + doprovodné služby → Hybrid → Převažující služba + zboží → Čistá služba.", tag: "KOTLER" },
-    { term: "Čistá služba", def: "Masáž, právní rada, koučink. Žádné fyzické zboží. Nejvyšší riziko nehmotnosti.", tag: "KOTLER" },
-    { term: "Hybrid", def: "Restaurace — jídlo (hmota) + obsluha (služba). 50/50 mix.", tag: "KOTLER" },
-    { term: "Předpokládaná kvalita", def: "To, co zákazník očekává před koupí. Tvořena reklamou, WOM, minulou zkušeností.", tag: "KVALITA" },
-    { term: "Vnímaná kvalita", def: "To, jak zákazník hodnotí službu během/po spotřebě. Subjektivní.", tag: "KVALITA" },
-    { term: "Skutečně poznaná kvalita", def: "Objektivní kvalita (procesy, kompetence). Často se liší od vnímané.", tag: "KVALITA" },
-    { term: "Technická kvalita (Grönroos)", def: "Co — výsledek služby. Jak dobře zubař vyspravil zub. Měřitelné.", tag: "GRÖNROOS" },
-    { term: "Funkční kvalita (Grönroos)", def: "Jak — proces dodání. Jak se zubař choval, rychlost. Subjektivní.", tag: "GRÖNROOS" },
-    { term: "5 standardů kvality", def: "Spolehlivost / Ochota / Jistota / Empatie / Hmotné prvky (Tangibles).", tag: "KVALITA" },
-    { term: "GAP model", def: "Parasuraman, Zeithaml, Berry 1985. 5 mezer mezi očekávanou a vnímanou kvalitou.", tag: "GAP" },
-    { term: "GAP 1", def: "Management nerozumí očekávání zákazníka. Myslí, že chce levně, ale chce rychle.", tag: "GAP" },
-    { term: "GAP 4", def: "Komunikace neodpovídá realitě. Reklama slibuje VIP, realita je standard.", tag: "GAP" },
-    { term: "GAP 5", def: "Výsledná mezera mezi očekávanou a vnímanou kvalitou. Dáno GAPy 1-4.", tag: "GAP" },
-    { term: "SERVQUAL", def: "Dotazníkový nástroj pro měření kvality. 7-8 dimenzí: spolehlivost, kompetence, ochota, bezpečnost, přístupnost, komunikativnost, porozumění, dojem.", tag: "SERVQUAL" },
-    { term: "Mystery shopping", def: "Falešný zákazník hodnotí službu. Banky, hotely, retail řetězce.", tag: "MĚŘENÍ" },
-    { term: "NPS (Net Promoter Score)", def: "Doporučili byste 0-10? % promoters − % detractors. Klíčová metrika loyalty.", tag: "MĚŘENÍ" },
-    { term: "Branding služeb", def: "Snižuje vnímané riziko, vytváří image, umožňuje cenovou prémii, buduje loyalty.", tag: "BRANDING" },
-    { term: "Zhmotnění služby", def: "Fyzické důkazy (certifikáty, prostředí, uniformy) — kompenzace nehmotnosti.", tag: "BRANDING" },
-    { term: "Holistický marketing služeb", def: "Externí (klasický 4P směrem k zákazníkovi) + Interní (vůči zaměstnancům) + Interaktivní (personál × zákazník).", tag: "HOLISTIC" },
-    { term: "Interní marketing", def: "Vůči zaměstnancům — trénink, motivace, kultura. Zaměstnanec = první zákazník služby.", tag: "HOLISTIC" },
-    { term: "Interaktivní marketing", def: "Schopnost personálu při obsluze. Touchpoint zaměstnance × zákazníka.", tag: "HOLISTIC" },
-    { term: "Outsourcing v logistice", def: "Svěření části nebo celé logistické funkce externímu poskytovateli (2PL–5PL).", tag: "OUTSOURCING" },
-    { term: "Make or Buy", def: "Rozhodnutí outsourcovat × dělat vlastní. Faktory: cena, kapacita, kvalita, kapitál, know-how, právo, riziko.", tag: "OUTSOURCING" },
-    { term: "2PL", def: "Speditér — outsourcuji jen část dopravy. Firma řídí vše ostatní. ČSAD klasika.", tag: "OUTSOURCING" },
-    { term: "3PL", def: "Komplex log. služeb. Doprava + skladování + manipulace + administrativa. DHL, UPS, Geis.", tag: "OUTSOURCING" },
-    { term: "4PL", def: "Kompletní řízení log. řetězce. Klient ztrácí kontrolu, získává specializaci.", tag: "OUTSOURCING" },
-    { term: "5PL", def: "Propojení 3PL a 4PL přes big data, AI, IoT. Amazon Logistics, JD.com.", tag: "OUTSOURCING" },
-    { term: "Diferenciace služeb", def: "10 způsobů: snadnost objednání, rychlost dodání, customizace, přesnost, digitální zážitek, milý personál, empatie, rady, dostupnost, inovativní nabídka.", tag: "DIFERENCIACE" },
+    { term: "Supply Chain Management (SCM)", def: "Řízení celého dodavatelského řetězce od surovin ke konečnému zákazníkovi.", tag: "SCM" },
+    { term: "Cíl logistiky", def: "Uspokojit přání zákazníka — dodat CO, KDY, KAM a v jakém MNOŽSTVÍ chce, při rozumných nákladech.", tag: "SCM" },
+    { term: "Plánovací oblasti SCM", def: "Dlouhodobé (strategický návrh, výběr dodavatelů, umístění továren) / střednědobé (plánování kapacit, distribuce) / krátkodobé (operativní řízení, rozvrhování).", tag: "SCM" },
+    { term: "Konkurenční výhody v logistice", def: "Cena, kvalita, rychlost a flexibilita, globální dosažitelnost, individualizace, inovace, ekologie.", tag: "SCM" },
+    { term: "Mass SCM", def: "Snižování nákladů zvyšováním objemu. Direktivní řízení, transakční vztah k dodavatelům, PUSH princip.", tag: "TYPY SCM" },
+    { term: "Lean SCM", def: "Odstraňování plýtvání, zbytečností, poruch. JIT a KANBAN. Štíhlý řetězec.", tag: "TYPY SCM" },
+    { term: "Agile SCM", def: "Spokojenost zákazníka, kvalita, rychlost dodání, minimalizace nákladů přes bod rozpojení. Pružná reakce.", tag: "TYPY SCM" },
+    { term: "Resilient SCM", def: "Odolný řetězec — reaguje na turbulence. Risk management do SCM, strategické a flexibilní zásoby, revenue management.", tag: "TYPY SCM" },
+    { term: "Green SCM", def: "Snižování negativního vlivu na životní prostředí. ISO 20400:2017 (udržitelný nákup).", tag: "TYPY SCM" },
+    { term: "SCM 4.0", def: "Z Průmyslu 4.0. Automatizace (drahá práce, málo lidí), nearshoring (kratší lhůty), poskytování výrobků → uspokojování potřeb.", tag: "TYPY SCM" },
+    { term: "ABC analýza", def: "Paretovo 80/20 — 80 % nákladů tvoří 20 % položek. A (klíčové), B (střední), C (mnoho levných).", tag: "MATERIÁL" },
+    { term: "XYZ analýza", def: "Podle stability poptávky. X (stabilní), Y (jemné výkyvy, kolísavá), Z (nepravidelná poptávka).", tag: "MATERIÁL" },
+    { term: "Kraljicova matice", def: "Nákupní portfolio podle os vliv na zisk × zásobovací riziko. Pákové, strategické, bezproblémové, úzkoprofilové položky.", tag: "MATERIÁL" },
+    { term: "Pákové položky", def: "Vysoký zisk, nízké riziko. Tlačit na cenu, soutěžit dodavatele, substituovat.", tag: "KRALJIC" },
+    { term: "Strategické položky", def: "Vysoký zisk, vysoké riziko. Partnerství, dlouhodobé smlouvy, 2 dodavatelé.", tag: "KRALJIC" },
+    { term: "Bezproblémové položky", def: "Nízký zisk, nízké riziko. Zjednodušit, automatizovat, 1 dodavatel.", tag: "KRALJIC" },
+    { term: "Úzkoprofilové položky", def: "Nízký zisk, vysoké riziko. Zajistit dostupnost, držet zásobu, hledat alternativy.", tag: "KRALJIC" },
+    { term: "JIT (Just In Time)", def: "Dodání zásob přesně v čas, kdy jsou potřeba. Jen pojistná zásoba. Minimum vázaného kapitálu. Patří k Lean.", tag: "ZÁSOBY" },
+    { term: "KANBAN", def: "Řízení kartičkami s identifikací produktu. Spotřeba (kartička) spustí doplnění. PULL princip. Toyota.", tag: "ZÁSOBY" },
+    { term: "Cross-docking", def: "Překladiště (mezisklad) pro příjem, naložení, odložení. Zboží se neskladuje, jen překládá — protéká.", tag: "ZÁSOBY" },
+    { term: "JIT × KANBAN", def: "JIT = časování (přesně včas). KANBAN = signál kartičkou (co doplnit). Souvisí, oba Lean, ale nejsou totéž.", tag: "ZÁSOBY" },
+    { term: "Optimální počet dodavatelů", def: "2 pro strategické položky (konkurenční boj), 1 pro bezproblémové. Dodavatelé na sobě nezávislí.", tag: "DODAVATEL" },
+    { term: "Matice dodavatelského portfolia", def: "Síla poptávky × síla dodavatelů. Sbírat smetanu / rozvažovat / diverzifikovat.", tag: "DODAVATEL" },
+    { term: "Síla dodavatele (Porter)", def: "Pozor na vyjednávací sílu dodavatele (Porter 5 sil). Oslabit ji víc dodavateli, substituty, vlastní výrobou.", tag: "DODAVATEL" },
+    { term: "Segmentace v logistice", def: "Pro větší efektivnost. Typy: demografická, geografická, podle užívání, podle chování.", tag: "SEGMENTACE" },
+    { term: "Klíčové faktory segmentace", def: "Stabilita, predikovatelnost, SKU (Stock Keeping Unit — kód produktu), objem. Plus dodací lhůta, frekvence, spolehlivost.", tag: "SEGMENTACE" },
+    { term: "SKU", def: "Stock Keeping Unit — jedinečný kód přiřazený produktu pro identifikaci.", tag: "SEGMENTACE" },
+    { term: "DIFOT / OTIF", def: "Logistické KPI kvality. DIFOT = Delivery In Full On Time, OTIF = On Time In Full. Dodání včas a bez chyb.", tag: "SEGMENTACE" },
   ];
 
   const quizLog2 = [
-    { q: "Která ze 4N je o tom, že službu nelze před koupí vidět ani ohmatat?", opts: ["Neoddělitelnost", "Nehmotnost", "Proměnlivost", "Pomíjivost"], correct: 1 },
-    { q: "Co znamená neoddělitelnost služby?", opts: ["Nelze ji vidět", "Vyrábí se a spotřebovává současně", "Mění se podle kvality", "Nelze ji skladovat"], correct: 1 },
-    { q: "Co je primárně příklad čisté služby (Kotler 5. kategorie)?", opts: ["Auto + servis", "Restaurace", "Hotel + jídlo", "Masáž, právní rada, koučink"], correct: 3 },
-    { q: "Kdo zavedl rozdíl mezi technickou a funkční kvalitou?", opts: ["Kotler", "Parasuraman", "Grönroos", "Porter"], correct: 2 },
-    { q: "Co je technická kvalita podle Grönroose?", opts: ["Jak — proces dodání", "Co — výsledek služby", "Cena", "Image"], correct: 1 },
-    { q: "Která z 5 standardů kvality znamená individuální péče o zákazníka?", opts: ["Spolehlivost", "Ochota", "Jistota", "Empatie"], correct: 3 },
-    { q: "Kolik GAPs identifikuje GAP model?", opts: ["3", "4", "5", "7"], correct: 2 },
-    { q: "Co je GAP 5?", opts: ["Management nerozumí", "Specifikace chybí", "Zaměstnanci nedodrží", "Výsledná mezera mezi očekávanou a vnímanou kvalitou"], correct: 3 },
-    { q: "Co je SERVQUAL?", opts: ["Druh hodnocení zaměstnanců", "Dotazníkový nástroj pro měření kvality služeb (7-8 dimenzí)", "Logo společnosti", "Pojistka kvality"], correct: 1 },
-    { q: "Proč je značka u služeb klíčovější než u hmotných produktů?", opts: ["Je levnější", "Nehmotnost = vyšší vnímané riziko, značka ho snižuje", "Je vidět", "Je povinná"], correct: 1 },
-    { q: "Co je interní marketing v holistickém modelu?", opts: ["Klasická 4P", "Vůči zaměstnancům — trénink, motivace, kultura", "Reklama v interních médiích", "Internetový marketing"], correct: 1 },
-    { q: "Co je interaktivní marketing?", opts: ["Interaktivní reklama", "Schopnost personálu při obsluze — touchpoint zaměstnance × zákazníka", "Marketing na sociálních sítích", "Direct marketing"], correct: 1 },
-    { q: "Co je 3PL?", opts: ["3 partneři", "3rd Party Logistics — komplex služeb: doprava + sklad + manipulace + administrativa", "3 partyové logo", "3rd Place v rankingu"], correct: 1 },
-    { q: "Jaký je rozdíl mezi 3PL a 4PL?", opts: ["Není rozdíl", "3PL = poskytovatel komplex služeb. 4PL = kompletní řízení celého log. řetězce (vyšší abstrakce)", "3PL je levnější vždy", "3PL je jen pro velké firmy"], correct: 1 },
-    { q: "Které je největší riziko outsourcingu logistiky?", opts: ["Vyšší náklady vždy", "Ztráta kontroly + závislost na dodavateli + jeho priority ≠ naše", "Není riziko", "Lepší kvalita"], correct: 1 },
-    { q: "Co je mystery shopping?", opts: ["Online nákup", "Falešný zákazník hodnotí službu inkognito", "Tajná promo akce", "Slevová akce"], correct: 1 },
-    { q: "Co znamená NPS?", opts: ["Net Profit Score", "Net Promoter Score — % promoters − % detractors", "New Product Service", "National Price Standard"], correct: 1 },
+    { q: "Co je cíl logistiky?", opts: ["Maximální zásoby", "Uspokojit přání zákazníka — dodat co, kdy, kam a v jakém množství chce", "Nejvíc skladů", "Nejlevnější doprava"], correct: 1 },
+    { q: "Co je Mass SCM?", opts: ["Štíhlý řetězec", "Snižování nákladů zvyšováním objemu, direktivní řízení, PUSH princip", "Ekologie", "Odolnost"], correct: 1 },
+    { q: "Co je Lean SCM?", opts: ["Masová výroba", "Odstraňování plýtvání, JIT a KANBAN, štíhlý řetězec", "Rychlá reakce", "Digitalizace"], correct: 1 },
+    { q: "Co je Agile SCM?", opts: ["Levná výroba", "Spokojenost zákazníka, rychlost dodání, pružná reakce na poptávku", "Ekologie", "Zásoby"], correct: 1 },
+    { q: "Co je Resilient SCM?", opts: ["Levný řetězec", "Odolný řetězec reagující na turbulence, risk management, strategické zásoby", "Štíhlý", "Zelený"], correct: 1 },
+    { q: "Co je SCM 4.0?", opts: ["Stará metoda", "Z Průmyslu 4.0 — automatizace, nearshoring, uspokojování potřeb", "Mass", "Lean"], correct: 1 },
+    { q: "Co je princip ABC analýzy?", opts: ["50/50", "Paretovo 80/20 — 80 % nákladů tvoří 20 % položek", "100/0", "Náhoda"], correct: 1 },
+    { q: "Co rozlišuje XYZ analýza?", opts: ["Cenu", "Stabilitu poptávky — X stabilní, Y kolísavá, Z nepravidelná", "Velikost", "Barvu"], correct: 1 },
+    { q: "Podle jakých os je Kraljicova matice?", opts: ["Cena × čas", "Vliv na zisk × zásobovací riziko", "Velikost × váha", "Kvalita × cena"], correct: 1 },
+    { q: "Co jsou strategické položky (Kraljic)?", opts: ["Levné a snadné", "Vysoký zisk + vysoké riziko → partnerství, dlouhodobé smlouvy, 2 dodavatelé", "Nízký zisk", "Žádné riziko"], correct: 1 },
+    { q: "Co je JIT (Just In Time)?", opts: ["Velké zásoby", "Dodání zásob přesně v čas, kdy jsou potřeba — jen pojistná zásoba", "Žádné dodávky", "Cross-docking"], correct: 1 },
+    { q: "Co je KANBAN?", opts: ["Velký sklad", "Řízení kartičkami — spotřeba spustí doplnění (PULL princip)", "JIT", "Doprava"], correct: 1 },
+    { q: "Co je cross-docking?", opts: ["Dlouhé skladování", "Překladiště — zboží se neskladuje, jen překládá a protéká", "Výroba", "Nákup"], correct: 1 },
+    { q: "Kolik dodavatelů pro strategické položky?", opts: ["10", "2 — zdravý konkurenční boj a pojistka proti výpadku", "100", "0"], correct: 1 },
+    { q: "Co je SKU?", opts: ["Sklad", "Stock Keeping Unit — jedinečný kód produktu pro identifikaci", "Cena", "Dodavatel"], correct: 1 },
+    { q: "Co je DIFOT / OTIF?", opts: ["Daně", "Logistické KPI kvality — dodání včas a bez chyb (In Full On Time)", "Typ skladu", "Dodavatel"], correct: 1 },
   ];
 
   const praxeLog2 = {
     caseStudy: {
-      company: "Ritz-Carlton — etalon service excellence + Disney Service Quality",
-      subtitle: "Standardy SERVQUAL v praxi + branding služeb",
+      company: "Toyota — JIT a KANBAN jako základ Lean SCM",
+      subtitle: "Jak Toyota vynalezla štíhlou logistiku",
       content: (<>
-        <b>Ritz-Carlton</b> je <b>učebnicový případ premium hotelové služby</b>. 100+ hotelů globálně, průměrná cena 800-1500 USD/noc, 95 % retention. Co dělají jinak:<br/><br/>
-        <b style={{ color: VSE.success }}>5 standardů kvality v praxi:</b><br/>
-        • <b>Spolehlivost:</b> Roomservice do 30 min nebo zdarma. Standardizovaný proces.<br/>
-        • <b>Ochota:</b> Každý zaměstnanec smí utratit až <b>2000 USD bez schválení</b> pro vyřešení problému hosta. Empowerment.<br/>
-        • <b>Jistota:</b> Personál proškolen 250 hodin před prvním kontaktem. Hamburger University-style.<br/>
-        • <b>Empatie:</b> CRM si pamatuje preferenci hosta (typ polštáře, alergie, oblíbený nápoj). Re-používá při dalším pobytu.<br/>
-        • <b>Hmotné prvky:</b> Luxusní materiály, mramor, čerstvé květiny denně, parfém v koridorech.<br/><br/>
-        <b style={{ color: VSE.warning }}>Branding služeb v praxi:</b><br/>
-        • Motto: <b>"We are Ladies and Gentlemen serving Ladies and Gentlemen"</b> — značka definuje vztah host × zaměstnanec<br/>
-        • Zlatý lev v logu = stabilita, prestiž, dědictví<br/>
-        • Cena za umístění Ritz-Carlton ve městě = +10-15 % oproti ostatním 5* hotelům<br/>
-        • Loyalty: 80 % hostů se vrací do roka<br/><br/>
-        <b style={{ color: VSE.fmv }}>Holistický marketing v Ritz-Carlton:</b><br/>
-        • <b>Externí:</b> Klasický mkt — luxusní fotky, magazíny, F1 sponzoring<br/>
-        • <b>Interní:</b> Daily lineup — 15 min každé ráno trénink standardů, sdílení historek excellence<br/>
-        • <b>Interaktivní:</b> Personál proškolen v "anticipation" — předvídat potřeby hosta dřív, než požádá<br/><br/>
-        <b style={{ color: VSE.success }}>Výsledek:</b> Ritz-Carlton vyhrál <b>Malcolm Baldrige National Quality Award</b> dvakrát (jediná hotelová síť). NPS přes 75 (norm 30-40), retention 95 %.
+        Toyota je <b>kolébka Lean SCM</b> a metod JIT a KANBAN. Toyota Production System (TPS) změnil světovou výrobu — místo obrovských zásob 'pro jistotu' zavedl tok, kde materiál přichází přesně, když je potřeba.<br/><br/>
+        ⏱️ JUST IN TIME:<br/><br/>
+        Toyota nedrží sklady plné dílů. Díly přicházejí na výrobní linku přesně v okamžiku, kdy se montují — ani dřív (sklad stojí peníze), ani později (linka stojí). Výsledek: minimum vázaného kapitálu, méně skladů, méně plýtvání.<br/><br/>
+        🎴 KANBAN:<br/><br/>
+        Slovo 'kanban' znamená japonsky cedule/štítek. Když dělník spotřebuje díly z bedny, pošle kartičku zpět dodavateli jako signál 'doplň'. Žádná kartička = nic se nevyrábí navíc. Tím se tok řídí podle skutečné spotřeby (PULL), ne podle plánu (PUSH).<br/><br/>
+        🔗 PROČ TO SPOLU FUNGUJE:<br/><br/>
+        JIT říká KDY (přesně včas), KANBAN říká KOLIK a CO (signál kartičkou). Dohromady tvoří štíhlý řetězec bez zbytečných zásob — to je Lean SCM.<br/><br/>
+        ⚠️ RIZIKO:<br/><br/>
+        JIT je citlivé na výpadky. Když dodavatel nedodá (zemětřesení, pandemie), linka stojí. Proto Toyota po krizích posílila i prvky Resilient SCM (strategické zásoby kritických dílů). <b>Ukázka, že čistý Lean má svá rizika a moderní firmy ho kombinují s odolností.</b>
       </>),
-      lessons: "Komise tohle miluje — Ritz-Carlton je <b>učebnicový příklad service excellence</b>. Když máš v PS firmu poskytující služby, doporuč: <b>standardizace přes procesy</b>, <b>empowerment zaměstnanců</b>, <b>memorable rituály</b> (jako daily lineup), <b>CRM pro empatii</b>. Pro alternativu zmiň <b>Disney (Magic Kingdom standards), Zappos (Hire for culture), Apple Genius Bar (technical + soft skills)</b>."
+      lessons: "Toyota ukazuje Lean SCM v praxi přes JIT a KANBAN. <b>JIT</b> = materiál přesně včas, jen pojistná zásoba, minimum vázaného kapitálu. <b>KANBAN</b> = kartičky řídí doplňování podle skutečné spotřeby (PULL, ne PUSH). Dohromady = štíhlý řetězec. Pozor: JIT je citlivé na výpadky, proto se kombinuje s Resilient SCM (strategické zásoby). Pro případovku: výrobní firma → Lean SCM s JIT a KANBANem, ale myslet i na odolnost."
     },
     miniExamples: [
-      { tag: "SERVQUAL", color: VSE.fmv, company: "Air New Zealand — 5 standardů", content: "Air NZ má 95 % on-time performance (Spolehlivost), Premium Lounge s personalizovaným servisem (Empatie), perfektně trénovaný personál (Jistota), moderní letadla A350/787 (Tangibles). Letecký Skytrax award 5 let v řadě." },
-      { tag: "OUTSOURCING 3PL", color: VSE.warning, company: "H&M × DHL Supply Chain", content: "H&M outsourcuje 70 % logistiky DHL Supply Chain (3PL). DHL provozuje sklady, picking, last-mile do 60 zemí. H&M se soustředí na design + retail, DHL na logistiku. Klasický win-win.<br/><br/><b>Důsledek:</b> H&M má rychlejší expanzi, DHL má dlouhodobý kontrakt 10+ let." },
-      { tag: "BRANDING SLUŽEB", color: VSE.success, company: "McKinsey — premium consulting brand", content: "McKinsey účtuje 5000+ USD/den/konzultant. Konkurence (Big 4) účtuje 2-3k. Proč zákazníci platí? <b>Značka</b> — McKinsey alumni v Fortune 500, prestigeous projekty, 80% partneři z McKinsey/HBS/Stanford. Klasická cenová prémie u nehmotných služeb." },
-      { tag: "GAP MODEL", color: VSE.danger, company: "United Airlines guitar fiasco (2009)", content: "United zničili kytaru Davea Carrolla, odmítli refund. Carrol napsal song \"United Breaks Guitars\" → 20M views YouTube → akcie −10 % (150M USD market cap). Klasický <b>GAP 4</b> (reklama slibuje care, realita ne) + <b>GAP 5</b> (vnímaná kvalita destruována)." },
+      { tag: "AGILE SCM", color: VSE.warning, company: "Zara — rychlost místo levné výroby", content: "Zara (Inditex) je etalon Agile SCM. Místo aby vyráběla levně ve velkém v Asii (Mass SCM), vyrábí blízko (Španělsko, Portugalsko, Maroko) a rychle reaguje na to, co se prodává. Nový model je v obchodě za týdny, ne měsíce. Drží malé zásoby a doplňuje podle skutečné poptávky. Vyšší výrobní náklady vyváží tím, že skoro nic neslevuje a netvoří neprodejné zásoby. Rychlost a pružnost = konkurenční výhoda." },
+      { tag: "CROSS-DOCKING", color: VSE.fph, company: "Walmart — překladiště jako tajná zbraň", content: "Walmart proslul cross-dockingem. Zboží z továren přijede do překladiště, kde se nerozkládá do regálů, ale rovnou přerozdělí a naloží na kamiony do jednotlivých prodejen. Zboží v centru stráví hodiny, ne dny. Tím Walmart drasticky snížil skladovací náklady a zrychlil tok — jeden z důvodů, proč mohl nabízet nízké ceny. Cross-docking = zboží protéká, neleží." },
+      { tag: "ABC + KRALJIC", color: VSE.success, company: "Automobilka — různé položky, různé řízení", content: "Automobilka nakupuje tisíce dílů. Motor a převodovka = strategické položky (vysoký zisk, vysoké riziko) → dlouhodobé partnerství, 2 dodavatelé. Šrouby a podložky = bezproblémové (nízký zisk, nízké riziko) → 1 dodavatel, automatický nákup. ABC analýza ukáže, že 20 % dílů (motory, elektronika) tvoří 80 % nákupních nákladů — tam soustředit pozornost. Kraljic + ABC = chytré rozdělení pozornosti." },
+      { tag: "SCM 4.0", color: VSE.primary, company: "Amazon — automatizace a nearshoring", content: "Amazon je ukázka SCM 4.0. Roboti Kiva ve skladech (automatizace kvůli drahé a vzácné lidské síle), prediktivní analytika (předpovídá, co si koupíš, ještě než objednáš), a budování skladů blíž zákazníkům (nearshoring/last mile) kvůli tlaku na rychlé dodání. Amazon neprodává jen produkty, ale uspokojuje potřebu 'mít to hned' — přesně posun, který SCM 4.0 popisuje." },
     ]
   };
 
   const examQuestionsLog2 = [
-    { komise: "2026 — Špaček + Nový + Machek", otazka: "Služby, charakteristiky, měření kvality služeb, řízení značky služeb, outsourcing v logistice, personální strategie", pozn: "Komplexní výklad — 4N charakteristiky, 5 standardů kvality + SERVQUAL, branding služeb (proč klíčový), outsourcing 2PL–5PL + Make or Buy. Logistiku a personálku student vůbec neřešil — ale podle Anety to chtějí." },
-    { komise: "2025 — Tahal + Kuděj + Nový", otazka: "Marketing služeb, jeho řízení a role distribuce služeb v logistice", pozn: "Tahal chce: 4N + 5 standardů + holistický mkt + role distribuce služeb v logistice (B2B vs B2C, fyzické zhmotnění). PS sanace/plísně/odvlhčování — typický B2B servis." },
-    { komise: "2025 — Vávra + Štamfestová + Mládková", otazka: "Marketing služeb, charakteristiky, řízení značky u služeb, personální přístup, logistika a outsourcing (logistika jako služba)", pozn: "Vávra explicitně chtěl <b>logistiku jako službu</b> + konkretizováno na <b>outsourcing</b>. Klíčové: B2B perspektiva, kvalita SLA, KPI v dodavateli." },
-    { komise: "2025 — Machek + Kolouchová + Legnerová", otazka: "Služby, charakteristiky, řízení značky služeb, outsourcing v logistice, personální strategie", pozn: "Komplex 4 témat. Doporučovaná struktura: 4N → branding (proč klíčový) → outsourcing 2PL–5PL → personální strategie (HR ve službách = interní marketing)." },
-    { komise: "2025 — Špaček + Kučera + Zamazalová", otazka: "Marketing služeb + řízení a měření kvality + branding u služeb jeho význam + Logistika (outsourcing + řízení lidských zdrojů)", pozn: "Velmi rozsáhlá otázka. Začni 4N → kvalita 3 pohledy (předpokládaná/vnímaná/poznaná) → SERVQUAL → branding (důvody) → outsourcing v log → HR v outsourcingu (transfer zaměstnanců)." },
-    { komise: "2025 — Tahal + Kuděj + Nový", otazka: "Rozhodování o výrobku. Marketingová strategie, charakteristiky výrobku. Diferenciace služeb a výrobku.", pozn: "Tahal chce explicitně diferenciaci — 10 způsobů diferenciace služeb. Klíčové porovnání: výrobek (vlastnosti, design) × služba (rychlost, empatie, customizace)." },
-    { komise: "2025 — Mládková + Mareš + Vávra", otazka: "Marketing služeb + logistické systémy (ve vazbě na případovku)", pozn: "PS Horská chata. Mládková chce propojit mkt služeb (hotelové) s log. systémy (zásobování, dodávky surovin pro restauraci). Klíčové: hotel = převažující služba + zboží (Kotler 4. kategorie)." },
+    { komise: "2025-06-12 — Pichanič + Kuděj + Zamazalová / 2025-06-13 Cejthamr + Machek + Heřman", otazka: "Marketingová strategie a strategie v logistice / konkurenční strategie v marketingu, logistické strategie a logistický systém", pozn: "Strategie v logistice (cíl logistiky, plánovací oblasti SCM, typy SCM) + konkurenční výhody (cena, rychlost, kvalita). Propojit s konkrétní firmou z PS." },
+    { komise: "2026 — Mikovcová, Kupec, Špaček, Schönfeld (opakovaně)", otazka: "Segmentace, kritéria segmentace + logistika v segmentaci / segmentační proměnné + segmentace v logistice", pozn: "Segmentace v logistice — typy (demografická/geografická/podle užívání/chování), klíčové faktory (stabilita, predikovatelnost, SKU, objem), DIFOT/OTIF, konkurenční výhoda ze segmentace." },
+    { komise: "Obecně (řízení zásob)", otazka: "JIT, KANBAN, cross-docking, typy SCM", pozn: "JIT (přesně včas, pojistná zásoba), KANBAN (kartičky, PULL), cross-docking (překladiště). 6 typů SCM. ABC/XYZ/Kraljic. Aplikovat na výrobní/obchodní firmu z PS." },
   ];
 
-  const podcastLog2 = { title: "Logistika 2 — Marketing služeb, řízení kvality, outsourcing", description: "Charakteristiky služeb (4N: nehmotnost, neoddělitelnost, proměnlivost, pomíjivost), Kotlerova 5 typů nabídky, 3 pohledy na kvalitu, Grönroos technická × funkční, 5 standardů kvality (Reliability, Responsiveness, Assurance, Empathy, Tangibles), GAP model + SERVQUAL, holistický marketing služeb (externí/interní/interaktivní), branding služeb a 10 způsobů diferenciace, outsourcing v logistice (2PL–5PL + Make or Buy). Ritz-Carlton, McKinsey, Air NZ, H&M × DHL.", audioUrl: null, notebookLmUrl: null };
+  const podcastLog2 = { title: "Logistika 2 — SCM, materiálové strategie a řízení zásob", description: "Supply Chain Management = řízení celého dodavatelského řetězce od surovin ke konečnému zákazníkovi. Cíl logistiky - dodat co, kdy, kam a v jakém množství zákazník chce. Plánovací oblasti SCM - dlouhodobé (strategický návrh, výběr dodavatelů, umístění továren), střednědobé (kapacity, distribuce), krátkodobé (operativní řízení). Konkurenční výhody - cena, kvalita, rychlost, flexibilita, globální dosažitelnost. 6 typů SCM - Mass (objem, PUSH), Lean (odstraňování plýtvání, JIT, KANBAN), Agile (rychlost, spokojenost zákazníka), Resilient (odolnost, risk management, strategické zásoby), Green (ekologie, ISO 20400), SCM 4.0 (Průmysl 4.0, automatizace, nearshoring). Materiálové strategie - ABC analýza (Paretovo 80/20, A klíčové, B střední, C mnoho levných), XYZ analýza (X stabilní, Y kolísavá, Z nepravidelná poptávka), Kraljicova matice (vliv na zisk × zásobovací riziko - pákové, strategické, bezproblémové, úzkoprofilové položky). Řízení zásob - JIT (Just In Time, dodání přesně včas, jen pojistná zásoba), KANBAN (kartičky s identifikací, PULL princip, Toyota), cross-docking (překladiště, zboží se neskladuje, jen překládá). Výběr dodavatele - 2 pro strategické, 1 pro bezproblémové, nezávislí, Porter 5 sil. Matice dodavatelského portfolia - sbírat smetanu, rozvažovat, diverzifikovat. Segmentace v logistice - demografická, geografická, podle užívání, chování. Faktory - stabilita, predikovatelnost, SKU, objem. DIFOT, OTIF metriky.", audioUrl: null, notebookLmUrl: null };
 
   const examStrategyLog2 = `
-    <b style="color:#245373">1.</b> Začni definicí služby a <b>4N charakteristikami</b> (Nehmotnost / Neoddělitelnost / Proměnlivost / Pomíjivost) — klíč pro každou komisi.<br/>
-    <b style="color:#245373">2.</b> Kotlerova klasifikace — 5 typů nabídky podle hmotnosti.<br/>
-    <b style="color:#245373">3.</b> 3 pohledy na kvalitu — předpokládaná × vnímaná × skutečně poznaná.<br/>
-    <b style="color:#245373">4.</b> Grönroos — technická (co) × funkční (jak) kvalita.<br/>
-    <b style="color:#245373">5.</b> ⚠️ 5 standardů kvality — Spolehlivost, Ochota, Jistota, Empatie, Hmotné prvky.<br/>
-    <b style="color:#245373">6.</b> ⚠️ <b>GAP model + SERVQUAL</b> (Špaček + Vávra to chtějí!).<br/>
-    <b style="color:#245373">7.</b> Měření kvality — mystery shopping, NPS, CSI, reklamace.<br/>
-    <b style="color:#245373">8.</b> ⚠️ <b>Branding služeb — proč je značka u služeb klíčová</b> (snižuje riziko z nehmotnosti).<br/>
-    <b style="color:#245373">9.</b> Holistický marketing služeb — Externí / Interní / Interaktivní.<br/>
-    <b style="color:#245373">10.</b> Diferenciace služeb — 10 způsobů + komplementární služby.<br/>
-    <b style="color:#245373">11.</b> ⚠️ <b>Outsourcing v logistice — Make or Buy + 2PL až 5PL</b> (vždy chtějí!).<br/>
-    <b style="color:#245373">12.</b> Problémy outsourcingu — řízení vztahů, smlouvy, pracovníci, kvalita, zaměstnanci.<br/>
-    <b style="color:#245373">13.</b> Aplikace na PS — identifikuj typ služby, navrhni standardy a outsourcing strategii.<br/>
-    <b style="color:#245373">14.</b> Příklady firem — Ritz-Carlton (excellence), McKinsey (premium brand), Air NZ (SERVQUAL), H&M × DHL (3PL), United (GAP 4 catastrofa).
+    <b style="color:#2E7D32">1.</b> <b>SCM</b> = řízení řetězce od surovin k zákazníkovi. Cíl logistiky: dodat co/kdy/kam/kolik.<br/>
+    <b style="color:#2E7D32">2.</b> Plánovací oblasti SCM — dlouhodobé / střednědobé / krátkodobé.<br/>
+    <b style="color:#2E7D32">3.</b> ⚠️ <b>6 typů SCM</b> — Mass (objem, PUSH), Lean (plýtvání, JIT/KANBAN), Agile (rychlost), Resilient (odolnost), Green (ekologie), SCM 4.0 (automatizace).<br/>
+    <b style="color:#2E7D32">4.</b> <b>ABC analýza</b> — Paretovo 80/20. <b>XYZ</b> — stabilita poptávky (X/Y/Z).<br/>
+    <b style="color:#2E7D32">5.</b> ⚠️ <b>Kraljicova matice</b> — vliv na zisk × zásobovací riziko (pákové/strategické/bezproblémové/úzkoprofilové).<br/>
+    <b style="color:#2E7D32">6.</b> ⚠️ <b>JIT</b> — přesně včas, jen pojistná zásoba. <b>KANBAN</b> — kartičky, PULL. <b>Cross-docking</b> — překladiště.<br/>
+    <b style="color:#2E7D32">7.</b> JIT × KANBAN — JIT je časování, KANBAN je signál. Oba Lean, nejsou totéž.<br/>
+    <b style="color:#2E7D32">8.</b> Výběr dodavatele — 2 strategické, 1 bezproblémové, nezávislí, Porter 5 sil.<br/>
+    <b style="color:#2E7D32">9.</b> Matice dodavatelského portfolia — sbírat smetanu / rozvažovat / diverzifikovat.<br/>
+    <b style="color:#2E7D32">10.</b> ⚠️ <b>Segmentace v logistice</b> — typy + faktory (stabilita, predikovatelnost, SKU, objem) + DIFOT/OTIF.<br/>
+    <b style="color:#2E7D32">11.</b> ⚠️ Spojit typ SCM s firmou z PS (móda → Agile, automobilka → Lean).
   `;
 
   const caseStudyLog2 = {
-    title: "Vendula — CEO ServiCare, české úklidové a facility management firmy, 180 zaměstnanců, 95 mil. Kč",
-    subtitle: "Identifikuj problémy v kvalitě služeb a navrhni branding + outsourcing strategii",
-    scenario: "Vendula (42 let) vede ServiCare 8 let. Česká úklidová a facility management firma — úklid kanceláří, ostraha, drobná údržba. 180 zaměstnanců — 150 v terénu (úklidovky, vrátní, údržbáři), 20 manažeři poboček (Praha/Brno/Ostrava), 10 administrativa. Tržby 95 mil. Kč ročně, růst 8 %. Klienti: 120 firem (kanceláře 50–500 zaměstnanců), 15 nemocnic, 8 školských zařízení.\n\nProblémy se hromadí. Klienti si stěžují, že kvalita úklidu kolísá — někteří uklízejí dobře, jiní špatně. Reklamací 23 za poslední čtvrtletí (z 120 klientů). 5 klientů odešlo (5 mil. Kč ročně). NPS klesl z 32 na 8. Konkurence (ISS Facility Services, Sodexo) získává klienty Venduly.\n\nVendula se snaží — koupila novou techniku (200k Kč), zaplatila reklamu (rádio + Google Ads, 800k Kč/rok), přepracovala web. Ale zákazníci dál odcházejí. Tým jí říká, že problém je v lidech — fluktuace 45 % ročně, mzda na úklidovku 22 000 Kč brutto (trh 28 000). Trénink? Den před prvním shiftem 30 min. Cílí v rozhovorech jen na praxi, ne na soft skills. Žádný daily lineup, žádné pravidelné review.\n\nKlienti, kteří zůstali, si stěžují konkrétně: úklidovka přijde, ale nezdraví. Když rozlije káva, dělá obličej. Nikdo nepamatuje na specifické požadavky (alergeny v nemocnici, časy zasedaček). Manažer pobočky řeší reklamace ad-hoc, žádný proces. Smlouvy se SLAs jsou vágní — „denní úklid kanceláří bez specifikace.\n\nBranding: ServiCare logo z 2008 (modrý štít s nápisem), web vypadá jako z 2015. Marketingové materiály bez konzistence. Klienti vnímají firmu jako commodity (cena ze 3 nabídek). Žádná diferenciace, žádný brand premium.\n\nVendula přemýšlí o 2 cestách: A) Outsourcovat ostrahu a údržbu (jen úklid in-house) — soustředit se na core. B) Plný rebrand + service excellence model (Ritz-Carlton inspirace). Komise chce vidět strategickou volbu.",
+    title: "Jana a sklad, který přetéká zásobami",
+    subtitle: "Jak zeštíhlit zásoby a vybrat správný přístup k řízení",
+    scenario: "Jana převzala vedení výroby v menší firmě na nábytek. Hned první týden ji zarazil sklad — praská ve švech. Plné regály materiálu, dřeva, kování, laků. Peníze firmy leží zamčené v zásobách a sklad stojí majlant na nájmu i na lidech, co ho obsluhují.\n\nKdyž se ptala, proč mají tolik zásob, slyšela pořád to samé: 'Radši toho máme víc, ať nám nedojde materiál a nezastaví se výroba.' Znělo to rozumně, ale Jana cítila, že to je drahé a neefektivní. Zároveň ale věděla, že kdyby zásoby prostě osekala, riskuje, že výroba opravdu stane, když něco nedojde včas.\n\nNapadlo ji, že ne všechen materiál je stejný. Dřevo a kvalitní kování jsou drahé a klíčové — bez nich nic nevyrobí. Naopak šroubky a běžné spojovací díly jsou levné a je jich plný sklad. Tušila, že s každým druhem materiálu by se mělo zacházet jinak, ale neuměla to uchopit systematicky.\n\nVzpomněla si na pojem, který slyšela na nějakém školení — 'štíhlá výroba', kde materiál přichází přesně, když je potřeba, a řídí se to nějakými kartičkami. Nebyla si ale jistá, jak to funguje a jestli se to hodí zrovna pro její firmu, která má pár spolehlivých dodavatelů dřeva.\n\nA pak je tu ještě jedna věc. Jana má dva dodavatele dřeva a uvažuje, jestli nemá přejít na jednoho, aby to bylo jednodušší. Ale něco jí říká, že u tak klíčové suroviny možná není dobrý nápad spoléhat jen na jednoho. Tuší, že než cokoliv změní, musí si pořádně srovnat, jak vlastně chytře řídit zásoby a dodavatele.",
     signals: [
-      { text: "Reklamací 23 za poslední čtvrtletí (z 120 klientů)", color: VSE.danger, reason: "19 % reklamačnost je katastrofa pro služby. Klasický GAP 3 — zaměstnanci nedodrží specifikace + GAP 1 — management nezná očekávání." },
-      { text: "NPS klesl z 32 na 8", color: VSE.danger, reason: "Kritický pokles loyalty. NPS pod 10 = krize. Klíčový externí signal — zákazníci nedoporučí ServiCare ostatním. WOM destruction." },
-      { text: "kvalita úklidu kolísá — někteří uklízejí dobře, jiní špatně", color: VSE.danger, reason: "Klasická proměnlivost (3N) bez řízení. Standardizace přes procesy a školení chybí. Ritz-Carlton model nepoužitý." },
-      { text: "fluktuace 45 % ročně, mzda na úklidovku 22 000 Kč brutto (trh 28 000)", color: VSE.danger, reason: "Interní marketing katastrofa. Levnější mzda → vyšší fluktuace → horší kvalita. Holistic mkt: zaměstnanec = první zákazník. Bez interního mkt není kvalitní service." },
-      { text: "Trénink? Den před prvním shiftem 30 min", color: VSE.danger, reason: "30 min × 250 hodin u Ritz-Carlton = 500× méně. Klasický GAP 3. Standardy nelze splnit bez trénování." },
-      { text: "Cílí v rozhovorech jen na praxi, ne na soft skills", color: VSE.warning, reason: "U služeb (4N proměnlivost) jsou soft skills klíčové. Empatie, ochota, jistota — to zákazník zažívá. Zappos: \"Hire for culture, train for skill\"." },
-      { text: "úklidovka přijde, ale nezdraví. Když rozlije káva, dělá obličej", color: VSE.danger, reason: "Selhání ve standardu Ochota + Empatie. Klasický funkční kvalita problém (Grönroos). Zákazník nezná technickou kvalitu úklidu, ale ví že úklidovka udělala obličej." },
-      { text: "Nikdo nepamatuje na specifické požadavky (alergeny v nemocnici, časy zasedaček)", color: VSE.danger, reason: "Empatie standard selhání + chybí CRM. V Ritz-Carlton si CRM pamatuje vše. Tady ani Excel." },
-      { text: "Smlouvy se SLAs jsou vágní — \'denní úklid kanceláří\' bez specifikace", color: VSE.warning, reason: "Klasický GAP 2 — management ví, co chtějí, ale nepřevedl do specifikací. Bez SLA nelze měřit ani vymáhat kvalitu." },
-      { text: "Klienti vnímají firmu jako commodity (cena ze 3 nabídek)", color: VSE.warning, reason: "Bez brandingu = bez cenové prémie. McKinsey účtuje 5x víc než konkurence díky značce. ServiCare bojuje cenou." },
-      { text: "Branding: ServiCare logo z 2008, web vypadá jako z 2015", color: VSE.warning, reason: "Hmotné prvky (Tangibles — 5. standard) v rozkladu. Zhmotnění služby chybí. Klient nevidí service quality v komunikaci." },
+      { text: "Plné regály materiálu... peníze firmy leží zamčené v zásobách a sklad stojí majlant", color: VSE.danger, reason: "Klasický problém vázaného kapitálu v zásobách (Log2). Velké zásoby = drahé. Volá po štíhlém přístupu (Lean SCM, JIT)." },
+      { text: "Radši toho máme víc, ať nám nedojde materiál... ale Jana cítila, že to je drahé a neefektivní", color: VSE.warning, reason: "PUSH myšlení (Mass SCM) × potřeba PULL (Lean SCM) (Log2). Velké zásoby 'pro jistotu' jsou drahé. Lean drží jen pojistnou zásobu." },
+      { text: "Ne všechen materiál je stejný. Dřevo a kování jsou drahé a klíčové... šroubky jsou levné", color: VSE.fph, reason: "Volá po ABC analýze a Kraljicově matici (Log2). Klíčové drahé položky (A, strategické) × levné běžné (C, bezproblémové) se řídí jinak." },
+      { text: "Štíhlá výroba, kde materiál přichází přesně, když je potřeba, a řídí se to nějakými kartičkami", color: VSE.success, reason: "Jana popisuje JIT (přesně včas) a KANBAN (kartičky) (Log2). To je jádro Lean SCM. Materiál právě včas, doplňování podle spotřeby." },
+      { text: "Pár spolehlivých dodavatelů dřeva", color: VSE.fph, reason: "Spolehliví dodavatelé jsou podmínka JIT (Log2). JIT je citlivé na výpadky — bez spolehlivých dodavatelů výroba stojí." },
+      { text: "Má dva dodavatele dřeva a uvažuje o jednom... u klíčové suroviny možná není dobrý nápad spoléhat jen na jednoho", color: VSE.success, reason: "Výběr dodavatele pro strategickou položku (Log2). U strategických položek (dřevo = vysoký zisk + riziko) se drží 2 dodavatelé — konkurenční boj + pojistka." },
     ],
     quiz1: {
-      question: "Která 4N charakteristika je hlavní příčinou problémů ServiCare?",
+      question: "Co Jana potřebuje, aby zeštíhlila zásoby bez rizika?",
       options: [
-        "Nehmotnost — služby nelze vidět",
-        "Neoddělitelnost — vyrábí se a spotřebovává současně",
-        "Proměnlivost — kvalita kolísá podle toho, kdo, kdy, kde",
-        "Pomíjivost — služby nelze skladovat",
+        "Prostě osekat všechny zásoby na polovinu",
+        "Chytře řídit zásoby — rozdělit materiál (ABC/Kraljic), zavést JIT a KANBAN pro tok a u klíčových surovin držet 2 dodavatele.",
+        "Postavit větší sklad",
+        "Nakoupit ještě víc zásob",
       ],
-      correct: 2,
+      correct: 1,
     },
     quiz2: {
-      question: "Co by Vendula měla udělat pro zlepšení kvality a brandingu ServiCare?",
+      question: "Jak by měla Jana postupovat?",
       options: [
-        { text: "Zavést SERVQUAL pro pravidelné měření kvality + NPS dotazník po každém měsíci servisu", correct: true, reason: "✓ Bez měření není řízení. SERVQUAL identifikuje slabé dimenze (např. ochotu, empatii). NPS sleduje trend loyalty." },
-        { text: "Zvýšit mzdu úklidovek na 28 000 Kč + investovat 50 hodin trénink (procesy + soft skills) před prvním shiftem", correct: true, reason: "✓ Interní marketing — bez kvalitních zaměstnanců není kvalitní služba. Zappos, Ritz-Carlton model. Sníží fluktuaci ze 45 % na 15 %." },
-        { text: "Specifikovat SLA v každé smlouvě — frekvence úkonů, čas reakce, sankce, KPI", correct: true, reason: "✓ Eliminace GAP 2. Bez SLA nelze měřit ani vymáhat. Klíčové pro B2B služby." },
-        { text: "Implementovat CRM s preferencemi klientů (alergeny, časy, kontaktní osoby) + daily briefing pro úklidovky", correct: true, reason: "✓ Empatie + standardizace v praxi. CRM kompenzuje proměnlivost (různí lidé, stejný service)." },
-        { text: "Rebrand — nové logo, web, uniformy, marketingové materiály + brand strategie premium (ServiCare Pro)", correct: true, reason: "✓ Zhmotnění služby (Tangibles). Premium brand → cenová prémie → vyšší marže → vyšší mzda → lepší lidé. Pozitivní spirála." },
-        { text: "Outsourcovat ostrahu a údržbu (3PL model) — soustředit se na core úklid + ServiCare Pro pro premium klienty", correct: true, reason: "✓ Make or Buy — Vendula nemá expertize v ostraze ani údržbě. Outsourcing umožní fokus + scaling premium úklidu." },
-        { text: "Snížit mzdy aby ušetřila peníze na reklamu", correct: false, reason: "✗ Spirála smrti. Nižší mzdy → vyšší fluktuace → horší kvalita → víc reklamací → odchod klientů. Klasický bottleneck." },
-        { text: "Zavolat všem 120 klientům a slíbit slevu 20 %", correct: false, reason: "✗ Cenová past. Sleva neřeší problém kvality. Klienti uvidí slevu jako přiznání chyby, ale dál budou nespokojení." },
+        { text: "Rozdělit materiál přes ABC analýzu — klíčové drahé položky (dřevo, kování = A) hlídat pečlivě, levné běžné (šroubky = C) řídit jednoduše.", correct: true, reason: "✓ Log2 — ABC analýza (Paretovo 80/20). Soustředit pozornost na položky, které tvoří většinu nákladů." },
+        { text: "Zavést JIT — dřevo a materiál objednávat tak, aby přicházely přesně, když jsou potřeba, místo držet velké zásoby. Jen pojistná zásoba.", correct: true, reason: "✓ Log2 — JIT (Just In Time). Sníží vázaný kapitál a skladovací náklady. Vhodné, protože má spolehlivé dodavatele." },
+        { text: "Zavést KANBAN — kartičky, které signalizují, kdy doplnit materiál podle skutečné spotřeby (PULL), ne podle odhadu (PUSH).", correct: true, reason: "✓ Log2 — KANBAN. Řídí tok podle spotřeby, zabraňuje nadbytečným zásobám. Jde ruku v ruce s JIT." },
+        { text: "U dřeva (strategická položka) zachovat 2 dodavatele — konkurenční boj o cenu a pojistka proti výpadku, který by zastavil výrobu.", correct: true, reason: "✓ Log2 — výběr dodavatele pro strategické položky. 2 dodavatelé = konkurence + odolnost. Klíčová surovina nesnese závislost na jednom." },
+        { text: "Osekat všechny zásoby na minimum bez rozmyslu", correct: false, reason: "✗ Bez rozdělení materiálu a spolehlivých dodavatelů by to zastavilo výrobu. Štíhlost musí být chytrá, ne brutální." },
+        { text: "Přejít na jednoho dodavatele dřeva pro jednoduchost", correct: false, reason: "✗ U strategické položky (dřevo) je závislost na jednom dodavateli riziko. Výpadek = stojící výroba. Držet 2 nezávislé." },
+        { text: "Nechat sklad přeplněný, jistota je jistota", correct: false, reason: "✗ To je právě ten drahý problém — vázaný kapitál a skladovací náklady. Cílem je zeštíhlit, ne zachovat plýtvání." },
       ],
     },
-    summary: "<b>ServiCare bojuje s klasickou kombinací — proměnlivost služeb bez interního marketingu, žádné měření kvality, slabý branding.</b> Klíč je <b>excellence model + outsourcing non-core + premium brand</b>.<br/><br/><b>3 vrstvy řešení:</b><br/>• <b>Kvalita:</b> SERVQUAL měření + 5 standardů (Reliability/Responsiveness/Assurance/Empathy/Tangibles) + SLA v každé smlouvě + CRM s preferencemi<br/>• <b>Lidé:</b> Mzda na trhu (28k+) + 50h trénink (procesy + soft skills) + daily lineup + empowerment. Interní marketing.<br/>• <b>Brand:</b> Rebrand → ServiCare Pro premium + cenová prémie 20 % + outsourcing non-core (ostraha, údržba) přes 3PL partnery<br/><br/><b>Pro komisi:</b> Klasický B2B service business v krizi kvality. <b>Ritz-Carlton model</b> aplikovaný na úklid funguje (Cintas v USA, ISS v EU). <b>Make or Buy</b> rozhodnutí — Vendula nemá expertize v ostraze/údržbě, outsource. <b>Holistický marketing</b> (externí + interní + interaktivní) je klíč — bez zaměstnanců není služba.",
+    summary: "<b>Jana musí zeštíhlit zásoby chytře — rozdělit materiál, zavést moderní řízení toku a u klíčových surovin udržet odolnost.</b><br/><br/><b>Postup:</b><br/><br/>• <b>ABC analýza:</b> rozdělit materiál. Dřevo a kvalitní kování (A — klíčové, drahé) hlídat pečlivě, šroubky a běžné díly (C — levné, mnoho) řídit jednoduše. Paretovo 80/20 ukáže, kam soustředit pozornost.<br/><br/>• <b>JIT (Just In Time):</b> objednávat materiál tak, aby přicházel přesně, když je potřeba — držet jen pojistnou zásobu. Sníží vázaný kapitál a skladovací náklady. Funguje, protože Jana má spolehlivé dodavatele.<br/><br/>• <b>KANBAN:</b> zavést kartičky, které signalizují doplnění podle skutečné spotřeby (PULL princip), ne podle odhadu (PUSH). Zabrání hromadění zbytečných zásob.<br/><br/>• <b>Lean SCM:</b> JIT + KANBAN dohromady = štíhlý řetězec. To je přesně ten přístup pro výrobní firmu.<br/><br/>• <b>Výběr dodavatele:</b> u dřeva (strategická položka — vysoký zisk i riziko) zachovat 2 dodavatele. Konkurenční boj o cenu + pojistka proti výpadku. Přechod na jednoho by byl u klíčové suroviny riziko.<br/><br/><b>Pro komisi:</b> Klíč: <b>JIT</b> (časování), <b>KANBAN</b> (signál kartičkou), <b>Lean SCM</b> (štíhlost), <b>ABC/Kraljic</b> (rozdělení položek), <b>2 dodavatelé pro strategické položky</b>. Spojit typ SCM s charakterem firmy. Anti-vzor: osekat zásoby naslepo nebo spoléhat na jednoho dodavatele u klíčové suroviny.",
   };
 
   return (
     <OkruhPanel
-      subject="Logistika" subjectId="logistika" number={2} title="Marketing služeb, řízení kvality, outsourcing"
-      subtitle="4N charakteristiky + SERVQUAL + branding služeb + outsourcing 2PL–5PL"
+      subject="Logistika" subjectId="logistika" number={2} title="SCM, materiálové strategie a řízení zásob"
+      subtitle="Supply Chain Management (6 typů) + ABC/XYZ/Kraljic + JIT/KANBAN/cross-docking + výběr dodavatele + segmentace"
       color={BOMBIK.success}
-      questionText="Marketing služeb, řízení kvality a role distribuce služeb v logistice (outsourcing)."
-      questionDesc="4N charakteristiky služeb (Nehmotnost/Neoddělitelnost/Proměnlivost/Pomíjivost). Kotlerova klasifikace 5 typů nabídky. 3 pohledy na kvalitu (předpokládaná/vnímaná/poznaná). Grönroos technická × funkční kvalita. 5 standardů kvality (Reliability/Responsiveness/Assurance/Empathy/Tangibles). GAP model (5 mezer) + SERVQUAL nástroj. Mystery shopping, NPS, CSI. Branding služeb — proč klíčový (snižuje riziko z nehmotnosti). Holistický marketing služeb (externí/interní/interaktivní). 10 způsobů diferenciace + komplementární služby. Outsourcing v logistice (Make or Buy + 2PL–5PL) + typické problémy. Ritz-Carlton, McKinsey, Air NZ, H&M × DHL, United Airlines anti-vzor."
-      sloz={2} roz={3} freq={3}
+      questionText="Strategie v logistice, řízení zásob a segmentace — SCM, materiálové strategie, JIT/KANBAN/cross-docking, výběr dodavatele, segmentace v logistice."
+      sloz={3} roz={4} freq={4}
       examStrategy={examStrategyLog2}
       studySections={studySectionsLog2}
       flashcards={flashcardsLog2}
@@ -14715,89 +14630,23 @@ function OkruhLog2Panel() {
   );
 }
 
+
 /* ════════════════════════════════════════════════════════
-   LOGISTIKA 3 — MIS a pohyb informací v logistice, log. systém
+   LOGISTIKA 3 — Logistický řetězec, nákup a informační systémy
    ════════════════════════════════════════════════════════ */
 function OkruhLog3Panel() {
   const studySectionsLog3 = [
-    { id: "intro", title: "Informace v marketingu a logistice — proč je klíčová", subtitle: "Definice informace + role v rozhodování + 4 charakteristiky", color: BOMBIK.success, emoji: "lightbulb",
+    { id: "retezec", title: "Logistický řetězec — co spojuje a jak funguje", subtitle: "Spojuje trh surovin s trhem spotřebitelů", color: BOMBIK.success, emoji: "path",
       content: (<div>
         <Def color={BOMBIK.success}>
-          <b>Informace</b> = údaj, který má smysl, význam a přínos pro rozhodování. Komise <b>Vrbová, Špaček, Stříteský</b> chtějí slyšet definici a hlavně <b>roli v rozhodování</b> — bez tohohle to neudělíš.
+          <b>Logistický řetězec</b> spojuje <b>trh surovin s trhem spotřebitelů</b>. Vede přes dodavatele → výrobce → velkoobchod → maloobchod → zákazníka. Pokud chce firma efektivně řídit tok zboží a informací, potřebuje co nejlepší propojení článků.
         </Def>
-        <Tag color={BOMBIK.success}>Proč jsou informace KV (konkurenční výhoda)</Tag>
-        <Bullet items={[
-          "<b>Rychlost rozhodování:</b> Real-time data → rychlejší reakce na trh než konkurence. Amazon mění ceny milionkrát denně.",
-          "<b>Predikce:</b> AI + big data umí předpovědět poptávku → optimální zásoby, žádné out-of-stock.",
-          "<b>Personalizace:</b> Data o zákazníkovi → individuální nabídka. Netflix doporučení, Spotify Discover Weekly.",
-          "<b>Efektivita:</b> Optimalizace tras (UPS ORION ušetří 100M USD/rok na palivu), JIT bez zásob.",
-          "<b>Transparentnost řetězce:</b> Vidím každý článek řetězce → vím kde je problém → rychlý fix.",
-        ]} color={BOMBIK.success} />
-        <Tag color={VSE.warning}>4 charakteristiky kvalitní informace</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "RELEVANCE", d: "Odpovídá na otázku, kterou si kladu. Není to šum. Příklad: data o teplotě v Brně, když plánuji distribuci v Praze, jsou irrelevantní." },
-            { c: VSE.warning, t: "PŘESNOST", d: "Pravdivá, ověřitelná, bez chyb. Garbage in, garbage out — špatná data = špatné rozhodnutí." },
-            { c: VSE.fph, t: "VČASNOST", d: "Dostane se k rozhodovateli včas. Skladové stavy z minulého týdne jsou pro JIT zbytečné." },
-            { c: VSE.success, t: "ÚPLNOST", d: "Nejen kus dat, ale celý obraz. Sales bez informace o vrácení zboží = falešná čísla." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-      </div>) },
-
-    { id: "zdroje", title: "Zdroje informací — primární × sekundární, interní × externí", subtitle: "4 typy zdrojů + kvalitativní × kvantitativní + vyčerpávající × výběrové", color: BOMBIK.success, emoji: "scale",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          Informace mají <b>různé zdroje</b>. Komise <b>Špaček (IT firma), Stříteský (Müllerová)</b> chtějí explicitně <b>zdroje a složky</b>. Klíč: rozdělení podle <b>původu</b> a <b>typu</b>.
-        </Def>
-        <Tag color={BOMBIK.success}>2 hlavní osy zdrojů informací</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "PRIMÁRNÍ DATA", d: "Sbírám si je sám pro konkrétní účel. Drahé, ale relevantní. Dotazníky, rozhovory, experimenty, focus group, mystery shopping." },
-            { c: VSE.warning, t: "SEKUNDÁRNÍ DATA", d: "Už existují, sbíral je někdo jiný. Levné, rychlé, ale obecné. Statistiky ČSÚ, EUROSTAT, výzkumy, oborové reporty, vlastní historie." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.fph}>Interní × Externí (druhá osa)</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fph, t: "INTERNÍ ZDROJE", d: "Z vlastní firmy. Účetnictví, prodejní data, CRM, ERP, HR records. Většinou sekundární (vznikly pro jiný účel)." },
-            { c: VSE.danger, t: "EXTERNÍ ZDROJE", d: "Mimo firmu. ČSÚ, EUROSTAT, oborové studie, sociální sítě, Google Trends, kupované databáze. Mohou být primární nebo sekundární." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>Další dělení informací</Tag>
-        <Bullet items={[
-          "<b>Kvalitativní × Kvantitativní:</b> Kvalitativní = popis (proč zákazník koupil), kvantitativní = čísla (kolik prodáno).",
-          "<b>Vyčerpávající × Výběrové:</b> Vyčerpávající = celá populace (drahé). Výběrové = vzorek (statisticky reprezentativní).",
-          "<b>Statické × Dynamické:</b> Statická = bod v čase (rozvaha). Dynamické = vývoj v čase (sales chart).",
-          "<b>Strukturovaná × Nestrukturovaná:</b> Strukturovaná = v databázi (excel, ERP). Nestrukturovaná = volný text, video, sociální média.",
-        ]} color={VSE.warning} />
-      </div>) },
-
-    { id: "mis", title: "MIS — Marketingový informační systém", subtitle: "Definice + 3 hlavní složky + funkce", color: BOMBIK.success, emoji: "chart",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          <b>MIS (Marketing Information System)</b> = soubor lidí, zařízení a procesů pro <b>sběr, třídění, analýzu a distribuci informací</b> potřebných pro marketingová rozhodnutí. Centralizuje vše do jednoho místa, aby byla data <b>rychle dostupná</b>.
-        </Def>
-        <Tag color={BOMBIK.success}>3 hlavní složky MIS (klasický model Kotler)</Tag>
+        <Tag color={BOMBIK.success}>3 podmínky fungujícího řetězce</Tag>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.fmv, t: "1. VNITŘNÍ IS", d: "Záznamy o objednávkách, prodejích, cenách, zásobách, pohledávkách. Tvoří se a aktualizují přes ERP, CRM, účetní systém." },
-            { c: VSE.warning, t: "2. MKT ZPRAVODAJSKÝ", d: "Informace o vývoji v tržním prostředí. Konkurence, trendy, regulace. Zdroje: oborové reporty, oborové konference, sales lidé." },
-            { c: VSE.fph, t: "3. MKT VÝZKUM", d: "Systematický sběr, analýza a interpretace dat pro konkrétní marketingový problém. Studie, dotazníky, experimenty." },
+            { c: VSE.fmv, t: "TRANSPARENTNOST", d: "Průhlednost po celé délce řetězce — dodavatelské i odbytové situace. Má největší význam pro všechny podniky tvořící články řetězce." },
+            { c: VSE.warning, t: "KONEKTIVITA", d: "Propojitelnost článků do integrovaného řetězce — schopnost vyměňovat, interpretovat a používat závazné informace s přesahem úseků a funkcí." },
+            { c: VSE.fph, t: "AGILNOST", d: "Agilnost partnerů usilujících o rychlé a cílevědomé dosažení praktických změn na základě získaných informací." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -14805,305 +14654,410 @@ function OkruhLog3Panel() {
             </GlassBox>
           ))}
         </ResponsiveGrid>
-        <Tag color={VSE.success}>4. složka — MDSS (Marketing Decision Support System)</Tag>
+        <Tag color={VSE.warning}>Logistický řetězec se rozděluje do 3 bloků</Tag>
         <Bullet items={[
-          "<b>MDSS</b> = analytický model + statistické nástroje + software → optimalizační algoritmy. Pomáhá manažerovi rozhodnout, ne jen ukázat data.",
-          "<b>Příklad:</b> Optimalizační algoritmus pro alokaci marketingového budgetu mezi 5 kanálů (TV/online/print/PR/event).",
-          "<b>Nástroje:</b> Excel pivot tables → Tableau/Power BI → SAS, R, Python pro pokročilou analýzu.",
-        ]} color={VSE.success} />
-        <Tag color={VSE.danger}>Funkce MIS — proč ho mít</Tag>
-        <Bullet items={[
-          "<b>Hodnocení potřeb informací:</b> Co manažeři potřebují vědět + jaké je rozhodnutí.",
-          "<b>Sběr a zpracování:</b> Sběr ze všech zdrojů (vnitřní, vnější), čištění, formátování.",
-          "<b>Distribuce:</b> Dostane se ke správnému manažerovi v rychlém čase (real-time dashboardy).",
-          "<b>Centralizace:</b> Vše na jednom místě → konzistentní data napříč firmou (single source of truth).",
-        ]} color={VSE.danger} />
-      </div>) },
-
-    { id: "logsystem", title: "Logistický systém — definice a procesní pohled", subtitle: "Co je log. systém + procesní řetězec + business procesy", color: BOMBIK.success, emoji: "refresh",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          <b>Logistický systém</b> = soubor SW, který souvisí s principem business procesů v logistice. Propojuje <b>nákup → výroba → distribuce → prodej</b> do jednoho integrovaného systému, který sleduje toky materiálů i informací.
-        </Def>
-        <Tag color={BOMBIK.success}>Co řeší logistický systém</Tag>
-        <Bullet items={[
-          "<b>Plánování:</b> Predikce poptávky, plán výroby, plán nákupů, plán distribuce.",
-          "<b>Realizace:</b> Příjem objednávky, výroba, balení, expedice, dodání zákazníkovi.",
-          "<b>Kontrola:</b> Tracking zboží, monitoring KPI (on-time delivery, zásoby, náklady).",
-          "<b>Optimalizace:</b> Trasy, sklady, zásoby, dodavatelé — AI + algoritmy.",
-        ]} color={BOMBIK.success} />
-        <Tag color={VSE.warning}>Klíčové aspekty integrace</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "INTEGRACE INFORMACÍ", d: "Všechny systémy mluví jedním jazykem (API, datový model). Bez integrace ERP × WMS × TMS si firma rozbíjí data." },
-            { c: VSE.warning, t: "REAL-TIME PROVOZ", d: "Změna zásoby v Brně se okamžitě zobrazí v centrále i e-shopu. Bez delay." },
-            { c: VSE.fph, t: "AUTOMATIZACE PROCESŮ", d: "Workflow — objednávka → automatický pick → automatický balení → automatický expedition label. Méně lidských chyb." },
-            { c: VSE.success, t: "ANALYTIKA + BI", d: "Reporting a predikce. Co se prodává? Co se vrací? Které trasy nejdražší? Vidíme čísla v reálném čase." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-      </div>) },
-
-    { id: "erp_wms_tms", title: "ERP, WMS, TMS, MES — hlavní typy IS v logistice", subtitle: "Co dělá který systém + příklady SAP, Oracle, ASW", color: BOMBIK.success, emoji: "tools",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          Komise <b>Tahal, Stříteský, Špaček</b> chtějí explicitně <b>4 hlavní typy IS</b>. Bez ERP / WMS / TMS / MES to neudělíš. Tahal navíc dodá: "Google Analytics mu nestačí" — chce konkrétní enterprise systémy.
-        </Def>
-        <Tag color={BOMBIK.success}>4 hlavní typy IS v logistice</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "ERP — Enterprise Resource Planning", d: "Plánování podnikových zdrojů (kapacity, zásoby, finance, HR). Každé oddělení má aplikaci → propojí se. Automatizace nákupních procesů. SAP, Oracle, Microsoft Dynamics, Helios, Money S5." },
-            { c: VSE.warning, t: "WMS — Warehouse Management System", d: "Sleduje příchod a odchod zboží/materiálu z/do skladu. Automatizace skladových procesů, optimalizace tras skladníka, FIFO/LIFO. Manhattan, Blue Yonder, Reflex, SAP EWM." },
-            { c: VSE.fph, t: "TMS — Transport Management System", d: "Systém pro řízení dopravy. Vazba na ERP a WMS, navrhuje optimální trasy pro závozy. Mercurgate, MercuryGate, BluJay, Oracle OTM." },
-            { c: VSE.success, t: "MES — Manufacturing Execution System", d: "Detailní plánování a řízení výroby. Automatizace výroby, propojeno na ERP. Sběr dat, řízení výrobní zakázky, materiálu. Siemens Opcenter, GE Proficy, Wonderware." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.danger}>Jak fungují spolu — integrovaný stack</Tag>
-        <Bullet items={[
-          "<b>ERP</b> je centrální mozek — má účetnictví, zakázky, plány. Ostatní s ním komunikují přes API.",
-          "<b>WMS</b> řídí sklad fyzicky — řekne skladníkovi jaký box vzít, kam dát, kdy odeslat. Reportuje stavy do ERP.",
-          "<b>TMS</b> plánuje dopravu — optimalizuje trasy z WMS výstupů. ERP fakturuje, TMS organizuje, WMS expeduje.",
-          "<b>MES</b> řídí výrobní halu — sleduje stroj po stroji, kolik vyrobeno, jaká vada. Reportuje do ERP.",
-          "<b>Hybridní systémy:</b> Některé moderní řešení (SAP S/4HANA, Microsoft Dynamics 365) integrují ERP + WMS + TMS do jednoho.",
-        ]} color={VSE.danger} />
-      </div>) },
-
-    { id: "bi", title: "BI a analytické nástroje — historie, současnost, predikce", subtitle: "Business Intelligence + data warehouse + AI/ML v logistice", color: BOMBIK.success, emoji: "lightbulb",
-      content: (<div>
-        <Def color={BOMBIK.success}>
-          <b>BI (Business Intelligence)</b> = sada nástrojů pro <b>analýzu dat</b> z různých systémů (ERP, WMS, TMS, CRM) a jejich <b>prezentaci ve formě reportů, dashboardů a predikcí</b>. Tahal explicitně chce slyšet, že Google Analytics nestačí — BI je o enterprise úrovni.
-        </Def>
-        <Tag color={BOMBIK.success}>3 úrovně analýzy v BI</Tag>
-        <ResponsiveGrid cols3>
-          {[
-            { c: VSE.fmv, t: "HISTORICKÁ", d: "Co se stalo? Reporty z minulosti. Tržby Q1, vrácené zboží, počet zásilek. Excel pivot, Tableau dashboard." },
-            { c: VSE.warning, t: "SOUČASNÁ", d: "Co se právě děje? Real-time dashboardy. Live status zásob, online sales, aktuální polohy kamionů." },
-            { c: VSE.success, t: "PREDIKTIVNÍ", d: "Co se stane? AI + ML modely. Predikce poptávky, optimalizace cen, risk scoring. Amazon, Netflix, UPS." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>Klíčové nástroje BI</Tag>
-        <Bullet items={[
-          "<b>Data warehouse:</b> Centralizované úložiště všech dat z firemních systémů. Snowflake, Amazon Redshift, Google BigQuery.",
-          "<b>ETL nástroje:</b> Extract, Transform, Load — přesun dat ze systémů do warehouse. Informatica, Talend, Apache Airflow.",
-          "<b>Vizualizace:</b> Tableau, Power BI, Looker, Qlik. Dashboardy pro management.",
-          "<b>AI/ML platformy:</b> Databricks, Azure ML, Google Vertex AI. Predikce, anomaly detection, optimalizace.",
+          "<b>Opatřovací (pořizovací) logistika</b> = nákup.",
+          "<b>Produkční (výrobní) logistika</b> = výroba.",
+          "<b>Distribuční logistika</b> = distribuce ke spotřebiteli.",
         ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Aplikace AI/ML v logistice (2025+)</Tag>
+        <ResponsiveSVG viewBox="0 0 560 180" maxHeight={200}>
+          <text x="280" y="20" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Logisticky retezec - od surovin k zakaznikovi</text>
+          {/* 5 clanku jako sipky */}
+          {[
+            {x: 20, label: "Trh surovin", c: VSE.nf},
+            {x: 130, label: "Dodavatel", c: VSE.fmv},
+            {x: 240, label: "Vyrobce", c: VSE.warning},
+            {x: 350, label: "Velko/Malo obchod", c: VSE.fph},
+            {x: 460, label: "Zakaznik", c: VSE.success},
+          ].map((b, i) => (
+            <g key={i}>
+              <rect x={b.x} y="55" width="90" height="44" rx="6" fill={b.c} opacity="0.82"/>
+              <text x={b.x + 45} y="81" textAnchor="middle" fontFamily={fontSans} fontSize="10.5" fontWeight="700" fill="#fff">{b.label}</text>
+              {i < 4 && <path d={`M ${b.x + 92} 77 L ${b.x + 108} 77`} stroke="var(--text-muted)" strokeWidth="2" markerEnd="url(#arrL)"/>}
+            </g>
+          ))}
+          <defs>
+            <marker id="arrL" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="var(--text-muted)"/>
+            </marker>
+          </defs>
+          {/* 3 bloky pod tim */}
+          <text x="130" y="130" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="700" fill={VSE.fmv}>OPATROVACI</text>
+          <text x="130" y="143" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill="var(--text-muted)">(nakup)</text>
+          <text x="285" y="130" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="700" fill={VSE.warning}>PRODUKCNI</text>
+          <text x="285" y="143" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill="var(--text-muted)">(vyroba)</text>
+          <text x="440" y="130" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="700" fill={VSE.fph}>DISTRIBUCNI</text>
+          <text x="440" y="143" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill="var(--text-muted)">(distribuce)</text>
+          {/* tok info zpet */}
+          <path d="M 505 110 Q 280 165 65 110" stroke={VSE.primary} strokeWidth="1.5" fill="none" strokeDasharray="4 3" opacity="0.6"/>
+          <text x="280" y="160" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill={VSE.primary} fontStyle="italic">tok informaci (zpet)</text>
+        </ResponsiveSVG>
+        <ExamAlert
+          komise="Tažené: MIS, co jsou informace, logistické systémy (Vrbová+Špaček+Machek, Mládková+Mareš+Vávra), informační systémy (Špaček+Palíšková+Machek)"
+          what="Komise chce: logistický řetězec + <b>logistické systémy / informační systémy v logistice</b> + co jsou informace. Klíč je umět popsat řetězec (3 bloky, pasivní × aktivní prvky) + hlavní IS (ERP, WMS, TMS, MIS)."
+        />
+      </div>) },
+
+    { id: "prvky", title: "Pasivní × aktivní prvky logistického řetězce", subtitle: "Co se přepravuje × čím se to přepravuje", color: BOMBIK.success, emoji: "grid",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Řetězec má dva druhy prvků — <b>pasivní</b> (to, co se hýbe a zpracovává) a <b>aktivní</b> (to, čím se to hýbe a zpracovává). Jednoduchá logika: pasivní = náklad, aktivní = nástroje.
+        </Def>
+        <Tag color={BOMBIK.success}>Pasivní prvky (co prochází řetězcem)</Tag>
         <Bullet items={[
-          "<b>UPS ORION:</b> AI optimalizace tras — ušetří 100M+ USD ročně na palivu a čase.",
-          "<b>Amazon prediction:</b> ML model předpoví, co zákazník chce, ještě před objednávkou (\"anticipatory shipping\").",
-          "<b>DHL Resilience360:</b> AI sleduje globální risk faktory (počasí, politika, výpadky) a doporučuje alternativní trasy.",
-          "<b>Walmart restocking:</b> AI sleduje regály v reálném čase, predikuje vyprodání, automaticky objedná.",
-          "<b>Tesla manufacturing:</b> MES + AI optimalizace výroby — zachytí vadu okamžitě, ne až při finální kontrole.",
+          "<b>Suroviny, základní a pomocný materiál, díly, nedokončené a hotové výrobky.</b>",
+          "<b>Obaly a přepravní prostředky.</b>",
+          "<b>Odpad</b> vznikající při výrobě.",
+          "<b>Informace</b> — jejich pohyb předbíhá, provází a následuje pohyb surovin, materiálu, dílů a výrobků.",
+        ]} color={BOMBIK.success} />
+        <Tag color={VSE.warning}>Aktivní prvky (čím se s pasivními manipuluje)</Tag>
+        <Bullet items={[
+          "<b>Technické prostředky a zařízení</b> pro manipulaci, přepravu, skladování, balení a fixaci.",
+          "<b>Technické prostředky a zařízení</b> sloužící operacím s informacemi (IT systémy).",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Základní znaky řetězce</Tag>
+        <Bullet items={[
+          "Integrální propojení všech zúčastněných (nákup, výroba, distribuce).",
+          "Základní články (provozy) jsou v interakci s předcházejícími a následujícími články.",
+          "Zaměření na materiálový a informační tok.",
+          "Všechny logistické procesy jsou zahrnuty ve všech článcích (sleduje celý hodnotový proces).",
         ]} color={VSE.fph} />
       </div>) },
 
-    { id: "trendy", title: "Trendy a budoucnost informačních systémů v logistice", subtitle: "Cloud, IoT, blockchain, digital twins, edge computing", color: BOMBIK.success, emoji: "bolt",
+    { id: "typy_zakladna", title: "Typy řetězců + technická základna logistiky", subtitle: "Přetržité/kontinuální/synchronní toky + infrastruktura", color: BOMBIK.success, emoji: "truck",
       content: (<div>
         <Def color={BOMBIK.success}>
-          Logistika prochází <b>digitální transformací</b>. Mladí komisaři (Bočková, Tahal, Stříteský) o tom rádi slyší — ukazuje to, že umíš víc než teorii z učebnic.
+          Řetězce se liší podle toho, jak v nich teče zboží, a stojí na <b>technické základně</b> — fyzické infrastruktuře (dopravní prostředky, sítě, uzly).
         </Def>
-        <Tag color={BOMBIK.success}>5 klíčových trendů 2025+</Tag>
+        <Tag color={BOMBIK.success}>Typy logistických řetězců podle toků</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "SC s PŘETRŽITÝMI toky", d: "Dopředu forecast (předpověď). Velké objednávky, výroba, sklad a zásoby. Samostatní účastníci vyměňují jen transakční info. Vysoká produktivita, dodací lhůta okamžitá pro zákazníka." },
+            { c: VSE.warning, t: "SC s KONTINUÁLNÍMI toky", d: "Průběžné zásobení dle odbytu. Přizpůsobení aktuální poptávce. Delší doba dodávky." },
+            { c: VSE.fph, t: "SC se SYNCHRONNÍMI toky", d: "Výroba na základě zakázky. S minimální zásobou. Automobily na míru (build-to-order)." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Technická základna logistiky</Tag>
         <Bullet items={[
-          "<b>Cloud-first ERP:</b> Místo on-premise serveru → cloud (SAP S/4HANA Cloud, Oracle Cloud ERP, Microsoft Dynamics 365). Rychlejší upgrades, menší IT náklady, škálovatelnost.",
-          "<b>IoT senzory:</b> RFID/GPS/teplotní senzory na zboží → real-time tracking. Důležité pro chladící řetězec (potraviny, léky, vakcíny).",
-          "<b>Blockchain pro traceability:</b> Maersk + IBM TradeLens — sleduje kontejnery napříč celým světem. Walmart sleduje původ potravin (food safety).",
-          "<b>Digital twins:</b> Virtuální kopie skladu/výrobní linky. Testuju změny v simulaci dřív, než to nasadím v reálu. BMW, Tesla, DHL.",
-          "<b>Edge computing:</b> Zpracování dat přímo na místě (sklad, kamion), ne v cloudu. Rychlejší rozhodování bez delay (autonomní stroje, AGV).",
+          "<b>Dopravní a přepravní prostředky</b> — kamiony, vlaky, lodě, letadla.",
+          "<b>Manipulační prostředky (zařízení)</b> — v místech ložných operací i na dopravních prostředcích.",
+          "<b>Sítě → infrastruktura:</b> dopravní cesty, součásti a příslušenství dopravních cest, <b>uzly (huby)</b> — logistické parky, terminály, překladiště.",
+          "<b>Prostředky pro řízení, komunikaci a přenos dat</b> (IT).",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Kontext technické základny (subsystémy logistiky)</Tag>
+        <Bullet items={[
+          "<b>Subsystémy:</b> lidé/společnosti, technická základna, logistické technologie, vědní aparát.",
+          "<b>Okolí systému 'logistika':</b> právní předpisy, technický a technologický pokrok, ekonomická a politická situace.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "nakup", title: "Nákup — purchasing, procurement, supply + 3 fáze", subtitle: "Tři pojmy nákupu + tradiční nákupní proces", color: BOMBIK.success, emoji: "coins",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Nákup má v logistice tři úrovně významu — od úzké obchodní operace po celý proces zásobování. Pozor na rozdíl mezi pojmy, komise to ráda slyší přesně.
+        </Def>
+        <Tag color={BOMBIK.success}>Tři pojmy nákupu</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "NÁKUP (purchasing)", d: "Obchodní operace — cílem je získání zboží/služeb potřebných k uspokojení vnitropodnikových/zákaznických potřeb. Nejužší pojem." },
+            { c: VSE.warning, t: "OPATŘOVÁNÍ (procurement)", d: "Krytí potřeb statků/služeb, pracovníků, finančních prostředků. Širší — pokrývá veškeré zajišťování zdrojů." },
+            { c: VSE.fph, t: "ZÁSOBOVÁNÍ (supply)", d: "Procesy přísunu nakoupeného zboží v potřebném množství, struktuře, kvalitě a čase od dodavatele do místa výroby nebo konečné spotřeby. Nejširší — celý tok." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>3 fáze tradičního nákupního procesu</Tag>
+        <Bullet items={[
+          "<b>1. Identifikace potřeby</b> — poznání problému, definování požadavků, specifikace produktu, splnění objednávky, vyhodnocení dodávky/dodavatele.",
+          "<b>2. Objednání</b> — vyhledávání dodavatelů, vystavení poptávky, obdržení a vyhodnocení nabídek, vystavení objednávky, obdržení potvrzení.",
+          "<b>3. Po-objednání</b> — obdržení avíza o možnosti vyzvednutí zboží, vyzvednutí zboží, dodací list, vstupní kontrola, obdržení faktury.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Specifika nákupního chování organizací</Tag>
+        <Bullet items={[
+          "Méně zákazníků, ale větší. Úzké dodavatelsko-odběratelské vztahy, geografická koncentrace.",
+          "Závislost poptávky na poptávce po koncovém produktu, nepružná a kolísavá poptávka.",
+          "Profesionální nakupování, vysoký důraz na spolehlivost, osobní vztahy, několik kupních vlivů.",
+          "Administrativní náročnost, přímé nakupování, reciprocita, leasing a finanční nástroje.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "outsourcing", title: "Outsourcing — Make or Buy + 2PL až 5PL", subtitle: "Kdy outsourcovat a jaké úrovně poskytovatelů", color: BOMBIK.success, emoji: "scale",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          <b>Outsourcing</b> = rozhodnutí <b>Make or Buy</b> (vyrobit/zajistit sám × koupit od dodavatele). V logistice se podle míry převzetí dělí poskytovatelé na 2PL až 5PL.
+        </Def>
+        <Tag color={BOMBIK.success}>Důvody pro outsourcing (kdy je dobrý)</Tag>
+        <PlusMinus type="plus" items={[
+          "Nákladové — cena je menší, než by byly vlastní náklady",
+          "Kapacitní — vlastní kapacity jsou plné",
+          "Kvalitativní — dodavatel zajistí vyšší kvalitu",
+          "Kapitálové — nemáme vybavení/prostředky na investici",
+          "Know-how — nejsou zkušenosti, know-how s řízením podobné výroby",
+          "Právní — produkční práva nelze zajistit nebo jsou drahá",
+          "Rizikové — vlastní výroba přináší rizika (bezpečnostní, výrobní)",
+        ]} />
+        <div style={{ height: 10 }} />
+        <PlusMinus type="minus" items={[
+          "Ztráta kontroly nad částí řetězce",
+          "Závislost na partnerovi (lock-in)",
+          "Únik citlivých informací",
+          "Nižší flexibilita v krizi (dodavatel má svoje priority)",
+        ]} />
+        <Tag color={VSE.warning}>2PL až 5PL — úrovně poskytovatelů</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "2PL (2nd Party Logistics)", d: "Najímám řidiče — jen část dopravy. Klasický dopravce/speditér." },
+            { c: VSE.warning, t: "3PL (3rd Party Logistics)", d: "Poskytovatel komplexních log. služeb — doprava, skladování, manipulace, administrativa. DHL, UPS (méně aplikační přístup)." },
+            { c: VSE.fph, t: "4PL (4th Party Logistics)", d: "Kompletní převzetí řízení log. řetězce. Moc se nepoužívá — rizikové, ztráta kontroly." },
+            { c: VSE.danger, t: "5PL (5th Party Logistics)", d: "Vyšší stupeň využití zdrojů — snaha o propojení subjektů 3PL a 4PL v jeden integrovaný systém." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "is", title: "Informační systémy v logistice", subtitle: "ERP, PLM, SCM, TMS, WMS, MIS", color: BOMBIK.success, emoji: "grid",
+      content: (<div>
+        <Def color={BOMBIK.success}>
+          Moderní logistika stojí na <b>informačních systémech</b>, které řídí toky zboží i dat. Komise chce, abys uměl hlavní typy a věděl, co každý dělá. <b>Informace</b> = zpracovaná data, která mají pro příjemce význam (přidávají hodnotu pro rozhodování).
+        </Def>
+        <Tag color={BOMBIK.success}>Hlavní informační systémy v logistice</Tag>
+        <Bullet items={[
+          "<b>ERP (Enterprise Resource Planning)</b> — plánování podnikových zdrojů, all in one: zásoby, nákup, prodej, finance. Pro každé oddělení. Páteř firemního IS.",
+          "<b>PLM (Product Lifecycle Management)</b> — řízení životního cyklu výrobku: od nápadu přes uvedení až po likvidaci.",
+          "<b>AUTOCAD / CAM</b> — efektivní plánování podle používané techniky (soustruhy, obráběče) — návrh a výroba.",
+          "<b>SCM (Supply Chain Management)</b> — systém pro řízení celého dodavatelského řetězce (viz Logistika 2).",
+          "<b>TMS (Transport Management System)</b> — navrhuje optimální trasy pro závozy. Řízení dopravy.",
+          "<b>WMS (Warehouse Management System)</b> — řízení skladu: rozdělení skladu podle zákazníka × zboží × frekvence používání, efektivní cesty po skladu.",
+          "<b>MIS (Manažerský informační systém)</b> — zpracování údajů z databází, jejich analýza a interpretace v tabulkách. Pro manažerské rozhodování.",
         ]} color={BOMBIK.success} />
-        <Tag color={VSE.warning}>Výzvy implementace IS v logistice</Tag>
+        <Tag color={VSE.warning}>Jak si je zapamatovat</Tag>
         <Bullet items={[
-          "<b>Cena:</b> ERP implementace 5–50 mil. Kč pro střední firmu. 2-5 let payback.",
-          "<b>Změnové řízení:</b> Lidé musí změnit zvyky. 70 % ERP projektů selže na change managementu, ne na technologii.",
-          "<b>Integrace:</b> Stará data, legacy systémy, různé formáty. Data cleansing před migrací = 50 % projektu.",
-          "<b>Dovednosti:</b> Chybí lidé. SAP konzultant 150k Kč/den. Databricks data engineer 200k+ měsíčně.",
-          "<b>Security:</b> Cyberattacks na log. firmy rostou (Maersk 2017 ransomware → 300M USD ztráta). Zero-trust security stačí.",
+          "<b>ERP</b> = páteř všeho (celá firma). <b>WMS</b> = sklad (warehouse). <b>TMS</b> = doprava (transport).",
+          "<b>MIS</b> = manažerské rozhodování (analýzy, tabulky). <b>PLM</b> = životní cyklus výrobku. <b>SCM</b> = celý řetězec.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "naklady", title: "Náklady logistického řetězce + jak na případovku", subtitle: "6 typů nákladů + postup", color: VSE.success, emoji: "coins",
+      content: (<div>
+        <Def color={VSE.success}>
+          Logistický řetězec generuje <b>náklady v každé fázi</b>. Pochopení jejich struktury je klíčem k optimalizaci a hledání úspor.
+        </Def>
+        <Tag color={VSE.success}>6 typů nákladů logistického řetězce</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "PROCESNÍ", d: "Administrativa nákupu, papírování, koordinace." },
+            { c: VSE.warning, t: "NÁKUPNÍ", d: "Nákupní cena, slevy, manipulace na vstupu." },
+            { c: VSE.fph, t: "FINANČNÍ", d: "Držba peněz v zásobách (vázaný kapitál), platební podmínky." },
+            { c: VSE.danger, t: "VÝROBNÍ", d: "Držba kapacit, materiál, režie, pracovní síla, údržba." },
+            { c: VSE.success, t: "SKLADOVACÍ", d: "Zásoby, sklady, manipulační technika." },
+            { c: VSE.primary, t: "DISTRIBUČNÍ", d: "Balení, doprava, pojištění, last-mile." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 560 200" maxHeight={220}>
+          <text x="280" y="20" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Naklady logistickeho retezce</text>
+          {/* root */}
+          <rect x="220" y="35" width="120" height="40" rx="8" fill={VSE.danger} opacity="0.9"/>
+          <text x="280" y="52" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill="#fff">Naklady</text>
+          <text x="280" y="66" textAnchor="middle" fontFamily={fontSans} fontSize="10" fontWeight="700" fill="#fff">log. retezce</text>
+          {/* 6 children */}
+          {[
+            {label: "Procesni", c: VSE.fmv, x: 30},
+            {label: "Nakupni", c: VSE.warning, x: 117},
+            {label: "Financni", c: VSE.fph, x: 204},
+            {label: "Vyrobni", c: VSE.danger, x: 291},
+            {label: "Skladovaci", c: VSE.success, x: 378},
+            {label: "Distribucni", c: VSE.primary, x: 465},
+          ].map((b, i) => (
+            <g key={i}>
+              <line x1="280" y1="75" x2={b.x + 32} y2="120" stroke="var(--text-muted)" strokeWidth="1"/>
+              <rect x={b.x} y="120" width="64" height="44" rx="5" fill={b.c} opacity="0.82"/>
+              <text x={b.x + 32} y="146" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fontWeight="700" fill="#fff">{b.label}</text>
+            </g>
+          ))}
+          <text x="280" y="188" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill="var(--text-muted)" fontStyle="italic">kazda faze retezce generuje naklady - klic k optimalizaci</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Popiš <b>logistický řetězec firmy z PS</b> — od surovin k zákazníkovi, 3 bloky (nákup/výroba/distribuce).",
+          "<b>2.</b> Urči <b>pasivní × aktivní prvky</b> — co teče řetězcem × čím se to přepravuje/zpracovává.",
+          "<b>3.</b> Zařaď <b>typ řetězce</b> — přetržité (forecast), kontinuální (dle odbytu), synchronní (na zakázku).",
+          "<b>4.</b> U nákupu rozliš <b>purchasing/procurement/supply</b> a popiš 3 fáze nákupního procesu.",
+          "<b>5.</b> Zvaž <b>outsourcing (Make or Buy)</b> — co dělat sám, co koupit (2PL–5PL).",
+          "<b>6.</b> Navrhni <b>informační systémy</b> — ERP (páteř), WMS (sklad), TMS (doprava), MIS (rozhodování).",
+          "<b>7.</b> Identifikuj <b>náklady</b> a kde se dá optimalizovat.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Rozlišit pasivní (náklad) a aktivní (nástroje) prvky řetězce.",
+          "<b>✅ Dobře:</b> Vědět, co dělá ERP, WMS, TMS, MIS (ne je jen vyjmenovat).",
+          "<b>✅ Dobře:</b> Rozlišit purchasing/procurement/supply.",
+          "<b>❌ Špatně:</b> Splést WMS (sklad) s TMS (doprava).",
+          "<b>❌ Špatně:</b> Mluvit o IS obecně bez znalosti, co který řeší.",
         ]} color={VSE.warning} />
       </div>) },
   ];
 
   const flashcardsLog3 = [
-    { term: "Informace", def: "Údaj, který má smysl, význam a přínos pro rozhodování. Klíčová konkurenční výhoda v dnešní logistice.", tag: "POJEM" },
-    { term: "4 charakteristiky kvalitní informace", def: "Relevance / Přesnost / Včasnost / Úplnost. Bez všech 4 je informace nepoužitelná pro rozhodování.", tag: "POJEM" },
-    { term: "Primární data", def: "Sbírám si je sám pro konkrétní účel. Drahé, ale relevantní. Dotazníky, focus group, experimenty, mystery shopping.", tag: "ZDROJE" },
-    { term: "Sekundární data", def: "Už existují, sbíral je někdo jiný. Levné, rychlé, ale obecné. ČSÚ, EUROSTAT, oborové reporty, vlastní historie.", tag: "ZDROJE" },
-    { term: "Interní zdroje", def: "Z vlastní firmy. ERP, CRM, účetnictví, prodejní data, HR records. Většinou sekundární (jiný účel).", tag: "ZDROJE" },
-    { term: "Externí zdroje", def: "Mimo firmu. ČSÚ, EUROSTAT, sociální sítě, Google Trends, kupované databáze, oborové studie.", tag: "ZDROJE" },
-    { term: "Kvalitativní data", def: "Popis, kontext, motivace. Proč zákazník koupil? Z dotazníků, rozhovorů, focus groups.", tag: "TYPY" },
-    { term: "Kvantitativní data", def: "Čísla, statistiky. Kolik prodáno, jaká marže. Z ERP, e-shopu, CRM.", tag: "TYPY" },
-    { term: "MIS", def: "Marketing Information System — soubor lidí, zařízení a procesů pro sběr, třídění, analýzu a distribuci informací pro mkt rozhodování.", tag: "MIS" },
-    { term: "3 složky MIS (Kotler)", def: "Vnitřní IS (záznamy) + Marketingový zpravodajský (info o prostředí) + Marketingový výzkum (systematický sběr pro konkrétní problém).", tag: "MIS" },
-    { term: "MDSS", def: "Marketing Decision Support System — 4. složka MIS. Analytický model + statistické nástroje pomáhající rozhodnout, ne jen ukázat data.", tag: "MIS" },
-    { term: "Mkt zpravodajský systém", def: "Soubor postupů a zdrojů pro získávání informací o vývoji v tržním prostředí. Konkurence, trendy, regulace.", tag: "MIS" },
-    { term: "Funkce MIS", def: "Hodnocení potřeb / Sběr a zpracování / Distribuce / Centralizace (single source of truth).", tag: "MIS" },
-    { term: "Logistický systém", def: "Soubor SW, který souvisí s principem business procesů v logistice. Propojuje nákup → výroba → distribuce → prodej.", tag: "LOG. SYSTÉM" },
-    { term: "ERP", def: "Enterprise Resource Planning — plánování podnikových zdrojů (kapacity, zásoby, finance, HR). SAP, Oracle, Dynamics, Helios.", tag: "ERP" },
-    { term: "ERP funkce", def: "Plánování zdrojů, automatizace nákupních procesů, propojení oddělení, centrální datová báze. Mozek logistiky.", tag: "ERP" },
-    { term: "WMS", def: "Warehouse Management System — sleduje příchod a odchod zboží ze skladu. Optimalizace skladových procesů, FIFO/LIFO. Manhattan, Blue Yonder.", tag: "WMS" },
-    { term: "TMS", def: "Transport Management System — řízení dopravy, vazba na ERP a WMS, navrhuje optimální trasy. MercuryGate, Oracle OTM, BluJay.", tag: "TMS" },
-    { term: "MES", def: "Manufacturing Execution System — detailní plánování a řízení výroby, propojeno na ERP. Sběr dat, řízení výroby. Siemens Opcenter, GE Proficy.", tag: "MES" },
-    { term: "Integrovaný stack", def: "ERP centrální mozek + WMS sklad + TMS doprava + MES výroba. Komunikují přes API. Moderní (S/4HANA) integruje vše do jednoho.", tag: "INTEGRACE" },
-    { term: "BI", def: "Business Intelligence — sada nástrojů pro analýzu dat z různých systémů a jejich prezentaci v reportech, dashboardech, predikcích.", tag: "BI" },
-    { term: "3 úrovně BI analýzy", def: "Historická (co se stalo) / Současná (co se děje teď) / Prediktivní (co se stane — AI/ML modely).", tag: "BI" },
-    { term: "Data warehouse", def: "Centralizované úložiště dat z firemních systémů pro analýzu. Snowflake, Amazon Redshift, Google BigQuery.", tag: "BI" },
-    { term: "ETL", def: "Extract, Transform, Load — přesun dat ze zdrojových systémů do data warehouse. Informatica, Talend, Apache Airflow.", tag: "BI" },
-    { term: "AI/ML v logistice", def: "Predikce poptávky, optimalizace tras, anomaly detection. UPS ORION (úspora 100M USD/rok), Amazon anticipatory shipping.", tag: "AI" },
-    { term: "Cloud-first ERP", def: "Trend 2025+. SAP S/4HANA Cloud, Oracle Cloud ERP, MS Dynamics 365. Rychlejší upgrades, menší IT náklady.", tag: "TRENDY" },
-    { term: "IoT v logistice", def: "RFID/GPS/teplotní senzory na zboží. Real-time tracking, klíčové pro chladící řetězec (potraviny, léky).", tag: "TRENDY" },
-    { term: "Blockchain pro traceability", def: "Sleduje původ a pohyb zboží. Maersk + IBM TradeLens (kontejnery), Walmart food safety.", tag: "TRENDY" },
-    { term: "Digital twin", def: "Virtuální kopie skladu/linky. Testuju změny v simulaci dřív, než nasadím v reálu. BMW, Tesla, DHL.", tag: "TRENDY" },
-    { term: "Edge computing", def: "Zpracování dat přímo na místě (sklad, kamion), ne v cloudu. Rychlejší rozhodování (AGV, autonomní stroje).", tag: "TRENDY" },
-    { term: "Výzvy ERP implementace", def: "Cena (5–50 mil. Kč), change management (70 % projektů selže na lidech), integrace legacy systémů, chybí lidé, security.", tag: "VÝZVY" },
-    { term: "Single source of truth", def: "Princip — všechna data v jednom místě, konzistentní napříč firmou. Klíč MIS i ERP.", tag: "INTEGRACE" },
+    { term: "Logistický řetězec", def: "Spojuje trh surovin s trhem spotřebitelů. Dodavatel → výrobce → velkoobchod → maloobchod → zákazník.", tag: "ŘETĚZEC" },
+    { term: "3 podmínky řetězce", def: "Transparentnost (průhlednost), konektivita (propojitelnost), agilnost (rychlé změny dle informací).", tag: "ŘETĚZEC" },
+    { term: "3 bloky řetězce", def: "Opatřovací logistika (nákup), produkční logistika (výroba), distribuční logistika (distribuce).", tag: "ŘETĚZEC" },
+    { term: "Pasivní prvky", def: "Co prochází řetězcem: suroviny, materiál, díly, výrobky, obaly, přepravní prostředky, odpad, informace.", tag: "PRVKY" },
+    { term: "Aktivní prvky", def: "Čím se manipuluje: technické prostředky pro manipulaci/přepravu/skladování/balení + IT pro operace s informacemi.", tag: "PRVKY" },
+    { term: "Pasivní × aktivní", def: "Pasivní = náklad (co se hýbe). Aktivní = nástroje (čím se to hýbe).", tag: "PRVKY" },
+    { term: "SC s přetržitými toky", def: "Dopředu forecast. Velké objednávky, sklad, zásoby. Samostatní účastníci. Dodací lhůta okamžitá pro zákazníka.", tag: "TYPY" },
+    { term: "SC s kontinuálními toky", def: "Průběžné zásobení dle odbytu. Přizpůsobení aktuální poptávce. Delší doba dodávky.", tag: "TYPY" },
+    { term: "SC se synchronními toky", def: "Výroba na základě zakázky. Minimální zásoba. Automobily na míru (build-to-order).", tag: "TYPY" },
+    { term: "Technická základna logistiky", def: "Dopravní/přepravní prostředky, manipulační prostředky, sítě (infrastruktura), uzly (huby), IT pro řízení.", tag: "ZÁKLADNA" },
+    { term: "Uzly (huby)", def: "Logistické parky, terminály, překladiště. Součást sítí/infrastruktury.", tag: "ZÁKLADNA" },
+    { term: "Nákup (purchasing)", def: "Obchodní operace — získání zboží/služeb pro uspokojení potřeb. Nejužší pojem.", tag: "NÁKUP" },
+    { term: "Opatřování (procurement)", def: "Krytí potřeb statků/služeb, pracovníků, financí. Širší pojem.", tag: "NÁKUP" },
+    { term: "Zásobování (supply)", def: "Procesy přísunu zboží v potřebném množství, kvalitě a čase od dodavatele do místa výroby/spotřeby. Nejširší.", tag: "NÁKUP" },
+    { term: "3 fáze nákupu", def: "1) Identifikace potřeby, 2) Objednání, 3) Po-objednání (vstupní kontrola, faktura).", tag: "NÁKUP" },
+    { term: "Specifika nákupu organizací", def: "Méně ale větší zákazníci, úzké vztahy, geografická koncentrace, nepružná poptávka, profesionální nakupování.", tag: "NÁKUP" },
+    { term: "Outsourcing (Make or Buy)", def: "Rozhodnutí vyrobit/zajistit sám × koupit od dodavatele. Důvody: náklady, kapacity, kvalita, kapitál, know-how, právní, rizikové.", tag: "OUTSOURCING" },
+    { term: "2PL", def: "Najímám řidiče — jen část dopravy. Klasický dopravce/speditér.", tag: "OUTSOURCING" },
+    { term: "3PL", def: "Komplexní log. služby — doprava, skladování, manipulace, administrativa. DHL, UPS.", tag: "OUTSOURCING" },
+    { term: "4PL", def: "Kompletní převzetí řízení řetězce. Moc se nepoužívá — rizikové, ztráta kontroly.", tag: "OUTSOURCING" },
+    { term: "5PL", def: "Vyšší stupeň využití zdrojů — propojení 3PL a 4PL v jeden integrovaný systém.", tag: "OUTSOURCING" },
+    { term: "Informace", def: "Zpracovaná data, která mají pro příjemce význam — přidávají hodnotu pro rozhodování.", tag: "IS" },
+    { term: "ERP", def: "Enterprise Resource Planning — plánování zdrojů all in one (zásoby, nákup, prodej, finance). Páteř firemního IS.", tag: "IS" },
+    { term: "PLM", def: "Product Lifecycle Management — řízení životního cyklu výrobku od nápadu po likvidaci.", tag: "IS" },
+    { term: "TMS", def: "Transport Management System — navrhuje optimální trasy pro závozy. Řízení dopravy.", tag: "IS" },
+    { term: "WMS", def: "Warehouse Management System — řízení skladu, rozdělení podle zákazníka/zboží/frekvence, efektivní cesty.", tag: "IS" },
+    { term: "MIS", def: "Manažerský informační systém — zpracování údajů z databází, analýza a interpretace v tabulkách pro rozhodování.", tag: "IS" },
+    { term: "ERP × WMS × TMS × MIS", def: "ERP = celá firma (páteř). WMS = sklad. TMS = doprava. MIS = manažerské rozhodování.", tag: "IS" },
+    { term: "6 typů nákladů řetězce", def: "Procesní, nákupní, finanční, výrobní, skladovací, distribuční.", tag: "NÁKLADY" },
   ];
 
   const quizLog3 = [
-    { q: "Co je hlavní rozdíl mezi daty a informací?", opts: ["Není rozdíl", "Informace = data, která mají smysl a přínos pro rozhodování", "Data jsou kvantitativní, informace kvalitativní", "Informace jsou online, data offline"], correct: 1 },
-    { q: "Které ze 4 charakteristik kvalitní informace znamená včasné dodání?", opts: ["Relevance", "Přesnost", "Včasnost", "Úplnost"], correct: 2 },
-    { q: "Co jsou primární data?", opts: ["První data v databázi", "Sbírám si je sám pro konkrétní účel (dotazníky, experimenty)", "Nejstarší data", "Data z primárního trhu"], correct: 1 },
-    { q: "ČSÚ a EUROSTAT jsou příklady:", opts: ["Primárních interních dat", "Sekundárních externích dat", "Primárních externích dat", "Sekundárních interních dat"], correct: 1 },
-    { q: "Kolik složek má klasický MIS model (Kotler)?", opts: ["2", "3 (vnitřní IS + zpravodajský + výzkum)", "4 (+ MDSS)", "5"], correct: 1 },
-    { q: "Co je MDSS?", opts: ["Mass Data Storage System", "Marketing Decision Support System — analytický model + statistické nástroje", "Marketing Database Survey Software", "Mobile Distribution Service"], correct: 1 },
-    { q: "Co dělá ERP?", opts: ["Jen účetnictví", "Plánování podnikových zdrojů — kapacity, zásoby, finance, HR. Centrální mozek firmy.", "Jen sklady", "Jen dopravu"], correct: 1 },
-    { q: "Co dělá WMS?", opts: ["Warehouse Marketing System", "Warehouse Management System — řídí příchod a odchod zboží ze skladu, optimalizuje sklady", "Web Management Service", "Workplace Monitoring System"], correct: 1 },
-    { q: "Co dělá TMS?", opts: ["Time Management System", "Transport Management System — řídí dopravu, optimalizace tras", "Tax Management System", "Team Management System"], correct: 1 },
-    { q: "Co dělá MES?", opts: ["Marketing Excellence System", "Manufacturing Execution System — detailní plánování a řízení výroby", "Mobile Enterprise Service", "Money Exchange System"], correct: 1 },
-    { q: "Jaká je vazba mezi ERP a WMS?", opts: ["Nesouvisí", "WMS reportuje skladové stavy do ERP, ERP řídí zakázky a fakturaci", "WMS je nadřazený ERP", "Jsou identické"], correct: 1 },
-    { q: "Co je BI (Business Intelligence)?", opts: ["Druh investice", "Sada nástrojů pro analýzu dat z různých systémů a jejich prezentaci v reportech/dashboardech", "Sledování konkurence", "Business plán"], correct: 1 },
-    { q: "Co je data warehouse?", opts: ["Datový sklad pro fyzická data", "Centralizované úložiště dat z firemních systémů pro analýzu (Snowflake, BigQuery)", "Cloudový backup", "Web stránka"], correct: 1 },
-    { q: "Co znamená ETL?", opts: ["Enterprise Technology Layer", "Extract, Transform, Load — přesun dat ze zdrojů do data warehouse", "European Tech License", "Energy Transfer Logic"], correct: 1 },
-    { q: "Která firma proslula AI optimalizací tras (úspora 100M USD/rok)?", opts: ["Amazon", "UPS (ORION)", "Microsoft", "Tesla"], correct: 1 },
-    { q: "Co je digital twin?", opts: ["AI chatbot", "Virtuální kopie skladu/linky pro simulaci změn před nasazením", "Dvojí backup", "Digitální podpis"], correct: 1 },
-    { q: "Proč selhává 70 % ERP projektů?", opts: ["Technologie nefunguje", "Change management — lidé se brání změnám zvyků", "Vysoká cena", "Není dostupné internet"], correct: 1 },
+    { q: "Co spojuje logistický řetězec?", opts: ["Dva sklady", "Trh surovin s trhem spotřebitelů", "Dvě firmy", "Stát a firmu"], correct: 1 },
+    { q: "Jaké jsou 3 podmínky fungujícího řetězce?", opts: ["Cena, čas, kvalita", "Transparentnost, konektivita, agilnost", "Nákup, výroba, prodej", "Lidé, stroje, peníze"], correct: 1 },
+    { q: "Jaké jsou 3 bloky řetězce?", opts: ["Malý, střední, velký", "Opatřovací (nákup), produkční (výroba), distribuční", "Ráno, poledne, večer", "A, B, C"], correct: 1 },
+    { q: "Co jsou pasivní prvky?", opts: ["Stroje a IT", "Co prochází řetězcem — suroviny, materiál, výrobky, obaly, odpad, informace", "Lidé", "Dodavatelé"], correct: 1 },
+    { q: "Co jsou aktivní prvky?", opts: ["Suroviny", "Čím se manipuluje — technické prostředky pro přepravu, skladování, IT", "Výrobky", "Odpad"], correct: 1 },
+    { q: "Co je SC se synchronními toky?", opts: ["Forecast dopředu", "Výroba na základě zakázky, minimální zásoba, automobily na míru", "Velký sklad", "Kontinuální zásobení"], correct: 1 },
+    { q: "Co jsou uzly (huby)?", opts: ["Stroje", "Logistické parky, terminály, překladiště", "Lidé", "Výrobky"], correct: 1 },
+    { q: "Co je nákup (purchasing)?", opts: ["Celý tok", "Obchodní operace — získání zboží/služeb. Nejužší pojem.", "Zásobování", "Opatřování"], correct: 1 },
+    { q: "Co je zásobování (supply)?", opts: ["Jen objednávka", "Procesy přísunu zboží v množství, kvalitě a čase od dodavatele do místa spotřeby. Nejširší.", "Nákup", "Faktura"], correct: 1 },
+    { q: "Jaké jsou 3 fáze nákupu?", opts: ["Ráno/poledne/večer", "Identifikace potřeby, objednání, po-objednání", "Plán/akce/kontrola", "A/B/C"], correct: 1 },
+    { q: "Co je ERP?", opts: ["Sklad", "Plánování podnikových zdrojů all in one — páteř firemního IS", "Doprava", "Jen účetnictví"], correct: 1 },
+    { q: "Co je WMS?", opts: ["Doprava", "Warehouse Management — řízení skladu, rozdělení, efektivní cesty", "Finance", "Výroba"], correct: 1 },
+    { q: "Co je TMS?", opts: ["Sklad", "Transport Management — navrhuje optimální trasy pro závozy", "Účetnictví", "Výroba"], correct: 1 },
+    { q: "Co je MIS?", opts: ["Sklad", "Manažerský informační systém — analýza a interpretace dat pro rozhodování", "Doprava", "Nákup"], correct: 1 },
+    { q: "Co je 3PL?", opts: ["Jen řidič", "Komplexní log. služby — doprava, skladování, manipulace (DHL, UPS)", "Vlastní výroba", "5PL"], correct: 1 },
+    { q: "Jaké jsou typy nákladů řetězce?", opts: ["Jen mzdy", "Procesní, nákupní, finanční, výrobní, skladovací, distribuční", "Jen doprava", "Jen sklad"], correct: 1 },
   ];
 
   const praxeLog3 = {
     caseStudy: {
-      company: "Amazon — etalon datově řízené logistiky a anticipatory shipping",
-      subtitle: "Integrace ERP + WMS + TMS + AI/ML predikce v praxi",
+      company: "Amazon — informační systémy jako páteř logistiky",
+      subtitle: "Jak Amazon řídí miliardy položek pomocí IS",
       content: (<>
-        <b>Amazon</b> je <b>globální etalon datově řízené logistiky</b>. 500+ skladů (fulfillment centers) globálně, 1.6 mld. zákazníků, 18 % světového e-commerce trhu. Data jsou v jádru firmy.<br/><br/>
-        <b style={{ color: VSE.success }}>Amazon integrated stack:</b><br/>
-        • <b>ERP:</b> Vlastní postavený systém (ne SAP/Oracle), na míru pro masivní škálovatelnost<br/>
-        • <b>WMS:</b> Amazon Robotics (Kiva) — autonomní roboti přinášejí regály k pickerovi. 350 000+ robotů ve skladech<br/>
-        • <b>TMS:</b> Amazon Logistics — vlastní flotila (Prime Air, vans, Rivian elektro), plus 3PL partneři (UPS, FedEx)<br/>
-        • <b>MES:</b> Amazon Devices (Kindle, Echo) — vlastní výroba s předikcí kvality<br/>
-        • <b>BI:</b> AWS Redshift data warehouse + AWS QuickSight dashboardy<br/><br/>
-        <b style={{ color: VSE.warning }}>Anticipatory shipping (2014 patent):</b><br/>
-        • AI model predikuje, co zákazník bude chtít, <b>ještě před objednávkou</b><br/>
-        • Zboží se přesune do nejbližšího fulfillment centra <b>preventivně</b><br/>
-        • Když zákazník objedná, doručení je za hodiny (Prime Now), ne dny<br/>
-        • Vstup do modelu: nákupní historie, search history, čas na položce, wishlist, sezóna, region<br/><br/>
-        <b style={{ color: VSE.fmv }}>3 úrovně BI v Amazonu:</b><br/>
-        • <b>Historická:</b> Tržby po dnech, kategoriích, regionech (real-time pro CFO)<br/>
-        • <b>Současná:</b> Live status skladů, zásoby, kamiony (Amazon NOC dashboard)<br/>
-        • <b>Prediktivní:</b> Demand forecasting, dynamic pricing (cena se mění milionkrát denně), risk scoring<br/><br/>
-        <b style={{ color: VSE.success }}>Výsledek:</b> Amazon má <b>nejnižší fulfillment cost na transakci v branži</b> (3-4× lepší než klasický e-commerce). Akcie 1500× růst za 25 let. Logistika je core competence + KV.
+        Amazon je <b>ukázka firmy, kde informační systémy řídí celý logistický řetězec</b>. Bez nich by nezvládl miliardy položek a dodání do druhého dne.<br/><br/>
+        🏢 ERP — PÁTEŘ:<br/><br/>
+        Amazon má systém propojující zásoby, nákup, prodej a finance napříč celou firmou. ERP je základ — všechna oddělení pracují se stejnými daty v reálném čase.<br/><br/>
+        📦 WMS — ŘÍZENÍ SKLADU:<br/><br/>
+        Ve fulfillment centrech WMS rozhoduje, kam zboží uložit a jak ho nejrychleji vychystat. Amazon používá 'chaotické skladování' — zboží se ukládá tam, kde je místo, a WMS si pamatuje kde co je. Roboti Kiva pak vozí regály k pracovníkům podle pokynů WMS.<br/><br/>
+        🚚 TMS — ŘÍZENÍ DOPRAVY:<br/><br/>
+        TMS plánuje optimální trasy závozů — který kamion, jakou trasou, v jakém pořadí. U last-mile (poslední míle k zákazníkovi) je optimalizace tras klíčová pro rychlost i náklady.<br/><br/>
+        📊 MIS — ROZHODOVÁNÍ:<br/><br/>
+        Manažeři Amazonu sledují přes MIS metriky jako DIFOT/OTIF (dodání včas a kompletně), obrátku zásob, náklady na řetězec. Data z databází se analyzují a interpretují pro rozhodování.<br/><br/>
+        🔗 POINTA:<br/><br/>
+        Každý systém má svou roli: ERP = páteř (celá firma), WMS = sklad, TMS = doprava, MIS = rozhodování. Dohromady tvoří nervovou soustavu Amazonu. <b>Bez integrovaných IS by moderní logistika v takovém měřítku nešla.</b>
       </>),
-      lessons: "Komise tohle miluje — Amazon je <b>učebnicový příklad informačního systému jako KV</b>. Když máš v PS firmu s logistickými problémy, doporuč: <b>integrovaný stack (ERP + WMS + TMS)</b>, <b>data warehouse + BI dashboardy</b>, <b>AI predikci poptávky</b>, <b>real-time tracking</b>. Pro alternativu zmiň <b>Alza (česká cesta, AlzaBox lockery), Walmart (AI restocking), UPS (ORION optimalizace), DHL Resilience360</b>."
+      lessons: "Amazon ukazuje informační systémy v logistice v praxi. <b>ERP</b> = páteř (zásoby, nákup, prodej, finance napříč firmou). <b>WMS</b> = řízení skladu (kam uložit, jak vychystat). <b>TMS</b> = optimální trasy dopravy. <b>MIS</b> = analýza dat pro manažerské rozhodování. Pro případovku: nesplést je — každý řeší jinou část řetězce. ERP propojuje vše, WMS je sklad, TMS doprava, MIS rozhodování."
     },
     miniExamples: [
-      { tag: "ERP", color: VSE.fmv, company: "Maersk × SAP S/4HANA", content: "Maersk (největší kontejnerová přepravce světa) v 2019 nasadil SAP S/4HANA Cloud. 3 roky implementace, 1 mld. USD náklady, ale jednotná data napříč 130+ zeměmi. Před tím 50+ regionálních systémů, žádná konsolidace. Po nasazení: real-time visibility, 15 % úspora na admin nákladech." },
-      { tag: "WMS", color: VSE.warning, company: "Alza × vlastní WMS", content: "Alza si postavila <b>vlastní WMS</b> (ne Blue Yonder ani Manhattan). Důvody: rychlejší development, plná kontrola, lower TCO. Sklad v Praze odbaví <b>3M+ zásilek měsíčně</b>, picking automatizovaný. Český příklad in-house IS." },
-      { tag: "BI + AI", color: VSE.success, company: "Walmart AI restocking", content: "Walmart v 4700 obchodech USA má AI sledující regály v reálném čase (kamery + image recognition). Predikuje vyprodání 24h dopředu, automaticky objedná u dodavatele. Vrátky o 30 % méně, dostupnost o 15 % vyšší. Příklad AI v retail logistice." },
-      { tag: "CYBER RISK", color: VSE.danger, company: "Maersk NotPetya útok (2017)", content: "Ransomware útok ochromil Maersk na <b>10 dní</b>. 76 přístavů offline, ručně řízeno, papír místo systémů. <b>300M USD ztráta</b>. Nucená rekonstrukce ERP. Lekce: cybersecurity je core riziko, ne IT detail. Zero-trust security architecture po útoku." },
+      { tag: "LOGISTICKÝ ŘETĚZEC", color: VSE.fph, company: "IKEA — řetězec od lesa k zákazníkovi", content: "IKEA řídí celý logistický řetězec od surovin (dřevo z lesů) přes výrobu, velkoobchodní sklady až po prodejny a zákazníka. Pasivní prvky = dřevo, panely, hotový nábytek, ploché obaly. Aktivní prvky = kamiony, vysokozdvižné vozíky, regálové sklady, IT systémy. IKEA proslula plochými obaly (flat-pack) — optimalizují přepravu (víc zboží na paletu) a snižují distribuční náklady. Celý řetězec je propojený a transparentní." },
+      { tag: "SYNCHRONNÍ TOKY", color: VSE.warning, company: "Dell / automobilky — výroba na zakázku", content: "Dell proslul build-to-order — počítač se začne montovat až po objednávce zákazníka (synchronní toky, minimální zásoba). Stejně automobilky vyrábějí auta na míru podle konfigurace zákazníka. Výhoda: skoro žádné neprodejné zásoby, vázaný kapitál minimální. Nevýhoda: delší dodací lhůta. Opak přetržitých toků (forecast + sklad), kde je zboží hned, ale drží se velké zásoby." },
+      { tag: "OUTSOURCING 3PL", color: VSE.success, company: "E-shopy a DHL/Geis — proč 3PL", content: "Menší e-shop nemá smysl budovat vlastní sklady a dopravní flotilu. Místo toho využije 3PL poskytovatele (DHL, Geis, Zásilkovna) — ten zajistí skladování, balení, dopravu i administrativu. Důvody Make or Buy: kapitálové (nemá na investici do skladů), kapacitní (nezvládl by špičky), know-how (3PL to umí líp). E-shop se soustředí na prodej, logistiku nechá specialistovi." },
+      { tag: "PURCHASING × SUPPLY", color: VSE.fph, company: "Výrobní firma — tři úrovně nákupu", content: "Výrobní firma rozlišuje: purchasing (nákupčí vyjedná a objedná konkrétní materiál — obchodní operace), procurement (oddělení opatřování zajišťuje veškeré zdroje včetně lidí a financí), supply (celý tok materiálu od dodavatele až na výrobní linku ve správném množství a čase). Komise ráda slyší tento rozdíl — od nejužšího (purchasing) po nejširší (supply)." },
     ]
   };
 
   const examQuestionsLog3 = [
-    { komise: "2025 — Stříteský + Schönfeld + Cejthamr", otazka: "MIS a IS v logistice", pozn: "Klasická kombinovaná otázka. Začni MIS (3 složky Kotler) → přejdi na IS v logistice (ERP/WMS/TMS/MES) → propojení mezi MIS (marketing) a IS v logistice (operations) → BI jako spojovací článek." },
-    { komise: "2025 — Špaček + Palíšková + Machek", otazka: "Informační systémy a význam informací v logistice a v marketingu — zdroje a složky", pozn: "Špaček chce explicitně <b>zdroje a složky</b>. Strukturuj: definice informace → 4 zdroje (primární/sekundární × interní/externí) → MIS (3 složky) → IS v logistice (ERP/WMS/TMS/MES) → integrace." },
-    { komise: "2025 — Tahal + Cejthamr + Schönfeld", otazka: "Konkurenční strategie, logistické strategie, logistický systém a konkurenční výhody v logistice — napasovat na PS", pozn: "Tahal chce vidět IS jako KV. Klíčové: digitalizace + automatizace + AI/ML jako nový moat. Doporučení: ERP/WMS/TMS pro PS firmu + data warehouse + dashboardy + AI predikce poptávky." },
-    { komise: "2025 — Abíková + Kolouchová + Smrčka", otazka: "Úloha informací v marketingu a logistice. MIS, Logistické systémy", pozn: "Strukturuj: definice informace → 4 charakteristiky → MIS (3 složky) → IS v logistice (4 typy) → integrovaný stack → trendy (AI, cloud, IoT). Aplikuj na PS." },
-    { komise: "2025 — Tahal + Lorencová + Schönfeld", otazka: "Marketingové a logistické informační systémy — zaměření na data: jak se získávají, druhy. Google Analytics mu nestačí.", pozn: "Tahal explicitně: <b>Google Analytics nestačí!</b> Chce enterprise systémy. Vyjmenuj: ERP, WMS, TMS, MES, BI, data warehouse, ETL, AI/ML. Zdroje dat: primární × sekundární, interní × externí, kvalitativní × kvantitativní." },
-    { komise: "2025 — Double Stříteský + Müllerová", otazka: "MIS — Marketingové a logistické informační systémy. Jaká jsou data a k čemu jsou informace + software log. systémy", pozn: "Stříteský chce explicitně <b>software logistických systémů</b>. Vyjmenuj konkrétní produkty: SAP S/4HANA, Oracle, Microsoft Dynamics, Helios (ČR), Manhattan WMS, MercuryGate TMS, Siemens Opcenter MES." },
-    { komise: "2025 — Špaček + Kučera + Zamazalová", otazka: "Marketingový informační systém", pozn: "Klasický MIS — definice, 3 složky Kotler (vnitřní IS / zpravodajský / výzkum), MDSS 4. složka, funkce (sběr, distribuce, centralizace), nástroje (CRM, ERP, BI). Aplikace na PS Lázně." },
+    { komise: "Vrbová + Špaček + Machek / Mládková + Mareš + Vávra", otazka: "MIS, co jsou to informace? Logistické systémy / Marketing služeb + logistické systémy", pozn: "Co jsou informace (zpracovaná data s významem). MIS + logistické systémy (ERP, WMS, TMS). Logistický řetězec a jeho prvky." },
+    { komise: "2025-01-28 — Špaček + Palíšková + Machek", otazka: "Informační systémy", pozn: "Hlavní IS v logistice — ERP (páteř), WMS (sklad), TMS (doprava), MIS (rozhodování), PLM, SCM. Vědět, co každý řeší." },
+    { komise: "2025-06-12 Machek+Kolouchová+Legnerová, 2026 Bočková+Nový+Kolouchová, Stříteský", otazka: "Outsourcing v logistice / služby + outsourcing v logistice", pozn: "Outsourcing (Make or Buy) — důvody (náklady, kapacity, kvalita, know-how) + 2PL/3PL/4PL/5PL. Aplikovat na firmu z PS." },
   ];
 
-  const podcastLog3 = { title: "Logistika 3 — MIS a informační systémy v logistice", description: "Informace jako konkurenční výhoda, 4 charakteristiky kvalitní informace, zdroje (primární × sekundární, interní × externí), MIS 3 složky Kotler + MDSS, logistický systém a procesní pohled, ERP/WMS/TMS/MES (4 hlavní typy IS), BI a 3 úrovně analýzy (historická/současná/prediktivní), data warehouse + ETL, AI/ML v logistice, trendy (cloud, IoT, blockchain, digital twins). Amazon, Maersk, Walmart, UPS ORION, DHL.", audioUrl: null, notebookLmUrl: null };
+  const podcastLog3 = { title: "Logistika 3 — Logistický řetězec, nákup a informační systémy", description: "Logistický řetězec spojuje trh surovin s trhem spotřebitelů (dodavatel, výrobce, velkoobchod, maloobchod, zákazník). 3 podmínky - transparentnost (průhlednost), konektivita (propojitelnost), agilnost (rychlé změny). 3 bloky - opatřovací logistika (nákup), produkční (výroba), distribuční (distribuce). Pasivní prvky (co prochází) - suroviny, materiál, díly, výrobky, obaly, odpad, informace. Aktivní prvky (čím se manipuluje) - technické prostředky pro přepravu, skladování, balení, IT. Typy řetězců - přetržité toky (forecast, sklad, zásoby), kontinuální (dle odbytu), synchronní (na zakázku, minimální zásoba, auta na míru). Technická základna - dopravní/přepravní/manipulační prostředky, sítě, uzly (huby - parky, terminály, překladiště). Nákup - purchasing (obchodní operace, nejužší), procurement/opatřování (krytí potřeb), supply/zásobování (celý tok, nejširší). 3 fáze - identifikace potřeby, objednání, po-objednání. Specifika nákupu organizací - méně ale větší zákazníci, úzké vztahy, nepružná poptávka. Outsourcing Make or Buy - důvody (náklady, kapacity, kvalita, kapitál, know-how, právní, rizikové), 2PL (řidič), 3PL (komplexní, DHL UPS), 4PL (řízení řetězce), 5PL (integrace). Informace = zpracovaná data s významem. Informační systémy - ERP (plánování zdrojů all in one, páteř), PLM (životní cyklus výrobku), TMS (optimální trasy doprava), WMS (řízení skladu), MIS (manažerský IS, analýza dat), SCM. Náklady řetězce - procesní, nákupní, finanční, výrobní, skladovací, distribuční.", audioUrl: null, notebookLmUrl: null };
 
   const examStrategyLog3 = `
-    <b style="color:#245373">1.</b> Začni <b>definicí informace</b> — údaj, který má smysl, význam, přínos pro rozhodování.<br/>
-    <b style="color:#245373">2.</b> <b>4 charakteristiky kvalitní informace</b> — Relevance / Přesnost / Včasnost / Úplnost.<br/>
-    <b style="color:#245373">3.</b> Proč jsou informace KV — rychlost rozhodování, predikce, personalizace, efektivita, transparentnost řetězce.<br/>
-    <b style="color:#245373">4.</b> ⚠️ <b>Zdroje informací</b> (Špaček chce!) — primární × sekundární, interní × externí, kvalitativní × kvantitativní.<br/>
-    <b style="color:#245373">5.</b> ⚠️ <b>MIS — Marketingový informační systém</b> — definice + 3 složky Kotler (vnitřní IS, zpravodajský, výzkum) + MDSS.<br/>
-    <b style="color:#245373">6.</b> Funkce MIS — sběr, distribuce, centralizace, hodnocení potřeb.<br/>
-    <b style="color:#245373">7.</b> Logistický systém — definice + co řeší (plánování, realizace, kontrola, optimalizace).<br/>
-    <b style="color:#245373">8.</b> ⚠️ <b>4 hlavní IS v logistice — ERP / WMS / TMS / MES</b> (klasika!).<br/>
-    <b style="color:#245373">9.</b> Konkrétní software — SAP, Oracle, Microsoft Dynamics, Helios, Manhattan, MercuryGate, Siemens (Stříteský chce!).<br/>
-    <b style="color:#245373">10.</b> Integrovaný stack — jak ERP × WMS × TMS × MES komunikují přes API.<br/>
-    <b style="color:#245373">11.</b> ⚠️ <b>BI a 3 úrovně analýzy</b> — historická / současná / prediktivní (AI/ML).<br/>
-    <b style="color:#245373">12.</b> Trendy 2025+ — cloud-first ERP, IoT, blockchain, digital twins, edge computing.<br/>
-    <b style="color:#245373">13.</b> Výzvy implementace — cena, change management (70 % selhání na lidech), integrace legacy, chybí lidé, security.<br/>
-    <b style="color:#245373">14.</b> Aplikace na PS — který IS by firma potřebovala + jak by změnil KV. Příklady: Amazon, Maersk, Alza, UPS, Walmart.
+    <b style="color:#2E7D32">1.</b> <b>Logistický řetězec</b> spojuje trh surovin s trhem spotřebitelů. 3 bloky: nákup/výroba/distribuce.<br/>
+    <b style="color:#2E7D32">2.</b> 3 podmínky — transparentnost, konektivita, agilnost.<br/>
+    <b style="color:#2E7D32">3.</b> ⚠️ <b>Pasivní prvky</b> (co teče: suroviny, materiál, výrobky, obaly, odpad, informace) × <b>aktivní prvky</b> (čím se manipuluje: technika, IT).<br/>
+    <b style="color:#2E7D32">4.</b> Typy toků — přetržité (forecast), kontinuální (dle odbytu), synchronní (na zakázku).<br/>
+    <b style="color:#2E7D32">5.</b> Technická základna — dopravní/manipulační prostředky, sítě, uzly (huby).<br/>
+    <b style="color:#2E7D32">6.</b> ⚠️ <b>Nákup</b> — purchasing (obchodní operace) × procurement (opatřování) × supply (zásobování, celý tok).<br/>
+    <b style="color:#2E7D32">7.</b> 3 fáze nákupu — identifikace potřeby / objednání / po-objednání.<br/>
+    <b style="color:#2E7D32">8.</b> <b>Outsourcing (Make or Buy)</b> — důvody + 2PL (řidič) / 3PL (komplex, DHL) / 4PL (řízení) / 5PL (integrace).<br/>
+    <b style="color:#2E7D32">9.</b> ⚠️ <b>IS v logistice</b> — ERP (páteř), WMS (sklad), TMS (doprava), MIS (rozhodování), PLM, SCM.<br/>
+    <b style="color:#2E7D32">10.</b> Informace = zpracovaná data s významem pro rozhodování.<br/>
+    <b style="color:#2E7D32">11.</b> ⚠️ Náklady řetězce — procesní/nákupní/finanční/výrobní/skladovací/distribuční. Nesplést WMS (sklad) s TMS (doprava).
   `;
 
   const caseStudyLog3 = {
-    title: "Petr — IT ředitel CzechParts, českého výrobce automotive komponentů, 850 zaměstnanců, 1.2 mld. Kč",
-    subtitle: "Identifikuj chaos v informačních systémech a navrhni integraci",
-    scenario: "Petr (45 let) je IT ředitel CzechParts 3 roky. Český výrobce automotive komponentů — brzdové systémy, díly pro karoserii. 850 zaměstnanců — 600 ve výrobě v Mladé Boleslavi, 100 v R&D, 80 v salesu, 70 v admin/IT. Tržby 1.2 mld. Kč ročně, růst 6 %. Klienti: Škoda Auto, BMW (Lipsko), VW (Wolfsburg), Audi (Ingolstadt). 70 % B2B Tier 1 do automotive.\n\nIT chaos. CzechParts za 20 let nasbíral 15+ různých systémů. Účetnictví v Pohodě (od 2005), CRM v Excel sheets + Salesforce (sales si pořídili sami v 2020), výroba na papíře + Excel (mistr má sešit), sklad ve vlastním systému z 2010 (rozbitý, vede ho jen 1 starší kolega Mirek), doprava řeší přes WhatsApp s 3 dopravci. ERP žádný — jen rozjedinečné moduly.\n\nDopady jsou katastrofální. Když se BMW zeptá, jaká je dodací lhůta na 1000 ks komponentu X, Petrův tým musí: zavolat výrobě (Mirek se ptá mistra), zavolat skladu (Mirek hledá v systému), zavolat dopravě (sales píše dopravcům na WhatsApp). Odpověď za 2-3 dny. Konkurence (Continental, Bosch, Magna) odpoví během 5 minut.\n\nDalší problémy: \n• Sales prodá BMW komponenty, které ve skladě nejsou (žádná real-time integrace) → BMW musí čekat 4 týdny → penalizace 200k EUR za quarter\n• Výroba neví, co se prodává — pošle do skladu 5000 ks neprodejných položek a 0 ks bestsellerů\n• Po Mirkově plánovaném odchodu (důchod 2026) NIKDO neumí starý sklad systém — backup chybí\n• Audit dat: 30 % zákazníků v Salesforce není v Pohodě, 40 % faktur nelze přiřadit ke konkrétnímu prodejnímu kontaktu\n• ESG reporting (CSRD od 2026): chybí data o emisích z dopravy, energie ve výrobě, materiálových tokách\n\nPetr navrhuje 5letý IT transformační projekt. Cena: 80 mil. Kč (SAP S/4HANA Cloud + Manhattan WMS + MercuryGate TMS + Siemens Opcenter MES + AWS Redshift BI). CEO ale váhá — \'je to drahé, dělali jsme to dosud bez toho\'. Komise chce vidět strategický argument.",
+    title: "Martin a e-shop, který přerostl vlastní sklad",
+    subtitle: "Jak nastavit řetězec, nákup a systémy při růstu",
+    scenario: "Martin rozjel před pár lety e-shop s potřebami pro domácnost. Začínal v garáži, balil objednávky sám. Teď mu byznys přerostl přes hlavu — sklad praská, objednávky se zpožďují, přehled o tom, co kde leží, ztrácí. Cítí, že to, co fungovalo na začátku, už dávno nestačí.\n\nNejvíc ho trápí sklad. Zboží je naskládané, jak to zrovna vyšlo, a hledání položky k objednávce trvá věčnost. Občas mají na skladě zboží, o kterém ani nevědí, a jindy objednají něco, co tam vlastně je. Martin tuší, že potřebuje nějaký systém, který by skladu udělal pořádek a navedl lidi, kam jít.\n\nDruhý problém je doprava. Martin teď posílá balíky, jak ho zrovna napadne, bez ladu a skladu. Řidiči jezdí křížem krážem, palivo utíká, závozy jsou neefektivní. Něco mu říká, že by to šlo plánovat chytřeji — optimalizovat trasy, ať se najezdí míň.\n\nA pak je tu velká otázka. Martin uvažuje, jestli má vůbec dál provozovat vlastní sklad a dopravu, nebo to celé předat někomu, kdo se na to specializuje. Nemá kapitál na velké haly ani na flotilu aut a logistika ho odvádí od toho, co umí nejlíp — prodávat a vybírat zboží. Slyšel něco o firmách, co za tebe zařídí skladování i rozvoz.\n\nMartin teď přemýšlí, jak to celé uchopit. Jak udělat pořádek ve skladu, jak zefektivnit rozvoz, a hlavně — jestli si logistiku dělat sám, nebo ji svěřit specialistovi. Tuší, že správně nastavené systémy a chytré rozhodnutí o tom, co dělat sám a co ne, mu můžou ušetřit spoustu peněz i nervů.",
     signals: [
-      { text: "15+ různých systémů. Účetnictví v Pohodě, CRM v Excel, výroba na papíře, sklad ve vlastním systému z 2010", color: VSE.danger, reason: "Klasický legacy chaos. Žádné single source of truth. 15 systémů × 15 různých datových formátů = nelze dělat reporting bez týdne práce." },
-      { text: "ERP žádný — jen rozjedinečné moduly", color: VSE.danger, reason: "ERP je centrální mozek firmy. Bez něho nelze řídit kapacity, zásoby, finance, HR. CzechParts s 1.2 mld. Kč obratem MUSÍ mít ERP." },
-      { text: "doprava řeší přes WhatsApp s 3 dopravci", color: VSE.danger, reason: "Manuální TMS přes WhatsApp v 2026 = profesionální selhání. Žádný tracking, žádná optimalizace tras, žádný audit. Klasický důvod pro TMS." },
-      { text: "Odpověď za 2-3 dny. Konkurence odpoví během 5 minut", color: VSE.danger, reason: "Klíčový externí signal — ztráta KV proti Continental/Bosch/Magna. Informace = rychlost rozhodování. CzechParts ztrácí klienty pomalou reakcí." },
-      { text: "Sales prodá BMW komponenty, které ve skladě nejsou (žádná real-time integrace) → penalizace 200k EUR za quarter", color: VSE.danger, reason: "Chybí integrace CRM × WMS × ERP. Reálné finanční důsledky — 800k EUR/rok pokut. ERP integrace by to vyřešila během měsíce." },
-      { text: "Výroba neví, co se prodává — pošle do skladu 5000 ks neprodejných položek a 0 ks bestsellerů", color: VSE.danger, reason: "Klasický bull-whip effect bez integrace MES × ERP × WMS. AI predikce poptávky by problém řešila." },
-      { text: "Po Mirkově plánovaném odchodu NIKDO neumí starý sklad systém — backup chybí", color: VSE.danger, reason: "Key person risk + tribal knowledge. Mirek odejde → sklad nefunguje. CzechParts musí naléhavě migrovat na standardní WMS (Manhattan, Blue Yonder)." },
-      { text: "30 % zákazníků v Salesforce není v Pohodě, 40 % faktur nelze přiřadit ke kontaktu", color: VSE.warning, reason: "Data quality crisis. Před nasazením ERP MUSÍ proběhnout data cleansing — 50 % nákladů ERP projektu. Bez toho ERP zopakuje chaos." },
-      { text: "ESG reporting (CSRD od 2026): chybí data o emisích z dopravy, energie ve výrobě, materiálových tokách", color: VSE.warning, reason: "Regulatory risk. CSRD je povinný od 2026 pro firmy 250+ zaměstnanců. CzechParts musí mít data sběr přes ERP/MES/TMS. Bez nich = pokuty, ztráta klientů (BMW vyžaduje ESG od dodavatelů)." },
-      { text: "CEO ale váhá — je to drahé, dělali jsme to dosud bez toho", color: VSE.warning, reason: "Klasický change resistance management. 70 % ERP projektů selže na change managementu, ne technologii. Petr musí ROI: 800k EUR pokut/rok + ztráta klientů + ESG compliance." },
+      { text: "Zboží je naskládané, jak to zrovna vyšlo... hledání položky trvá věčnost... mají zboží, o kterém nevědí", color: VSE.danger, reason: "Chybí WMS — Warehouse Management System (Log3). Řízení skladu, rozdělení podle zboží/frekvence, efektivní cesty. Bez něj chaos a ztracené zboží." },
+      { text: "Potřebuje systém, který by skladu udělal pořádek a navedl lidi, kam jít", color: VSE.fph, reason: "Přesný popis WMS (Log3). Řídí, kam zboží uložit a jak ho nejrychleji vychystat. Naviguje pracovníky po skladu." },
+      { text: "Řidiči jezdí křížem krážem, palivo utíká, závozy jsou neefektivní... optimalizovat trasy", color: VSE.warning, reason: "Volá po TMS — Transport Management System (Log3). Navrhuje optimální trasy pro závozy. Sníží náklady na dopravu i čas." },
+      { text: "Jestli má vůbec dál provozovat vlastní sklad a dopravu, nebo to celé předat někomu, kdo se specializuje", color: VSE.success, reason: "Rozhodnutí o outsourcingu — Make or Buy (Log3). Předat logistiku 3PL poskytovateli (komplexní služby: sklad, doprava, manipulace)." },
+      { text: "Nemá kapitál na velké haly ani na flotilu aut a logistika ho odvádí od toho, co umí nejlíp", color: VSE.fph, reason: "Důvody pro outsourcing (Log3): kapitálové (nemá na investici), know-how/fokus (chce se soustředit na prodej). Klasický Make or Buy." },
+      { text: "Firmách, co za tebe zařídí skladování i rozvoz", color: VSE.success, reason: "Popis 3PL poskytovatele (Log3). Komplexní logistické služby — doprava, skladování, manipulace, administrativa (DHL, Geis, Zásilkovna)." },
     ],
     quiz1: {
-      question: "Jaký je hlavní problém CzechParts v IT?",
+      question: "Co Martin potřebuje, aby zvládl rostoucí logistiku?",
       options: [
-        "Drahé licence",
-        "Pomalý internet",
-        "Žádná integrace mezi systémy — 15+ izolovaných nástrojů, žádné single source of truth, žádné ERP",
-        "Příliš složitý ERP",
+        "Najmout víc baličů",
+        "Nasadit správné informační systémy (WMS na sklad, TMS na dopravu) a rozhodnout outsourcing (Make or Buy) — co dělat sám a co svěřit 3PL.",
+        "Postavit větší garáž",
+        "Přestat růst",
       ],
-      correct: 2,
+      correct: 1,
     },
     quiz2: {
-      question: "Co by Petr měl udělat pro vyřešení IT chaosu?",
+      question: "Jak by měl Martin postupovat?",
       options: [
-        { text: "Nasadit integrovaný ERP (SAP S/4HANA Cloud) — centrální mozek pro účetnictví, plánování, zásoby, finance, HR", correct: true, reason: "✓ Bez ERP nelze řídit firmu s 1.2 mld. Kč. Cloud verze = rychlejší implementace (12-18 měsíců) než on-premise (3-5 let)." },
-        { text: "Doplnit WMS (Manhattan nebo Blue Yonder) pro sklad — náhrada Mirkova systému před jeho odchodem", correct: true, reason: "✓ Key person risk řešení. Standardní WMS + dokumentace + školení 5 lidí. Žádný single point of failure." },
-        { text: "Doplnit TMS (MercuryGate, BluJay) pro dopravu — náhrada WhatsApp komunikace s dopravci", correct: true, reason: "✓ Optimalizace tras, real-time tracking pro BMW/Škoda požadavky, audit trail pro CSRD reporting." },
-        { text: "Doplnit MES (Siemens Opcenter) pro výrobu — propojit s ERP, sledovat produkci v reálném čase", correct: true, reason: "✓ Eliminace bull-whip efektu. Výroba uvidí aktuální poptávku z ERP, automaticky upraví plán. CSRD ESG data o materiálových tokách." },
-        { text: "Data cleansing PŘED nasazením ERP — sjednotit Salesforce × Pohoda, vyčistit 30 % nesouladu, dohromady 6 měsíců práce", correct: true, reason: "✓ Garbage in, garbage out. Bez čistých dat ERP zopakuje chaos. 50 % nákladů ERP projektu jde na data migration." },
-        { text: "Postavit data warehouse (AWS Redshift) + BI dashboardy (Power BI) — pro management visibility + ESG reporting CSRD", correct: true, reason: "✓ Real-time visibility pro CEO + CSRD compliance. BI nad ERP/WMS/TMS/MES daty = strategická KV." },
-        { text: "Najmout SAP konzultanty (Accenture, Deloitte) na implementaci + change management (komunikace, školení)", correct: true, reason: "✓ Vlastními silami nezvládnou. 70 % ERP projektů selže na change managementu. Profi konzultanti + interní champions." },
-        { text: "Zachovat status quo — Mirek je nepostradatelný, Pohoda funguje, není potřeba měnit", correct: false, reason: "✗ Klasický change resistance. Status quo už stojí 800k EUR/rok pokut + ztráta klientů + Mirek odchází. Petr musí přesvědčit CEO čísly." },
-        { text: "Implementovat všech 15 systémů znovu, ale propojit je přes API", correct: false, reason: "✗ Spaghetti architecture. 15 × 15 = 225 integrací. Levnější je nasadit jeden ERP než propojovat 15 starých systémů." },
+        { text: "Nasadit WMS (Warehouse Management System) — udělá pořádek ve skladu, rozdělí ho podle zboží a frekvence, navede pracovníky nejkratší cestou k položce.", correct: true, reason: "✓ Log3 — WMS řídí sklad. Vyřeší chaos, ztracené zboží a pomalé vychystávání." },
+        { text: "Nasadit TMS (Transport Management System) — naplánuje optimální trasy závozů, sníží počet najetých km, palivo a čas.", correct: true, reason: "✓ Log3 — TMS optimalizuje dopravu. Vyřeší neefektivní rozvoz křížem krážem." },
+        { text: "Zvážit outsourcing (Make or Buy) — předat skladování a dopravu 3PL poskytovateli, protože nemá kapitál na haly ani flotilu a chce se soustředit na prodej.", correct: true, reason: "✓ Log3 — Make or Buy. Důvody kapitálové + know-how/fokus. 3PL zajistí komplexní logistiku." },
+        { text: "Pokud poroste dál, integrovat vše přes ERP — propojit zásoby, nákup, prodej a finance do jedné páteře.", correct: true, reason: "✓ Log3 — ERP jako páteř firemního IS. Propojí všechna oddělení nad stejnými daty." },
+        { text: "Najmout víc lidí na balení a nechat chaos být", correct: false, reason: "✗ Víc lidí nevyřeší chaos ve skladu ani neefektivní dopravu. Problém je v chybějících systémech, ne v počtu rukou." },
+        { text: "Zaměnit WMS a TMS — dát na sklad systém na dopravu", correct: false, reason: "✗ WMS je na sklad (warehouse), TMS na dopravu (transport). Záměna je klasická chyba — každý řeší jinou část řetězce." },
+        { text: "Postavit obří sklad a koupit vlastní kamiony hned", correct: false, reason: "✗ Martin nemá kapitál a logistika ho odvádí od prodeje. Velká investice do vlastní logistiky je opak toho, co potřebuje — outsourcing je vhodnější." },
       ],
     },
-    summary: "<b>CzechParts má klasický legacy IT chaos — 15+ izolovaných systémů bez integrace, žádné ERP, key person risk u skladu.</b> Klíč je <b>5letá IT transformace s integrovaným stackem</b>.<br/><br/><b>3 vrstvy řešení:</b><br/>• <b>Foundation (rok 1-2):</b> Data cleansing + SAP S/4HANA Cloud ERP (centrální mozek) + Salesforce CRM integrace<br/>• <b>Operations (rok 2-3):</b> Manhattan WMS + MercuryGate TMS + Siemens Opcenter MES (3 systémy nad ERP, propojené přes API)<br/>• <b>Analytics (rok 3-5):</b> AWS Redshift data warehouse + Power BI dashboardy + AI/ML predikce poptávky + CSRD ESG reporting<br/><br/><b>Pro komisi:</b> Klasická česká středně velká výrobní firma s legacy chaos. <b>SAP S/4HANA Cloud</b> je standard pro automotive Tier 1 (Continental, Bosch). <b>Change management</b> je 70 % úspěchu — Petr musí přesvědčit CEO ROI (800k EUR pokut/rok + Mirek odejde + CSRD compliance). <b>Anti-vzor: Maersk NotPetya 2017</b> — bez moderní IT architektury jsou firmy zranitelné. <b>Příklady úspěchu: Maersk SAP S/4HANA migrace, Amazon vlastní stack, Alza in-house WMS</b>.",
+    summary: "<b>Martin musí nasadit správné informační systémy a chytře rozhodnout, co dělat sám a co svěřit specialistovi.</b><br/><br/><b>Postup:</b><br/><br/>• <b>WMS (Warehouse Management System):</b> udělá pořádek ve skladu — rozdělí ho podle zboží a frekvence používání, naviguje pracovníky nejkratší cestou k položce. Vyřeší chaos, ztracené zboží a pomalé vychystávání.<br/><br/>• <b>TMS (Transport Management System):</b> naplánuje optimální trasy závozů. Sníží počet najetých kilometrů, palivo a čas. Vyřeší neefektivní rozvoz křížem krážem.<br/><br/>• <b>Outsourcing (Make or Buy):</b> zvážit předání skladování a dopravy 3PL poskytovateli (DHL, Geis, Zásilkovna). Důvody: kapitálové (nemá na haly a flotilu), know-how a fokus (chce se soustředit na prodej a výběr zboží). 3PL zajistí komplexní logistiku.<br/><br/>• <b>ERP (při dalším růstu):</b> integrovat zásoby, nákup, prodej a finance do jedné páteře, ať všechna oddělení pracují se stejnými daty.<br/><br/><b>Pro komisi:</b> Klíč: <b>WMS</b> (sklad), <b>TMS</b> (doprava), <b>ERP</b> (páteř), <b>MIS</b> (rozhodování) — vědět, co každý řeší. <b>Outsourcing Make or Buy</b> + důvody + 3PL. Anti-vzor: zaměnit WMS (sklad) s TMS (doprava) nebo investovat do vlastní logistiky bez kapitálu, když dává smysl outsourcing.",
   };
 
   return (
     <OkruhPanel
-      subject="Logistika" subjectId="logistika" number={3} title="MIS a IS v logistice, logistický systém"
-      subtitle="Informace + zdroje + MIS 3 složky + ERP/WMS/TMS/MES + BI + trendy"
+      subject="Logistika" subjectId="logistika" number={3} title="Logistický řetězec, nákup a informační systémy"
+      subtitle="Řetězec (pasivní × aktivní prvky) + typy toků + nákup (purchasing/procurement/supply) + outsourcing 2PL–5PL + IS (ERP/WMS/TMS/MIS) + náklady"
       color={BOMBIK.success}
-      questionText="MIS a pohyb informací v logistice (zdroje, složky), logistický systém."
-      questionDesc="Informace jako KV. 4 charakteristiky kvalitní informace (Relevance/Přesnost/Včasnost/Úplnost). Zdroje — primární × sekundární, interní × externí, kvalitativní × kvantitativní, vyčerpávající × výběrové. MIS — definice + 3 složky Kotler (vnitřní IS / zpravodajský / výzkum) + 4. MDSS. Funkce MIS. Logistický systém — definice + co řeší. 4 hlavní IS v logistice (ERP / WMS / TMS / MES) + konkrétní software (SAP, Oracle, Manhattan, MercuryGate, Siemens). Integrovaný stack přes API. BI a 3 úrovně analýzy (historická/současná/prediktivní). Data warehouse, ETL, AI/ML. Trendy 2025+ (cloud, IoT, blockchain, digital twins, edge). Výzvy implementace. Amazon, Maersk, Walmart, UPS ORION, Alza."
-      sloz={2} roz={3} freq={3}
+      questionText="Logistický řetězec, nákup a informační systémy v logistice — řetězec a jeho prvky, nákup, outsourcing, logistické systémy (ERP, WMS, TMS, MIS)."
+      sloz={3} roz={4} freq={4}
       examStrategy={examStrategyLog3}
       studySections={studySectionsLog3}
       flashcards={flashcardsLog3}
@@ -15115,6 +15069,7 @@ function OkruhLog3Panel() {
     />
   );
 }
+
 
 /* ════════════════════════════════════════════════════════
    MARKETING 1 — Marketingový výzkum, metody a limity, mediální výzkumy
@@ -15503,7 +15458,6 @@ function OkruhMkt1Panel() {
       subtitle="Definice + proces + kvant × kval + výběr respondentů + pretest/post-test + mediální metriky + limity"
       color={VSE.fis}
       questionText="Marketingový výzkum, metody a jejich limity, mediální výzkumy."
-      questionDesc="Definice MV + 3 cíle + 3 fáze procesu + MV jako součást MIS. Typy dat (primární × sekundární, interní × externí). Kvantitativní × Kvalitativní metody. Výběr respondentů (4 typy + co dělá náhodný náhodným). Pretest / korekční / post-test + TOTE model. Mediální výzkum — 4 dimenze + online metriky (GRP, CTR, brand lift). Nástroje (AdGraal, Adwise, GA4). 5 limitů MV + 6 typů bias. P&G, Coca-Cola, Apple, Alza."
       sloz={2} roz={3} freq={3}
       examStrategy={examStrategyMkt1}
       studySections={studySectionsMkt1}
@@ -15841,7 +15795,6 @@ function OkruhMkt2Panel() {
       subtitle="3 typy analýzy + ANOVA, regrese, faktorová, shluková, conjoint + nástroje + limity"
       color={VSE.fis}
       questionText="Analytické metody marketingového výzkumu. Analýza primárních a sekundárních dat."
-      questionDesc="3 typy analýzy podle účelu (sumarizace × diference × souvislosti). Popisná statistika (průměr/medián/modus, časové řady). Parametrické × neparametrické testy (t-test, ANOVA, chí-kvadrát, Mann-Whitney). Křížové tabulky. Korelační analýza (Pearson, Spearman, korelace ≠ kauzalita). Regrese (jednoduchá, vícenásobná, logistická, R²). Multivariantní analýzy — faktorová (redukce), shluková (segmentace), diskriminační (rozlišení), conjoint (preference kombinací). Nástroje (SPSS, R, Python, GA4, Tableau, Sawtooth). Limity primárních × sekundárních dat. Netflix, P&G, Pepsi, Škoda, Apple."
       sloz={3} roz={3} freq={2}
       examStrategy={examStrategyMkt2}
       studySections={studySectionsMkt2}
@@ -15920,7 +15873,7 @@ function OkruhMkt3Panel() {
         </ResponsiveGrid>
       </div>) },
 
-    { id: "kriteria", title: "Segmentační kritéria — 4 klasická + tradiční × netradiční", subtitle: "Geo, demo, psycho, behavior + Anetina Zuzčina tabulka", color: VSE.fis, emoji: "scale",
+    { id: "kriteria", title: "Segmentační kritéria — 4 klasická + tradiční × netradiční", subtitle: "Geo, demo, psycho, behavior + tradiční × netradiční", color: VSE.fis, emoji: "scale",
       content: (<div>
         <Def color={VSE.fis}>
           <b>4 klasická kritéria</b> podle Kotlera. Komise <b>Mikovcová</b> chce vyjmenovat všechna 4 + příklady. Bočková chce navíc rozlišit <b>tradiční × netradiční</b>.
@@ -16272,7 +16225,6 @@ function OkruhMkt3Panel() {
       subtitle="STP model + 4 kritéria Kotler + 4 fáze postupu + 4 strategie + logistika v segmentaci"
       color={VSE.fis}
       questionText="Segmentace, typy, fáze, postup, kritéria (+ logistika v segmentaci)."
-      questionDesc="Definice segmentace (homogenní uvnitř, heterogenní zvenku) + 4 podmínky kvality. STP model. 4 klasická kritéria Kotler (geografická/demografická/psychografická/behaviorální) + příklady. Popisná × vysvětlující × vysvětlované (Zuzčina tabulka). Forward × Backward segmentation. Tradiční × netradiční. 3 úrovně (mikro/strategická/makro) + RFM. 3 typy marketingu (nediferencovaný/diferencovaný/koncentrovaný-niche). 4 fáze postupu segmentace. Induktivní × deduktivní + ad hoc × post hoc. 4 strategie pokrytí trhu. Logistika v segmentaci — Speed Lovers / Value Seekers / Reliability Demanders / Premium Experience. Tesla, McDonald's, Pampers, Lululemon, Amazon Prime."
       sloz={2} roz={3} freq={5}
       examStrategy={examStrategyMkt3}
       studySections={studySectionsMkt3}
@@ -16742,7 +16694,6 @@ function OkruhMkt4Panel() {
       subtitle="DOCS model + 3 úrovně + USP/ESP + POP/POD + referenční rámec + 9 strategií"
       color={VSE.fis}
       questionText="Positioning — úrovně, ref. rámec, POP a POD."
-      questionDesc="Definice positioningu. Návaznost na STP (M3). DOCS model (Define/Overdeliver/Claim/Success). 3 úrovně positioningu (specifický/nadstavbový/total value). USP × ESP. Referenční rámec — úzké × široké × netradiční vymezení. POP (body shody) — 2 typy + interval tolerance. POD (body rozdílnosti) — 3 podmínky kvalitního (uvěřitelný/prosaditelný/sdělitelný). Vztah POP × POD. Positioning Statement vzor. Brand Mantra (3-5 slov, interní). Percepční mapa + white space. Motivační positioning (PODs+POPs+rezonance=kompromis). 9 strategií positioningu (atributy, užitek, aktivity, proti konkurenci, původ, třída...). Diferenciace 3 cestami. Volvo, Duracell, Red Bull, Avis, Tesla."
       sloz={2} roz={3} freq={4}
       examStrategy={examStrategyMkt4}
       studySections={studySectionsMkt4}
@@ -17286,7 +17237,6 @@ function OkruhMkt5Panel() {
       subtitle="Porter 5 sil + Leader/Challenger/Follower/Nicher + generic strategies + Value Chain + logistika jako KV"
       color={VSE.fis}
       questionText="Konkurenční strategie v marketingu, logistické strategie a konkurenční výhody v logistice."
-      questionDesc="Konkurence + KV definice. Makro (PESTLE) × Mikro (Porter 5 sil). Market/Mind/Heart share. Typy konkurentů — Leader/Challenger/Follower/Nicher + strategie každého. Porterovy generic (Cost Leadership/Differentiation/Focus). VRIO model. Hodnotový řetězec (primární + podpůrné činnosti). Logistika jako KV (7 typů). Log. strategie (JIT, QR, cross-docking, vertical integration). Integrace řetězce (vertikální backward × forward, horizontální). Růstové strategie. Tesla, Ryanair, Apple, Toyota, Zara, Walmart."
       sloz={3} roz={4} freq={5}
       examStrategy={examStrategyMkt5}
       studySections={studySectionsMkt5}
@@ -17743,7 +17693,6 @@ function OkruhMkt6Panel() {
       subtitle="Kotler 5 vrstev + 6 charakteristik + klasifikace + 6 cest diferenciace + diverzifikace"
       color={VSE.fis}
       questionText="Produkt/výrobek — charakteristiky, vrstvy, klasifikace."
-      questionDesc="Definice produktu + kompletní výrobek + symbolický náboj. Komoditní × diferencované. Kotlerových 5 vrstev (jádro → základní → očekávaný → vylepšený → potenciální). 6 charakteristik (technické/funkční/smyslové/identifikační/ekonomické/obal) + 5 funkcí obalu. Klasifikace (trvanlivost — netrv/trv/služby; 4 typy spotřebitelského — convenience/shopping/specialty/unsought; B2B kategorie). Vztah klasifikace → mkt strategie. 6 cest diferenciace + diferenciace výrobku × služeb. 4 faktory volby (Kotler) + 5 úrovní zainteresovanosti + NPS. 3 typy změn vnímání v čase. Diverzifikace (horizontální/vertikální/konglomerátní). Apple iPhone, Starbucks, Dyson, Tesla, Amazon."
       sloz={2} roz={3} freq={5}
       examStrategy={examStrategyMkt6}
       studySections={studySectionsMkt6}
@@ -18158,7 +18107,6 @@ function OkruhMkt7Panel() {
       subtitle="Kotlerových 4 dimenzí + rozhodování o řadě + 5 strategií ceny mixu + bundle"
       color={VSE.fis}
       questionText="Výrobkové řady — délka/šířka/hloubka/konzistence, cenotvorba mixu."
-      questionDesc="3 úrovně organizace (produkt × řada × mix). Kotlerových 4 dimenzí (šířka/délka/hloubka/konzistence) s konkrétními příklady. Rozhodování o řadě — extenze dolů/nahoru/do stran, line filling, 4 strategie modernizace, line pruning. 5 strategií cenotvorby Kotler (Product Line / Optional / Captive / Two-part / By-product) + Bundle Pricing (Pure × Mixed). Kanibalizace + psychologická cenotvorba + reference price. Specifika B2B × B2C × služby. Metriky mixu (Pareto/Mozaika, AOV, cross-sell). Apple, P&G, Coca-Cola, McDonald's, Nespresso, Philips Hue."
       sloz={2} roz={3} freq={4}
       examStrategy={examStrategyMkt7}
       studySections={studySectionsMkt7}
@@ -18623,7 +18571,6 @@ function OkruhMkt8Panel() {
       subtitle="5 fází + strategie v každé + 3 modifikace ve zralosti + Rogers adopční proces + Chasm"
       color={VSE.fis}
       questionText="Životní cyklus výrobku, strategie v jednotlivých fázích."
-      questionDesc="Definice PLC + 3 cíle managementu. 5 fází (Vývoj/Zavádění/Růst/Zralost/Úpadek) s detailem pro každou fázi (prodej/zisk/konkurence/strategie/cena). Skimming × Penetration ve zavádění. 3 modifikace ve zralosti (trhu/produktu/mkt mixu). 3 strategie v úpadku (Maintain/Harvest/Divest). 3 modely PLC křivky (S-křivka/opakovaný/vln). Specifické cykly (styl/móda/módní výstřelek + dlouhotrvající/neúplný/nepřerušený/sezónní). Adopční proces Rogers (5 typů + Chasm Geoffrey Moore). 3 faktory ovlivňující průběh + 4 strategie revitalizace. Apple iPhone, Tesla, Nintendo, Coca-Cola, Fidget Spinners, Google Glass."
       sloz={2} roz={3} freq={4}
       examStrategy={examStrategyMkt8}
       studySections={studySectionsMkt8}
@@ -19094,7 +19041,6 @@ function OkruhMkt9Panel() {
       subtitle="6 metod + Kano model + Stage-Gate 8 fází + Go-to-Market 6 elementů"
       color={VSE.fis}
       questionText="Výrobkový výzkum, jeho metody a nástroje, způsob uvedení výrobku na trh."
-      questionDesc="Definice výrobkového výzkumu. 4 typy nových výrobků. 6 hlavních metod (Concept testing/IHUT/Sensory/Focus groups/Conjoint/Kano model). 5 Kano kategorií. 5 doplňkových technik (MaxDiff/eye-tracking/A-B/beta/co-creation). Stage-Gate proces Cooper (8 fází + 7 gates). Go-to-Market strategie (6 elementů + 3 typy: Big Bang/Phased/Soft). 4 fáze launch kampaně. 5 důvodů selhání + risk mitigation (MVP, Build-Measure-Learn). Apple Vision Pro, P&G Tide Pods, Tesla, Google Glass, Spotify, ChatGPT."
       sloz={2} roz={3} freq={3}
       examStrategy={examStrategyMkt9}
       studySections={studySectionsMkt9}
@@ -19548,7 +19494,6 @@ function OkruhMkt10Panel() {
       subtitle="6 prvků + Aaker × Kotler × Keller + 4 brand architecture + NPS/BrandZ + service branding"
       color={VSE.fis}
       questionText="Značka, prvky, modely hodnoty značky, strategie značky, měření, branding služeb."
-      questionDesc="Definice značky (Kotler). 5 fází tvorby značky. 4+4 funkce (pro spotřebitele/firmu). 6 prvků značky (jméno/logo/slogan/barvy/font/zvuk) + kritéria Kotler. Modely hodnoty značky — Aakerův (5 dimenzí), Kotlerova Brand Resonance Pyramid (4 vrstvy), Kellerův CBBE. Brand architecture (House of Brands/Branded House/Endorsed/Multi-brand). Typy značek podle geografie a kvality. Brand v retailu + Private Label. Měření: NPS, BrandZ (5 úrovní pyramidy), Interbrand, Y&R BAV. Branding služeb — 5 specifik + 5 pravidel řízení + Ritz-Carlton. Apple, Nike, Volvo, Virgin, IKEA, P&G."
       sloz={3} roz={4} freq={5}
       examStrategy={examStrategyMkt10}
       studySections={studySectionsMkt10}
@@ -19979,7 +19924,6 @@ function OkruhMkt11Panel() {
       subtitle="Kotlerův postup 6 kroků + 4 metody + 3 stupně diskriminace + 6 cenových efektů"
       color={VSE.fis}
       questionText="Cenotvorba — faktory, postup tvorby ceny, strategie, cenová diskriminace, efekty."
-      questionDesc="Cena jako marketingový nástroj (4 role). 3 skupiny faktorů (interní/externí/vnímání). Cenová elasticita. Kotlerův postup 6 kroků (cíl/poptávka/náklady/konkurence/metoda/finální). 4 metody stanovení (cost-plus/demand-based/competition-based/value-based). Cenové strategie podle PLC (Skimming/Penetration/Going rate/Premium). Psychologická cenotvorba (charm/prestige/anchor/decoy). Dynamic pricing. 3 stupně cenové diskriminace (Pigou) + 6 praktických technik. 6 cenových efektů (Veblen/Snob/Bandwagon/Giffen/Placebo/Anchor). Tesla, Ryanair, Hermès, Salesforce, Spotify, The Economist."
       sloz={3} roz={4} freq={5}
       examStrategy={examStrategyMkt11}
       studySections={studySectionsMkt11}
@@ -20464,7 +20408,6 @@ function OkruhMkt12Panel() {
       subtitle="5 metod + SERVQUAL pro služby + kombinace metod + adopční difúzní proces"
       color={VSE.fis}
       questionText="Cenový výzkum — metody, testy, aplikace."
-      questionDesc="Definice cenového výzkumu + 4 hlavní otázky. 5 hlavních metod: Gabor-Granger (křivka poptávky), Van Westendorp PSM (4 otázky → OPP, IPP, PMC, PME), BPTO (brand-price trade-off, integruje konkurenci), Conjoint Analysis (kombinace atributů), MaxDiff (best-worst scaling). TURF test (komplementárnost). SERVQUAL (5 GAP mezer + 5 dimenzí RATER). Kombinace metod podle situace. Adopční difúzní proces. Spotify, Disney+, Apple iPhone, Toyota Camry, Coca-Cola, Marriott."
       sloz={3} roz={4} freq={4}
       examStrategy={examStrategyMkt12}
       studySections={studySectionsMkt12}
@@ -21021,7 +20964,6 @@ function OkruhMkt13Panel() {
       subtitle="IMK + makro/mikro modely + 6 nástrojů mixu + AIDA + 5M + PR + moderní trendy"
       color={VSE.fis}
       questionText="Integrovaná marketingová komunikace, komunikační mix, makro a mikro modely, AIDA, 5M, PR."
-      questionDesc="Definice IMK + 7 úrovní + 3 zdroje + 4 znaky efektivní komunikace. Makromodel (Shannon-Weaver 1949): odesílatel/kódování/sdělení/dekódování/příjemce + šum + feedback. Mikromodel AIDA (Lewis 1898): Attention/Interest/Desire/Action + rozšíření. 6 nástrojů komunikačního mixu (Kotler). Faktory výběru (B2B vs B2C, fáze PLC, připravenost). Push × Pull. 5M framework (Mission/Money/Message/Media/Measurement). PR jako 1 ze 6 nástrojů (detail v M14). Výzkum komunikace. Moderní trendy: online, social, influencer, WOM, guerilla, viral, native, podcast, ABM. Dollar Shave Club, Old Spice, Salesforce, KFC FCK, Cisco, Glossier."
       sloz={3} roz={4} freq={5}
       examStrategy={examStrategyMkt13}
       studySections={studySectionsMkt13}
@@ -21463,7 +21405,6 @@ function OkruhMkt14Panel() {
       subtitle="4 nástroje (reklama/PR/sponzoring/events) + mediální plán + online metriky + měření"
       color={VSE.fis}
       questionText="Hromadná marketingová komunikace — nástroje, plánování, měření."
-      questionDesc="Definice hromadné komunikace + rozdíl vs osobní. 4 hlavní nástroje: Reklama / PR / Sponzoring / Event marketing. Klasifikace reklamy (4 cíle, 4 zaměření, 6 médií). Advertising appeals (racionální × emocionální). Mediální plánování: Reach × Frequency × GRP × CPP × CPM × CTR × CPC × CPA × ROAS. Sponzoring (6 typů) + Event marketing. Mediální výzkum: 3 fáze + tradiční + online metriky + pokročilé (MMM, MTA, Brand Lift). Trendy: programmatic, video first, social commerce, native, CTV, AI, cookie-less. Red Bull, Coca-Cola Christmas, Nike, Amazon, P&G."
       sloz={3} roz={4} freq={4}
       examStrategy={examStrategyMkt14}
       studySections={studySectionsMkt14}
@@ -21959,7 +21900,6 @@ function OkruhMkt15Panel() {
       subtitle="Odlišení osobní/direct + organizace + 7-step sales + SPIN + Sales Force Management + CRM + ABM"
       color={VSE.fis}
       questionText="Osobní marketingová komunikace — direct marketing, osobní prodej, řízení prodejních sil."
-      questionDesc="Odlišení osobního a direct mktu (Stříteský — direct přímo ponouká k akci). 9 nástrojů direct mktu (email/SMS/telemarketing/direct mail/katalogy/retargeting/teleshopping/chatboty/push). 4 dimenze organizace direct mktu (region/zákazník/zboží/premium). 6 typů osobního prodeje. 7-krokový sales proces. SPIN Selling (Rackham 1988). Consultative/Challenger/Solution/Sandler/MEDDIC frameworks. Sales Force Management 6 fází Kotler + 4 struktury + kompenzace + KPIs. CRM (3 dimenze) + B2B specifika + relationship mkt. Trendy: ABM, AI sales, video selling, intent data. Salesforce, Mailchimp, ESET, IBM, Demandbase, Loom."
       sloz={3} roz={4} freq={5}
       examStrategy={examStrategyMkt15}
       studySections={studySectionsMkt15}
@@ -22398,7 +22338,6 @@ function OkruhMkt16Panel() {
       subtitle="5 typů výzkumu + Brand Lift + MMM + MTA + Incrementality + MIS 4 zdroje + cookie-less era"
       color={VSE.fis}
       questionText="Výzkum marketingové komunikace + mediální výzkumy + marketingový informační systém."
-      questionDesc="Definice výzkumu mkt komunikace + návaznost na M1/M13/M14. 5 typů výzkumu: Pre-testing (concept, animatic, focus groups, A/B, neuromarketing) / Tracking studie (Brand Health Tracker, TOTE model, funnel) / Post-campaign (Brand Lift Study, MMM, MTA, Incrementality) / Mystery shopping / Social listening. Pretest metriky. MMM (top-down) + MTA 5 modelů (bottom-up) + Incrementality testing (gold standard). Mkt informační systém Kotler 4 zdroje (interní záznamy / mkt intelligence / mkt research / DSS). Primary × Secondary, 1st/2nd/3rd-party data, structured × unstructured. Cookie-less era + Privacy Sandbox. Analytical tooling (GA4, Adobe, Mixpanel, Tableau, Brandwatch, Robyn MMM). P&G, Apple, Coca-Cola, Unilever, Meta, Amazon."
       sloz={3} roz={4} freq={4}
       examStrategy={examStrategyMkt16}
       studySections={studySectionsMkt16}
@@ -22877,7 +22816,6 @@ function OkruhMkt17Panel() {
       subtitle="5 fází lifecycle + brief + 5M aplikace + agency management + evaluation + budgeting"
       color={VSE.fis}
       questionText="Řízení marketingových kampaní — end-to-end proces, brief, 5M, agency management, měření."
-      questionDesc="Capstone okruh integrace M13-M16. Definice řízení kampaní + 5 fází lifecycle (Brief → Plan → Creative → Execute → Evaluate). 6 klíčových rolí. Brief structure (10 elementů + SMP + RTB) + 4 typy briefů. 5M aplikace + media flighting/pulsing/continuous + Gantt timeline. Creative production (concept/storyboard/asset adaptace 50+). Media buying + trafficking + frequency capping + real-time monitoring. Crisis management (Pepsi Kendall Jenner). 3 vrstvy evaluation (operational/tactical/strategic) + KPIs hierarchie + post-mortem workshop. Agency management (full-service vs specialized vs in-house + SPOC + QBR + 5 kompenzačních modelů). 4 metody mkt budgetingu Kotler. Mastercard Priceless, Apple keynote, Old Spice 2010, Spotify Wrapped, Dove Real Beauty."
       sloz={3} roz={4} freq={4}
       examStrategy={examStrategyMkt17}
       studySections={studySectionsMkt17}
@@ -23242,7 +23180,6 @@ function OkruhStr1Panel() {
       subtitle="Co je strategie, tři patra, paradoxy, logika × intuice"
       color={VSE.fmv}
       questionText="Strategie a strategické uvažování — definice, úrovně, proces, logika × intuice, paradoxy."
-      questionDesc="Foundation okruh. Strategie = dlouhodobé směřování + cesta + konkurenční výhoda. Tři patra (celofiremní/konkurenční/funkční). Tři podmínky V-P-P (vhodná/přijatelná/proveditelná). K čemu strategie slouží (hodnota/budoucnost/kondice). Strategický × operativní pohled, Eisenhowerova past. Pět znaků strategického myšlení C-Č-O-P-S (cíl/čas/otázka co kdyby/příležitost/souvislosti). Logika × intuice — strategie jako věda i umění. Intuice jako zhuštěná zkušenost. Paradox a proč si nevybírat. Pět způsobů práce s paradoxy. Hlavní strategické paradoxy jako preview Str2-Str10. Čtyři kroky tvorby strategie. Apple Jobs+Cook, Lidl, Kofola, IKEA, Nokia, Kodak."
       sloz={2} roz={4} freq={3}
       examStrategy={examStrategyStr1}
       studySections={studySectionsStr1}
@@ -23638,7 +23575,6 @@ function OkruhStr2Panel() {
       subtitle="Mise a vize, Carrollova pyramida, Friedman × Freeman, CSR × CSV, stakeholdeři"
       color={VSE.fmv}
       questionText="Zisk × společenská odpovědnost — mise, vize, etika, CSR, CSV, stakeholdeři."
-      questionDesc="Mise a vize jako kompas firmy. Rozdíl vize (kam) × mise (proč). 5 funkcí. Firemní kultura — Schein 3 vrstvy. Etika v podnikání — kde končí zákon, začíná etika. Etické dilema, absolutní × relativní etika, 4 testy. Carrollova pyramida 4 pater (ekonomická/právní/etická/filantropická). Friedman 1970 × Freeman 1984 — pro vlastníky × pro všechny dotčené. CSR (dělat věci správně, dodatek) × CSV (dělat správné věci, jádro strategie). Stakeholdeři — 4 skupiny + Mendelowova matice (aktivně řídit / udržuj spokojené / informovat / jen sledovat). Proč moderní firmy přecházejí k odpovědnosti. Patagonia jako vzor, Microsoft Nadella, IKEA, Nestlé Cocoa Plan, Volkswagen Dieselgate anti-vzor."
       sloz={2} roz={4} freq={4}
       examStrategy={examStrategyStr2}
       studySections={studySectionsStr2}
@@ -24112,7 +24048,6 @@ function OkruhStr3Panel() {
       subtitle="PESTLE + Porter 5 sil + konkurenční pozice + OUTSIDE-IN PULL filosofie"
       color={VSE.fmv}
       questionText="Tržní přístup volby strategie — PESTLE, Porter 5 sil, konkurence, outside-in PULL."
-      questionDesc="Tržní přístup (Market-Based View) — volba strategie zaměřená na vnější prostředí. OUTSIDE-IN PULL filosofie. Tržní × Zdrojový paradox (6× chytaný!). 2 úrovně vnějšího prostředí: makrookolí (PESTLE) + mikrookolí (Porter 5 sil). PESTLE 6 faktorů (P/E/S/T/L/E). Cyklické × Anti-cyklické × Neutrální odvětví. Porter 5 sil (1979): Rivalita / Noví konkurenti / Substituty / Dodavatelé / Odběratelé. Konkurenční pozice (Kotler): Leader (40%+) / Challenger (20-40%) / Follower (10-20%) / Niche (1-10%). Strategie podle pozice. 4 kroky analýzy konkurence + 3 způsoby poznání + benchmarking. Netflix (capstone), Tesla, Airlines high intensity, Pepsi vs Coca-Cola, Rolex niche, Apple vs Samsung CI."
       sloz={3} roz={5} freq={5}
       examStrategy={examStrategyStr3}
       studySections={studySectionsStr3}
@@ -24200,7 +24135,7 @@ function OkruhStr4Panel() {
           "<b>✅V ✅R ✅I ❌O → UNUSED COMPETITIVE ADVANTAGE</b> (potenciál bez realizace).",
           "<b>✅V ✅R ✅I ✅O → SUSTAINED COMPETITIVE ADVANTAGE</b> (trvalá KV — strategický cíl).",
         ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>VRIN — alternativní framework (5 kritérií)</Tag>
+        <Tag color={VSE.fph}>VRIN — původní framework (4 kritéria)</Tag>
         <Bullet items={[
           "<b>Valuable, Rare, Inimitable, Non-substitutable</b> = VRIN (původní Barney 1991).",
           "<b>Non-substitutable</b> = nelze nahradit jiným zdrojem se stejnou funkcí.",
@@ -24606,7 +24541,6 @@ function OkruhStr4Panel() {
       subtitle="VRIO + hodnotový řetězec + SWOT + SPACE + INSIDE-OUT PUSH + Tržní × Zdrojový paradox"
       color={VSE.fmv}
       questionText="Zdrojový přístup volby strategie — VRIO, hodnotový řetězec, SWOT, SPACE, inside-out PUSH + paradox."
-      questionDesc="Zdrojový přístup (Resource-Based View). INSIDE-OUT PUSH filosofie. Hmotné × nehmotné zdroje. Tržní × Zdrojový paradox (6× chytaný!). VRIO framework (Barney 1991): Valuable / Rare / Inimitable / Organized. 5 výsledků: Disadvantage / Parity / Temporary CA / Unused CA / Sustained CA. VRIN alternativa. Hodnotový řetězec (Porter 1985): 5 primárních + 4 podpůrné aktivity. SWOT 4 kvadranty + 4 SWOT strategie (S-O/S-T/W-O/W-T). SPACE matice — 4 dimenze + 4 strategie (konzervativní/agresivní/defenzivní/konkurenční). Benchmarking externí/interní/procesní. Embracing tržní + zdrojový. LVMH (capstone), Coca-Cola brand, Tesla, Microsoft Nadella, SpaceX, Toyota TPS."
       sloz={3} roz={5} freq={5}
       examStrategy={examStrategyStr4}
       studySections={studySectionsStr4}
@@ -25134,7 +25068,6 @@ function OkruhStr5Panel() {
       subtitle="Porter generic + Bowman strategické hodiny + Pyramida KV + aliance + řešení paradoxu"
       color={VSE.fmv}
       questionText="Konkurenční strategie a Konkurence × Kooperace — Porter generic, Bowman, Pyramida KV, aliance."
-      questionDesc="Konkurenční strategie — nalezení KV podle segmentace. Konkurence × Kooperace paradox (2× chytaný). 3 klíčové frameworky: Porter generic strategies (1980): cenový šampión / diferenciace / zaostření (focus 3a cost, 3b differentiation). Stuck in the middle past. Bowman strategické hodiny (1996) — 8 pozic. Pyramida KV (Treacy & Wiersema 1993): provozní dokonalost / těsný vztah / nejlepší výrobky. Princip: exceluj v 1, akceptovatelný v 2. Kooperace — win-win, motivy (globalizace, ↓N), 4 typy spolupráce (nesmluvní/smluvní/majetkové/nekonkurenční). Aliance mezi nekonkurujícími (vertical, diverzifikace, expanze) × konkurujícími (finanční, spojení). Discrete × Embedded organization. 3 řešení paradoxu: Navigating / Parallel Processing / Juxtaposing. Renault-Nissan-Mitsubishi (capstone), Apple-Samsung, Microsoft-OpenAI, Pfizer-BioNTech, Walmart, Apple, Toyota."
       sloz={3} roz={5} freq={4}
       examStrategy={examStrategyStr5}
       studySections={studySectionsStr5}
@@ -25637,7 +25570,6 @@ function OkruhStr6Panel() {
       subtitle="Životní cyklus SBU + Ansoff matrix + BCG + GE matrix + firemní expanze"
       color={VSE.fmv}
       questionText="SBU, portfolio, Integrace × Samostatnost — životní cyklus, Ansoff, BCG, GE, expanze."
-      questionDesc="SBU (Strategic Business Unit) - samostatná podnikatelská jednotka s vlastní strategií, P&L. Integrace × Samostatnost paradox (2× chytaný). Životní cyklus SBU - 4 fáze (vznik s Porter/Pyramida KV / růst s Ansoff / stabilizace s BCG+GE / pokles s reengineering/sanace). Ansoffova matice (1957) - 4 strategie: penetrace / nové produkty / rozšíření trhu / diverzifikace. BCG matice (1970) - otazníky / hvězdy / dojné krávy / bídní psi. Cash flow cycle. GE Matrix - 9 kvadrantů 3×3. Firemní expanze - horizontální / vertikální (dopředná/zpětná) / konglomerátní. Související × nesouvisející diverzifikace. Reengineering, sanace, divestice. Marriott (capstone), Apple iPhone, Amazon, Alphabet, Tesla, Berkshire."
       sloz={3} roz={5} freq={4}
       examStrategy={examStrategyStr6}
       studySections={studySectionsStr6}
@@ -26187,7 +26119,6 @@ function OkruhStr7Panel() {
       subtitle="Plánování × Emergence + 5P (Plan/Ploy/Pattern/Position/Perspective) + Balanced Scorecard"
       color={VSE.fmv}
       questionText="Proces strategie + Mintzberg 5P + Plánování × Emergence — Balancing/Juxtaposing + BSC + scenario planning."
-      questionDesc="Tvorba strategie - klasický proces 4 kroky (identifikace → diagnóza → koncepce → realizace). Strategic formation = formulation + action. Top-down × Bottom-up. Plánování × Emergence paradox (Mintzberg 1985). Plánování = záměr, strukturovaný, forecasting. Emergence = postupně tvořená, reaguje na podněty. Strategické × Inkrementální plánování. Mintzberg 5P (1987) - Plan/Ploy/Pattern/Position/Perspective. Pattern princip = strategy bez konsistence není strategie. Řešení paradoxu - Balancing (sequential) / Juxtaposing (plánovaná emergence). Scenario planning 6 kroků. Balanced Scorecard (Kaplan-Norton 1992) - 4 perspektivy (Financial/Customer/Internal Process/Learning & Growth). Cause-effect logic. Učící se organizace (Senge) - 5 disciplín. Adaptivní × Generativní učení. Intrapreneurs (Google 20 %, Amazon Working Backwards). Microsoft Nadella (capstone Juxtaposing), Apple, Honda emergent, Tesla, Google OKRs."
       sloz={3} roz={4} freq={3}
       examStrategy={examStrategyStr7}
       studySections={studySectionsStr7}
@@ -26741,7 +26672,6 @@ function OkruhStr8Panel() {
       subtitle="Kotter 8 kroků + Lewin 3 fáze + U-křivka + Kaizen/Lean/Six Sigma + Reengineering"
       color={VSE.fmv}
       questionText="Strategická změna - Evoluce × Revoluce + Kotter / Lewin / U-křivka + improvement frameworks."
-      questionDesc="Strategická změna - systematická transformace v turbulentním prostředí. 2 typy změn (běžná × strategická). Evoluce × Revoluce paradox (3× chytaný!). Evoluce = postupně (Kaizen, Lean, Six Sigma, PDCA). Revoluce = skokem (BPR Reengineering). Ideál: Revoluce → dotvořit Evolucí. Kotter 8 kroků (1996) - urgency/coalition/vision/communicate/empower/wins/consolidate/anchor. Lewin 3 fáze (1947) - Unfreeze/Change/Refreeze. Force Field Analysis. U-křivka 7 fází - šok/popírání/hněv/deprese/experimentování/rozhodnutí/integrace. Kaizen (Toyota), Lean Production (Womack), Six Sigma + DMAIC (Motorola, GE), PDCA cycle (Deming). Reengineering BPR (Hammer 1993). Mechanická × Klan organizace. Microsoft Nadella (capstone Revoluce→Evoluce), Netflix DVD→streaming, Toyota Kaizen, Ford BPR, IBM Gerstner, BlackBerry anti-vzor."
       sloz={3} roz={5} freq={4}
       examStrategy={examStrategyStr8}
       studySections={studySectionsStr8}
@@ -27220,7 +27150,6 @@ function OkruhStr9Panel() {
       subtitle="Schumpeter + Utterback + Push/Pull + Innovator's Dilemma + Blue Ocean + hodnotová inovace"
       color={VSE.fmv}
       questionText="Strategie inovací - Schumpeter + Exploate × Explore + Modrý oceán + Disruptive vs Sustaining."
-      questionDesc="Strategie inovací - Schumpeter creative destruction. 5 typů inovací (produktová/procesní/organizační/tržní/dodavatelská). Closed × Open innovation (Chesbrough). Utterback-Abernathy 3 fáze (Fluid/Transitional/Specific). Technology Push × Market Pull. Exploitation × Exploration paradox (March 1991, 3× chytaný!). Innovator's Dilemma (Christensen 1997) - Kodak/BlackBerry/Blockbuster. Sustaining × Disruptive innovations. Christensen separate org units. Blue Ocean Strategy (Kim+Mauborgne 2005) - Modrý × Rudý oceán. Hodnotová inovace. ERRC Grid (Eliminate/Reduce/Raise/Create). Cirque du Soleil classic. Brzdné síly inovací. NIH syndrom. Chasm (Moore). Intrapreneurs (Pinchot). Google Alphabet (capstone Exploitation × Exploration), Netflix triple disruption, Nintendo Wii Blue Ocean, P&G Connect+Develop, Apple iPad Tech Push, Kodak failure."
       sloz={3} roz={5} freq={4}
       examStrategy={examStrategyStr9}
       studySections={studySectionsStr9}
@@ -27233,6 +27162,2122 @@ function OkruhStr9Panel() {
     />
   );
 }
+
+/* ════════════════════════════════════════════════════════
+   STRATEGIE 10 — Kontextový rozměr: Globální × Lokální
+   ════════════════════════════════════════════════════════ */
+function OkruhStr10Panel() {
+  const studySectionsStr10 = [
+    { id: "kontext", title: "Tři kontexty strategie — kde se strategie odehrává", subtitle: "Odvětvový, organizační a mezinárodní kontext", color: VSE.fmv, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Žádná strategie nevzniká ve vzduchoprázdnu. Vždy ji formuje <b>prostředí, ve kterém firma žije</b>. Tomu prostředí říkáme <b>kontext</b> a má tři roviny — odvětví, vlastní organizace a mezinárodní scéna.
+        </Def>
+        <Tag color={VSE.fmv}>Tři kontexty, ve kterých se strategie tvoří</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🏭 Odvětvový kontext", d: "Pravidla daného oboru. Některá odvětví jsou jen místní (péče o trávníky), jiná musí soutěžit celosvětově (letecké motory, ropa, kamery). Kde je obor globální, nestačí být dobrý doma." },
+            { c: VSE.warning, t: "🏢 Organizační kontext", d: "Jak je firma uvnitř řízena — pevnou rukou, nebo volně? Napětí mezi kontrolou (vedení drží otěže) a chaosem (nápady vznikají zdola, firma se sama organizuje)." },
+            { c: VSE.fph, t: "🌍 Mezinárodní kontext", d: "Jak se chovat na cizích trzích. Mám všude prodávat to samé (globální), nebo se přizpůsobit každé zemi (lokální)? Hlavní téma tohoto okruhu." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Organizační kontext — kontrola × chaos</Tag>
+        <Bullet items={[
+          "<b>Pohled kontroly:</b> Vedení má firmu pevně v rukou. Když chybí řízení, firma se nepozorovaně odchýlí od směru (tzv. strategický drift). Lídr potřebuje autoritu, důvěru a respekt. Hlavní úkol vedení je vychovat nové lídry.",
+          "<b>Pohled chaosu (dynamiky):</b> Silní lídři jsou vzácní. Realita firmy je tak složitá, že manažer toho fakticky moc neuřídí. Trochu chaosu je dobře — vytváří prostor pro nové nápady. Hlavní úkol vedení je zajistit, aby firma fungovala i tak, že se organizuje sama.",
+          "<b>Příklad zlaté střední cesty — Laurin & Klement:</b> Dva zakladatelé Škodovky. Laurin se staral o techniku a produkt, Klement o obchod, lidi a vnější vztahy. Z malé opravny kol vybudovali velkou továrnu. <b>Dvě role, které se doplňují</b> — vnitřní (produkt) a vnější (vztahy).",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="3 tažené: Mikovcová+Kolouchová+Viktora 2025 (hrnce/Tescoma), Vrbová+Tahal+Svobodová 2025 (víno), Schönfeld+Legnerová+Zamazalová 2026 (prádlo)"
+          what="Komise chce <b>globální × lokální jako paradox</b> — proč existuje, jak ho řešit, a hlavně napasovat na případovku. Mikovcová doslova: 'paradox, proč to tak je, řešení toho, napasovat na PS'."
+        />
+      </div>) },
+
+    { id: "globalizace", title: "Globalizace a internacionalizace — proč firmy jdou ven", subtitle: "Co žene firmy za hranice a jaké to má plusy i mínusy", color: VSE.fmv, emoji: "globe",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Globalizace</b> = svět se propojuje. Padají bariéry, volně se pohybuje zboží, lidé, peníze i znalosti. <b>Internacionalizace</b> = reakce firmy na to — rozhodnutí jít podnikat do ciziny.
+        </Def>
+        <Tag color={VSE.fmv}>Pět sil, které ženou firmy za hranice</Tag>
+        <Bullet items={[
+          "<b>1. Trh</b> — doma je nasyceno, venku jsou noví zákazníci a poptávka.",
+          "<b>2. Náklady</b> — větší výroba = nižší cena za kus (úspory z rozsahu). Levnější práce nebo suroviny jinde.",
+          "<b>3. Vláda</b> — odbourání cel a bariér usnadňuje vstup. Naopak bariéry firmu tlačí vyrábět na místě.",
+          "<b>4. Konkurence</b> — když jdou ven rivalové, musím taky, abych nezůstal pozadu.",
+          "<b>5. Rozložení rizika</b> — když jeden trh ochabne, druhý to vykryje. Firma není závislá na jediné ekonomice.",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>Globalizace — výhody × stinné stránky</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.success, t: "✅ Co přináší", d: "Nižší ceny díky úsporám z rozsahu. Šíření znalostí a technologií. Nové pracovní příležitosti. Ekonomický růst chudších zemí. Širší nabídka pro zákazníky. Srovnatelná kvalita všude." },
+            { c: VSE.danger, t: "⚠️ Co bere", d: "Zatěžuje životní prostředí (více dopravy). Sjednocování produktů (všude to samé). Vývoz práce do levných zemí. Závislost ekonomik na sobě. Roste nerovnost — nejchudší 20 % světa neroste." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Tři způsoby, jak firma propojuje své zahraniční části</Tag>
+        <Bullet items={[
+          "<b>Standardizace</b> — zákazník dostane všude to samé. Stejný produkt, stejná značka (Apple, Coca-Cola).",
+          "<b>Koordinace</b> — jednotlivé části se domlouvají a ladí mezi sebou, ale nemusí být identické.",
+          "<b>Centralizace</b> — řízení z jednoho místa. Buď kvůli úsporám z rozsahu, nebo aby firma využila výhodu konkrétní země (třeba levnou výrobu).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "vyber_trhu", title: "Výběr trhu — kam vstoupit a jak ho posoudit", subtitle: "Porterův diamant a model CAGE", color: VSE.fmv, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Než firma vstoupí na cizí trh, musí ho posoudit. Dva nástroje pomohou: <b>Porterův diamant</b> (proč je některá země v daném oboru silná) a <b>model CAGE</b> (jak je ta země daleko — a ne jen kilometry).
+        </Def>
+        <Tag color={VSE.fmv}>Porterův konkurenční diamant — proč je země v oboru úspěšná</Tag>
+        <Bullet items={[
+          "Ptá se: <b>proč jsou některé země světovou špičkou v určitém oboru?</b> (Německo v autech, Itálie v módě, Švýcarsko v hodinkách).",
+          "Stojí na šesti faktorech: <b>výrobní faktory</b> (lidé, suroviny, infrastruktura), <b>poptávka</b> (nároční domácí zákazníci), <b>konkurence</b> (tvrdá domácí rivalita firmy zoceluje), <b>navazující obory</b> (silní dodavatelé okolo), <b>vláda</b> a <b>příležitosti</b>.",
+          "<b>K čemu to je:</b> Pomáhá rozhodnout, odkud čerpat sílu nebo kde stavět výrobu. Když chce firma vyniknout v oboru, vyplatí se sídlit tam, kde je obor silný.",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>Model CAGE — jak daleko ten trh doopravdy je</Tag>
+        <Bullet items={[
+          "Vzdálenost není jen v kilometrech. CAGE měří <b>čtyři druhy odstupu</b> mezi domovem a cílovou zemí:",
+          "<b>C — Kulturní</b> (Cultural): jiný jazyk, náboženství, zvyky, hodnoty. Nejvíc bolí u věcí spjatých s identitou — jídlo, média.",
+          "<b>A — Administrativní/politický</b> (Administrative): jiné zákony, žádná společná měna, politické napětí, chybějící historické vazby. Bolí u oborů, které vláda považuje za strategické.",
+          "<b>G — Geografický</b> (Geographic): fyzická vzdálenost, chybějící hranice, špatná doprava, jiné klima. Bolí u těžkého/levného zboží (stavební materiál) nebo zkazitelného (ovoce).",
+          "<b>E — Ekonomický</b> (Economic): rozdíl v příjmech, dostupnosti zdrojů, infrastruktuře. Bolí u zboží závislého na příjmu (auta).",
+          "<b>Trik na zapamatování:</b> <b>CAGE = klec.</b> Čím větší odstup ve všech čtyřech, tím víc je trh jako klec — těžší se tam dostat.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Doplňkové nástroje posouzení</Tag>
+        <Bullet items={[
+          "<b>PESTLE</b> — politické, ekonomické, sociální, technologické, právní a ekologické vlivy v dané zemi (viz okruh 3).",
+          "<b>Porter 5 sil</b> — jak ostrá je konkurence v daném odvětví na tom trhu (viz okruh 3).",
+          "<b>Klíč:</b> Výběr trhu = složit dohromady diamant (síla oboru) + CAGE (odstup) + PESTLE + 5 sil. Teprve pak se rozhodnout.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "ctyri_strategie", title: "Čtyři strategie na cizích trzích — od exportu po šití na míru", subtitle: "Mezinárodní, multinacionální, globální, transnacionální", color: VSE.fmv, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Firma na cizích trzích volí mezi dvěma silami: <b>tlakem na nízké náklady</b> (vyrábět všude stejně a levně) a <b>tlakem na přizpůsobení</b> (každá země chce něco jiného). Podle toho, čemu dá přednost, vznikají čtyři strategie.
+        </Def>
+        <Tag color={VSE.fmv}>Čtyři strategie podle míry přizpůsobení</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📦 MEZINÁRODNÍ (exportní)", d: "Vyrábím doma, vyvážím ven. Vše se řídí z centrály. Volí firmy se silnou konkurenční výhodou, kterou nechtějí pustit z ruky. Nejjednodušší vstup. Příklad: malá značka, co začíná vyvážet." },
+            { c: VSE.warning, t: "🏘️ MULTINACIONÁLNÍ (lokální)", d: "Každá země si dělá svoje. Výroba i řízení přesunuté do dceřiných firem, které mají velkou samostatnost. Pro produkty, co vyžadují silné přizpůsobení místu. Vytváří dojem 'místního' produktu." },
+            { c: VSE.fph, t: "🌐 GLOBÁLNÍ (jednotná)", d: "Svět = jeden trh. Firma neřeší místní rozdíly, prodává všude stejně. Výroba rozmístěná tam, kde je levně, ale řízeno z centra. Maximální úspory z rozsahu. Příklad: Apple." },
+            { c: VSE.success, t: "🔀 TRANSNACIONÁLNÍ (kombinace)", d: "Bere to nejlepší z obou. Každý proces umístí tam, kde se mu daří nejlíp — výzkum v jedné zemi, výroba v druhé, design ve třetí. Nejsložitější, ale nejsilnější. Příklad: automobilky." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Jak si to zapamatovat</Tag>
+        <Bullet items={[
+          "<b>Mezinárodní</b> = vyrábím doma, jen vyvážím. (nejmenší přizpůsobení)",
+          "<b>Globální</b> = všude to samé, ale chytře rozmístěná výroba. (nízké náklady)",
+          "<b>Multinacionální</b> = každá země jiná, dcery si vládnou. (maximální přizpůsobení)",
+          "<b>Transnacionální</b> = chytrá kombinace, každý proces tam, kde se mu daří. (nejlepší z obou)",
+          "<b>Osa logiky:</b> Vlevo náklady (globální), vpravo přizpůsobení (multinacionální), nahoře kombinace obou (transnacionální).",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "vstup_tempo", title: "Tempo a forma vstupu — jak rychle a jakými dveřmi", subtitle: "Sprinkler × Waterfall a tři formy vstupu", color: VSE.fmv, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Když se firma rozhodne jít ven, musí vyřešit dvě věci: <b>jak rychle</b> obsadit trhy (tempo) a <b>jakými dveřmi</b> tam vstoupit (forma).
+        </Def>
+        <Tag color={VSE.fmv}>Tempo vstupu — najednou, nebo postupně?</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.warning, t: "🚿 SPRINKLER (najednou)", d: "Vezmu všechny trhy útokem současně. Jako kropáč, co stříká do všech stran. Výhoda: jsem první (first mover). Nevýhoda: když to selže na více trzích, hrozí obrovské ztráty. Příklad: McDonald's." },
+            { c: VSE.fmv, t: "💧 WATERFALL (postupně)", d: "Jeden trh, a když uspěju, jdu na další. Jako vodopád, co stéká po stupních. Výhoda: nižší náklady, učím se z chyb. Nevýhoda: pomalejší, konkurence mě může předběhnout." },
+            { c: VSE.fph, t: "🌊 WAGE (po skupinách)", d: "Souběžně beru trhy po skupinách (clusterech), které jsou si podobné. Kompromis mezi rychlostí a opatrností." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Tři formy vstupu — od nejjednodušší po nejnáročnější</Tag>
+        <Bullet items={[
+          "<b>1. Export zboží a služeb</b> — nejjednodušší. Vyrobím doma, prodám ven. Nejmenší riziko i náklady, ale nejmenší kontrola nad trhem.",
+          "<b>2. Smluvní partnerství</b> — někdo místní prodává pod mojí značkou. Patří sem <b>licence</b> (pronajmu právo vyrábět můj produkt) a <b>franšíza</b> (prodám hotový obchodní model, jako McDonald's). Střední riziko.",
+          "<b>3. Kooperativní vztah</b> — spojím se s místní firmou. Patří sem <b>aliance</b> (spolupráce bez nové firmy) a <b>joint venture</b> (společně založíme novou firmu). Nejnáročnější, ale největší kontrola a přítomnost.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>Rizika vstupu na cizí trh</Tag>
+        <Bullet items={[
+          "Rozdíly mezi trhy (co funguje doma, nemusí venku).",
+          "Nízká informovanost o místních poměrech.",
+          "Přílišná samostatnost dceřiných firem (ztráta kontroly).",
+          "Narušení hodnotového řetězce (logistika, dodávky).",
+          "Kurzová rizika (pohyby měn ukrojí zisk).",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "glokalizace", title: "Glokalizace — řešení paradoxu globální × lokální", subtitle: "Mysli globálně, jednej lokálně", color: VSE.fmv, emoji: "globe",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Glokalizace</b> = spojení globálního a lokálního. Firma využívá sílu velikosti (úspory, jednotná značka), ale zároveň přizpůsobuje produkt místu. <b>Není to volba buď-anebo — je to chytrá kombinace obojího.</b>
+        </Def>
+        <Tag color={VSE.fmv}>Proč vůbec ten paradox vzniká</Tag>
+        <Bullet items={[
+          "<b>Globální tah:</b> Být všude stejný = úspory z rozsahu, nižší náklady, jednotná silná značka, větší stabilita. Ale: neflexibilní, sjednocený produkt nesedí každému.",
+          "<b>Lokální tah:</b> Přizpůsobit se každému trhu = spokojení zákazníci, reakce na místní zvyky. Ale: drahé, náročné, užší nabídka, menší tlak na inovace.",
+          "<b>Jádro paradoxu:</b> Firma chce obojí najednou — levně vyrábět ve velkém ALE zároveň sedět každému trhu. To jde jen těžko. Glokalizace je odpověď.",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>Jak glokalizace vypadá v praxi</Tag>
+        <Bullet items={[
+          "<b>Kromě standardních produktů firma navrhuje i lokální verze</b>, aby se přizpůsobila místnímu trhu. Když se to povede, jsou vyšší zisky a zákazníci spokojeni.",
+          "<b>McDonald's — McSmažák / McKebab:</b> Jednotný systém a značka po celém světě, ale menu se mění podle země. V Indii žádné hovězí, v Česku smažák.",
+          "<b>Starbucks:</b> Stejná značka, ale kavárny uzpůsobené místnímu prostředí a chutím.",
+          "<b>Google:</b> Jedno globální vyhledávání, ale různá loga k místním příležitostem a svátkům.",
+          "<b>Tesco:</b> V různých zemích vystupuje pod různými jmény, přizpůsobuje sortiment.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Heslo, které řeší celý okruh</Tag>
+        <Bullet items={[
+          "<b>'Mysli globálně, jednej lokálně.'</b> (Think global, act local.)",
+          "Globálně = strategie, značka, know-how, úspory z rozsahu drž jednotně.",
+          "Lokálně = produkt, marketing, chuť, zvyky přizpůsob každé zemi.",
+          "<b>Tohle je odpověď, kterou komise chce slyšet</b> na otázku 'jak řešit paradox globální × lokální'.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak to celé poskládat u zkoušky", subtitle: "Postup pro případovku s mezinárodní expanzí", color: VSE.fmv, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Tohle je poslední okruh strategie a často míří přímo na případovku s expanzí do zahraničí. Komise chce vidět, že umíš paradox <b>pojmenovat, vysvětlit proč vzniká, a vyřešit ho na konkrétní firmě</b>.
+        </Def>
+        <Tag color={VSE.fmv}>Postup, jak na případovku s expanzí</Tag>
+        <Bullet items={[
+          "<b>1.</b> Pojmenuj <b>paradox globální × lokální</b> — firma chce úspory z velikosti, ale i sedět místnímu trhu.",
+          "<b>2.</b> Vysvětli, <b>proč vzniká</b> — tah na nízké náklady (globální) versus tah na přizpůsobení (lokální).",
+          "<b>3.</b> Posuď trh — <b>Porterův diamant</b> (síla oboru v zemi) + <b>CAGE</b> (jak daleko trh je) + PESTLE.",
+          "<b>4.</b> Vyber <b>strategii</b> — mezinárodní / multinacionální / globální / transnacionální podle míry přizpůsobení.",
+          "<b>5.</b> Urči <b>tempo</b> — Sprinkler (najednou) × Waterfall (postupně).",
+          "<b>6.</b> Urči <b>formu vstupu</b> — export / licence-franšíza / aliance-joint venture.",
+          "<b>7.</b> Navrhni <b>řešení paradoxu = glokalizace</b> — mysli globálně, jednej lokálně.",
+          "<b>8.</b> Zmiň <b>rizika</b> — kurzy, kulturní odstup, ztráta kontroly nad dcerami.",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Paradox pojmenovaný + vysvětlený + vyřešený glokalizací na konkrétní firmě z případovky.",
+          "<b>✅ Dobře:</b> CAGE rozepsané na čtyři odstupy s příkladem, který sedí na případovku.",
+          "<b>✅ Dobře:</b> Volba strategie zdůvodněná (proč zrovna multinacionální a ne globální?).",
+          "<b>❌ Špatně:</b> Jen vyjmenovat strategie bez napojení na zadání.",
+          "<b>❌ Špatně:</b> Tvrdit, že globální je vždy lepší než lokální (nebo naopak) — je to o vyvážení.",
+          "<b>❌ Špatně:</b> Zapomenout na glokalizaci jako řešení — to je jádro celého okruhu.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Firmy, které se hodí jako příklad</Tag>
+        <Bullet items={[
+          "<b>McDonald's</b> — učebnicová glokalizace (jednotný systém, místní menu). Sprinkler tempo.",
+          "<b>Apple</b> — globální strategie (všude to samé, jen jazyk se mění).",
+          "<b>Starbucks</b> — glokalizace přes přizpůsobení kaváren a chutí.",
+          "<b>Automobilky</b> — transnacionální strategie (výzkum, design, výroba v různých zemích).",
+          "<b>IKEA</b> — globální koncept, ale místní úpravy sortimentu.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsStr10 = [
+    { term: "Kontext strategie", def: "Prostředí, ve kterém firma žije a které formuje její strategii. Tři roviny: odvětvový, organizační, mezinárodní kontext.", tag: "POJEM" },
+    { term: "Odvětvový kontext", def: "Pravidla daného oboru. Některá odvětví jen místní (péče o trávníky), jiná globální (ropa, letecké motory, kamery).", tag: "KONTEXT" },
+    { term: "Organizační kontext — kontrola × chaos", def: "Kontrola = vedení drží otěže, bez řízení hrozí strategický drift. Chaos = nápady vznikají zdola, firma se organizuje sama.", tag: "KONTEXT" },
+    { term: "Laurin & Klement (příklad)", def: "Dva zakladatelé Škodovky. Laurin = technika a produkt (vnitřní role). Klement = obchod, lidé, vztahy (vnější role). Dvě role, co se doplňují.", tag: "KONTEXT" },
+    { term: "Globalizace", def: "Světový proces propojování zemí. Padají bariéry, volně se pohybuje zboží, lidé, kapitál, znalosti.", tag: "POJEM" },
+    { term: "Internacionalizace", def: "Reakce firmy na globalizaci. Rozhodnutí firmy podnikat v cizích zemích.", tag: "POJEM" },
+    { term: "Pět sil ženoucích firmy ven", def: "Trh (poptávka), náklady (úspory z rozsahu), vláda (bariéry), konkurence (jdou rivalové), rozložení rizika.", tag: "POHON" },
+    { term: "Tři mechanismy integrace", def: "Standardizace (zákazník dostane to samé), koordinace (části se ladí), centralizace (řízení z jednoho místa).", tag: "INTEGRACE" },
+    { term: "Porterův konkurenční diamant", def: "Proč jsou některé země světová špička v oboru. 6 faktorů: výrobní faktory, poptávka, konkurence, navazující obory, vláda, příležitosti.", tag: "VÝBĚR TRHU" },
+    { term: "Model CAGE", def: "Jak daleko trh doopravdy je (ne jen km). 4 odstupy: Cultural (kulturní), Administrative (politický), Geographic (geografický), Economic (ekonomický).", tag: "VÝBĚR TRHU" },
+    { term: "CAGE — C (kulturní)", def: "Jiný jazyk, náboženství, zvyky, hodnoty. Nejvíc bolí u věcí spjatých s identitou — jídlo, média.", tag: "VÝBĚR TRHU" },
+    { term: "CAGE — A (administrativní)", def: "Jiné zákony, žádná společná měna, politické napětí. Bolí u oborů, co vláda považuje za strategické.", tag: "VÝBĚR TRHU" },
+    { term: "CAGE — G (geografický)", def: "Fyzická vzdálenost, chybějící hranice, špatná doprava, klima. Bolí u těžkého zboží (stavebniny) a zkazitelného (ovoce).", tag: "VÝBĚR TRHU" },
+    { term: "CAGE — E (ekonomický)", def: "Rozdíl v příjmech, zdrojích, infrastruktuře. Bolí u zboží závislého na příjmu (auta).", tag: "VÝBĚR TRHU" },
+    { term: "Mezinárodní strategie (exportní)", def: "Vyrábím doma, vyvážím ven. Vše řízeno z centrály. Volí firmy se silnou KV. Nejjednodušší vstup.", tag: "4 STRATEGIE" },
+    { term: "Multinacionální strategie (lokální)", def: "Každá země si dělá svoje. Dcery mají velkou samostatnost. Pro produkty vyžadující silné přizpůsobení. Dojem 'místního' produktu.", tag: "4 STRATEGIE" },
+    { term: "Globální strategie (jednotná)", def: "Svět = jeden trh. Všude to samé, výroba rozmístěná kde je levně, řízeno z centra. Maximální úspory z rozsahu. Apple.", tag: "4 STRATEGIE" },
+    { term: "Transnacionální strategie (kombinace)", def: "Nejlepší z obou. Každý proces tam, kde se mu daří (výzkum v jedné zemi, výroba v druhé). Nejsložitější. Automobilky.", tag: "4 STRATEGIE" },
+    { term: "Sprinkler (tempo)", def: "Vezmu všechny trhy najednou. Výhoda: first mover. Nevýhoda: při selhání na více trzích fatální ztráty. McDonald's.", tag: "TEMPO" },
+    { term: "Waterfall (tempo)", def: "Jeden trh, po úspěchu další. Výhoda: nižší náklady, učení z chyb. Nevýhoda: pomalejší, konkurence předběhne.", tag: "TEMPO" },
+    { term: "Wage (tempo)", def: "Souběžně po skupinách podobných trhů (clusterech). Kompromis rychlosti a opatrnosti.", tag: "TEMPO" },
+    { term: "Forma vstupu — export", def: "Vyrobím doma, prodám ven. Nejjednodušší, nejmenší riziko i kontrola.", tag: "FORMA" },
+    { term: "Forma vstupu — smluvní partnerství", def: "Někdo místní prodává pod mojí značkou. Licence (právo vyrábět) + franšíza (hotový model, McDonald's). Střední riziko.", tag: "FORMA" },
+    { term: "Forma vstupu — kooperativní vztah", def: "Spojím se s místní firmou. Aliance (bez nové firmy) + joint venture (společně založíme novou). Největší kontrola.", tag: "FORMA" },
+    { term: "Glokalizace", def: "Spojení globálního a lokálního. Síla velikosti + přizpůsobení místu. Chytrá kombinace, ne volba buď-anebo.", tag: "ŘEŠENÍ" },
+    { term: "Mysli globálně, jednej lokálně", def: "Heslo řešící paradox. Globálně = strategie, značka, know-how. Lokálně = produkt, marketing, chuť, zvyky.", tag: "ŘEŠENÍ" },
+    { term: "Glokalizace — příklady", def: "McDonald's (McSmažák/McKebab), Starbucks (místní kavárny), Google (lokální loga), Tesco (jiná jména v zemích).", tag: "ŘEŠENÍ" },
+    { term: "Rizika mezinárodního vstupu", def: "Rozdíly trhů, nízká informovanost, přílišná samostatnost dcer, narušení hodnotového řetězce, kurzová rizika.", tag: "RIZIKA" },
+    { term: "Strategický drift", def: "Když chybí řízení a kontrola, firma se nepozorovaně odchýlí od svého směru. Argument pohledu kontroly.", tag: "KONTEXT" },
+    { term: "Globální leadership", def: "Vzít to nejlepší z každé kultury (cross-culture thinking). Neformální propojení mezi odděleními, flexibilita.", tag: "POJEM" },
+  ];
+
+  const quizStr10 = [
+    { q: "Které jsou tři kontexty strategie?", opts: ["Malý, střední, velký", "Odvětvový, organizační, mezinárodní", "Levný, drahý, prémiový", "Místní, krajský, státní"], correct: 1 },
+    { q: "Co je napětí v organizačním kontextu?", opts: ["Zisk × ztráta", "Kontrola (vedení drží otěže) × chaos (nápady zdola, sebeorganizace)", "Velký × malý", "Doma × venku"], correct: 1 },
+    { q: "Co ukazuje příklad Laurin & Klement?", opts: ["Cenovou válku", "Dvě role co se doplňují — vnitřní (produkt, Laurin) + vnější (obchod a vztahy, Klement)", "Akvizici", "Bankrot"], correct: 1 },
+    { q: "Co je glokalizace?", opts: ["Jen globální", "Jen lokální", "Spojení obojího — síla velikosti + přizpůsobení místu", "Bankrot"], correct: 2 },
+    { q: "Co je rozdíl globalizace × internacionalizace?", opts: ["Žádný", "Globalizace = svět se propojuje. Internacionalizace = reakce firmy, jde podnikat ven.", "Velikost firmy", "Sektor"], correct: 1 },
+    { q: "K čemu slouží model CAGE?", opts: ["Měření zisku", "Posouzení, jak daleko trh doopravdy je — 4 odstupy (kulturní/admin/geografický/ekonomický)", "Reklama", "Nábor"], correct: 1 },
+    { q: "Co znamená C v modelu CAGE?", opts: ["Cena", "Cultural — kulturní odstup (jazyk, náboženství, zvyky)", "Cash", "Country"], correct: 1 },
+    { q: "K čemu slouží Porterův diamant?", opts: ["Měření zisku", "Vysvětluje, proč jsou některé země světová špička v oboru (6 faktorů)", "Cenotvorba", "Segmentace"], correct: 1 },
+    { q: "Co je mezinárodní (exportní) strategie?", opts: ["Každá země jiná", "Vyrábím doma, vyvážím ven, vše řízeno z centrály", "Svět = jeden trh", "Kombinace"], correct: 1 },
+    { q: "Co je globální strategie?", opts: ["Export", "Svět = jeden trh, všude to samé, výroba kde je levně, řízeno z centra. Apple.", "Každá země jiná", "Licence"], correct: 1 },
+    { q: "Co je multinacionální strategie?", opts: ["Export", "Každá země si dělá svoje, dcery mají velkou samostatnost, dojem místního produktu", "Jednotný svět", "Kombinace"], correct: 1 },
+    { q: "Co je transnacionální strategie?", opts: ["Jen export", "Nejlepší z obou — každý proces tam, kde se mu daří. Automobilky.", "Jen lokální", "Jen globální"], correct: 1 },
+    { q: "Co je Sprinkler tempo vstupu?", opts: ["Postupně", "Všechny trhy najednou. First mover, ale při selhání fatální ztráty. McDonald's.", "Po skupinách", "Nikdy"], correct: 1 },
+    { q: "Co je Waterfall tempo vstupu?", opts: ["Najednou", "Jeden trh, po úspěchu další. Nižší náklady, učení z chyb, ale pomalejší.", "Po clusterech", "Nikdy"], correct: 1 },
+    { q: "Které jsou tři formy vstupu na trh?", opts: ["Malá, střední, velká", "Export / smluvní partnerství (licence, franšíza) / kooperativní vztah (aliance, joint venture)", "Levná, drahá", "Rychlá, pomalá"], correct: 1 },
+    { q: "Jaké heslo řeší paradox globální × lokální?", opts: ["Zákazník na prvním místě", "Mysli globálně, jednej lokálně", "Čas jsou peníze", "Růst za každou cenu"], correct: 1 },
+  ];
+
+  const praxeStr10 = {
+    caseStudy: {
+      company: "McDonald's — učebnicový příklad glokalizace",
+      subtitle: "Jak vyřešit paradox globální × lokální v praxi",
+      content: (<>
+        McDonald's je nejčastější příklad <b>glokalizace</b>, který komise chce slyšet. Firma působí ve více než stovce zemí a dokazuje, že paradox globální × lokální se dá vyřešit — být všude stejný i jiný zároveň.<br/><br/>
+        🌐 CO JE GLOBÁLNÍ (drží se jednotně):<br/><br/>
+        • Značka, zlaté oblouky, logo — všude stejné.<br/><br/>
+        • Systém provozu, rychlost, hygiena, školení.<br/><br/>
+        • Franšízový model — jak se otevírá a vede restaurace.<br/><br/>
+        • Klíčové produkty — Big Mac znají všude.<br/><br/>
+        • Úspory z rozsahu — nákup, technologie, marketing.<br/><br/>
+        🏘️ CO JE LOKÁLNÍ (přizpůsobuje se):<br/><br/>
+        • Menu podle země — v Indii žádné hovězí (krávy jsou posvátné), místo toho McAloo Tikki. V Česku McSmažák.<br/><br/>
+        • Chutě — v Asii pikantnější, jinde sladší.<br/><br/>
+        • Místní suroviny a dodavatelé.<br/><br/>
+        • Marketing přizpůsobený kultuře.<br/><br/>
+        🚿 TEMPO A FORMA VSTUPU:<br/><br/>
+        • Tempo Sprinkler — McDonald's expanduje agresivně na mnoho trhů.<br/><br/>
+        • Forma vstupu — hlavně franšíza (smluvní partnerství). Místní podnikatel koupí právo provozovat restauraci podle systému McDonald's.<br/><br/>
+        💡 V ČEM JE PONAUČENÍ:<br/><br/>
+        McDonald's neřeší globální vs lokální jako volbu. Drží jednotnou sílu velikosti (značka, systém, úspory) a zároveň nechává každé zemi přizpůsobit to, co je citlivé na kulturu (menu, chuť). Přesně <b>'mysli globálně, jednej lokálně'</b>.<br/><br/>
+        Kdyby byl McDonald's čistě globální (všude úplně stejné menu), v Indii by neuspěl. Kdyby byl čistě lokální (každá země úplně po svém), ztratil by úspory z rozsahu a jednotnou značku. Glokalizace je střední cesta, která mu dovolila vyrůst do celého světa.
+      </>),
+      lessons: "McDonald's ukazuje, že paradox globální × lokální se řeší <b>glokalizací</b> — držet globálně to, co dává sílu (značka, systém, úspory z rozsahu), a přizpůsobit lokálně to, co je citlivé na kulturu (menu, chuť, marketing). Pro případovku: vždy doporuč <b>'mysli globálně, jednej lokálně'</b>. Další příklady: <b>Starbucks</b> (místní kavárny a chutě), <b>Apple</b> (čistě globální — všude to samé), <b>automobilky</b> (transnacionální — výroba a vývoj rozmístěné po světě), <b>IKEA</b> (globální koncept, místní sortiment)."
+    },
+    miniExamples: [
+      { tag: "GLOBÁLNÍ STRATEGIE", color: VSE.fph, company: "Apple — svět jako jeden trh", content: "Apple jede čistě globální strategii. iPhone je všude stejný, mění se jen jazyk a zásuvka. Žádné přizpůsobování menu nebo designu jednotlivým zemím. Firma tím získává obrovské úspory z rozsahu a jednotnou silnou značku. Funguje to, protože technologii lidé chtějí všude stejnou — nikdo nechce 'český iPhone'." },
+      { tag: "TRANSNACIONÁLNÍ", color: VSE.success, company: "Automobilky — každý proces jinde", content: "Velké automobilky jedou transnacionální strategii. Výzkum a vývoj v Německu, design v Itálii, výroba v zemích s levnější prací, montáž blízko trhu. Každý proces umístěný tam, kde se mu daří nejlíp. Nejsložitější na řízení, ale spojuje výhody všech ostatních strategií — nízké náklady i přizpůsobení." },
+      { tag: "CAGE", color: VSE.warning, company: "Proč je vstup do vzdálené kultury těžší", content: "Když česká firma s potravinami chce expandovat, snadno půjde na Slovensko (malý odstup ve všech čtyřech rovinách CAGE) a těžko do Japonska (velký kulturní, geografický i administrativní odstup). U potravin je kulturní odstup obzvlášť bolestivý — jídlo je spjaté s identitou a zvyky. Proto firmy často začínají u sousedů a postupují dál (Waterfall)." },
+      { tag: "FORMA VSTUPU", color: VSE.fmv, company: "Franšíza jako chytrý vstup", content: "Franšíza je oblíbená forma vstupu, protože firma roste rychle bez velkých investic. McDonald's, Subway nebo KFC nepostavily většinu svých restaurací samy — prodaly místním podnikatelům právo provozovat je podle daného systému. Firma získá rozšíření a poplatky, podnikatel získá ověřený model a značku. Riziko nese hlavně místní franšízant." },
+    ]
+  };
+
+  const examQuestionsStr10 = [
+    { komise: "2025-02-04 — Mikovcová + Kolouchová + Viktora (hrnce / Tescoma)", otazka: "Globální vs. lokální mezinárodní kontext strategie (paradox, proč to tak je, řešení toho, napasovat na případovku)", pozn: "Mikovcová chce <b>paradox + proč vzniká + řešení (glokalizace) + napasovat na PS</b>. Klíč: pojmenovat paradox (úspory × přizpůsobení), vysvětlit tahy, vyřešit glokalizací (mysli globálně, jednej lokálně), aplikovat na firmu vyrábějící hrnce." },
+    { komise: "2025-02-04 — Vrbová + Tahal + Svobodová (víno)", otazka: "Globální vs. lokální strategie", pozn: "Marketingová varianta stejného tématu. Naučit: 4 strategie (mezinárodní/multinacionální/globální/transnacionální) + glokalizace + aplikace na vinařství (víno je hodně spjaté s lokální identitou — kulturní odstup CAGE)." },
+    { komise: "2026-02-02 — Schönfeld + Legnerová + Zamazalová (prádlo)", otazka: "Globální vs. lokální řízení", pozn: "Schönfeld chce napojení na případovku, u teorie stačí základ. Naučit: paradox + glokalizace + řízení globální firmy (jednotná strategie, unifikace) vs lokální (flexibilita, přizpůsobení) + aplikace na výrobce prádla." },
+  ];
+
+  const podcastStr10 = { title: "Strategie 10 — Kontextový rozměr: Globální × Lokální", description: "Tři kontexty strategie - odvětvový (některá odvětví jen místní, jiná globální), organizační (kontrola × chaos, Laurin & Klement dvě doplňující se role), mezinárodní (globální × lokální). Globalizace (svět se propojuje) × internacionalizace (reakce firmy, jde ven). Pět sil ženoucích firmy ven - trh, náklady, vláda, konkurence, rozložení rizika. Tři mechanismy integrace - standardizace, koordinace, centralizace. Výběr trhu - Porterův konkurenční diamant (proč jsou země špička v oboru, 6 faktorů) + model CAGE (jak daleko trh je - Cultural/Administrative/Geographic/Economic odstup). Čtyři strategie - mezinárodní (exportní), multinacionální (lokální, dcery samostatné), globální (jednotný svět, Apple), transnacionální (kombinace, automobilky). Tempo vstupu - Sprinkler (najednou, McDonald's) × Waterfall (postupně) × Wage (po skupinách). Tři formy vstupu - export, smluvní partnerství (licence, franšíza), kooperativní vztah (aliance, joint venture). Glokalizace - řešení paradoxu, mysli globálně jednej lokálně. McDonald's (McSmažák/McKebab), Starbucks, Google loga, Tesco. Rizika - kurzy, kulturní odstup, samostatnost dcer. Postup na případovku s expanzí.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyStr10 = `
+    <b style="color:#A82A5F">1.</b> Začni <b>třemi kontexty</b> strategie — odvětvový / organizační (kontrola × chaos) / mezinárodní.<br/>
+    <b style="color:#A82A5F">2.</b> ⚠️ Hlavní téma: <b>paradox globální × lokální</b> — pojmenuj ho, vysvětli proč vzniká.<br/>
+    <b style="color:#A82A5F">3.</b> Proč vzniká: tah na <b>nízké náklady</b> (globální) × tah na <b>přizpůsobení</b> (lokální).<br/>
+    <b style="color:#A82A5F">4.</b> Globalizace (svět se propojuje) × internacionalizace (firma jde ven). Pět sil: trh, náklady, vláda, konkurence, rozložení rizika.<br/>
+    <b style="color:#A82A5F">5.</b> Výběr trhu — <b>Porterův diamant</b> (síla oboru v zemi) + <b>CAGE</b> (4 odstupy: kulturní/admin/geografický/ekonomický).<br/>
+    <b style="color:#A82A5F">6.</b> ⚠️ <b>4 strategie</b> — mezinárodní (export) / multinacionální (lokální) / globální (jednotná, Apple) / transnacionální (kombinace).<br/>
+    <b style="color:#A82A5F">7.</b> Tempo — <b>Sprinkler</b> (najednou, McDonald's) × <b>Waterfall</b> (postupně) × Wage (po skupinách).<br/>
+    <b style="color:#A82A5F">8.</b> Formy vstupu — export / smluvní (licence, franšíza) / kooperativní (aliance, joint venture).<br/>
+    <b style="color:#A82A5F">9.</b> ⚠️ <b>Řešení paradoxu = GLOKALIZACE</b> — mysli globálně, jednej lokálně. McDonald's McSmažák.<br/>
+    <b style="color:#A82A5F">10.</b> Rizika — kurzy, kulturní odstup, samostatnost dcer, narušení hodnotového řetězce.<br/>
+    <b style="color:#A82A5F">11.</b> <b>VŽDY napoj na případovku</b> — komise to chce explicitně (Mikovcová, Schönfeld).
+  `;
+
+  const caseStudyStr10 = {
+    title: "Eva a její značka přírodní kosmetiky",
+    subtitle: "Doma vyprodáno, je čas jít do světa — ale jak?",
+    scenario: "Eva osm let buduje českou značku přírodní kosmetiky. Krémy, mýdla, oleje — všechno z místních surovin, ručně, s důrazem na ekologii. Doma má skvělou pověst, věrné zákaznice, plné sklady objednávek. Trh v Česku je ale malý a Eva cítí, že už ho skoro vyčerpala.\n\nNa veletrhu v Berlíně si jejích produktů všimli zájemci z Německa, Rakouska, ale i z Dubaje a Japonska. Eva se vrátila nadšená a zároveň vyděšená. Najednou má před sebou celý svět, ale netuší, kde začít a jak to udělat.\n\nMá v hlavě hromadu otázek. Má jít na všechny trhy naráz, dokud je o ni zájem? Nebo opatrně, jeden po druhém? Má všude prodávat úplně stejné produkty se stejným obalem, nebo to v každé zemi přizpůsobit? Kamarádka, co dělá v korporátu, jí řekla, že Dubaj a Japonsko jsou úplně jiný svět než sousední Rakousko — jiná kultura, jiné zvyky, jiné předpisy na kosmetiku.\n\nEvu trápí ještě jedna věc. Celá její značka stojí na příběhu — česká příroda, ruční výroba, ekologie. Bojí se, že když to bude cpát do každé země stejně, ztratí kouzlo. Ale když to bude všude předělávat, bude to strašně drahé a náročné a možná ztratí svou identitu.\n\nDcera jí poradila, ať se na to podívá systematicky. Nejdřív posoudit, jak jsou ty trhy vlastně daleko — ne kilometrově, ale kulturně a předpisy. Pak se rozhodnout, kolik toho přizpůsobit a kolik nechat jednotné. Eva si sedla s papírem a snaží se v tom udělat jasno. Cítí, že odpověď není ani 'všude stejně', ani 'všude jinak', ale někde mezi tím.",
+    signals: [
+      { text: "Trh v Česku je malý a Eva cítí, že už ho skoro vyčerpala", color: VSE.fmv, reason: "Klasický spouštěč internacionalizace (Str10). Nasycený domácí trh je jedna z pěti sil, které ženou firmu za hranice — hledá nové zákazníky venku." },
+      { text: "Má jít na všechny trhy naráz... Nebo opatrně, jeden po druhém?", color: VSE.warning, reason: "Otázka tempa vstupu (Str10). Všechny naráz = Sprinkler (rychlé, ale riskantní). Jeden po druhém = Waterfall (pomalejší, ale učí se z chyb). Pro malou firmu je obvykle bezpečnější Waterfall." },
+      { text: "Má všude prodávat úplně stejné produkty... nebo to v každé zemi přizpůsobit?", color: VSE.fph, reason: "Jádro paradoxu globální × lokální (Str10). Stejné = úspory a jednotná značka. Přizpůsobené = sedí místnímu trhu. Řešení je glokalizace — kombinace obojího." },
+      { text: "Dubaj a Japonsko jsou úplně jiný svět než sousední Rakousko — jiná kultura, jiné zvyky, jiné předpisy", color: VSE.danger, reason: "Přesně model CAGE (Str10). Rakousko = malý odstup ve všech čtyřech rovinách. Dubaj a Japonsko = velký kulturní, geografický i administrativní (předpisy) odstup. U kosmetiky je kulturní a administrativní odstup obzvlášť důležitý." },
+      { text: "Celá její značka stojí na příběhu — česká příroda, ruční výroba, ekologie. Bojí se, že to ztratí", color: VSE.warning, reason: "Tady je vidět, co držet globálně (Str10). Příběh a identita značky = globální jádro, které dává sílu. To se nemá rozmělňovat — naopak je to konkurenční výhoda i v zahraničí." },
+      { text: "Odpověď není ani 'všude stejně', ani 'všude jinak', ale někde mezi tím", color: VSE.success, reason: "Eva sama nahmatává glokalizaci (Str10). Přesně 'mysli globálně, jednej lokálně' — držet jednotné jádro (značka, příběh, kvalita) a přizpůsobit detaily (obal, marketing, předpisy) každé zemi." },
+    ],
+    quiz1: {
+      question: "Jaký je hlavní strategický problém Evy?",
+      options: [
+        "Špatný produkt",
+        "Nedostatek peněz",
+        "Jak vstoupit na zahraniční trhy — vyřešit paradox globální × lokální (jednotná značka × přizpůsobení), zvolit tempo a formu vstupu a posoudit, jak jsou trhy daleko.",
+        "Špatný tým",
+      ],
+      correct: 2,
+    },
+    quiz2: {
+      question: "Jak by Eva měla postupovat při expanzi?",
+      options: [
+        { text: "Nejdřív posoudit trhy modelem CAGE — jak daleko jsou kulturně, administrativně (předpisy na kosmetiku), geograficky a ekonomicky. Rakousko a Německo blízko, Dubaj a Japonsko daleko. Začít tam, kde je odstup nejmenší.", correct: true, reason: "✓ Str10 — CAGE posouzení trhu. U kosmetiky jsou klíčové kulturní rozdíly (chutě, zvyky) a administrativní (předpisy na složení). Začít u blízkých trhů dává smysl." },
+        { text: "Zvolit tempo Waterfall — postupně, jeden trh po druhém. Začít Rakouskem a Německem (blízké, malý odstup), učit se z chyb, a teprve po úspěchu jít na vzdálenější a náročnější trhy jako Dubaj nebo Japonsko.", correct: true, reason: "✓ Str10 — Waterfall tempo. Pro malou firmu s omezenými zdroji je postupný vstup bezpečnější než Sprinkler. Nižší riziko, učení z chyb." },
+        { text: "Zvolit formu vstupu podle trhu — na blízké trhy zkusit export nebo distributora, na vzdálené a složité (Japonsko, Dubaj) raději místního partnera, který zná předpisy a kulturu.", correct: true, reason: "✓ Str10 — formy vstupu. Export na blízké trhy (nízké riziko), kooperativní vztah s místním partnerem tam, kde je velký odstup a složité předpisy." },
+        { text: "Vyřešit paradox glokalizací — držet globálně to, co dává sílu (značka, příběh české přírody, ruční výroba, kvalita) a přizpůsobit lokálně to, co je citlivé na kulturu a předpisy (složení podle norem, obal, marketing, vůně podle místních chutí).", correct: true, reason: "✓ Str10 — glokalizace jako řešení. 'Mysli globálně, jednej lokálně.' Příběh = globální jádro (nerozmělňovat), detaily = lokální přizpůsobení." },
+        { text: "Příběh značky držet jednotný všude — je to konkurenční výhoda i v zahraničí. Cizí zákazníci ocení autentický příběh české přírodní kosmetiky, nemá ho rozmělňovat.", correct: true, reason: "✓ Str10 — co držet globálně. Identita a příběh jsou jádro značky a zdroj síly. To se napříč trhy nemění, naopak se na tom staví." },
+        { text: "Jít na všechny trhy naráz se stejným produktem", correct: false, reason: "✗ Sprinkler tempo + čistě globální přístup je pro malou firmu příliš riskantní. Bez přizpůsobení neprojde předpisy v Japonsku/Dubaji a při selhání na více trzích hrozí velké ztráty." },
+        { text: "Každou zemi řešit úplně od nuly, vlastní produkt i značku", correct: false, reason: "✗ Čistě lokální přístup je drahý, náročný a Eva by ztratila úspory z rozsahu i jednotnou značku — přesně to kouzlo, které ji odlišuje. Potřebuje glokalizaci, ne plnou lokalizaci." },
+        { text: "Počkat, až bude mít víc peněz, a zatím nic neřešit", correct: false, reason: "✗ Zájem ze zahraničí je teď — když nezareaguje, konkurence ji předběhne. Pasivita není strategie. Lepší je opatrný, ale aktivní postup (Waterfall)." },
+      ],
+    },
+    summary: "Eva musí <b>vyřešit paradox globální × lokální glokalizací</b> a postupovat systematicky — posoudit trhy, zvolit tempo a formu vstupu.<br/><br/><b>Doporučený postup expanze:</b><br/><br/>• <b>Krok 1 — Posoudit trhy (CAGE):</b> Změřit odstup každého trhu ve čtyřech rovinách. Rakousko a Německo = malý odstup (blízká kultura, EU předpisy, blízko). Dubaj a Japonsko = velký odstup (jiná kultura, jiné předpisy na kosmetiku, daleko). U přírodní kosmetiky jsou kritické kulturní rozdíly (chutě, vůně) a administrativní (normy na složení).<br/><br/>• <b>Krok 2 — Zvolit tempo (Waterfall):</b> Postupně, ne najednou. Začít blízkými trhy (Rakousko, Německo), naučit se z chyb, a teprve po úspěchu jít na vzdálenější a náročnější. Pro malou firmu s omezenými zdroji je Sprinkler příliš riskantní.<br/><br/>• <b>Krok 3 — Zvolit formu vstupu:</b> Na blízké trhy export nebo distributor (nízké riziko). Na vzdálené a složité (Japonsko, Dubaj) místní partner, který zná předpisy a kulturu (kooperativní vztah).<br/><br/>• <b>Krok 4 — Vyřešit paradox glokalizací:</b> Držet globálně jádro značky — příběh české přírody, ruční výrobu, ekologii, kvalitu. To je konkurenční výhoda a nerozmělňuje se. Přizpůsobit lokálně detaily — složení podle místních norem, obal, marketing, vůně podle místních chutí.<br/><br/>• <b>Heslo:</b> Mysli globálně (značka, příběh, kvalita), jednej lokálně (předpisy, obal, marketing).<br/><br/><b>Pro komisi:</b> Tohle je přesně to, co tažené otázky chtějí. <b>McDonald's (glokalizace, McSmažák), Apple (globální strategie), Starbucks (místní kavárny), automobilky (transnacionální)</b> jako příklady. Klíč: <b>paradox globální × lokální</b> + <b>proč vzniká</b> (náklady × přizpůsobení) + <b>CAGE</b> + <b>4 strategie</b> + <b>tempo (Sprinkler × Waterfall)</b> + <b>formy vstupu</b> + <b>řešení = glokalizace</b> (mysli globálně, jednej lokálně) + <b>VŽDY napojit na případovku</b>. Anti-vzor: tvrdit, že globální je vždy lepší, nebo zapomenout na glokalizaci jako řešení.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Strategie" subjectId="str" number={10} title="Kontextový rozměr: Globální × Lokální"
+      subtitle="Tři kontexty + CAGE + Porterův diamant + 4 strategie + tempo a formy vstupu + glokalizace"
+      color={VSE.fmv}
+      questionText="Kontextový rozměr strategie — globální × lokální, paradox, CAGE, 4 strategie, glokalizace."
+      sloz={3} roz={5} freq={4}
+      examStrategy={examStrategyStr10}
+      studySections={studySectionsStr10}
+      flashcards={flashcardsStr10}
+      quiz={quizStr10}
+      praxe={praxeStr10}
+      examQuestions={examQuestionsStr10}
+      podcast={podcastStr10}
+      caseStudy={caseStudyStr10}
+    />
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   MANAŽERSKÉ ROZHODOVÁNÍ 1 — Rozhodovací problém + Kepner-Tregoe
+   ════════════════════════════════════════════════════════ */
+function OkruhRoz1Panel() {
+  const studySectionsRoz1 = [
+    { id: "zaklad", title: "Co je rozhodování a rozhodovací problém", subtitle: "Volba mezi možnostmi + odchylka od žádoucího stavu", color: VSE.fph, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Rozhodování</b> = volba mezi alespoň dvěma možnostmi. <b>Rozhodovací problém</b> = odchylka od žádoucího stavu (od plánu). Něco je jinak, než má být — a my musíme vybrat, co s tím.
+        </Def>
+        <Tag color={VSE.fph}>Dvě stránky každého rozhodování</Tag>
+        <Bullet items={[
+          "<b>Meritorní (věcná, obsahová):</b> CO konkrétně řešíme. Liší se podle problému — rozhodování o výrobku je jiné než o investici nebo marketingu.",
+          "<b>Formálně-logická (procedurální):</b> JAK postupujeme. Tady jsou všechna rozhodování stejná — mají společný rámec (najít problém → příčiny → cíle → varianty → výběr).",
+          "<b>Pamatuj:</b> Meritorní = obsah (každý jiný). Formální = postup (vždy stejný). Proto se dá naučit jeden univerzální postup.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Dvě teorie rozhodování</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📋 NORMATIVNÍ teorie", d: "Dává návod do budoucna — jaké modely použít a jak. Tvoří normy řešení. 'Jak BY SE mělo rozhodovat.'" },
+            { c: VSE.nf, t: "🔍 DESKRIPTIVNÍ teorie", d: "Popisuje už proběhlá rozhodnutí — analyzuje, jak to ve skutečnosti probíhalo. 'Jak se rozhoduje SKUTEČNĚ.'" },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ExamAlert
+          komise="Nejčastější tažená! Kepner-Tregoe + rozhodovací problém — aplikovat na případovku (desítky komisí: Mikovcová, Pichanič, Stříteský, Nový, Svobodová, Schönfeld...)"
+          what="Komise chce: <b>najít rozhodovací problém v PS</b> + <b>aplikovat metodu Kepner-Tregoe</b> (analýza problému, hledání příčin) + popsat postup. Vrbová se ptala, proč je dobré mít sloupec 'co problém NENÍ'."
+        />
+      </div>) },
+
+    { id: "typy", title: "Typy problémů a podmínky rozhodování", subtitle: "Dobře × špatně strukturované + jistota/riziko/nejistota", color: VSE.fph, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Ne každý problém je stejný. Liší se podle toho, jak dobře ho známe (struktura), a podle toho, kolik víme o budoucnosti (podmínky).
+        </Def>
+        <Tag color={VSE.fph}>Dobře × špatně strukturované problémy</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.success, t: "✅ DOBŘE strukturovaný", d: "Rutinní problém se známým řešením. Řešili jsme ho už mnohokrát. Dají se použít matematické modely a vzorce. Příklad: vytížení výrobní linky." },
+            { c: VSE.warning, t: "⚠️ ŠPATNĚ strukturovaný", d: "Nový, neopakovatelný problém. Vyžaduje tvůrčí přístup a hledání nového řešení. Neznámé proměnné, obtížná interpretace. Příklad: vstup na nový trh." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Tři podmínky rozhodování — kolik víme o budoucnosti</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.success, t: "☀️ ZA JISTOTY", d: "Máme úplné informace. Víme, jak co dopadne. Známe všechny důsledky. Nejjednodušší, ale v praxi vzácné." },
+            { c: VSE.warning, t: "🎲 ZA RIZIKA", d: "Známe možné budoucí stavy světa A jejich pravděpodobnosti. Víme, co může nastat a s jakou šancí. Tady pracujeme nejčastěji." },
+            { c: VSE.danger, t: "❓ ZA NEJISTOTY", d: "Známe možné stavy světa, ALE neznáme jejich pravděpodobnosti. Nevíme, jak je co pravděpodobné. Nejtěžší situace." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Vstupy do rozhodovacího procesu</Tag>
+        <Bullet items={[
+          "<b>Problém</b> — co řešíme (odchylka od žádoucího stavu).",
+          "<b>Čas a riziko</b> — kolik máme času, co nás může překvapit.",
+          "<b>Manažer / skupina rozhodovatelů</b> — kdo rozhoduje.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "kepner", title: "Kepner-Tregoe — jak najít skutečnou příčinu problému", subtitle: "Metoda, kterou chce skoro každá komise", color: VSE.fph, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Kepner-Tregoe (KT)</b> = metoda, jak systematicky najít <b>skutečnou příčinu</b> problému. Vychází z myšlenky: <b>problém je odchylka a její příčina je zatím neznámá</b> — abychom ho vyřešili, musíme tu příčinu najít.
+        </Def>
+        <Tag color={VSE.fph}>Čtyři kroky Kepner-Tregoe</Tag>
+        <Bullet items={[
+          "<b>1. Popis problému + specifikace</b> — přesně popíšeme problém ze 4 hledisek: identita (CO), lokalizace (KDE), čas (KDY), rozsah (KOLIK).",
+          "<b>2. Identifikace možných příčin</b> — díky zkušenostem expertů sestavíme seznam možných příčin.",
+          "<b>3. Testování možných příčin</b> — u každé se ptáme: vysvětluje tato příčina VŠECHNY následky?",
+          "<b>4. Potvrzení dané příčiny</b> — najdeme tu, která sedí, a přijmeme korekční akci (nápravu).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Klíčový trik: tabulka JE × NENÍ</Tag>
+        <Bullet items={[
+          "Srdce metody KT je tabulka se <b>dvěma sloupci: co problém JE × co problém NENÍ</b>.",
+          "Ptáme se: CO je vadné × co podobného by mohlo být vadné, ale NENÍ? KDE se to děje × kde by mohlo, ale neděje? KDY × kdy ne? KOLIK × kolik ne?",
+          "<b>Proč sloupec 'NENÍ'?</b> (tohle se ptala Vrbová) — Skutečná příčina musí vysvětlit nejen to, co se děje, ale i PROČ se to neděje jinde. Tím se zúží hledání na pravou příčinu a vyřadí se falešné stopy.",
+          "<b>Příklad:</b> Kartony se trhají. JE: u zákazníka X, od minulého týdne. NENÍ: u zákazníka Y, dřív ne. → Co se změnilo zrovna u X a zrovna minulý týden? Tam je příčina.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Výhoda metody KT</Tag>
+        <Bullet items={[
+          "Spousta možných příčin jde <b>vyřadit čistě logikou</b> — když příčina nevysvětlí, proč se problém neobjevuje jinde, není to ona.",
+          "Nutí nás <b>popsat problém přesně</b>, než začneme hádat řešení. Většina lidí skáče rovnou k řešení — KT to nedovolí.",
+          "<b>Pozor na chyby:</b> hlavní nepřítel je nedostatek informací. Bez dobrého popisu problému metoda nefunguje.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "kauzalni", title: "Hledání příčin — kauzální analýza", subtitle: "Problem tree, Ishikawa, GAP, Paretova analýza", color: VSE.fph, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Než najdeme řešení, musíme znát <b>příčinu</b> (kauzalita = příčina → následek). K hledání příčin slouží <b>kauzální analýza</b> — několik nástrojů, které pomáhají rozkrýt, proč problém vzniká.
+        </Def>
+        <Tag color={VSE.fph}>Nástroje kauzální analýzy</Tag>
+        <Bullet items={[
+          "<b>Problem tree (strom problému)</b> — od důsledku jdeme k příčinám a podpříčinám. Vizualizuje problém, jeho příčiny a následky stromovitě.",
+          "<b>Ishikawův diagram (rybí kost)</b> — podobné jako strom, ale naležato. Příčiny vedou k jednomu důsledku (hlavě ryby).",
+          "<b>Kognitivní mapy</b> — zobrazují vztahy a závislosti mezi faktory (přímé i nepřímé).",
+          "<b>Analýza silového pole</b> — dvě síly působící na problém: hybné (podporují změnu) × brzdné (brání změně).",
+          "<b>GAP analýza</b> — zjišťuje rozdíl mezi tím, kde jsme, a kde chceme být.",
+          "<b>Paretova analýza</b> — pravidlo 80/20. Najde pár klíčových příčin (A), které způsobují většinu problémů.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Důležité varování</Tag>
+        <Bullet items={[
+          "<b>Korelace není kauzalita!</b> To, že dvě věci jdou spolu, neznamená, že jedna způsobuje druhou. (Zmrzlina a utonutí rostou spolu v létě — ale zmrzlina nezpůsobuje utonutí.)",
+          "<b>Skutečná příčina</b> musí vysvětlit každý aspekt problému. Když nesedí byť jeden detail, není to ona.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "bariery", title: "Bariéry a léčky v rozhodování", subtitle: "Co nám brání rozhodnout se dobře", color: VSE.fph, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Rozhodování není jen technika. Lidé dělají chyby kvůli <b>bariérám</b> (omezením) a <b>léčkám</b> (myšlenkovým pastím). Komise ráda vidí, že je umíš pojmenovat a najít v případovce.
+        </Def>
+        <Tag color={VSE.fph}>Tři typy bariér</Tag>
+        <Bullet items={[
+          "<b>Subjekt</b> — omezení lidského uvažování a schopností (nestíháme zpracovat všechno).",
+          "<b>Organizace</b> — chybí kompetence, zdroje nebo informace.",
+          "<b>Léčky</b> — myšlenkové pasti (viz níže).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Léčky — myšlenkové pasti, do kterých padáme</Tag>
+        <Bullet items={[
+          "<b>Zakotvení</b> — držíme se první informace, kterou jsme dostali, i když je špatná.",
+          "<b>Utopené náklady</b> — pokračujeme v projektu jen proto, že jsme do něj už hodně investovali ('škoda těch peněz').",
+          "<b>Status quo</b> — neměníme zajeté, i když by změna pomohla.",
+          "<b>Letadlo (přežití)</b> — díváme se jen na úspěšné případy a zapomínáme na ty, co selhaly.",
+          "<b>Vyhledávání potvrzujících informací</b> — hledáme jen to, co potvrzuje náš názor (selekce).",
+          "<b>Hráč</b> — 'dvakrát padla šestka, potřetí už určitě nepadne' (mylná představa o pravděpodobnosti).",
+          "<b>Zkreslení minulostí</b> — necháme se ovlivnit tím, co bylo dřív.",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.fph}>Jak problém vyřešit</Tag>
+        <Bullet items={[
+          "Problém vyřešíme tak, že <b>adresujeme jeho příčiny</b> — ne jen příznaky.",
+          "<b>Neexistuje jen jedno správné řešení</b> — problém může mít více úhlů pohledu podle toho, kdo a jak ho vnímá.",
+          "Dobré řešení často přináší <b>nový pohled na situaci</b>, se kterým bychom běžně nepřišli.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro rozhodovací problém + Kepner-Tregoe", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Tohle je nejčastější tažená otázka z rozhodování. Komise chce, abys <b>našel rozhodovací problém v případovce</b> a <b>aplikoval na něj Kepner-Tregoe</b> — najít příčinu, popsat postup.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Najdi v PS <b>rozhodovací problém</b> — odchylku od žádoucího stavu (často jich je víc, vyber jeden).",
+          "<b>2.</b> Pokud je problémů víc, <b>prioritizuj</b> podle závažnosti, naléhavosti a budoucího dopadu.",
+          "<b>3.</b> Urči <b>typ problému</b> — dobře nebo špatně strukturovaný? Za jistoty, rizika, nebo nejistoty?",
+          "<b>4.</b> Aplikuj <b>Kepner-Tregoe</b> — popiš problém (CO/KDE/KDY/KOLIK, tabulka JE × NENÍ), najdi možné příčiny, otestuj je, potvrď tu pravou.",
+          "<b>5.</b> Použij <b>kauzální analýzu</b> (problem tree, Ishikawa) k rozkrytí příčin.",
+          "<b>6.</b> Navrhni <b>korekční akci</b> — co konkrétně udělat, aby se příčina odstranila.",
+          "<b>7.</b> Pokud sedí, najdi v PS i <b>léčky</b> (zakotvení, utopené náklady, status quo).",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Sloupec 'co problém NENÍ' a vysvětlit, proč pomáhá najít příčinu (ptala se Vrbová).",
+          "<b>✅ Dobře:</b> Rozlišit problém od jeho příčiny — neskákat rovnou k řešení.",
+          "<b>✅ Dobře:</b> Najít konkrétní problém v PS a projít celý postup KT na něm.",
+          "<b>❌ Špatně:</b> Zaměnit příznak za příčinu (řešit horečku místo nemoci).",
+          "<b>❌ Špatně:</b> Skočit rovnou k řešení bez popisu a analýzy problému.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsRoz1 = [
+    { term: "Rozhodování", def: "Volba mezi alespoň dvěma možnostmi.", tag: "DEFINICE" },
+    { term: "Rozhodovací problém", def: "Odchylka od žádoucího stavu (od plánu). Něco je jinak, než má být.", tag: "DEFINICE" },
+    { term: "Meritorní stránka", def: "Věcná, obsahová — CO konkrétně řešíme. Liší se podle problému (výrobek × investice × marketing).", tag: "STRÁNKY" },
+    { term: "Formálně-logická stránka", def: "Procedurální — JAK postupujeme. Všechna rozhodování mají společný rámcový postup.", tag: "STRÁNKY" },
+    { term: "Normativní teorie", def: "Dává návod do budoucna — jaké modely použít a jak. 'Jak by se mělo rozhodovat.'", tag: "TEORIE" },
+    { term: "Deskriptivní teorie", def: "Popisuje proběhlá rozhodnutí — jak rozhodování ve skutečnosti probíhá.", tag: "TEORIE" },
+    { term: "Vstupy do rozhodování", def: "Problém, čas a riziko, manažer/skupina rozhodovatelů.", tag: "VSTUPY" },
+    { term: "Dobře strukturovaný problém", def: "Rutinní, známé řešení, matematické modely. Příklad: vytížení výrobní linky.", tag: "TYPY" },
+    { term: "Špatně strukturovaný problém", def: "Nový, neopakovatelný, vyžaduje tvůrčí přístup. Příklad: vstup na nový trh.", tag: "TYPY" },
+    { term: "Rozhodování za jistoty", def: "Máme úplné informace, víme jak co dopadne. Vzácné v praxi.", tag: "PODMÍNKY" },
+    { term: "Rozhodování za rizika", def: "Známe možné stavy světa A jejich pravděpodobnosti. Tady pracujeme nejčastěji.", tag: "PODMÍNKY" },
+    { term: "Rozhodování za nejistoty", def: "Známe možné stavy světa, ale NEznáme jejich pravděpodobnosti. Nejtěžší.", tag: "PODMÍNKY" },
+    { term: "Kepner-Tregoe", def: "Metoda na nalezení skutečné příčiny problému. Problém je odchylka, příčina je zatím neznámá.", tag: "KT" },
+    { term: "KT — 4 kroky", def: "1) Popis problému (CO/KDE/KDY/KOLIK), 2) Identifikace možných příčin, 3) Testování příčin, 4) Potvrzení příčiny + korekční akce.", tag: "KT" },
+    { term: "KT — 4 hlediska popisu", def: "Identita (CO), lokalizace (KDE), čas (KDY), rozsah (KOLIK).", tag: "KT" },
+    { term: "KT — tabulka JE × NENÍ", def: "Dva sloupce: co problém JE × co by mohl být, ale NENÍ. Skutečná příčina musí vysvětlit, proč se problém neobjevuje jinde.", tag: "KT" },
+    { term: "Proč sloupec NENÍ?", def: "Zúží hledání na pravou příčinu a vyřadí falešné stopy. Příčina musí vysvětlit i to, proč se problém neděje jinde. (ptala se Vrbová)", tag: "KT" },
+    { term: "Kauzalita", def: "Příčina → následek. Korelace (jdou spolu) NENÍ kauzalita (jedna způsobuje druhou).", tag: "PŘÍČINY" },
+    { term: "Problem tree", def: "Strom problému — od důsledku k příčinám a podpříčinám. Vizualizuje problém, příčiny, následky.", tag: "PŘÍČINY" },
+    { term: "Ishikawův diagram", def: "Rybí kost. Příčiny vedou k jednomu důsledku (hlavě ryby). Naležato.", tag: "PŘÍČINY" },
+    { term: "Analýza silového pole", def: "Dvě síly na problém: hybné (podporují změnu) × brzdné (brání změně).", tag: "PŘÍČINY" },
+    { term: "GAP analýza", def: "Zjišťuje rozdíl mezi tím, kde jsme, a kde chceme být.", tag: "PŘÍČINY" },
+    { term: "Paretova analýza", def: "Pravidlo 80/20. Pár klíčových příčin (A) způsobuje většinu problémů.", tag: "PŘÍČINY" },
+    { term: "Léčka: zakotvení", def: "Držíme se první informace, i když je špatná.", tag: "LÉČKY" },
+    { term: "Léčka: utopené náklady", def: "Pokračujeme v projektu jen proto, že jsme do něj už investovali ('škoda peněz').", tag: "LÉČKY" },
+    { term: "Léčka: status quo", def: "Neměníme zajeté, i když by změna pomohla.", tag: "LÉČKY" },
+    { term: "Léčka: hráč", def: "'Dvakrát padla šestka, potřetí nepadne' — mylná představa o pravděpodobnosti.", tag: "LÉČKY" },
+    { term: "Léčka: potvrzující info", def: "Hledáme jen to, co potvrzuje náš názor (selekce).", tag: "LÉČKY" },
+    { term: "Stavy světa", def: "Budoucí vzájemně se vylučující situace, které mohou nastat po realizaci varianty.", tag: "POJEM" },
+  ];
+
+  const quizRoz1 = [
+    { q: "Co je rozhodování?", opts: ["Hádání", "Volba mezi alespoň dvěma možnostmi", "Plánování", "Kontrola"], correct: 1 },
+    { q: "Co je rozhodovací problém?", opts: ["Dobrá zpráva", "Odchylka od žádoucího stavu (od plánu)", "Zisk", "Plán"], correct: 1 },
+    { q: "Jaký je rozdíl meritorní × formálně-logická stránka?", opts: ["Žádný", "Meritorní = CO řešíme (obsah, různý). Formální = JAK postupujeme (postup, vždy stejný).", "Velikost", "Cena"], correct: 1 },
+    { q: "Co je dobře strukturovaný problém?", opts: ["Nový a neznámý", "Rutinní, známé řešení, matematické modely (vytížení linky)", "Tvůrčí", "Náhodný"], correct: 1 },
+    { q: "Co je rozhodování za rizika?", opts: ["Nevíme nic", "Známe možné stavy světa A jejich pravděpodobnosti", "Máme úplné info", "Neznáme stavy"], correct: 1 },
+    { q: "Co je rozhodování za nejistoty?", opts: ["Známe pravděpodobnosti", "Známe stavy světa, ale NEznáme jejich pravděpodobnosti", "Máme úplné info", "Žádný problém"], correct: 1 },
+    { q: "K čemu slouží Kepner-Tregoe?", opts: ["K plánování", "K nalezení skutečné příčiny problému", "K výrobě", "K prodeji"], correct: 1 },
+    { q: "Jaké jsou 4 kroky Kepner-Tregoe?", opts: ["Plán/Akce/Kontrola/Konec", "Popis problému / Identifikace příčin / Testování příčin / Potvrzení příčiny", "Cíl/Strategie/Taktika/Realizace", "Sběr/Analýza/Návrh/Volba"], correct: 1 },
+    { q: "Jaká 4 hlediska popisuje KT?", opts: ["Kdo/Co/Kde/Proč", "Identita (CO) / lokalizace (KDE) / čas (KDY) / rozsah (KOLIK)", "Plán/Cíl/Akce/Výsledek", "Síla/Slabost/Šance/Hrozba"], correct: 1 },
+    { q: "Proč má KT sloupec 'co problém NENÍ'?", opts: ["Pro pořádek", "Skutečná příčina musí vysvětlit i to, proč se problém neděje jinde — zúží hledání", "Pro delší tabulku", "Bez důvodu"], correct: 1 },
+    { q: "Co je kauzalita?", opts: ["Náhoda", "Příčina → následek. Korelace NENÍ kauzalita.", "Korelace", "Statistika"], correct: 1 },
+    { q: "Co je Ishikawův diagram?", opts: ["Graf zisku", "Rybí kost — příčiny vedou k jednomu důsledku, naležato", "Strom", "Tabulka"], correct: 1 },
+    { q: "Co je Paretova analýza?", opts: ["50/50", "Pravidlo 80/20 — pár klíčových příčin způsobuje většinu problémů", "100/0", "Náhoda"], correct: 1 },
+    { q: "Co je léčka 'utopené náklady'?", opts: ["Úspora", "Pokračujeme v projektu jen proto, že jsme už investovali", "Zisk", "Nový start"], correct: 1 },
+    { q: "Co je léčka 'zakotvení'?", opts: ["Stabilita", "Držíme se první informace, i když je špatná", "Změna", "Růst"], correct: 1 },
+    { q: "Co je léčka 'hráč'?", opts: ["Výhra", "'Dvakrát padla šestka, potřetí nepadne' — mylná představa o pravděpodobnosti", "Strategie", "Risk"], correct: 1 },
+  ];
+
+  const praxeRoz1 = {
+    caseStudy: {
+      company: "Toyota — Kepner-Tregoe a hledání kořenové příčiny (5x Proč)",
+      subtitle: "Jak nejlepší výrobce světa hledá skutečnou příčinu",
+      content: (<>
+        Toyota je <b>učebnicový příklad firmy, která nehádá řešení, ale hledá příčinu</b>. Její slavná metoda <b>5x Proč</b> je v podstatě duch Kepner-Tregoe v praxi: než něco opravíš, musíš vědět, PROČ se to stalo.<br/><br/>
+        🔧 LEGENDÁRNÍ PŘÍKLAD Z TOYOTY:<br/><br/>
+        Stroj se zastavil. Místo aby ho prostě restartovali, ptali se:<br/><br/>
+        • Proč se stroj zastavil? Přetížil se a spálila se pojistka.<br/><br/>
+        • Proč se přetížil? Ložisko nebylo dost namazané.<br/><br/>
+        • Proč nebylo namazané? Mazací pumpa nečerpala dost oleje.<br/><br/>
+        • Proč nečerpala? Hřídel pumpy byla opotřebená.<br/><br/>
+        • Proč byla opotřebená? Chyběl filtr a dostaly se tam piliny.<br/><br/>
+        🎯 POINTA:<br/><br/>
+        Kdyby Toyota jen vyměnila pojistku (příznak), stroj by se zastavil zas. Skutečná příčina byl chybějící filtr. To je přesně logika Kepner-Tregoe — <b>oddělit příznak od příčiny a najít tu pravou.</b><br/><br/>
+        🏭 PROČ TO FUNGUJE V CELÉ TOYOTĚ:<br/><br/>
+        Tahle kultura hledání příčin (součást Toyota Production System) je důvod, proč Toyota léta patří mezi nejspolehlivější značky aut. Neřeší symptomy, řeší kořeny. <b>To je rozdíl mezi průměrnou a špičkovou firmou v rozhodování.</b>
+      </>),
+      lessons: "Toyota ukazuje Kepner-Tregoe v praxi přes metodu 5x Proč — <b>neřešit příznak, ale najít kořenovou příčinu</b>. Stejná logika jako KT: popsat problém, hledat příčinu, testovat ji (vysvětlí všechny následky?), teprve pak řešit. Pro případovku: najdi problém, nehádej rovnou řešení, ale projdi řetězec příčin až ke kořenu. Anti-vzor: vyměnit pojistku (příznak) místo doplnit filtr (příčina)."
+    },
+    miniExamples: [
+      { tag: "KEPNER-TREGOE", color: VSE.fph, company: "NASA — JE × NENÍ při vyšetřování havárií", content: "Když NASA vyšetřovala havárii raketoplánu Challenger, použila přesně logiku JE × NENÍ. Problém byl u těsnění (O-kroužků). Ptali se: za jakých podmínek O-kroužky selhávají (JE) × za jakých ne (NENÍ)? Zjistili, že selhávají za nízkých teplot. Challenger startoval za mrazu — to byla příčina. Bez systematického oddělení 'kdy ano' a 'kdy ne' by se příčina hledala mnohem déle. Tohle je síla tabulky JE × NENÍ na reálném tragickém případu." },
+      { tag: "LÉČKA: UTOPENÉ NÁKLADY", color: VSE.danger, company: "Concorde — projekt, který nešlo zastavit", content: "Nadzvukové letadlo Concorde je tak slavný příklad utopených nákladů, že se tomu říká 'Concorde fallacy'. Británie a Francie léta věděly, že projekt je prodělečný, ale pokračovaly s argumentem: 'už jsme do toho dali tolik miliard, nemůžeme to teď zahodit.' Concorde nikdy nevydělal. Klasická léčka — minulé náklady jsou pryč a do rozhodnutí nepatří. Správně se ptát: vyplatí se to OD TEĎ dál?" },
+      { tag: "KAUZALITA × KORELACE", color: VSE.warning, company: "Google — proč testují vše A/B testem", content: "Google nikdy nezavádí změnu jen proto, že 'data ukazují souvislost'. Slavně testovali i 41 odstínů modré u odkazů. Proč? Protože korelace (uživatelé víc klikají, když je víc modré) nemusí být kauzalita. A/B test izoluje skutečnou příčinu — změní jen jednu věc a měří dopad. Tím se vyhnou klasické chybě záměny korelace za příčinu, která stojí firmy miliony ve špatných rozhodnutích." },
+      { tag: "LÉČKA: ZAKOTVENÍ", color: VSE.fph, company: "Kodak — uvíznutí v první informaci", content: "Kodak vynalezl digitální fotoaparát už v roce 1975, ale management byl zakotvený v přesvědčení 'my jsme firma na film, film je naše budoucnost'. Drželi se první informace o tom, kdo jsou, a ignorovali signály, že svět jde digitálně. Zakotvení je stálo existenci — v roce 2012 zbankrotovali. Klasická léčka: držet se původní představy i přes nové důkazy." },
+    ]
+  };
+
+  const examQuestionsRoz1 = [
+    { komise: "Mnoho komisí 2025-2026 (Mikovcová, Pichanič, Nový, Svobodová, Schönfeld, Stříteský...)", otazka: "Kepner-Tregoe + rozhodovací problém — aplikovat na případovku", pozn: "Naprosto nejčastější tažená z rozhodování. Najít problém v PS, popsat ho (tabulka JE × NENÍ, 4 hlediska), najít příčinu, postup řešení. Komise chce aplikaci, ne jen teorii." },
+    { komise: "2025-02-04 — Vrbová + Tahal + Svobodová", otazka: "Kepner-Tregoe — analýza problému a příčiny, formulace problému, najít v případovce", pozn: "Vrbová se explicitně ptala, proč je dobré mít sloupec 'co problém NENÍ'. Odpověď: skutečná příčina musí vysvětlit i to, proč se problém neděje jinde — tím se vyřadí falešné stopy." },
+    { komise: "2025-06-16 — Double Stříteský + Mareš", otazka: "Nalézt rozhodovací problémy v PS, prioritizace, řešení jednoho přes Kepner-Tregoe", pozn: "Chtěl i jak se stanovují možné příčiny (výzkum, kvalitativní a kvantitativní). Prioritizace problémů podle závažnosti, naléhavosti, budoucího dopadu." },
+  ];
+
+  const podcastRoz1 = { title: "Manažerské rozhodování 1 — Rozhodovací problém + Kepner-Tregoe", description: "Rozhodování = volba mezi alespoň 2 možnostmi. Rozhodovací problém = odchylka od žádoucího stavu. Meritorní stránka (CO řešíme, obsah) × formálně-logická (JAK postupujeme, postup). Normativní teorie (návod do budoucna) × deskriptivní (popis proběhlých). Vstupy - problém, čas a riziko, manažer. Typy problémů - dobře strukturovaný (rutinní, matematické modely) × špatně strukturovaný (nový, tvůrčí přístup). Tři podmínky - za jistoty (úplné info), za rizika (známe pravděpodobnosti), za nejistoty (neznáme pravděpodobnosti). Kepner-Tregoe - metoda na nalezení skutečné příčiny. 4 kroky - popis problému (4 hlediska CO/KDE/KDY/KOLIK, tabulka JE × NENÍ), identifikace příčin, testování příčin, potvrzení + korekční akce. Proč sloupec NENÍ - příčina musí vysvětlit proč se problém neděje jinde. Kauzální analýza - problem tree, Ishikawa rybí kost, kognitivní mapy, silové pole, GAP, Pareto. Korelace není kauzalita. Bariéry - subjekt, organizace, léčky (zakotvení, utopené náklady, status quo, hráč, potvrzující info). Postup na případovku.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyRoz1 = `
+    <b style="color:#0F6661">1.</b> Rozhodování = <b>volba mezi alespoň 2 možnostmi</b>. Problém = odchylka od žádoucího stavu.<br/>
+    <b style="color:#0F6661">2.</b> Dvě stránky — meritorní (CO, obsah) × formálně-logická (JAK, postup).<br/>
+    <b style="color:#0F6661">3.</b> Typy problémů — dobře strukturovaný (rutinní) × špatně strukturovaný (nový, tvůrčí).<br/>
+    <b style="color:#0F6661">4.</b> Tři podmínky — za jistoty / za rizika (známe pp) / za nejistoty (neznáme pp).<br/>
+    <b style="color:#0F6661">5.</b> ⚠️ <b>Kepner-Tregoe</b> — metoda na nalezení skutečné příčiny. 4 kroky.<br/>
+    <b style="color:#0F6661">6.</b> KT krok 1 — popis problému, 4 hlediska (CO/KDE/KDY/KOLIK), <b>tabulka JE × NENÍ</b>.<br/>
+    <b style="color:#0F6661">7.</b> ⚠️ Proč sloupec NENÍ — příčina musí vysvětlit, proč se problém neděje jinde (ptala se Vrbová).<br/>
+    <b style="color:#0F6661">8.</b> Kauzální analýza — problem tree, Ishikawa (rybí kost), GAP, Pareto, silové pole.<br/>
+    <b style="color:#0F6661">9.</b> ⚠️ Korelace NENÍ kauzalita — pozor na záměnu.<br/>
+    <b style="color:#0F6661">10.</b> Léčky — zakotvení, utopené náklady, status quo, hráč, potvrzující info.<br/>
+    <b style="color:#0F6661">11.</b> ⚠️ VŽDY najít problém v PS + aplikovat KT + najít příčinu + korekční akce.
+  `;
+
+  const caseStudyRoz1 = {
+    title: "Pavel a kavárna, kde ubývají hosté",
+    subtitle: "Najít skutečnou příčinu, ne hádat řešení",
+    scenario: "Pavel vede oblíbenou kavárnu v centru města. Roky jí šlo skvěle, ale poslední dobou má pocit, že hostů ubývá. Číšníci to potvrzují, tržby klesají. Pavel je nervózní a začíná střílet od boku.\n\nNejdřív si řekl, že je to konkurencí — kousek vedle otevřela nová kavárna. Chtěl hned spustit slevovou akci a předražit konkurenci. Pak ho napadlo, že možná zestárlo menu, a chtěl ho celé předělat. Pak zase, že číšníci jsou pomalí, a chtěl je proškolit. Každý den nový nápad, ale žádný nestojí na faktech.\n\nKamarádka, co dělá manažerku, mu řekla, ať se zastaví. 'Pavle, ty hádáš řešení, ale vůbec nevíš, v čem je problém. Nejdřív musíš najít příčinu, ne střílet naslepo.' Poradila mu, ať si problém pořádně popíše — kdy přesně hosté ubývají, kde, kterých, a kdy naopak ne.\n\nPavel se nad tím zamyslel a zjistil zajímavou věc. Hostů neubývá pořád — ubývá jich hlavně v odpoledních hodinách všedních dnů. Ráno a o víkendu je plno jako dřív. A ubývají hlavně štamgasti, co tu dřív sedávali s notebookem. Nových hostů na kávu s sebou je pořád dost.\n\nTeď má Pavel před sebou hádanku. Místo aby předělával celé menu nebo školil personál, musí zjistit, co se změnilo zrovna pro odpolední štamgasty s notebookem. Tuší, že když najde tu jednu věc, která se změnila právě tam a právě tehdy, najde i příčinu — a ušetří si zbytečné drahé akce, které by problém stejně nevyřešily.",
+    signals: [
+      { text: "Pavel je nervózní a začíná střílet od boku... každý den nový nápad, ale žádný nestojí na faktech", color: VSE.danger, reason: "Klasická chyba — skákání k řešení bez analýzy problému (Roz1). Pavel hádá řešení (sleva, menu, školení), aniž zná příčinu. Kepner-Tregoe říká: nejdřív najdi příčinu." },
+      { text: "Chtěl hned spustit slevovou akci... pak předělat menu... pak proškolit číšníky", color: VSE.warning, reason: "Tři různá řešení tří různých domnělých příčin (Roz1). Každé je drahé a žádné nestojí na faktech. Bez nalezení skutečné příčiny je to plýtvání." },
+      { text: "Nejdřív musíš najít příčinu, ne střílet naslepo", color: VSE.fph, reason: "Jádro Kepner-Tregoe (Roz1). Problém je odchylka, jejíž příčina je zatím neznámá. Nejdřív popsat a najít příčinu, teprve pak řešit." },
+      { text: "Ubývá jich hlavně v odpoledních hodinách všedních dnů. Ráno a o víkendu je plno jako dřív", color: VSE.success, reason: "Tohle je sloupec JE × NENÍ z KT (Roz1). JE: odpoledne ve všední den. NENÍ: ráno, víkend. Zúžení pomáhá najít, co se změnilo právě tehdy." },
+      { text: "Ubývají hlavně štamgasti, co tu dřív sedávali s notebookem. Nových hostů na kávu s sebou je pořád dost", color: VSE.success, reason: "Další JE × NENÍ (Roz1). JE: štamgasti s notebookem. NENÍ: hosté na kávu s sebou. Co se změnilo zrovna pro lidi, co tu dlouho sedí a pracují?" },
+      { text: "Co se změnilo zrovna pro odpolední štamgasty s notebookem", color: VSE.fph, reason: "Pavel sám dochází k logice KT (Roz1). Skutečná příčina musí vysvětlit, proč problém JE jen tam a jen tehdy. Možná zrušil wifi, zdražil, nebo obsadil zásuvky." },
+    ],
+    quiz1: {
+      question: "Jakou chybu Pavel na začátku dělá?",
+      options: [
+        "Moc analyzuje",
+        "Skáče rovnou k řešením (sleva, menu, školení), aniž zná skutečnou příčinu problému — hádá naslepo místo aby použil metodu jako Kepner-Tregoe.",
+        "Málo investuje",
+        "Špatně počítá tržby",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měl Pavel postupovat podle Kepner-Tregoe?",
+      options: [
+        { text: "Popsat problém přesně přes tabulku JE × NENÍ — kdy hosté ubývají (odpoledne všední den) × kdy ne (ráno, víkend), kterých (štamgasti s notebookem) × kterých ne (káva s sebou).", correct: true, reason: "✓ Roz1 — KT krok 1, tabulka JE × NENÍ ze 4 hledisek. Přesný popis problému je základ, bez něj metoda nefunguje." },
+        { text: "Sestavit seznam možných příčin — co se mohlo změnit zrovna pro odpolední štamgasty: zrušená wifi, obsazené zásuvky, zdražení, hlučnější prostředí, nová pravidla.", correct: true, reason: "✓ Roz1 — KT krok 2, identifikace možných příčin. Seznam potenciálních příčin na základě toho, co popsal." },
+        { text: "Otestovat každou příčinu logikou — vysvětlí tato příčina, proč problém JE jen odpoledne, jen ve všední den, jen u štamgastů s notebookem? Co nevysvětlí všechno, vyřadit.", correct: true, reason: "✓ Roz1 — KT krok 3, testování příčin. Skutečná příčina musí vysvětlit VŠECHNY následky. Tím se vyřadí falešné stopy." },
+        { text: "Potvrdit pravou příčinu a navrhnout konkrétní korekční akci — třeba pokud zrušil wifi pro úsporu, vrátit ji, protože odháněla právě dlouhosedící hosty.", correct: true, reason: "✓ Roz1 — KT krok 4, potvrzení + korekční akce. Až po nalezení příčiny se řeší, ne dřív." },
+        { text: "Hned spustit slevovou akci, ať se hosté vrátí", correct: false, reason: "✗ To je přesně ta chyba — řešení bez nalezení příčiny. Pokud je problém ve zrušené wifi, sleva nepomůže a jen sníží zisk." },
+        { text: "Předělat celé menu a proškolit personál najednou", correct: false, reason: "✗ Drahé řešení naslepo. Když problém není v menu ani v personálu (ráno a víkend je plno), je to plýtvání penězi i časem." },
+        { text: "Počkat, jestli se to samo zlepší", correct: false, reason: "✗ Pasivita. Problém se bez nalezení a odstranění příčiny sám nevyřeší, hosté budou ubývat dál." },
+      ],
+    },
+    summary: "<b>Pavel dělá klasickou chybu — hádá řešení, místo aby našel příčinu.</b> Měl by použít Kepner-Tregoe a postupovat systematicky.<br/><br/><b>Postup podle Kepner-Tregoe:</b><br/><br/>• <b>Krok 1 — Popsat problém (tabulka JE × NENÍ):</b> CO: ubývají hosté × ostatní v pořádku. KDE/KDY: odpoledne ve všední den × ne ráno a o víkendu. KTERÝCH: štamgasti s notebookem × ne hosté na kávu s sebou. Přesný popis ze 4 hledisek (CO/KDE/KDY/KOLIK).<br/><br/>• <b>Krok 2 — Možné příčiny:</b> Co se mohlo změnit zrovna pro odpolední štamgasty? Zrušená wifi, obsazené zásuvky, zdražení, hluk, nová pravidla.<br/><br/>• <b>Krok 3 — Testování:</b> Vysvětlí daná příčina, proč problém JE jen odpoledne, jen ve všední den, jen u dlouhosedících? Co nevysvětlí všechno, vyřadit. (Zdražení by zasáhlo i ranní hosty — vyřazeno.)<br/><br/>• <b>Krok 4 — Potvrzení + akce:</b> Najít pravou příčinu (třeba zrušená wifi nebo zabrané zásuvky odpoledne) a navrhnout konkrétní nápravu.<br/><br/><b>Proč sloupec NENÍ:</b> Skutečná příčina musí vysvětlit nejen co se děje, ale i proč se to neděje jinde. To vyřadí falešné stopy a ušetří Pavlovi drahé akce naslepo.<br/><br/><b>Pro komisi:</b> Tohle je přesně to, co tažené chtějí — najít rozhodovací problém v PS + aplikovat Kepner-Tregoe. Klíč: <b>popis problému (JE × NENÍ, 4 hlediska)</b> + <b>možné příčiny</b> + <b>testování logikou</b> + <b>potvrzení + korekční akce</b>. Zmínit i <b>léčky</b> (Pavel málem spadl do skákání k řešení). Anti-vzor: hádat řešení bez nalezení příčiny.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Manažerské rozhodování" subjectId="roz" number={1} title="Rozhodovací problém + Kepner-Tregoe"
+      subtitle="Co je rozhodování + typy problémů + Kepner-Tregoe (JE × NENÍ) + kauzální analýza + léčky"
+      color={VSE.fph}
+      questionText="Rozhodovací problém a metoda Kepner-Tregoe — analýza problému, hledání příčin, aplikace na případovku."
+      sloz={3} roz={4} freq={5}
+      examStrategy={examStrategyRoz1}
+      studySections={studySectionsRoz1}
+      flashcards={flashcardsRoz1}
+      quiz={quizRoz1}
+      praxe={praxeRoz1}
+      examQuestions={examQuestionsRoz1}
+      podcast={podcastRoz1}
+      caseStudy={caseStudyRoz1}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   MANAŽERSKÉ ROZHODOVÁNÍ 2 — Cíle, stakeholdery, kritéria, varianty
+   ════════════════════════════════════════════════════════ */
+function OkruhRoz2Panel() {
+  const studySectionsRoz2 = [
+    { id: "cile", title: "Cíle a strom cílů — co vlastně chceme dosáhnout", subtitle: "Hierarchie cílů a její logika", color: VSE.fph, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Cíl</b> = stav firmy, kterého chceme rozhodnutím dosáhnout. Než začneme řešit, musíme vědět, KAM míříme. Cíle se uspořádávají do <b>stromu cílů</b> — hierarchie od obecných po konkrétní.
+        </Def>
+        <Tag color={VSE.fph}>Strom cílů (hierarchie)</Tag>
+        <Bullet items={[
+          "<b>Spodní patro → nahoru</b> odpovídá na otázku <b>PROČ</b> (proč to děláme? kvůli vyššímu cíli).",
+          "<b>Horní patro → dolů</b> odpovídá na otázku <b>JAK</b> (jak toho dosáhneme? přes nižší cíle).",
+          "<b>Začínáme hledat shora</b>, ale vrcholové cíle bývají obecné — čím níž jdeme, tím konkrétnější a snadněji měřitelné jsou.",
+          "<b>Vrcholový cíl nesmí být přímo problémem</b> — má to být pozitivní stav, kterého chceme dosáhnout.",
+          "<b>Začni od hodnot a alternativ</b>, ne od řešení. Nejdřív víme, co chceme, pak hledáme jak.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Konfliktní cíle</Tag>
+        <Bullet items={[
+          "Cíle se mohou <b>doplňovat</b> (jdou ruku v ruce) nebo být <b>konfliktní</b> (jeden brání druhému).",
+          "<b>Příklad konfliktu:</b> chci nejvyšší kvalitu A zároveň nejnižší cenu — to jde proti sobě.",
+          "U špatně strukturovaných problémů jsou konflikty cílů běžné — musíme je vyvážit.",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Tažené: Propojení cílů, stakeholderů, kritérií a variant (Stříteský+Schönfeld+Cejthamr 2025, Honig+Kučera+Machek 2026, Špaček+Nový+Machek 2026)"
+          what="Komise chce: <b>vybrat jeden rozhodovací problém z PS</b> a stručně stanovit <b>cíle + stakeholdery + kritéria + varianty + eliminační (omezující) podmínky</b>. Klíč je umět propojit těchto 5 prvků."
+        />
+      </div>) },
+
+    { id: "stakeholders", title: "Stakeholdeři — koho se rozhodnutí týká", subtitle: "Zainteresované strany v rozhodování", color: VSE.fph, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Stakeholdeři</b> = všichni, koho se rozhodnutí dotkne nebo kdo ho může ovlivnit. Než rozhodneme, musíme vědět, KDO má na věci zájem — jinak nás někdo nemile překvapí.
+        </Def>
+        <Tag color={VSE.fph}>Kdo bývá stakeholder</Tag>
+        <Bullet items={[
+          "<b>Vnitřní:</b> zaměstnanci, manažeři, vlastníci, akcionáři.",
+          "<b>Vnější:</b> zákazníci, dodavatelé, odběratelé, stát, konkurence, komunita.",
+          "<b>Proč na nich záleží:</b> Každý má jiné zájmy a jinou moc. Rozhodnutí, které ignoruje klíčové stakeholdery, často narazí na odpor.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Jak se stakeholdeři propojují s rozhodováním</Tag>
+        <Bullet items={[
+          "<b>Stakeholdeři určují cíle</b> — co je pro koho důležité.",
+          "<b>Stakeholdeři ovlivňují kritéria</b> — podle čeho budeme varianty hodnotit (akcionáři chtějí zisk, zaměstnanci jistotu).",
+          "<b>Stakeholdeři jsou zdrojem omezení</b> — některé varianty nepřipadají v úvahu kvůli zájmům určité skupiny.",
+          "<b>Pro případovku:</b> vždy si u problému vyjmenuj, koho se týká a co každý chce.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "kriteria", title: "Kritéria — podle čeho varianty hodnotíme", subtitle: "Měřítka výhodnosti variant", color: VSE.fph, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Kritéria</b> = hlediska (měřítka, ukazatele), podle kterých posuzujeme, která varianta je nejlepší. <b>Vycházejí z cílů</b> — kritérium je vlastně způsob, jak změřit, jestli jsme se k cíli přiblížili.
+        </Def>
+        <Tag color={VSE.fph}>Kvalitativní × kvantitativní kritéria</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "📊 KVANTITATIVNÍ", d: "Přesné číslo — vzdálenost v km, zisk v Kč, počet kusů. Snadno se měří a porovnává." },
+            { c: VSE.nf, t: "📝 KVALITATIVNÍ", d: "Širší, obtížně měřitelné — dopad na životní prostředí, politické a sociální dopady. Vyjadřují se škálami (ordinální = pořadí, kardinální = intervaly)." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>5 požadavků na dobré kritérium</Tag>
+        <Bullet items={[
+          "<b>Jednoznačné</b> — jasně definované. Ne 'malý/velký' (každý si představí jinak), ale konkrétní.",
+          "<b>Komplexní</b> — pokrývá celý obsah. Ne jen 'úmrtí', ale i nemoc a bolest.",
+          "<b>Přímé</b> — popisují přímo následky, nejsou mimo téma ani zbytečně duplicitní.",
+          "<b>Operativní (funkční)</b> — dají se změřit, umíme s nimi pracovat.",
+          "<b>Srozumitelné</b> — dobře popsané a není jich zbytečně moc.",
+          "<b>Pozor na REDUNDANCI</b> — duplicitní kritéria (dvě, co měří to samé) zkreslí výsledek.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Výnosová × nákladová kritéria</Tag>
+        <Bullet items={[
+          "<b>Výnosová</b> — chceme co největší hodnotu (zisk, kvalita). Čím víc, tím líp.",
+          "<b>Nákladová</b> — chceme co nejmenší hodnotu (cena, riziko). Čím míň, tím líp.",
+          "<b>Pozor při výběru:</b> u výnosových hledáme maximum, u nákladových minimum — nesmí se to splést.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "varianty", title: "Varianty — jaké máme možnosti řešení", subtitle: "Tvorba variant a zásady kreativity", color: VSE.fph, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Varianty</b> = možné cesty, jak se dostat k cíli. Co můžeme udělat, abychom problém vyřešili. Bez dostatku variant si vybíráme jen z mála možností — proto je důležité jich vymyslet hodně.
+        </Def>
+        <Tag color={VSE.fph}>Dva způsoby tvorby variant</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.warning, t: "💡 INTUITIVNÍ (kreativní)", d: "Pro špatně strukturované problémy. Tvůrčí, na základě spolupráce týmu. Brainstorming, design thinking, analogie, metoda 635. Hledá nový, inovativní pohled." },
+            { c: VSE.fmv, t: "📐 SYSTEMATICKO-ANALYTICKÉ", d: "Pro dobře strukturované problémy. Vědecké metody, matematika, software. Rozhodovací stromy, Monte Carlo, scénáře, morfologická analýza." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Zásady tvorby variant — jak nakopnout kreativitu</Tag>
+        <Bullet items={[
+          "<b>Odložený úsudek</b> — nebýt hned kritický. Nejdřív sbírat nápady, kritizovat až potom.",
+          "<b>Co nejvíce nápadů</b> — kvantita teď, kvalita později. Z velkého počtu se snáz vybírá.",
+          "<b>Příznivá atmosféra</b> — lidé se nebojí říct i bláznivý nápad.",
+          "<b>Vzájemné obohacování</b> — stavět na nápadech ostatních, reagovat na ně.",
+          "<b>Nestrannost moderátora</b> — ten, kdo vede, nehodnotí ani nepreferuje.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "eliminace", title: "Eliminační (omezující) podmínky", subtitle: "Co musí varianta splnit, aby vůbec prošla", color: VSE.fph, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Eliminační (omezující) podmínky</b> = hranice, které varianta MUSÍ splnit, aby vůbec připadala v úvahu. Fungují jako síto — co je nesplní, okamžitě vyřadíme (GO / NO GO).
+        </Def>
+        <Tag color={VSE.fph}>Jak fungují eliminační podmínky</Tag>
+        <Bullet items={[
+          "Nejsou to běžná kritéria (která dávají body). Jsou to <b>tvrdé hranice</b> — splní/nesplní.",
+          "<b>Pohled vpřed:</b> odhadujeme, jestli varianta podmínku splní. Když ne → vyřadíme ji hned.",
+          "<b>Příklad:</b> 'rozpočet max 1 milion'. Varianta za 1,5 milionu je NO GO, vyřazena, dál se s ní nezabýváme.",
+          "<b>Proč je to užitečné:</b> zúží počet variant, se kterými dál pracujeme. Nemá smysl hodnotit variantu, která je předem mimo hru.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Rozdíl: kritérium × eliminační podmínka</Tag>
+        <Bullet items={[
+          "<b>Kritérium</b> = škála, dává body (lepší/horší). Varianta s méně body není vyřazená, jen hůř hodnocená.",
+          "<b>Eliminační podmínka</b> = ano/ne. Varianta buď projde, nebo letí ven. Žádný střed.",
+          "<b>Pamatuj:</b> Nejdřív eliminační podmínky (vyřadit nemožné), pak kritéria (seřadit zbytek podle kvality).",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Propojení 5 prvků na rozhodovací problém", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Tahle tažená chce jednu věc: <b>vybrat jeden rozhodovací problém z PS a propojit na něm 5 prvků</b> — cíle, stakeholdery, kritéria, varianty a eliminační podmínky.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Vyber <b>jeden rozhodovací problém</b> z PS (ne všechny, jeden konkrétní).",
+          "<b>2.</b> Stanov <b>cíle</b> — čeho chceme dosáhnout (sestav strom cílů, ptej se PROČ a JAK).",
+          "<b>3.</b> Urči <b>stakeholdery</b> — koho se to týká, co každý chce.",
+          "<b>4.</b> Stanov <b>kritéria</b> — podle čeho budeme hodnotit (vycházejí z cílů, jednoznačná, neredundantní).",
+          "<b>5.</b> Vytvoř <b>varianty</b> — jaké máme možnosti řešení (intuitivní nebo analytické).",
+          "<b>6.</b> Urči <b>eliminační podmínky</b> — co musí varianta splnit (GO / NO GO).",
+          "<b>7.</b> Ukaž <b>propojení</b> — jak stakeholdeři určují cíle, cíle určují kritéria, podmínky vyřazují varianty.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Propojit všech 5 prvků a ukázat, jak na sebe navazují.",
+          "<b>✅ Dobře:</b> Rozlišit kritérium (body) od eliminační podmínky (ano/ne).",
+          "<b>✅ Dobře:</b> Konkrétní cíle, stakeholdery a kritéria přímo z případovky.",
+          "<b>❌ Špatně:</b> Vyjmenovat prvky obecně bez napojení na problém z PS.",
+          "<b>❌ Špatně:</b> Splést kritéria s eliminačními podmínkami.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsRoz2 = [
+    { term: "Cíl rozhodování", def: "Stav firmy, kterého chceme rozhodnutím dosáhnout. Než řešíme, musíme vědět KAM míříme.", tag: "CÍLE" },
+    { term: "Strom cílů", def: "Hierarchie cílů od obecných po konkrétní. Nahoru = PROČ, dolů = JAK.", tag: "CÍLE" },
+    { term: "Strom cílů — logika", def: "Spodní → nahoru = PROČ to děláme. Horní → dolů = JAK toho dosáhneme. Čím níž, tím konkrétnější a měřitelnější.", tag: "CÍLE" },
+    { term: "Vrcholový cíl", def: "Nesmí být přímo problémem — má to být pozitivní stav, kterého chceme dosáhnout.", tag: "CÍLE" },
+    { term: "Konfliktní cíle", def: "Cíle se buď doplňují, nebo jdou proti sobě. Příklad konfliktu: nejvyšší kvalita A nejnižší cena.", tag: "CÍLE" },
+    { term: "Stakeholdeři", def: "Všichni, koho se rozhodnutí dotkne nebo kdo ho může ovlivnit. Vnitřní (zaměstnanci, vlastníci) + vnější (zákazníci, stát).", tag: "STAKEHOLDEŘI" },
+    { term: "Stakeholdeři × rozhodování", def: "Určují cíle, ovlivňují kritéria, jsou zdrojem omezení. Rozhodnutí ignorující klíčové stakeholdery narazí na odpor.", tag: "STAKEHOLDEŘI" },
+    { term: "Kritéria", def: "Hlediska, podle kterých posuzujeme výhodnost variant. Vycházejí z cílů — měří, jestli jsme se přiblížili k cíli.", tag: "KRITÉRIA" },
+    { term: "Kvantitativní kritérium", def: "Přesné číslo — km, Kč, kusy. Snadno měřitelné.", tag: "KRITÉRIA" },
+    { term: "Kvalitativní kritérium", def: "Širší, obtížně měřitelné — dopad na ŽP, sociální dopady. Vyjadřuje se škálami (ordinální/kardinální).", tag: "KRITÉRIA" },
+    { term: "5 požadavků na kritérium", def: "Jednoznačné, komplexní, přímé, operativní (funkční), srozumitelné. Pozor na redundanci.", tag: "KRITÉRIA" },
+    { term: "Redundance kritérií", def: "Duplicitní kritéria (dvě měřící to samé) zkreslí výsledek. Vyvarovat se jí.", tag: "KRITÉRIA" },
+    { term: "Výnosové × nákladové kritérium", def: "Výnosové = chceme maximum (zisk). Nákladové = chceme minimum (cena, riziko).", tag: "KRITÉRIA" },
+    { term: "Varianty", def: "Možné cesty k cíli. Co můžeme udělat. Důležité vymyslet jich hodně, aby bylo z čeho vybírat.", tag: "VARIANTY" },
+    { term: "Intuitivní tvorba variant", def: "Pro špatně strukturované problémy. Kreativní, týmová. Brainstorming, design thinking, analogie, 635.", tag: "VARIANTY" },
+    { term: "Systematicko-analytické varianty", def: "Pro dobře strukturované problémy. Matematika, software. Rozhodovací stromy, Monte Carlo, scénáře.", tag: "VARIANTY" },
+    { term: "Zásady tvorby variant", def: "Odložený úsudek, co nejvíc nápadů, příznivá atmosféra, vzájemné obohacování, nestrannost moderátora.", tag: "VARIANTY" },
+    { term: "Odložený úsudek", def: "Nebýt hned kritický. Nejdřív sbírat nápady, kritizovat až potom. Základ kreativity.", tag: "VARIANTY" },
+    { term: "Eliminační podmínky", def: "Tvrdé hranice, které varianta MUSÍ splnit (GO / NO GO). Co nesplní, vyřadíme hned.", tag: "ELIMINACE" },
+    { term: "Kritérium × eliminační podmínka", def: "Kritérium = škála, dává body. Eliminační podmínka = ano/ne, varianta projde nebo letí ven.", tag: "ELIMINACE" },
+    { term: "Pořadí: podmínky → kritéria", def: "Nejdřív eliminační podmínky (vyřadit nemožné), pak kritéria (seřadit zbytek podle kvality).", tag: "ELIMINACE" },
+    { term: "Stavy světa", def: "Budoucí vzájemně se vylučující situace, které mohou nastat po realizaci varianty.", tag: "POJEM" },
+    { term: "Subjekt rozhodování", def: "Rozhodovatel — kdo rozhoduje (jednotlivec nebo skupina).", tag: "POJEM" },
+    { term: "Objekt rozhodování", def: "Čeho se rozhodnutí týká — varianty a jejich důsledky.", tag: "POJEM" },
+  ];
+
+  const quizRoz2 = [
+    { q: "Co je cíl rozhodování?", opts: ["Problém", "Stav firmy, kterého chceme rozhodnutím dosáhnout", "Riziko", "Náklad"], correct: 1 },
+    { q: "Jak funguje strom cílů?", opts: ["Náhodně", "Nahoru = PROČ (proč to děláme), dolů = JAK (jak toho dosáhneme)", "Jen dolů", "Jen nahoru"], correct: 1 },
+    { q: "Co jsou konfliktní cíle?", opts: ["Cíle, co se doplňují", "Cíle, které jdou proti sobě (nejvyšší kvalita A nejnižší cena)", "Stejné cíle", "Žádné cíle"], correct: 1 },
+    { q: "Co jsou stakeholdeři?", opts: ["Jen akcionáři", "Všichni, koho se rozhodnutí dotkne nebo kdo ho může ovlivnit", "Jen zaměstnanci", "Konkurence"], correct: 1 },
+    { q: "Jak souvisí stakeholdeři s rozhodováním?", opts: ["Nesouvisí", "Určují cíle, ovlivňují kritéria, jsou zdrojem omezení", "Jen platí", "Jen kontrolují"], correct: 1 },
+    { q: "Co jsou kritéria?", opts: ["Problémy", "Hlediska, podle kterých posuzujeme výhodnost variant — vycházejí z cílů", "Varianty", "Cíle"], correct: 1 },
+    { q: "Jaký je rozdíl kvantitativní × kvalitativní kritérium?", opts: ["Žádný", "Kvantitativní = přesné číslo (km, Kč). Kvalitativní = širší, na škálách (dopad na ŽP).", "Velikost", "Cena"], correct: 1 },
+    { q: "Jaké jsou požadavky na dobré kritérium?", opts: ["Drahé, velké", "Jednoznačné, komplexní, přímé, operativní, srozumitelné", "Malé, levné", "Rychlé, pomalé"], correct: 1 },
+    { q: "Co je redundance kritérií?", opts: ["Dobrá vlastnost", "Duplicitní kritéria (dvě měřící to samé) — zkreslí výsledek", "Málo kritérií", "Hodně kritérií"], correct: 1 },
+    { q: "Jaký je rozdíl výnosové × nákladové kritérium?", opts: ["Žádný", "Výnosové = chceme maximum (zisk). Nákladové = chceme minimum (cena, riziko).", "Velikost", "Barva"], correct: 1 },
+    { q: "Co jsou varianty?", opts: ["Problémy", "Možné cesty k cíli — co můžeme udělat pro vyřešení", "Cíle", "Kritéria"], correct: 1 },
+    { q: "Kdy použít intuitivní tvorbu variant?", opts: ["Vždy", "U špatně strukturovaných problémů — kreativní, brainstorming, design thinking", "Nikdy", "U rutinních"], correct: 1 },
+    { q: "Co je zásada 'odložený úsudek'?", opts: ["Hned kritizovat", "Nebýt hned kritický — nejdřív sbírat nápady, kritizovat až potom", "Nerozhodovat", "Odložit vše"], correct: 1 },
+    { q: "Co jsou eliminační (omezující) podmínky?", opts: ["Body", "Tvrdé hranice, které varianta MUSÍ splnit (GO / NO GO)", "Cíle", "Kritéria na škále"], correct: 1 },
+    { q: "Jaký je rozdíl kritérium × eliminační podmínka?", opts: ["Žádný", "Kritérium = škála, dává body. Eliminační podmínka = ano/ne, projde nebo vyřazena.", "Velikost", "Cena"], correct: 1 },
+    { q: "Jaké je pořadí: podmínky × kritéria?", opts: ["Nezáleží", "Nejdřív eliminační podmínky (vyřadit nemožné), pak kritéria (seřadit zbytek)", "Jen kritéria", "Jen podmínky"], correct: 1 },
+  ];
+
+  const praxeRoz2 = {
+    caseStudy: {
+      company: "Amazon — rozhodování o vstupu do cloudu (AWS)",
+      subtitle: "Jak Amazon propojil cíle, stakeholdery, kritéria a varianty",
+      content: (<>
+        Amazon je <b>učebnicový příklad firmy, která rozhoduje systematicky</b>. Vznik AWS (Amazon Web Services) — dnes nejziskovější část firmy — ukazuje propojení všech prvků rozhodování.<br/><br/>
+        🎯 CÍLE (strom cílů):<br/><br/>
+        Vrcholový cíl: nový zdroj růstu mimo e-commerce. Dílčí cíle: využít volnou serverovou kapacitu + získat nový trh + dlouhodobá zisková marže. (PROČ → diverzifikovat příjmy. JAK → pronajímat výpočetní výkon.)<br/><br/>
+        👥 STAKEHOLDEŘI:<br/><br/>
+        Akcionáři (chtěli zisk z e-commerce, ne riskovat nový obor), interní inženýři (chtěli postavit infrastrukturu), budoucí zákazníci (startupy a firmy bez vlastních serverů), Jeff Bezos (tlačil na dlouhodobou vizi proti krátkodobému zisku).<br/><br/>
+        📊 KRITÉRIA:<br/><br/>
+        Velikost trhu (výnosové), návratnost investice (výnosové), riziko kanibalizace hlavního byznysu (nákladové), škálovatelnost.<br/><br/>
+        🛤️ VARIANTY:<br/><br/>
+        Nedělat nic (jistota) · pronajímat jen volnou kapacitu · postavit plnohodnotnou cloudovou platformu · koupit existujícího hráče.<br/><br/>
+        🚧 ELIMINAČNÍ PODMÍNKY:<br/><br/>
+        Nesmí ohrozit hlavní e-commerce byznys + musí být škálovatelné globálně. Tím vypadly varianty, které by odčerpaly příliš zdrojů z hlavního byznysu.<br/><br/>
+        🔗 VÝSLEDEK:<br/><br/>
+        Bezos prosadil plnohodnotnou platformu (proti odporu akcionářů, kteří se báli odklonu od e-commerce). Dnes AWS tvoří většinu provozního zisku Amazonu. <b>Ukázka, jak stakeholdeři, cíle a kritéria vedou k rozhodnutí, které krátkodobě vypadá riskantně, ale dlouhodobě vyhrává.</b>
+      </>),
+      lessons: "Amazon AWS ukazuje propojení 5 prvků rozhodování na reálném strategickém kroku. <b>Stakeholdeři</b> (akcionáři × Bezos) měli konfliktní cíle (krátkodobý zisk × dlouhodobá vize). <b>Cíle</b> se promítly do <b>kritérií</b> (velikost trhu, ROI, riziko kanibalizace). <b>Eliminační podmínky</b> (neohrozit hlavní byznys) vyřadily nemožné varianty. Pro případovku: ukázat, jak stakeholdeři určují cíle, cíle určují kritéria, podmínky filtrují varianty."
+    },
+    miniExamples: [
+      { tag: "KONFLIKTNÍ CÍLE", color: VSE.danger, company: "Boeing — když cíle jdou proti sobě", content: "Boeing u modelu 737 MAX čelil konfliktním cílům: nízká cena a rychlé uvedení na trh (tlak konkurence od Airbusu) × bezpečnost a důkladné testování. Vyhrály cena a rychlost — software MCAS nebyl dostatečně otestovaný. Následovaly dvě havárie a uzemnění celé flotily. Klasická ukázka, že když firma upřednostní jeden cíl (rychlost/cena) na úkor konfliktního (bezpečnost), může to skončit katastrofou. Konflikt cílů se musí vyvážit, ne ignorovat." },
+      { tag: "STAKEHOLDEŘI", color: VSE.fph, company: "Disney — proč mapuje stakeholdery před rozhodnutím", content: "Když Disney rozhodoval o spuštění Disney+ (vlastní streamovací služba), musel zvážit stakeholdery: akcionáře (krátkodobý propad zisku kvůli investici), Netflix a další (kterým přestal licencovat obsah), zákazníky (chtěli vše na jednom místě), Hollywood studia. Rozhodnutí stáhnout obsah z Netflixu a spustit vlastní platformu zohlednilo dlouhodobý zájem nad krátkodobým. Disney+ za pár let získal stovky milionů předplatitelů. Mapování stakeholderů před rozhodnutím se vyplatilo." },
+      { tag: "KRITÉRIA × ELIMINAČNÍ PODMÍNKY", color: VSE.warning, company: "IKEA — výběr lokality pro obchodní dům", content: "IKEA při výběru místa pro nový obchodní dům používá eliminační podmínky (ano/ne) i kritéria (body). Eliminační: musí být u dálnice + dostatek parkování + určitá velikost pozemku. Co to nesplní, vypadne hned. Teprve zbylé lokality boduje podle kritérií: cena pozemku, kupní síla v okolí, blízkost konkurence. Proto jsou obchody IKEA skoro vždy u dálnice na okraji města — to je tvrdá eliminační podmínka, ne jen preference." },
+      { tag: "TVORBA VARIANT", color: VSE.fph, company: "Netflix — od DVD pošty ke streamingu", content: "Netflix v roce 2007 stál před rozhodnutím o budoucnosti. Místo aby vybíral z mála zřejmých variant (víc DVD, levnější DVD), vygeneroval odvážnou variantu: streaming, který tehdy skoro nešel kvůli pomalému internetu. Zásada 'co nejvíc nápadů, i bláznivých' a 'odložený úsudek' (nezavrhnout streaming hned jako nereálný) vedla k variantě, která firmu udělala globálním gigantem. Kdyby Netflix vybíral jen z opatrných variant, skončil by jako Blockbuster." },
+    ]
+  };
+
+  const examQuestionsRoz2 = [
+    { komise: "2025-09-11 / 2026 — Stříteský + Schönfeld + Cejthamr, Honig + Kučera + Machek, Špaček + Nový + Machek", otazka: "Propojení cílů, stakeholderů, kritérií a variant. Vybrat z PS jeden rozhodovací problém a stručně vše stanovit (včetně omezujících podmínek)", pozn: "Velmi častá tažená. Vybrat JEDEN problém z PS a propojit 5 prvků: cíle + stakeholdery + kritéria + varianty + eliminační (omezující) podmínky. Klíč je ukázat, jak na sebe navazují." },
+    { komise: "2025-02-04 — Mikovcová + Kolouchová + Viktora", otazka: "Cíl, kritéria, varianty, stakeholdeři, eliminační podmínky — propojení a najít problém v PS a určit k němu tyto faktory", pozn: "Stejná struktura — 5 prvků aplikovaných na konkrétní problém z případovky. Určit ke každému faktoru konkrétní obsah z PS." },
+    { komise: "Obecně", otazka: "Stanovení kritérií, požadavky na kritéria, váhy kritérií", pozn: "Kritéria vycházejí z cílů. 5 požadavků (jednoznačná, komplexní, přímá, operativní, srozumitelná). Pozor na redundanci. Výnosová (max) × nákladová (min)." },
+  ];
+
+  const podcastRoz2 = { title: "Manažerské rozhodování 2 — Cíle, stakeholdeři, kritéria, varianty", description: "Pět prvků rozhodování a jejich propojení. Cíl = stav, kterého chceme dosáhnout. Strom cílů - hierarchie, nahoru PROČ, dolů JAK, čím níž tím konkrétnější. Vrcholový cíl nesmí být problémem. Konfliktní cíle (kvalita A cena). Stakeholdeři = koho se rozhodnutí týká (vnitřní + vnější), určují cíle, ovlivňují kritéria, jsou zdrojem omezení. Kritéria = hlediska hodnocení variant, vycházejí z cílů. Kvantitativní (číslo) × kvalitativní (škály). 5 požadavků (jednoznačná, komplexní, přímá, operativní, srozumitelná). Redundance. Výnosová (max) × nákladová (min). Varianty = možné cesty k cíli. Intuitivní (brainstorming, design thinking) × systematicko-analytické (stromy, Monte Carlo). Zásady tvorby (odložený úsudek, co nejvíc nápadů, příznivá atmosféra). Eliminační (omezující) podmínky = tvrdé hranice GO/NO GO, varianta musí splnit. Rozdíl kritérium (body) × podmínka (ano/ne). Nejdřív podmínky, pak kritéria. Propojení 5 prvků na případovku.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyRoz2 = `
+    <b style="color:#0F6661">1.</b> Tažená chce <b>propojit 5 prvků</b> na jeden problém z PS — cíle, stakeholdery, kritéria, varianty, eliminační podmínky.<br/>
+    <b style="color:#0F6661">2.</b> <b>Cíle</b> — strom cílů, nahoru PROČ, dolů JAK. Vrcholový cíl není problém. Pozor na konfliktní cíle.<br/>
+    <b style="color:#0F6661">3.</b> <b>Stakeholdeři</b> — koho se týká (vnitřní + vnější), určují cíle a kritéria, jsou zdroj omezení.<br/>
+    <b style="color:#0F6661">4.</b> <b>Kritéria</b> — vycházejí z cílů. Kvantitativní × kvalitativní. 5 požadavků. Pozor na redundanci.<br/>
+    <b style="color:#0F6661">5.</b> Výnosová (chceme max) × nákladová (chceme min) kritéria.<br/>
+    <b style="color:#0F6661">6.</b> <b>Varianty</b> — možné cesty. Intuitivní (kreativní) × systematicko-analytické.<br/>
+    <b style="color:#0F6661">7.</b> Zásady tvorby variant — odložený úsudek, co nejvíc nápadů, příznivá atmosféra.<br/>
+    <b style="color:#0F6661">8.</b> ⚠️ <b>Eliminační (omezující) podmínky</b> — tvrdé hranice GO/NO GO.<br/>
+    <b style="color:#0F6661">9.</b> Rozdíl: kritérium (body na škále) × eliminační podmínka (ano/ne).<br/>
+    <b style="color:#0F6661">10.</b> Pořadí — nejdřív podmínky (vyřadit nemožné), pak kritéria (seřadit zbytek).<br/>
+    <b style="color:#0F6661">11.</b> ⚠️ Ukázat PROPOJENÍ — stakeholdeři → cíle → kritéria, podmínky filtrují varianty.
+  `;
+
+  const caseStudyRoz2 = {
+    title: "Klára a stěhování firmy do nových prostor",
+    subtitle: "Jak rozhodnout, když každý chce něco jiného",
+    scenario: "Klára vede menší firmu, která vyrostla a potřebuje nové prostory. Stará kancelář už nestačí, lidé sedí na sobě. Klára cítí, že se musí rozhodnout, kam se přestěhovat, ale je v tom zmatek. Každý ve firmě chce něco jiného a Klára neví, jak to celé uchopit.\n\nObchodníci chtějí být blízko centra kvůli klientům. Vývojáři chtějí klid a dost místa, klidně na okraji města. Účetní hlídá rozpočet a tlačí na co nejnižší nájem. Klára sama chce, aby se firma mohla dál rozrůstat a aby lidé do práce rádi chodili. Všichni mají pravdu, ale dohromady to nejde splnit.\n\nKlára si našla několik možných prostor. Jeden je krásný v centru, ale drahý a malý. Druhý je velký a levný, ale daleko za městem. Třetí je někde mezi tím. A pak je tu možnost zůstat a jen dokoupit patro ve stávající budově.\n\nProblém je, že Klára neví, jak ty možnosti spravedlivě porovnat. Když se rozhodne jen podle ceny, naštve obchodníky. Když podle blízkosti centra, rozbije rozpočet. Cítí, že potřebuje nějaký pořádek — vědět, co je vlastně cíl, koho se to týká, podle čeho měřit a co je úplně mimo hru.\n\nNapadlo ji, že některé prostory může rovnou vyřadit. Třeba ten za městem nemá kde zaparkovat a špatně se tam dostane MHD — a to je pro firmu zásadní. Tuší, že nejdřív musí vyřadit nemožné a teprve pak pečlivě porovnat to, co zůstane.",
+    signals: [
+      { text: "Každý ve firmě chce něco jiného a Klára neví, jak to celé uchopit", color: VSE.warning, reason: "Různí stakeholdeři s různými zájmy (Roz2). Obchodníci, vývojáři, účetní, Klára — každý má jiné priority. Prvním krokem je je zmapovat." },
+      { text: "Obchodníci chtějí centrum... vývojáři klid a místo... účetní nízký nájem... Klára prostor pro růst", color: VSE.fph, reason: "Konkrétní stakeholdeři a jejich zájmy (Roz2). Z těchto zájmů vzniknou cíle a kritéria. Každý stakeholder tlačí na jiné kritérium." },
+      { text: "Všichni mají pravdu, ale dohromady to nejde splnit", color: VSE.danger, reason: "Konfliktní cíle (Roz2). Blízkost centra × nízká cena × hodně místa jdou proti sobě. Klára bude muset vyvážit, ne splnit všechno." },
+      { text: "Klára neví, jak ty možnosti spravedlivě porovnat", color: VSE.fph, reason: "Chybí kritéria (Roz2). Bez jasných měřítek (vycházejících z cílů) nelze varianty objektivně srovnat. Potřebuje stanovit kritéria." },
+      { text: "Co je vlastně cíl, koho se to týká, podle čeho měřit a co je úplně mimo hru", color: VSE.success, reason: "Klára sama jmenuje 5 prvků (Roz2): cíl, stakeholdeři (koho se týká), kritéria (podle čeho měřit), a eliminační podmínky (co je mimo hru)." },
+      { text: "Nejdřív musí vyřadit nemožné a teprve pak pečlivě porovnat to, co zůstane", color: VSE.success, reason: "Přesné pořadí (Roz2): nejdřív eliminační podmínky (GO/NO GO vyřadí nemožné), pak kritéria (seřadí zbytek podle kvality)." },
+    ],
+    quiz1: {
+      question: "Co Klára potřebuje, aby se mohla rozhodnout?",
+      options: [
+        "Víc peněz",
+        "Uspořádat rozhodnutí přes 5 prvků — stanovit cíle, zmapovat stakeholdery, určit kritéria, najít varianty a stanovit eliminační podmínky.",
+        "Najmout poradce",
+        "Zůstat, kde je",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měla Klára postupovat?",
+      options: [
+        { text: "Zmapovat stakeholdery a jejich zájmy — obchodníci (centrum), vývojáři (klid, místo), účetní (cena), ona sama (růst). Z toho vzejde, co je důležité.", correct: true, reason: "✓ Roz2 — stakeholdeři určují, co je důležité. Z jejich zájmů vzniknou cíle a kritéria." },
+        { text: "Stanovit cíle (strom cílů) — vrcholový: vhodné prostory pro růst firmy. Pod ním dílčí: dostupnost + dost místa + únosná cena. Rozpoznat, že jsou částečně konfliktní.", correct: true, reason: "✓ Roz2 — strom cílů. Vrcholový cíl + dílčí cíle. Rozpoznání konfliktu (centrum × cena) je klíčové." },
+        { text: "Určit kritéria z cílů — nájem (nákladové, min), vzdálenost od centra (nákladové), plocha (výnosové, max), dostupnost MHD. Jednoznačná, neredundantní.", correct: true, reason: "✓ Roz2 — kritéria vycházejí z cílů. Rozlišit výnosová (max) a nákladová (min). Vyhnout se redundanci." },
+        { text: "Stanovit eliminační podmínky — musí mít parkování + dostupnost MHD. Prostor za městem bez obojího je NO GO, vyřazen hned, i když je nejlevnější.", correct: true, reason: "✓ Roz2 — eliminační podmínky (GO/NO GO). Vyřadí nemožné varianty před hodnocením podle kritérií." },
+        { text: "Aplikovat podmínky a kritéria ve správném pořadí — nejdřív vyřadit nemožné (eliminační podmínky), pak zbylé porovnat podle kritérií.", correct: true, reason: "✓ Roz2 — správné pořadí. Nejdřív podmínky (síto), pak kritéria (žebříček). Nemá smysl bodovat variantu, co je předem mimo hru." },
+        { text: "Vybrat nejlevnější a hotovo", correct: false, reason: "✗ Rozhodnutí jen podle jednoho kritéria (cena) ignoruje ostatní cíle a stakeholdery. Naštve obchodníky a možná vyjde dráž v důsledcích." },
+        { text: "Zeptat se, kdo křičí nejvíc, a podle toho rozhodnout", correct: false, reason: "✗ Rozhodování podle hlasitosti, ne podle systému. Ignoruje cíle, kritéria a tiché ale důležité stakeholdery (třeba zákazníky)." },
+        { text: "Hodit kostkou mezi všemi prostory", correct: false, reason: "✗ Náhoda není rozhodování. Ignoruje cíle, kritéria i eliminační podmínky — může vybrat prostor, který nesplní ani základní požadavky." },
+      ],
+    },
+    summary: "<b>Klára musí uspořádat rozhodnutí přes pět propojených prvků</b> — místo aby se rozhodovala podle toho, kdo nejvíc křičí.<br/><br/><b>Postup propojení 5 prvků:</b><br/><br/>• <b>Stakeholdeři:</b> obchodníci (centrum), vývojáři (klid, místo), účetní (cena), Klára (růst). Každý tlačí na jiné kritérium — zmapovat je první.<br/><br/>• <b>Cíle (strom cílů):</b> vrcholový — vhodné prostory pro růst firmy. Dílčí — dostupnost + dost místa + únosná cena. Rozpoznat, že centrum × cena jsou konfliktní cíle, které je třeba vyvážit.<br/><br/>• <b>Kritéria (z cílů):</b> nájem (nákladové, min), vzdálenost od centra (nákladové), plocha (výnosové, max), dostupnost MHD. Jednoznačná, neredundantní.<br/><br/>• <b>Varianty:</b> centrum (drahé, malé), za městem (velké, levné), kompromis, dokoupit patro.<br/><br/>• <b>Eliminační podmínky (GO/NO GO):</b> musí mít parkování + dostupnost MHD. Prostor za městem bez obojího je vyřazen hned, i kdyby byl nejlevnější.<br/><br/>• <b>Správné pořadí:</b> nejdřív aplikovat eliminační podmínky (vyřadit nemožné), pak zbylé varianty porovnat podle kritérií.<br/><br/><b>Pro komisi:</b> Přesně to, co tažená chce — vybrat jeden problém z PS a propojit 5 prvků. Klíč: <b>stakeholdeři → cíle → kritéria</b> + <b>varianty filtrované eliminačními podmínkami</b>. Ukázat, jak na sebe navazují. Rozlišit kritérium (body) od eliminační podmínky (ano/ne). Anti-vzor: rozhodnout podle jednoho kritéria nebo podle toho, kdo nejvíc křičí.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Manažerské rozhodování" subjectId="roz" number={2} title="Cíle, stakeholdeři, kritéria, varianty"
+      subtitle="Strom cílů + stakeholdeři + kritéria (5 požadavků) + varianty + eliminační podmínky"
+      color={VSE.fph}
+      questionText="Propojení cílů, stakeholderů, kritérií a variant — vybrat problém z případovky a vše stanovit včetně omezujících podmínek."
+      sloz={2} roz={4} freq={4}
+      examStrategy={examStrategyRoz2}
+      studySections={studySectionsRoz2}
+      flashcards={flashcardsRoz2}
+      quiz={quizRoz2}
+      praxe={praxeRoz2}
+      examQuestions={examQuestionsRoz2}
+      podcast={podcastRoz2}
+      caseStudy={caseStudyRoz2}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   MANAŽERSKÉ ROZHODOVÁNÍ 3 — Rizika, závažnost, opatření
+   ════════════════════════════════════════════════════════ */
+function OkruhRoz3Panel() {
+  const studySectionsRoz3 = [
+    { id: "riziko", title: "Co je riziko a jak se liší od nejistoty", subtitle: "Pravděpodobnost × dopad", color: VSE.fph, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Riziko</b> = nejistý budoucí stav, který nastane s určitou pravděpodobností. Je to potenciální problém NEBO příležitost. Klíčové: u rizika <b>známe pravděpodobnost</b>, u nejistoty ne.
+        </Def>
+        <Tag color={VSE.fph}>Riziko × nejistota — klíčový rozdíl</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.warning, t: "🎲 RIZIKO", d: "Známe možné stavy světa A jejich pravděpodobnosti. Víme, co může nastat a s jakou šancí. Dá se počítat." },
+            { c: VSE.danger, t: "❓ NEJISTOTA", d: "Známe možné stavy světa, ale NEznáme jejich pravděpodobnosti. Nevíme, jak je co pravděpodobné. Hůř se počítá." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Pravděpodobnost — objektivní × subjektivní</Tag>
+        <Bullet items={[
+          "<b>Objektivní</b> — statisticky spočítaná (hod kostkou = 1/6). V manažerském rozhodování ji obvykle nelze využít.",
+          "<b>Subjektivní</b> — odhad na základě zkušenosti. S tou v praxi pracujeme.",
+          "<b>Rozdělení pravděpodobnosti:</b> diskrétní (konečný počet hodnot) × spojité (intervaly, nekonečno). Symetrické (normální) × nesymetrické (hodnoty spíš na jednu stranu).",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Tažené: Riziko, určení rizik u varianty a závažnost (Bočková+Nový+Kolouchová 2025), Krause+Viktora+Tahal 2025 (varianty, riziko, měření, ošetření)"
+          what="Komise chce: u rozhodovací varianty <b>určit rizika</b> + <b>závažnost = pravděpodobnost × síla (dopad)</b> + <b>opatření (preventivní/nápravná)</b> + zohlednit při hodnocení variant. Bočková zmínila MEAT, prevenci, kontingenční kritéria."
+        />
+      </div>) },
+
+    { id: "mereni", title: "Měření rizika — pravděpodobnost × dopad", subtitle: "Matice rizika a závažnost", color: VSE.fph, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Riziko měříme na základě dvou věcí: <b>pravděpodobnosti</b> (jak je pravděpodobné, že nastane) a <b>míry dopadu</b> (jak moc by to bolelo). Závažnost = <b>pravděpodobnost × síla dopadu</b>.
+        </Def>
+        <Tag color={VSE.fph}>Matice rizika</Tag>
+        <Bullet items={[
+          "<b>Matice rizika</b> = mřížka, kde jedna osa je pravděpodobnost a druhá dopad (intenzita).",
+          "Každé riziko se umístí do políčka podle své pravděpodobnosti a dopadu.",
+          "<b>Barvy:</b> zelená (nízké riziko) → žlutá (střední) → oranžová (vysoké) → červená (kritické).",
+          "<b>K čemu to je:</b> klasifikace a zobrazení rizik, definování kategorií, nástroj na posouzení, jestli je riziko přijatelné.",
+          "<b>Klíč:</b> Riziko s vysokou pravděpodobností A vysokým dopadem = kritické (červené), řešit první.",
+        ]} color={VSE.fph} />
+        <ResponsiveSVG viewBox="0 0 460 380" maxHeight={400}>
+          {/* Nadpis */}
+          <text x="230" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Matice rizika</text>
+          {/* Mřížka 5x5 — barvy podle závažnosti (pp × dopad) */}
+          {[0,1,2,3,4].map(row => (
+            [0,1,2,3,4].map(col => {
+              // row = dopad (0 dole = nízký, 4 nahoře = vysoký), col = pravděpodobnost
+              const dopad = row + 1;       // 1..5 odspodu
+              const pp = col + 1;          // 1..5 zleva
+              const score = dopad * pp;    // závažnost
+              let fill = "#2E7D32";        // zelená - nízké
+              if (score >= 5 && score < 10) fill = "#E0A92C";   // žlutá - střední
+              else if (score >= 10 && score < 15) fill = "#E06D1E"; // oranžová - vysoké
+              else if (score >= 15) fill = "#C0392B";           // červená - kritické
+              else if (score < 5) fill = "#2E7D32";
+              const x = 80 + col * 60;
+              const y = 280 - row * 50;
+              return (
+                <g key={`${row}-${col}`}>
+                  <rect x={x} y={y} width="58" height="48" fill={fill} opacity="0.82" stroke="var(--surface)" strokeWidth="2" rx="3"/>
+                  <text x={x + 29} y={y + 30} textAnchor="middle" fontFamily={fontMono} fontSize="11" fill="#fff" fontWeight="700">{score}</text>
+                </g>
+              );
+            })
+          ))}
+          {/* Osa Y — dopad */}
+          <text x="38" y="160" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill="var(--text)" transform="rotate(-90, 38, 160)">DOPAD (síla) →</text>
+          {[1,2,3,4,5].map((v,i) => (
+            <text key={`d${v}`} x="68" y={310 - i*50} textAnchor="end" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">{v}</text>
+          ))}
+          {/* Osa X — pravděpodobnost */}
+          <text x="230" y="360" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill="var(--text)">PRAVDĚPODOBNOST →</text>
+          {[1,2,3,4,5].map((v,i) => (
+            <text key={`p${v}`} x={109 + i*60} y="345" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">{v}</text>
+          ))}
+          {/* Legenda */}
+          <g fontFamily={fontSans} fontSize="9" fontWeight="600">
+            <rect x="370" y="50" width="14" height="14" fill="#2E7D32" opacity="0.82" rx="2"/><text x="388" y="61" fill="var(--text-muted)">Nízké</text>
+            <rect x="370" y="70" width="14" height="14" fill="#E0A92C" opacity="0.82" rx="2"/><text x="388" y="81" fill="var(--text-muted)">Střední</text>
+            <rect x="370" y="90" width="14" height="14" fill="#E06D1E" opacity="0.82" rx="2"/><text x="388" y="101" fill="var(--text-muted)">Vysoké</text>
+            <rect x="370" y="110" width="14" height="14" fill="#C0392B" opacity="0.82" rx="2"/><text x="388" y="121" fill="var(--text-muted)">Kritické</text>
+          </g>
+          {/* Číslo v políčku = závažnost */}
+          <text x="230" y="378" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill="var(--text-muted)" fontStyle="italic">číslo v poli = závažnost (pravděpodobnost × dopad)</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.warning}>Statistické míry rizika (jak rozptýlené jsou hodnoty)</Tag>
+        <Bullet items={[
+          "<b>Rozptyl</b> — absolutní míra variability (jak moc se hodnoty liší od průměru).",
+          "<b>Směrodatná odchylka</b> — odmocnina z rozptylu. Běžnější vyjádření.",
+          "<b>Variační koeficient</b> — směrodatná odchylka / průměr. Ukazuje míru rizika v procentech. Umožňuje srovnat riziko různě velkých variant.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.fph}>Postoj k riziku</Tag>
+        <Bullet items={[
+          "<b>Averze k riziku</b> — vyhýbáme se riziku, preferujeme jistotu. Graf užitku je konkávní.",
+          "<b>Neutrální postoj</b> — riziko nás nevzrušuje ani neodrazuje.",
+          "<b>Sklon k riziku</b> — máme rádi risk (hráč). Graf užitku je konvexní.",
+          "<b>Spravedlivá sázka:</b> jistota = očekávanému užitku. Přijme ji jen ten se sklonem k risku.",
+        ]} color={VSE.warning} />
+        <ResponsiveSVG viewBox="0 0 540 240" maxHeight={260}>
+          <text x="270" y="20" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Postoj k riziku - krivka uzitku</text>
+          {/* AVERZE - konkavni */}
+          <text x="135" y="42" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.fph}>Averze (konkavni)</text>
+          <line x1="40" y1="200" x2="240" y2="200" stroke="var(--text-muted)" strokeWidth="1"/>
+          <line x1="40" y1="200" x2="40" y2="55" stroke="var(--text-muted)" strokeWidth="1"/>
+          <path d="M 40 200 Q 100 70 240 55" stroke={VSE.fph} strokeWidth="2.5" fill="none"/>
+          <text x="140" y="218" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">zisk</text>
+          <text x="28" y="130" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)" transform="rotate(-90, 28, 130)">uzitek</text>
+          <text x="140" y="235" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill={VSE.fph} fontStyle="italic">preferuje jistotu, vyhyba se riziku</text>
+          {/* SKLON - konvexni */}
+          <text x="405" y="42" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.danger}>Sklon k riziku (konvexni)</text>
+          <line x1="310" y1="200" x2="510" y2="200" stroke="var(--text-muted)" strokeWidth="1"/>
+          <line x1="310" y1="200" x2="310" y2="55" stroke="var(--text-muted)" strokeWidth="1"/>
+          <path d="M 310 200 Q 450 185 510 55" stroke={VSE.danger} strokeWidth="2.5" fill="none"/>
+          <text x="410" y="218" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">zisk</text>
+          <text x="298" y="130" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)" transform="rotate(-90, 298, 130)">uzitek</text>
+          <text x="410" y="235" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill={VSE.danger} fontStyle="italic">hrac, prijme spravedlivou sazku</text>
+        </ResponsiveSVG>
+      </div>) },
+
+    { id: "opatreni", title: "Opatření proti riziku — prevence × náprava", subtitle: "Jak riziko snížit a ošetřit", color: VSE.fph, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Řízení rizika = <b>snížit pravděpodobnost</b>, že nastane, NEBO <b>minimalizovat dopad</b>, když nastane. K tomu slouží dva typy opatření — preventivní a nápravná.
+        </Def>
+        <Tag color={VSE.fph}>Dva typy opatření</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.success, t: "🛡️ PREVENTIVNÍ", d: "Zabraňují, aby nepříznivý stav vůbec vznikl. Útočí na PŘÍČINU. Příklad: dům nepostavím v záplavové oblasti. Volně dostupná pitná voda na festivalu snižuje šanci omdlení." },
+            { c: VSE.warning, t: "🚑 NÁPRAVNÁ (kontingenční)", d: "Zmírňují dopad, KDYŽ už problém nastane. Útočí na NÁSLEDEK. Příklad: pojistka, hasicí zařízení, helma na kole, pojištění před výletem." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Klíčová otázka u opatření</Tag>
+        <Bullet items={[
+          "<b>Vyplatí se opatření dělat?</b> Otázkou je vždy finanční náročnost.",
+          "Opatření, které stojí víc než škoda, kterou má zabránit, nedává smysl.",
+          "<b>Příklad:</b> Nemá smysl dávat zabezpečení za milion na věc, jejíž ztráta by stála tisíc.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.fph}>Postup řízení rizika (Risk Assessment)</Tag>
+        <Bullet items={[
+          "<b>1. Identifikace rizik</b> — rozpoznání a popis. Pomáhá: expertní odhad, brainstorming, Delphi, kontrolní seznamy, SWOT, PESTLE, Kepner-Tregoe.",
+          "<b>2. Analýza</b> — povaha a úroveň rizika.",
+          "<b>3. Vyhodnocení</b> — porovnání výsledků analýzy s kritérii (je riziko přijatelné?).",
+          "<b>4. Ošetření</b> — návrh a zavedení opatření na modifikaci rizika.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "kt_priležitosti", title: "Analýza potenciálních problémů a příležitostí", subtitle: "Kepner-Tregoe pro budoucí rizika variant", color: VSE.fph, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Pro hledání rizik konkrétní varianty se používá <b>metodika Kepner-Tregoe</b> — tentokrát ne na minulý problém, ale na budoucí: <b>analýza potenciálních problémů a příležitostí</b>.
+        </Def>
+        <Tag color={VSE.fph}>Dva pohledy</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.danger, t: "⚠️ Analýza problémů", d: "Cíl: ochránit úspěšnost varianty. Najít potenciální problémy a připravit se na ně dřív, než nastanou." },
+            { c: VSE.success, t: "🌟 Analýza příležitostí", d: "Cíl: zvětšit úspěšnost varianty. Najít příležitosti, které by mohly nastat, a umět jich využít." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Postup analýzy</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikace potenciálních problémů a příležitostí — co a s jakou pravděpodobností by mohlo nastat.",
+          "<b>2.</b> Identifikace pravděpodobných příčin — spouštěče: proč a za jaké situace by to mohlo nastat.",
+          "<b>3.</b> Příprava opatření — preventivní i nápravná.",
+          "<b>4.</b> Tvorba plánu — rozdělení zodpovědnosti (kdo se postará, když něco nastane), zajištění zdrojů.",
+          "<b>Výsledek:</b> seznam rizik a příležitostí + plán opatření, který na ně reaguje.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.fph}>Riziko nesystematické × systematické</Tag>
+        <Bullet items={[
+          "<b>Nesystematické riziko</b> — týká se jen některých variant. Dá se snížit diverzifikací (rozložením do více projektů).",
+          "<b>Systematické riziko</b> — týká se všech (korona, ekonomický cyklus). Diverzifikací ho snížit nelze.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro rizika a opatření", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Komise chce: u varianty z případovky <b>určit rizika</b>, ohodnotit jejich <b>závažnost</b>, navrhnout <b>opatření</b> a <b>zohlednit riziko při hodnocení variant</b>.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> U každé varianty <b>identifikuj rizika</b> (brainstorming, SWOT, Kepner-Tregoe).",
+          "<b>2.</b> Urči <b>závažnost = pravděpodobnost × dopad (síla)</b> u každého rizika.",
+          "<b>3.</b> Zanes rizika do <b>matice rizika</b> — která jsou kritická (vysoká pp + vysoký dopad)?",
+          "<b>4.</b> Navrhni <b>opatření</b> — preventivní (zabránit vzniku) + nápravná (zmírnit dopad).",
+          "<b>5.</b> Posuď <b>finanční náročnost</b> opatření — vyplatí se?",
+          "<b>6.</b> <b>Zohledni riziko při výběru varianty</b> — riziková ale výnosná × jistá ale méně výnosná (podle postoje k riziku).",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Závažnost jako pravděpodobnost × dopad, ne jen 'to je rizikové'.",
+          "<b>✅ Dobře:</b> Rozlišit preventivní (na příčinu) a nápravná (na následek) opatření.",
+          "<b>✅ Dobře:</b> Zohlednit riziko při hodnocení variant, ne ho řešit zvlášť.",
+          "<b>❌ Špatně:</b> Vyjmenovat rizika bez ohodnocení závažnosti.",
+          "<b>❌ Špatně:</b> Navrhnout opatření dražší než škoda, které brání.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsRoz3 = [
+    { term: "Riziko", def: "Nejistý budoucí stav s určitou pravděpodobností. Potenciální problém nebo příležitost. U rizika ZNÁME pravděpodobnost.", tag: "DEFINICE" },
+    { term: "Riziko × nejistota", def: "Riziko = známe pravděpodobnosti stavů světa. Nejistota = známe stavy, ale NEznáme jejich pravděpodobnosti.", tag: "DEFINICE" },
+    { term: "Objektivní pravděpodobnost", def: "Statisticky spočítaná (kostka = 1/6). V manažerském rozhodování obvykle nelze využít.", tag: "PP" },
+    { term: "Subjektivní pravděpodobnost", def: "Odhad na základě zkušenosti. S tou v praxi pracujeme.", tag: "PP" },
+    { term: "Rozdělení pp", def: "Diskrétní (konečný počet hodnot) × spojité (intervaly). Symetrické (normální) × nesymetrické.", tag: "PP" },
+    { term: "Závažnost rizika", def: "Pravděpodobnost × síla (dopad). Klíčový vzorec — jak měřit, jak vážné riziko je.", tag: "MĚŘENÍ" },
+    { term: "Matice rizika", def: "Mřížka pravděpodobnost × dopad. Barvy: zelená (nízké) → žlutá → oranžová → červená (kritické). Klasifikace rizik.", tag: "MĚŘENÍ" },
+    { term: "Kritické riziko", def: "Vysoká pravděpodobnost A vysoký dopad (červené v matici). Řešit první.", tag: "MĚŘENÍ" },
+    { term: "Rozptyl", def: "Absolutní míra variability — jak moc se hodnoty liší od průměru.", tag: "MĚŘENÍ" },
+    { term: "Směrodatná odchylka", def: "Odmocnina z rozptylu. Běžnější vyjádření míry rizika.", tag: "MĚŘENÍ" },
+    { term: "Variační koeficient", def: "Směrodatná odchylka / průměr. Míra rizika v %. Umožňuje srovnat různě velké varianty.", tag: "MĚŘENÍ" },
+    { term: "Averze k riziku", def: "Vyhýbáme se riziku, preferujeme jistotu. Graf užitku konkávní.", tag: "POSTOJ" },
+    { term: "Sklon k riziku", def: "Máme rádi risk (hráč). Graf užitku konvexní. Přijme spravedlivou sázku.", tag: "POSTOJ" },
+    { term: "Preventivní opatření", def: "Zabraňují, aby problém vůbec vznikl. Útočí na PŘÍČINU. Příklad: dům nestavím v záplavové oblasti.", tag: "OPATŘENÍ" },
+    { term: "Nápravná (kontingenční) opatření", def: "Zmírňují dopad, KDYŽ problém nastane. Útočí na NÁSLEDEK. Příklad: pojistka, hasicí přístroj, helma.", tag: "OPATŘENÍ" },
+    { term: "Finanční náročnost opatření", def: "Vyplatí se opatření dělat? Opatření dražší než škoda, které brání, nedává smysl.", tag: "OPATŘENÍ" },
+    { term: "Risk Assessment", def: "Posouzení rizika: 1) identifikace, 2) analýza, 3) vyhodnocení, 4) ošetření (opatření).", tag: "POSTUP" },
+    { term: "Identifikace rizik", def: "Rozpoznání + popis. Nástroje: expertní odhad, brainstorming, Delphi, kontrolní seznamy, SWOT, PESTLE, Kepner-Tregoe.", tag: "POSTUP" },
+    { term: "Analýza problémů (KT)", def: "Cíl: ochránit úspěšnost varianty. Najít potenciální problémy a připravit se na ně.", tag: "KT BUDOUCNOST" },
+    { term: "Analýza příležitostí (KT)", def: "Cíl: zvětšit úspěšnost varianty. Najít příležitosti a umět jich využít.", tag: "KT BUDOUCNOST" },
+    { term: "Nesystematické riziko", def: "Týká se jen některých variant. Dá se snížit diverzifikací (rozložením do více projektů).", tag: "TYPY RIZIKA" },
+    { term: "Systematické riziko", def: "Týká se všech (korona, ekonomický cyklus). Diverzifikací ho snížit NELZE.", tag: "TYPY RIZIKA" },
+  ];
+
+  const quizRoz3 = [
+    { q: "Co je riziko?", opts: ["Jistota", "Nejistý budoucí stav s určitou pravděpodobností — potenciální problém nebo příležitost", "Plán", "Cíl"], correct: 1 },
+    { q: "Jaký je rozdíl riziko × nejistota?", opts: ["Žádný", "U rizika ZNÁME pravděpodobnosti, u nejistoty NE", "Velikost", "Cena"], correct: 1 },
+    { q: "Jak se počítá závažnost rizika?", opts: ["Jen pravděpodobnost", "Pravděpodobnost × síla (dopad)", "Jen dopad", "Náhodně"], correct: 1 },
+    { q: "Co je matice rizika?", opts: ["Tabulka zisku", "Mřížka pravděpodobnost × dopad, barevně od zelené (nízké) po červené (kritické)", "Strom", "Graf"], correct: 1 },
+    { q: "Které riziko je kritické?", opts: ["Nízká pp, nízký dopad", "Vysoká pravděpodobnost A vysoký dopad (červené)", "Žádné", "Střední"], correct: 1 },
+    { q: "Co je variační koeficient?", opts: ["Zisk", "Směrodatná odchylka / průměr — míra rizika v %, srovná různě velké varianty", "Rozptyl", "Průměr"], correct: 1 },
+    { q: "Co jsou preventivní opatření?", opts: ["Zmírňují dopad", "Zabraňují, aby problém vůbec vznikl — útočí na příčinu (dům nestavím v záplavě)", "Pojistka", "Náprava"], correct: 1 },
+    { q: "Co jsou nápravná (kontingenční) opatření?", opts: ["Brání vzniku", "Zmírňují dopad, když problém nastane — útočí na následek (pojistka, helma)", "Prevence", "Příčina"], correct: 1 },
+    { q: "Jaká je klíčová otázka u opatření?", opts: ["Jak rychle", "Vyplatí se? Opatření dražší než škoda, které brání, nedává smysl", "Kdo to udělá", "Kde"], correct: 1 },
+    { q: "Jaké jsou kroky Risk Assessment?", opts: ["Plán/Akce", "Identifikace / analýza / vyhodnocení / ošetření", "Cíl/Strategie", "Sběr/Volba"], correct: 1 },
+    { q: "Jak identifikujeme rizika?", opts: ["Náhodně", "Expertní odhad, brainstorming, Delphi, SWOT, PESTLE, Kepner-Tregoe", "Hádáním", "Nijak"], correct: 1 },
+    { q: "Co je nesystematické riziko?", opts: ["Týká se všech", "Týká se jen některých variant — dá se snížit diverzifikací", "Nelze snížit", "Korona"], correct: 1 },
+    { q: "Co je systematické riziko?", opts: ["Lze snížit diverzifikací", "Týká se všech (korona, ek. cyklus) — diverzifikací NELZE snížit", "Jednotlivé", "Malé"], correct: 1 },
+    { q: "Co je averze k riziku?", opts: ["Sklon k risku", "Vyhýbáme se riziku, preferujeme jistotu (konkávní graf užitku)", "Neutralita", "Hráč"], correct: 1 },
+    { q: "K čemu slouží analýza problémů (KT) u variant?", opts: ["K minulosti", "Ochránit úspěšnost varianty — najít budoucí problémy a připravit se na ně", "K zisku", "K prodeji"], correct: 1 },
+    { q: "Co je subjektivní pravděpodobnost?", opts: ["Statistika", "Odhad na základě zkušenosti — s tou v praxi pracujeme", "Kostka", "Jistota"], correct: 1 },
+  ];
+
+  const praxeRoz3 = {
+    caseStudy: {
+      company: "Netflix — řízení rizika při přechodu na streaming",
+      subtitle: "Jak Netflix ohodnotil a ošetřil riziko největšího rozhodnutí",
+      content: (<>
+        Netflix kolem roku 2011 čelil obrovskému riziku. Fungoval na DVD poště, ale tušil, že budoucnost je streaming. Rozhodnutí přejít bylo <b>strategicky nutné, ale plné rizik</b>.<br/><br/>
+        🔍 IDENTIFIKACE RIZIK:<br/><br/>
+        Zákazníci nebudou chtít platit za streaming · studia nebudou licencovat obsah · pomalý internet to neutáhne · stávající DVD zákazníci odejdou naštvaní.<br/><br/>
+        📊 ZÁVAŽNOST (pravděpodobnost × dopad):<br/><br/>
+        Odchod DVD zákazníků: vysoká pravděpodobnost × vysoký dopad = kritické riziko (červená zóna). A přesně to se stalo — když Netflix rozdělil DVD a streaming (Qwikster), přišel o miliony předplatitelů a akcie spadly.<br/><br/>
+        🛡️ OPATŘENÍ:<br/><br/>
+        • Preventivní (na příčinu): postupně budovat vlastní obsah (House of Cards), aby nebyl závislý na studiích.<br/><br/>
+        • Nápravná (na následek): když Qwikster selhal, rychle ho zrušit a vrátit se zpět — náprava chyby.<br/><br/>
+        🎯 POINTA:<br/><br/>
+        Netflix podcenil jedno riziko (reakci zákazníků na rozdělení služby) a tvrdě zaplatil. Ale uměl rychle napravit a hlavně dobře ošetřil hlavní riziko — závislost na cizím obsahu — vlastní tvorbou. <b>Ukázka, že riziko se musí ohodnotit závažností a aktivně ošetřit, ne jen přijmout.</b>
+      </>),
+      lessons: "Netflix ukazuje řízení rizika v praxi: <b>identifikovat → ohodnotit závažnost (pravděpodobnost × dopad) → ošetřit</b>. Podcenění rizika (reakce zákazníků na Qwikster) stálo miliony — důkaz, proč se závažnost musí brát vážně. Preventivní opatření (vlastní obsah) ošetřilo největší riziko (závislost na studiích). Pro případovku: u variant určit rizika, závažnost a navrhnout preventivní + nápravná opatření."
+    },
+    miniExamples: [
+      { tag: "ZÁVAŽNOST (pp × dopad)", color: VSE.fph, company: "Toyota — proč svolává auta i kvůli malé chybě", content: "Toyota a další automobilky hodnotí rizika přesně přes závažnost = pravděpodobnost × dopad. Vada brzd má sice nízkou pravděpodobnost, ale extrémní dopad (smrt) → vysoká závažnost → okamžité svolání milionů aut, i když to stojí miliardy. Naopak kosmetická vada s vysokou pravděpodobností, ale nízkým dopadem se řeší až při příští sérii. Bez násobení pravděpodobnosti dopadem by firma buď panikařila, nebo ignorovala smrtelná rizika." },
+      { tag: "PREVENCE × NÁPRAVA", color: VSE.success, company: "Banky po krizi 2008 — stress testy", content: "Po finanční krizi 2008 banky zavedly preventivní i nápravná opatření. Preventivní (na příčinu): stress testy, které simulují krizi a nutí banku držet dost kapitálu, aby krize vůbec nenastala. Nápravná (na následek): pojištění vkladů a záchranné fondy, které zmírní dopad, když banka přesto padne. Kombinace obojího — zabránit vzniku + připravit se na následek — je dnes základ řízení rizika v bankovnictví." },
+      { tag: "SYSTEMATICKÉ RIZIKO", color: VSE.danger, company: "Cestovní firmy a COVID — co diverzifikace nezachrání", content: "Cestovní kanceláře byly před covidem dobře diverzifikované — různé destinace, různí klienti, různé typy zájezdů. To je obrana proti nesystematickému riziku. Jenže covid byl systematické riziko — zasáhl celý obor najednou, všechny destinace, všechny klienty. Diverzifikace nepomohla, protože systematické riziko se rozložením do více variant snížit nedá. Mnoho firem zkrachovalo. Ukázka rozdílu: diverzifikace chrání jen před nesystematickým rizikem." },
+      { tag: "FINANČNÍ NÁROČNOST OPATŘENÍ", color: VSE.warning, company: "Apple — proč nediverzifikuje výrobu úplně", content: "Apple ví, že výroba téměř výhradně v Číně je riziko (geopolitika, cla). Opatření = přesunout výrobu jinam (Indie, Vietnam). Ale dělá to jen postupně. Proč? Plný a rychlý přesun by stál miliardy a roky — finanční náročnost opatření by převýšila aktuální škodu z rizika. Apple proto riziko snižuje pomalu a částečně, tam kde se to vyplatí. Klasická otázka: stojí opatření míň než škoda, které brání?" },
+    ]
+  };
+
+  const examQuestionsRoz3 = [
+    { komise: "2025-02-03 — Bočková + Nový + Kolouchová", otazka: "Rizika, určení rizik u rozhodovací varianty a určení závažnosti rizika varianty (pravděpodobnost × síla), prevence, kontingenční kritéria", pozn: "Bočková chce závažnost jako pravděpodobnost × síla (dopad). Prevence (preventivní opatření) + kontingenční (nápravná) kritéria. Aplikovat na varianty z PS." },
+    { komise: "2025-02-05 — Krause + Viktora + Tahal", otazka: "Varianty řešení (najít/vymyslet z PS), riziko, jeho měření, hodnocení významnosti, ošetření a zohlednění při hodnocení variant", pozn: "Komplexní — najít varianty, změřit riziko (pp × dopad), ohodnotit významnost (matice rizika), navrhnout ošetření (opatření) a zohlednit při výběru varianty." },
+    { komise: "2025-01-30 — Nový + Vávra + Heřman", otazka: "Finanční riziko, metody snižování rizika, úloha finančních derivátů při řízení rizika", pozn: "Snižování rizika přes preventivní/nápravná opatření + diverzifikaci. Finanční deriváty jako nástroj řízení rizika (zajištění). Systematické × nesystematické riziko." },
+  ];
+
+  const podcastRoz3 = { title: "Manažerské rozhodování 3 — Rizika, závažnost, opatření", description: "Riziko = nejistý budoucí stav s určitou pravděpodobností (problém nebo příležitost). Riziko (známe pp) × nejistota (neznáme pp). Pravděpodobnost objektivní (statistika) × subjektivní (odhad, s tou pracujeme). Rozdělení diskrétní/spojité, symetrické/nesymetrické. Závažnost = pravděpodobnost × síla (dopad). Matice rizika (mřížka pp × dopad, barvy zelená až červená). Kritické riziko = vysoká pp + vysoký dopad. Statistické míry - rozptyl, směrodatná odchylka, variační koeficient (smodch/průměr, riziko v %). Postoj k riziku - averze (konkávní), neutrální, sklon k riziku (konvexní). Opatření preventivní (zabrání vzniku, na příčinu) × nápravná/kontingenční (zmírní dopad, na následek). Finanční náročnost - vyplatí se? Risk Assessment - identifikace, analýza, vyhodnocení, ošetření. Identifikace (brainstorming, Delphi, SWOT, PESTLE, Kepner-Tregoe). Analýza problémů a příležitostí (KT pro budoucnost). Nesystematické riziko (diverzifikace pomůže) × systematické (korona, nelze snížit). Postup na případovku.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyRoz3 = `
+    <b style="color:#0F6661">1.</b> <b>Riziko</b> = nejistý budoucí stav s pravděpodobností. Riziko (známe pp) × nejistota (neznáme pp).<br/>
+    <b style="color:#0F6661">2.</b> Pravděpodobnost — objektivní (statistika) × subjektivní (odhad, s tou pracujeme).<br/>
+    <b style="color:#0F6661">3.</b> ⚠️ <b>Závažnost = pravděpodobnost × síla (dopad)</b>. Klíčový vzorec.<br/>
+    <b style="color:#0F6661">4.</b> <b>Matice rizika</b> — mřížka pp × dopad, barvy zelená (nízké) → červená (kritické).<br/>
+    <b style="color:#0F6661">5.</b> Statistické míry — rozptyl, směrodatná odchylka, variační koeficient (riziko v %).<br/>
+    <b style="color:#0F6661">6.</b> ⚠️ <b>Opatření: preventivní</b> (zabrání vzniku, na příčinu) × <b>nápravná</b> (zmírní dopad, na následek).<br/>
+    <b style="color:#0F6661">7.</b> Vyplatí se opatření? Pozor na finanční náročnost.<br/>
+    <b style="color:#0F6661">8.</b> Risk Assessment — identifikace / analýza / vyhodnocení / ošetření.<br/>
+    <b style="color:#0F6661">9.</b> KT pro budoucnost — analýza problémů (ochránit) + příležitostí (zvětšit úspěch).<br/>
+    <b style="color:#0F6661">10.</b> Nesystematické riziko (diverzifikace pomůže) × systematické (nelze snížit).<br/>
+    <b style="color:#0F6661">11.</b> ⚠️ Zohlednit riziko PŘI hodnocení variant, ne zvlášť.
+  `;
+
+  const caseStudyRoz3 = {
+    title: "Marek a velká zakázka, která může firmu posunout — nebo položit",
+    subtitle: "Jak rozhodnout, když je v sázce hodně",
+    scenario: "Marek vede stavební firmu, která dostala nabídku na velkou zakázku. Je to největší projekt, jaký kdy firma měla — kdyby vyšel, posunul by ji o úroveň výš. Marek je nadšený, ale zároveň ho v noci budí starost. Cítí, že zakázka je sice lákavá, ale taky pořádně riskantní.\n\nKamarád, taky podnikatel, mu řekl něco, co mu nejde z hlavy: 'Marku, ty se díváš jen na to, kolik vyděláš. Ale co když se něco pokazí? Zamyslel ses, co všechno se může podělat a jak moc by to bolelo?' Marek si uvědomil, že o rizicích vlastně vůbec nepřemýšlel pořádně.\n\nKdyž se nad tím zamyslel, napadla ho spousta věcí, co se může pokazit. Subdodavatel může nestihnout termín. Ceny materiálu můžou vyletět nahoru. Počasí může práce zdržet. Můžou narazit na problém v podloží. A kdyby firma zakázku nezvládla, mohla by přijít o pověst i o peníze.\n\nMarek ale tuší, že ne všechna rizika jsou stejně vážná. Některá jsou skoro jistá, ale nevadí tolik. Jiná jsou nepravděpodobná, ale kdyby nastala, byla by katastrofa. Neumí to ale srovnat — jak poznat, na co se soustředit a co je vlastně nejnebezpečnější.\n\nA pak je tu druhá otázka. I když rizika pozná, co s nimi? Některým se dá předejít, jiná se dají pojistit. Ale všechno stojí peníze a Marek neví, do čeho se vyplatí investovat a co je zbytečné. Tuší, že než kývne na zakázku, musí si rizika pořádně rozebrat — jinak se může pěkně spálit.",
+    signals: [
+      { text: "Zakázka je sice lákavá, ale taky pořádně riskantní", color: VSE.warning, reason: "Varianta s vysokým výnosem i vysokým rizikem (Roz3). Marek musí riziko ohodnotit, ne se rozhodovat jen podle výnosu." },
+      { text: "Ty se díváš jen na to, kolik vyděláš... co když se něco pokazí?", color: VSE.danger, reason: "Klasická chyba — hodnotit variantu jen podle výnosu bez rizika (Roz3). Riziko se musí zohlednit PŘI hodnocení varianty, ne ignorovat." },
+      { text: "Subdodavatel nestihne termín... ceny materiálu vyletí... počasí zdrží... problém v podloží", color: VSE.fph, reason: "Identifikace rizik (Roz3). První krok Risk Assessmentu — rozpoznat a popsat rizika. Marek si dělá brainstorming možných rizik." },
+      { text: "Některá jsou skoro jistá, ale nevadí tolik. Jiná nepravděpodobná, ale byla by katastrofa", color: VSE.success, reason: "Marek nahmatává závažnost = pravděpodobnost × dopad (Roz3). Riziko se měří oběma rozměry — jak pravděpodobné a jak velký dopad." },
+      { text: "Jak poznat, na co se soustředit a co je nejnebezpečnější", color: VSE.fph, reason: "Potřeba matice rizika (Roz3). Zanést rizika podle pravděpodobnosti a dopadu, najít kritická (červená zóna) a ta řešit první." },
+      { text: "Některým se dá předejít, jiná se dají pojistit. Ale všechno stojí peníze", color: VSE.warning, reason: "Opatření preventivní (předejít, na příčinu) × nápravná (pojistit, na následek), a otázka finanční náročnosti (Roz3). Vyplatí se opatření?" },
+    ],
+    quiz1: {
+      question: "Co Marek potřebuje udělat, než kývne na zakázku?",
+      options: [
+        "Spočítat jen zisk",
+        "Systematicky ohodnotit rizika varianty — identifikovat je, určit jejich závažnost (pravděpodobnost × dopad), navrhnout opatření a zohlednit riziko při rozhodnutí.",
+        "Najmout víc lidí",
+        "Odmítnout zakázku",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měl Marek s riziky pracovat?",
+      options: [
+        { text: "Identifikovat rizika (brainstorming, SWOT) — subdodavatel, ceny materiálu, počasí, podloží, pověst. Rozpoznat a popsat je.", correct: true, reason: "✓ Roz3 — identifikace rizik, první krok Risk Assessmentu. Bez rozpoznání rizik se nedá nic řídit." },
+        { text: "Určit závažnost každého rizika = pravděpodobnost × dopad. Skoro jisté ale mírné × nepravděpodobné ale katastrofické rozlišit.", correct: true, reason: "✓ Roz3 — závažnost = pravděpodobnost × síla (dopad). Klíčový vzorec, kterým se rizika srovnávají." },
+        { text: "Zanést rizika do matice rizika — najít ta v červené zóně (vysoká pp + vysoký dopad) a řešit je první.", correct: true, reason: "✓ Roz3 — matice rizika. Vizualizace pomáhá najít kritická rizika a prioritizovat." },
+        { text: "Navrhnout opatření — preventivní (smlouva s pokutami pro subdodavatele, fixní cena materiálu) i nápravná (rezerva v rozpočtu, pojištění).", correct: true, reason: "✓ Roz3 — preventivní (na příčinu) + nápravná (na následek) opatření. Kombinace obojího je nejlepší." },
+        { text: "Posoudit, zda se opatření vyplatí — pojištění za rozumnou cenu ano, drahé zajištění proti nepravděpodobnému riziku možná ne.", correct: true, reason: "✓ Roz3 — finanční náročnost opatření. Opatření dražší než škoda, které brání, nedává smysl." },
+        { text: "Vzít zakázku hned, protože výnos je velký", correct: false, reason: "✗ Hodnocení jen podle výnosu bez rizika. Přesně chyba, na kterou ho upozornil kamarád. Velký výnos s nezvládnutým rizikem může firmu položit." },
+        { text: "Odmítnout, protože je to riskantní", correct: false, reason: "✗ Druhý extrém — odmítnout kvůli riziku bez ohodnocení. Riziko se dá řídit opatřeními. Možná po ošetření je zakázka přijatelná." },
+        { text: "Spolehnout se na štěstí", correct: false, reason: "✗ Spoléhat na štěstí není řízení rizika. Rizika se identifikují, měří a ošetřují — ne ignorují a nechávají na náhodě." },
+      ],
+    },
+    summary: "<b>Marek musí systematicky ohodnotit rizika zakázky</b> — ne se rozhodovat jen podle výnosu, ani zakázku odmítnout ze strachu.<br/><br/><b>Postup řízení rizika:</b><br/><br/>• <b>1. Identifikace:</b> brainstorming + SWOT. Rizika: subdodavatel nestihne, ceny materiálu vyletí, počasí zdrží, problém v podloží, ztráta pověsti.<br/><br/>• <b>2. Závažnost (pravděpodobnost × dopad):</b> u každého rizika. 'Ceny materiálu vyletí' = vysoká pp × střední dopad. 'Problém v podloží' = nízká pp × vysoký dopad. Tím se rizika srovnají.<br/><br/>• <b>3. Matice rizika:</b> zanést rizika podle pravděpodobnosti a dopadu. Najít kritická (červená zóna) a ta řešit první.<br/><br/>• <b>4. Opatření:</b> preventivní (smlouva s pokutami pro subdodavatele, fixace ceny materiálu — útočí na příčinu) + nápravná (rezerva v rozpočtu, pojištění — zmírní dopad).<br/><br/>• <b>5. Vyplatí se?</b> Posoudit finanční náročnost. Pojištění za rozumnou cenu ano, drahé zajištění proti nepravděpodobnému riziku možná ne.<br/><br/>• <b>6. Zohlednit při rozhodnutí:</b> Po ošetření rizik posoudit, jestli je zakázka přijatelná. Riziková ale výnosná × jistá ale bez růstu — podle postoje Marka k riziku.<br/><br/><b>Pro komisi:</b> Přesně to, co tažené chtějí. Klíč: <b>závažnost = pravděpodobnost × dopad</b> (ne jen 'to je riskantní') + <b>matice rizika</b> + <b>preventivní × nápravná opatření</b> + <b>finanční náročnost</b> + <b>zohlednit riziko při hodnocení variant</b>. Anti-vzor: hodnotit variantu jen podle výnosu, nebo navrhnout opatření dražší než škoda.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Manažerské rozhodování" subjectId="roz" number={3} title="Rizika, závažnost, opatření"
+      subtitle="Riziko × nejistota + závažnost (pp × dopad) + matice rizika + preventivní/nápravná opatření"
+      color={VSE.fph}
+      questionText="Rizika u rozhodovacích variant — určení rizik, závažnost (pravděpodobnost × dopad), opatření a zohlednění při hodnocení variant."
+      sloz={3} roz={4} freq={4}
+      examStrategy={examStrategyRoz3}
+      studySections={studySectionsRoz3}
+      flashcards={flashcardsRoz3}
+      quiz={quizRoz3}
+      praxe={praxeRoz3}
+      examQuestions={examQuestionsRoz3}
+      podcast={podcastRoz3}
+      caseStudy={caseStudyRoz3}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   MANAŽERSKÉ ROZHODOVÁNÍ 4 — Metody rozhodování za rizika
+   ════════════════════════════════════════════════════════ */
+function OkruhRoz4Panel() {
+  const studySectionsRoz4 = [
+    { id: "uvod", title: "Tři metody pro rozhodování za rizika", subtitle: "Kdy použít strom, Monte Carlo nebo scénáře", color: VSE.fph, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Když rozhodujeme za rizika (známe pravděpodobnosti) a jde o <b>významné strategické rozhodnutí</b>, používáme tři hlavní metody: <b>rozhodovací strom, simulaci Monte Carlo a tvorbu scénářů</b>. Každá se hodí na něco jiného.
+        </Def>
+        <Tag color={VSE.fph}>Rychlý přehled — kterou metodu kdy</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "🌳 ROZHODOVACÍ STROM", d: "Pro několik etap rozhodnutí za sebou, málo variant, diskrétní hodnoty. Když se rozhoduji postupně a chci vidět větve." },
+            { c: VSE.warning, t: "🎰 MONTE CARLO", d: "Pro hodně proměnných a velký počet scénářů, spojité hodnoty. Když je to složité a chci hloubkovou analýzu." },
+            { c: VSE.fph, t: "📖 SCÉNÁŘE", d: "Pro nestabilní prostředí, kdy chci vidět odlišné možné budoucnosti. Když potřebuji rozšířit obzor a připravit se na různé varianty vývoje." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ExamAlert
+          komise="Tažené: vhodnost stromu/Monte Carlo/scénářů pro daný problém (Nový+Kolouchová+Svobodová, Tahal+Cejthamr+Svobodová, Smrčka+Zamazalová+Viktora, Mládková+Kolouchová+Mikan)"
+          what="Komise chce: najít problém v PS, vymyslet varianty, popsat postup stanovení důsledků variant + <b>určit, který nástroj je vhodný</b> (strom × Monte Carlo × scénáře) a PROČ. Stříteský: nechtěla teorii, jen praxi a vhodnost."
+        />
+      </div>) },
+
+    { id: "strom", title: "Rozhodovací (pravděpodobnostní) strom", subtitle: "Když se rozhoduji postupně ve více krocích", color: VSE.fph, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Rozhodovací strom</b> = grafický nástroj, který zobrazuje důsledky jednotlivých variant podle pravděpodobnosti, že nastanou rizikové faktory. Udělám rozhodnutí a sleduji, co se pak může stát a jak budu reagovat.
+        </Def>
+        <Tag color={VSE.fph}>Z čeho se strom skládá</Tag>
+        <Bullet items={[
+          "<b>Uzly</b> — obsahují rizikový faktor (např. měnový kurz). Začínáme vždy <b>rozhodovacím uzlem</b> (kosočtverec = varianty, co udělám), pak situační uzly (kolečka = rizika).",
+          "<b>Hrany</b> — 'čáry' z uzlů. Představují varianty a pravděpodobnost nastání (např. kurz vzroste s 60 %, spadne s 40 %).",
+          "<b>Větve</b> — souhrnný název pro uzly a hrany. Každá větev = jeden scénář vývoje.",
+          "<b>Výsledek</b> — na konci větví jsou dopady variant podle pravděpodobnosti jejich nastání.",
+          "<b>Důležité:</b> Pravděpodobnosti se týkají RIZIKA, ne variant. Já si vybírám variantu, ale co se stane potom, je riziko.",
+        ]} color={VSE.fph} />
+        <ResponsiveSVG viewBox="0 0 540 340" maxHeight={360}>
+          <text x="270" y="20" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Rozhodovací strom — investovat × neinvestovat</text>
+          {/* Rozhodovací uzel (kosočtverec) */}
+          <rect x="40" y="150" width="34" height="34" transform="rotate(45, 57, 167)" fill={VSE.fmv} opacity="0.9"/>
+          <text x="57" y="210" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fontWeight="700" fill={VSE.fmv}>rozhodnutí</text>
+          {/* Hrana 1: Investovat -> situační uzel */}
+          <line x1="80" y1="160" x2="240" y2="90" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <text x="150" y="110" textAnchor="middle" fontFamily={fontSans} fontSize="10" fontWeight="700" fill={VSE.fph}>Investovat</text>
+          {/* Hrana 2: Neinvestovat -> výsledek */}
+          <line x1="80" y1="174" x2="430" y2="280" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <text x="200" y="250" textAnchor="middle" fontFamily={fontSans} fontSize="10" fontWeight="700" fill={VSE.nf}>Neinvestovat</text>
+          {/* Situační uzel (kolečko = riziko) */}
+          <circle cx="250" cy="85" r="17" fill={VSE.warning} opacity="0.9"/>
+          <text x="250" y="130" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fontWeight="700" fill={VSE.warning}>riziko (stav trhu)</text>
+          {/* Hrana: trh roste 60% */}
+          <line x1="266" y1="78" x2="430" y2="45" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <text x="350" y="48" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fontWeight="700" fill={VSE.success}>roste 60 %</text>
+          {/* Hrana: trh klesá 40% */}
+          <line x1="266" y1="92" x2="430" y2="150" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <text x="350" y="135" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fontWeight="700" fill={VSE.danger}>klesá 40 %</text>
+          {/* Výsledky (čtverečky na konci větví) */}
+          <rect x="430" y="30" width="90" height="30" rx="4" fill={VSE.success} opacity="0.18" stroke={VSE.success} strokeWidth="1.5"/>
+          <text x="475" y="49" textAnchor="middle" fontFamily={fontMono} fontSize="10.5" fontWeight="700" fill={VSE.success}>+100</text>
+          <rect x="430" y="135" width="90" height="30" rx="4" fill={VSE.danger} opacity="0.18" stroke={VSE.danger} strokeWidth="1.5"/>
+          <text x="475" y="154" textAnchor="middle" fontFamily={fontMono} fontSize="10.5" fontWeight="700" fill={VSE.danger}>−20</text>
+          <rect x="430" y="265" width="90" height="30" rx="4" fill={VSE.nf} opacity="0.18" stroke={VSE.nf} strokeWidth="1.5"/>
+          <text x="475" y="284" textAnchor="middle" fontFamily={fontMono} fontSize="10.5" fontWeight="700" fill={VSE.nf}>0 (jistota)</text>
+          {/* Rollback výpočet */}
+          <rect x="40" y="245" width="350" height="70" rx="6" fill="var(--surface)" stroke={VSE.fph} strokeWidth="1.2" opacity="0.95"/>
+          <text x="52" y="264" fontFamily={fontSans} fontSize="10" fontWeight="800" fill={VSE.fph}>ROLLBACK (počítáme odzadu):</text>
+          <text x="52" y="281" fontFamily={fontMono} fontSize="9.5" fill="var(--text)">Investovat = 0,6 × 100 + 0,4 × (−20) = 52</text>
+          <text x="52" y="297" fontFamily={fontMono} fontSize="9.5" fill="var(--text)">Neinvestovat = 0</text>
+          <text x="52" y="310" fontFamily={fontSans} fontSize="9.5" fontWeight="700" fill={VSE.success}>52 &gt; 0 → vyhrává INVESTOVAT</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.warning}>Jak se strom počítá — Rollback</Tag>
+        <Bullet items={[
+          "<b>Rollback = počítáme odzadu.</b> Začneme na konci větví (výsledky) a postupujeme zpět k začátku.",
+          "Pro každou variantu spočítáme <b>očekávaný výsledek</b> (vážíme pravděpodobnostmi).",
+          "Pak se díváme dopředu a vybereme variantu s nejlepším očekávaným výsledkem.",
+          "<b>Logika:</b> 'Jdeme odzadu, protože nemůžeme starou pravděpodobnost promítat do budoucnosti.'",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Výhody × nevýhody stromu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.success, t: "+ VÝHODY", d: "Jasné, ilustrativní zobrazení. Jednoduchá konstrukce a přehlednost. Zvládá více navazujících etap rozhodování. Lépe se s ním pracuje než s tabulkou." },
+            { c: VSE.danger, t: "− NEVÝHODY", d: "Zjednodušené a statické. Omezený počet rizikových faktorů. Varianty se v něm nemění podle vývoje. Jen pro diskrétní hodnoty a jedno kritérium." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "monte", title: "Simulace Monte Carlo", subtitle: "Když je to složité a proměnných je hodně", color: VSE.fph, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Simulace Monte Carlo</b> = statistická metoda, která simuluje náhodné jevy pomocí opakovaných simulací a náhodných čísel. Hodí se, když potřebujeme <b>vygenerovat velký počet scénářů s mnoha proměnnými</b>.
+        </Def>
+        <Tag color={VSE.fph}>Postup Monte Carlo</Tag>
+        <Bullet items={[
+          "<b>1. Tvorba matematického modelu</b> — propojení hodnot, které se vzájemně ovlivňují.",
+          "<b>2. Určení klíčových faktorů rizika</b> — co situaci ovlivňuje (např. pomocí analýzy citlivosti).",
+          "<b>3. Stanovení rozdělení pravděpodobnosti</b> nastání rizika (diskrétní/spojité, symetrické/nesymetrické).",
+          "<b>4. Stanovení statistické závislosti</b> faktorů rizika.",
+          "<b>5. Volba výstupů</b> — co chceme dostat (grafy, čísla).",
+          "<b>Pak počítač opakuje simulaci mnohokrát</b> s náhodnými hodnotami a dá nám rozdělení možných výsledků.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Výstupy Monte Carlo</Tag>
+        <Bullet items={[
+          "<b>Grafické:</b> trendové grafy (vývoj v čase), překryvové grafy (rozdělení pravděpodobnosti), tornádo graf (analýza citlivosti).",
+          "<b>Číselné:</b> míry variability — modus, medián, mean (očekávaná hodnota), rozptyl, min, max.",
+          "<b>Modus</b> = nejpravděpodobnější hodnota (nejvyšší sloupec). <b>Medián</b> = rozděluje hodnoty 50/50 (nejblíž realitě). <b>Mean</b> = aritmetický průměr.",
+        ]} color={VSE.fph} />
+        <ResponsiveSVG viewBox="0 0 540 280" maxHeight={300}>
+          <text x="270" y="20" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Vystup Monte Carlo - rozdeleni pravdepodobnosti</text>
+          <text x="135" y="45" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.fph}>Symetricke (modus = median = mean)</text>
+          {[20,40,70,110,150,180,150,110,70,40,20].map((h,i) => (
+            <rect key={`s${i}`} x={30 + i*20} y={220 - h*0.7} width="18" height={h*0.7} fill={VSE.fph} opacity="0.5" rx="1"/>
+          ))}
+          <line x1="135" y1="95" x2="135" y2="220" stroke={VSE.danger} strokeWidth="1.5" strokeDasharray="3 2"/>
+          <text x="135" y="240" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill={VSE.danger} fontWeight="700">vsechny stejne</text>
+          <line x1="25" y1="220" x2="260" y2="220" stroke="var(--text-muted)" strokeWidth="1"/>
+          <text x="15" y="160" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)" transform="rotate(-90, 15, 160)">PP</text>
+          <text x="240" y="258" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">hodnota (NPV)</text>
+          <text x="405" y="45" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.fmv}>Nesymetricke (modus, median, mean se lisi)</text>
+          {[30,90,160,180,150,110,80,55,35,22,12].map((h,i) => (
+            <rect key={`n${i}`} x={300 + i*20} y={220 - h*0.7} width="18" height={h*0.7} fill={VSE.fmv} opacity="0.5" rx="1"/>
+          ))}
+          <line x1="345" y1="95" x2="345" y2="220" stroke={VSE.warning} strokeWidth="1.5" strokeDasharray="3 2"/>
+          <text x="345" y="110" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill={VSE.warning} fontWeight="700">modus</text>
+          <line x1="372" y1="120" x2="372" y2="220" stroke={VSE.success} strokeWidth="1.5" strokeDasharray="3 2"/>
+          <text x="378" y="135" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill={VSE.success} fontWeight="700">median</text>
+          <line x1="400" y1="140" x2="400" y2="220" stroke={VSE.danger} strokeWidth="1.5" strokeDasharray="3 2"/>
+          <text x="412" y="155" textAnchor="middle" fontFamily={fontMono} fontSize="8" fill={VSE.danger} fontWeight="700">mean</text>
+          <line x1="295" y1="220" x2="530" y2="220" stroke="var(--text-muted)" strokeWidth="1"/>
+          <text x="510" y="258" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">hodnota</text>
+          <text x="270" y="276" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill="var(--text-muted)" fontStyle="italic">modus = nejvyssi sloupec, median = rozdeli 50/50 (nejbliz realite), mean = prumer (tahnou ho extremy)</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.fph}>Výhody × nevýhody Monte Carlo</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.success, t: "+ VÝHODY", d: "Hloubková, detailní analýza. Velký počet úrovní, scénářů a proměnných. Zvládne složité situace, které strom nezvládne." },
+            { c: VSE.danger, t: "− NEVÝHODY", d: "Obtížnost vytvoření modelu. Tunelový efekt (vycházíme jen ze známých faktů, neznámé nezahrneme). Riziko kvantifikace nesprávných rizik." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "scenare", title: "Tvorba scénářů", subtitle: "Když chci vidět odlišné možné budoucnosti", color: VSE.fph, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Scénáře</b> = vzájemně konzistentní kombinace hodnot klíčových rizikových faktorů. Každý scénář ukazuje <b>odlišný možný vývoj okolí</b> — jiný obraz budoucnosti. Pomáhá rozšířit obzor a připravit se na různé varianty.
+        </Def>
+        <Tag color={VSE.fph}>Podoba scénářů</Tag>
+        <Bullet items={[
+          "<b>Kvalitativní</b> — popis budoucího vývoje slovy.",
+          "<b>Kvantitativní</b> — číselné vyjádření (např. ziskovost variant).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Obvykle 4 scénáře</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.danger, t: "😟 PESIMISTICKÝ", d: "Co když se věci pokazí. Nejhorší rozumný vývoj." },
+            { c: VSE.success, t: "😊 OPTIMISTICKÝ", d: "Co když všechno vyjde. Nejlepší rozumný vývoj." },
+            { c: VSE.warning, t: "🎯 NEJPRAVDĚPODOBNĚJŠÍ", d: "Nejpravděpodobnější trend. To, co reálně čekáme." },
+            { c: VSE.nf, t: "➡️ BEZ PŘEKVAPENÍ", d: "Prostě pokračování aktuálních trendů, nic nového." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Systém včasného varování</Tag>
+        <Bullet items={[
+          "Dnes je prostředí málo stabilní → dobré scénáře patří do strategického rozhodování.",
+          "<b>Systém včasného varování</b> obsahuje korekční opatření — návrhy, jak snížit nepříznivé dopady, kdyby se naplnil špatný scénář.",
+          "<b>+ Výhody:</b> rozšiřují obzor manažerů, jednoduché a názorné, varují včas.",
+          "<b>− Nevýhody:</b> zúžený pohled, subjektivní, jen pro menší počet proměnných.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "matice", title: "Rozhodovací matice — pravidla výběru", subtitle: "MAXIMIN, MAXIMAX, LAPLACE, Hurwicz, Savage", color: VSE.fph, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Rozhodovací matice</b> = mřížka s variantami × možnými stavy světa a jejich výsledky. Když neznáme pravděpodobnosti (rozhodování za nejistoty), použijeme jedno z <b>rozhodovacích pravidel</b> podle našeho postoje.
+        </Def>
+        <Tag color={VSE.fph}>Rozhodovací pravidla</Tag>
+        <Bullet items={[
+          "<b>MAXIMIN</b> — z každé varianty vezmu nejhorší výsledek, pak vyberu nejlepší z nich. Pesimistický přístup (zajistím se proti nejhoršímu).",
+          "<b>MAXIMAX</b> — z každé varianty vezmu nejlepší výsledek, pak vyberu nejlepší z nich. Optimistický přístup (sázím na nejlepší).",
+          "<b>LAPLACE</b> — předpokládám, že všechny stavy světa mají stejnou pravděpodobnost.",
+          "<b>BAYES</b> — použiju mnou zvolené (subjektivní) pravděpodobnosti.",
+          "<b>HURWICZ</b> — vážený průměr nejlepší a nejhorší hodnoty (kompromis mezi optimismem a pesimismem).",
+          "<b>SAVAGE</b> — minimalizuji nejvyšší možnou ztrátu (lítost z toho, že jsem nevybral líp).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Portfolio rizikových variant</Tag>
+        <Bullet items={[
+          "<b>Portfolio</b> = skupina variant se společnými rysy, posouzená stejnými kritérii. Když nemáme neomezené zdroje a vybíráme z více projektů.",
+          "<b>Vhodné pro:</b> výzkumné a investiční projekty, finanční investice.",
+          "<b>Diverzifikace:</b> rozložením do více projektů snížíme NEsystematické riziko (systematické ne).",
+          "<b>Efektivní hranice</b> = vyvážení rizika a výnosu. Optimální portfolio: varianty vyrovnané, nekorelované, plní cíle.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Vybrat vhodnou metodu a zdůvodnit", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Tahle tažená chce: najít problém, vymyslet varianty, popsat <b>jak stanovit důsledky variant</b>, a hlavně <b>vybrat vhodnou metodu</b> (strom × Monte Carlo × scénáře) a zdůvodnit proč.
+        </Def>
+        <Tag color={VSE.success}>Jak vybrat metodu — rozhodovací klíč</Tag>
+        <Bullet items={[
+          "<b>Rozhoduji se postupně ve více krocích, málo variant?</b> → ROZHODOVACÍ STROM (vidím větve a etapy).",
+          "<b>Je to složité, hodně proměnných, spojité hodnoty?</b> → MONTE CARLO (hloubková analýza, hodně scénářů).",
+          "<b>Nestabilní prostředí, chci vidět odlišné budoucnosti?</b> → SCÉNÁŘE (pesimistický/optimistický/nejpravděpodobnější/bez překvapení).",
+          "<b>Neznám pravděpodobnosti vůbec?</b> → ROZHODOVACÍ MATICE (MAXIMIN/MAXIMAX podle postoje).",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Postup na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Najdi problém a vymysli varianty řešení.",
+          "<b>2.</b> Popiš, jak stanovit důsledky variant (názory expertů, Delphi, podle kritérií).",
+          "<b>3.</b> Posuď charakter problému — kolik etap, kolik proměnných, znám pravděpodobnosti?",
+          "<b>4.</b> Vyber vhodnou metodu a <b>zdůvodni proč</b> (to komise nejvíc chce).",
+          "<b>5.</b> Pokud sedí, zmiň výhody/nevýhody zvolené metody.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Zdůvodnit VÝBĚR metody podle charakteru problému (Stříteský chce praxi, ne teorii).",
+          "<b>✅ Dobře:</b> Vědět, že strom = etapy/málo variant, Monte Carlo = složitost, scénáře = nestabilita.",
+          "<b>❌ Špatně:</b> Vyjmenovat všechny metody bez výběru té vhodné.",
+          "<b>❌ Špatně:</b> Recitovat teorii bez napojení na konkrétní problém z PS.",
+        ]} color={VSE.fph} />
+      </div>) },
+  ];
+
+  const flashcardsRoz4 = [
+    { term: "3 metody za rizika", def: "Rozhodovací strom, simulace Monte Carlo, tvorba scénářů. Pro významná strategická rozhodnutí.", tag: "PŘEHLED" },
+    { term: "Kdy rozhodovací strom", def: "Více etap za sebou, málo variant, diskrétní hodnoty. Když se rozhoduji postupně a chci vidět větve.", tag: "VÝBĚR" },
+    { term: "Kdy Monte Carlo", def: "Hodně proměnných, velký počet scénářů, spojité hodnoty. Když je to složité a chci hloubkovou analýzu.", tag: "VÝBĚR" },
+    { term: "Kdy scénáře", def: "Nestabilní prostředí, chci vidět odlišné možné budoucnosti. Rozšíření obzoru, příprava na varianty vývoje.", tag: "VÝBĚR" },
+    { term: "Rozhodovací strom", def: "Grafický nástroj — zobrazuje důsledky variant podle pravděpodobnosti rizikových faktorů. Rozhoduji a sleduji co se stane.", tag: "STROM" },
+    { term: "Uzly stromu", def: "Obsahují rizikový faktor. Začínáme rozhodovacím uzlem (kosočtverec = varianty), pak situační uzly (kolečka = rizika).", tag: "STROM" },
+    { term: "Hrany stromu", def: "Čáry z uzlů. Představují varianty a pravděpodobnost nastání (kurz vzroste 60 %, spadne 40 %).", tag: "STROM" },
+    { term: "Větve stromu", def: "Souhrnný název pro uzly a hrany. Každá větev = jeden scénář vývoje.", tag: "STROM" },
+    { term: "Pp se týká rizika", def: "Ve stromu se pravděpodobnosti týkají RIZIKA, ne variant. Variantu si vybírám, co se stane potom je riziko.", tag: "STROM" },
+    { term: "Rollback", def: "Počítáme strom ODZADU — od výsledků k začátku. Pro variantu spočítáme očekávaný výsledek. Pak vybereme nejlepší.", tag: "STROM" },
+    { term: "Strom — výhody", def: "Jasné ilustrativní zobrazení, jednoduchá konstrukce, přehlednost, více navazujících etap.", tag: "STROM" },
+    { term: "Strom — nevýhody", def: "Zjednodušené, statické, omezený počet rizikových faktorů, jen diskrétní hodnoty a jedno kritérium.", tag: "STROM" },
+    { term: "Monte Carlo", def: "Statistická metoda — simuluje náhodné jevy opakovanými simulacemi a náhodnými čísly. Velký počet scénářů, hodně proměnných.", tag: "MONTE CARLO" },
+    { term: "Monte Carlo — postup", def: "1) matematický model, 2) klíčové faktory rizika, 3) rozdělení pp, 4) statistická závislost, 5) volba výstupů. Pak opakovaná simulace.", tag: "MONTE CARLO" },
+    { term: "Monte Carlo — výstupy", def: "Grafické (trendové, překryvové, tornádo) + číselné (modus, medián, mean, rozptyl, min, max).", tag: "MONTE CARLO" },
+    { term: "Modus / medián / mean", def: "Modus = nejpravděpodobnější (nejvyšší sloupec). Medián = rozděluje 50/50 (nejblíž realitě). Mean = aritmetický průměr.", tag: "MONTE CARLO" },
+    { term: "Monte Carlo — výhody/nevýhody", def: "+ Hloubková analýza, hodně proměnných. − Obtížnost vytvoření, tunelový efekt (jen známé fakty).", tag: "MONTE CARLO" },
+    { term: "Scénáře", def: "Vzájemně konzistentní kombinace hodnot rizikových faktorů. Každý scénář = odlišný možný vývoj okolí.", tag: "SCÉNÁŘE" },
+    { term: "Podoba scénářů", def: "Kvalitativní (popis slovy) × kvantitativní (čísla, ziskovost).", tag: "SCÉNÁŘE" },
+    { term: "4 scénáře", def: "Pesimistický, optimistický, nejpravděpodobnější, bez překvapení (pokračování trendů).", tag: "SCÉNÁŘE" },
+    { term: "Systém včasného varování", def: "Obsahuje korekční opatření — návrhy, jak snížit nepříznivé dopady, kdyby se naplnil špatný scénář.", tag: "SCÉNÁŘE" },
+    { term: "Scénáře — výhody/nevýhody", def: "+ Rozšiřují obzor, názorné, včasné varování. − Zúžený pohled, subjektivní, jen pro málo proměnných.", tag: "SCÉNÁŘE" },
+    { term: "Rozhodovací matice", def: "Mřížka varianty × stavy světa a výsledky. Pro rozhodování za nejistoty (neznáme pp).", tag: "MATICE" },
+    { term: "MAXIMIN", def: "Z každé varianty nejhorší výsledek, pak nejlepší z nich. Pesimistický (zajistím se proti nejhoršímu).", tag: "MATICE" },
+    { term: "MAXIMAX", def: "Z každé varianty nejlepší výsledek, pak nejlepší z nich. Optimistický (sázím na nejlepší).", tag: "MATICE" },
+    { term: "LAPLACE", def: "Předpokládám, že všechny stavy světa mají stejnou pravděpodobnost.", tag: "MATICE" },
+    { term: "HURWICZ", def: "Vážený průměr nejlepší a nejhorší hodnoty. Kompromis mezi optimismem a pesimismem.", tag: "MATICE" },
+    { term: "SAVAGE", def: "Minimalizuji nejvyšší možnou ztrátu (lítost z nevybrání lepší varianty).", tag: "MATICE" },
+    { term: "Portfolio rizikových variant", def: "Skupina variant se společnými rysy, stejná kritéria. Pro výběr z více projektů při omezených zdrojích.", tag: "PORTFOLIO" },
+    { term: "Efektivní hranice", def: "Vyvážení rizika a výnosu. Optimální portfolio: varianty vyrovnané, nekorelované, plní cíle.", tag: "PORTFOLIO" },
+  ];
+
+  const quizRoz4 = [
+    { q: "Jaké jsou 3 metody rozhodování za rizika?", opts: ["SWOT/PESTLE/Porter", "Rozhodovací strom, Monte Carlo, tvorba scénářů", "Plán/Akce/Kontrola", "Cíl/Kritérium/Varianta"], correct: 1 },
+    { q: "Kdy použít rozhodovací strom?", opts: ["Hodně proměnných", "Více etap za sebou, málo variant, diskrétní hodnoty", "Nestabilní prostředí", "Neznám nic"], correct: 1 },
+    { q: "Kdy použít Monte Carlo?", opts: ["Málo variant", "Hodně proměnných, velký počet scénářů, spojité hodnoty, složitost", "Jen 2 možnosti", "Pár etap"], correct: 1 },
+    { q: "Kdy použít scénáře?", opts: ["Stabilní prostředí", "Nestabilní prostředí, chci vidět odlišné možné budoucnosti", "Málo proměnných", "Jistota"], correct: 1 },
+    { q: "Z čeho se skládá rozhodovací strom?", opts: ["Jen čísla", "Uzly (rizikový faktor), hrany (varianty + pp), větve (scénáře), výsledek", "Jen grafy", "Tabulky"], correct: 1 },
+    { q: "Čeho se týkají pravděpodobnosti ve stromu?", opts: ["Variant", "Rizika — ne variant. Variantu si vybírám, co se stane potom je riziko.", "Nákladů", "Cílů"], correct: 1 },
+    { q: "Co je Rollback?", opts: ["Počítání zepředu", "Počítáme strom ODZADU — od výsledků k začátku, spočítáme očekávaný výsledek", "Náhodný výběr", "Simulace"], correct: 1 },
+    { q: "Co je Monte Carlo?", opts: ["Graf", "Statistická metoda — simuluje náhodné jevy opakovanými simulacemi a náhodnými čísly", "Strom", "Tabulka"], correct: 1 },
+    { q: "Co je medián v Monte Carlo?", opts: ["Průměr", "Rozděluje hodnoty 50/50 — nejblíž realitě", "Nejvyšší sloupec", "Minimum"], correct: 1 },
+    { q: "Co je modus?", opts: ["Průměr", "Nejpravděpodobnější hodnota (nejvyšší sloupec)", "Medián", "Maximum"], correct: 1 },
+    { q: "Co je tunelový efekt (nevýhoda Monte Carlo)?", opts: ["Rychlost", "Vycházíme jen ze známých faktů, neznámé nezahrneme", "Přesnost", "Jednoduchost"], correct: 1 },
+    { q: "Jaké jsou 4 scénáře?", opts: ["Malý/střední/velký/obří", "Pesimistický, optimistický, nejpravděpodobnější, bez překvapení", "A/B/C/D", "Den/týden/měsíc/rok"], correct: 1 },
+    { q: "Co je systém včasného varování?", opts: ["Alarm", "Korekční opatření — návrhy jak snížit dopady, kdyby se naplnil špatný scénář", "Graf", "Tabulka"], correct: 1 },
+    { q: "Co je pravidlo MAXIMIN?", opts: ["Nejlepší z nejlepších", "Z každé varianty nejhorší výsledek, pak nejlepší z nich (pesimistický)", "Průměr", "Náhoda"], correct: 1 },
+    { q: "Co je pravidlo MAXIMAX?", opts: ["Nejhorší z nejhorších", "Z každé varianty nejlepší výsledek, pak nejlepší z nich (optimistický)", "Průměr", "Náhoda"], correct: 1 },
+    { q: "Co je portfolio rizikových variant?", opts: ["Jedna varianta", "Skupina variant se společnými rysy, stejná kritéria — výběr z více projektů", "Strom", "Scénář"], correct: 1 },
+  ];
+
+  const praxeRoz4 = {
+    caseStudy: {
+      company: "Shell — tvorba scénářů jako firemní DNA",
+      subtitle: "Jak ropný gigant předpověděl ropné krize díky scénářům",
+      content: (<>
+        Royal Dutch Shell je <b>nejslavnější příklad firmy, která ovládla tvorbu scénářů</b>. Od 70. let je scénářové plánování součástí její strategie a několikrát ji zachránilo.<br/><br/>
+        📖 ROPNÁ KRIZE 1973:<br/><br/>
+        Zatímco ostatní ropné firmy počítaly s tím, že levná ropa poteče navždy, Shell si vytvořil scénáře — včetně pesimistického: 'co když arabské země omezí těžbu a ropa prudce zdraží?' Když krize v roce 1973 opravdu přišla, Shell byl jediný připravený. Z menšího hráče se stal jedním z největších.<br/><br/>
+        🎯 PROČ SCÉNÁŘE A NE PŘEDPOVĚĎ:<br/><br/>
+        Shell nepředpovídal jednu budoucnost (to nejde). Místo toho připravil <b>několik odlišných obrazů</b> — optimistický, pesimistický, nejpravděpodobnější. Pro každý měl plán. Nešlo o to uhodnout, co se stane, ale být připravený na cokoliv.<br/><br/>
+        🔮 SYSTÉM VČASNÉHO VAROVÁNÍ:<br/><br/>
+        Shell sledoval signály, které napovídaly, který scénář se naplňuje, a měl předem připravená korekční opatření. Když se objevily známky krize, věděli přesně, co dělat.<br/><br/>
+        💡 PROČ ZROVNA SCÉNÁŘE:<br/><br/>
+        Ropný trh je <b>nestabilní a dlouhodobý</b> — investice do těžby se plánují na desítky let v prostředí plném politických nejistot. To je přesně situace, kde scénáře překonají rozhodovací strom (málo etap) i Monte Carlo (potřebuje čísla). <b>Nestabilita + dlouhý horizont = scénáře.</b>
+      </>),
+      lessons: "Shell ukazuje, kdy a proč použít scénáře: <b>nestabilní prostředí + dlouhý horizont + politické nejistoty</b>. Klíč není předpovědět jednu budoucnost, ale připravit se na několik (pesimistický/optimistický/nejpravděpodobnější) a mít systém včasného varování s korekčními opatřeními. Pro případovku: vybrat metodu podle charakteru problému — scénáře pro nestabilitu, strom pro postupné rozhodování, Monte Carlo pro složitost s mnoha proměnnými."
+    },
+    miniExamples: [
+      { tag: "ROZHODOVACÍ STROM", color: VSE.fph, company: "Farmaceutické firmy — strom u vývoje léku", content: "Pfizer a další farmaceutické firmy používají rozhodovací strom u vývoje léků, protože jde o postupné rozhodování ve fázích. Uzel 1: investovat do fáze I testů? Pokud projde (pravděpodobnost úspěchu) → investovat do fáze II? → fáze III? → schválení? Každá fáze má pravděpodobnost úspěchu a náklady. Rollbackem (odzadu) spočítají očekávanou hodnotu celého vývoje a rozhodnou, jestli vůbec začít. Málo variant, jasné etapy, diskrétní pravděpodobnosti — doména stromu." },
+      { tag: "MONTE CARLO", color: VSE.warning, company: "Pojišťovny — Monte Carlo pro pojistné riziko", content: "Pojišťovny jako Allianz používají Monte Carlo k oceňování rizika. Výplata pojistek závisí na desítkách proměnných — počet nehod, výše škod, počasí, ekonomika — všechny spojité a vzájemně propojené. Žádný strom to nezvládne. Počítač odsimuluje miliony možných scénářů a dá rozdělení možných výplat (modus, medián, mean). Z toho pojišťovna stanoví pojistné tak, aby i v nepříznivém scénáři nezkrachovala. Hodně spojitých proměnných = Monte Carlo." },
+      { tag: "MODUS × MEDIÁN × MEAN", color: VSE.fph, company: "Realitní trh — proč medián, ne průměr", content: "Když se uvádí cena nemovitostí, používá se MEDIÁN, ne průměr (mean). Proč? Pár extrémně drahých vil (vily za stovky milionů) vytáhne průměr nahoru a zkreslí realitu. Medián (prostřední hodnota, 50 % nad, 50 % pod) ukáže, za kolik se reálně prodává běžný byt. To je přesně poučka z Monte Carlo: u nakloněného rozdělení je medián nejblíž realitě, zatímco mean klame. Realitní statistiky to využívají denně." },
+      { tag: "MAXIMIN × MAXIMAX", color: VSE.danger, company: "Startupy vs korporace — různý postoj k riziku", content: "Startup a velká korporace se u stejné nejisté situace rozhodnou jinak. Startup hraje MAXIMAX (optimisticky) — vsadí na nejlepší možný scénář, protože nemá co ztratit a potřebuje velký úspěch. Korporace hraje MAXIMIN (pesimisticky) — zajistí se proti nejhoršímu, protože má co bránit a chce stabilitu. Stejná data, jiný postoj k riziku, jiné rozhodovací pravidlo. Proto startupy dělají odvážné sázky a korporace opatrné kroky." },
+    ]
+  };
+
+  const examQuestionsRoz4 = [
+    { komise: "2025-02-05 / 2026 — Nový+Kolouchová+Svobodová, Tahal+Cejthamr+Svobodová, Mládková+Kolouchová+Mikan", otazka: "Najít problém v PS, navrhnout varianty, popsat postup stanovení důsledků variant, vhodnost rozhodovacího stromu / Monte Carlo / scénářů pro daný problém", pozn: "Klíč: vybrat vhodnou metodu a ZDŮVODNIT proč podle charakteru problému. Strom = etapy/málo variant, Monte Carlo = složitost, scénáře = nestabilita." },
+    { komise: "2025-06-16 — Double Stříteský + Müllerová", otazka: "Najít rozhodovací problém, určit varianty a důsledky variant, určit vhodnost — zda lze využít rozhodovací strom, Monte Carlo, scénáře", pozn: "Nechtěla teorii, jen praxi a vhodnost. Komise chce praktickou aplikaci a výběr metody, ne recitaci definic." },
+    { komise: "2025-02-03 — Smrčka + Zamazalová + Viktora", otazka: "Řešení problému, Monte Carlo, důsledky variant — najít v PS + hlavní problém", pozn: "Zaměřeno na Monte Carlo a stanovení důsledků variant. Vysvětlit, kdy je Monte Carlo vhodné (hodně proměnných, spojité hodnoty)." },
+  ];
+
+  const podcastRoz4 = { title: "Manažerské rozhodování 4 — Metody (strom, Monte Carlo, scénáře)", description: "Tři metody pro rozhodování za rizika. Rozhodovací strom - pro více etap za sebou, málo variant, diskrétní hodnoty. Skládá se z uzlů (rizikový faktor, rozhodovací uzel kosočtverec = varianty, situační kolečka = rizika), hran (varianty + pravděpodobnost), větví (scénáře), výsledků. Pravděpodobnosti se týkají rizika, ne variant. Rollback - počítáme odzadu, očekávaný výsledek. Výhody (jasné, etapy) × nevýhody (statické, jen diskrétní). Monte Carlo - statistická metoda, simuluje náhodné jevy, hodně proměnných, spojité hodnoty. Postup (matematický model, klíčové faktory rizika, rozdělení pp, statistická závislost, výstupy). Výstupy grafické (trendové, překryvové, tornádo) + číselné (modus = nejpravděpodobnější, medián = 50/50 nejblíž realitě, mean = průměr). Výhody (hloubková analýza) × nevýhody (obtížnost, tunelový efekt). Scénáře - odlišné možné budoucnosti, nestabilní prostředí. Kvalitativní × kvantitativní. 4 scénáře (pesimistický, optimistický, nejpravděpodobnější, bez překvapení). Systém včasného varování. Rozhodovací matice za nejistoty - MAXIMIN (pesimistický), MAXIMAX (optimistický), LAPLACE (stejné pp), HURWICZ (vážený průměr), SAVAGE (minimalizace ztráty). Portfolio rizikových variant, diverzifikace, efektivní hranice. Výběr metody a zdůvodnění na případovku.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyRoz4 = `
+    <b style="color:#0F6661">1.</b> Tři metody za rizika — <b>rozhodovací strom, Monte Carlo, scénáře</b>. Komise chce VÝBĚR + zdůvodnění.<br/>
+    <b style="color:#0F6661">2.</b> ⚠️ <b>Strom</b> — více etap za sebou, málo variant, diskrétní hodnoty.<br/>
+    <b style="color:#0F6661">3.</b> Strom složení — uzly (rizikový faktor), hrany (varianty + pp), větve (scénáře), výsledek.<br/>
+    <b style="color:#0F6661">4.</b> ⚠️ Pp se týká RIZIKA, ne variant. <b>Rollback</b> = počítáme odzadu.<br/>
+    <b style="color:#0F6661">5.</b> ⚠️ <b>Monte Carlo</b> — hodně proměnných, spojité hodnoty, hloubková simulace.<br/>
+    <b style="color:#0F6661">6.</b> Monte Carlo výstupy — modus (nejpravděpodobnější), medián (50/50, nejblíž realitě), mean (průměr).<br/>
+    <b style="color:#0F6661">7.</b> Tunelový efekt — nevýhoda Monte Carlo (jen známé fakty).<br/>
+    <b style="color:#0F6661">8.</b> ⚠️ <b>Scénáře</b> — nestabilní prostředí. 4 typy: pesimistický/optimistický/nejpravděpodobnější/bez překvapení.<br/>
+    <b style="color:#0F6661">9.</b> Systém včasného varování — korekční opatření pro špatný scénář.<br/>
+    <b style="color:#0F6661">10.</b> Rozhodovací matice za nejistoty — MAXIMIN (pesim.), MAXIMAX (optim.), LAPLACE, HURWICZ, SAVAGE.<br/>
+    <b style="color:#0F6661">11.</b> ⚠️ Vybrat metodu podle charakteru problému + ZDŮVODNIT (Stříteský chce praxi).
+  `;
+
+  const caseStudyRoz4 = {
+    title: "Tereza a rozhodnutí, které nejde spočítat na koleně",
+    subtitle: "Která metoda sedí na který problém",
+    scenario: "Tereza vede firmu, která stojí před velkým rozhodnutím. Zvažuje, jestli postavit novou výrobní halu. Je to drahá investice a výsledek závisí na spoustě věcí, které nejdou jistě předpovědět. Tereza cítí, že tohle nemůže rozhodnout od stolu pocitově — potřebuje nějaký pořádný nástroj.\n\nKamarád, co učí na vysoké, jí řekl, že existuje víc metod, jak takové rozhodnutí podpořit. 'Terezo, záleží na tom, jaký ten problém je. Na jiný problém sedí jiná metoda. Nejdřív si ujasni, o jaký typ rozhodnutí jde, a teprve pak vyber nástroj.'\n\nTereza si uvědomila, že vlastně řeší několik různých rozhodnutí najednou. U haly jde hlavně o to, jestli ji postavit teď, nebo počkat rok — a podle toho, jak se vyvine poptávka, pak reagovat dál. Je to rozhodování v krocích, kde má jen pár variant.\n\nU finanční stránky je to ale jiné. Výsledek investice závisí na ceně materiálu, kurzu, mzdách, úrocích, poptávce — na desítkách věcí, které se navíc mění plynule. Tady by jí pár větví nestačilo, potřebovala by něco, co zvládne velkou složitost.\n\nA pak je tu ještě dlouhodobý pohled. Tereza neví, jak bude obor vypadat za pět let — můžou přijít nové technologie, jiná regulace, jiná konkurence. Tady ji nezajímá jedno číslo, ale spíš různé možné obrazy budoucnosti, na které by měla být připravená. Tuší, že na každou z těch tří situací se hodí jiný nástroj — jen musí poznat který.",
+    signals: [
+      { text: "Tohle nemůže rozhodnout od stolu pocitově — potřebuje nějaký pořádný nástroj", color: VSE.fph, reason: "Významné strategické rozhodnutí za rizika (Roz4). Volá po metodě — strom, Monte Carlo nebo scénáře podle charakteru problému." },
+      { text: "Na jiný problém sedí jiná metoda. Nejdřív si ujasni, o jaký typ rozhodnutí jde, a teprve pak vyber nástroj", color: VSE.success, reason: "Jádro této tažené (Roz4). Komise chce VÝBĚR vhodné metody podle charakteru problému + zdůvodnění, ne recitaci všech metod." },
+      { text: "Jestli ji postavit teď, nebo počkat rok — a podle toho, jak se vyvine poptávka, reagovat dál. Rozhodování v krocích, jen pár variant", color: VSE.fmv, reason: "Tohle volá po ROZHODOVACÍM STROMU (Roz4). Postupné rozhodování ve více etapách, málo variant, jasné větve — přesně doména stromu." },
+      { text: "Závisí na ceně materiálu, kurzu, mzdách, úrocích, poptávce — na desítkách věcí, které se mění plynule", color: VSE.warning, reason: "Tohle volá po MONTE CARLU (Roz4). Hodně proměnných, spojité hodnoty, velká složitost — pár větví stromu by nestačilo." },
+      { text: "Neví, jak bude obor vypadat za pět let... různé možné obrazy budoucnosti, na které by měla být připravená", color: VSE.fph, reason: "Tohle volá po SCÉNÁŘÍCH (Roz4). Nestabilní prostředí, dlouhý horizont, potřeba vidět odlišné možné budoucnosti a připravit se na ně." },
+      { text: "Na každou z těch tří situací se hodí jiný nástroj — jen musí poznat který", color: VSE.success, reason: "Tereza sama formuluje pointu okruhu (Roz4): metoda se vybírá podle charakteru problému. Strom (etapy), Monte Carlo (složitost), scénáře (nestabilita)." },
+    ],
+    quiz1: {
+      question: "Co je klíčové, aby Tereza dobře rozhodla?",
+      options: [
+        "Použít všechny metody najednou",
+        "Vybrat vhodnou metodu podle charakteru každého problému a zdůvodnit proč — strom (etapy, málo variant), Monte Carlo (složitost), scénáře (nestabilita).",
+        "Rozhodnout pocitově",
+        "Najmout poradce",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Kterou metodu na kterou ze tří situací?",
+      options: [
+        { text: "Rozhodnutí 'postavit teď nebo počkat + reagovat podle poptávky' → rozhodovací strom. Postupné rozhodování v krocích, málo variant, jasné větve, počítá se Rollbackem.", correct: true, reason: "✓ Roz4 — strom je pro postupné rozhodování ve více etapách s málo variantami a diskrétními hodnotami." },
+        { text: "Finanční výsledek závislý na desítkách plynule se měnících proměnných (cena, kurz, mzdy, úroky) → Monte Carlo. Hloubková simulace, hodně proměnných, spojité hodnoty.", correct: true, reason: "✓ Roz4 — Monte Carlo je pro složité situace s mnoha spojitými proměnnými, kde strom nestačí." },
+        { text: "Dlouhodobý pohled na nejistý obor (technologie, regulace, konkurence za 5 let) → scénáře. Pesimistický/optimistický/nejpravděpodobnější/bez překvapení, příprava na každý.", correct: true, reason: "✓ Roz4 — scénáře jsou pro nestabilní prostředí a dlouhý horizont, kdy chci vidět odlišné budoucnosti." },
+        { text: "U každé metody zdůvodnit výběr podle charakteru problému — to komise chce nejvíc slyšet.", correct: true, reason: "✓ Roz4 — zdůvodnění výběru je jádro tažené. Stříteský explicitně chce praxi a vhodnost, ne teorii." },
+        { text: "Použít na všechno rozhodovací strom, je nejjednodušší", correct: false, reason: "✗ Strom nezvládne desítky spojitých proměnných (finanční stránka) ani dlouhodobou nejistotu oboru. Každý problém potřebuje vhodnou metodu." },
+        { text: "Recitovat teorii všech metod bez výběru", correct: false, reason: "✗ Přesně to komise nechce. Stříteský: nechtěla teorii, jen praxi a vhodnost. Klíč je vybrat a zdůvodnit." },
+        { text: "Rozhodnout intuitivně, metody jsou zbytečné", correct: false, reason: "✗ U významného strategického rozhodnutí za rizika jsou metody namístě. Intuice bez analýzy u drahé investice je hazard." },
+      ],
+    },
+    summary: "<b>Tereza řeší tři různé typy rozhodnutí a na každý sedí jiná metoda.</b> Klíč celé tažené: vybrat vhodnou metodu podle charakteru problému a zdůvodnit proč.<br/><br/><b>Výběr metody:</b><br/><br/>• <b>Rozhodovací strom</b> — pro rozhodnutí 'postavit halu teď nebo počkat + reagovat podle poptávky'. Postupné rozhodování v krocích, málo variant, jasné větve. Skládá se z uzlů (rizikový faktor), hran (varianty + pravděpodobnost) a větví. Počítá se Rollbackem (odzadu). Pravděpodobnosti se týkají rizika, ne variant.<br/><br/>• <b>Monte Carlo</b> — pro finanční výsledek závislý na desítkách plynule se měnících proměnných (cena materiálu, kurz, mzdy, úroky, poptávka). Statistická simulace, velký počet scénářů, spojité hodnoty. Výstupem je rozdělení možných výsledků (modus, medián, mean). Pozor na tunelový efekt (jen známé fakty).<br/><br/>• <b>Scénáře</b> — pro dlouhodobý pohled na nejistý obor (technologie, regulace, konkurence za 5 let). Vytvoří pesimistický, optimistický, nejpravděpodobnější a 'bez překvapení' scénář a připraví se na každý. Systém včasného varování doplní korekční opatření.<br/><br/><b>Pro komisi:</b> Přesně to, co tažená chce — najít problém, navrhnout varianty, popsat stanovení důsledků, a hlavně <b>vybrat vhodnou metodu + zdůvodnit</b>. Klíč k výběru: <b>strom = etapy/málo variant</b>, <b>Monte Carlo = složitost/hodně proměnných</b>, <b>scénáře = nestabilita/dlouhý horizont</b>. Stříteský chce praxi a vhodnost, ne teorii. Anti-vzor: recitovat všechny metody bez výběru té vhodné.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Manažerské rozhodování" subjectId="roz" number={4} title="Metody rozhodování (strom, Monte Carlo, scénáře)"
+      subtitle="Rozhodovací strom (Rollback) + Monte Carlo + scénáře (4 typy) + rozhodovací matice + výběr metody"
+      color={VSE.fph}
+      questionText="Metody rozhodování za rizika — vhodnost rozhodovacího stromu, Monte Carlo a scénářů pro daný problém z případovky."
+      sloz={3} roz={4} freq={4}
+      examStrategy={examStrategyRoz4}
+      studySections={studySectionsRoz4}
+      flashcards={flashcardsRoz4}
+      quiz={quizRoz4}
+      praxe={praxeRoz4}
+      examQuestions={examQuestionsRoz4}
+      podcast={podcastRoz4}
+      caseStudy={caseStudyRoz4}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   MANAŽERSKÉ ROZHODOVÁNÍ 5 — Postaudit
+   ════════════════════════════════════════════════════════ */
+function OkruhRoz5Panel() {
+  const studySectionsRoz5 = [
+    { id: "uvod", title: "Co je postaudit a proč se dělá", subtitle: "Učení se z minulých chyb a úspěchů", color: VSE.fph, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fph}>
+          <b>Postaudit</b> = systém učení se z minulých chyb a úspěchů. Když projekt skončí (nebo běží), ohlédneme se zpět a ptáme se: <b>co fungovalo, co ne, a co si z toho odneseme pro příště?</b> Cílem je neopakovat chyby a zvyšovat výkonnost.
+        </Def>
+        <Tag color={VSE.fph}>Proč postaudit potřebujeme</Tag>
+        <Bullet items={[
+          "Existují <b>nepředvídatelná rizika a změny</b> ve vnějším i vnitřním okolí, které mohou způsobit neúspěch.",
+          "Realita je tvrdá: <b>až 2 ze 3 projektů selžou</b> nebo nedopadnou podle plánu.",
+          "Bez postauditu firma <b>opakuje stejné chyby</b> dokola — nikdo se nepoučí.",
+          "<b>Postaudit nabízí východisko</b> — pomáhá firmě se kontinuálně zlepšovat a zamezit chybám.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Typické problémy projektů, které postaudit odhalí</Tag>
+        <Bullet items={[
+          "<b>Prodloužení doby</b> — projekt trval déle, než se plánovalo.",
+          "<b>Překročení nákladů</b> — stálo to víc, než se rozpočtovalo.",
+          "<b>Problémy při vývoji, uvedení na trh nebo v provozu.</b>",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Tažené (časté): Postaudit + aplikace na PS. POZOR: Mikovcová zdůraznila, že POSTAUDIT NENÍ KONTROLA! (Mikovcová+Vávra+Viktora 2025, Krause, Stříteský, Špaček+Nový+Machek)"
+          what="Komise chce: vysvětlit postaudit + aplikovat na PS (která část by se dala využít, co bys auditoval). Klíčové: <b>rozdíl postaudit × kontrola</b> + <b>ex ante × ex post</b> + bariéry + doporučení."
+        />
+      </div>) },
+
+    { id: "rozdil", title: "Postaudit NENÍ kontrola — klíčový rozdíl", subtitle: "Tohle chce komise slyšet", color: VSE.fph, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Tohle je <b>nejdůležitější bod celého okruhu</b> — Mikovcová na něm trvá. Postaudit a kontrola nejsou totéž. Pleteš si je → trojka. Rozdíl je v tom KDY a PROČ se dělají.
+        </Def>
+        <Tag color={VSE.fph}>Kontrola × postaudit — vedle sebe</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.warning, t: "🔍 KONTROLA", d: "Probíhá PRŮBĚŽNĚ během procesu. Ptá se: jdou věci správným směrem TEĎ? Hlídá, aby se proces nevychýlil. Umožňuje zasáhnout a přijmout nápravná opatření hned." },
+            { c: VSE.fph, t: "📊 POSTAUDIT", d: "Probíhá PO dokončení (nebo zpětně). Ptá se: jak to dopadlo a co se z toho naučíme? Porovnává plánované × dosažené. Cílem je poučení a zlepšení budoucích projektů." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Jak si rozdíl zapamatovat</Tag>
+        <Bullet items={[
+          "<b>Kontrola = během.</b> Sleduju řidiče za jízdy, jestli drží směr, a hned koriguju volant.",
+          "<b>Postaudit = potom.</b> Po cestě si rozeberu, kde jsem zbloudil, abych příště jel líp.",
+          "<b>Kontrola</b> je o aktuálním řízení procesu. <b>Postaudit</b> je o učení pro budoucnost.",
+          "<b>Když to spleteš</b>, komise (hlavně Mikovcová) to pozná hned — je to klasická chytačka.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "priciny", title: "Příčiny neúspěchu podle fáze projektu", subtitle: "Kde se to nejčastěji pokazí", color: VSE.fph, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Postaudit hledá, <b>proč projekt selhal</b>. Příčiny se dělí podle toho, ve které fázi vznikly — příprava, realizace, nebo vlastní provoz.
+        </Def>
+        <Tag color={VSE.fph}>Příčiny podle fáze</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fmv, t: "1️⃣ PŘÍPRAVA", d: "Nejasný cíl, chybné parametry (špatně zvolená technologie), nekvalitní časový plán, podceněný rozpočet. Špatný start = problém na celý projekt." },
+            { c: VSE.warning, t: "2️⃣ REALIZACE", d: "Nedodržení plánu, výskyt rizik (problémy s dodavateli, odběrateli, morálkou týmu). Projekt se vychýlí během provádění." },
+            { c: VSE.fph, t: "3️⃣ VLASTNÍ PROVOZ", d: "Neporozumění zákazníků, špatný čas a místo uvedení, nedostatečné testování. Produkt nefunguje, jak měl." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Cíle postauditu</Tag>
+        <Bullet items={[
+          "<b>Kontinuální zlepšování</b> společnosti a zamezení chyb.",
+          "<b>Zvýšení kvality</b> rozhodování, plánování a řízení.",
+          "<b>Zvýšení výkonnosti</b> — úprava tam, kde se neplní cíle.",
+          "<b>Růst hodnoty</b> firmy.",
+          "<b>Dokumentace poznatků</b> pro rozšíření znalostí (aby se předaly dál).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "typy", title: "Typy postauditu a kde má smysl", subtitle: "Ex ante × ex post + oblasti a přínosy", color: VSE.fph, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Postaudit se dělí podle toho, KDY ho děláme — před implementací (ex ante) nebo po ní (ex post). A má smysl skoro u všech projektů.
+        </Def>
+        <Tag color={VSE.fph}>Dva typy podle časování</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fmv, t: "⏮️ EX ANTE", d: "Ve fázi příprav. Tvoří součást projektu — údaje se shromažďují a hodnotí už během příprav. Připravujeme se na audit dopředu." },
+            { c: VSE.fph, t: "⏭️ EX POST", d: "Po realizaci (implementaci). Vhodné cca půl roku až 3 roky po dokončení — to už se ukáže, jak projekt opravdu dopadl." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Kde má postaudit smysl</Tag>
+        <Bullet items={[
+          "U <b>velkých i malých</b> projektů.",
+          "U <b>úspěšných i neúspěšných</b> (i z úspěchu se učíme!).",
+          "U <b>opakujících se i jednorázových</b> projektů.",
+          "<b>Zkrátka skoro všude</b> — všude se dá najít poučení.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.fph}>Náplň, oblasti a přínosy</Tag>
+        <Bullet items={[
+          "<b>Náplň:</b> plnění cílů, plán vs. realita, vhodnost zvolené varianty, problémy a rizika, krizové situace.",
+          "<b>Oblasti:</b> výběr, stanovení rozpočtu, procesy a postupy, neplnění cílů, marketing, modifikace projektů.",
+          "<b>Přínosy:</b> pro budoucí projekty, současné projekty, projektové týmy, organizaci jako celek.",
+          "<b>Postaudit musí mít vstup</b> — jasně definované body a celkové hodnocení, prezentováno odpovědným, odsouhlaseno oběma stranami.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "bariery", title: "Bariéry a výstupy postauditu", subtitle: "Co brání + co z postauditu vzejde", color: VSE.fph, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fph}>
+          Postaudit zní skvěle, ale v praxi naráží na <b>bariéry</b>. A když projde, má jasné <b>výstupy</b> — dokumenty a doporučení.
+        </Def>
+        <Tag color={VSE.danger}>Bariéry postauditu</Tag>
+        <Bullet items={[
+          "<b>Nedostatek času</b> — projekt skončil, lidé spěchají na další, na ohlédnutí není čas.",
+          "<b>Nedostatek financí</b> — postaudit něco stojí a nepřináší hned vidět zisk.",
+          "<b>Nedostatek informací a zkušeností</b> — chybí data nebo know-how, jak audit udělat.",
+          "<b>Malá podpora od zaměstnanců</b> — berou audit jako útok ('hledají, kdo to zkazil'), bojí se ho.",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.fph}>Výstupy postauditu</Tag>
+        <Bullet items={[
+          "<b>Konečná zpráva auditu</b> — celkové vyhodnocení.",
+          "<b>Dílčí zprávy</b> za jednotlivé oblasti kontroly.",
+          "<b>Souhrnná prezentace</b> managementu.",
+          "<b>Doporučení pro další fáze nebo projekty.</b>",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.warning}>Rozhodování o postauditu</Tag>
+        <Bullet items={[
+          "<b>Větší skupina stakeholderů</b> — audit se týká více lidí.",
+          "<b>Postaudit má mít jasně definované body</b> a celkové hodnocení.",
+          "Výsledek se <b>prezentuje všem odpovědným</b> a <b>odsouhlasí oběma stranami</b>.",
+          "<b>Kdo ho provádí:</b> obvykle centrální / hlavní tým (ne ten, kdo projekt dělal — kvůli objektivitě).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na to v případovce", subtitle: "Postup pro postaudit", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Komise chce: vysvětlit postaudit a <b>aplikovat na případovku</b> — která část by se dala využít, co bys auditoval. A hlavně: <b>nezaměnit postaudit s kontrolou</b> (Mikovcová na to číhá).
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Vysvětli, co je postaudit — <b>systém učení z minulých chyb a úspěchů</b> (NE kontrola!).",
+          "<b>2.</b> Zdůrazni rozdíl: <b>kontrola = během procesu, postaudit = po dokončení / zpětně</b>.",
+          "<b>3.</b> Najdi v PS <b>projekt nebo rozhodnutí</b>, které by se dalo auditovat.",
+          "<b>4.</b> Urči, co bys auditoval — <b>plán vs. realita, plnění cílů, příčiny problémů</b> (podle fáze: příprava/realizace/provoz).",
+          "<b>5.</b> Zmiň <b>ex ante × ex post</b> (kdy audit dělat).",
+          "<b>6.</b> Pojmenuj <b>bariéry</b> (čas, finance, odpor zaměstnanců) a jak je překonat.",
+          "<b>7.</b> Navrhni <b>doporučení</b> — co by si firma měla z auditu odnést pro příště.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Jasně říct, že postaudit NENÍ kontrola, a vysvětlit rozdíl (Mikovcová to chce).",
+          "<b>✅ Dobře:</b> Aplikovat na konkrétní projekt z PS — co a proč auditovat.",
+          "<b>✅ Dobře:</b> Zmínit ex ante × ex post a bariéry.",
+          "<b>❌ Špatně:</b> Zaměnit postaudit s průběžnou kontrolou — klasická chytačka.",
+          "<b>❌ Špatně:</b> Mluvit obecně bez napojení na případovku.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsRoz5 = [
+    { term: "Postaudit", def: "Systém učení se z minulých chyb a úspěchů. Po projektu se ohlédneme: co fungovalo, co ne, co si odneseme. Cíl: neopakovat chyby.", tag: "DEFINICE" },
+    { term: "Proč postaudit", def: "Až 2 ze 3 projektů selžou. Bez postauditu firma opakuje stejné chyby. Nabízí východisko — kontinuální zlepšování.", tag: "DEFINICE" },
+    { term: "POSTAUDIT NENÍ KONTROLA!", def: "Nejdůležitější bod. Kontrola = PRŮBĚŽNĚ během procesu. Postaudit = PO dokončení/zpětně. Mikovcová na tom trvá!", tag: "KLÍČOVÉ" },
+    { term: "Kontrola", def: "Probíhá průběžně během procesu. Hlídá, aby se proces nevychýlil TEĎ. Umožňuje zasáhnout hned.", tag: "KLÍČOVÉ" },
+    { term: "Rozdíl kontrola × postaudit", def: "Kontrola = během, řídí proces teď. Postaudit = potom, učí se pro budoucnost. Záměna = trojka.", tag: "KLÍČOVÉ" },
+    { term: "Typické problémy projektů", def: "Prodloužení doby, překročení nákladů, problémy při vývoji/uvedení na trh/v provozu.", tag: "PROBLÉMY" },
+    { term: "Příčiny: příprava", def: "Nejasný cíl, chybné parametry (špatná technologie), nekvalitní časový plán, podceněný rozpočet.", tag: "PŘÍČINY" },
+    { term: "Příčiny: realizace", def: "Nedodržení plánu, výskyt rizik (dodavatelé, odběratelé, morálka týmu).", tag: "PŘÍČINY" },
+    { term: "Příčiny: vlastní provoz", def: "Neporozumění zákazníků, špatný čas a místo, nedostatečné testování.", tag: "PŘÍČINY" },
+    { term: "Cíle postauditu", def: "Kontinuální zlepšování, zvýšení kvality rozhodování, zvýšení výkonnosti, růst hodnoty, dokumentace poznatků.", tag: "CÍLE" },
+    { term: "Ex ante", def: "Postaudit ve fázi příprav. Tvoří součást projektu — údaje se shromažďují už během příprav.", tag: "TYPY" },
+    { term: "Ex post", def: "Postaudit po realizaci (implementaci). Vhodné cca půl roku až 3 roky po dokončení.", tag: "TYPY" },
+    { term: "Kde má postaudit smysl", def: "U velkých i malých, úspěšných i neúspěšných, opakujících se i jednorázových projektů. Skoro všude.", tag: "KDE" },
+    { term: "Náplň postauditu", def: "Plnění cílů, plán vs. realita, vhodnost varianty, problémy a rizika, krizové situace.", tag: "NÁPLŇ" },
+    { term: "Oblasti postauditu", def: "Výběr, stanovení rozpočtu, procesy a postupy, neplnění cílů, marketing, modifikace projektů.", tag: "OBLASTI" },
+    { term: "Přínosy postauditu", def: "Pro budoucí projekty, současné projekty, projektové týmy, organizaci jako celek.", tag: "PŘÍNOSY" },
+    { term: "Bariéry postauditu", def: "Nedostatek času, financí, informací a zkušeností, malá podpora od zaměstnanců (berou jako útok).", tag: "BARIÉRY" },
+    { term: "Výstupy postauditu", def: "Konečná zpráva auditu, dílčí zprávy za oblasti, souhrnná prezentace, doporučení pro další projekty.", tag: "VÝSTUPY" },
+    { term: "Kdo provádí postaudit", def: "Obvykle centrální / hlavní tým — ne ten, kdo projekt dělal (kvůli objektivitě).", tag: "KDO" },
+    { term: "Postaudit musí mít vstup", def: "Jasně definované body + celkové hodnocení. Prezentováno odpovědným, odsouhlaseno oběma stranami.", tag: "JAK" },
+  ];
+
+  const quizRoz5 = [
+    { q: "Co je postaudit?", opts: ["Průběžná kontrola", "Systém učení se z minulých chyb a úspěchů — neopakovat chyby, zlepšovat se", "Plán", "Rozpočet"], correct: 1 },
+    { q: "Jaký je KLÍČOVÝ rozdíl postaudit × kontrola?", opts: ["Žádný", "Kontrola = PRŮBĚŽNĚ během procesu. Postaudit = PO dokončení / zpětně, učí se pro budoucnost.", "Velikost", "Cena"], correct: 1 },
+    { q: "Kolik projektů podle materiálu selže?", opts: ["1 z 10", "Až 2 ze 3 projektů", "Žádný", "Všechny"], correct: 1 },
+    { q: "Co je kontrola (na rozdíl od postauditu)?", opts: ["Po dokončení", "Probíhá průběžně během procesu, umožňuje zasáhnout hned", "Učení pro budoucnost", "Dokumentace"], correct: 1 },
+    { q: "Jaké jsou typické problémy projektů?", opts: ["Jen úspěch", "Prodloužení doby, překročení nákladů, problémy při vývoji/uvedení/provozu", "Žádné", "Jen finance"], correct: 1 },
+    { q: "Jaké jsou příčiny neúspěchu ve fázi přípravy?", opts: ["Dobrý plán", "Nejasný cíl, chybné parametry, nekvalitní časový plán, podceněný rozpočet", "Skvělý tým", "Nízká cena"], correct: 1 },
+    { q: "Co je ex ante postaudit?", opts: ["Po realizaci", "Ve fázi příprav — součást projektu, údaje se shromažďují už během příprav", "Za 3 roky", "Nikdy"], correct: 1 },
+    { q: "Co je ex post postaudit?", opts: ["Před projektem", "Po realizaci — vhodné cca půl roku až 3 roky po dokončení", "Během příprav", "Nikdy"], correct: 1 },
+    { q: "Kde má postaudit smysl?", opts: ["Jen velké projekty", "U velkých i malých, úspěšných i neúspěšných, opakujících se i jednorázových — skoro všude", "Jen neúspěšné", "Nikde"], correct: 1 },
+    { q: "Jaké jsou cíle postauditu?", opts: ["Potrestat viníky", "Kontinuální zlepšování, zvýšení kvality, výkonnosti, hodnoty, dokumentace poznatků", "Snížit mzdy", "Kontrola"], correct: 1 },
+    { q: "Jaké jsou bariéry postauditu?", opts: ["Žádné", "Nedostatek času, financí, informací, malá podpora zaměstnanců (berou jako útok)", "Příliš peněz", "Moc času"], correct: 1 },
+    { q: "Jaké jsou výstupy postauditu?", opts: ["Nic", "Konečná zpráva, dílčí zprávy, souhrnná prezentace, doporučení", "Jen mzdy", "Jen plán"], correct: 1 },
+    { q: "Kdo obvykle provádí postaudit?", opts: ["Ten, kdo projekt dělal", "Centrální / hlavní tým — kvůli objektivitě ne ten, kdo projekt dělal", "Zákazník", "Nikdo"], correct: 1 },
+    { q: "Proč zaměstnanci postaudit nemají rádi?", opts: ["Je drahý", "Berou ho jako útok — bojí se, že hledá, kdo to zkazil", "Je nudný", "Je rychlý"], correct: 1 },
+    { q: "Co je náplň postauditu?", opts: ["Jen rozpočet", "Plnění cílů, plán vs. realita, vhodnost varianty, problémy a rizika, krizové situace", "Jen mzdy", "Jen marketing"], correct: 1 },
+    { q: "Co musí postaudit mít?", opts: ["Nic", "Jasně definované body + celkové hodnocení, prezentováno a odsouhlaseno oběma stranami", "Jen jméno", "Jen datum"], correct: 1 },
+  ];
+
+  const praxeRoz5 = {
+    caseStudy: {
+      company: "NASA — postaudit po havárii Columbia",
+      subtitle: "Jak se nejlepší inženýři světa učí z chyb (a kde selhali)",
+      content: (<>
+        NASA je <b>příklad organizace, kde postaudit rozhoduje o životech</b>. Po havárii raketoplánu Columbia (2003) provedla rozsáhlý postaudit, který odhalil hlubokou pravdu o učení z chyb.<br/><br/>
+        📊 CO POSTAUDIT ODHALIL:<br/><br/>
+        Columbia se rozpadla kvůli kusu pěny, který při startu poškodil tepelný štít. Ale postaudit šel hlouběji — zjistil, že stejný problém s pěnou NASA znala už léta a ignorovala ho. Příčina nebyla jen technická, ale v <b>kultuře, která nebrala varování vážně</b>.<br/><br/>
+        ⚠️ POSTAUDIT NENÍ KONTROLA — PŘESNĚ TADY:<br/><br/>
+        Během letu probíhala kontrola (sledování parametrů v reálném čase). Ale teprve postaudit PO havárii se zpětně podíval, PROČ systém selhal a co se z toho naučit. Kontrola hlídala 'jde to teď', postaudit hledal 'proč to dopadlo takhle a jak to změnit'. <b>Učebnicový rozdíl.</b><br/><br/>
+        🎯 PŘÍČINY PODLE FÁZE:<br/><br/>
+        Postaudit našel příčiny napříč fázemi — v přípravě (podceněné riziko pěny), v realizaci (ignorování varování během mise) i v organizaci (kultura mlčení).<br/><br/>
+        💡 POUČENÍ:<br/><br/>
+        NASA změnila procesy, posílila kulturu, kde se varování bere vážně. Ale tragédie ukázala i bariéru postauditu: po předchozí havárii (Challenger 1986) se NASA nepoučila dost — <b>stejné chyby se zopakovaly</b>. To je přesně to, čemu má postaudit zabránit: učit se, ne opakovat.
+      </>),
+      lessons: "NASA ukazuje postaudit v nejvážnější podobě — a hlavně rozdíl od kontroly: kontrola hlídá za letu, postaudit se zpětně ptá PROČ a co změnit. Postaudit hledá příčiny napříč fázemi (příprava/realizace/organizace), ne jen technickou závadu. Tragický důkaz, proč postaudit funguje jen když se z něj firma OPRAVDU poučí — po Challengeru se NASA nepoučila dost a přišla Columbia. Pro případovku: zdůraznit postaudit ≠ kontrola, hledat příčiny podle fáze, navrhnout, jak se poučit."
+    },
+    miniExamples: [
+      { tag: "POSTAUDIT × KONTROLA", color: VSE.danger, company: "Letecké nehody — black box jako postaudit", content: "Letectví je obor s nejlepším postauditem na světě. Během letu probíhá kontrola (piloti a věž sledují parametry teď). Po nehodě nastupuje postaudit — vyšetřovatelé rozeberou černou skříňku a ptají se PROČ to spadlo a jak tomu příště zabránit. Klíč: nehledají viníka k potrestání, ale příčinu k poučení. Díky tomuhle postauditu (ne kontrole) je dnes létání nejbezpečnější doprava — každá nehoda zlepší celý systém. Přesně rozdíl, na který číhá Mikovcová." },
+      { tag: "EX POST TIMING", color: VSE.fph, company: "Amazon — postmortem po každém velkém selhání", content: "Amazon má slavnou kulturu 'Correction of Errors' (COE) — po každém velkém výpadku nebo selhání píše detailní postmortem. Ale nedělá ho hned druhý den — počká, až se usadí dopady a jsou dostupná data. To je ex post princip: postaudit má smysl s odstupem, kdy už se ukázaly skutečné následky. Dokument pak obsahuje 5x Proč (kořenová příčina) a konkrétní opatření, aby se chyba neopakovala. Poznatky se sdílí napříč firmou." },
+      { tag: "BARIÉRA: ODPOR", color: VSE.warning, company: "Toyota — proč postaudit nesmí být hon na viníky", content: "Toyota vědomě buduje kulturu, kde se chyby hlásí bez strachu (psychological safety). Proč? Protože hlavní bariéra postauditu je, že lidé ho berou jako hon na viníky a chyby skrývají. U Toyoty platí: kdo nahlásí problém, je hrdina, ne viník. Díky tomu se problémy řeší u kořene a postaudit funguje. Firmy, kde se za chyby trestá, mají postaudit k ničemu — lidé chyby zametají pod koberec a organizace se nepoučí." },
+      { tag: "NEPOUČENÍ SE", color: VSE.danger, company: "Boeing 737 MAX — když postaudit chybí", content: "Boeing po první havárii 737 MAX (Lion Air 2018) neudělal pořádný postaudit — spíš problém bagatelizoval. O pět měsíců později spadlo druhé letadlo (Ethiopian Airlines) ze stejné příčiny (systém MCAS). Kdyby Boeing po první havárii provedl důkladný postaudit a poučil se, druhá tragédie nemusela nastat. Letadla byla celosvětově uzemněna na téměř dva roky. Ukázka, co stojí, když se firma z chyby nepoučí — přesně to, čemu má postaudit zabránit." },
+    ]
+  };
+
+  const examQuestionsRoz5 = [
+    { komise: "2025-06-10 / 2025-02-04 — Mikovcová + Vávra + Viktora, Mikovcová + Kolouchová + Viktora", otazka: "Postaudit, jak se dá aplikovat na případovku; POZOR postaudit NENÍ kontrola", pozn: "Mikovcová explicitně chtěla slyšet rozdíl mezi postauditem a kontrolou. Klíčová chytačka okruhu. Kontrola = během procesu, postaudit = po dokončení / zpětně, učí se." },
+    { komise: "2025-06-17 — Vávra + Lorencová + Krause", otazka: "Postaudit (obecně, bariéry, doporučení — např. kdy po projektu)", pozn: "Komise chce bariéry (čas, finance, odpor zaměstnanců) + doporučení + kdy postaudit dělat (ex post: půl roku až 3 roky po dokončení)." },
+    { komise: "2026-02-02 — Špaček + Nový + Machek", otazka: "Postaudit — aplikovat na případovku, jaká část postauditu by se dala využít", pozn: "Aplikace na PS — najít projekt/rozhodnutí, určit co auditovat (plán vs. realita, plnění cílů, příčiny podle fáze), navrhnout doporučení." },
+  ];
+
+  const podcastRoz5 = { title: "Manažerské rozhodování 5 — Postaudit", description: "Postaudit = systém učení se z minulých chyb a úspěchů. Po projektu se ohlédneme: co fungovalo, co ne, co si odneseme. Až 2 ze 3 projektů selžou. NEJDŮLEŽITĚJŠÍ: postaudit NENÍ kontrola! Kontrola = průběžně během procesu, řídí a koriguje teď. Postaudit = po dokončení nebo zpětně, učí se pro budoucnost. Mikovcová na tom trvá. Typické problémy - prodloužení doby, překročení nákladů, problémy při vývoji/uvedení/provozu. Příčiny podle fáze - příprava (nejasný cíl, chybné parametry, nekvalitní plán, podceněný rozpočet), realizace (nedodržení plánu, rizika), vlastní provoz (neporozumění zákazníků, špatný čas a místo, málo testování). Cíle - kontinuální zlepšování, zvýšení kvality, výkonnosti, hodnoty, dokumentace poznatků. Typy - ex ante (ve fázi příprav) × ex post (po realizaci, půl roku až 3 roky). Kde má smysl - velké i malé, úspěšné i neúspěšné, opakující se i jednorázové, skoro všude. Náplň, oblasti, přínosy. Bariéry - nedostatek času, financí, informací, malá podpora zaměstnanců (berou jako útok). Výstupy - konečná zpráva, dílčí zprávy, prezentace, doporučení. Kdo provádí - centrální tým kvůli objektivitě. Aplikace na případovku.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyRoz5 = `
+    <b style="color:#0F6661">1.</b> <b>Postaudit</b> = systém učení se z minulých chyb a úspěchů. Cíl: neopakovat chyby, zlepšovat se.<br/>
+    <b style="color:#0F6661">2.</b> ⚠️⚠️ <b>POSTAUDIT NENÍ KONTROLA!</b> (Mikovcová na tom trvá) — kontrola = během procesu, postaudit = po dokončení / zpětně.<br/>
+    <b style="color:#0F6661">3.</b> Až 2 ze 3 projektů selžou — proto se učit z chyb.<br/>
+    <b style="color:#0F6661">4.</b> Typické problémy — prodloužení doby, překročení nákladů, problémy při vývoji/uvedení/provozu.<br/>
+    <b style="color:#0F6661">5.</b> ⚠️ Příčiny podle fáze — příprava (nejasný cíl, podceněný rozpočet) / realizace (nedodržení plánu, rizika) / provoz (neporozumění zákazníků, málo testování).<br/>
+    <b style="color:#0F6661">6.</b> Cíle — kontinuální zlepšování, zvýšení kvality/výkonnosti/hodnoty, dokumentace poznatků.<br/>
+    <b style="color:#0F6661">7.</b> ⚠️ <b>Ex ante</b> (ve fázi příprav) × <b>ex post</b> (po realizaci, půl roku až 3 roky).<br/>
+    <b style="color:#0F6661">8.</b> Kde má smysl — velké i malé, úspěšné i neúspěšné, opakující se i jednorázové (skoro všude).<br/>
+    <b style="color:#0F6661">9.</b> ⚠️ Bariéry — čas, finance, informace, odpor zaměstnanců (berou jako útok).<br/>
+    <b style="color:#0F6661">10.</b> Výstupy — konečná zpráva, dílčí zprávy, prezentace, doporučení.<br/>
+    <b style="color:#0F6661">11.</b> ⚠️ Aplikovat na PS — najít projekt, určit co auditovat + NEZAMĚNIT s kontrolou.
+  `;
+
+  const caseStudyRoz5 = {
+    title: "Petr a projekt, ze kterého se nikdo nepoučil",
+    subtitle: "Když firma dělá pořád stejné chyby",
+    scenario: "Petr nastoupil jako projektový manažer do firmy, která dělá velké zakázky. Hned první týden si všiml zvláštní věci. Skoro každý projekt skončí podobně — protáhne se, překročí rozpočet, na konci je shon a stres. A pak se prostě skočí na další projekt a všechno se opakuje.\n\nKdyž se ptal kolegů, krčili rameny. 'To už je tak vždycky. Projekt skončí, oddychneme si a jedeme dál.' Nikdo se nikdy nezastavil, aby se podíval, PROČ to pořád dopadá takhle. Petr měl pocit, že firma šlape pořád do stejných děr a diví se, že má bolavé nohy.\n\nPetr navrhl vedení, že by se měli po každém projektu ohlédnout zpět a rozebrat, co se povedlo a co ne. Šéf ale namítl: 'Vždyť my projekty kontrolujeme po celou dobu, sledujeme rozpočet i termíny.' Petr cítil, že tohle není totéž — kontrola během projektu je něco jiného než ohlédnutí po jeho konci.\n\nNarazil ale i na odpor týmu. Lidé se báli, že to bude hon na viníky. 'Takže ty budeš hledat, kdo to zkazil?' Petr musel vysvětlovat, že mu nejde o to někoho potrestat, ale o to, aby se firma poučila a příště to šlo líp.\n\nTeď přemýšlí, jak to celé nastavit. Kdy přesně se má ohlédnutí dělat? Co všechno rozebírat? Jak přesvědčit lidi, že je to pro ně, ne proti nim? A hlavně — jak vedení vysvětlit, že tohle není zbytečné papírování ani opakovaná kontrola, ale způsob, jak přestat dělat pořád stejné chyby.",
+    signals: [
+      { text: "Skoro každý projekt skončí podobně — protáhne se, překročí rozpočet... a pak se skočí na další a všechno se opakuje", color: VSE.danger, reason: "Klasický důvod pro postaudit (Roz5). Firma opakuje stejné chyby (prodloužení doby, překročení nákladů), protože se z nich nepoučí. Až 2 ze 3 projektů selžou." },
+      { text: "Nikdo se nikdy nezastavil, aby se podíval, PROČ to pořád dopadá takhle", color: VSE.fph, reason: "Chybí postaudit (Roz5). Systém učení se z minulých chyb. Bez něj firma šlape do stejných děr dokola." },
+      { text: "Vždyť my projekty kontrolujeme po celou dobu, sledujeme rozpočet i termíny", color: VSE.warning, reason: "Šéf zaměňuje kontrolu za postaudit (Roz5)! Tohle je přesně ta chytačka, na kterou číhá Mikovcová. Kontrola = během procesu. Postaudit = po dokončení, učí se." },
+      { text: "Kontrola během projektu je něco jiného než ohlédnutí po jeho konci", color: VSE.fph, reason: "Petr správně rozlišuje (Roz5). Kontrola řídí proces teď, postaudit se učí pro budoucnost. Klíčový rozdíl celého okruhu." },
+      { text: "Lidé se báli, že to bude hon na viníky", color: VSE.danger, reason: "Hlavní bariéra postauditu (Roz5). Zaměstnanci berou audit jako útok. Řešení: nastavit ho jako učení, ne trestání." },
+      { text: "Kdy přesně se má ohlédnutí dělat? Co všechno rozebírat?", color: VSE.fph, reason: "Otázky na ex ante × ex post a náplň postauditu (Roz5). Kdy (ex post: půl roku až 3 roky), co (plán vs. realita, plnění cílů, příčiny podle fáze)." },
+    ],
+    quiz1: {
+      question: "Co Petrova firma potřebuje zavést?",
+      options: [
+        "Víc kontroly během projektů",
+        "Postaudit — systém učení se z dokončených projektů, aby firma přestala opakovat stejné chyby (prodloužení, překročení rozpočtu).",
+        "Víc projektů",
+        "Méně lidí",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měl Petr postaudit nastavit a obhájit?",
+      options: [
+        { text: "Vysvětlit šéfovi rozdíl — kontrola probíhá BĚHEM projektu (řídí ho teď), postaudit přichází PO dokončení (učí se pro budoucnost). Nejsou to totéž.", correct: true, reason: "✓ Roz5 — klíčový rozdíl postaudit × kontrola. Přesně to, co Mikovcová hlídá. Šéf si je plete." },
+        { text: "Dělat postaudit ex post — ideálně půl roku až 3 roky po dokončení, kdy se ukáže skutečný dopad projektu.", correct: true, reason: "✓ Roz5 — ex post timing. Příliš brzy se skutečné dopady ještě neukážou." },
+        { text: "Rozebírat příčiny podle fáze — příprava (nereálný plán, podceněný rozpočet), realizace (nedodržení plánu), provoz. Najít, KDE se chyba stala.", correct: true, reason: "✓ Roz5 — příčiny podle fáze. Pomáhá najít, kde přesně se projekty kazí, a tam zasáhnout." },
+        { text: "Nastavit postaudit jako učení, ne hon na viníky — vysvětlit týmu, že nejde o trest, ale o zlepšení pro příště. Tím překonat odpor.", correct: true, reason: "✓ Roz5 — překonání bariéry odporu. Zaměstnanci se bojí útoku. Nastavení jako učení je řešení." },
+        { text: "Zdokumentovat poznatky a doporučení pro příští projekty, aby se chyby neopakovaly.", correct: true, reason: "✓ Roz5 — výstup a cíl postauditu. Dokumentace poznatků pro rozšíření znalostí, doporučení pro budoucí projekty." },
+        { text: "Souhlasit se šéfem, že průběžná kontrola stačí", correct: false, reason: "✗ Kontrola během projektu nenahradí postaudit. Kontrola koriguje teď, ale neučí se systematicky pro budoucnost. Proto firma opakuje chyby." },
+        { text: "Hledat, kdo konkrétně projekty kazí, a potrestat ho", correct: false, reason: "✗ Přesně to, čeho se tým bojí. Postaudit není hon na viníky — to by jen prohloubilo odpor a zničilo smysl." },
+        { text: "Dělat postaudit hned druhý den po dokončení", correct: false, reason: "✗ Příliš brzy. Skutečné dopady projektu se ukážou až za měsíce. Ex post se dělá půl roku až 3 roky po dokončení." },
+      ],
+    },
+    summary: "<b>Petrova firma opakuje stejné chyby, protože se z dokončených projektů nepoučí.</b> Potřebuje zavést postaudit — a hlavně ho nezaměnit s kontrolou.<br/><br/><b>Co Petr potřebuje:</b><br/><br/>• <b>Vysvětlit rozdíl postaudit × kontrola.</b> Šéf si je plete. Kontrola probíhá BĚHEM projektu (sleduje rozpočet a termíny, řídí proces teď). Postaudit přichází PO dokončení (ohlédne se zpět, učí se pro budoucnost). Tohle je klíčová chytačka, na které Mikovcová stojí.<br/><br/>• <b>Načasovat ex post.</b> Postaudit dělat ideálně půl roku až 3 roky po dokončení, kdy se ukáže skutečný dopad projektu.<br/><br/>• <b>Rozebírat příčiny podle fáze.</b> Příprava (nereálný časový plán, podceněný rozpočet), realizace (nedodržení plánu, rizika), vlastní provoz. Najít, KDE přesně se projekty kazí.<br/><br/>• <b>Překonat odpor týmu.</b> Lidé se bojí honu na viníky — hlavní bariéra postauditu. Nastavit ho jako učení, ne trestání: 'nezajímá nás kdo, ale co a proč, abychom se zlepšili.'<br/><br/>• <b>Zdokumentovat poznatky a doporučení.</b> Aby se chyby neopakovaly a znalosti se předaly na další projekty.<br/><br/><b>Pro komisi:</b> Klíč celého okruhu: <b>postaudit NENÍ kontrola</b> (Mikovcová!) — kontrola = během, postaudit = potom. Plus <b>příčiny podle fáze</b>, <b>ex ante × ex post</b>, <b>bariéry</b> (čas, finance, odpor), <b>doporučení</b>. Pro PS: najít projekt, určit co auditovat. Anti-vzor: popsat postaudit jako průběžnou kontrolu.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Manažerské rozhodování" subjectId="roz" number={5} title="Postaudit"
+      subtitle="Učení z chyb (NENÍ kontrola!) + příčiny podle fáze + ex ante/ex post + bariéry + výstupy"
+      color={VSE.fph}
+      questionText="Postaudit — vyhodnocení rozhodnutí a projektů, rozdíl od kontroly, aplikace na případovku."
+      sloz={2} roz={3} freq={4}
+      examStrategy={examStrategyRoz5}
+      studySections={studySectionsRoz5}
+      flashcards={flashcardsRoz5}
+      quiz={quizRoz5}
+      praxe={praxeRoz5}
+      examQuestions={examQuestionsRoz5}
+      podcast={podcastRoz5}
+      caseStudy={caseStudyRoz5}
+    />
+  );
+}
+
+
+
+
 
 
 
@@ -27339,7 +29384,7 @@ function OkruhyTab({ navTarget, clearNavTarget }) {
 }
 
 /* ════════════════════════════════════════════════════════
-   PLACEHOLDER TABS
+   COMING SOON TABS (Komunita atd.)
    ════════════════════════════════════════════════════════ */
 function KomunitaTab() {
   const t = useTheme();
