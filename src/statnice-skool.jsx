@@ -488,14 +488,13 @@ const SUBJECTS = [
   {
     id: "inov", name: "Inovace", color: VSE.primary, icon: "lightbulb",
     okruhy: [
-      { n: 1, title: "Definice inovace dle Schumpetera, typy", status: "todo", difficulty: 2 },
-      { n: 2, title: "Zdroje inovací dle Druckera", status: "todo", difficulty: 2 },
-      { n: 3, title: "Inovační modely — lineární × nelineární", status: "todo", difficulty: 3 },
-      { n: 4, title: "Inovační techniky, Design Thinking", status: "todo", difficulty: 2 },
-      { n: 5, title: "Stage Gate Control Process (SGCP)", status: "todo", difficulty: 3 },
-      { n: 6, title: "Lean Canvas, Business Model Canvas, Gassmann", status: "todo", difficulty: 2 },
-      { n: 7, title: "Financování inovací, bariéry, VC × PE", status: "todo", difficulty: 3 },
-      { n: 8, title: "Inovační podnikání, determinanty", status: "todo", difficulty: 2 },
+      { n: 1, title: "Co je inovace, modely inovačního procesu (lineární/nelineární/interaktivní)", status: "done", difficulty: 2 },
+      { n: 2, title: "Schumpeter, Drucker 7 zdrojů, inovační podnikání a inovativní organizace", status: "done", difficulty: 3 },
+      { n: 3, title: "Metody a techniky inovací — Lean Canvas, Business Model Canvas, Gassmann", status: "done", difficulty: 3 },
+      { n: 4, title: "Design Thinking — 5 fází + Double Diamond", status: "done", difficulty: 2 },
+      { n: 5, title: "Stage Gate Control Process (Roberts × Cooper, gatekeeping)", status: "done", difficulty: 3 },
+      { n: 6, title: "Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)", status: "done", difficulty: 3 },
+      { n: 7, title: "Bariéry inovací + anatomie selhání + metriky inovací", status: "done", difficulty: 3 },
     ],
   },
   {
@@ -6959,7 +6958,7 @@ function OkruhySidebar({ selectedSubject, setSelectedSubject, selectedOkruh, set
   const pct = total > 0 ? Math.round((done / total) * 100) : 0;
 
   return (
-    <div data-skool-sidebar style={{ width: 320, minWidth: 320, borderRight: `1px solid ${t.borderSoft}`, height: "calc(100vh - 105px)", overflowY: "auto", background: t.bgDeep, display: "flex", flexDirection: "column" }}>
+    <div data-skool-sidebar style={{ width: 320, minWidth: 320, borderRight: `1px solid ${t.borderSoft}`, height: "calc(100vh - 105px)", overflowY: "auto", background: t.bgDeep, display: "flex", flexDirection: "column", position: "sticky", top: 0, alignSelf: "flex-start" }}>
       {onBackToDashboard && (
         <div style={{ padding: "14px 18px 0" }}>
           <button onClick={onBackToDashboard} style={{
@@ -7142,6 +7141,13 @@ function OkruhContent({ subjectId, okruhN }) {
   if (subjectId === "roz" && okruhN === 3) return <OkruhRoz3Panel />;
   if (subjectId === "roz" && okruhN === 4) return <OkruhRoz4Panel />;
   if (subjectId === "roz" && okruhN === 5) return <OkruhRoz5Panel />;
+  if (subjectId === "inov" && okruhN === 1) return <OkruhInov1Panel />;
+  if (subjectId === "inov" && okruhN === 2) return <OkruhInov2Panel />;
+  if (subjectId === "inov" && okruhN === 3) return <OkruhInov3Panel />;
+  if (subjectId === "inov" && okruhN === 4) return <OkruhInov4Panel />;
+  if (subjectId === "inov" && okruhN === 5) return <OkruhInov5Panel />;
+  if (subjectId === "inov" && okruhN === 6) return <OkruhInov6Panel />;
+  if (subjectId === "inov" && okruhN === 7) return <OkruhInov7Panel />;
 
   return null;
 }
@@ -29276,6 +29282,3152 @@ function OkruhRoz5Panel() {
 }
 
 
+/* ════════════════════════════════════════════════════════
+   INOVACE 1 — Co je inovace, modely inovačního procesu
+   ════════════════════════════════════════════════════════ */
+function OkruhInov1Panel() {
+  const studySectionsInov1 = [
+    { id: "uvod", title: "Co je inovace — definice a Schumpetrova triáda", subtitle: "Invence × inovace × imitace + jak inovace mění trh", color: VSE.primary, emoji: "lightbulb",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Inovace</b> = zavedení nového nebo vylepšeného produktu, procesu, služby nebo způsobu organizace, které <b>přináší hodnotu</b> nebo řeší problém. Není to jen nápad — je to <b>praktické využití invence</b> (nového nápadu), které přináší novou přidanou hodnotu.
+        </Def>
+        <Tag color={VSE.primary}>Schumpetrova triáda — INVENCE → INOVACE → IMITACE</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fph, t: "1. INVENCE", d: "Nový nápad, vynález, objev. Sama o sobě ještě nevydělává — je to jen myšlenka nebo technické řešení. (Např. Tesla v 19. století vymyslel střídavý proud — invence.)" },
+            { c: VSE.warning, t: "2. INOVACE", d: "Praktické uvedení invence na trh, kde přináší hodnotu. <b>Jen první firma na trhu inovuje</b> — má dočasnou konkurenční výhodu. (Edison/Westinghouse postavili elektrickou síť.)" },
+            { c: VSE.danger, t: "3. IMITACE", d: "Všichni ostatní jsou imitátoři — kopírují, snaží se dohnat lídra. Po čase se výhoda smaže (rovnováha). Firma proto musí inovovat dál — <b>snaha o neustálou inovaci</b>." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 540 180" maxHeight={200}>
+          <text x="270" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Schumpetrova triada (invence to inovace to imitace)</text>
+          {/* INVENCE */}
+          <rect x="30" y="50" width="130" height="80" rx="10" fill={VSE.fph} opacity="0.85"/>
+          <text x="95" y="80" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill="#fff">INVENCE</text>
+          <text x="95" y="98" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="#fff">napad / vynalez</text>
+          <text x="95" y="112" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="#fff">(myslenka)</text>
+          <text x="95" y="148" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill={VSE.fph} fontStyle="italic">"strida proud" - Tesla 19. st.</text>
+          {/* arrow */}
+          <path d="M 165 90 L 200 90" stroke="var(--text-muted)" strokeWidth="2.5" markerEnd="url(#arrI1)"/>
+          {/* INOVACE */}
+          <rect x="205" y="50" width="130" height="80" rx="10" fill={VSE.warning} opacity="0.85"/>
+          <text x="270" y="80" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill="#fff">INOVACE</text>
+          <text x="270" y="98" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="#fff">uvedeni na trh</text>
+          <text x="270" y="112" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="#fff">(jen 1. firma!)</text>
+          <text x="270" y="148" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill={VSE.warning} fontStyle="italic">Edison/Westinghouse - elektricka sit</text>
+          {/* arrow */}
+          <path d="M 340 90 L 375 90" stroke="var(--text-muted)" strokeWidth="2.5" markerEnd="url(#arrI1)"/>
+          {/* IMITACE */}
+          <rect x="380" y="50" width="130" height="80" rx="10" fill={VSE.danger} opacity="0.85"/>
+          <text x="445" y="80" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill="#fff">IMITACE</text>
+          <text x="445" y="98" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="#fff">kopirovani</text>
+          <text x="445" y="112" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="#fff">(vsichni ostatni)</text>
+          <text x="445" y="148" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill={VSE.danger} fontStyle="italic">vyhoda se smaze - kreativni destrukce</text>
+          <defs>
+            <marker id="arrI1" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="var(--text-muted)"/>
+            </marker>
+          </defs>
+        </ResponsiveSVG>
+        <Tag color={VSE.warning}>Kreativní destrukce — klíčový pojem Schumpetera</Tag>
+        <Bullet items={[
+          "<b>Inovace ničí staré, aby vzniklo nové.</b> Stará rovnováha se rozbije, ale nová inovace ji nastaví o úroveň výš.",
+          "Bez kreativní destrukce by ekonomika stagnovala — to je <b>motor pokroku</b>.",
+          "Příklad: Smartphone zničil trh klasických telefonů, ale otevřel obrovský trh aplikací a služeb.",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Tažené: Schumpeter — definice inovace, koncept ekonomické inovace (Tahal+Lorencová+Schönfeld 2025, Mikovcová+Vávra+Viktora, Kubíček+Říhová+Kolouchová, Špaček+Nový+Machek 2026)"
+          what="Komise vždy chce <b>triádu invence-inovace-imitace</b> + pojem <b>kreativní destrukce</b>. Schumpeter je 'duchovní otec teorie inovací' — připomeň to."
+        />
+      </div>) },
+
+    { id: "schumpeter_typy", title: "5 typů inovace podle Schumpetera", subtitle: "Kde všude může inovace vzniknout", color: VSE.primary, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Schumpeter definoval <b>5 typů inovace</b> — koncept ekonomické inovace. Inovace není jen nový produkt; může být i nová metoda, nový trh nebo nová organizace. <b>Komise tohle ráda chce všech 5.</b>
+        </Def>
+        <Tag color={VSE.primary}>5 typů inovace (koncept ekonomické inovace)</Tag>
+        <Bullet items={[
+          "<b>1. Nový výrobek/zboží</b> — produkt, který zákazník zatím neznal (iPhone 2007, mRNA vakcína).",
+          "<b>2. Nová výrobní metoda</b> — nový způsob výroby nebo dodání (Ford montážní linka, Toyota TPS).",
+          "<b>3. Otevření nového trhu</b> — vstup do segmentu, kde firma ještě nebyla (Spotify uvedl streaming, Tesla otevřel masový trh EV).",
+          "<b>4. Získání nového zdroje surovin nebo polotovarů</b> — nový zdroj vstupů (lithium pro baterie, recyklované materiály).",
+          "<b>5. Zavedení nové organizace v daném odvětví</b> — změna struktury trhu (Uber změnil taxi, Airbnb hotelnictví, Amazon retail).",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Jak si je zapamatovat</Tag>
+        <Bullet items={[
+          "Schumpeter to mířil <b>na ekonomickou změnu</b>, ne jen technologie — inovace organizace je stejně důležitá jako nový produkt.",
+          "Když komise chce příklady: vyber 2-3 typy a aplikuj na firmu z případovky (např. e-shop = nový trh + nová organizace).",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "typy_inovaci", title: "Typy inovací — inkrementální × radikální × disruptivní", subtitle: "Jak velká je změna a co to znamená", color: VSE.primary, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Inovace se dělí podle <b>míry změny</b>, kterou přinášejí. Inkrementální vylepšují, radikální boří pravidla, disruptivní vytvářejí nové trhy. Komise tohle chce umět rozlišit.
+        </Def>
+        <Tag color={VSE.primary}>3 stupně novosti</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.success, t: "INKREMENTÁLNÍ", d: "Pohyb po stejné S-křivce (životním cyklu produktu). Drobná vylepšení charakteru produktu nebo trhu/BM. Prodlužuje životní cyklus produktu. (Nový iPhone každý rok, lepší příchuť minerálky, facelift auta.)" },
+            { c: VSE.warning, t: "RADIKÁLNÍ", d: "Přechod na <b>novou S-křivku</b>. Mění pravidla hry na trhu, nová přidaná hodnota pro zákazníka. Změna charakteru, průlomové. Co převyšuje a vytlačuje staré. (Tesla elektromobily, iPhone smartphone.)" },
+            { c: VSE.danger, t: "DISRUPTIVNÍ", d: "Vytvoří úplně nový trh nebo radikálně přemění existující. <b>Nový BM</b> (Uber/Airbnb), nová technologie (mRNA vakcína, ChatGPT). Často malí hráči vyšlou velké etablované firmy z trhu." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Galbraithova škála intenzity</Tag>
+        <Bullet items={[
+          "Galbraith řadí inovace od nejmenší po největší: <b>Vylepšení produktu</b> (nová příchuť minerálky, ABS) → <b>Rozšíření produktové řady</b> (ovocná piva, Škoda Rapid) → <b>Další generace</b> (dotykové telefony) → <b>Nový produkt</b> (tablet) → <b>Nový BM</b> (internetové podnikání, virtuální operátor) → <b>Disruptivní nové technologie</b> (nanovlákna, internet).",
+          "<b>Komise může chtít rozlišit:</b> radikální (mění S-křivku) × disruptivní (mění trh/BM). V praxi se to často překrývá, ale disruptivní má vždy nový business model.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "uzavrena_otevrena", title: "Uzavřená × Otevřená inovace + duševní vlastnictví", subtitle: "Inovovat sám × spolupracovat se světem", color: VSE.primary, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Firma má dvě možnosti, jak inovovat: <b>uvnitř firmy</b> s vlastním R&D (uzavřená), nebo <b>se světem</b> přes spolupráci a licence (otevřená). Volba zásadně ovlivňuje, jak firma chrání duševní vlastnictví.
+        </Def>
+        <Tag color={VSE.primary}>UZAVŘENÁ inovace — všechno doma</Tag>
+        <Bullet items={[
+          "Uvnitř firmy, pomocí <b>vlastního R&D</b>.",
+          "Snaha získat ty nejlepší odborníky <b>na výplatní listinu</b>.",
+          "<b>Střeží si zdroje a know-how</b>, mlčenlivost, NDA.",
+          "Cílem je být <b>první firmou na trhu</b> a získat trvalou výhodu.",
+          "Klasika: <b>Apple</b> (tajné labs, vše interně), <b>farmaceutické firmy</b> (chrání patenty).",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>OTEVŘENÁ inovace — spolupráce</Tag>
+        <Bullet items={[
+          "<b>Nápady zevnitř i zvenku firmy.</b>",
+          "Spojení sil, poznatků, financí. Sdílení rizika a nákladů.",
+          "<b>Větší šance k objevu</b>, šíření know-how dál (i prodej licencí).",
+          "<b>Inside-out (outbound):</b> poskytuji své know-how někomu jinému — licence, patenty, spin-off, venturing.",
+          "<b>Outside-in (inbound):</b> využívám externí zdroje k podpoře inovací uvnitř firmy — kooperace s univerzitami, uživateli, crowdsourcing, lead users.",
+          "<b>Spojený proces:</b> kombinace obou — aliance, joint ventures, společné inovační projekty.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Duševní vlastnictví podle typu inovace</Tag>
+        <Bullet items={[
+          "<b>V uzavřené inovaci:</b> snaha zabránit konkurenci těžit z našich inovací — patenty, NDA. <b>Není použita 90 % duševního vlastnictví</b> (firmy si ho schovávají do šuplíku).",
+          "<b>V otevřené inovaci:</b> tvorba výnosů <b>prodejem licencí</b> a poznatků. Snaha využít všechno duševní vlastnictví.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>Příklady otevřených inovací</Tag>
+        <Bullet items={[
+          "<b>Sdílená strategie</b> dobývání vesmíru USA-Rusko-Čína (ISS).",
+          "<b>Linux</b> — opensource, kdokoli může přispívat.",
+          "<b>Android</b> — Google zpřístupnil dalším vývojářům.",
+          "<b>Tesla</b> — zpřístupnila všechny své patenty na elektromobily, aby pomohla prosadit EV jako dopravní prostředek. <b>Win-win.</b>",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "modely_proces", title: "Modely inovačního procesu — lineární, nelineární, interaktivní", subtitle: "Jak inovace reálně vzniká — od jednoduchého k chaotickému", color: VSE.primary, emoji: "path",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Modely inovačního procesu popisují, <b>jak inovace prochází firmou</b> — od nápadu k uvedení na trh. Postupně se vyvinuly od jednoduchých lineárních ke složitým nelineárním modelům, které odpovídají realitě.
+        </Def>
+        <Tag color={VSE.primary}>1) LINEÁRNÍ MODEL — proces šíření inovací</Tag>
+        <Bullet items={[
+          "<b>Postupný proces:</b> ukončení jednoho kroku vede k otevření dalšího. Přímá vazba mezi procesy, systém, návaznost.",
+          "<b>Push model (1. generace) — proces od výzkumu k trhu:</b><br/>Základní výzkum → Aplikovaný výzkum → Příprava výroby → Výroba → Uplatnění na trhu",
+          "<b>Push znamená:</b> 'máme novou vědu, najdeme pro ni trh'. Klíčové u průlomových inovací (mRNA vakcína — věda existovala dřív, než si zákazník uvědomil potřebu).",
+          "<b>Pull model (2. generace) — proces od trhu zpět:</b><br/>Potřeby trhu → Vývoj → Výroba → Prodej",
+          "<b>Pull znamená:</b> 'trh = zdroj inovačních příležitostí', reaguje na potřeby zákazníka. Klasika u inkrementálních inovací (vylepšení produktu).",
+          "<b>Slabina lineárního modelu:</b> neodpovídá realitě šíření inovací — ve skutečnosti to není přímka.",
+        ]} color={VSE.primary} />
+        <ResponsiveSVG viewBox="0 0 600 260" maxHeight={280}>
+          <text x="300" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Linearni vs nelinearni model inovace</text>
+          {/* LINEARNI - top */}
+          <text x="60" y="60" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.fmv}>LINEARNI</text>
+          <text x="60" y="74" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">(Push)</text>
+          {/* 5 stages */}
+          {[
+            {x: 120, label: "Zakladni vyzkum"},
+            {x: 215, label: "Aplikovany vyzkum"},
+            {x: 310, label: "Priprava vyroby"},
+            {x: 405, label: "Vyroba"},
+            {x: 500, label: "Trh"},
+          ].map((s, i) => (
+            <g key={i}>
+              <rect x={s.x} y="50" width="82" height="38" rx="4" fill={VSE.fmv} opacity="0.72"/>
+              <text x={s.x + 41} y="73" textAnchor="middle" fontFamily={fontSans} fontSize="9" fontWeight="700" fill="#fff">{s.label}</text>
+              {i < 4 && <path d={`M ${s.x+84} 69 L ${s.x+91} 69`} stroke="var(--text-muted)" strokeWidth="2" markerEnd="url(#arrL1)"/>}
+            </g>
+          ))}
+          <text x="300" y="105" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill={VSE.danger} fontStyle="italic">prima cesta, zadny feedback -&gt; neodpovida realite!</text>
+          {/* NELINEARNI - bottom */}
+          <text x="60" y="148" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.fph}>NELINEARNI</text>
+          <text x="60" y="162" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">(retezovy)</text>
+          {/* nodes */}
+          <circle cx="135" cy="170" r="22" fill={VSE.fph} opacity="0.75"/>
+          <text x="135" y="174" textAnchor="middle" fontFamily={fontSans} fontSize="9" fontWeight="700" fill="#fff">Vyzkum</text>
+          <circle cx="225" cy="170" r="22" fill={VSE.fph} opacity="0.75"/>
+          <text x="225" y="174" textAnchor="middle" fontFamily={fontSans} fontSize="9" fontWeight="700" fill="#fff">Vyvoj</text>
+          <circle cx="315" cy="170" r="22" fill={VSE.fph} opacity="0.75"/>
+          <text x="315" y="174" textAnchor="middle" fontFamily={fontSans} fontSize="9" fontWeight="700" fill="#fff">Vyroba</text>
+          <circle cx="405" cy="170" r="22" fill={VSE.fph} opacity="0.75"/>
+          <text x="405" y="174" textAnchor="middle" fontFamily={fontSans} fontSize="9" fontWeight="700" fill="#fff">Trh</text>
+          {/* center: znalost */}
+          <ellipse cx="270" cy="225" rx="80" ry="18" fill={VSE.warning} opacity="0.55"/>
+          <text x="270" y="229" textAnchor="middle" fontFamily={fontSans} fontSize="10" fontWeight="700" fill="#fff">ZNALOST (vedecka)</text>
+          {/* arrows between nodes - both directions */}
+          {[[135,225], [225,225], [315,225], [405,225]].map((p, i) => (
+            <g key={`a${i}`}>
+              <path d={`M ${p[0]} 192 Q ${p[0]} 210 ${p[0]+10} 220`} stroke={VSE.warning} strokeWidth="1.5" fill="none"/>
+              <path d={`M ${p[0]+10} 222 Q ${p[0]} 210 ${p[0]} 192`} stroke={VSE.warning} strokeWidth="1.5" fill="none" strokeDasharray="2 2"/>
+            </g>
+          ))}
+          {/* horizontal connections + feedback */}
+          <path d="M 157 170 L 203 170" stroke="var(--text-muted)" strokeWidth="1.5" markerEnd="url(#arrL1)"/>
+          <path d="M 247 170 L 293 170" stroke="var(--text-muted)" strokeWidth="1.5" markerEnd="url(#arrL1)"/>
+          <path d="M 337 170 L 383 170" stroke="var(--text-muted)" strokeWidth="1.5" markerEnd="url(#arrL1)"/>
+          {/* feedback - curved back */}
+          <path d="M 405 148 Q 405 110 270 110 Q 135 110 135 148" stroke={VSE.success} strokeWidth="1.5" fill="none" strokeDasharray="4 3"/>
+          <text x="270" y="135" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill={VSE.success} fontStyle="italic">feedback z trhu zpet</text>
+          <text x="500" y="174" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)" fontStyle="italic">chaos +</text>
+          <text x="500" y="186" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)" fontStyle="italic">paralel +</text>
+          <text x="500" y="198" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)" fontStyle="italic">feedback</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.warning}>2) NELINEÁRNÍ MODEL — řetězový model</Tag>
+        <Bullet items={[
+          "<b>Inovace je chaotický a neuspořádaný proces.</b>",
+          "Sleduje různé vzorce přenosu informací, <b>různé inovační aktivity mohou probíhat současně</b> (paralelně).",
+          "Inovace jsou <b>výsledkem týmové spolupráce</b>.",
+          "Existuje <b>zpětná vazba (feedback)</b> mezi všemi fázemi — vývoj se může vrátit zpět k výzkumu, marketing zpět k vývoji.",
+          "Centrální roli hraje <b>znalost (vědecká a technická)</b>, ke které se vrací všechny fáze.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>3) INTERAKTIVNÍ MODEL</Tag>
+        <Bullet items={[
+          "<b>Vychází z lineárního modelu + doplnění o feedback z okolí.</b>",
+          "Spojuje výhody obou: jasná posloupnost kroků + zpětná vazba od trhu, zákazníků, dodavatelů.",
+          "Dnes nejčastější model, na kterém staví moderní metody (Design Thinking, SGCP — viz Inovace 4 a 5).",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Tažené: Lineární a nelineární model inovací + další modely (Tahal+Cejthamr+Schönfeld 2025, Vrbová+Špaček+Machek, Krause+Viktora+Tahal 2025)"
+          what="Komise chce: <b>lineární (push × pull)</b> + <b>nelineární/řetězový</b> + <b>interaktivní</b>. Klíč je vědět, že lineární neodpovídá realitě → proto přišel řetězový. Připomeň, že modely jsou základ pro Design Thinking a SGCP (viz Inov 4 a 5)."
+        />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na případovku — modely a typy inovací", subtitle: "Postup + co komise oceňuje × čemu se vyhnout", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          U případovky komise nejvíc oceňuje, když umíš <b>identifikovat typ inovace</b> ve firmě a <b>vysvětlit, jak proces probíhá</b> (lineární? nelineární?). Tady je postup, jak to uchopit.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Najdi inovaci ve firmě z PS — co konkrétně mění (produkt? proces? organizaci? trh?).",
+          "<b>2.</b> Zařaď přes <b>Schumpeterových 5 typů</b> — pravděpodobně bude víc než jeden.",
+          "<b>3.</b> Urči <b>intenzitu</b>: inkrementální (na stejné S-křivce), radikální (nová S-křivka), nebo disruptivní (nový trh/BM)?",
+          "<b>4.</b> Zařaď proces: <b>push</b> (firma má technologii a hledá trh) × <b>pull</b> (firma reaguje na poptávku)?",
+          "<b>5.</b> Rozhodni: bude firma inovovat <b>uzavřeně</b> (sama, chrání IP) nebo <b>otevřeně</b> (spolupráce, licence)?",
+          "<b>6.</b> Pokud je inovace složitější, doporuč <b>nelineární přístup</b> s feedbackem (Design Thinking — viz Inov 4, SGCP — viz Inov 5).",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Schumpetrova triáda (invence → inovace → imitace) a kreativní destrukce.",
+          "<b>✅ Dobře:</b> Rozlišit inkrementální × radikální × disruptivní s konkrétním příkladem.",
+          "<b>✅ Dobře:</b> Říct, že lineární model nestačí (Pichanič) → použít nelineární/interaktivní.",
+          "<b>❌ Špatně:</b> Zaměnit invenci s inovací — invence je nápad, inovace je <b>uvedení na trh</b>.",
+          "<b>❌ Špatně:</b> Mluvit jen o produktové inovaci — komise oceňuje, když zmíníš i procesní/organizační (Schumpetrových 5 typů).",
+          "<b>❌ Špatně:</b> Nazvat každé zlepšení 'disruptivní inovací' — to je inflace pojmu.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsInov1 = [
+    { term: "Inovace", def: "Zavedení nového nebo vylepšeného produktu, procesu, služby nebo organizace, které přináší novou přidanou hodnotu. Praktické využití invence.", tag: "DEFINICE" },
+    { term: "Schumpetrova triáda", def: "INVENCE (nápad/vynález) → INOVACE (uvedení na trh, jen 1. firma) → IMITACE (kopírování ostatními).", tag: "SCHUMPETER" },
+    { term: "Kreativní destrukce", def: "Schumpetrův pojem — inovace ničí staré, aby vzniklo nové. Motor ekonomického pokroku.", tag: "SCHUMPETER" },
+    { term: "5 typů inovace (Schumpeter)", def: "1) Nový výrobek, 2) nová výrobní metoda, 3) otevření nového trhu, 4) získání nového zdroje surovin, 5) nová organizace v odvětví.", tag: "SCHUMPETER" },
+    { term: "Invence × inovace", def: "Invence = nový nápad/vynález (myšlenka). Inovace = praktické uvedení invence na trh, kde přináší hodnotu.", tag: "DEFINICE" },
+    { term: "Inkrementální inovace", def: "Pohyb po stejné S-křivce. Drobná vylepšení (nový iPhone, facelift auta). Prodlužuje životní cyklus produktu.", tag: "TYPY" },
+    { term: "Radikální inovace", def: "Přechod na novou S-křivku. Mění pravidla hry, nová přidaná hodnota (Tesla EV, smartphone).", tag: "TYPY" },
+    { term: "Disruptivní inovace", def: "Vytvoří nový trh nebo zničí existující. Nový BM (Uber, Airbnb), nová technologie (ChatGPT). Často malí vyšlou velké z trhu.", tag: "TYPY" },
+    { term: "Galbraithova škála", def: "Vylepšení produktu → rozšíření řady → další generace → nový produkt → nový BM → disruptivní technologie.", tag: "TYPY" },
+    { term: "Uzavřená inovace", def: "Uvnitř firmy, vlastní R&D, střežení know-how, snaha být první. Apple, farmaceutické firmy.", tag: "INOVOVAT" },
+    { term: "Otevřená inovace", def: "Nápady zevnitř i zvenku. Spojení sil, sdílení rizika, licence. Linux, Android, Tesla patenty.", tag: "INOVOVAT" },
+    { term: "Inside-out (outbound)", def: "Poskytuji své know-how někomu jinému — licence, patenty, spin-off, venturing.", tag: "INOVOVAT" },
+    { term: "Outside-in (inbound)", def: "Využívám externí zdroje pro inovace uvnitř — kooperace s univerzitami, lead users, crowdsourcing.", tag: "INOVOVAT" },
+    { term: "Lineární model — Push", def: "Základní výzkum → Aplikovaný → Příprava výroby → Výroba → Trh. 'Máme vědu, najdeme trh.' 1. generace.", tag: "MODELY" },
+    { term: "Lineární model — Pull", def: "Potřeby trhu → Vývoj → Výroba → Prodej. 'Trh = zdroj příležitostí.' 2. generace.", tag: "MODELY" },
+    { term: "Nelineární model (řetězový)", def: "Inovace je chaotický proces, různé aktivity paralelně, feedback mezi fázemi, centrální roli hraje znalost.", tag: "MODELY" },
+    { term: "Interaktivní model", def: "Vychází z lineárního + doplnění o feedback z okolí. Spojuje výhody obou. Základ pro Design Thinking a SGCP.", tag: "MODELY" },
+    { term: "Push × Pull", def: "Push = technologie hledá trh (mRNA vakcína). Pull = trh diktuje co vyvinout (vylepšení produktu dle poptávky).", tag: "MODELY" },
+  ];
+
+  const quizInov1 = [
+    { q: "Co je inovace podle Schumpetera?", opts: ["Jakýkoliv nový nápad", "Praktické uvedení invence na trh, které přináší hodnotu — jen první firma inovuje", "Pouze technologický vynález", "Vylepšení existujícího produktu"], correct: 1 },
+    { q: "Co je Schumpetrova triáda?", opts: ["Strategie, struktura, kultura", "INVENCE → INOVACE → IMITACE", "Plánování, řízení, kontrola", "Push, Pull, Hybrid"], correct: 1 },
+    { q: "Co je kreativní destrukce?", opts: ["Náhodný úspěch", "Inovace ničí staré, aby vzniklo nové — motor ekonomického pokroku", "Plánovaná obsolescence", "Marketingová strategie"], correct: 1 },
+    { q: "Kolik typů inovace definuje Schumpeter?", opts: ["3", "5 (výrobek, metoda, trh, zdroje surovin, organizace)", "7", "10"], correct: 1 },
+    { q: "Co je inkrementální inovace?", opts: ["Vytvoření nového trhu", "Pohyb po stejné S-křivce, drobná vylepšení (nový iPhone)", "Radikální změna", "Nový business model"], correct: 1 },
+    { q: "Co je radikální inovace?", opts: ["Drobné vylepšení", "Přechod na novou S-křivku, mění pravidla hry (Tesla EV)", "Marketingová kampaň", "Restrukturalizace"], correct: 1 },
+    { q: "Co charakterizuje disruptivní inovaci?", opts: ["Postupné zlepšování", "Nový BM nebo nová technologie, mění trh — malí často vyšlou velké (Uber, Airbnb)", "Vyšší cena", "Levnější výroba"], correct: 1 },
+    { q: "Co je uzavřená inovace?", opts: ["Veřejně dostupná", "Uvnitř firmy, vlastní R&D, střežení know-how, snaha být první", "Licencovaná", "Outsourcovaná"], correct: 1 },
+    { q: "Co je Inside-out (outbound) v otevřené inovaci?", opts: ["Přijímám nápady zvenku", "Poskytuji své know-how někomu jinému — licence, spin-off", "Zavírám firmu", "Tlačím produkt na trh"], correct: 1 },
+    { q: "Co je lineární Push model?", opts: ["Z trhu zpět", "Základní výzkum → Aplikovaný → Výroba → Trh; 'máme vědu, najdeme trh'", "Krouživý proces", "Marketingový tah"], correct: 1 },
+    { q: "Co je lineární Pull model?", opts: ["Z laboratoře", "Potřeby trhu → Vývoj → Výroba → Prodej; 'trh = zdroj příležitostí'", "Push princip", "Tah za vlasy"], correct: 1 },
+    { q: "Co je hlavní slabina lineárního modelu?", opts: ["Je moc rychlý", "Neodpovídá realitě šíření inovací — proces není přímka", "Je drahý", "Není organizovaný"], correct: 1 },
+    { q: "Co je nelineární (řetězový) model?", opts: ["Přímka", "Chaotický proces, paralelní aktivity, feedback mezi fázemi, centrální role znalosti", "Jen pro velké firmy", "Pouze pro služby"], correct: 1 },
+    { q: "Co je interaktivní model inovace?", opts: ["Jen pro IT", "Lineární model + feedback z okolí — spojuje výhody obou", "Náhodný", "Bez plánu"], correct: 1 },
+    { q: "Která firma je etalonem otevřené inovace s patenty?", opts: ["Apple", "Tesla — zpřístupnila všechny patenty na elektromobily", "Coca-Cola", "Microsoft"], correct: 1 },
+    { q: "Co znamená 'imitace' v Schumpetrově triádě?", opts: ["Krádež", "Ostatní firmy kopírují inovátora, snaží se ho dohnat — výhoda se časem smaže", "Falšování", "Cenová válka"], correct: 1 },
+  ];
+
+  const praxeInov1 = {
+    caseStudy: {
+      company: "Tesla — etalon všech typů inovace + otevřená strategie patentů",
+      subtitle: "Jak Tesla pokrývá celou Schumpetrovu typologii",
+      content: (<>
+        Tesla je <b>učebnicový příklad firmy, která inovovala ve všech 5 typech podle Schumpetera najednou</b> a navíc změnila pohled na duševní vlastnictví v automotive.<br/><br/>
+        🚗 5 TYPŮ INOVACE V JEDNÉ FIRMĚ:<br/><br/>
+        <b>1. Nový výrobek</b> — masově vyráběný elektromobil dlouhého dojezdu (Model S 2012).<br/><br/>
+        <b>2. Nová výrobní metoda</b> — Gigafactory s vertikální integrací baterií, přímý prodej zákazníkům bez dealerů.<br/><br/>
+        <b>3. Otevření nového trhu</b> — masový trh prémiových EV, který předtím prakticky neexistoval (Roadster otevřel cestu).<br/><br/>
+        <b>4. Získání nového zdroje surovin</b> — vlastní těžba lithia, dohody s dodavateli, kontrola dodavatelského řetězce.<br/><br/>
+        <b>5. Nová organizace v odvětví</b> — Supercharger síť, OTA software updates, Tesla obchází tradiční prodejní model.<br/><br/>
+        🔓 RADIKÁLNÍ KROK K OTEVŘENÉ INOVACI:<br/><br/>
+        V roce 2014 Tesla <b>zpřístupnila všechny své patenty</b> na elektromobily ostatním automobilkám. Důvod podle Elona Muska: pomoct prosadit EV jako dopravní prostředek — pokud zůstanou patenty zavřené, EV se neujmou. <b>Win-win</b>: trh roste, Tesla má první-mover výhodu + reputaci průkopníka.<br/><br/>
+        ⚙️ TYP INOVACE: RADIKÁLNÍ + DISRUPTIVNÍ:<br/><br/>
+        Tesla přešla na novou S-křivku (z ICE na BEV) a změnila pravidla hry (přímý prodej, OTA, Supercharger). Mnoho prvků disruptivních — nový BM (předplatné autopilotu, energetické služby).<br/><br/>
+        🔄 NELINEÁRNÍ PROCES:<br/><br/>
+        Tesla nevyvíjela podle starého lineárního modelu (výzkum → výroba → trh). Místo toho běží paralelně vývoj baterií, softwaru, výroby i autonomní jízdy — s neustálým feedbackem od zákazníků (Beta testy, fleet data). To je přesně <b>nelineární/interaktivní model</b> v praxi.
+      </>),
+      lessons: "Tesla ukazuje, že velké inovace jsou <b>kombinací více typů</b> (Schumpeter všech 5) a velké firmy musí používat <b>nelineární proces</b> s paralelními aktivitami a feedbackem. Otevřená inovace (zpřístupnění patentů) může být strategicky výhodnější než uzavřená — pokud chceš rozjet celý trh. Pro případovku: hledat víc typů inovace najednou, určit intenzitu (radikální/disruptivní) a doporučit otevřený nebo uzavřený přístup podle cíle."
+    },
+    miniExamples: [
+      { tag: "INKREMENTÁLNÍ", color: VSE.success, company: "Škoda Auto (CZ) — facelift jako etalon", content: "Škoda každé 2-3 roky vylétne facelift modelů Octavia, Kodiaq, Superb. Vždy stejná S-křivka — drobná vylepšení designu, nové motory, lepší výbava. Pohyb po stejném typu produktu, prodlužuje životní cyklus. Komerčně úspěšné, ale neudělá z toho 'novou éru'. Klasický inkrementální přístup, který Škoda dělá perfektně — proto jí prodeje rostou bez radikálních skoků." },
+      { tag: "DISRUPTIVNÍ + NOVÝ BM", color: VSE.danger, company: "Spotify — disrupce hudebního průmyslu", content: "Před Spotify lidé hudbu kupovali na nosiči (CD, MP3 stahování). Spotify přišlo s <b>úplně novým BM</b>: předplatné neomezeného streamingu. Disruptivní inovace organizace odvětví — zničila prodej alb, ale vytvořila gigantický trh streamingu. Klasická Schumpetrova kreativní destrukce: staré zničeno, nové větší. Dnes obor stojí na předplatném, ne na nákupech." },
+      { tag: "OTEVŘENÁ — OUTSIDE-IN", color: VSE.warning, company: "Avast (CZ → NortonLifeLock) — community driven", content: "Avast vyrostl z opensource a komunity nadšenců. Pavel Baudiš s Eduardem Kučerou stavěli antivirus za pomoci uživatelů, kteří hlásili nové viry. Outside-in v praxi — externí komunita je zdroj inovací. Z Brna se stala globální firma, kterou v roce 2021 koupil NortonLifeLock za 8 miliard dolarů. Otevřená inovace pohnula s českým IT scénou — dnes je Praha tech hub i díky Avastu." },
+      { tag: "PUSH MODEL — VĚDA → TRH", color: VSE.fph, company: "Pfizer/BioNTech — mRNA vakcína COVID", content: "Technologie mRNA vakcín se vyvíjela 30 let v laboratořích bez jasného trhu. Když přišel COVID, byla připravená. <b>Klasický Push model</b> — věda existovala dřív, než se objevila potřeba. Bez dlouhodobého základního výzkumu mRNA by žádná rychlá vakcína nebyla. Ukázka, že Push model funguje u průlomových inovací, kde si zákazník 'neumí představit', co potřebuje, dokud to není." },
+    ]
+  };
+
+  const examQuestionsInov1 = [
+    { komise: "2025-06-09 / 2025-06-10 / 2025-06-16 / 2025-06-18 — Tahal+Lorencová, Mikovcová+Vávra+Viktora, Špaček+Kučera+Zamazalová, Mládková+Mareš+Vávra, Kubíček+Říhová+Kolouchová, 2026-02-02 Špaček+Nový+Machek", otazka: "Definice inovace dle Schumpetera, typy inovací podle Schumpetera (často se vrací)", pozn: "Schumpetrova triáda (invence-inovace-imitace) + 5 typů inovace (výrobek, metoda, trh, surovina, organizace) + koncept ekonomické inovace. Vždy zmiň kreativní destrukci. Pichanič ji řadí mezi 'duchovní otce teorie inovací'." },
+    { komise: "4.6.2025 Tahal+Cejthamr+Schönfeld, 2025-01-27 Vrbová+Špaček+Machek, 2025-02-05 Krause+Viktora+Tahal", otazka: "Lineární a nelineární model inovací. Další modely inovací.", pozn: "Lineární (Push 1. gen + Pull 2. gen) → vysvětlit slabinu (není přímka) → nelineární řetězový (chaos, paralel, feedback) → interaktivní (lineární + feedback). Modely jsou základ pro DT a SGCP." },
+    { komise: "Obecně — typy inovací (vyšší rok studia)", otazka: "Inkrementální × radikální × disruptivní + Galbraithova škála", pozn: "Inkrementální (stejná S-křivka, vylepšení) × radikální (nová S-křivka, mění pravidla) × disruptivní (nový BM, mění trh). Galbraith: vylepšení → rozšíření řady → další generace → nový produkt → nový BM → disruptivní technologie." },
+    { komise: "Obecně — otevřená × uzavřená inovace", otazka: "Strategie inovace — uzavřená vs otevřená, IP management", pozn: "Uzavřená (R&D doma, IP střežíme) × otevřená (inside-out + outside-in). U otevřené 90 % IP firma využije (prodej licencí), u uzavřené často IP zůstane v šuplíku. Etalon: Tesla patenty (otevřená), Apple (uzavřená)." },
+  ];
+
+  const podcastInov1 = {
+    title: "Inovace 1 — Co je inovace, modely inovačního procesu",
+    description: "Inovace = praktické uvedení invence na trh, které přináší novou hodnotu. Schumpetrova triáda - INVENCE (nápad), INOVACE (uvedení na trh, jen 1. firma inovuje), IMITACE (kopírování ostatními). Kreativní destrukce - inovace ničí staré, aby vzniklo nové, motor ekonomického pokroku. 5 typů inovace podle Schumpetera - nový výrobek, nová výrobní metoda, otevření nového trhu, získání nového zdroje surovin, nová organizace v odvětví (Schumpeter byl 'duchovní otec teorie inovací'). Typy inovací podle intenzity - inkrementální (pohyb po stejné S-křivce, drobná vylepšení, prodlužuje životní cyklus, nový iPhone, facelift auta) - radikální (přechod na novou S-křivku, mění pravidla hry, Tesla EV, smartphone) - disruptivní (nový BM nebo nová technologie, mění trh, Uber, Airbnb, ChatGPT). Galbraithova škála - vylepšení produktu, rozšíření řady, další generace, nový produkt, nový BM, disruptivní technologie. Uzavřená inovace - uvnitř firmy, vlastní R&D, střežení know-how, snaha být první (Apple, farmaceutické firmy). Otevřená inovace - nápady zevnitř i zvenku, spojení sil, sdílení rizika. Inside-out (outbound) - poskytuji své know-how, licence, spin-off. Outside-in (inbound) - využívám externí zdroje, kooperace s univerzitami, lead users, crowdsourcing. Duševní vlastnictví - v uzavřené 90 procent IP nevyužito, v otevřené tvorba výnosů licencemi. Příklady otevřených inovací - Tesla patenty, Linux, Android, Sdílená vesmírná strategie. Modely inovačního procesu - lineární Push (Základní výzkum, Aplikovaný, Příprava výroby, Výroba, Trh, máme vědu, najdeme trh, mRNA vakcína) - lineární Pull (Potřeby trhu, Vývoj, Výroba, Prodej, trh je zdroj příležitostí). Lineární modely ale neodpovídají realitě šíření inovací. Nelineární (řetězový) model - inovace je chaotický proces, paralelní aktivity, feedback mezi fázemi, centrální role znalosti. Interaktivní model - lineární + feedback z okolí, spojuje výhody obou, základ pro Design Thinking a SGCP.",
+    audioUrl: null,
+    notebookLmUrl: null,
+  };
+
+  const examStrategyInov1 = `
+    <b style="color:#1E938D">1.</b> Definuj inovaci — praktické uvedení invence na trh, přináší hodnotu.<br/>
+    <b style="color:#1E938D">2.</b> ⚠️ <b>Schumpetrova triáda</b> — invence → inovace → imitace. Vždy zmiň.<br/>
+    <b style="color:#1E938D">3.</b> <b>Kreativní destrukce</b> — motor pokroku. Inovace ničí staré.<br/>
+    <b style="color:#1E938D">4.</b> ⚠️ <b>5 typů inovace (Schumpeter)</b> — výrobek / metoda / trh / surovina / organizace (komise chce všech 5).<br/>
+    <b style="color:#1E938D">5.</b> Typy podle intenzity — inkrementální (stejná S-křivka) × radikální (nová S-křivka) × disruptivní (nový BM, mění trh).<br/>
+    <b style="color:#1E938D">6.</b> Galbraithova škála — od vylepšení produktu po disruptivní technologie.<br/>
+    <b style="color:#1E938D">7.</b> Uzavřená inovace (R&D doma, IP střežíme) × otevřená (inside-out outbound, outside-in inbound).<br/>
+    <b style="color:#1E938D">8.</b> Etalony — Tesla (otevřená, zpřístupnila patenty), Apple (uzavřená).<br/>
+    <b style="color:#1E938D">9.</b> ⚠️ <b>Lineární model</b> — Push (věda → trh) × Pull (trh → vývoj). Slabina: nepřesné.<br/>
+    <b style="color:#1E938D">10.</b> ⚠️ <b>Nelineární (řetězový)</b> — chaos, paralel, feedback, centrální role znalosti.<br/>
+    <b style="color:#1E938D">11.</b> <b>Interaktivní model</b> — lineární + feedback. Základ pro DT a SGCP.<br/>
+    <b style="color:#1E938D">12.</b> Aplikace na PS — najít inovaci, zařadit podle Schumpetera, určit intenzitu, doporučit otevřenost/uzavřenost.
+  `;
+
+  const caseStudyInov1 = {
+    title: "Adam a strojírenská firma na rozcestí",
+    subtitle: "Jaký typ inovace zvolit a jak má proces probíhat",
+    scenario: "Adam převzal po otci rodinnou strojírnu na střední Moravě. Firma 80 lidí, dělá CNC obrábění pro automotive, tržby 120 milionů, ale poslední tři roky stagnují. Hlavní zákazníci tlačí na cenu, konkurence z Polska a Maďarska nabízí o 15 procent levněji. Adam ví, že jen levnější už být neumí — musí přijít s něčím novým.\n\nProšel firmu od shora dolů. Zjistil, že má skvělou výrobní technologii, špičkové operátory a vlastní know-how v obrábění speciálních slitin. Ale celá firma jede staromódně: zakázka přijde, vyrobíme, fakturujeme. Žádná inovace, žádný vlastní produkt. Konstruktéři mají v šuplíku nápady na vlastní díly pro elektromobilitu, ale nikdy se nedostali k realizaci. Vědí o trendu EV, ale neví, jestli do toho jít.\n\nAdam přemýšlí o dvou cestách. První: zůstat dodavatel a prostě dál vylepšovat, co umí — rychlejší stroje, lepší servis, nižší cena (Polsko ale poráží stejně). Druhá: vyvinout vlastní produkt — třeba komponenty pro EV baterie nebo nabíječky. To by ale chtělo úplně jinou logiku — vlastní R&D, marketing, B2B prodej. Sám na to ale není a chybí mu peníze i lidi.\n\nMezi tím slyšel od kamaráda o tom, jak Tesla 'rozdala' své patenty na elektromobily. To Adama zaujalo. Třeba by mohl spolupracovat s univerzitou (ČVUT má dobrou skupinu na e-mobilitu), zapojit konstruktéry, využít otevřené patenty. Místo aby všechno vymýšlel od nuly, postavil by inovaci na sdílení a spolupráci.\n\nAdam teď přemýšlí, jaký typ inovace si vlastně vybrat — drobné vylepšování existující výroby, nebo skok na nový trh (EV komponenty), a jak má celý proces vést. Tuší, že to není přímka výzkum → výroba → prodej, ale že potřebuje něco složitějšího, s feedbackem od trhu a možná i partnerů.",
+    signals: [
+      { text: "Stagnují tržby, konkurence o 15 procent levnější, jen levnější už být neumí", color: VSE.danger, reason: "Klasický signál (Inov 1), že firma potřebuje INOVACI — současný BM už nedrží. Inkrementální vylepšování nestačí, hrozí, že firmu konkurence vytlačí." },
+      { text: "Konstruktéři mají v šuplíku nápady na vlastní díly pro elektromobilitu, ale nikdy se nedostali k realizaci", color: VSE.warning, reason: "INVENCE existuje — nápady jsou (Inov 1), ale chybí přechod na INOVACI (uvedení na trh). Klasický rozdíl podle Schumpetera: nápad není inovace, dokud nedorazí na trh." },
+      { text: "Vyvinout vlastní produkt — komponenty pro EV baterie nebo nabíječky", color: VSE.fph, reason: "Volá po RADIKÁLNÍ inovaci (Inov 1) — přechod na novou S-křivku. Zároveň by to byl 1. typ Schumpetera (nový výrobek) + 3. typ (otevření nového trhu, EV)." },
+      { text: "Tesla 'rozdala' své patenty na elektromobily", color: VSE.success, reason: "Ukázka OTEVŘENÉ inovace v praxi (Inov 1). Adam by mohl jít stejnou cestou — outside-in (využít zpřístupněné patenty, kooperaci s univerzitou)." },
+      { text: "Spolupracovat s univerzitou (ČVUT), zapojit konstruktéry, využít otevřené patenty", color: VSE.success, reason: "Outside-in (Inov 1) — využití externích zdrojů a spolupráce. Sníží náklady na vývoj, sdílení rizika, větší šance na úspěch než vyvíjet vše sám." },
+      { text: "Není přímka výzkum → výroba → prodej, ale něco složitějšího, s feedbackem od trhu", color: VSE.primary, reason: "Adam intuitivně cítí, že LINEÁRNÍ model nestačí (Inov 1). Pro radikální inovaci do nového trhu (EV) je správný NELINEÁRNÍ/INTERAKTIVNÍ model s feedbackem." },
+    ],
+    quiz1: {
+      question: "Jaký typ inovace by měl Adam zvolit a proč?",
+      options: [
+        "Drobně vylepšovat existující CNC výrobu (inkrementální) — zůstat na stejné S-křivce",
+        "Radikální inovace — vyvinout vlastní komponenty pro EV, přechod na novou S-křivku a nový trh, otevřeně ve spolupráci s univerzitou (outside-in)",
+        "Snížit ceny na úroveň Polska a držet se kvality",
+        "Prodat firmu konkurenci",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měl Adam postupovat?",
+      options: [
+        { text: "Zvolit RADIKÁLNÍ inovaci — přechod na novou S-křivku (EV komponenty). Jen vylepšování CNC nezachrání firmu před levnější konkurencí.", correct: true, reason: "✓ Inov 1 — radikální inovace mění pravidla. Inkrementální zlepšení by jen zpomalilo úpadek, ne ho zastavilo." },
+        { text: "Najít víc typů Schumpetrovy inovace najednou — nový výrobek (EV komponenty) + otevření nového trhu (EV) + nová organizace (vlastní R&D).", correct: true, reason: "✓ Inov 1 — komise chce všech 5 Schumpetrových typů. Adam má kombinovat (typ 1 + 3 + 5). Velké inovace bývají kombinací." },
+        { text: "Použít OTEVŘENOU inovaci přes outside-in — kooperace s ČVUT, využití Tesla open patentů, lead users mezi výrobci EV. Sníží riziko i náklady.", correct: true, reason: "✓ Inov 1 — outside-in je vhodný, když firmě chybí R&D kapacita a peníze. Otevřená inovace = větší šance na úspěch než dělat všechno sám." },
+        { text: "Zvolit NELINEÁRNÍ/INTERAKTIVNÍ model procesu — paralelně vyvíjet, testovat s partnery, sbírat feedback z trhu. Ne lineárně výzkum → výroba → prodej.", correct: true, reason: "✓ Inov 1 — pro radikální inovaci s novým trhem je lineární model nebezpečný (na konci zjistíš, že to trh nechce). Nelineární s feedbackem snižuje riziko." },
+        { text: "Zůstat u inkrementálních vylepšení a snížit ceny", correct: false, reason: "✗ Polsko a Maďarsko mají strukturálně nižší náklady. Vyhrávat na ceně nelze. Inkrementální zlepšení by nezachránilo trend." },
+        { text: "Vyvíjet EV komponenty uzavřeně, vše interně, bez partnerů", correct: false, reason: "✗ Adam nemá kapitál, R&D ani know-how v elektromobilitě. Uzavřená inovace by trvala dlouho, byla drahá a riskantní. Otevřená je pro menší firmu rozumnější." },
+        { text: "Vyrobit prototyp tajně a pak ho jednorázově uvést na trh (lineární push)", correct: false, reason: "✗ Klasická chyba — bez feedbacku trhu (B2B zákazníci, automobilky) může vyvinout něco, co nikdo nechce. Nelineární model s feedbackem je bezpečnější." },
+      ],
+    },
+    summary: "<b>Adam by měl zvolit RADIKÁLNÍ inovaci s otevřeným, nelineárním přístupem.</b><br/><br/><b>Postup:</b><br/><br/>• <b>Typ inovace (Schumpeter):</b> jde o kombinaci — typ 1 (nový výrobek, EV komponenty) + typ 3 (otevření nového trhu, e-mobilita) + typ 5 (nová organizace, vlastní R&D). To je radikální skok, ne inkrementální vylepšování.<br/><br/>• <b>Intenzita:</b> RADIKÁLNÍ inovace — přechod na novou S-křivku. Inkrementální by nezachránila firmu před cenovou konkurencí z Polska/Maďarska.<br/><br/>• <b>Otevřená × uzavřená:</b> jednoznačně OTEVŘENÁ. Adam nemá R&D kapacitu, kapitál ani know-how v EV. Outside-in přístup — kooperace s ČVUT, využití zpřístupněných Tesla patentů, lead users mezi výrobci EV (Škoda Auto, Hyundai u nás).<br/><br/>• <b>Model procesu:</b> NELINEÁRNÍ/INTERAKTIVNÍ. Pro radikální inovaci do nového trhu je lineární push (výzkum → výroba → prodej) nebezpečný. Paralelní vývoj + feedback z trhu (testovat prototypy s partnery, iterovat).<br/><br/>• <b>Konkrétně:</b> sestavit innovation team (interní konstruktéři + univerzita), využít Tesla open patenty, identifikovat lead users (e-mobility startupy), pilotovat malou sérii s feedbackem, pak škálovat.<br/><br/><b>Pro komisi:</b> Klíč — <b>Schumpetrových 5 typů</b> (umět rozlišit), <b>radikální × inkrementální</b> (S-křivka), <b>otevřená inovace + outside-in</b> (Tesla patenty jako etalon), <b>nelineární model s feedbackem</b> (lineární nestačí). Anti-vzor: zůstat na inkrementálních vylepšeních a věřit, že cena vyhraje proti strukturálně levnější konkurenci.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Inovace" subjectId="inov" number={1} title="Co je inovace, modely inovačního procesu"
+      subtitle="Schumpeter (triáda + 5 typů) + intenzita inovace (inkr./rad./disrupt.) + uzavřená × otevřená + lineární/nelineární/interaktivní model"
+      color={VSE.primary}
+      questionText="Co je inovace, modely inovačního procesu (lineární × nelineární × interaktivní), typy inovací podle Schumpetera, intenzita inovací, otevřená × uzavřená inovace."
+      sloz={2} roz={3} freq={5}
+      examStrategy={examStrategyInov1}
+      studySections={studySectionsInov1}
+      flashcards={flashcardsInov1}
+      quiz={quizInov1}
+      praxe={praxeInov1}
+      examQuestions={examQuestionsInov1}
+      podcast={podcastInov1}
+      caseStudy={caseStudyInov1}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   INOVACE 2 — Schumpeter, Drucker, inovační podnikání a inovativní organizace
+   ════════════════════════════════════════════════════════ */
+function OkruhInov2Panel() {
+  const studySectionsInov2 = [
+    { id: "schumpeter_detail", title: "Schumpeter detailně — proč je 'duchovní otec' teorie inovací", subtitle: "Koncept ekonomické inovace + proč firmy musí inovovat neustále", color: VSE.primary, emoji: "crown",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Joseph Alois Schumpeter je <b>duchovní otec teorie inovací</b>. Vyvinul koncept, kdy inovace vysvětluje příčiny ekonomického cyklu — <b>inovace jako kritická dimenze ekonomické změny</b>. Bez inovací by ekonomika stagnovala v rovnováze.
+        </Def>
+        <Tag color={VSE.primary}>Schumpetrova logika ekonomické změny</Tag>
+        <Bullet items={[
+          "<b>Idea:</b> proces, kdy dochází k narušení rovnováhy, ale inovace ji opět nastavují na <b>kvalitativně vyšší úroveň</b>.",
+          "<b>Proces kreativní destrukce</b> — staré modely a firmy padají, aby uvolnily místo lepším. Bez bolesti ekonomiky není růst.",
+          "<b>Podnikatelé chtějí získat konkurenční výhodu</b>, všichni se o ni snaží, napodobují se — <b>snaha o neustálou inovaci</b> je trvalý hnací motor.",
+          "<b>Schumpetrova triáda</b> (viz Inov 1): jen <b>první uvedení na trh = INVENCE; ostatní jsou IMITÁTOŘI</b>.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Koncept ekonomické inovace — proč to říct přesně</Tag>
+        <Bullet items={[
+          "Schumpeter se snažil <b>vysvětlit příčiny ekonomického cyklu</b> — inovace nejsou kosmetika, ale kritická dimenze ekonomické změny.",
+          "Inovace mění ekonomiku ve <b>5 různých rovinách</b> (nový výrobek/metoda/trh/zdroj surovin/organizace — viz Inov 1, sekce typy Schumpetera).",
+          "<b>Bez inovace</b> — ekonomika stagnuje, podniky vydělávají na klesající křivce, krize.",
+          "<b>S inovací</b> — kreativní destrukce, vyšší úroveň rovnováhy, ekonomický růst.",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Tažené: Definice inovace dle Schumpetera, koncept ekonomické inovace (Tahal+Lorencová+Schönfeld, Mikovcová+Vávra+Viktora, Mládková+Mareš+Vávra, Kubíček+Říhová+Kolouchová, Špaček+Kučera+Zamazalová, Špaček+Nový+Machek 2026)"
+          what="Komise chce: <b>Schumpeter jako duchovní otec teorie inovací</b> + <b>koncept ekonomické inovace</b> (5 typů, kritická dimenze ekonomické změny) + <b>kreativní destrukce</b>. Mikovcová ráda slyší, že 'všichni jsou imitátoři, jen první firma inovuje'."
+        />
+      </div>) },
+
+    { id: "drucker", title: "Drucker — 7 zdrojů inovace", subtitle: "Kde hledat inovační příležitosti", color: VSE.primary, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Peter Drucker (otec moderního managementu) viděl inovaci jinak než Schumpeter. Pro něj je inovace <b>změna — jednoduchá a zaměřená na specifickou potřebu, vede k tržnímu leadershipu</b>. Definoval <b>7 zdrojů</b>, kde firmy mají hledat inovační příležitosti. Komise to chce skoro vždy.
+        </Def>
+        <Tag color={VSE.primary}>7 zdrojů inovace podle Druckera</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "1. NEČEKANÁ UDÁLOST", d: "Změna v preferencích zákazníků, kterou nikdo nečekal. Příklad: COVID urychlil e-commerce o 5 let. Firmy, co zareagovaly, vyhrály." },
+            { c: VSE.warning, t: "2. ROZPORY MEZI REALITOU A PŘEDPOKLADEM", d: "Podnik si myslí, co chce zákazník, ale ve skutečnosti chce něco jiného. Příklad: hotely si mysleli, že lidé chtějí luxus, Airbnb ukázalo, že chtějí autenticitu." },
+            { c: VSE.fmv, t: "3. POTŘEBA PROCESU", d: "Existující proces má slabé místo — řekněme to opravit. Příklad: Toyota detekce vad → andon kabel → Toyota Production System." },
+            { c: VSE.danger, t: "4. STRUKTURA ODVĚTVÍ A TRHU", d: "Trh není dostatečně obsluhován nebo rychle roste. Příklad: Tesla vstoupila do EV, když tradiční automobilky trh ignorovaly." },
+            { c: VSE.success, t: "5. DEMOGRAFICKÉ FAKTORY", d: "Co, kdo, kde, kdy, v jakém množství bude kupovat. Změny populace. Příklad: stárnutí populace → trh zdravotních pomůcek." },
+            { c: VSE.primary, t: "6. ZMĚNY V POHLEDU NA SVĚT", d: "Změna preferencí lidí. Příklad: bio/eko boom, sustainability — patagonia, Beyond Meat." },
+            { c: VSE.fph, t: "7. NOVÉ ZNALOSTI", d: "Vědecké průlomy, nové technologie. Příklad: mRNA, AI/ML, kvantové počítání. Nejrizikovější ale nejvíce transformační." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 700 460" maxHeight={460}>
+          <text x="350" y="24" textAnchor="middle" fontFamily={fontSans} fontSize="15" fontWeight="800" fill="var(--text)">Drucker - 7 zdroju inovace</text>
+          <text x="350" y="42" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">kde firma hleda inovacni prilezitosti</text>
+          {/* Central node */}
+          <circle cx="350" cy="230" r="48" fill={VSE.primary} opacity="0.92"/>
+          <text x="350" y="226" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill="#fff">INOVACE</text>
+          <text x="350" y="244" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="#fff">(Drucker)</text>
+          {/* 7 sources around — wider radius, sub-label BELOW circle */}
+          {[
+            {x: 90,  y: 110, n: "1", label: "Necekana", sub: "udalost",              c: "#0F6661", subY: 35},
+            {x: 350, y: 90,  n: "2", label: "Rozpory",  sub: "realita x predpoklad", c: "#E0A92C", subY: 35},
+            {x: 610, y: 110, n: "3", label: "Potreba",  sub: "procesu",              c: "#E06D1E", subY: 35},
+            {x: 650, y: 250, n: "4", label: "Struktura", sub: "odvetvi",             c: "#C0392B", subY: 35},
+            {x: 560, y: 390, n: "5", label: "Demografie", sub: "co / kdo / kdy",     c: "#2E7D32", subY: 35},
+            {x: 140, y: 390, n: "6", label: "Zmeny",    sub: "pohledu na svet",      c: "#1E938D", subY: 35},
+            {x: 50,  y: 250, n: "7", label: "Nove znalosti", sub: "nejrizikovejsi",  c: "#0F6661", subY: 35},
+          ].map((s, i) => (
+            <g key={i}>
+              <line x1={s.x} y1={s.y} x2="350" y2="230" stroke={s.c} strokeWidth="1.5" opacity="0.5"/>
+              <circle cx={s.x} cy={s.y} r="38" fill={s.c} opacity="0.9"/>
+              <text x={s.x} y={s.y - 5} textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="800" fill="#fff">{s.n}.</text>
+              <text x={s.x} y={s.y + 12} textAnchor="middle" fontFamily={fontSans} fontSize="10" fontWeight="700" fill="#fff">{s.label}</text>
+              <text x={s.x} y={s.y + s.subY} textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">{s.sub}</text>
+            </g>
+          ))}
+        </ResponsiveSVG>
+        <Tag color={VSE.warning}>Drucker × Schumpeter — rozdíl</Tag>
+        <Bullet items={[
+          "<b>Schumpeter:</b> inovace je <b>destruktivní síla</b> ekonomického cyklu (kreativní destrukce). Velký makroekonomický pohled.",
+          "<b>Drucker:</b> inovace je <b>cílevědomá manažerská aktivita</b>, kterou se firma učí dělat. Pragmatický pohled — kde hledat příležitosti.",
+          "<b>Doplňují se:</b> Schumpeter říká PROČ inovovat (ekonomika to vyžaduje), Drucker říká KDE hledat příležitosti (7 zdrojů).",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Tažené: 7 zdrojů inovace dle Druckera (Mikovcová+Vávra+Viktora, Cejthamr+Machek+Heřman, Mládková+Mareš+Vávra, Kubíček+Říhová+Kolouchová, Nový+Vávra+Heřman, Tahal+Lorencová+Schönfeld, Špaček+Nový+Machek 2026)"
+          what="Komise <b>VŽDY chce všech 7</b>, ne jen 3 nebo 4. Memorování pomocí 'NRP-SDŽ-N' (Nečekaná-Rozpory-Proces, Struktura-Demografie-Změny pohledu, Nové znalosti). Schopnost dát konkrétní příklad ke každému je extra bod."
+        />
+      </div>) },
+
+    { id: "inovacni_podnikani", title: "Inovační podnikání — co musí firma mít, aby uměla inovovat", subtitle: "Determinanty inovačního podnikání", color: VSE.primary, emoji: "construction",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Inovační podnikání</b> = firma využívá svůj <b>inovační potenciál</b> a inovace jsou její <b>konkurenční výhodou</b>. Není to náhoda — je to projev <b>podnikatelského myšlení manažerů</b>. Komise se ptá, co musí firma mít, aby inovační podnikání fungovalo.
+        </Def>
+        <Tag color={VSE.primary}>Determinanty inovačního podnikání — co potřebujete</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "VHODNÝ BUSINESS MODEL", d: "Výrobky, ekonomika, distribuce, segmenty, propagace musí umožňovat inovace. (BMC a Lean Canvas — viz Inov 3.)" },
+            { c: VSE.warning, t: "ZÁMĚR (INICIATIVA)", d: "Tvůrčí záměr manažerů a zaměstnanců — chuť dělat věci jinak, ne jen plnit pokyny." },
+            { c: VSE.fmv, t: "FIREMNÍ KULTURA", d: "ZÁSADNÍ! Imunitní systém firmy, který může potlačit cizorodé látky (nové nápady). Musí být otevřená, flexibilní, podporující, tolerující neúspěch." },
+            { c: VSE.danger, t: "MOTIVAČNÍ SYSTÉM", d: "Vyšší úrovně Maslowovy pyramidy — uznání, seberealizace. Peníze nestačí na inovační kreativitu." },
+            { c: VSE.success, t: "STYL ŘÍZENÍ", d: "Manažerská mřížka — týmový, konzultativní, participativní, ne autoritativní styl. Ne mikromanagement." },
+            { c: VSE.primary, t: "OPTIMÁLNÍ ORG. USPOŘÁDÁNÍ", d: "Síťová × maticová struktura. Kreativní chování pracovníků. Ne striktní hierarchie." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Firemní dilema — procesní × funkční pohled na řízení inovací</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "PROCESNÍ POHLED", d: "Zaměřená na dokonalý provoz. <b>Inovace je proces</b>, na kterém se průřezově podílejí jednotlivé organizační útvary. Vhodný pro <b>kontinuální inovace</b> (Lean SCM, JIT — viz Logistika 2)." },
+            { c: VSE.warning, t: "FUNKČNÍ POHLED", d: "<b>Inovace je tématem pro jednotlivé funkční útvary</b> — R&D dělá vývoj, marketing průzkum. Klasický silo přístup. Vhodný pro <b>radikální průlomy</b> v jednotlivých funkčních doménách." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Bullet items={[
+          "<b>V praxi se obvykle kombinuje</b> — procesní pro malé/kontinuální inovace, funkční (R&D oddělení) pro radikální průlomy.",
+          "Komise může chtít vědět, <b>proč firmy někdy oddělují R&D</b> od zbytku (Špaček+Kučera+Zamazalová 2025) — protože radikální inovace potřebuje jinou kulturu, tempo a riziko než provozní byznys.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "inovativni_org", title: "Inovativní organizace podle Galbraitha", subtitle: "STRUKTURA + PROCESY + ODMĚŇOVÁNÍ + ZAMĚSTNANCI", color: VSE.primary, emoji: "building",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Inovativní organizace</b> = firma, která <b>zakládá svou konkurenční výhodu na inovacích</b>. Není to jen 'firma, co někdy inovovala' — je to organizace s vědomě nastavenou strukturou, procesy, odměňováním a lidmi. <b>Galbraith</b> ji popsal jako kombinaci 4 faktorů.
+        </Def>
+        <Tag color={VSE.primary}>Co je inovativní organizace (4 definice)</Tag>
+        <Bullet items={[
+          "Firma, která <b>zakládá svou konkurenční výhodu na inovacích</b>.",
+          "Firma, která <b>ve sledovaném období implementovala nějakou inovaci</b>.",
+          "Firma, která <b>buduje firemní kulturu vytvářející podmínky pro generování inovací</b>.",
+          "Firma, která <b>má dobrou strukturu, nastavené procesy a odměňování</b>.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Galbraith — 4 faktory inovativní organizace</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "1. STRUKTURA", d: "Dělíme na dvě části: <b>Provozní organizace</b> (eliminace chyb, výroba ve velkém) × <b>Inovativní organizace</b> (využití nových řešení, pokus-omyl). Firma musí mít LEADERSHIP pro koordinaci obou." },
+            { c: VSE.warning, t: "2. PROCESY", d: "Skupinové konzultace s klíčovými zákazníky. Rotace lidí pro potenciální šampiony. Veletrh nápadů. Financování inovací (interní fond na pilotní projekty)." },
+            { c: VSE.fmv, t: "3. ODMĚŇOVÁNÍ", d: "Motivace přes vyšší úrovně Maslowovy pyramidy. Autonomie, bottom-up přístup. Inovační bonusy, podíly na úsporách, akciové opce." },
+            { c: VSE.success, t: "4. ZAMĚSTNANCI", d: "Lidé jako <b>samostatně podnikající jedinci</b> uvnitř firmy. Intrapreneurship. Talenty, kreativci, různorodost myšlení." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 560 320" maxHeight={340}>
+          <text x="280" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Galbraith - 4 faktory inovativni organizace</text>
+          {/* Central - INOVATIVNI ORG */}
+          <rect x="220" y="135" width="120" height="55" rx="8" fill={VSE.primary} opacity="0.95"/>
+          <text x="280" y="158" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill="#fff">INOVATIVNI</text>
+          <text x="280" y="174" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill="#fff">ORGANIZACE</text>
+          {/* 4 quadrants */}
+          {[
+            {x: 50, y: 50, w: 200, h: 90, t: "STRUKTURA", c: VSE.fph, items: ["Provozni org. (eliminace chyb)", "+ Inovativni org. (nova reseni)", "Leadership pro koordinaci"]},
+            {x: 310, y: 50, w: 200, h: 90, t: "PROCESY", c: VSE.warning, items: ["Skupinove konzultace", "Veletrh napadu, rotace", "Inovacni fond"]},
+            {x: 50, y: 180, w: 200, h: 90, t: "ODMENOVANI", c: VSE.fmv, items: ["Vyssi Maslow (autonomie)", "Bottom-up pristup", "Inovacni bonusy, akcie"]},
+            {x: 310, y: 180, w: 200, h: 90, t: "ZAMESTNANCI", c: VSE.success, items: ["Samostatne podnikajici", "Intrapreneurship", "Talenty, ruznorodost"]},
+          ].map((q, i) => (
+            <g key={i}>
+              <rect x={q.x} y={q.y} width={q.w} height={q.h} rx="8" fill={q.c} opacity="0.16" stroke={q.c} strokeWidth="1.8"/>
+              <text x={q.x + q.w/2} y={q.y + 20} textAnchor="middle" fontFamily={fontSans} fontSize="12" fontWeight="800" fill={q.c}>{q.t}</text>
+              {q.items.map((it, j) => (
+                <text key={j} x={q.x + 10} y={q.y + 40 + j*15} fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">- {it}</text>
+              ))}
+            </g>
+          ))}
+          {/* Bottom note */}
+          <text x="280" y="300" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)" fontStyle="italic">vsechny 4 faktory musi byt nastavene, jinak vyhrava imunitni system (Kodak)</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.fph}>Inovační role v organizaci</Tag>
+        <Bullet items={[
+          "<b>Idea šampioni</b> — v kontaktu s problémy a zákazníky; <b>veletrh nápadů</b> — generují nápady.",
+          "<b>Sponzoři</b> — autorita, zdroje, prosadí transformaci nápadu na produkt. Klíčoví pro to, aby nápad přežil organizační byrokracii.",
+          "<b>Lídři</b> — aby inovace vůbec vznikla. Vize, energie, vytrvalost.",
+          "Bez všech tří rolí inovace umírá — nápad bez sponzora se nikam nedostane, sponzor bez šampiona nemá co prosazovat.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>Inovační kultura — z čeho se zakládá</Tag>
+        <Bullet items={[
+          "<b>Leadership jako model role</b> — vedoucí sami inovují, ne jen mluví o tom.",
+          "<b>Zaměstnanci jako zdroje nápadů, dovedností, talentu</b> — ne jako 'lidský kapitál'.",
+          "<b>Základní hodnoty</b> — respekt, vzájemné učení se, otevřenost k chybám.",
+          "<b>Svoboda inovačního uvažování</b> — psychological safety, prostor pro experimenty, akceptace neúspěchu.",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.warning}>Budování inovativní organizace — co se děje</Tag>
+        <Bullet items={[
+          "<b>Dochází k dezorganizaci společnosti</b> — staré struktury se rozpadají, lidé jsou nervózní.",
+          "<b>Inovace = kreativně destruktivní proces</b> — vyvolává <b>imunitní reakce</b> v organizaci (firemní kultura jako imunitní systém, který se brání cizorodým látkám).",
+          "<b>Usnadňuje procesy</b> — ale jen pokud se podaří překonat odpor.",
+          "Komise může chtít: <b>proč firmy oddělují R&D od zbytku</b> (Špaček+Kučera+Zamazalová) — protože inovační kultura a tempo se nesnesou s provozním byznysem.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "rozdil_iorg", title: "Inovativní × neinovativní organizace + budoucnost", subtitle: "Rozdíl + kam směřujeme", color: VSE.primary, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Rozdíl mezi inovativní a neinovativní organizací je <b>strukturální a kulturní</b>, ne náhodný. Komise tohle ráda chce — schopnost rozpoznat, který typ je firma v případovce.
+        </Def>
+        <Tag color={VSE.primary}>Inovativní × neinovativní organizace</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.success, t: "INOVATIVNÍ", d: "Inovace = KV. Otevřená flexibilní kultura. Akceptuje neúspěch jako učení. Síťová/maticová struktura. Bottom-up nápady. Inovační role (šampioni, sponzoři, lídři). Vlastní inovační fond. Příklad: Google, 3M, Pixar." },
+            { c: VSE.danger, t: "NEINOVATIVNÍ", d: "Inovace = riziko. Striktní hierarchie. Trest za chybu. Funkční silo struktura. Top-down nařízení. Bez inovačních rolí. R&D rozpočet je nákladová položka. Příklad: tradiční úřad, mnoho státních podniků." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Budoucí inovativní organizace</Tag>
+        <Bullet items={[
+          "<b>Dezorganizace tradičních hierarchií</b> — ploché struktury, hybrid teams, holacracy experimenty.",
+          "<b>Inovace jako kreativně destruktivní proces</b> ve firmě — neustálé přizpůsobování trhu.",
+          "<b>Imunitní reakce firmy</b> — firemní kultura se brání cizorodým novinkám, leadership musí pomoct novinkám projít.",
+          "<b>Usnadňuje procesy</b> — díky technologiím, AI, automatizaci. Ale jen pokud kultura akceptuje.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na případovku — Schumpeter, Drucker, inovativní org.", subtitle: "Postup + co komise oceňuje × čemu se vyhnout", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Tažené z této oblasti jsou skoro v každé komisi — 8× ze 45 inovačních otázek. Tady je postup, jak na případovku přesvědčivě.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj v případovce <b>zdroj inovace (Drucker)</b> — který ze 7 zdrojů firma využila nebo by mohla? (Nečekaná událost? Demografie? Nové znalosti?)",
+          "<b>2.</b> Aplikuj <b>Schumpetrovu logiku</b> — firma inovuje, nebo se snaží být imitátorem? Je tu kreativní destrukce starého?",
+          "<b>3.</b> Zhodnoť <b>determinanty inovačního podnikání</b> — má firma vhodný BM, firemní kulturu, motivační systém, styl řízení, optimální strukturu?",
+          "<b>4.</b> Aplikuj <b>Galbraitha (4 faktory)</b> — STRUKTURA (provoz × inovační), PROCESY (skupinové konzultace, veletrh nápadů, fond), ODMĚŇOVÁNÍ (bottom-up), ZAMĚSTNANCI (intrapreneurship).",
+          "<b>5.</b> Najdi <b>inovační role</b> — má firma idea šampiony, sponzory, lídry? Kdo chybí?",
+          "<b>6.</b> Rozhodni: <b>procesní × funkční pohled</b>? Pro radikální inovaci doporuč funkční (oddělené R&D); pro kontinuální procesní.",
+          "<b>7.</b> Navrhni konkrétní změny v <b>inovační kultuře</b> — leadership jako model, svoboda inovačního uvažování, akceptace neúspěchu.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Vyjmenovat <b>všech 7 zdrojů</b> Druckera (komise to vždy chce, ne jen 3-4).",
+          "<b>✅ Dobře:</b> Říct, že Schumpeter je <b>'duchovní otec teorie inovací'</b> + koncept ekonomické inovace + kreativní destrukce.",
+          "<b>✅ Dobře:</b> <b>Galbraithovy 4 faktory</b> aplikovat na firmu z PS s konkrétními příklady.",
+          "<b>✅ Dobře:</b> Rozlišit <b>procesní × funkční pohled</b> a vědět, kdy který.",
+          "<b>❌ Špatně:</b> Říct jen 'Drucker měl 7 zdrojů' a vyjmenovat 3 — komise chce všech 7.",
+          "<b>❌ Špatně:</b> Tvrdit, že každá firma musí být inovativní — někdy stačí provozní efektivita (Mintzberg, Inov 6).",
+          "<b>❌ Špatně:</b> Zaměnit <b>inovační podnikání</b> (firma využívá inovace jako KV) s <b>inovativní organizací</b> (firma má strukturu, procesy, kulturu pro inovace) — souvisí, ale nejsou totéž.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsInov2 = [
+    { term: "Schumpeter — kdo to je", def: "Duchovní otec teorie inovací. Koncept ekonomické inovace = inovace jako kritická dimenze ekonomické změny. Bez inovací ekonomika stagnuje.", tag: "SCHUMPETER" },
+    { term: "Koncept ekonomické inovace", def: "Schumpetrův koncept — inovace mění ekonomiku v 5 typech (výrobek/metoda/trh/zdroj surovin/organizace). Vysvětluje příčiny ekonomického cyklu.", tag: "SCHUMPETER" },
+    { term: "Snaha o neustálou inovaci", def: "Podnikatelé chtějí získat KV, všichni se o ni snaží, napodobují se. Trvalý hnací motor ekonomického růstu.", tag: "SCHUMPETER" },
+    { term: "Drucker — kdo to je + def. inovace", def: "Otec moderního managementu. Inovace = změna, jednoduchá a zaměřená na specifickou potřebu, vede k tržnímu leadershipu.", tag: "DRUCKER" },
+    { term: "7 zdrojů inovace (Drucker)", def: "1) Nečekaná událost, 2) rozpory realita × předpoklad, 3) potřeba procesu, 4) struktura odvětví, 5) demografie, 6) změny v pohledu na svět, 7) nové znalosti.", tag: "DRUCKER" },
+    { term: "Drucker × Schumpeter", def: "Schumpeter = PROČ inovovat (makroekonomický, kreativní destrukce). Drucker = KDE hledat příležitosti (pragmatický, 7 zdrojů). Doplňují se.", tag: "DRUCKER" },
+    { term: "Inovační podnikání", def: "Firma využívá svůj inovační potenciál, inovace jsou KV. Projev podnikatelského myšlení manažerů. Vyžaduje determinanty (BM, kultura, motivace, styl, struktura).", tag: "PODNIKÁNÍ" },
+    { term: "Determinanty inovačního podnikání", def: "Vhodný BM + záměr/iniciativa + firemní kultura (ZÁSADNÍ) + motivační systém (Maslow vyšší úrovně) + styl řízení (participativní) + optimální org. uspořádání (síťové/maticové).", tag: "PODNIKÁNÍ" },
+    { term: "Firemní kultura jako imunitní systém", def: "Firemní kultura = imunitní systém firmy, který může potlačit cizorodé látky (nové nápady). Musí být otevřená a tolerující neúspěch, jinak nápady zemřou.", tag: "PODNIKÁNÍ" },
+    { term: "Procesní × funkční pohled na inovace", def: "Procesní = inovace je proces napříč útvary (vhodné pro kontinuální). Funkční = inovace v jednotlivých útvarech, oddělené R&D (vhodné pro radikální). V praxi kombinace.", tag: "PODNIKÁNÍ" },
+    { term: "Inovativní organizace (def.)", def: "Firma, která: 1) zakládá KV na inovacích, 2) implementovala inovaci, 3) buduje kulturu pro inovace, 4) má dobrou strukturu, procesy, odměňování.", tag: "GALBRAITH" },
+    { term: "Galbraith — 4 faktory inovativní org.", def: "STRUKTURA (provozní × inovativní) + PROCESY (skupinové konzultace, rotace, veletrh nápadů, fond) + ODMĚŇOVÁNÍ (motivace, autonomie, bottom-up) + ZAMĚSTNANCI (intrapreneurship).", tag: "GALBRAITH" },
+    { term: "Provozní × inovativní organizace (struktura)", def: "Provozní = eliminace chyb, výroba ve velkém. Inovativní = využití nových řešení, pokus-omyl. Firma musí mít LEADERSHIP pro koordinaci obou.", tag: "GALBRAITH" },
+    { term: "Inovační role — idea šampioni", def: "V kontaktu s problémy a zákazníky. Generují nápady. Veletrh nápadů jako platforma pro jejich uplatnění.", tag: "ROLE" },
+    { term: "Inovační role — sponzoři", def: "Autorita, zdroje, prosadí transformaci nápadu na produkt. Klíčoví pro to, aby nápad přežil organizační byrokracii.", tag: "ROLE" },
+    { term: "Inovační role — lídři", def: "Aby inovace vůbec vznikla. Vize, energie, vytrvalost. Leadership inovace.", tag: "ROLE" },
+    { term: "Inovační kultura — z čeho se zakládá", def: "Leadership jako model role + zaměstnanci jako zdroje nápadů a talentu + základní hodnoty (respekt, učení) + svoboda inovačního uvažování (psychological safety).", tag: "KULTURA" },
+    { term: "Imunitní reakce firmy", def: "Firemní kultura se brání cizorodým novinkám. Inovace = kreativně destruktivní proces, vyvolává imunitní reakce. Leadership musí pomoct novinkám projít.", tag: "KULTURA" },
+    { term: "Inovativní × neinovativní organizace", def: "Inovativní = inovace = KV, otevřená kultura, akceptuje neúspěch, síťová struktura, bottom-up. Neinovativní = striktní hierarchie, trest za chybu, silo, top-down.", tag: "GALBRAITH" },
+    { term: "Proč firmy oddělují R&D od zbytku", def: "Radikální inovace potřebuje jinou kulturu, tempo a riziko než provozní byznys. Oddělené R&D má vlastní pravidla, nesvazuje ho operativa.", tag: "PODNIKÁNÍ" },
+  ];
+
+  const quizInov2 = [
+    { q: "Kdo je 'duchovní otec teorie inovací'?", opts: ["Drucker", "Schumpeter — definoval koncept ekonomické inovace a kreativní destrukci", "Galbraith", "Porter"], correct: 1 },
+    { q: "Co je koncept ekonomické inovace podle Schumpetera?", opts: ["Marketingový plán", "Inovace jako kritická dimenze ekonomické změny, vysvětluje příčiny ekonomického cyklu", "Účetní metoda", "Strategie financování"], correct: 1 },
+    { q: "Kolik zdrojů inovace definuje Drucker?", opts: ["3", "5", "7 (nečekaná událost, rozpory, potřeba procesu, struktura odvětví, demografie, změny v pohledu, nové znalosti)", "10"], correct: 2 },
+    { q: "Co je hlavní rozdíl mezi Schumpeterem a Druckerem?", opts: ["Schumpeter byl Rakušák", "Schumpeter = PROČ inovovat (makro), Drucker = KDE hledat příležitosti (pragmaticky)", "Nic se neliší", "Schumpeter byl starší"], correct: 1 },
+    { q: "Co je 'nečekaná událost' jako zdroj inovace?", opts: ["Krize", "Změna v preferencích zákazníků, kterou nikdo nečekal (např. COVID urychlil e-commerce)", "Smrt zakladatele", "Bankrot"], correct: 1 },
+    { q: "Co znamená 'potřeba procesu' jako zdroj inovace?", opts: ["Více zaměstnanců", "Existující proces má slabé místo — řekněme ho opravit (např. Toyota andon kabel)", "Kontroly", "Plánování"], correct: 1 },
+    { q: "Co je inovační podnikání?", opts: ["Druh živnosti", "Firma využívá svůj inovační potenciál a inovace jsou její KV", "Investice", "Reklama"], correct: 1 },
+    { q: "Která determinanta inovačního podnikání je ZÁSADNÍ?", opts: ["Kancelář", "Firemní kultura — imunitní systém, který může potlačit nové nápady", "Logo", "Webové stránky"], correct: 1 },
+    { q: "Co je procesní pohled na řízení inovací?", opts: ["Inovace v jednom útvaru", "Inovace je proces napříč organizačními útvary — vhodné pro kontinuální inovace", "Kreslení procesů", "Audit"], correct: 1 },
+    { q: "Co je funkční pohled na řízení inovací?", opts: ["Designové úpravy", "Inovace je téma pro jednotlivé funkční útvary (R&D, marketing) — vhodné pro radikální inovace", "Pracovní popis", "Reorganizace"], correct: 1 },
+    { q: "Proč firmy někdy oddělují R&D od zbytku?", opts: ["Daňové důvody", "Radikální inovace potřebuje jinou kulturu, tempo a riziko než provozní byznys", "Mzdy", "Místa"], correct: 1 },
+    { q: "Kolik faktorů má Galbraithův model inovativní organizace?", opts: ["3", "4 — STRUKTURA, PROCESY, ODMĚŇOVÁNÍ, ZAMĚSTNANCI", "5", "7"], correct: 1 },
+    { q: "Co jsou idea šampioni?", opts: ["Sportovci", "V kontaktu s problémy a zákazníky, generují nápady", "Manažeři kvality", "Zákazníci"], correct: 1 },
+    { q: "Co dělají sponzoři v inovační organizaci?", opts: ["Platí reklamu", "Mají autoritu a zdroje, prosadí transformaci nápadu na produkt", "Sponzorují sport", "Vedou marketing"], correct: 1 },
+    { q: "Co je 'imunitní reakce' firmy na inovaci?", opts: ["Nemoc", "Firemní kultura se brání cizorodým novinkám, leadership musí pomoct projít", "Bezpečnost", "Audit"], correct: 1 },
+    { q: "Co charakterizuje inovativní organizaci?", opts: ["Striktní hierarchie", "Inovace = KV, otevřená kultura, akceptuje neúspěch, síťová struktura, bottom-up", "Top-down rozhodování", "Trest za chybu"], correct: 1 },
+  ];
+
+  const praxeInov2 = {
+    caseStudy: {
+      company: "Google — etalon inovativní organizace podle Galbraitha",
+      subtitle: "Jak Google vědomě postavil všechny 4 faktory pro inovace",
+      content: (<>
+        Google je <b>učebnicový příklad inovativní organizace podle Galbraitha</b>. Postavil vědomě všechny 4 faktory — strukturu, procesy, odměňování, zaměstnance — kolem inovací jako KV.<br/><br/>
+        🏗️ STRUKTURA — PROVOZNÍ × INOVATIVNÍ:<br/><br/>
+        Google má dvě paralelní struktury. <b>Provozní</b> jede core byznys (vyhledávač, reklamy, Cloud) s důrazem na stabilitu a škálu. <b>Google X (dnes X Development)</b> je oddělený 'moonshot factory' pro radikální inovace (Waymo, Loon, Glass). Leadership (Sundar Pichai) koordinuje oba světy — přesně Galbraithova logika.<br/><br/>
+        🔄 PROCESY — VELETRH NÁPADŮ A 20% PRAVIDLO:<br/><br/>
+        Slavné <b>20% pravidlo</b> — zaměstnanci mohli věnovat 20 % času vlastním projektům. Vznikly tak Gmail, AdSense, Google News. <b>Veletrh nápadů</b> probíhá ve formě interních hackathonů a TGIF setkání. <b>Inovační fond</b> = Area 120 (interní inkubátor pro experimentální produkty).<br/><br/>
+        💰 ODMĚŇOVÁNÍ — VYŠŠÍ MASLOW:<br/><br/>
+        Plat je tu nadprůměrný, ale to není to hlavní. Google motivuje <b>autonomií</b> (vyber si projekt), <b>uznáním</b> (Founders' Award, akciové opce), <b>seberealizací</b> (mise 'organize the world's information'). Bottom-up přístup — nápady neprochází byrokracií.<br/><br/>
+        👥 ZAMĚSTNANCI — INTRAPRENEURSHIP:<br/><br/>
+        Lidé jsou <b>samostatně podnikající jedinci uvnitř firmy</b> (intrapreneurship). Najímají PhD z top univerzit, kreativce, polyglotty. Různorodost myšlení je explicitní cíl. Idea šampioni, sponzoři a lídři jsou identifikovaní a podporovaní.<br/><br/>
+        🛡️ FIREMNÍ KULTURA JAKO IMUNITNÍ SYSTÉM:<br/><br/>
+        Google si <b>vědomě buduje kulturu, která akceptuje neúspěch</b>. Většina moonshot projektů zkrachuje (Google Glass, Google+, Stadia) — to je ale akceptováno jako součást procesu. Bez této kultury by 'imunitní systém' firmy zabil radikální nápady, jak to udělalo třeba Kodak s digitální fotografií.
+      </>),
+      lessons: "Google ukazuje Galbraithovy <b>4 faktory inovativní organizace</b> v praxi: STRUKTURA (provozní + X), PROCESY (20% pravidlo, veletrh nápadů, Area 120), ODMĚŇOVÁNÍ (autonomie, akciové opce, mise), ZAMĚSTNANCI (intrapreneurship). Klíč: firemní kultura akceptuje neúspěch, jinak by imunitní systém firmy zabil radikální nápady. Pro případovku: hledat všechny 4 faktory a najít, který firmě chybí — tam zaměřit doporučení."
+    },
+    miniExamples: [
+      { tag: "DRUCKER — NOVÉ ZNALOSTI", color: VSE.fph, company: "Avast (CZ) — Drucker 'nové znalosti' v praxi", content: "Pavel Baudiš a Eduard Kučera vyšli z technické univerzity (ČVUT) a využili své znalosti programování + matematiky k vytvoření antivirového algoritmu (Druckerův zdroj 7 — nové znalosti). Začínali v Praze v 90. letech, kdy byla česká IT scéna na začátku. Z technické inovace postavili firmu, kterou v roce 2021 koupil NortonLifeLock za 8 miliard dolarů. Ukázka, že 'nové znalosti' je nejrizikovější ale nejvíce transformativní zdroj inovace." },
+      { tag: "INOVAČNÍ ROLE", color: VSE.warning, company: "3M — instituce idea šampionů + sponzorů", content: "3M (Minnesota Mining and Manufacturing) je etalon firmy s formálními inovačními rolemi. Idea šampioni = každý zaměstnanec smí věnovat 15 % času vlastním projektům (tzv. <b>15% pravidlo</b>, předchůdce Google 20%). Sponzoři = senior manažeři, kteří vyberou nápady a dají jim rozpočet. Lídři = výkonný management. Z 15% pravidla vznikly Post-it Notes — možná nejslavnější neplánovaná inovace v historii. Bez sponzora by Spencer Silver (vynálezce slabého lepidla) skončil v šuplíku." },
+      { tag: "FUNKČNÍ POHLED — ODDĚLENÉ R&D", color: VSE.fmv, company: "Pixar (Disney) — proč R&D žije odděleně", content: "Pixar od založení v 1986 měl R&D oddělené od produkce. Ed Catmull (CTO) chtěl, aby technologičtí inženýři měli vlastní kulturu, tempo a riziko — odlišné od týmu vyrábějícího filmy. Funkční pohled na inovaci v praxi — radikální inovace (Pixar RenderMan, simulace vody/vlasů) potřebuje jinou kulturu než operace ('udělej film do termínu'). Po akvizici Disney v 2006 zůstala Pixar samostatná, aby si zachovala inovační kulturu — komise se ráda ptá, proč firmy oddělují R&D, tohle je perfektní příklad." },
+      { tag: "IMUNITNÍ REAKCE — KODAK", color: VSE.danger, company: "Kodak — co se stane, když imunitní systém zvítězí", content: "Kodak vynalezl digitální fotoaparát už v roce 1975. Inženýr Steve Sasson vytvořil první prototyp. Co se stalo? <b>Imunitní reakce firmy</b>. Manažeři viděli, že digitální technologie zničí jejich byznys s filmem. Místo aby projekt podpořili, schovali ho do šuplíku. Kodak měl invenci, ale nebyl inovativní organizace — chyběl sponzor s odvahou, chyběla kultura kreativní destrukce vlastního byznysu. V roce 2012 Kodak zbankrotoval, zatímco svět fotil digitálně. Ukázka, že bez Galbraithových 4 faktorů (zejména kultury) jakkoli skvělá invence umírá uvnitř organizace." },
+    ]
+  };
+
+  const examQuestionsInov2 = [
+    { komise: "2025-06-09 Tahal+Lorencová+Schönfeld, 2025-06-10 Mikovcová+Vávra+Viktora, 2025-06-16 Špaček+Kučera+Zamazalová, 2025-06-18 Mládková+Mareš+Vávra, 2026-02-02 Špaček+Nový+Machek", otazka: "Definice inovace dle Schumpetera, typy inovací podle Schumpetera, inovační podnikání a inovativní organizace, 7 zdrojů dle Druckera", pozn: "Celý balík. Schumpeter (duchovní otec, koncept ekonomické inovace, kreativní destrukce, 5 typů — viz Inov 1) + Drucker 7 zdrojů + inovační podnikání (determinanty) + inovativní organizace (Galbraith 4 faktory)." },
+    { komise: "2025-06-13 Cejthamr+Machek+Heřman, 2025-01-29 Kubíček+Říhová+Kolouchová, 2025-01-30 Nový+Vávra+Heřman", otazka: "Inovace dle Schumpetera, zdroje dle Druckera, inovační podnikání vs inovativní organizace, 7 zdrojů Druckera, definovat inovativní organizaci", pozn: "Rozdíl inovační podnikání (firma využívá inovace jako KV) × inovativní organizace (firma má strukturu, procesy, kulturu pro inovace). Komise to ráda chytá — nezaměnit. Galbraithovy 4 faktory pro inovativní organizaci." },
+    { komise: "2025-06-16 Špaček+Kučera+Zamazalová", otazka: "Vysvětlit pojem inovativní společnost (jaká má být, jaké tam jsou role, rozdíl mezi inovativní a neinovativní organizací, proč někdy oddělujeme R&D od zbytku)", pozn: "Specifická otázka: <b>proč oddělujeme R&D</b> — radikální inovace potřebuje jinou kulturu, tempo, riziko. Inovační role: idea šampioni, sponzoři, lídři." },
+    { komise: "2025-06-18 Mládková+Mareš+Vávra", otazka: "Schumpeter, Inovační podnik, Kultura inovační firmy, Zdroje inovace dle Druckera", pozn: "Pozor na 'kulturu inovační firmy' — z čeho se zakládá: leadership jako model + zaměstnanci jako zdroj nápadů + základní hodnoty + svoboda inovačního uvažování." },
+  ];
+
+  const podcastInov2 = {
+    title: "Inovace 2 — Schumpeter, Drucker a inovativní organizace",
+    description: "Schumpeter je duchovní otec teorie inovací. Vyvinul koncept ekonomické inovace - inovace jako kritická dimenze ekonomické změny, bez nich ekonomika stagnuje. Proces kreativní destrukce - staré modely a firmy padají, aby uvolnily místo lepším. Podnikatelé chtějí získat konkurenční výhodu, všichni se o ni snaží, napodobují se, snaha o neustálou inovaci. Drucker je otec moderního managementu. Definuje inovaci jako změnu, jednoduchou a zaměřenou na specifickou potřebu, vede k tržnímu leadershipu. 7 zdrojů inovace podle Druckera - nečekaná událost (změna preferencí, kterou nikdo nečekal, COVID urychlil e-commerce), rozpory mezi realitou a předpokladem (Airbnb ukázalo, že lidé chtějí autenticitu místo luxusu), potřeba procesu (Toyota andon kabel), struktura odvětví a trhu (Tesla vstoupila do EV, když automobilky trh ignorovaly), demografické faktory (stárnutí populace, trh zdravotních pomůcek), změny v pohledu na svět (bio, sustainability, Patagonia), nové znalosti (mRNA, AI, kvantové počítání - nejrizikovější ale nejvíc transformující). Drucker × Schumpeter - Schumpeter PROČ inovovat (makroekonomický, kreativní destrukce), Drucker KDE hledat příležitosti (pragmaticky, 7 zdrojů). Inovační podnikání - firma využívá svůj inovační potenciál, inovace jsou KV, projev podnikatelského myšlení manažerů. Determinanty - vhodný BM, záměr/iniciativa, firemní kultura (ZÁSADNÍ, imunitní systém firmy), motivační systém (vyšší úrovně Maslowa), styl řízení (participativní), optimální organizační uspořádání (síťové, maticové). Firemní dilema - procesní pohled (inovace je proces napříč útvary, vhodné pro kontinuální) × funkční pohled (inovace v jednotlivých útvarech, oddělené R&D, vhodné pro radikální). Proč firmy oddělují R&D - radikální inovace potřebuje jinou kulturu, tempo a riziko než provozní byznys. Inovativní organizace - firma, která zakládá KV na inovacích, implementovala inovaci, buduje kulturu pro inovace, má dobrou strukturu a procesy. Galbraith 4 faktory - STRUKTURA (provozní × inovativní organizace, leadership pro koordinaci), PROCESY (skupinové konzultace s klíčovými zákazníky, rotace lidí, veletrh nápadů, financování inovací), ODMĚŇOVÁNÍ (motivace přes vyšší Maslow, autonomie, bottom-up), ZAMĚSTNANCI (samostatně podnikající jedinci uvnitř firmy, intrapreneurship). Inovační role - idea šampioni (v kontaktu s problémy, generují nápady), sponzoři (autorita, zdroje, prosadí nápad), lídři (aby inovace vůbec vznikla). Inovační kultura se zakládá z - leadership jako model role, zaměstnanci jako zdroje nápadů a talentu, základní hodnoty (respekt, učení), svoboda inovačního uvažování (psychological safety). Budoucí inovativní organizace - dochází k dezorganizaci společnosti, inovace je kreativně destruktivní proces, vyvolává imunitní reakce v organizaci, ale usnadňuje procesy.",
+    audioUrl: null,
+    notebookLmUrl: null,
+  };
+
+  const examStrategyInov2 = `
+    <b style="color:#1E938D">1.</b> <b>Schumpeter</b> = duchovní otec teorie inovací + koncept ekonomické inovace + kreativní destrukce (5 typů — viz Inov 1).<br/>
+    <b style="color:#1E938D">2.</b> ⚠️ <b>Drucker 7 zdrojů</b> — komise chce VŠECH 7: nečekaná událost, rozpory, potřeba procesu, struktura odvětví, demografie, změny v pohledu, nové znalosti.<br/>
+    <b style="color:#1E938D">3.</b> Drucker × Schumpeter — Schumpeter PROČ, Drucker KDE. Doplňují se.<br/>
+    <b style="color:#1E938D">4.</b> <b>Inovační podnikání</b> = firma využívá inovace jako KV. Vyžaduje determinanty (BM, kultura, motivace, styl, struktura).<br/>
+    <b style="color:#1E938D">5.</b> ⚠️ <b>Firemní kultura</b> = imunitní systém firmy — může potlačit nové nápady (Kodak!).<br/>
+    <b style="color:#1E938D">6.</b> <b>Procesní × funkční pohled</b> — proč firmy oddělují R&D (jiná kultura, tempo, riziko).<br/>
+    <b style="color:#1E938D">7.</b> ⚠️ <b>Inovativní organizace ≠ inovační podnikání</b> — nezaměnit (komise to chytá).<br/>
+    <b style="color:#1E938D">8.</b> ⚠️ <b>Galbraith 4 faktory</b> — STRUKTURA + PROCESY + ODMĚŇOVÁNÍ + ZAMĚSTNANCI.<br/>
+    <b style="color:#1E938D">9.</b> <b>Inovační role</b> — idea šampioni, sponzoři, lídři (všechny tři).<br/>
+    <b style="color:#1E938D">10.</b> <b>Inovační kultura</b> — leadership jako model, zaměstnanci jako zdroj, hodnoty, svoboda uvažování.<br/>
+    <b style="color:#1E938D">11.</b> Etalony — Google (Galbraith všech 4), 3M (15% pravidlo, šampioni), Pixar (oddělené R&D), Avast (Drucker 'nové znalosti'), Kodak (imunitní reakce — anti-vzor).<br/>
+    <b style="color:#1E938D">12.</b> Aplikace na PS — který Drucker zdroj? Které Galbraith faktory firmě chybí? Procesní nebo funkční pohled?
+  `;
+
+  const caseStudyInov2 = {
+    title: "Jana a tradiční výrobce nábytku — jak přetvořit firmu na inovativní organizaci",
+    subtitle: "Identifikuj Drucker zdroje + aplikuj Galbraitha",
+    scenario: "Jana převzala před třemi lety rodinnou firmu na výrobu kuchyní v Plzeňském kraji. Firma 120 lidí, dělá tradiční bukové a dubové kuchyně, tržby 180 milionů. Otec firmu budoval 30 let na řemeslné kvalitě. Jenže poslední tři roky tržby stagnují, mladší zákazníci kupují víc IKEA a online značky (Vivere, Westwing), staří zákazníci postupně vymírají.\n\nJana ví, že firma musí inovovat — ale neví jak. Otec si vždycky myslel, že 'kvalita se prodá sama' a inovace jsou ztráta času. Designéři, kteří kdysi přicházeli s nápady, dávno odešli, protože je nikdo neposlouchal. Mladí truhláři pracují podle dědových šablon a vlastní nápady si nedovolí říct. Žádné R&D, žádné prototypy, žádná data o tom, co zákazníci dnes chtějí.\n\nJana udělala průzkum mezi mladšími zákazníky (25-40 let). Zjistila tři věci. <b>Zaprvé</b>, mladí chtějí udržitelnost — ekologické lepidla, lokální dřevo, recyklovatelné materiály. Firma to už dělá, ale nemluví o tom. <b>Zadruhé</b>, chtějí modulární řešení — kuchyně, která se snadno přizpůsobí novému bytu při stěhování. Tradiční pevně zabudované kuchyně jim nestačí. <b>Zatřetí</b>, chtějí konfigurovat online a vidět 3D vizualizaci před koupí.\n\nJana si uvědomuje, že musí přebudovat celou firmu, ne jen vyrobit nový model. Tuší, že problém je hlubší — chybí firemní kultura podporující nápady, chybí proces, který by je sebral, posoudil a realizoval, chybí role lidí, kteří by vůbec mohli nápady přinášet. Když mluví o inovacích na poradě, vedoucí mistři se tváří, jako by je urážela.\n\nDál Jana přemýšlí, jestli má dělat inovace 'odshora' (najmout R&D ředitele, postavit oddělené R&D oddělení) nebo 'odzdola' (zapojit současné truhláře, založit interní fond pro experimenty, motivovat lidi). Tuší, že potřebuje obojí — ale neví, kde začít a jak překonat odpor staré gardy.",
+    signals: [
+      { text: "Mladší zákazníci kupují víc IKEA a online značky, staří postupně vymírají", color: VSE.danger, reason: "Drucker zdroj 5 — DEMOGRAFICKÉ FAKTORY (Inov 2). Stárnutí klientely + nová generace s jinými preferencemi. Klasický signál nutnosti inovace." },
+      { text: "Mladí chtějí udržitelnost, modulární řešení, online konfiguraci", color: VSE.warning, reason: "Drucker zdroj 6 — ZMĚNY V POHLEDU NA SVĚT (Inov 2). Bio/eko boom, sharing economy, digitalizace. Firma musí reagovat na novou preferenci." },
+      { text: "Otec si myslel, že 'kvalita se prodá sama'... designéři odešli... mladí truhláři si vlastní nápady nedovolí říct", color: VSE.fph, reason: "Klasický příklad chybějící INOVAČNÍ KULTURY (Inov 2) — firma jako 'imunitní systém', který potlačuje nové nápady. Chybí svoboda inovačního uvažování." },
+      { text: "Žádné R&D, žádné prototypy, žádná data o tom, co zákazníci chtějí", color: VSE.danger, reason: "Chybí PROCESY (Inov 2) — žádné skupinové konzultace s klíčovými zákazníky, žádný veletrh nápadů, žádný inovační fond. Galbraith druhý faktor chybí." },
+      { text: "Vedoucí mistři se tváří, jako by je [inovace] urážela", color: VSE.warning, reason: "IMUNITNÍ REAKCE firmy (Inov 2) — kultura se brání cizorodým novinkám. Bez prolomení tohoto odporu jakákoli inovace umře (Kodak case)." },
+      { text: "Inovace 'odshora' (oddělené R&D) nebo 'odzdola' (zapojit truhláře, fond)", color: VSE.success, reason: "Volba mezi PROCESNÍM × FUNKČNÍM pohledem (Inov 2). V praxi se obvykle kombinuje — oddělené R&D pro radikální + interní fond pro kontinuální." },
+    ],
+    quiz1: {
+      question: "Co Jana potřebuje, aby přebudovala firmu na inovativní organizaci?",
+      options: [
+        "Najmout R&D ředitele a tím to vyřeší",
+        "Aplikovat Galbraithovy 4 faktory (struktura, procesy, odměňování, zaměstnanci) + Drucker zdroje + překonat imunitní reakci kultury",
+        "Snížit ceny a doufat, že prodeje porostou",
+        "Prodat firmu IKEA",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měla Jana postupovat?",
+      options: [
+        { text: "Identifikovat Drucker zdroje inovace — demografie (mladí × staří) + změny v pohledu (sustainability, modularita, digitalizace). Z toho vyjít.", correct: true, reason: "✓ Inov 2 — Drucker je první krok analýzy. Bez znalosti, KDE jsou příležitosti, je inovace náhoda." },
+        { text: "Postavit STRUKTURU dle Galbraitha — provozní část jede dál tradiční výrobu + oddělené R&D pro moderní (modulární, online konfigurace). Leadership koordinuje.", correct: true, reason: "✓ Inov 2 — Galbraithova struktura. Funkční pohled, proč firmy oddělují R&D — jiná kultura a tempo." },
+        { text: "Nastavit PROCESY — skupinové konzultace s mladými zákazníky (focus groups), veletrh nápadů s truhláři, interní fond na pilotní projekty.", correct: true, reason: "✓ Inov 2 — Galbraithovy procesy. Bez nich nápady nevzniknou ani neprojdou." },
+        { text: "Změnit ODMĚŇOVÁNÍ + ZAMĚSTNANCE — bonusy za inovační nápady (bottom-up), najít idea šampiony mezi mladšími truhláři, dát jim sponzora (např. sama Jana).", correct: true, reason: "✓ Inov 2 — Galbraithovy faktory 3 a 4 + inovační role (šampioni, sponzoři, lídři)." },
+        { text: "Vyhlásit, že 'odteď inovujeme' a věřit, že to mistři pochopí", color: VSE.danger, correct: false, reason: "✗ Chyba — imunitní reakce firmy je silná. Bez vědomé práce s kulturou (Galbraith) inovace umře." },
+        { text: "Najmout R&D ředitele odjinud a doufat, že to udělá za Janu", correct: false, reason: "✗ Sám R&D ředitel nestačí — potřeba změnit celou organizaci (4 faktory Galbraitha + kultura)." },
+        { text: "Zachovat status quo a doufat, že trend bio a modularity skončí", correct: false, reason: "✗ Klasický Kodak scénář — imunitní systém zvítězí, firma zanikne." },
+      ],
+    },
+    summary: "<b>Jana musí přebudovat firmu pomocí Druckerových zdrojů + Galbraithových 4 faktorů a překonat imunitní reakci kultury.</b><br/><br/><b>Postup:</b><br/><br/>• <b>Drucker zdroje:</b> demografie (mladí 25-40 × staří) + změny v pohledu (udržitelnost, modulární řešení, online). Z toho vyjít — to jsou konkrétní inovační příležitosti.<br/><br/>• <b>Galbraith STRUKTURA:</b> ponechat provozní organizaci (tradiční bukové/dubové kuchyně pro stávající zákazníky) a paralelně postavit <b>inovativní organizaci</b> — oddělené R&D oddělení pro moderní modulární linii. Sama Jana jako leadership pro koordinaci obou.<br/><br/>• <b>Galbraith PROCESY:</b> spustit skupinové konzultace s mladými zákazníky (focus groups, prototypy testovat na nich), zavést <b>veletrh nápadů</b> pro truhláře (jednou za měsíc), založit <b>interní inovační fond</b> (1-2 % tržeb = 1,8-3,6 mil. Kč na pilotní projekty).<br/><br/>• <b>Galbraith ODMĚŇOVÁNÍ:</b> nejen plat — autonomie pro inovační projekty (vlastní rozpočet, vlastní rozhodování), uznání (interní cena za nejlepší inovaci), seberealizace (mise 'modernizujeme český nábytkářský trh'). Vyšší úrovně Maslowa.<br/><br/>• <b>Galbraith ZAMĚSTNANCI:</b> identifikovat <b>idea šampiony</b> mezi mladšími truhláři (kdo má nápady), dát jim <b>sponzora</b> (Jana nebo někdo ze seniorů), <b>lídra</b> R&D (případně externí najmout).<br/><br/>• <b>Kultura jako imunitní systém:</b> vědomě stavět <b>inovační kulturu</b> — leadership jako model role (Jana sama inovuje), zaměstnanci jako zdroje nápadů (ne 'lidský kapitál'), respekt + učení se z chyb, <b>svoboda inovačního uvažování</b> (psychological safety). Bez toho imunitní reakce zvítězí — Kodak scénář.<br/><br/>• <b>Procesní × funkční pohled:</b> pro modulární linii FUNKČNÍ (oddělené R&D, vlastní kultura a tempo). Pro kontinuální zlepšování tradiční výroby PROCESNÍ (truhláři přispívají nápady k provozu).<br/><br/><b>Pro komisi:</b> Klíč — <b>všech 7 Druckerových zdrojů</b> (vědět vše, použít 2-3 relevantní pro PS), <b>všechny 4 faktory Galbraitha</b> (STRUKTURA/PROCESY/ODMĚŇOVÁNÍ/ZAMĚSTNANCI), <b>inovační role</b> (šampioni/sponzoři/lídři), <b>imunitní reakce firmy</b>, rozdíl <b>inovační podnikání × inovativní organizace</b>. Anti-vzor: vyhlásit inovace a věřit, že stačí.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Inovace" subjectId="inov" number={2} title="Schumpeter, Drucker, inovační podnikání a inovativní organizace"
+      subtitle="Schumpeter (koncept ekon. inovace) + Drucker (7 zdrojů) + determinanty inovačního podnikání + Galbraith 4 faktory inovativní organizace + inovační role + kultura"
+      color={VSE.primary}
+      questionText="Schumpeter — koncept ekonomické inovace a kreativní destrukce. Drucker — 7 zdrojů inovace. Inovační podnikání a jeho determinanty (vhodný BM, kultura, motivace, styl řízení, organizace). Inovativní organizace dle Galbraitha (4 faktory). Inovační role (idea šampioni, sponzoři, lídři) a kultura."
+      sloz={3} roz={4} freq={5}
+      examStrategy={examStrategyInov2}
+      studySections={studySectionsInov2}
+      flashcards={flashcardsInov2}
+      quiz={quizInov2}
+      praxe={praxeInov2}
+      examQuestions={examQuestionsInov2}
+      podcast={podcastInov2}
+      caseStudy={caseStudyInov2}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   INOVACE 3 — Metody a techniky inovací (Lean Canvas, BMC, Gassmann)
+   ════════════════════════════════════════════════════════ */
+function OkruhInov3Panel() {
+  const studySectionsInov3 = [
+    { id: "co_je_bm", title: "Business Model — co to je a proč ho potřebujeme", subtitle: "Jak firma vytváří, dodává a získává hodnotu", color: VSE.primary, emoji: "construction",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Business Model (BM)</b> = popis toho, <b>jak firma vytváří, dodává a zachycuje hodnotu</b> — produktem nebo službou. Není to účetní výkaz; je to <b>logika fungování firmy</b>. Bez vědomého BM firma létá naslepo.
+        </Def>
+        <Tag color={VSE.primary}>K čemu BM slouží</Tag>
+        <Bullet items={[
+          "<b>Pro nový podnik (startup)</b> — strukturuje představu o tom, jak vůbec budeme vydělávat. Lean Canvas (viz dál) je etalon pro startupy.",
+          "<b>Pro existující firmu</b> — analyzuje, co funguje a co ne. Hledá inovační příležitosti (Drucker zdroje — viz Inov 2).",
+          "<b>Pro investora/banku</b> — rychlé pochopení byznysu na jednu A4 (klíčový artefakt pro pitch deck).",
+          "<b>Pro inovaci</b> — kde v řetězci hodnoty inovovat? Produkt? Zákazníky? Distribuci? Cenu?",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Inovace BM jako Schumpetrův 5. typ inovace</Tag>
+        <Bullet items={[
+          "Inovace <b>nemusí</b> být jen nový produkt. Schumpeter (viz Inov 1) řadí jako 5. typ <b>'novou organizaci v odvětví'</b> — to je inovace BM.",
+          "Etalony: <b>Uber</b> (taxi platforma), <b>Airbnb</b> (sdílené ubytování), <b>Spotify</b> (předplatné místo prodeje), <b>Tesla</b> (přímý prodej + OTA), <b>Nespresso</b> (kapslový BM, prodej spotřebitelům).",
+          "<b>Disruptivní inovace</b> (viz Inov 1) má skoro vždy nový BM — to je její esence.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "bmc", title: "Business Model Canvas — 9 bloků Osterwaldera", subtitle: "Universální šablona pro každou firmu", color: VSE.primary, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Business Model Canvas (BMC)</b> = strategická šablona od <b>Alexandera Osterwaldera</b> (2010). Devět bloků na jednu stránku — visual první nástroj pro popsání nebo redesign BM existující firmy. Cíl: na jeden A4 vidět celou firmu.
+        </Def>
+        <Tag color={VSE.primary}>9 bloků BMC — co každý znamená</Tag>
+        <Bullet items={[
+          "<b>1. KLÍČOVÉ SEGMENTY ZÁKAZNÍKŮ</b> (pravá strana) — pro koho vytváříme hodnotu? Kdo jsou naši nejdůležitější zákazníci? (B2B × B2C, niche × mass.)",
+          "<b>2. HODNOTOVÁ NABÍDKA (Value Proposition)</b> (střed) — jakou hodnotu pro zákazníka doručujeme? Jaký problém řešíme? Co je naše USP?",
+          "<b>3. KANÁLY</b> (pravá) — jak se k zákazníkům dostáváme? Online? Retail? Distributoři? Sales rep?",
+          "<b>4. VZTAHY SE ZÁKAZNÍKY</b> (pravá) — jaký vztah budujeme? Osobní × samoobslužný × komunitní × automatizovaný?",
+          "<b>5. ZDROJE PŘÍJMŮ (Revenue Streams)</b> (dole pravá) — jak vyděláváme? Jednorázový prodej? Předplatné? Licence? Reklama?",
+          "<b>6. KLÍČOVÉ ZDROJE</b> (levá) — co potřebujeme k fungování? Lidi? Technologii? Značku? Kapitál?",
+          "<b>7. KLÍČOVÉ ČINNOSTI</b> (levá) — co děláme každý den? Výroba? Vývoj? Servis? Logistika?",
+          "<b>8. KLÍČOVÁ PARTNERSTVÍ</b> (levá) — kdo nám pomáhá? Dodavatelé? Aliance? Joint ventures?",
+          "<b>9. STRUKTURA NÁKLADŮ</b> (dole levá) — co stojí nejvíc? Fixní × variabilní? Cost-driven × value-driven?",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Jak BMC číst a vyplňovat</Tag>
+        <Bullet items={[
+          "<b>Pravá strana = trh, hodnota, peníze IN</b> — emocionální, zákaznický pohled.",
+          "<b>Levá strana = infrastruktura, efektivita, peníze OUT</b> — operativní, interní pohled.",
+          "<b>Začínej zprava</b> — kdo je zákazník + co mu nabízíme. Pak doplň kanály a vztahy. Až nakonec řeš, jak to interně postavit.",
+          "<b>Pravá strana zaměřená na trh, levá na produkt/infrastrukturu.</b>",
+        ]} color={VSE.warning} />
+        <ResponsiveSVG viewBox="0 0 760 380" maxHeight={400}>
+          <text x="380" y="20" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Business Model Canvas - 9 bloku (Osterwalder)</text>
+          <text x="380" y="36" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)" fontStyle="italic">leva = infrastruktura (OUT) | stred = hodnota | prava = trh, penize IN</text>
+          {/* Row 1 — top 7 blocks */}
+          {/* 8. Klíčová partnerství (left) */}
+          <rect x="20" y="50" width="140" height="240" rx="8" fill={VSE.fph} opacity="0.18" stroke={VSE.fph} strokeWidth="1.5"/>
+          <text x="90" y="68" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="800" fill={VSE.fph}>8</text>
+          <text x="90" y="86" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.fph}>KLICOVA</text>
+          <text x="90" y="100" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.fph}>PARTNERSTVI</text>
+          <text x="90" y="125" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">kdo nam pomaha</text>
+          <text x="90" y="140" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">dodavatele,</text>
+          <text x="90" y="153" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">aliance, JV</text>
+          {/* 7. Klíčové činnosti */}
+          <rect x="170" y="50" width="140" height="115" rx="8" fill={VSE.warning} opacity="0.18" stroke={VSE.warning} strokeWidth="1.5"/>
+          <text x="240" y="68" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="800" fill={VSE.warning}>7</text>
+          <text x="240" y="86" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.warning}>KLICOVE</text>
+          <text x="240" y="100" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.warning}>CINNOSTI</text>
+          <text x="240" y="125" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">co delame</text>
+          <text x="240" y="140" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">vyroba, vyvoj</text>
+          {/* 6. Klíčové zdroje */}
+          <rect x="170" y="175" width="140" height="115" rx="8" fill={VSE.fmv} opacity="0.18" stroke={VSE.fmv} strokeWidth="1.5"/>
+          <text x="240" y="193" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="800" fill={VSE.fmv}>6</text>
+          <text x="240" y="211" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.fmv}>KLICOVE</text>
+          <text x="240" y="225" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.fmv}>ZDROJE</text>
+          <text x="240" y="250" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">co potrebujeme</text>
+          <text x="240" y="265" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">lidi, tech, brand</text>
+          {/* 2. Hodnotová nabídka (střed) */}
+          <rect x="320" y="50" width="140" height="240" rx="8" fill={VSE.primary} opacity="0.22" stroke={VSE.primary} strokeWidth="2"/>
+          <text x="390" y="68" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="800" fill={VSE.primary}>2</text>
+          <text x="390" y="86" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.primary}>HODNOTOVA</text>
+          <text x="390" y="100" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.primary}>NABIDKA</text>
+          <text x="390" y="115" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontStyle="italic" fill={VSE.primary}>(Value Prop)</text>
+          <text x="390" y="145" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">jakou hodnotu</text>
+          <text x="390" y="160" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">dorucujeme</text>
+          <text x="390" y="180" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">jaky problem</text>
+          <text x="390" y="195" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">resime</text>
+          {/* 4. Vztahy se zákazníky */}
+          <rect x="470" y="50" width="140" height="115" rx="8" fill={VSE.success} opacity="0.18" stroke={VSE.success} strokeWidth="1.5"/>
+          <text x="540" y="68" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="800" fill={VSE.success}>4</text>
+          <text x="540" y="86" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.success}>VZTAHY SE</text>
+          <text x="540" y="100" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.success}>ZAKAZNIKY</text>
+          <text x="540" y="125" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">jaky vztah</text>
+          <text x="540" y="140" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">budujeme</text>
+          {/* 3. Kanály */}
+          <rect x="470" y="175" width="140" height="115" rx="8" fill={VSE.danger} opacity="0.18" stroke={VSE.danger} strokeWidth="1.5"/>
+          <text x="540" y="193" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="800" fill={VSE.danger}>3</text>
+          <text x="540" y="211" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.danger}>KANALY</text>
+          <text x="540" y="236" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">jak se k nim</text>
+          <text x="540" y="251" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">dostaneme</text>
+          {/* 1. Segmenty zákazníků (right) */}
+          <rect x="620" y="50" width="120" height="240" rx="8" fill={VSE.primary} opacity="0.18" stroke={VSE.primary} strokeWidth="1.5"/>
+          <text x="680" y="68" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="800" fill={VSE.primary}>1</text>
+          <text x="680" y="86" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.primary}>SEGMENTY</text>
+          <text x="680" y="100" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.primary}>ZAKAZNIKU</text>
+          <text x="680" y="125" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">pro koho</text>
+          <text x="680" y="140" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">B2B / B2C</text>
+          {/* Row 2: 9 + 5 */}
+          <rect x="20" y="300" width="370" height="70" rx="8" fill={VSE.danger} opacity="0.15" stroke={VSE.danger} strokeWidth="1.5"/>
+          <text x="205" y="318" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="800" fill={VSE.danger}>9</text>
+          <text x="205" y="336" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.danger}>STRUKTURA NAKLADU (penize OUT)</text>
+          <text x="205" y="358" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">co stoji nejvic - fixni x variabilni</text>
+          <rect x="400" y="300" width="340" height="70" rx="8" fill={VSE.success} opacity="0.15" stroke={VSE.success} strokeWidth="1.5"/>
+          <text x="570" y="318" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontWeight="800" fill={VSE.success}>5</text>
+          <text x="570" y="336" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.success}>ZDROJE PRIJMU (penize IN)</text>
+          <text x="570" y="358" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">jak vydelavame - jednorazovy x predplatne</text>
+        </ResponsiveSVG>
+      </div>) },
+
+    { id: "lean_canvas", title: "Lean Canvas — adaptace pro startupy", subtitle: "Ash Maurya 2010 — důraz na problém a riziko", color: VSE.primary, emoji: "bolt",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Lean Canvas</b> = adaptace BMC pro <b>startupy a nové podnikatelské nápady</b>, kterou navrhl <b>Ash Maurya</b>. Místo „infrastrukturních" bloků (klíčová partnerství, činnosti, zdroje) řeší <b>problém, řešení, klíčové metriky, nefér výhodu</b> — co startup potřebuje validovat dřív, než scaluje.
+        </Def>
+        <Tag color={VSE.primary}>9 bloků Lean Canvas (rozdíly oproti BMC zvýrazněné)</Tag>
+        <Bullet items={[
+          "<b>1. PROBLÉM</b> ⭐ — top 3 problémy zákazníka, které řešíme. <i>(BMC: klíčová partnerství)</i>",
+          "<b>2. ŘEŠENÍ</b> ⭐ — top 3 vlastnosti, jak problém řešíme. <i>(BMC: klíčové činnosti)</i>",
+          "<b>3. KLÍČOVÉ METRIKY</b> ⭐ — KPI pro úspěch (AARRR: Acquisition, Activation, Retention, Revenue, Referral). <i>(BMC: klíčové zdroje)</i>",
+          "<b>4. UNIQUE VALUE PROPOSITION (UVP)</b> — jasná, přesvědčivá zpráva proč si nás zákazník vybere.",
+          "<b>5. NEFÉR VÝHODA (Unfair Advantage)</b> ⭐ — to, co nelze snadno zkopírovat (patent, exkluzivní deal, network effects, znalost trhu).",
+          "<b>6. KANÁLY</b> — cesta k zákazníkovi (stejně jako BMC).",
+          "<b>7. ZÁKAZNICKÉ SEGMENTY</b> — pro koho děláme (s důrazem na <b>early adopters</b> = lead users, viz Inov 4 Design Thinking).",
+          "<b>8. STRUKTURA NÁKLADŮ</b> — co stojí spuštění (CAC, server, dev, marketing).",
+          "<b>9. ZDROJE PŘÍJMŮ</b> — jak vyděláme (LTV, cenotvorba, pricing model).",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Klíčové vlastnosti Lean Canvas</Tag>
+        <Bullet items={[
+          "<b>Pomůcka pro podnikatelům a start-upům</b> — orientovaný na <b>problém a řešení</b>, ne na produkt.",
+          "Cíl: <b>jedna A4, jednoduše prezentovatelná, kontrolovatelná, odhalení rizik, zpětná kontrola</b>.",
+          "<b>Selhává, pokud navrhované řešení je nereálné</b> — Lean Canvas tě donutí to přiznat brzy.",
+          "Pravá strana zaměřená na trh, levá na produkt (stejně jako BMC).",
+          "Identifikuje <b>nejrizikovější předpoklady</b> a postupně je validuje (build-measure-learn — viz Inov 4).",
+        ]} color={VSE.warning} />
+        <ResponsiveSVG viewBox="0 0 720 320" maxHeight={340}>
+          <text x="360" y="20" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">4 rozdilne bloky - Lean Canvas vs Business Model Canvas</text>
+          <text x="360" y="36" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)" fontStyle="italic">cervene bloky vlevo (BMC) nahrazeny modrymi vpravo (Lean Canvas)</text>
+          {/* Headers */}
+          <text x="180" y="62" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill={VSE.danger}>BMC (Osterwalder)</text>
+          <text x="180" y="78" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fontStyle="italic" fill="var(--text-muted)">etablovana firma</text>
+          <text x="540" y="62" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill={VSE.primary}>Lean Canvas (Maurya)</text>
+          <text x="540" y="78" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fontStyle="italic" fill="var(--text-muted)">startup, nejistota</text>
+          {/* 3 pairs of blocks side-by-side + 1 new */}
+          {[
+            {y: 100, bmcLabel: "Klicova partnerstvi", bmcSub: "kdo nam pomaha", leanLabel: "PROBLEM", leanSub: "top 3 problemy zakaznika"},
+            {y: 152, bmcLabel: "Klicove cinnosti", bmcSub: "co delame", leanLabel: "RESENI", leanSub: "top 3 vlastnosti reseni"},
+            {y: 204, bmcLabel: "Klicove zdroje", bmcSub: "co potrebujeme", leanLabel: "KLICOVE METRIKY", leanSub: "AARRR, KPI"},
+          ].map((pair, i) => (
+            <g key={i}>
+              {/* BMC left */}
+              <rect x="40" y={pair.y} width="280" height="42" rx="6" fill={VSE.danger} opacity="0.15" stroke={VSE.danger} strokeWidth="1.2"/>
+              <text x="180" y={pair.y + 18} textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.danger}>{pair.bmcLabel}</text>
+              <text x="180" y={pair.y + 32} textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">{pair.bmcSub}</text>
+              {/* arrow */}
+              <path d={`M 330 ${pair.y + 21} L 390 ${pair.y + 21}`} stroke="var(--text-muted)" strokeWidth="1.8" markerEnd="url(#arrLC)"/>
+              {/* Lean right */}
+              <rect x="400" y={pair.y} width="280" height="42" rx="6" fill={VSE.primary} opacity="0.18" stroke={VSE.primary} strokeWidth="1.5"/>
+              <text x="540" y={pair.y + 18} textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.primary}>{pair.leanLabel}</text>
+              <text x="540" y={pair.y + 32} textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">{pair.leanSub}</text>
+            </g>
+          ))}
+          {/* New: NEFER VYHODA (only in Lean) */}
+          <text x="180" y={266 + 18} textAnchor="middle" fontFamily={fontSans} fontSize="10" fontStyle="italic" fill="var(--text-muted)">(neni v BMC)</text>
+          <path d="M 330 277 L 390 277" stroke="var(--text-muted)" strokeWidth="1.8" strokeDasharray="3 2" markerEnd="url(#arrLC)"/>
+          <rect x="400" y="256" width="280" height="42" rx="6" fill={VSE.warning} opacity="0.18" stroke={VSE.warning} strokeWidth="2"/>
+          <text x="540" y="274" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.warning}>NEFER VYHODA (novy blok!)</text>
+          <text x="540" y="288" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">co konkurence neumi zkopirovat</text>
+          <defs>
+            <marker id="arrLC" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="var(--text-muted)"/>
+            </marker>
+          </defs>
+        </ResponsiveSVG>
+        <Tag color={VSE.fph}>Lean Canvas × BMC — kdy co</Tag>
+        <Bullet items={[
+          "<b>Lean Canvas:</b> startup, nový nápad, vysoká nejistota, hledáme problém-řešení fit. Klíčové: PROBLÉM + ŘEŠENÍ + METRIKY + NEFÉR VÝHODA.",
+          "<b>BMC:</b> existující firma s ověřeným BM, hledáme optimalizaci nebo expanzi. Klíčové: PARTNERSTVÍ + ČINNOSTI + ZDROJE.",
+          "<b>Pravidlo:</b> Startup → Lean Canvas. Etablovaná firma → BMC. Pro radikální inovaci v etablované firmě (nový BM) → znovu Lean Canvas.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Tažené: Lean Canvas + Business Model Canvas (11× komise — nejvyšší frekvence!) — Nový+Svobodová+Kolouchová 2025, Vrbová+Tahal+Svobodová, Tahal+Kuděj+Nový, Bočková+Nový+Kolouchová 2026, Stříteský+Lorencová+Pernica 2026, Kupec+Mládková+Kolouchová 2026, Heřman+Schovancová+Vávra 2026"
+          what="Komise <b>vždy chce oba</b> a rozdíl. Klíč: BMC = univerzální, Lean Canvas = startup-focused (problém/řešení). Vědět všechny 9 bloků každého. Hořejší nápověda: <b>4 rozdílné bloky v Lean Canvas — PROBLÉM, ŘEŠENÍ, KLÍČOVÉ METRIKY, NEFÉR VÝHODA</b> (nahrazují partnerství, činnosti, zdroje z BMC)."
+        />
+      </div>) },
+
+    { id: "gassmann", title: "Gassmann — Business Model Navigator (4 dimenze BM)", subtitle: "Kdo / Co / Jak / Proč — analýza a inovace BM", color: VSE.primary, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Oliver Gassmann</b> (Univerzita St. Gallen) vyvinul <b>Business Model Navigator</b> — nástroj pro <b>systematickou inovaci business modelu</b>. Definoval <b>4 klíčové dimenze BM</b> a katalog <b>55 vzorců (patternů)</b> úspěšných BM, podle kterých lze odvodit nové.
+        </Def>
+        <Tag color={VSE.primary}>4 dimenze BM podle Gassmanna</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "1. KDO — zákazníci", d: "<b>Kdo je náš zákazník?</b> Komu prodáváme? Jaké segmenty? Klíčová otázka — bez správné definice 'kdo' nedává smysl ani 'co'." },
+            { c: VSE.warning, t: "2. CO — hodnotová nabídka", d: "<b>Co zákazníkovi nabízíme za hodnotu?</b> Jaký problém řešíme? Co prodáváme — produkt, službu, zážitek, kombinaci?" },
+            { c: VSE.fmv, t: "3. JAK — řetězec hodnot", d: "<b>Jak vytváříme hodnotu?</b> Jak ji produkujeme, dodáváme, prodáváme? Klíčové procesy, zdroje, partnerství." },
+            { c: VSE.success, t: "4. PROČ — výnosový model", d: "<b>Proč je obchodní model životaschopný?</b> Jak vydělává? Jaké jsou výnosy minus náklady? Cena × marže × objem." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Pravidlo Gassmanna: <b>změna alespoň 2 ze 4 dimenzí = nový BM</b></Tag>
+        <Bullet items={[
+          "Pokud firma změní <b>jen 1 dimenzi</b> (např. jen 'co' — vylepší produkt) — je to <b>inkrementální inovace produktu</b>, ne BM.",
+          "Pokud firma změní <b>2 nebo více dimenzí najednou</b> — je to <b>inovace BM</b> (radikální/disruptivní podle Inov 1).",
+          "<b>Příklad:</b> Nespresso — změnil COJAK (kapsle místo zrn) + JAK (přímý prodej + Nespresso Club) + KDO (domácí spotřebitelé místo profi). Tři dimenze = jednoznačně nový BM.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Business Model Navigator — postup</Tag>
+        <Bullet items={[
+          "<b>1. Iniciace</b> — analyzuj současný BM přes 4 dimenze (Kdo/Co/Jak/Proč).",
+          "<b>2. Generování nápadů</b> — projdi 55 patternů (např. Razor and Blade, Subscription, Freemium, Long Tail, Crowdsourcing, Pay-per-Use). Použij analogie z jiných odvětví.",
+          "<b>3. Integrace</b> — zkombinuj pattern s tvým byznysem. Otestuj na zákaznících.",
+          "<b>4. Implementace</b> — naroluj nový BM. Sleduj metriky.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Tažené: Inovace BM podle Gassmanna (Mikovcová+Viktora+Kolouchová 2025, Pichanič+Kuděj+Zamazalová 2025, Kupec+Mládková+Kolouchová 2026)"
+          what="Komise chce: <b>4 dimenze (KDO/CO/JAK/PROČ)</b> + <b>pravidlo 'změna 2+ dimenzí = nový BM'</b> + příklad (Nespresso, Spotify, Tesla, Uber). Gassmann je často spojený s Lean Canvas / BMC — komise může chtít porovnání všech tří nástrojů."
+        />
+      </div>) },
+
+    { id: "kreativni_techniky", title: "Kreativní techniky pro generování nápadů", subtitle: "Brainstorming, SCAMPER, Walt Disney, 5x Proč", color: VSE.primary, emoji: "lightbulb",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Vedle Lean Canvas a BMC patří do <b>metod a technik inovací</b> i kreativní techniky pro <b>generování nápadů</b>. Komise se ráda ptá na konkrétní techniky — minimálně 5-6 byste měli umět vyjmenovat.
+        </Def>
+        <Tag color={VSE.primary}>Brainstormingové techniky</Tag>
+        <Bullet items={[
+          "<b>Brainstorming</b> (Osborn 1953) — skupinové generování nápadů, žádná kritika ve fázi generování, kvantita před kvalitou, stavění na nápadech ostatních.",
+          "<b>Brainwriting</b> — písemná varianta brainstormingu (každý napíše nápady na papír, papíry kolují). Vhodné pro introvertní týmy, eliminuje dominanci jedince.",
+          "<b>Metoda 6-3-5</b> — strukturovaná varianta brainwriting: <b>6 lidí, 3 nápady, 5 minut</b> na kolečku. Za 30 minut máš 108 nápadů. Pichaničovo oblíbené.",
+          "<b>Metoda 666</b> — 6 nápadů, 6 minut, 6 účastníků. Podobné jako 6-3-5.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>SCAMPER — 7 technik vymýšlení nápadů</Tag>
+        <Bullet items={[
+          "<b>SCAMPER</b> je akronym 7 technik, jak modifikovat existující produkt/proces na nový:",
+          "<b>S</b>ubstitute (nahradit) — co můžu nahradit? Materiál? Postup? Lidi? <i>(Bílé plastové kola místo kovových)</i>",
+          "<b>C</b>ombine (zkombinovat) — co můžu spojit? <i>(Multifunkční nářadí, smartphone = telefon + kamera + počítač)</i>",
+          "<b>A</b>dapt (přizpůsobit) — co můžu adaptovat z jiného odvětví? <i>(Auta na auto vodítka, šetrné na vodu z umyvadla)</i>",
+          "<b>M</b>odify (upravit) — co můžu zvětšit/zmenšit? <i>(Mini SUV, XL Coca-Cola)</i>",
+          "<b>P</b>ut to another use (jiné použití) — kde jinde to můžu použít? <i>(Skútr → poštovní rozvážka, navigace na kolo)</i>",
+          "<b>E</b>liminate (odstranit) — co můžu odstranit? <i>(Samoobslužné pokladny, auta bez klíče)</i>",
+          "<b>R</b>everse (otočit) — co můžu obrátit? <i>(Pizza naruby, vegetable burger)</i>",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Další klíčové techniky</Tag>
+        <Bullet items={[
+          "<b>Walt Disney metoda</b> — <b>3 úhly pohledu</b>: <b>Snílek</b> (vize bez limitů), <b>Realista</b> (jak to udělat), <b>Kritik</b> (co může selhat). Postupně procházej tři role, různá místa v místnosti.",
+          "<b>5x Proč (5 Whys)</b> — Toyota technika. Neustále se ptáš <b>'proč?'</b>, dostat se do hloubky problému (kořenová příčina). Po 5 'proč' obvykle najdeš skutečnou příčinu.",
+          "<b>Buy a feature</b> — řízení vlastností produktu dle ocenění zákazníkem. Zákazníci dostanou virtuální peníze a kupují si vlastnosti — co je pro ně důležité.",
+          "<b>Speedboat</b> (metoda rychlého člunu) — diskuze, co zákazníkům brání plout rychleji. Loď = produkt, kotvy = problémy. Seřadit kotvy podle důležitosti.",
+          "<b>Storyboard</b> — 'komiks', průchod zákazníka službou. Vizualizace customer journey.",
+          "<b>Produktový box</b> — zákazník kreslí a popisuje svůj <b>dream produkt</b> jako kdyby ho viděl na regále.",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>Modely šíření inovací (Difuze)</Tag>
+        <Bullet items={[
+          "<b>Poptávkové modely</b> — jak se inovace šíří mezi zákazníky:",
+          "<b>Epidemický model</b> — šíření Word of Mouth (WOM) mezi lidmi, jako epidemie.",
+          "<b>Bassův model</b> — kombinace masmédií (reklama) a WOM. Dělí lidi na <b>inovátory</b> (kupují první) a <b>imitátory</b> (kopírují).",
+          "<b>Nabídkové modely</b> — strategie expanze, vhodnosti, užitkovosti, komunikace.",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na případovku — Lean Canvas / BMC / Gassmann + techniky", subtitle: "Postup + co komise oceňuje × čemu se vyhnout", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Komise se ráda ptá <b>11× ze 45 inovačních otázek</b> právě na tyto metody. Tady je postup, jak na ně přesvědčivě.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Rozhodni: <b>existující firma s ověřeným BM</b> (→ BMC) nebo <b>startup/nový BM</b> (→ Lean Canvas)?",
+          "<b>2.</b> U <b>BMC</b> — vyplň všech 9 bloků: zákazníci → hodnotová nabídka → kanály → vztahy → příjmy → zdroje → činnosti → partnerství → náklady.",
+          "<b>3.</b> U <b>Lean Canvas</b> — důraz na <b>PROBLÉM (top 3) → ŘEŠENÍ (top 3) → KLÍČOVÉ METRIKY → NEFÉR VÝHODA</b>. Tyhle 4 bloky odlišují Lean Canvas od BMC.",
+          "<b>4.</b> Pro <b>inovaci BM</b> aplikuj <b>Gassmanna</b> — analyzuj současný BM přes 4 dimenze (KDO/CO/JAK/PROČ) a změň alespoň 2.",
+          "<b>5.</b> Pro <b>generování nápadů</b> doporuč konkrétní techniky — SCAMPER (modifikace existujícího), Walt Disney (3 perspektivy), 5x Proč (kořenová příčina).",
+          "<b>6.</b> Pro <b>šíření inovace</b> — Bass model (inovátoři × imitátoři), epidemický model.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Umět vyjmenovat <b>všech 9 bloků BMC + všech 9 Lean Canvas</b> + 4 dimenze Gassmanna.",
+          "<b>✅ Dobře:</b> Vědět <b>4 rozdílné bloky Lean Canvas oproti BMC</b> (problém/řešení/metriky/nefér výhoda nahrazují partnerství/činnosti/zdroje).",
+          "<b>✅ Dobře:</b> Aplikovat na konkrétní firmu z PS s konkrétními příklady v každém bloku.",
+          "<b>✅ Dobře:</b> Vědět <b>Gassmannovo pravidlo 'změna 2+ dimenzí = nový BM'</b> + příklad (Nespresso).",
+          "<b>❌ Špatně:</b> Zaměnit Lean Canvas a BMC — to je klasický chytač.",
+          "<b>❌ Špatně:</b> Vyjmenovat jen 5-6 bloků a doufat, že to projde. Komise často počítá.",
+          "<b>❌ Špatně:</b> Tvrdit, že 'inovace BM = vylepšení produktu' — to je inkrementální inovace, ne BM (Gassmannovo pravidlo).",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsInov3 = [
+    { term: "Business Model (BM)", def: "Popis toho, jak firma vytváří, dodává a zachycuje hodnotu. Logika fungování firmy. Jednou stránkou popsat celou firmu.", tag: "BM" },
+    { term: "Business Model Canvas (BMC)", def: "Strategická šablona od Osterwaldera (2010). 9 bloků na jednu stránku pro popis nebo redesign existujícího BM.", tag: "BMC" },
+    { term: "9 bloků BMC", def: "1) Segmenty zákazníků, 2) Hodnotová nabídka, 3) Kanály, 4) Vztahy se zákazníky, 5) Zdroje příjmů, 6) Klíčové zdroje, 7) Klíčové činnosti, 8) Klíčová partnerství, 9) Struktura nákladů.", tag: "BMC" },
+    { term: "Pravá × levá strana BMC", def: "Pravá = trh, hodnota, peníze IN (zákazníci, kanály, vztahy, příjmy). Levá = infrastruktura, peníze OUT (zdroje, činnosti, partnerství, náklady).", tag: "BMC" },
+    { term: "Lean Canvas — kdo a proč", def: "Ash Maurya (2010), adaptace BMC pro startupy. Důraz na PROBLÉM, ŘEŠENÍ, KLÍČOVÉ METRIKY, NEFÉR VÝHODU — co startup musí validovat.", tag: "LEAN" },
+    { term: "Lean Canvas — 4 rozdílné bloky vs BMC", def: "PROBLÉM (místo partnerství), ŘEŠENÍ (místo činností), KLÍČOVÉ METRIKY (místo zdrojů), NEFÉR VÝHODA (nová položka).", tag: "LEAN" },
+    { term: "9 bloků Lean Canvas", def: "1) Problém, 2) Řešení, 3) Klíčové metriky, 4) UVP, 5) Nefér výhoda, 6) Kanály, 7) Segmenty zákazníků, 8) Struktura nákladů, 9) Zdroje příjmů.", tag: "LEAN" },
+    { term: "Lean Canvas × BMC — kdy co", def: "Startup s vysokou nejistotou → Lean Canvas (validace problém-řešení). Etablovaná firma → BMC (optimalizace, expanze). Pro nový BM v etabl. firmě → znovu Lean Canvas.", tag: "LEAN" },
+    { term: "Nefér výhoda (Unfair Advantage)", def: "To, co konkurence nemůže snadno zkopírovat: patent, exkluzivní deal, network effects, znalost trhu, brand, talent. Klíčový blok v Lean Canvas.", tag: "LEAN" },
+    { term: "Unique Value Proposition (UVP)", def: "Jasná, přesvědčivá zpráva, proč si nás zákazník vybere. 1-2 věty na webu, které okamžitě vysvětlují hodnotu. Klíčové v Lean Canvas i BMC.", tag: "LEAN" },
+    { term: "Gassmann — kdo", def: "Oliver Gassmann (Univerzita St. Gallen). Vyvinul Business Model Navigator pro systematickou inovaci BM. Definoval 4 dimenze BM + 55 patternů.", tag: "GASSMANN" },
+    { term: "4 dimenze BM (Gassmann)", def: "1) KDO (zákazníci), 2) CO (hodnotová nabídka), 3) JAK (řetězec hodnot), 4) PROČ (výnosový model).", tag: "GASSMANN" },
+    { term: "Gassmannovo pravidlo 2+", def: "Změna alespoň 2 ze 4 dimenzí = nový business model. Jedna dimenze = inkrementální inovace, ne BM.", tag: "GASSMANN" },
+    { term: "Business Model Navigator", def: "Postup: 1) Iniciace (analýza současného BM přes 4 dimenze), 2) Generování (55 patternů), 3) Integrace (kombinace), 4) Implementace.", tag: "GASSMANN" },
+    { term: "Nespresso jako Gassmann příklad", def: "Změnil CO (kapsle místo zrn) + JAK (přímý prodej + Nespresso Club) + KDO (domácí spotřebitelé). 3 dimenze = jednoznačně nový BM.", tag: "GASSMANN" },
+    { term: "Brainstorming", def: "Osborn 1953. Skupinové generování nápadů, žádná kritika ve fázi generování, kvantita před kvalitou, stavění na nápadech ostatních.", tag: "TECHNIKY" },
+    { term: "Brainwriting + Metoda 6-3-5", def: "Brainwriting = písemný brainstorming (papíry kolují). 6-3-5 = 6 lidí, 3 nápady, 5 minut, 6 kolečků → 108 nápadů.", tag: "TECHNIKY" },
+    { term: "SCAMPER", def: "7 technik modifikace existujícího: Substitute, Combine, Adapt, Modify, Put to another use, Eliminate, Reverse.", tag: "TECHNIKY" },
+    { term: "Walt Disney metoda", def: "3 úhly pohledu — Snílek (vize), Realista (jak), Kritik (co selže). Postupně procházet 3 role, různá místa v místnosti.", tag: "TECHNIKY" },
+    { term: "5x Proč (5 Whys)", def: "Toyota technika. Neustále se ptáš 'proč?', dostat se ke kořenové příčině. Po 5 'proč' obvykle najdeš skutečnou příčinu.", tag: "TECHNIKY" },
+    { term: "Bassův model šíření inovace", def: "Kombinace masmédií (reklama) a WOM. Dělí trh na inovátory (kupují první) a imitátory (kopírují). Klíčový model difuze inovací.", tag: "DIFUZE" },
+    { term: "Epidemický model šíření", def: "Šíření Word of Mouth (WOM) mezi lidmi, jako epidemie. Bez masmédií, jen mezi vrstevníky.", tag: "DIFUZE" },
+  ];
+
+  const quizInov3 = [
+    { q: "Co je Business Model?", opts: ["Účetní výkaz", "Popis toho, jak firma vytváří, dodává a zachycuje hodnotu — logika fungování", "Marketingový plán", "Organizační struktura"], correct: 1 },
+    { q: "Kdo vytvořil Business Model Canvas?", opts: ["Drucker", "Alexander Osterwalder (2010)", "Schumpeter", "Porter"], correct: 1 },
+    { q: "Kolik bloků má Business Model Canvas?", opts: ["4", "7", "9 (zákazníci, hodnota, kanály, vztahy, příjmy, zdroje, činnosti, partnerství, náklady)", "12"], correct: 2 },
+    { q: "Co je 'pravá strana' BMC?", opts: ["Marketingová", "Trh, hodnota, peníze IN — zákazníci, kanály, vztahy, příjmy", "Levá strana", "Manažerská"], correct: 1 },
+    { q: "Kdo vytvořil Lean Canvas?", opts: ["Osterwalder", "Ash Maurya (2010) — adaptace BMC pro startupy", "Gassmann", "Schumpeter"], correct: 1 },
+    { q: "Které 4 bloky Lean Canvas se liší od BMC?", opts: ["Zákazníci, kanály, vztahy, příjmy", "PROBLÉM, ŘEŠENÍ, KLÍČOVÉ METRIKY, NEFÉR VÝHODA (místo partnerství, činností, zdrojů + nový blok)", "Žádné, jsou stejné", "Všechny"], correct: 1 },
+    { q: "Co je 'nefér výhoda' v Lean Canvas?", opts: ["Cena", "To, co konkurence nemůže snadno zkopírovat — patent, exkluzivita, network effects", "Reklama", "Slevy"], correct: 1 },
+    { q: "Kdy použít Lean Canvas místo BMC?", opts: ["Vždy", "Startup s vysokou nejistotou, validace problém-řešení; nebo nový BM v etabl. firmě", "Pro účetnictví", "Nikdy"], correct: 1 },
+    { q: "Kdo definoval 4 dimenze BM?", opts: ["Osterwalder", "Oliver Gassmann (Univerzita St. Gallen) — Business Model Navigator", "Maurya", "Drucker"], correct: 1 },
+    { q: "Jaké jsou 4 dimenze BM podle Gassmanna?", opts: ["Strategie, struktura, kultura, lidi", "KDO (zákazníci), CO (hodnotová nabídka), JAK (řetězec hodnot), PROČ (výnosový model)", "Plánování, řízení, kontrola, motivace", "Výroba, marketing, finance, IT"], correct: 1 },
+    { q: "Gassmannovo pravidlo nového BM?", opts: ["Změna 1 dimenze stačí", "Změna alespoň 2 ze 4 dimenzí = nový BM. Jen 1 = inkrementální inovace produktu", "Změna všech 4", "Není pravidlo"], correct: 1 },
+    { q: "Která firma je Gassmann etalon (3 dimenze)?", opts: ["McDonald", "Nespresso — změnil CO (kapsle), JAK (přímý prodej), KDO (domácí)", "Walmart", "IBM"], correct: 1 },
+    { q: "Co znamená SCAMPER?", opts: ["Skupina manažerů", "7 technik modifikace: Substitute, Combine, Adapt, Modify, Put to another use, Eliminate, Reverse", "Cyklus rozhodování", "Audit"], correct: 1 },
+    { q: "Co je Walt Disney metoda?", opts: ["Dětský brainstorming", "3 úhly pohledu — Snílek (vize), Realista (jak), Kritik (co selže)", "Filmová produkce", "Marketingová kampaň"], correct: 1 },
+    { q: "Co je '5x Proč'?", opts: ["Reklamní slogan", "Toyota technika — neustále se ptáš 'proč?' do kořenové příčiny", "Auditní postup", "Statistický test"], correct: 1 },
+    { q: "Co je Bassův model?", opts: ["Účetní model", "Model šíření inovací — kombinace masmédií (reklama) a WOM, inovátoři × imitátoři", "Strategie", "Cenotvorba"], correct: 1 },
+  ];
+
+  const praxeInov3 = {
+    caseStudy: {
+      company: "Nespresso — etalon Gassmanna a kombinace všech metod",
+      subtitle: "Jak Nestlé vytvořil úplně nový BM přes 3 dimenze Gassmanna",
+      content: (<>
+        Nespresso je <b>učebnicový příklad inovace BM podle Gassmanna</b>. Nestlé vzal komoditu (káva v zrnech) a postavil okolo ní úplně nový business model. Změnil 3 ze 4 dimenzí.<br/><br/>
+        ☕ ANALÝZA SOUČASNÉHO BM KÁVY (PŘED NESPRESSO):<br/><br/>
+        <b>KDO:</b> kavárny, restaurace, supermarkety (B2B + B2C masová káva).<br/>
+        <b>CO:</b> káva v zrnech nebo mletá, různé značky a typy.<br/>
+        <b>JAK:</b> velký retail (Lidl, Tesco), velkoobchod, distributoři.<br/>
+        <b>PROČ:</b> nízká marže, komoditní byznys, konkurence na ceně.<br/><br/>
+        🔄 NESPRESSO BM — ZMĚNIL 3 ZE 4 DIMENZÍ:<br/><br/>
+        <b>KDO ✓ ZMĚNĚNO:</b> domácí prémioví spotřebitelé (cílí na lidi, kteří chtějí kvalitu kávárny doma).<br/>
+        <b>CO ✓ ZMĚNĚNO:</b> kapsle (uzavřený systém) + design Nespresso stroje. Není to káva — je to zážitek.<br/>
+        <b>JAK ✓ ZMĚNĚNO:</b> přímý prodej přes Nespresso Boutiques + Nespresso Club (predplatné kapslí přes web/app). Žádný retail.<br/>
+        <b>PROČ ✗ stejné:</b> stále prodej fyzického produktu (kapsle), ale s mnohem vyšší marží než káva v zrnech.<br/><br/>
+        💰 BUSINESS MODEL CANVAS NESPRESSA:<br/><br/>
+        <b>Segmenty:</b> prémioví domácí spotřebitelé, kanceláře. <b>Hodnotová nabídka:</b> kavárenský zážitek doma + design + pohodlí. <b>Kanály:</b> Boutiques (fyzické butiky), web/app, Nespresso Club. <b>Vztahy:</b> Club model (loajalita, expertise). <b>Příjmy:</b> opakovaný prodej kapslí (razor + blade model). <b>Klíčové zdroje:</b> patent na kapsli (původně), brand. <b>Klíčové činnosti:</b> výroba kapslí, Boutique marketing. <b>Partnerství:</b> kávovary (DeLonghi, Krups). <b>Náklady:</b> marketing (George Clooney!), Boutique síť.<br/><br/>
+        🎯 PROČ TO FUNGOVALO:<br/><br/>
+        <b>Razor and Blade pattern</b> (jeden z 55 Gassmannových patternů) — prodáš stroj levně, vyděláváš na kapslích. <b>Patent na kapsli</b> = nefér výhoda (do roku 2012, kdy ho ostatní obešli). <b>Brand premium</b> = George Clooney + Boutiques jako experience. Po expiraci patentu Nespresso udrželo trh přes brand a kvalitu.
+      </>),
+      lessons: "Nespresso ukazuje <b>Gassmanovo pravidlo v praxi</b> — změna 3 dimenzí (KDO+CO+JAK) = jednoznačně nový BM. Razor and Blade je jeden z 55 patternů Gassmanna. Kombinace s <b>BMC</b> ukazuje, jak vyplnit všech 9 bloků. Pro startupy (na začátku) by se použil Lean Canvas (problém = nedostupnost kavárenské kávy doma, řešení = kapslový systém, nefér výhoda = patent). Pro PS: identifikovat dimenze BM, najít pattern z analogického odvětví, validovat přes Lean Canvas."
+    },
+    miniExamples: [
+      { tag: "LEAN CANVAS — STARTUP", color: VSE.fph, company: "Slevomat (CZ) — startup Lean Canvas v praxi", content: "Slevomat (2010) měl klasický Lean Canvas: <b>Problém</b> = malé restaurace/lázně potřebují vyplnit kapacity v slabých chvílích, lidé hledají slevy. <b>Řešení</b> = denní deal platforma. <b>Klíčové metriky</b> = počet uživatelů, konverze, opakované nákupy. <b>Nefér výhoda</b> = první mover na CZ trhu + exkluzivní dealy. <b>UVP</b> = 'Sleva až 90 % na restauraci/wellness/zájezd'. Po validaci přes Lean Canvas Slevomat scaloval na BMC (etablovaný BM)." },
+      { tag: "BMC — VELKÁ FIRMA", color: VSE.warning, company: "Škoda Auto (CZ) — klasický BMC", content: "Škoda Auto je etablovaná firma s ověřeným BM. BMC vypadá takto: <b>Segmenty</b> = střední třída v Evropě, retail. <b>Hodnotová nabídka</b> = 'simply clever' — kvalita VW za nižší cenu. <b>Kanály</b> = autorizovaní dealeři, online konfigurátor. <b>Vztahy</b> = servisní síť, dlouhodobá loajalita. <b>Příjmy</b> = prodej aut + servis + náhradní díly + financování. <b>Zdroje</b> = továrny v ČR, R&D Mladá Boleslav. <b>Činnosti</b> = výroba, vývoj. <b>Partnerství</b> = VW Group (platformy, technologie), dodavatelé. <b>Náklady</b> = výroba (variabilní), R&D, marketing." },
+      { tag: "GASSMANN — DISRUPCE BM", color: VSE.danger, company: "Spotify — změnil všechny 4 dimenze hudebního BM", content: "Spotify aplikuje Gassmanovo pravidlo extrémně: <b>KDO ✓</b> všichni posluchači místo nakupujících alb. <b>CO ✓</b> neomezený přístup ke streamingu místo vlastnictví. <b>JAK ✓</b> aplikace + algoritmus + sociální features (playlisty) místo CD/iTunes. <b>PROČ ✓</b> předplatné (recurring revenue) místo jednorázových nákupů. <b>Všechny 4 dimenze = jednoznačně disruptivní inovace BM.</b> Zničil staré hráče (alba/iTunes prodeje), vytvořil nový trh streamingu. Klasická Schumpetrova kreativní destrukce (viz Inov 1)." },
+      { tag: "SCAMPER + 5x PROČ", color: VSE.success, company: "Toyota TPS — 5x Proč v praxi", content: "Toyota Production System je etalon technik 5x Proč. Když stroj selhal, mistři se ptali: <b>Proč selhal stroj? →</b> motor přehřál. <b>Proč přehřál? →</b> chyběl olej. <b>Proč chyběl olej? →</b> filtr byl zanesený. <b>Proč zanesený? →</b> nesprávný interval údržby. <b>Proč nesprávný interval? →</b> chyběl checklist. Kořenová příčina = systémová mezera, ne 'rozbitý stroj'. Toyota využívá i SCAMPER (Eliminate = andon kabel pro zastavení vady, Reverse = pull production místo push) a Kaizen jako kontinuální inovaci." },
+    ]
+  };
+
+  const examQuestionsInov3 = [
+    { komise: "2025-06-10 Nový+Svobodová+Kolouchová, 2025-01-28 Tahal+Kuděj+Nový, 2025-02-04 Vrbová+Tahal+Svobodová, 2026-02-02 Stříteský+Lorencová+Pernica, 2026-02-03 Bočková+Nový+Kolouchová, 2026-02-06 Kupec+Mládková+Kolouchová, 2026-02-06 Heřman+Schovancová+Vávra", otazka: "Techniky používané v managementu inovací, podrobně popsané Lean Canvas a Business Model Canvas (často s konkrétním příkladem)", pozn: "11× komise (nejvíc!). Komise chce <b>obě</b> Canvas + rozdíly + 9 bloků každého + příklad. Klíč: 4 rozdílné bloky v Lean Canvas (problém/řešení/metriky/nefér výhoda). Vědět, kdy co — startup vs etabl. firma." },
+    { komise: "2025-06-04 Mikovcová+Viktora+Kolouchová, 2025-06-12 Pichanič+Kuděj+Zamazalová, 2026-02-06 Kupec+Mládková+Kolouchová", otazka: "Podnikatelský model + inovace BM podle Gassmanna", pozn: "Gassmann = 4 dimenze (KDO/CO/JAK/PROČ) + pravidlo 'změna 2+ dimenzí = nový BM' + příklad (Nespresso, Spotify, Tesla, Uber). Často spojené s Lean/BMC otázkou." },
+    { komise: "2025-01-28 Tahal+Kuděj+Kučera, 2026-02-06 Mládková+Kolouchová+Mikan", otazka: "Metody inovací - první stránka Zuzky / vyjmenujte nejpoužívanější modely tvorby inovací", pozn: "Široká otázka — vyjmenovat všechny techniky: Lean Canvas, BMC, Gassmann, SCAMPER, Walt Disney, 5x Proč, brainstorming/brainwriting/6-3-5, storyboard, buy a feature, speedboat, hraní rolí, produktový box, stínování, mind maps." },
+    { komise: "Obecně — Bass model šíření inovací", otazka: "Modely difuze inovací — Bass, epidemický model", pozn: "Bass = kombinace masmédií + WOM, inovátoři × imitátoři. Epidemický = jen WOM. Poptávkové × nabídkové modely šíření." },
+  ];
+
+  const podcastInov3 = {
+    title: "Inovace 3 — Metody a techniky inovací (Lean Canvas, BMC, Gassmann)",
+    description: "Business Model je popis toho, jak firma vytváří, dodává a zachycuje hodnotu - logika fungování firmy. Slouží pro startup (jak budeme vydělávat), existující firmu (analýza), investora (rychlé pochopení) a pro inovaci (kde inovovat). Inovace BM jako Schumpetrův 5. typ inovace - Uber, Airbnb, Spotify, Tesla, Nespresso. Business Model Canvas (Alexander Osterwalder 2010) - 9 bloků na jednu stránku - segmenty zákazníků, hodnotová nabídka, kanály, vztahy se zákazníky, zdroje příjmů, klíčové zdroje, klíčové činnosti, klíčová partnerství, struktura nákladů. Pravá strana BMC = trh, hodnota, peníze IN (zákazníci, kanály, vztahy, příjmy). Levá strana = infrastruktura, peníze OUT (zdroje, činnosti, partnerství, náklady). Lean Canvas - Ash Maurya 2010, adaptace BMC pro startupy. Místo infrastrukturních bloků řeší problém, řešení, klíčové metriky, nefér výhodu. 9 bloků - problém top 3, řešení top 3, klíčové metriky AARRR, UVP, nefér výhoda, kanály, segmenty zákazníků s early adopters, struktura nákladů, zdroje příjmů. 4 rozdílné bloky oproti BMC - PROBLÉM místo partnerství, ŘEŠENÍ místo činností, KLÍČOVÉ METRIKY místo zdrojů, NEFÉR VÝHODA nový blok. Nefér výhoda - to, co konkurence nemůže zkopírovat - patent, exkluzivní deal, network effects, znalost trhu, brand, talent. Kdy Lean Canvas - startup, nový nápad, validace problém-řešení. Kdy BMC - etablovaná firma s ověřeným BM, optimalizace, expanze. Pro nový BM v etabl. firmě - znovu Lean Canvas. Oliver Gassmann (Univerzita St. Gallen) - Business Model Navigator. 4 dimenze BM - KDO (zákazníci), CO (hodnotová nabídka), JAK (řetězec hodnot), PROČ (výnosový model). Pravidlo - změna alespoň 2 ze 4 dimenzí = nový BM, jen 1 dimenze = inkrementální inovace produktu. 55 patternů úspěšných BM - Razor and Blade, Subscription, Freemium, Long Tail, Crowdsourcing, Pay-per-Use. Postup - iniciace, generování nápadů z patternů, integrace, implementace. Nespresso etalon - změnil 3 dimenze - KDO (domácí spotřebitelé), CO (kapsle + design), JAK (přímý prodej Nespresso Club). Kreativní techniky - brainstorming (Osborn 1953, kvantita před kvalitou), brainwriting (písemný), metoda 6-3-5 (6 lidí, 3 nápady, 5 minut), metoda 666. SCAMPER - 7 technik modifikace - Substitute, Combine, Adapt, Modify, Put to another use, Eliminate, Reverse. Walt Disney metoda - 3 úhly pohledu - Snílek, Realista, Kritik. 5x Proč - Toyota, do kořenové příčiny. Buy a feature - zákazníci kupují vlastnosti za virtuální peníze. Speedboat - co brání plout rychleji. Storyboard - customer journey jako komiks. Produktový box - zákazník kreslí dream produkt. Modely šíření inovací - Bass (masmédia + WOM, inovátoři × imitátoři), epidemický (jen WOM).",
+    audioUrl: null,
+    notebookLmUrl: null,
+  };
+
+  const examStrategyInov3 = `
+    <b style="color:#1E938D">1.</b> Definuj <b>Business Model</b> — jak firma vytváří, dodává a zachycuje hodnotu.<br/>
+    <b style="color:#1E938D">2.</b> ⚠️ <b>BMC (Osterwalder 2010)</b> — 9 bloků, univerzální pro etabl. firmy.<br/>
+    <b style="color:#1E938D">3.</b> Pravá × levá strana BMC — trh × infrastruktura.<br/>
+    <b style="color:#1E938D">4.</b> ⚠️ <b>Lean Canvas (Maurya 2010)</b> — adaptace BMC pro startupy.<br/>
+    <b style="color:#1E938D">5.</b> ⚠️ <b>4 rozdílné bloky Lean Canvas</b> — PROBLÉM, ŘEŠENÍ, KLÍČOVÉ METRIKY, NEFÉR VÝHODA (nahrazují partnerství/činnosti/zdroje).<br/>
+    <b style="color:#1E938D">6.</b> Kdy Lean Canvas (startup) × kdy BMC (etabl. firma).<br/>
+    <b style="color:#1E938D">7.</b> ⚠️ <b>Gassmann — 4 dimenze BM</b> — KDO / CO / JAK / PROČ.<br/>
+    <b style="color:#1E938D">8.</b> ⚠️ <b>Gassmannovo pravidlo</b> — změna 2+ dimenzí = nový BM. Etalon: Nespresso (3 dimenze).<br/>
+    <b style="color:#1E938D">9.</b> <b>Kreativní techniky</b> — SCAMPER (7), Walt Disney (3 perspektivy), 5x Proč (Toyota), brainstorming/brainwriting/6-3-5.<br/>
+    <b style="color:#1E938D">10.</b> <b>Modely šíření</b> — Bass (mass + WOM, inovátoři × imitátoři), epidemický.<br/>
+    <b style="color:#1E938D">11.</b> Aplikace na PS — Lean Canvas pro startup, BMC pro etabl. firmu, Gassmann pro inovaci BM.<br/>
+    <b style="color:#1E938D">12.</b> Etalony — Nespresso (Gassmann 3D), Spotify (4D disrupce), Slevomat (Lean Canvas), Škoda (BMC), Toyota (5x Proč).
+  `;
+
+  const caseStudyInov3 = {
+    title: "Tereza a její startup pro vegan stravování — Lean Canvas nebo BMC?",
+    subtitle: "Vyber správnou metodu + identifikuj Gassmann dimenze",
+    scenario: "Tereza (28 let) byla 5 let marketingovou manažerkou v korporátu, ale chce se osamostatnit. Sama je vegankou a všimla si, že v Brně chybí kvalitní vegan rozvážková služba. Existující řešení jsou buď drahá (vegan v Wolt vychází na 350 Kč za jídlo) nebo nevegan (Wolt/Bolt mají málo veganských restaurací). Tereza má nápad - vlastní vegan kuchyně s rozvozem v Brně, předplatné na týden, příchozí cena 180 Kč za jídlo.\n\nTereza má 350 tisíc korun úspor, znalost marketingu, ale žádné zkušenosti s gastronomií ani logistikou. Tuší, že nápad může a nemusí fungovat. Některé otázky jsou nejasné: chce si zákazník platit dopředu (předplatné), nebo platit za každé jídlo? Bude rozvoz vlastní (vlastní kurýři + nájem auto) nebo přes existující službu (Wolt jako kanál)? A jak vůbec ověřit, že lidi chtějí přepláchnout 350 za Wolt vegan, ale 180 za její?\n\nKamarád jí poradil, ať vytvoří 'business plán', ale Tereza neví, jak začít. Slyšela o Lean Canvas a o Business Model Canvas, ale neví, co je rozdíl a který má použít. Slyšela i o Gassmanovi a inovaci BM. Ví o existujících službách jako Wolt, Bolt, Damejidlo - jak ji odliší? Co je její 'nefér výhoda'? Co je její UVP?\n\nDá si schůzku s investorem (anděl s 1 mil. Kč), který chce vidět její BM na jedné A4. Investor jí říká: 'Než ti dám peníze, chci vědět, kde jsou rizika a proč si myslíš, že to budou lidi kupovat.' Tereza si uvědomuje, že **bez ověření problému ten investor peníze nedá** - ale jak to ověření udělat?\n\nMladí kolegové z markeťácké firmy jí říkají, ať udělá nejdřív průzkum - dotazník mezi vegany v Brně, focus groups, prototyp menu na týden. Tereza tuší, že to je správný směr - ne hned otevřít, ale validovat.",
+    signals: [
+      { text: "Startup, žádné zkušenosti s gastronomií, vysoká nejistota, nejasné předpoklady", color: VSE.danger, reason: "Klasický signál pro LEAN CANVAS (Inov 3) — Tereza ještě neví, jestli BM bude fungovat. Etablovaný BMC by byl předčasný. Důraz na PROBLÉM a ŘEŠENÍ + validace." },
+      { text: "Nejasné otázky - jednorázový × předplatné, vlastní rozvoz × Wolt, ověření poptávky", color: VSE.warning, reason: "Tereza musí identifikovat KLÍČOVÉ METRIKY (Inov 3) - co měřit pro validaci. CAC, LTV, konverze z dotazníku, opakované objednávky. Bez metrik startup létá naslepo." },
+      { text: "Wolt, Bolt, Damejidlo už existují - jak ji odliší?", color: VSE.fph, reason: "Hledá NEFÉR VÝHODU (Inov 3) - to, co konkurence nemůže snadno zkopírovat. Specializace na vegan + nižší cena + vlastní kuchyně. To je 4. rozdílný blok Lean Canvas." },
+      { text: "Vegan kuchyně, předplatné, vlastní rozvoz - oproti restaurace + Wolt model", color: VSE.success, reason: "GASSMANN 3 DIMENZE (Inov 3) — Tereza mění KDO (vegani místo mass), CO (předplatné menu místo single jídla), JAK (vlastní kuchyně + rozvoz místo Wolt). 3 dimenze = nový BM." },
+      { text: "Investor chce BM na jedné A4 + rizika + proč si lidi koupí", color: VSE.primary, reason: "LEAN CANVAS (Inov 3) je přesně pro tohle — jedna A4, identifikuje rizika, validuje problém-řešení. BMC investora nepotěší (nejsou tam rizika, jen popis)." },
+      { text: "Udělat dotazník, focus groups, prototyp menu na týden", color: VSE.warning, reason: "VALIDACE PŘEDPOKLADŮ (Inov 3) — přesně co Lean Canvas vyžaduje. Build-measure-learn cyklus. Vyzkouší si MVP před plnou investicí." },
+    ],
+    quiz1: {
+      question: "Jakou metodu by měla Tereza zvolit?",
+      options: [
+        "Business Model Canvas — popsat všech 9 bloků a poslat investorovi",
+        "Lean Canvas — startup s vysokou nejistotou, fokus na problém, řešení, klíčové metriky, nefér výhodu + validace přes dotazníky a MVP",
+        "Klasický business plán na 30 stran",
+        "SWOT analýzu a doufat",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měla Tereza postupovat?",
+      options: [
+        { text: "Vyplnit LEAN CANVAS jako první — definovat PROBLÉM (drahé vegan rozvážky), ŘEŠENÍ (vegan kuchyně + předplatné), KLÍČOVÉ METRIKY (počet předplatitelů, LTV), NEFÉR VÝHODA (vegan specializace + cena)", correct: true, reason: "✓ Inov 3 — Lean Canvas je pro startup. 4 unikátní bloky řeší přesně to, co je nejisté." },
+        { text: "Aplikovat GASSMANNOVO PRAVIDLO — identifikovat 3 změněné dimenze BM: KDO (vegani), CO (předplatné), JAK (vlastní kuchyně + rozvoz). 2+ dimenze = nový BM (radikální inovace).", correct: true, reason: "✓ Inov 3 — Gassmann pomůže Tereze pochopit, že staví NOVÝ BM (3 dimenze) — ne jen variantu Wolt. Investor to ocení." },
+        { text: "VALIDOVAT PŘEDPOKLADY — dotazník mezi vegany v Brně, focus groups, prototyp menu na týden (10-20 lidí). Build-measure-learn. Až po validaci scaluje.", correct: true, reason: "✓ Inov 3 — Lean Canvas vyžaduje validaci nejrizikovějších předpokladů. MVP před plnou investicí. Sníží riziko investora." },
+        { text: "Po validaci a 6-12 měsících provozu PŘEPNOUT NA BMC — když má ověřený BM a expanduje, BMC je správný nástroj pro popsání všech 9 bloků (partnerství, činnosti, zdroje).", correct: true, reason: "✓ Inov 3 — Lean Canvas je pro fázi nejistoty (0-1), BMC pro scaling (1-N). Klasický přechod startup → etablovaný BM." },
+        { text: "Vyplnit Business Model Canvas a poslat investorovi", correct: false, reason: "✗ BMC nepasuje pro startup s vysokou nejistotou. Investor chce rizika a validaci — to BMC neřeší. Lean Canvas je vhodnější." },
+        { text: "Hned otevřít kuchyni a doufat, že lidi přijdou", correct: false, reason: "✗ Klasická chyba startupů. Bez validace přes Lean Canvas + MVP = 90% šance selhat. 350 tisíc úspor je v tahu za 3 měsíce bez příjmů." },
+        { text: "Použít SCAMPER pro generování nápadů místo Lean Canvas", correct: false, reason: "✗ SCAMPER je doplňková technika pro modifikaci existujícího. Tereza potřebuje strukturu pro celý BM — Lean Canvas. SCAMPER může pomoct s menu inovacemi později." },
+      ],
+    },
+    summary: "<b>Tereza by měla použít LEAN CANVAS (ne BMC) + GASSMANNA pro pochopení inovace BM + validaci přes MVP.</b><br/><br/><b>Postup:</b><br/><br/>• <b>Lean Canvas (jeden A4 pro investora):</b><br/>– PROBLÉM (top 3): drahé vegan jídlo (Wolt 350 Kč), málo vegan variant, nevegan kurýři nevědí o specifikách.<br/>– ŘEŠENÍ (top 3): vegan kuchyně, předplatné, vlastní rozvoz s vegan znalostmi.<br/>– KLÍČOVÉ METRIKY: počet předplatitelů, retention rate, LTV, CAC.<br/>– UVP: 'Kvalitní vegan jídlo doma za polovinu Woltu, s týdenním menu na míru.'<br/>– NEFÉR VÝHODA: jediná specializovaná vegan rozvážka v Brně + vlastní kuchyně (kontrola kvality) + vegan komunita Brno (network).<br/>– KANÁLY: vlastní web/app + Instagram + spolupráce s veganskými influencery.<br/>– SEGMENTY: vegani 25-45 v Brně (early adopters), pak rozšíření na vegetariány a flexitariány.<br/>– STRUKTURA NÁKLADŮ: nájem kuchyně, suroviny (variabilní), kurýři, marketing.<br/>– ZDROJE PŘÍJMŮ: měsíční předplatné (recurring) + jednorázové objednávky (one-time).<br/><br/>• <b>Gassmann 4 dimenze — Tereza buduje NOVÝ BM (3 dimenze změněné = inovace BM):</b><br/>– <b>KDO ✓</b> vegani (místo masového trhu Woltu).<br/>– <b>CO ✓</b> předplatné menu (místo single objednávek).<br/>– <b>JAK ✓</b> vlastní kuchyně + vlastní rozvoz (místo restaurace + Wolt platform).<br/>– <b>PROČ ✗</b> stále prodej jídla, ale recurring revenue (předplatné).<br/>3 dimenze = nový BM (radikální inovace dle Inov 1).<br/><br/>• <b>Validace PŘED scalingem:</b><br/>1. <b>Dotazník</b> mezi vegany v Brně (500 lidí přes Facebook skupiny, vegan komunita).<br/>2. <b>Focus group</b> (10 lidí, testovat menu + cenu + frekvenci).<br/>3. <b>MVP týden</b> — 20 zákazníků, 5 jídel/týden, ručně rozvést. Měřit retention.<br/>4. <b>Pokud retention >50 %</b> → scaling. <b>Pokud <30 %</b> → pivot.<br/><br/>• <b>Po validaci (6-12 měsíců):</b> přepnout z Lean Canvas na BMC pro popsání všech 9 bloků, partnerství (vegan dodavatelé), klíčové činnosti (logistika, marketing), zdroje (značka, kuchyně).<br/><br/><b>Pro komisi:</b> Klíč — <b>Lean Canvas vs BMC</b> (kdy co), <b>4 rozdílné bloky</b>, <b>Gassmannovo pravidlo 2+ dimenzí</b>, <b>UVP × nefér výhoda</b>, <b>validace přes MVP</b>. Anti-vzor: udělat BMC pro nevalidovaný startup, otevřít kuchyni bez ověření poptávky.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Inovace" subjectId="inov" number={3} title="Metody a techniky inovací — Lean Canvas, BMC, Gassmann"
+      subtitle="Business Model + BMC 9 bloků (Osterwalder) + Lean Canvas 9 bloků (Maurya) + Gassmann 4 dimenze BM + SCAMPER + Walt Disney + 5x Proč + Bass model"
+      color={VSE.primary}
+      questionText="Metody a techniky inovací — Lean Canvas, Business Model Canvas, Gassmann (Business Model Navigator), kreativní techniky (SCAMPER, Walt Disney, 5x Proč, brainstorming/brainwriting/6-3-5), modely šíření inovací (Bass, epidemický)."
+      sloz={3} roz={4} freq={5}
+      examStrategy={examStrategyInov3}
+      studySections={studySectionsInov3}
+      flashcards={flashcardsInov3}
+      quiz={quizInov3}
+      praxe={praxeInov3}
+      examQuestions={examQuestionsInov3}
+      podcast={podcastInov3}
+      caseStudy={caseStudyInov3}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   INOVACE 4 — Design Thinking (5 fází + Double Diamond)
+   ════════════════════════════════════════════════════════ */
+function OkruhInov4Panel() {
+  const studySectionsInov4 = [
+    { id: "co_je_dt", title: "Co je Design Thinking a proč existuje", subtitle: "Přístup zaměřený na lidi + empatie + iterace", color: VSE.primary, emoji: "brain",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Design Thinking (DT)</b> = uživatelsky orientovaný přístup k řešení problémů. Vychází z myšlení designérů a aplikuje ho na <b>byznys, inovace, služby, organizační změnu</b> — kdekoli, kde řešíš problém pro lidi. Využívá <b>empatii, kreativitu a iteraci</b>.
+        </Def>
+        <Tag color={VSE.primary}>Klíčové charakteristiky Design Thinking</Tag>
+        <Bullet items={[
+          "<b>Přístup zaměřený na lidi</b> — vychází z reálných potřeb uživatele, ne z technologie nebo strategie firmy.",
+          "<b>Proces začínající u zákazníka</b> — jeho potřeb, přání, frustrací → končí <b>inovativním produktem, službou nebo procesem</b>, který naplňuje potřeby.",
+          "<b>Popisuje jednotlivá stádia (jasný postup)</b>, která <b>na sebe reagují</b>, mohou probíhat paralelně a <b>mohou se vracet</b>.",
+          "<b>Nelineární dynamický proces</b> — lze udělat krok zpět nebo úplně začít znovu (oproti SGCP, viz Inov 5, který je lineárnější).",
+          "<b>Abduktivní styl uvažování</b> — schopnost dopátrat se vysvětlení, 'empatie'. (Dedukce = od pravidla k případu. Indukce = od případu k pravidlu. <b>Abdukce = nejlepší vysvětlení existujícího pozorování.</b>)",
+          "<b>Holistický a vizionářský pohled</b> — mix intuice a analýzy. Nejen čísla, ale i kontext.",
+          "<b>Založen na práci multidisciplinárních týmů</b> — snaha porozumět zákazníkovi, zaměstnanci, dodavateli. Designér + inženýr + sociolog + marketér.",
+          "<b>Iterace a experimenty</b> — pozorování, vizualizace, rychlé prototypování.",
+          "<b>Tolerance rizika a selhání</b> — důležitost učení (chyba ≠ konec, ale data).",
+          "<b>Celostní pohled a mezioborová spolupráce</b>.",
+          "<b>Univerzální</b> — pro produkty, procesy, služby, organizační změnu.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Proč DT vzniklo a kdy ho použít</Tag>
+        <Bullet items={[
+          "Klasické modely inovací (lineární push/pull, viz Inov 1) selhávají u <b>komplexních problémů s nejasnou definicí</b> (wicked problems).",
+          "DT je vhodné, když: <b>neznáš přesný problém</b>, <b>uživatel nedokáže říct, co chce</b> (Henry Ford: 'rychlejšího koně'), <b>chceš radikálně inovovat</b>, nebo redesignovat zákaznickou zkušenost.",
+          "Nevhodné: striktně technické problémy s jasnou definicí (matematická optimalizace), škálování ověřeného produktu (tam jdi do SGCP, viz Inov 5).",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "5_fazi", title: "5 fází Design Thinking (Stanford d.school)", subtitle: "Vcítění → Definování → Generování → Prototypování → Testování", color: VSE.primary, emoji: "path",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Stanford d.school model — <b>5 fází</b>, které na sebe reagují a <b>mohou se vracet</b>. Není to lineární — můžeš se kdykoli vrátit zpátky, když zjistíš, že jsi špatně pochopil problém.
+        </Def>
+        <Tag color={VSE.primary}>FÁZE 1 — VCÍTĚNÍ (Empathize)</Tag>
+        <Bullet items={[
+          "<b>Pochopení potřeb zákazníka</b> — jak produkt používá v reálném životě (např. sedneš si do vozíku, když řešíš věci pro invalidy).",
+          "<b>Formulované požadavky a potřeby na produkt z pohledu zákazníka</b>, které jsou <b>rozpracované v dalších fázích</b>.",
+          "<b>Předběžné a hloubkové rozhovory</b>, pozorování (etnografie), kontextové návštěvy.",
+          "<b>Nástroje:</b> empathy map, customer journey, deník uživatele, persony.",
+          "<i>Klíč: NEPTAT SE 'co chcete?' — ale POZOROVAT, co dělají a jak to dělají.</i>",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>FÁZE 2 — DEFINOVÁNÍ (Define)</Tag>
+        <Bullet items={[
+          "<b>Co chceme vyřešit a jak</b> — z hloubkového pochopení v fázi 1 zformulujeme <b>jasný problém (Problem Statement)</b>.",
+          "<b>Point of View (POV)</b> — uživatel + potřeba + insight. Např: 'Mladé veganky v Brně potřebují cenově dostupnou rozvážku, protože stávající řešení jsou drahá a nezohledňují vegan nutrici.'",
+          "<b>How Might We (HMW)</b> otázky — 'jak bychom mohli...' — otevírá prostor pro řešení.",
+          "<b>Cíl:</b> jasný, akční problém, na kterém můžeme začít stavět řešení. Špatně definovaný problém = špatné řešení.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>FÁZE 3 — GENEROVÁNÍ NÁPADŮ (Ideate)</Tag>
+        <Bullet items={[
+          "<b>Cíl: vytvořit mezistátní množství myšlenek a nápadů</b>, které <b>napomohou k vytvoření originality a unikátnosti inovačního řešení</b>.",
+          "<b>Originálnost a inovační řešení</b> — stimulovat kreativitu.",
+          "<b>Využít spolupráci v týmu</b> — multidisciplinarita.",
+          "<b>Brainstorming, brainwriting, metoda 6-3-5</b> (6 lidí, 3 nápady, 5 min — viz Inov 3 techniky), <b>666</b>.",
+          "<b>SCAMPER, Walt Disney, 5x Proč</b> (viz Inov 3).",
+          "<b>Nejlepší nápady jdou do další fáze.</b>",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.success}>FÁZE 4 — PROTOTYPOVÁNÍ (Prototype)</Tag>
+        <Bullet items={[
+          "<b>Převedení myšlenky do hmatatelné a snadno uchopitelné formy.</b>",
+          "<b>Iterativní proces</b> — tvorba jednoduchých a relativně levných nápadů. Lze snadno prezentovat koncovým uživatelům → feedback.",
+          "<b>4 typy prototypů</b> podle <b>komplexity a věrnosti podoby</b>:",
+          "&nbsp;&nbsp;• <b>User stories</b> — textový popis scénáře použití.",
+          "&nbsp;&nbsp;• <b>MVP (Minimum Viable Product)</b> — minimální funkční verze, kterou lze pustit do světa a sbírat feedback.",
+          "&nbsp;&nbsp;• <b>Wireframe / mockup</b> — vizuální náčrt rozhraní, papírové prototypy.",
+          "&nbsp;&nbsp;• <b>Funkční prototyp</b> — fungující ale ne kompletní (Concorde efekt: ne všechno musí být dotažené).",
+          "<b>Proces se upravuje a prototypy jsou upravovány na základě feedbacku.</b>",
+          "<b>Prototyp musí představovat plně funkční celek</b> (i když některé části nejsou dokončené).",
+          "<b>Nemusí být hodnocen jen vnitřními členy týmu</b> — testovat na uživatelích!",
+          "<b>Podporuje postupné osvojování info a znalostí</b> o řešeném problému, vyúsťuje ve validační řešení.",
+          "<b>Testování a úprava chyb na prototypech je relativně levné</b> — podněcuje uživatele, aby se zapojili do samotné výroby, zátěžovými testy se odhalí slabá místa.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.danger}>FÁZE 5 — TESTOVÁNÍ (Test)</Tag>
+        <Bullet items={[
+          "<b>Vyzkoušení dokončeného řešení na větší skupině zákazníků.</b>",
+          "<b>Lead users (pokrokoví uživatelé)</b> — testuje malá skupina nejpokrokovějších/nejotevřenějších zákazníků, kteří dají kvalitní zpětnou vazbu.",
+          "<b>Cílem je co nejvíce se naučit (ne 'ostré' uvedení na trh)</b> — sbírat data, učit se, iterovat.",
+          "<b>Pokud testování odhalí závažné problémy → ZPĚT na fázi 1 (Vcítění) nebo 2 (Definování).</b> To je to 'iterativní' v DT.",
+          "<b>Pokud testování potvrdí směr → posun do dalšího kroku (např. SGCP, viz Inov 5, pro průmyslový vývoj a launch).</b>",
+        ]} color={VSE.danger} />
+        <ResponsiveSVG viewBox="0 0 820 420" maxHeight={420}>
+          <text x="410" y="26" textAnchor="middle" fontFamily={fontSans} fontSize="15" fontWeight="800" fill="var(--text)">5 fazi Design Thinking - nelinearni iterativni proces</text>
+          <text x="410" y="46" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">faze na sebe reaguji a mohou se vracet zpet (Stanford d.school)</text>
+          {/* Feedback caption ABOVE the curve */}
+          <text x="410" y="78" textAnchor="middle" fontFamily={fontMono} fontSize="10" fontStyle="italic" fill={VSE.danger}>pokud test odhali problem - navrat na faze 1 (Vciteni) nebo 2 (Definovani)</text>
+          {/* Red feedback curve from box 5 back to box 1 — goes through y=110-150 zone above boxes */}
+          <path d="M 740 160 Q 740 100 410 100 Q 80 100 80 160" stroke={VSE.danger} strokeWidth="2" fill="none" strokeDasharray="6 4" markerEnd="url(#arrDTred)"/>
+          {/* 5 phases — box top at y=160, height 130 */}
+          {[
+            {x: 20,  c: VSE.fph,     n: "1", label: "VCITENI",       sub: "Empathize",   detail: "pozorovani"},
+            {x: 180, c: VSE.warning, n: "2", label: "DEFINOVANI",    sub: "Define",      detail: "Problem Statement"},
+            {x: 340, c: VSE.fmv,     n: "3", label: "GENEROVANI",    sub: "Ideate",      detail: "brainstorming"},
+            {x: 500, c: VSE.success, n: "4", label: "PROTOTYPOVANI", sub: "Prototype",   detail: "wireframe, MVP"},
+            {x: 660, c: VSE.danger,  n: "5", label: "TESTOVANI",     sub: "Test",        detail: "lead users"},
+          ].map((p, i, arr) => (
+            <g key={i}>
+              <rect x={p.x} y="160" width="140" height="130" rx="10" fill={p.c} opacity="0.18" stroke={p.c} strokeWidth="2"/>
+              <circle cx={p.x + 70} cy="182" r="14" fill={p.c} opacity="0.95"/>
+              <text x={p.x + 70} y="187" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="800" fill="#fff">{p.n}</text>
+              <text x={p.x + 70} y="222" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={p.c}>{p.label}</text>
+              <text x={p.x + 70} y="240" textAnchor="middle" fontFamily={fontMono} fontSize="10" fontStyle="italic" fill="var(--text-muted)">{p.sub}</text>
+              <text x={p.x + 70} y="268" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)">{p.detail}</text>
+              {i < arr.length - 1 && <path d={`M ${p.x + 142} 225 L ${p.x + 158} 225`} stroke="var(--text-muted)" strokeWidth="2.2" markerEnd="url(#arrDT)"/>}
+            </g>
+          ))}
+          {/* Short feedback arrows between adjacent phases — below boxes (y=290+) */}
+          <path d="M 320 310 Q 270 340 220 310" stroke={VSE.warning} strokeWidth="1.5" fill="none" strokeDasharray="4 3" markerEnd="url(#arrDTorange)"/>
+          <path d="M 480 310 Q 430 340 380 310" stroke={VSE.warning} strokeWidth="1.5" fill="none" strokeDasharray="4 3" markerEnd="url(#arrDTorange)"/>
+          <path d="M 640 310 Q 590 340 540 310" stroke={VSE.warning} strokeWidth="1.5" fill="none" strokeDasharray="4 3" markerEnd="url(#arrDTorange)"/>
+          <text x="410" y="362" textAnchor="middle" fontFamily={fontMono} fontSize="10" fontStyle="italic" fill={VSE.warning}>kratke iterace mezi sousednimi fazemi - kazda faze muze ladit predchozi</text>
+          <text x="410" y="395" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">multidisciplinarni tym: designer + inzenyr + sociolog + marketer + frontline</text>
+          <defs>
+            <marker id="arrDT" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="var(--text-muted)"/>
+            </marker>
+            <marker id="arrDTred" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill={VSE.danger}/>
+            </marker>
+            <marker id="arrDTorange" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill={VSE.warning}/>
+            </marker>
+          </defs>
+        </ResponsiveSVG>
+        <ExamAlert
+          komise="Tažené: Design Thinking detailně + příklad (Cejthamr+Machek+Heřman 2025, Štamfestová+Mládková+Vávra, Double Stříteský+Mareš, Krause+Lorencová+Zamazalová 2025)"
+          what="Komise <b>VŽDY chce všech 5 fází</b> + popsat každou + konkrétní příklad firmy (Apple/IKEA/Airbnb/IDEO). Klíčové: <b>nelineární proces, iterace, empatie, lead users, MVP</b>. Pozor na rozdíl od SGCP (Inov 5) — DT je explorativní, SGCP exekuční."
+        />
+      </div>) },
+
+    { id: "double_diamond", title: "Double Diamond — Britský Design Council", subtitle: "2 fáze rozšiřování × zužování (Discover/Define/Develop/Deliver)", color: VSE.primary, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Double Diamond</b> je <b>alternativní (a populární) model DT</b> od British Design Council (2005). Vizualizuje DT jako <b>2 diamanty</b> — každý má fázi rozšiřování (divergent thinking) a fázi zužování (convergent thinking).
+        </Def>
+        <Tag color={VSE.primary}>2 zásadní fáze Double Diamond</Tag>
+        <Bullet items={[
+          "<b>Princip rozšiřování a zužování</b> — rozšiř (otevři možnosti), pak zužuj (vyber to nejlepší). Opakuj dvakrát.",
+          "<b>Redefinice problému, iterace a krok zpět</b> — pokud na konci diamantu zjistíš, že problém byl špatně definovaný, vrať se na začátek.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>4 kroky Double Diamond</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "1. DISCOVER (rozšíření)", d: "<b>Pochopení problému</b> — výzkum, pozorování, sběr dat. Odpovídá <b>Vcítění (DT fáze 1)</b>. Cílem je porozumět situaci ze všech úhlů." },
+            { c: VSE.warning, t: "2. DEFINE (zúžení)", d: "<b>Definice problému</b> — z širokého výzkumu zformulovat jasný problem statement. Odpovídá <b>Definování (DT fáze 2)</b>. Konec prvního diamantu." },
+            { c: VSE.fmv, t: "3. DEVELOP (rozšíření)", d: "<b>Ideace a prototypování</b> — brainstorming řešení, prototypy. Odpovídá <b>Generování nápadů + Prototypování (DT fáze 3-4)</b>. Začátek druhého diamantu." },
+            { c: VSE.success, t: "4. DELIVER (zúžení)", d: "<b>Testování a uvedení</b> — vyber nejlepší řešení, otestuj, dodej na trh. Odpovídá <b>Testování (DT fáze 5)</b>." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 760 320" maxHeight={340}>
+          <text x="380" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Double Diamond - British Design Council 2005</text>
+          <text x="380" y="40" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)" fontStyle="italic">princip rozsirovani × zuzovani - 2 diamanty</text>
+          {/* Diamond 1 — Discover + Define (problem) */}
+          <path d="M 80 160 L 220 90 L 360 160 L 220 230 Z" fill={VSE.fph} opacity="0.18" stroke={VSE.fph} strokeWidth="2"/>
+          <text x="220" y="76" textAnchor="middle" fontFamily={fontSans} fontSize="12" fontWeight="800" fill={VSE.fph}>1. DIAMANT - PROBLEM</text>
+          <text x="150" y="160" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.fph}>DISCOVER</text>
+          <text x="150" y="175" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontStyle="italic" fill="var(--text-muted)">(rozsirovani)</text>
+          <text x="150" y="192" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">pochopeni</text>
+          <text x="150" y="205" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">problemu</text>
+          <text x="290" y="160" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.warning}>DEFINE</text>
+          <text x="290" y="175" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontStyle="italic" fill="var(--text-muted)">(zuzovani)</text>
+          <text x="290" y="192" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">Problem</text>
+          <text x="290" y="205" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">Statement</text>
+          {/* Diamond 2 — Develop + Deliver (solution) */}
+          <path d="M 400 160 L 540 90 L 680 160 L 540 230 Z" fill={VSE.success} opacity="0.18" stroke={VSE.success} strokeWidth="2"/>
+          <text x="540" y="76" textAnchor="middle" fontFamily={fontSans} fontSize="12" fontWeight="800" fill={VSE.success}>2. DIAMANT - RESENI</text>
+          <text x="470" y="160" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.fmv}>DEVELOP</text>
+          <text x="470" y="175" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontStyle="italic" fill="var(--text-muted)">(rozsirovani)</text>
+          <text x="470" y="192" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">ideace +</text>
+          <text x="470" y="205" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">prototypovani</text>
+          <text x="610" y="160" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={VSE.success}>DELIVER</text>
+          <text x="610" y="175" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontStyle="italic" fill="var(--text-muted)">(zuzovani)</text>
+          <text x="610" y="192" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">testovani +</text>
+          <text x="610" y="205" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">uvedeni</text>
+          {/* Center break */}
+          <line x1="380" y1="60" x2="380" y2="260" stroke="var(--text-muted)" strokeWidth="1" strokeDasharray="4 3"/>
+          <text x="380" y="252" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)" fontStyle="italic">brida problem - reseni</text>
+          {/* Mapping to 5 phases */}
+          <text x="220" y="290" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">odpovida DT fazim 1+2 (Vciteni, Definovani)</text>
+          <text x="540" y="290" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">odpovida DT fazim 3+4+5 (Generovani, Prototyp, Testovani)</text>
+          <text x="380" y="310" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fill={VSE.danger} fontStyle="italic">pokud diamant 2 selze - navrat na diamant 1 (redefinice problemu)</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.fph}>1) Definice a poznání problému</Tag>
+        <Bullet items={[
+          "<b>Organizační × produktový/procesní × uživatelský/technický</b> pohled na problém.",
+          "Před řešením musíš vědět, <b>jaký problém vlastně řešíš</b> — to je první diamant (Discover → Define).",
+        ]} color={VSE.fph} />
+        <Tag color={VSE.danger}>2) Ideace a prototypování</Tag>
+        <Bullet items={[
+          "<b>Brainstorming</b> v rozšiřovací fázi (Develop) — generování max nápadů.",
+          "<b>4 typy prototypů</b> podle <b>komplexity a věrnosti podoby</b> (viz fáze 4 DT): user stories, MVP, wireframe/mockup, funkční prototyp.",
+          "<b>Experimenty a uživatelské testování</b> ve fázi Deliver.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "mvp_lead_users", title: "MVP a lead users — klíčové pojmy DT", subtitle: "Jak validovat dřív, než spálíš všechny zdroje", color: VSE.primary, emoji: "bolt",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>MVP a lead users</b> jsou dvě pilíře, na kterých stojí praktická aplikace DT (a Lean Startup). Komise se na ně ráda ptá specificky.
+        </Def>
+        <Tag color={VSE.primary}>MVP — Minimum Viable Product</Tag>
+        <Bullet items={[
+          "<b>Minimální funkční verze produktu</b>, kterou lze pustit do světa a začít sbírat <b>reálný feedback</b>.",
+          "<b>Eric Ries</b> (Lean Startup, 2011) — populizoval pojem.",
+          "<b>Cíl:</b> validovat hypotézu o produktu/trhu s <b>minimálními zdroji a v minimálním čase</b>.",
+          "<b>Princip:</b> <b>build → measure → learn</b>. Postav minimum, změř (data, feedback), nauč se, iteruj.",
+          "<b>Co MVP NENÍ:</b> nekompletní/rozbitý produkt. Musí být <b>funkční</b>, jen má méně features.",
+          "<b>Příklady MVP:</b> Dropbox vydal před produktem demo video (test poptávky). Airbnb začal s 3 nafukovacími matracemi v bytě zakladatelů. Zappos zakladatel fotil boty v obchodech a posílal je ručně (test, jestli lidi chtějí kupovat boty online).",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Lead users — pokrokoví uživatelé</Tag>
+        <Bullet items={[
+          "<b>Eric von Hippel</b> (MIT) — definoval pojem 1986.",
+          "<b>Charakteristika:</b> uživatelé, kteří <b>narážejí na potřeby trhu dřív než zbytek</b>. Jsou inovativní, ochotni experimentovat, často sami modifikují produkty.",
+          "<b>Proč jsou cenní:</b> jejich feedback je <b>kvalitnější</b> než od mass-market uživatelů. Hlavní zákazníci ještě neumí formulovat potřeby — lead users už ano.",
+          "<b>Kde je hledat:</b> v komunitách (subreddity, forum), na konferencích, mezi influencery v dané oblasti, mezi early adopters.",
+          "<b>Příklad:</b> outdoor značky testují produkty na profi horolezcích/cyklistech (lead users), pak je škálují na běžné uživatele.",
+          "<b>V DT fázi 5 (Testování)</b> — primárně testuješ na lead users, ne na mainstream.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>DT × Lean Startup — vztah</Tag>
+        <Bullet items={[
+          "<b>DT</b> (Stanford, IDEO) — fokus na <b>empatii, vcítění, kreativitu</b>. Vhodné pro radikální inovace, redesign zkušenosti.",
+          "<b>Lean Startup</b> (Ries) — fokus na <b>MVP, metriky, validaci hypotéz</b>. Vhodné pro startupy s nejistým produkt-trh fit.",
+          "<b>V praxi se kombinují</b> — DT pro pochopení problému + generování řešení, Lean Startup pro rychlou validaci přes MVP a metriky.",
+          "<b>Lean Canvas (viz Inov 3)</b> — Maurya kombinuje obojí přes jednoduchou šablonu.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "dt_vs_sgcp", title: "DT × SGCP — kdy co použít", subtitle: "Explorativní × exekuční inovační procesy", color: VSE.primary, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Komise často chce <b>rozdíl mezi Design Thinking a Stage Gate Control Process (SGCP — viz Inov 5)</b>. To jsou dvě klíčové metodiky inovací, ale slouží různým fázím.
+        </Def>
+        <Tag color={VSE.primary}>Hlavní rozdíly</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.primary, t: "DESIGN THINKING", d: "<b>Explorativní</b> proces — hledá problém a řešení. <b>Nelineární, iterativní</b>, návraty zpět. Vhodný pro <b>fuzzy front-end</b> (rané fáze, nejistota). Uživatelsky orientovaný, empatie, multidisciplinarita." },
+            { c: VSE.warning, t: "STAGE GATE (SGCP)", d: "<b>Exekuční</b> proces — řízení inovačního projektu od nápadu k uvedení na trh. <b>Lineárnější, gateway-based</b>. Vhodný pro <b>back-end</b> (vývoj a launch po validaci konceptu). Manažersky orientovaný, kontrola, metriky." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Jak je kombinovat</Tag>
+        <Bullet items={[
+          "<b>Fáze 1 (Discovery/Vcítění):</b> DT — empatie, pozorování, problem statement.",
+          "<b>Fáze 2 (Ideation):</b> DT — generování + prototypy + lead users.",
+          "<b>Po validaci konceptu</b> přepnout na <b>SGCP</b> (Cooper Stage 1+: Scoping, Business Case) — formální vývoj, schvalování přes brány, příprava launch.",
+          "<b>Etalon kombinace:</b> Apple — využívá DT pro rané fáze (vcítění, ideace), pak SGCP pro průmyslový vývoj a launch (Tim Cook expertise).",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na případovku — Design Thinking", subtitle: "Postup + co komise oceňuje × čemu se vyhnout", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Komise tažené DT 4× ze 45 — chce <b>všech 5 fází</b> + konkrétní příklad. Tady je postup, jak na PS přesvědčivě.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj, jestli firma z PS má <b>komplexní problém s nejasnou definicí</b> (vhodné pro DT) nebo má jasný produkt ve vývoji (vhodné pro SGCP).",
+          "<b>2.</b> Aplikuj <b>5 fází DT</b> — vždy postupně: Vcítění → Definování → Generování → Prototypování → Testování.",
+          "<b>3.</b> Ke každé fázi navrhni <b>konkrétní nástroje</b>: Vcítění (empathy map, deník), Definování (POV, HMW), Generování (brainstorming/6-3-5/SCAMPER), Prototypování (wireframe, MVP), Testování (lead users).",
+          "<b>4.</b> Doporuč <b>multidisciplinární tým</b> — designér + inženýr + sociolog + marketér.",
+          "<b>5.</b> Zdůrazni <b>iterativnost</b> — návrat na fázi 1 nebo 2, když test odhalí, že problém byl špatně definovaný.",
+          "<b>6.</b> Pro radikální inovaci v etablované firmě doporuč <b>oddělený inovační tým</b> (viz Inov 2 — proč firmy oddělují R&D).",
+          "<b>7.</b> Po validaci konceptu navrhuji přejít na <b>SGCP</b> (Inov 5) pro průmyslový vývoj.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Vyjmenovat <b>všech 5 fází</b> (komise je vždy chce) + konkrétní nástroj ke každé.",
+          "<b>✅ Dobře:</b> Říct, že DT je <b>nelineární a iterativní</b> — není to checklist, je to mindset.",
+          "<b>✅ Dobře:</b> Konkrétní příklad firmy (Apple, IKEA, Airbnb, IDEO, Pixar).",
+          "<b>✅ Dobře:</b> Vědět rozdíl <b>DT (explorativní) × SGCP (exekuční)</b> — a kdy co.",
+          "<b>✅ Dobře:</b> Zmínit <b>Double Diamond</b> jako alternativní/komplementární model.",
+          "<b>❌ Špatně:</b> Říct, že DT je 'brainstorming' — to je jen jedna technika v jedné fázi.",
+          "<b>❌ Špatně:</b> Vyjmenovat 5 fází, ale neumět vysvětlit, co se v nich konkrétně dělá.",
+          "<b>❌ Špatně:</b> Tvrdit, že DT funguje vždy. Pro striktně technické problémy nebo škálování ověřeného produktu jdi do SGCP.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsInov4 = [
+    { term: "Design Thinking — definice", def: "Uživatelsky orientovaný přístup k řešení problémů. Empatie, kreativita, iterace. Aplikuje myšlení designérů na byznys, inovace, služby.", tag: "DT" },
+    { term: "Klíčové charakteristiky DT", def: "Zaměřený na lidi, nelineární dynamický proces, abduktivní styl uvažování, holistický pohled, multidisciplinární týmy, iterace a experimenty, tolerance rizika.", tag: "DT" },
+    { term: "Abduktivní uvažování", def: "Schopnost dopátrat se vysvětlení existujícího pozorování — 'empatie'. Dedukce (pravidlo → případ), Indukce (případ → pravidlo), Abdukce (nejlepší vysvětlení pozorování).", tag: "DT" },
+    { term: "Kdy použít DT", def: "Komplexní problémy s nejasnou definicí (wicked problems), neznáš přesný problém, uživatel neumí říct co chce, radikální inovace, redesign zákaznické zkušenosti.", tag: "DT" },
+    { term: "5 fází Design Thinking (Stanford)", def: "1) Vcítění (Empathize), 2) Definování (Define), 3) Generování nápadů (Ideate), 4) Prototypování (Prototype), 5) Testování (Test).", tag: "FÁZE" },
+    { term: "FÁZE 1: Vcítění (Empathize)", def: "Pochopení potřeb zákazníka. Hloubkové rozhovory, pozorování, etnografie. Nástroje: empathy map, customer journey, persony. Princip: NEPTAT SE, POZOROVAT.", tag: "FÁZE" },
+    { term: "FÁZE 2: Definování (Define)", def: "Z hloubkového pochopení formulovat jasný Problem Statement. Point of View (POV) + How Might We (HMW) otázky. Špatně def. problém = špatné řešení.", tag: "FÁZE" },
+    { term: "FÁZE 3: Generování nápadů (Ideate)", def: "Vytvořit množství myšlenek pro originalitu řešení. Brainstorming, brainwriting, 6-3-5, SCAMPER, Walt Disney. Nejlepší jdou dál.", tag: "FÁZE" },
+    { term: "FÁZE 4: Prototypování (Prototype)", def: "Převedení myšlenky do hmatatelné formy. Iterativní, levné, prezentovat uživatelům → feedback. 4 typy: user stories, MVP, wireframe/mockup, funkční prototyp.", tag: "FÁZE" },
+    { term: "FÁZE 5: Testování (Test)", def: "Vyzkoušení na větší skupině zákazníků, primárně lead users. Cíl: učit se, NE 'ostré uvedení'. Pokud problém → návrat na fázi 1-2.", tag: "FÁZE" },
+    { term: "Double Diamond", def: "British Design Council 2005. 2 diamanty: rozšiřování × zužování. 4 kroky: Discover → Define (1. diamant) → Develop → Deliver (2. diamant).", tag: "MODEL" },
+    { term: "Discover (Double Diamond)", def: "1. krok, rozšiřování. Pochopení problému, výzkum, pozorování. Odpovídá fázi Vcítění v DT.", tag: "MODEL" },
+    { term: "Define (Double Diamond)", def: "2. krok, zužování. Definice problému, problem statement. Odpovídá fázi Definování v DT. Konec 1. diamantu.", tag: "MODEL" },
+    { term: "Develop (Double Diamond)", def: "3. krok, rozšiřování. Ideace + prototypování. Odpovídá fázím Generování + Prototypování v DT. Začátek 2. diamantu.", tag: "MODEL" },
+    { term: "Deliver (Double Diamond)", def: "4. krok, zužování. Testování + uvedení na trh. Odpovídá fázi Testování v DT.", tag: "MODEL" },
+    { term: "MVP — Minimum Viable Product", def: "Minimální funkční verze produktu pro validaci hypotézy s minimálními zdroji. Eric Ries (Lean Startup 2011). Princip: build → measure → learn.", tag: "POJMY" },
+    { term: "Co MVP NENÍ", def: "Není nekompletní/rozbitý produkt. MVP musí být FUNKČNÍ, jen má méně features. Cíl: vydat brzy, sbírat data, iterovat.", tag: "POJMY" },
+    { term: "Lead users (pokrokoví uživatelé)", def: "Eric von Hippel (MIT 1986). Uživatelé, kteří narážejí na potřeby trhu dřív než ostatní. Inovativní, ochotni experimentovat, kvalitní feedback.", tag: "POJMY" },
+    { term: "Kde hledat lead users", def: "Komunity (Reddit, fóra), konference, influenceři v oblasti, early adopters. V DT fázi 5 testuješ primárně na nich.", tag: "POJMY" },
+    { term: "DT × Lean Startup", def: "DT (Stanford, IDEO) = empatie + kreativita pro radikální inovace. Lean Startup (Ries) = MVP + metriky pro validaci. V praxi se kombinují.", tag: "POJMY" },
+    { term: "DT × SGCP — kdy co", def: "DT = explorativní (fuzzy front-end, hledání problému/řešení). SGCP = exekuční (back-end, vývoj a launch po validaci konceptu).", tag: "DT vs SGCP" },
+    { term: "Univerzálnost DT", def: "Použitelný pro produkty, procesy, služby, organizační změnu. Univerzální mindset, ne jen pro design produktů.", tag: "DT" },
+  ];
+
+  const quizInov4 = [
+    { q: "Co je Design Thinking?", opts: ["Brainstorming", "Uživatelsky orientovaný přístup k řešení problémů — empatie, kreativita, iterace", "Účetní metoda", "Marketingová strategie"], correct: 1 },
+    { q: "Kolik fází má Design Thinking podle Stanford d.school?", opts: ["3", "5 (Vcítění, Definování, Generování, Prototypování, Testování)", "7", "10"], correct: 1 },
+    { q: "Co je první fáze DT?", opts: ["Brainstorming", "Vcítění (Empathize) — pochopení potřeb zákazníka přes pozorování", "Testování", "Prodej"], correct: 1 },
+    { q: "Co je hlavní princip fáze Vcítění?", opts: ["Ptát se zákazníků", "NEPTAT SE 'co chcete', ale POZOROVAT, co reálně dělají", "Dělat focus groups", "Anketovat online"], correct: 1 },
+    { q: "Co je Problem Statement ve fázi Define?", opts: ["Reklama", "Jasná formulace problému (uživatel + potřeba + insight) z hloubkového pochopení", "Audit", "Plán"], correct: 1 },
+    { q: "Co je MVP?", opts: ["Marketingová zkratka", "Minimum Viable Product — minimální funkční verze pro validaci hypotézy (Eric Ries, Lean Startup)", "Management", "Master plán"], correct: 1 },
+    { q: "Co MVP NENÍ?", opts: ["Funkční produkt", "Nekompletní nebo rozbitý produkt — MVP musí být funkční, jen má méně features", "Validační nástroj", "Iterace"], correct: 1 },
+    { q: "Princip Lean Startup je:", opts: ["Plan-Do-Check-Act", "Build → Measure → Learn (postav, změř, nauč se, iteruj)", "Push-Pull", "Top-down rozhodování"], correct: 1 },
+    { q: "Kdo jsou Lead users?", opts: ["Manažeři", "Pokrokoví uživatelé, kteří narážejí na potřeby trhu dřív než ostatní (Eric von Hippel MIT)", "Investoři", "Konkurenti"], correct: 1 },
+    { q: "Kolik typů prototypů má fáze Prototype?", opts: ["2", "4 (user stories, MVP, wireframe/mockup, funkční prototyp)", "7", "10"], correct: 1 },
+    { q: "Co je Double Diamond?", opts: ["Šperk", "Model DT od British Design Council — 2 diamanty (rozšiřování × zužování)", "Investiční nástroj", "Cenotvorba"], correct: 1 },
+    { q: "Jaké jsou 4 kroky Double Diamond?", opts: ["Plan/Do/Check/Act", "Discover → Define → Develop → Deliver", "Push/Pull/Hybrid/Mix", "Plánování/řízení/kontrola/zpětná vazba"], correct: 1 },
+    { q: "DT vs SGCP — hlavní rozdíl?", opts: ["Cena", "DT = explorativní (hledání problému/řešení, fuzzy front-end), SGCP = exekuční (vývoj a launch po validaci)", "Velikost", "Rok vzniku"], correct: 1 },
+    { q: "Co se stane, když testování (fáze 5) odhalí závažný problém?", opts: ["Konec projektu", "Návrat na fázi 1 (Vcítění) nebo 2 (Definování) — DT je nelineární a iterativní", "Větší rozpočet", "Nábor"], correct: 1 },
+    { q: "Co je abduktivní uvažování v DT?", opts: ["Únos", "Schopnost dopátrat se vysvětlení existujícího pozorování — 'empatie'", "Algebraická operace", "Účetní metoda"], correct: 1 },
+    { q: "Která firma je etalon Design Thinking?", opts: ["Walmart", "IDEO (David Kelley) — průkopníci DT v 90. letech, Stanford d.school", "Lidl", "ČSOB"], correct: 1 },
+  ];
+
+  const praxeInov4 = {
+    caseStudy: {
+      company: "IDEO + Apple — etalony Design Thinking v praxi",
+      subtitle: "Jak David Kelley založil DT a jak ho Apple využívá dodnes",
+      content: (<>
+        <b>IDEO (Palo Alto, 1991)</b> je <b>celosvětový etalon Design Thinking</b>. Založil ji <b>David Kelley</b>, který později (2005) založil Stanford d.school — kolébku DT. Apple je největším konzumentem DT metodiky.<br/><br/>
+        🎯 IDEO — JAK ZAČAL DT:<br/><br/>
+        Kelley v 80. letech řešil návrh ergonomické myši pro Apple (originální Apple Mouse 1983). Místo aby vymýšlel od stolu, <b>strávil týdny pozorováním lidí</b>, jak používají rané PC. Zjistil, že existující myši jsou nepohodlné, nepřesné. Empatie + pozorování → nový design.<br/><br/>
+        Pak IDEO redesignovala <b>nákupní vozík pro Target</b> (1999, dokumentováno v ABC Nightline). 5 dní, 5 fází DT:<br/>
+        <b>Vcítění:</b> pozorovali rodiče v supermarketu, jak vozíky používají (děti vypadávají, nelze nést jednou rukou).<br/>
+        <b>Definování:</b> 'Rodiče potřebují bezpečný a flexibilní vozík, který umožní mít volnou ruku.'<br/>
+        <b>Generování:</b> brainstorming 5 týmů, žádná kritika, šílené nápady.<br/>
+        <b>Prototypování:</b> 4 prototypy (kartón, hadice, dráty) za odpoledne.<br/>
+        <b>Testování:</b> rodiče ve velkém supermarketu, sledování reakcí.<br/><br/>
+        🍎 APPLE — DT JAKO STRATEGIE:<br/><br/>
+        Apple vede DT na úroveň firemní filozofie. <b>Steve Jobs</b> říkal: <b>'You've got to start with the customer experience and work backwards to the technology.'</b> To je esence DT.<br/><br/>
+        Příklady DT v Apple:<br/>
+        <b>iPhone (2007):</b> Vcítění s tehdejšími 'smartphony' (BlackBerry, Windows Mobile) — všechny byly těžkopádné, klávesy nepohodlné. Define: 'Lidé chtějí kapesní počítač s telefonem, ne telefon s počítačem.' Develop: multi-touch interface (lead users testování). Deliver: 2007, změnil odvětví.<br/>
+        <b>iPod (2001):</b> Vcítění s lidmi, kteří poslouchají MP3 (komplikované přenášení do PC, malé kapacity). Define: '1000 songs in your pocket.' Prototype: scroll wheel jako revoluční UI.<br/>
+        <b>Apple Watch (2015):</b> Iterace přes 4 generace MVP — první watch byla nedotažená, postupné learnings vedly k Series 4+ jako etalonu smartwatch.<br/><br/>
+        🔄 KOMBINACE DT + SGCP V APPLE:<br/><br/>
+        Apple využívá <b>DT pro rané fáze</b> (Vcítění, Definování, Generování — Jonathan Ive design studio) a <b>SGCP pro průmyslový vývoj a launch</b> (Tim Cook expertise — supply chain, masová výroba, předvídatelný launch cyklus). Klasická <b>kombinace explorativní + exekuční</b> metodiky.<br/><br/>
+        Multidisciplinarita: <b>industrial designers + software engineers + materiálová věda + marketing</b> — všichni spolu od fáze Vcítění. Jonathan Ive řekl, že nejlepší produkty vznikají, když designéři rozumí inženýrství a inženýři designu.
+      </>),
+      lessons: "DT není jen brainstorming — je to <b>kompletní mindset</b>. IDEO + Apple ukazují, že <b>5 fází se opakuje a iteruje</b>, často roky před tím, než produkt vyjde. Klíč: <b>multidisciplinarita</b>, <b>pozorování místo ptaní</b>, <b>iterace přes prototypy</b>, <b>lead users feedback</b>. Pro PS: aplikuj všech 5 fází, navrhni multidisciplinární tým, ukaž iterace + návraty. Po validaci přepni na SGCP."
+    },
+    miniExamples: [
+      { tag: "DT — VCÍTĚNÍ", color: VSE.fph, company: "IKEA — observe and design", content: "IKEA designéři každoročně navštěvují <b>tisíce domácností po celém světě</b> — pozorují, jak lidi reálně bydlí. V Praze stejně jako v Mumbai. Hledají frustrace (málo místa, špatné úložiště, nepřehledné kuchyně). Z těchto pozorování vznikají nové produktové řady. Klasická fáze 1 DT v korporátním měřítku. Bez tohoto vcítění by IKEA byla jen levný švédský retailer — díky DT je globální etalon affordable design." },
+      { tag: "DT — IDEACE + MVP", color: VSE.warning, company: "Airbnb — od matračí k disrupci", content: "Airbnb (2007) začal jako klasický MVP. Zakladatelé Brian Chesky a Joe Gebbia neměli peníze na nájem, tak nafoukli 3 matrace v obytném pokoji a pronajali je účastníkům designové konference v San Francisku (kde byly všechny hotely vyprodané). To bylo MVP — minimální funkční verze, která validovala hypotézu: 'Lidé jsou ochotni spát u cizích.' Po validaci iterovali — vlastní fotky, recenze, platby. Klasická Lean Startup spojená s DT. Dnes hodnotováno přes 100 mld. USD." },
+      { tag: "DT — IKEA Place", color: VSE.fmv, company: "Notino (CZ) — DT v e-commerce", content: "Notino (česká firma, dnes evropská lichva v parfumerii) využívá DT pro UX své aplikace. Pozoruje lidi v parfumeriích (jak vybírají vůně), simuluje to v aplikaci — <b>AR funkce 'Vyzkoušej vůni'</b>, popisy not, doporučení podle nálady. Iterují přes A/B testy. Lead users = jejich VIP zákazníci, kteří dostávají beta features dřív. Z e-shopu se stal lifestyle brand díky tomu, že rozumí zákaznické psychologii. Etalon DT v česky retailu." },
+      { tag: "DT — DOUBLE DIAMOND", color: VSE.success, company: "British Government Digital Service — vláda dělá DT", content: "Britská vláda (Government Digital Service, GDS) standardně používá Double Diamond pro <b>redesign veřejných služeb</b>. GOV.UK web byl postaven přes DT od základu — Discover (pozorování občanů, jak hledají info), Define (problem statement: 'Občan potřebuje jasnou cestu k informaci'), Develop (prototypy, user testing), Deliver (postupný rollout). Výsledek: jeden z nejjednodušších government webů na světě. Ukazuje, že DT funguje i mimo komerční sektor." },
+    ]
+  };
+
+  const examQuestionsInov4 = [
+    { komise: "2025-06-13 Cejthamr+Machek+Heřman, 2025-06-16 Štamfestová+Mládková+Vávra, 2025-06-16 Double Stříteský+Mareš, 2025-01-30 Krause+Lorencová+Zamazalová", otazka: "Design Thinking + detailněji popsat + příklad", pozn: "4× tažené. Komise <b>VŽDY chce všech 5 fází</b> (Vcítění/Definování/Generování/Prototypování/Testování) + konkrétní nástroj ke každé + konkrétní příklad firmy (IDEO, Apple, IKEA, Airbnb). Klíč: nelineární iterativní proces." },
+    { komise: "Obecně — Double Diamond model", otazka: "Alternativní modely DT — Double Diamond, kroky", pozn: "British Design Council (2005). 4 kroky: Discover → Define → Develop → Deliver. 2 diamanty = rozšiřování × zužování. Mapování na 5 fází DT." },
+    { komise: "Obecně — MVP a lead users", otazka: "Klíčové pojmy DT a Lean Startup — MVP, lead users", pozn: "MVP = Eric Ries Lean Startup, build-measure-learn. Lead users = Eric von Hippel MIT 1986, pokrokoví uživatelé pro kvalitní feedback. V DT fázi 5 (Testování) testuješ primárně na lead users." },
+    { komise: "Obecně — rozdíl DT × SGCP", otazka: "Kdy použít Design Thinking a kdy SGCP?", pozn: "DT = explorativní (fuzzy front-end, hledání problému/řešení). SGCP = exekuční (back-end, vývoj a launch). V praxi kombinace — Apple DT na začátku + SGCP pro launch." },
+  ];
+
+  const podcastInov4 = {
+    title: "Inovace 4 — Design Thinking",
+    description: "Design Thinking je uživatelsky orientovaný přístup k řešení problémů. Vychází z myšlení designérů a aplikuje ho na byznys, inovace, služby, organizační změnu. Využívá empatii, kreativitu a iteraci. Charakteristiky - zaměřený na lidi, proces začínající u zákazníka, popisuje jednotlivá stádia která na sebe reagují a mohou se vracet, nelineární dynamický proces, abduktivní styl uvažování (schopnost dopátrat se vysvětlení, empatie), holistický a vizionářský pohled, založen na práci multidisciplinárních týmů, iterace a experimenty (pozorování, vizualizace, rychlé prototypování), tolerance rizika a selhání (důležitost učení), celostní pohled a mezioborová spolupráce, univerzální (pro produkty, procesy, služby). Vhodný pro komplexní problémy s nejasnou definicí (wicked problems), když neznáš přesný problém, uživatel neumí říct co chce, radikální inovace, redesign zákaznické zkušenosti. 5 fází podle Stanford d.school. FÁZE 1 Vcítění - pochopení potřeb zákazníka (jak produkt používá v reálném životě), formulované požadavky a potřeby z pohledu zákazníka, předběžné a hloubkové rozhovory, pozorování, etnografie, kontextové návštěvy. Nástroje - empathy map, customer journey, deník uživatele, persony. Klíč - NEPTAT SE co chcete, ale POZOROVAT. FÁZE 2 Definování - co chceme vyřešit a jak, z hloubkového pochopení formulujeme jasný problem statement, Point of View (POV) - uživatel + potřeba + insight, How Might We (HMW) otázky. Špatně definovaný problém = špatné řešení. FÁZE 3 Generování nápadů - cíl vytvořit mezistátní množství myšlenek pro originalitu a unikátnost řešení, originalita a inovační řešení, stimulovat kreativitu, využít spolupráci v týmu, brainstorming, brainwriting, metoda 6-3-5 (6 lidí, 3 nápady, 5 minut), 666, SCAMPER, Walt Disney, 5x Proč. Nejlepší nápady jdou do další fáze. FÁZE 4 Prototypování - převedení myšlenky do hmatatelné a snadno uchopitelné formy, iterativní proces tvorby jednoduchých a relativně levných nápadů, lze snadno prezentovat koncovým uživatelům - feedback, proces se upravuje a prototypy jsou upravovány na základě feedbacku, prototyp musí představovat plně funkční celek, nemusí být hodnocen jen vnitřními členy týmu, podporuje postupné osvojování info a znalostí, vyúsťuje ve validační řešení. 4 typy prototypů - user stories, MVP, wireframe/mockup, funkční prototyp. Testování a úprava chyb na prototypech je relativně levné, podněcuje uživatele aby se zapojili do samotné výroby, zátěžovými testy se odhalí slabá místa. FÁZE 5 Testování - vyzkoušení dokončeného řešení na větší skupině zákazníků, lead users (pokrokoví uživatelé), cílem je co nejvíce se naučit ne ostré uvedení na trh. Pokud testování odhalí závažné problémy - zpět na fázi 1 nebo 2. Double Diamond - British Design Council 2005, 2 zásadní fáze, princip rozšiřování a zužování, redefinice problému, iterace a krok zpět. 4 kroky - Discover (rozšíření, pochopení problému), Define (zúžení, definice problému, konec 1. diamantu), Develop (rozšíření, ideace a prototypování, začátek 2. diamantu), Deliver (zúžení, testování a uvedení). MVP - Minimum Viable Product, Eric Ries Lean Startup 2011, minimální funkční verze pro validaci hypotézy, build-measure-learn. Lead users - Eric von Hippel MIT 1986, pokrokoví uživatelé, narážejí na potřeby trhu dřív než ostatní, kvalitní feedback. DT × SGCP - DT explorativní (fuzzy front-end), SGCP exekuční (back-end vývoj a launch). Etalony - IDEO (David Kelley), Apple (Steve Jobs - You've got to start with customer experience), IKEA observe and design, Airbnb (MVP s matracemi), Notino (DT v e-commerce CZ).",
+    audioUrl: null,
+    notebookLmUrl: null,
+  };
+
+  const examStrategyInov4 = `
+    <b style="color:#1E938D">1.</b> Definuj DT — uživatelsky orientovaný přístup, empatie + iterace.<br/>
+    <b style="color:#1E938D">2.</b> Klíčové charakteristiky — nelineární, abduktivní, multidisciplinární, iterativní.<br/>
+    <b style="color:#1E938D">3.</b> ⚠️ <b>5 fází DT (Stanford)</b> — Vcítění → Definování → Generování → Prototypování → Testování. <b>Komise VŽDY chce všech 5.</b><br/>
+    <b style="color:#1E938D">4.</b> Ke každé fázi konkrétní nástroj — Vcítění (empathy map, customer journey), Definování (POV, HMW), Generování (brainstorming/6-3-5/SCAMPER), Prototypování (4 typy), Testování (lead users).<br/>
+    <b style="color:#1E938D">5.</b> ⚠️ <b>Iterativnost</b> — návrat na fázi 1-2, když test odhalí problém.<br/>
+    <b style="color:#1E938D">6.</b> ⚠️ <b>Double Diamond</b> — British Design Council 2005, 4 kroky (Discover/Define/Develop/Deliver).<br/>
+    <b style="color:#1E938D">7.</b> <b>MVP</b> — Eric Ries Lean Startup, minimální funkční verze pro validaci.<br/>
+    <b style="color:#1E938D">8.</b> <b>Lead users</b> — Eric von Hippel, pokrokoví uživatelé pro kvalitní feedback.<br/>
+    <b style="color:#1E938D">9.</b> <b>DT × SGCP</b> — explorativní (DT) × exekuční (SGCP, viz Inov 5). Apple kombinuje obojí.<br/>
+    <b style="color:#1E938D">10.</b> <b>Etalony</b> — IDEO (David Kelley), Apple (Steve Jobs), IKEA, Airbnb, Notino (CZ).<br/>
+    <b style="color:#1E938D">11.</b> Aplikace na PS — postupně 5 fází, multidisciplinární tým, oddělený inovační tým pro radikální inovaci (viz Inov 2).<br/>
+    <b style="color:#1E938D">12.</b> Po validaci přepni na SGCP (Inov 5) pro vývoj a launch.
+  `;
+
+  const caseStudyInov4 = {
+    title: "Klára a redesign call centra pro pojišťovnu",
+    subtitle: "Aplikuj 5 fází Design Thinking + Double Diamond",
+    scenario: "Klára (32 let) je nová head of customer experience v české pojišťovně NovaSure (1500 lidí, 800 tisíc klientů). Call centrum (180 operátorů) má katastrofální NPS skóre minus 25. Klienti nadávají na fronty (průměrně 8 minut čekání), opakované přepojování, robotický script, neschopnost vyřešit problém napoprvé. Operátoři jsou frustrovaní, fluktuace 45 % ročně.\n\nManagement chce 'quick fix' - víc operátorů, nový IVR systém, lepší script. Klára tuší, že tohle není řešení - 5 let už zkoušejí podobné věci a NPS stále padá. Musí to celé promyslet znova - od zákazníka, ne od technologie.\n\nKlára studovala Design Thinking na Stanford online course a chce ho aplikovat na celý redesign call centra. Argumentuje před boardem - 'potřebujeme 6 týdnů na Vcítění, než cokoli začneme stavět'. Board je skeptický - 'máme problém TEĎ, ne za 6 týdnů'. Klára trvá - 'bez pochopení reálných potřeb klientů a operátorů jen vyhodíme další miliony za špatné řešení'.\n\nKlára navrhuje multidisciplinární tým - UX designér, sociolog, IT architekt, sales manager, customer success lead, 3 operátoři z různých center. Plánuje 6 týdnů Vcítění - poslouchat reálné hovory, sedět vedle operátorů 3 dny, dělat hloubkové rozhovory s 20 frustrovanými klienty, sledovat customer journey od první návštěvy webu po vyřešení reklamace.\n\nVíc - Klára chce do testování pustit lead users. Identifikovala 15 'super klientů' (mají pojistku 10+ let, otevření, ochotni testovat, dávají kvalitní feedback). S nimi chce prototypovat řešení dřív, než to půjde na mainstream.",
+    signals: [
+      { text: "NPS minus 25, fronty 8 min, opakované přepojování, robotický script — opakované 'quick fixy' nefungovaly", color: VSE.danger, reason: "Klasický signál pro DT (Inov 4) — komplexní problém s nejasnou definicí. Linear fixes (víc operátorů, nový IVR) selhávaly 5 let. Potřeba radikálního redesignu zákaznické zkušenosti." },
+      { text: "Management chce 'quick fix', Klára trvá na 6 týdnech Vcítění", color: VSE.warning, reason: "Klára brání KLÍČOVOU FÁZI DT (Inov 4) — Vcítění bez kompromisu. Bez pochopení reálných potřeb (etnografie, pozorování) je redesign věštění z koule. Komise tohle ocení." },
+      { text: "Multidisciplinární tým — UX designér, sociolog, IT, sales, customer success, 3 operátoři", color: VSE.fph, reason: "MULTIDISCIPLINARITA DT (Inov 4) — klíčová charakteristika. Designér + technik + sociolog + business + frontline lidé. Bez všech těchto perspektiv se prototypy minou s realitou." },
+      { text: "6 týdnů Vcítění — poslouchat hovory, sedět vedle operátorů, hloubkové rozhovory s 20 klienty, customer journey", color: VSE.success, reason: "FÁZE 1 DT — VCÍTĚNÍ (Inov 4) v praxi. Ne ptaní 'co chcete', ale POZOROVÁNÍ. Empathy map, customer journey, hloubkové rozhovory — všechny správné nástroje fáze 1." },
+      { text: "15 'super klientů' jako lead users — pojistka 10+ let, otevření, kvalitní feedback", color: VSE.primary, reason: "LEAD USERS (Inov 4) — Eric von Hippel. Pokrokoví uživatelé, kteří dají kvalitnější feedback než mass-market. Klára správně identifikovala lead users pro fázi 5 (Testování)." },
+      { text: "Prototypovat řešení s lead users dřív, než půjde na mainstream", color: VSE.warning, reason: "ITERATIVNÍ PŘÍSTUP DT (Inov 4) — fáze 4 (Prototypování) + fáze 5 (Testování) s lead users. Pokud problém, návrat na fáze 1-2. Klasický nelineární DT proces." },
+    ],
+    quiz1: {
+      question: "Co Klára správně dělá?",
+      options: [
+        "Aplikuje 'quick fix' rychle, jak chce board",
+        "Aplikuje Design Thinking — všechny 5 fází, multidisciplinární tým, lead users pro testování, brání 6 týdnů Vcítění před akcí",
+        "Najímá víc operátorů a kupuje nový IVR",
+        "Optimalizuje script pro operátory",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měla Klára postupovat?",
+      options: [
+        { text: "FÁZE 1 VCÍTĚNÍ (6 týdnů) — pozorovat operátory, hloubkové rozhovory s klienty, customer journey, empathy map. Ne ptát se 'co chcete', POZOROVAT.", correct: true, reason: "✓ Inov 4 — Vcítění je základ DT. 6 týdnů je dlouho, ale bez něj jakékoli řešení mine. Board se musí přesvědčit nebo Klára selže." },
+        { text: "FÁZE 2 DEFINOVÁNÍ — z pozorování formulovat Problem Statement (POV: 'Klienti potřebují cítit, že je někdo poslouchá, ne jen rychle vyřešit, protože dnes mají dojem, že je systém ignoruje') + HMW otázky.", correct: true, reason: "✓ Inov 4 — bez jasné definice problému jakékoli řešení mine. POV je klíčový artefakt DT." },
+        { text: "FÁZE 3 GENEROVÁNÍ + FÁZE 4 PROTOTYPOVÁNÍ — brainstorming s týmem, 6-3-5 metoda, prototypy (wireframy nové aplikace, role play s novým scriptem, redesign IVR menu).", correct: true, reason: "✓ Inov 4 — generování bez kritiky, prototypy levné a iterativní. 4 typy prototypů (wireframe, role-play, MVP nové funkce, user story scénáře)." },
+        { text: "FÁZE 5 TESTOVÁNÍ s 15 lead users — beta verze redesignu na vybraných super klientech, sběr feedbacku, iterace. Pokud problém → návrat na fázi 1 nebo 2.", correct: true, reason: "✓ Inov 4 — lead users dají kvalitnější feedback než mass-market. Testování není 'ostré uvedení', je to učení. Nelineární návraty jsou ok." },
+        { text: "Multidisciplinární tým — UX, sociolog, IT, sales, customer success, frontline operátoři. Vyhnout se 'pyramidě' jen z managementu.", correct: true, reason: "✓ Inov 4 — multidisciplinarita je klíčová charakteristika DT. Bez frontline (operátorů) by tým neměl reálný kontext, bez sociologa by chyběl pohled na chování." },
+        { text: "Po validaci konceptu s lead users přepnout na SGCP (Inov 5) pro průmyslový rollout, gates, formální schvalování.", correct: true, reason: "✓ Inov 4 — DT pro explorativní fáze, SGCP pro exekuční. Apple etalon kombinace. Po validaci jdi do SGCP gates pro launch." },
+        { text: "Najmout 50 nových operátorů a koupit nový IVR systém — tradiční fix", correct: false, reason: "✗ Klasický anti-vzor. 5 let to nefungovalo. Bez DT a empatie jen utratíš víc peněz za stejný problém." },
+        { text: "Začít prototypováním rovnou bez Vcítění — uspořit čas", correct: false, reason: "✗ Bez Vcítění je prototyp jen tipnutí. DT trvá na fázi 1 z důvodu. Klára by selhala stejně jako předchozí 'quick fixy'." },
+      ],
+    },
+    summary: "<b>Klára správně aplikuje Design Thinking — 5 fází, multidisciplinární tým, lead users, kombinace s SGCP po validaci.</b><br/><br/><b>Postup:</b><br/><br/>• <b>FÁZE 1 VCÍTĚNÍ (6 týdnů):</b><br/>– Pozorovat 30 operátorů v jejich práci 3 dny každý.<br/>– Hloubkové rozhovory s 20 frustrovanými klienty (1 hodina každý).<br/>– Etnografie call centra — všímat si emocí, gest, frustrací.<br/>– Customer journey od první návštěvy webu po vyřešení reklamace.<br/>– Nástroje: empathy map per persona (mladá rodina × důchodce × OSVČ), shadowing operátorů, deník uživatele (5 klientů týden).<br/><br/>• <b>FÁZE 2 DEFINOVÁNÍ:</b> Z výzkumu formulovat <b>Problem Statement</b>: 'Klienti se v call centru cítí ignorováni, protože script je robotický a operátor nemůže vyřešit problém napoprvé. Frustrace pak roste s každým přepojením.' + HMW otázky: 'Jak bychom mohli dát operátorům autonomii a klientům pocit, že jsou slyšeni už od prvního kontaktu?'<br/><br/>• <b>FÁZE 3 GENEROVÁNÍ:</b><br/>– Brainstorming týmu — 6-3-5 metoda (6 lidí, 3 nápady, 5 min).<br/>– SCAMPER na existující procesy (Eliminate = odstranit přepojování, Combine = AI assistent pro operátora, Reverse = klient mluví s 1 operátorem od začátku do konce).<br/>– Walt Disney metoda — Snílek (utopické řešení), Realista (jak to udělat), Kritik (co selže).<br/><br/>• <b>FÁZE 4 PROTOTYPOVÁNÍ (4 typy):</b><br/>– User stories: 'Klient volá → AI rozpozná, kdo to je → operátor má všechen kontext na obrazovce → vyřeší v 1 hovoru'.<br/>– Wireframe nového interface operátora.<br/>– MVP — 5 operátorů testuje novou aplikaci 2 týdny.<br/>– Funkční prototyp — pilot na 10 klientech.<br/><br/>• <b>FÁZE 5 TESTOVÁNÍ s 15 lead users:</b><br/>– 'Super klienti' (10+ let, otevření) dostanou nový proces.<br/>– Sběr feedbacku — NPS, kvalitativní rozhovory, sledování metrik (čekání, opakované hovory, vyřešeno napoprvé).<br/>– Pokud NPS roste a feedback je pozitivní → škálování na celé centrum. Pokud ne → návrat na fázi 1-2.<br/><br/>• <b>Po validaci přepnout na SGCP (Inov 5):</b> formální rollout, gates pro schvalování fází (pilot → 20 % → 50 % → 100 %), metriky.<br/><br/>• <b>Double Diamond:</b> Discover (Vcítění) → Define (Problem Statement) → Develop (Generování + Prototypy) → Deliver (Testing + rollout). Klára aplikuje obojí, DT 5 fází i Double Diamond jsou kompatibilní.<br/><br/><b>Pro komisi:</b> Klíč — <b>5 fází DT</b> (vždy všech 5), <b>nelineární iterace</b>, <b>multidisciplinarita</b>, <b>lead users v testování</b>, <b>kombinace s SGCP po validaci</b>. Anti-vzor: 'quick fix' přístup, jednorázová akce bez Vcítění, jen ptaní 'co chcete' místo pozorování.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Inovace" subjectId="inov" number={4} title="Design Thinking — 5 fází + Double Diamond"
+      subtitle="DT 5 fází (Vcítění/Definování/Generování/Prototypování/Testování) + Double Diamond (Discover/Define/Develop/Deliver) + MVP (Ries) + lead users (von Hippel) + rozdíl DT × SGCP"
+      color={VSE.primary}
+      questionText="Design Thinking — uživatelsky orientovaný přístup k řešení problémů. 5 fází podle Stanford d.school (Vcítění, Definování, Generování nápadů, Prototypování, Testování). Double Diamond model. MVP a lead users. Rozdíl Design Thinking × Stage Gate Control Process."
+      sloz={2} roz={3} freq={4}
+      examStrategy={examStrategyInov4}
+      studySections={studySectionsInov4}
+      flashcards={flashcardsInov4}
+      quiz={quizInov4}
+      praxe={praxeInov4}
+      examQuestions={examQuestionsInov4}
+      podcast={podcastInov4}
+      caseStudy={caseStudyInov4}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   INOVACE 5 — Stage Gate Control Process (Roberts × Cooper)
+   ════════════════════════════════════════════════════════ */
+function OkruhInov5Panel() {
+  const studySectionsInov5 = [
+    { id: "co_je_sgcp", title: "Co je SGCP a proč ho firmy používají", subtitle: "Nástroj řízení inovačních procesů přes brány (gates)", color: VSE.primary, emoji: "construction",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Stage Gate Control Process (SGCP)</b> = nástroj řízení inovačních procesů pro jejich <b>postupnou implementaci</b>. Podrobný plán <b>od nápadu po uvedení na trh</b>. Celý proces je rozčleněn do stádií (Stages), mezi kterými jsou <b>brány (Gates)</b>, kde se rozhoduje, zda projekt postoupí dál nebo skončí.
+        </Def>
+        <Tag color={VSE.primary}>Klíčové principy SGCP</Tag>
+        <Bullet items={[
+          "<b>Celý proces je rozčleněn do stádií STAGES</b> — postupně se při splnění kritérií posouváme z jednoho do druhého.",
+          "<b>Dle potřeby rozkládán do dílčích stádií</b> s cílem činit <b>sledování projektu přehlednějším, ilustrativnějším a efektivnějším</b>.",
+          "<b>Posun se řídí GATEKEEPINGEM</b> — <b>vedoucí pracovníci kontrolují</b> tento proces. Říká se jim <b>gatekeepers</b>.",
+          "<b>Týmy vyvíjející inovace musí splnit předem daná kritéria</b>, aby inovace mohla projít do dalšího kritéria.",
+          "<b>Hledáme nejlepší řešení = GATE CONTROL.</b>",
+          "<b>Jakmile je etapa ukončena, projekt je kriticky posouván s předem stanoveným souborem metrik</b>, které jsou kvalifikačním kritériem pro propuštění projektu do další etapy.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Proč firmy SGCP používají</Tag>
+        <Bullet items={[
+          "<b>Bere v úvahu kritické faktory úspěchu</b>.",
+          "<b>Počet stádií podle typu inovace</b> — čím složitější, tím víc stádií:",
+          "&nbsp;&nbsp;• <b>Radikální inovace</b> — volnější měřítka na výstup z etapy.",
+          "&nbsp;&nbsp;• <b>Inkrementální inovace</b> — tvrdší měřítka.",
+          "<b>Každá firma si sestaví podle sebe</b>, podle svých critical success factors.",
+          "<b>+ Bere v úvahu CSF, zkracuje čas vývoje, eliminuje zbytečnou práci a chyby.</b>",
+          "<b>Tento formalizovaný postup:</b> usnadňuje přechod inovačních projektů stadii, stanovuje kritické milníky, bere v úvahu kritické faktory úspěchu.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "roberts", title: "SGCP podle Robertse — 6 stádií", subtitle: "Klasický model SGCP — od příležitosti ke komerčnímu vývoji", color: VSE.primary, emoji: "path",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Edward Roberts</b> (MIT) navrhl <b>6 stadií</b> inovačního procesu. Klasická akademická verze SGCP — zaměřená na technologické a R&D inovace. <b>Komise se na rozdíl Roberts × Cooper ráda ptá.</b>
+        </Def>
+        <Tag color={VSE.primary}>6 stadií Roberts</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, n: "1", t: "ROZPOZNÁNÍ PŘÍLEŽITOSTI", d: "Vyhledává se tržní příležitost, myšlenky, nápady. V úvahu <b>technická uskutečnitelnost</b>, na základě požadavků zákazníka, analogií." },
+            { c: VSE.warning, n: "2", t: "GENEROVÁNÍ A TŘÍDĚNÍ MYŠLENEK", d: "Nápad přetvořen na model. <b>Životaschopnost a technická proveditelnost</b>. První formální přezkoumání (důraz na kvalitu). Kreativní metody." },
+            { c: VSE.fmv, n: "3", t: "ŘEŠENÍ PROBLÉMŮ", d: "Validace modelu, odhad poptávky a nákladů. <b>Cenová politika, finanční rozpočet.</b> V laboratoři, dílně, simulační systémy." },
+            { c: VSE.success, n: "4", t: "PROTOTYP", d: "Pracovníci nalézají <b>technická řešení problémů</b>. Plně funkční celek (ne odlitek) — zda bude inovace fungovat." },
+            { c: VSE.danger, n: "5", t: "VYUŽITÍ ŘEŠENÍ", d: "Objevené řešení převedeno do <b>využitelného</b>. Uvést na trh první sérii + otestování <b>lead users</b> (viz Inov 4)." },
+            { c: VSE.primary, n: "6", t: "KOMERČNÍ VÝVOJ", d: "<b>Výroba a uvedení na trh.</b> Preference zákazníků → výběr dodavatelského modelu. Marketing, distribuce, vhodné mít plány." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontMono, marginBottom: 4 }}>{b.n}. {b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Hlavní rys Robertse</Tag>
+        <Bullet items={[
+          "<b>Akademický + R&D focused</b> — vychází z univerzitního a laboratorního prostředí (MIT).",
+          "<b>Důraz na technickou proveditelnost</b> a validaci modelu před výrobou.",
+          "<b>Lead users testují první sérii</b> (krok 5) — kvalitní feedback před masovým uvedením.",
+          "<b>Komerční vývoj až na konci (krok 6)</b> — marketing přichází relativně pozdě v procesu.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "cooper", title: "SGCP podle Coopera — formalizovaný 5-stage proces", subtitle: "Praktická manažerská verze pro průmysl", color: VSE.primary, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Robert G. Cooper</b> (kanadský konzultant a profesor McMaster University) navrhl <b>formalizovaný 5-stage proces</b> v 80. letech. <b>Dnes nejrozšířenější verze SGCP</b> v korporátní praxi (Procter & Gamble, 3M, Johnson & Johnson).
+        </Def>
+        <Tag color={VSE.primary}>Cooper — klíčové principy</Tag>
+        <Bullet items={[
+          "<b>Formalizovaný proces</b> — jasné kroky, dokumenty, schvalování.",
+          "<b>Zachycení myšlenky a zvládnutí systému.</b>",
+          "<b>'Voice of customer'</b> — diskuze s <b>lead users</b> (viz Inov 4) ve všech fázích.",
+          "<b>Generování scénářů</b> — různé možnosti vývoje produktu.",
+          "<b>Organizační akce</b> — kdo co dělá, jasná odpovědnost.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>5 stage Cooper modelu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, n: "Stage 0", t: "DISCOVERY (objev)", d: "<b>Nové myšlenky, příležitosti.</b> Vstupní brainstorming, sběr nápadů, market research." },
+            { c: VSE.warning, n: "Stage 1", t: "SCOPING (stanovení rozsahu)", d: "<b>Zhodnocení technických přínosů.</b> Předběžná tržní a technická analýza. První gate." },
+            { c: VSE.fmv, n: "Stage 2", t: "BUSINESS CASE", d: "<b>Definuje problém</b>, podrobné technické, marketingové, finanční analýzy. <b>Příprava produktu, investice.</b> Druhý gate (důležitý)." },
+            { c: VSE.success, n: "Stage 3", t: "DEVELOPMENT (vývoj)", d: "<b>Plány — konkrétní výstupy.</b> Vývoj produktu, prototypy, testy. Třetí gate." },
+            { c: VSE.danger, n: "Stage 4", t: "TESTOVÁNÍ A VALIDACE", d: "<b>Beta testy, pilotní výroba, marketingové testy.</b> Validace u zákazníků. Čtvrtý gate." },
+            { c: VSE.primary, n: "Stage 5", t: "LAUNCH (uvedení na trh)", d: "<b>Komerční výroba + uvedení na trh.</b> Plný marketing, distribuce, sales. Post-launch review." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 12.5, fontWeight: 700, color: b.c, fontFamily: fontMono, marginBottom: 4 }}>{b.n}: {b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 960 230" maxHeight={260}>
+          <text x="480" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Cooper Stage Gate Process - linearni tok stages a gates</text>
+          <text x="480" y="40" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)" fontStyle="italic">na kazde brane Go / Kill / Hold / Recycle - gatekeepers rozhoduji</text>
+          {/* All 6 stages + 5 gates in single row */}
+          {[
+            {type: "stage", x: 20,  c: VSE.fph,     n: "Stage 0", label: "DISCOVERY",  sub: "napady"},
+            {type: "gate",  x: 126, c: VSE.warning, n: "G1",      label: "idea screen"},
+            {type: "stage", x: 182, c: VSE.fph,     n: "Stage 1", label: "SCOPING",    sub: "predbezna analyza"},
+            {type: "gate",  x: 288, c: VSE.danger,  n: "G2",      label: "2nd screen"},
+            {type: "stage", x: 344, c: VSE.fph,     n: "Stage 2", label: "BUSINESS CASE", sub: "finance, marketing"},
+            {type: "gate",  x: 450, c: VSE.warning, n: "G3",      label: "go to dev"},
+            {type: "stage", x: 506, c: VSE.fph,     n: "Stage 3", label: "DEVELOPMENT", sub: "prototypy, MVP"},
+            {type: "gate",  x: 612, c: VSE.warning, n: "G4",      label: "go to test"},
+            {type: "stage", x: 668, c: VSE.success, n: "Stage 4", label: "TESTING",    sub: "beta, pilot"},
+            {type: "gate",  x: 774, c: VSE.danger,  n: "G5",      label: "go to launch"},
+            {type: "stage", x: 830, c: VSE.danger,  n: "Stage 5", label: "LAUNCH",     sub: "vyroba, sales"},
+          ].map((el, i, arr) => {
+            if (el.type === "stage") {
+              return (
+                <g key={i}>
+                  <rect x={el.x} y="80" width="100" height="80" rx="8" fill={el.c} opacity="0.20" stroke={el.c} strokeWidth="2"/>
+                  <text x={el.x + 50} y="100" textAnchor="middle" fontFamily={fontMono} fontSize="10.5" fontWeight="800" fill={el.c}>{el.n}</text>
+                  <text x={el.x + 50} y="125" textAnchor="middle" fontFamily={fontSans} fontSize="10.5" fontWeight="700" fill={el.c}>{el.label}</text>
+                  <text x={el.x + 50} y="148" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill="var(--text-muted)">{el.sub}</text>
+                </g>
+              );
+            }
+            return (
+              <g key={i}>
+                <path d={`M ${el.x} 120 L ${el.x + 25} 85 L ${el.x + 50} 120 L ${el.x + 25} 155 Z`} fill={el.c} opacity="0.32" stroke={el.c} strokeWidth="2"/>
+                <text x={el.x + 25} y="118" textAnchor="middle" fontFamily={fontMono} fontSize="10" fontWeight="800" fill={el.c}>{el.n}</text>
+                <text x={el.x + 25} y="138" textAnchor="middle" fontFamily={fontMono} fontSize="7.5" fill={el.c}>{el.label}</text>
+              </g>
+            );
+          })}
+          {/* Forward arrows between adjacent elements at y=120 */}
+          {[120, 176, 282, 338, 444, 500, 606, 662, 768, 824].map((endX, i) => (
+            <line key={i} x1={endX} y1="120" x2={endX + 6} y2="120" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          ))}
+          {/* Bottom decisions legend */}
+          <text x="480" y="195" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">na kazdem gate 4 rozhodnuti: GO (pokracovat) - KILL (ukoncit) - HOLD (pozastavit) - RECYCLE (vratit zpet)</text>
+          <text x="480" y="217" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">G2 a G5 jsou nejkritictejsi brany (cervene) - Business Case schvaleni a Launch decision</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.fph}>Roberts × Cooper — rozdíly</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "ROBERTS (MIT)", d: "<b>6 stadií, akademický.</b> R&D fokus, technická proveditelnost, lab/dílna. Lead users až ve fázi 5 (využití). Komerční vývoj na konci. Hodí se pro <b>technologické inovace</b> (farmaceutika, deeptech)." },
+            { c: VSE.warning, t: "COOPER", d: "<b>5 stage (0-5), formalizovaný.</b> Manažerský/korporátní fokus, business case, gates jako schvalování. Voice of customer od začátku. Hodí se pro <b>komerční produktové inovace</b> (FMCG, elektronika)." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 760 340" maxHeight={360}>
+          <text x="380" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Roberts (6 stadii MIT) vs Cooper (5 stage McMaster)</text>
+          <text x="380" y="40" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">paralelni casove osy - co kdy delaji</text>
+          {/* Roberts row - top */}
+          <text x="40" y="80" fontFamily={fontSans} fontSize="13" fontWeight="800" fill={VSE.fph}>ROBERTS</text>
+          <text x="40" y="96" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)" fontStyle="italic">6 stadii, MIT, R&D</text>
+          {[
+            {x: 220, label: "1. Roz-", sub: "poznani", c: VSE.fph},
+            {x: 305, label: "2. Gene-", sub: "rovani", c: VSE.fph},
+            {x: 390, label: "3. Reseni", sub: "problemu", c: VSE.fph},
+            {x: 475, label: "4. Proto-", sub: "typ", c: VSE.fph},
+            {x: 560, label: "5. Vyuziti", sub: "reseni", c: VSE.fph},
+            {x: 645, label: "6. Komer.", sub: "vyvoj", c: VSE.fph},
+          ].map((s, i) => (
+            <g key={`r${i}`}>
+              <rect x={s.x} y="70" width="80" height="46" rx="4" fill={s.c} opacity="0.20" stroke={s.c} strokeWidth="1.5"/>
+              <text x={s.x + 40} y="87" textAnchor="middle" fontFamily={fontSans} fontSize="10" fontWeight="700" fill={s.c}>{s.label}</text>
+              <text x={s.x + 40} y="100" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill={s.c}>{s.sub}</text>
+            </g>
+          ))}
+          {/* Cooper row - middle */}
+          <text x="40" y="160" fontFamily={fontSans} fontSize="13" fontWeight="800" fill={VSE.warning}>COOPER</text>
+          <text x="40" y="176" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)" fontStyle="italic">5 stage, McMaster, komercni</text>
+          {[
+            {x: 220, label: "Stage 0", sub: "Discovery", c: VSE.warning},
+            {x: 305, label: "Stage 1", sub: "Scoping", c: VSE.warning},
+            {x: 390, label: "Stage 2", sub: "Bus. Case", c: VSE.warning},
+            {x: 475, label: "Stage 3", sub: "Develop.", c: VSE.warning},
+            {x: 560, label: "Stage 4", sub: "Testing", c: VSE.warning},
+            {x: 645, label: "Stage 5", sub: "Launch", c: VSE.warning},
+          ].map((s, i) => (
+            <g key={`c${i}`}>
+              <rect x={s.x} y="150" width="80" height="46" rx="4" fill={s.c} opacity="0.20" stroke={s.c} strokeWidth="1.5"/>
+              <text x={s.x + 40} y="167" textAnchor="middle" fontFamily={fontSans} fontSize="10" fontWeight="700" fill={s.c}>{s.label}</text>
+              <text x={s.x + 40} y="180" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill={s.c}>{s.sub}</text>
+            </g>
+          ))}
+          {/* Comparison table */}
+          <text x="40" y="232" fontFamily={fontSans} fontSize="11" fontWeight="800" fill="var(--text)">Kdy ktery pouzit:</text>
+          <rect x="40" y="246" width="340" height="70" rx="8" fill={VSE.fph} opacity="0.10" stroke={VSE.fph} strokeWidth="1.5"/>
+          <text x="55" y="265" fontFamily={fontMono} fontSize="10" fontWeight="700" fill={VSE.fph}>ROBERTS:</text>
+          <text x="55" y="282" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)">- technologicke / R&D inovace</text>
+          <text x="55" y="296" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)">- deeptech, farmaceutika, akademicky</text>
+          <text x="55" y="310" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)">- napr. Pfizer mRNA vakcina</text>
+          <rect x="400" y="246" width="340" height="70" rx="8" fill={VSE.warning} opacity="0.10" stroke={VSE.warning} strokeWidth="1.5"/>
+          <text x="415" y="265" fontFamily={fontMono} fontSize="10" fontWeight="700" fill={VSE.warning}>COOPER:</text>
+          <text x="415" y="282" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)">- komercni produktove inovace</text>
+          <text x="415" y="296" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)">- FMCG, elektronika, korporat</text>
+          <text x="415" y="310" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)">- napr. P&G, Skoda, 3M</text>
+        </ResponsiveSVG>
+        <ExamAlert
+          komise="Tažené: SGCP a stádia, 2 přístupy SGCP — Roberts × Cooper (Tahal+Cejthamr+Schönfeld 2025, Vrbová+Špaček+Machek, Krause+Viktora+Tahal 2025, Mládková+Kolouchová+Mikan 2026)"
+          what="Komise <b>VŽDY chce oba modely</b> + rozdíl. Klíč: <b>Roberts = 6 stadií, akademický/R&D</b> × <b>Cooper = 5 stage (0-5), korporátní/komerční</b>. Mládková+Kolouchová+Mikan 2026 explicitně chce 'rozdíl v přístupu Roberts a Cooper'."
+        />
+      </div>) },
+
+    { id: "gates_csf", title: "Brány (Gates), gatekeeping a kritické faktory úspěchu", subtitle: "Co se na bráně rozhoduje + 7 CSF úspěšného SGCP", color: VSE.primary, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Brány (Gates)</b> jsou rozhodovací body mezi stádii. Na každé bráně se rozhodne, zda projekt <b>postoupí, zastaví nebo skončí</b>. Gatekeepers (senior management) hodnotí projekt podle <b>předem stanovených kritérií</b>.
+        </Def>
+        <Tag color={VSE.primary}>Co se na bráně rozhoduje (Go / Kill / Hold / Recycle)</Tag>
+        <Bullet items={[
+          "<b>GO</b> — projekt pokračuje do další fáze, dostává zdroje.",
+          "<b>KILL</b> — projekt ukončen. Klíčové! SGCP umožňuje 'zabít' špatné projekty <b>brzy a levně</b>, místo aby šly do drahého vývoje a launchu.",
+          "<b>HOLD</b> — projekt pozastaven (čeká na lepší podmínky, zdroje).",
+          "<b>RECYCLE</b> — projekt se vrací do předchozí fáze k dopracování.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Kritéria hodnocení na bráně</Tag>
+        <Bullet items={[
+          "<b>Strategický fit</b> — odpovídá projekt firemní strategii?",
+          "<b>Tržní atraktivita</b> — velikost trhu, růst, konkurence.",
+          "<b>Technická proveditelnost</b> — zvládneme to technicky?",
+          "<b>Finanční viability</b> — NPV, IRR, ROI, payback (statické a dynamické metriky — viz Inov 7).",
+          "<b>Konkurenční výhoda</b> — co je naše USP, máme nefér výhodu?",
+          "<b>Risk assessment</b> — co může selhat a jak to mitigovat.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>7 kritických faktorů úspěchu SGCP</Tag>
+        <Bullet items={[
+          "<b>1. Dobrá příprava</b> — důkladná tržní a technická analýza v early stages.",
+          "<b>2. Hlas zákazníka (Voice of Customer)</b> — od fáze 0, ne až ve fázi 5. Cooper na tom trvá.",
+          "<b>3. Přidaná hodnota produktu</b> — jasná hodnotová nabídka pro zákazníka.",
+          "<b>4. Dobrá definice produktu</b> — jasná specifikace před začátkem vývoje (Stage 2).",
+          "<b>5. Uvedení na trh</b> — profesionální launch s marketingem a sales.",
+          "<b>6. Účinné brány (gates)</b> — gatekeepers musí mít autoritu Kill, jinak SGCP nefunguje.",
+          "<b>7. Dobrý tým</b> — multidisciplinární, dedikovaný, kompetentní.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "vyhody_aplikace", title: "Výhody SGCP + MVP v kontextu SGCP", subtitle: "Hlavní poznatky + aplikace v malých × velkých firmách", color: VSE.primary, emoji: "bolt",
+      content: (<div>
+        <Def color={VSE.primary}>
+          SGCP přináší <b>strukturu a kontrolu</b> do jinak chaotického inovačního procesu. Hlavní poznatky pro státnice.
+        </Def>
+        <Tag color={VSE.primary}>Hlavní poznatky ohledně SGCP</Tag>
+        <Bullet items={[
+          "<b>Využití SGCP prokázalo, že tento přístup je aplikovatelný nejen ve velkých firmách, ale rovněž v menších firmách.</b>",
+          "<b>Díky omezenému rozsahu projektů a diverzifikovanosti inovačních projektů</b> mohou tyto firmy účinně adaptovat SGCP na vlastní podmínky.",
+          "<b>Takto adaptovaný SGCP zohledňuje specifika dané firmy</b> a inovační proces může být veden na optimální hladině výkonnosti.",
+          "<b>SGCP skutečně usnadňuje a urychluje inovační proces v důsledku 'racionalizace' vývojového procesu.</b>",
+          "<b>SGCP minimalizuje chyby</b>, téměř eliminuje jak chybné závěry, tak i zbytečnou práci, čímž spoří peníze.",
+          "<b>SGCP zkracuje čas do uvedení inovace na trh</b>, což zajišťuje dřívější inkaso přínosů z inovace a účinnější ochranu intelektuálního kapitálu firmy.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>MVP v kontextu SGCP</Tag>
+        <Bullet items={[
+          "<b>MVP (Minimum Viable Product — viz Inov 4)</b> a SGCP se nevylučují — naopak, doplňují.",
+          "<b>V Cooper modelu</b> MVP typicky vzniká ve <b>Stage 3 (Development)</b> a testuje se ve <b>Stage 4 (Testing)</b>.",
+          "<b>V Roberts modelu</b> MVP odpovídá <b>kroku 4 (Prototyp) až 5 (Využití řešení)</b> — testování na lead users.",
+          "<b>Spojení DT + Lean + SGCP:</b> <b>DT</b> (viz Inov 4) pro fuzzy front-end (objevení problému) → <b>Lean/MVP</b> pro rychlou validaci → <b>SGCP</b> pro formální vývoj a launch. <b>Etalon kombinace: Apple, P&G, 3M.</b>",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Kdy SGCP NEpoužít</Tag>
+        <Bullet items={[
+          "<b>Velmi rané fuzzy front-end</b> — kdy ještě neznáš problém. Tam jdi do <b>DT (Inov 4)</b>.",
+          "<b>Velmi malé jednorázové projekty</b> — overhead SGCP by byl větší než přínos.",
+          "<b>Velmi agile prostředí</b> (SaaS, software) — kde se preferuje continuous delivery místo formálních gates. SGCP může být <b>'lehčí'</b> verze (light Stage Gate).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na případovku — SGCP", subtitle: "Postup + co komise oceňuje × čemu se vyhnout", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Tažené SGCP 8× ze 45 — komise chce <b>oba modely (Roberts × Cooper)</b> + rozdíl + aplikaci na konkrétní firmu. Někteří chtějí i gatekeeping detail.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj, jestli firma z PS má <b>jasný produkt ve vývoji</b> (SGCP) nebo <b>komplexní problém s nejasnou definicí</b> (jdi do DT — Inov 4).",
+          "<b>2.</b> Rozhodni: <b>Roberts</b> (technologická/R&D inovace, akademický kontext, deeptech) nebo <b>Cooper</b> (komerční produktová inovace, FMCG, korporát).",
+          "<b>3.</b> Aplikuj všechna stádia konkrétně — co se v Stage 0/1/2/3/4/5 (Cooper) nebo krocích 1-6 (Roberts) v případové firmě stane.",
+          "<b>4.</b> Definuj <b>kritéria na bránách</b> — strategický fit, tržní atraktivita, technická proveditelnost, finanční viability, konkurenční výhoda, risk.",
+          "<b>5.</b> Identifikuj <b>gatekeepers</b> — kdo má autoritu Go/Kill/Hold/Recycle.",
+          "<b>6.</b> Doporuč <b>multidisciplinární tým</b> a <b>Voice of Customer</b> od fáze 0 (Cooper).",
+          "<b>7.</b> Pro komplexní inovaci doporuč <b>kombinaci DT (Inov 4) + SGCP</b> — DT pro objevení problému, SGCP pro vývoj a launch.",
+          "<b>8.</b> Pro adaptaci na menší firmu navrhni <b>light Stage Gate</b> — méně stádií, méně formální dokumentace.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> <b>Oba modely</b> (Roberts 6 + Cooper 5) + jasný rozdíl + kdy co.",
+          "<b>✅ Dobře:</b> <b>Gatekeeping</b> a 4 rozhodnutí (Go/Kill/Hold/Recycle) — komise se ráda ptá.",
+          "<b>✅ Dobře:</b> <b>7 CSF</b> úspěšného SGCP — komise to oceňuje.",
+          "<b>✅ Dobře:</b> Vědět, že SGCP funguje i v menších firmách (Mládková tohle ráda).",
+          "<b>✅ Dobře:</b> Spojit s DT (Inov 4) a Lean (MVP) — moderní kombinace.",
+          "<b>❌ Špatně:</b> Mluvit jen o jednom modelu — komise vždy chce porovnání.",
+          "<b>❌ Špatně:</b> Říct, že 'gatekeeper jen schvaluje' — má autoritu i KILL projekty, to je esence SGCP.",
+          "<b>❌ Špatně:</b> Tvrdit, že SGCP je 'staromódní waterfall' — moderní verze (Cooper next-gen) zahrnuje agile prvky.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsInov5 = [
+    { term: "SGCP — definice", def: "Stage Gate Control Process. Nástroj řízení inovačních procesů pro postupnou implementaci. Podrobný plán od nápadu po uvedení na trh.", tag: "SGCP" },
+    { term: "Stages × Gates", def: "Stages = stadia inovačního procesu. Gates = brány mezi nimi, kde se rozhoduje, zda projekt postoupí.", tag: "SGCP" },
+    { term: "Gatekeeping", def: "Posun mezi stádii řízený vedoucími pracovníky (gatekeepers). Kontrolují, zda projekt splnil předem daná kritéria pro postup dál.", tag: "SGCP" },
+    { term: "Gate control", def: "Hledání nejlepšího řešení — kritické posouzení projektu s předem stanoveným souborem metrik, které jsou kvalifikačním kritériem pro propuštění do další etapy.", tag: "SGCP" },
+    { term: "4 rozhodnutí na bráně", def: "GO (pokračovat), KILL (ukončit), HOLD (pozastavit), RECYCLE (vrátit do předchozí fáze).", tag: "GATES" },
+    { term: "Kdo je Roberts", def: "Edward Roberts (MIT). Navrhl 6-stadiový SGCP model. Akademický, R&D fokus, technologické inovace.", tag: "ROBERTS" },
+    { term: "Roberts — 6 stadií", def: "1) Rozpoznání příležitosti, 2) Generování myšlenek, 3) Řešení problémů, 4) Prototyp, 5) Využití řešení, 6) Komerční vývoj.", tag: "ROBERTS" },
+    { term: "Roberts — krok 1 (rozpoznání)", def: "Vyhledává se tržní příležitost, myšlenky, nápady. V úvahu technická uskutečnitelnost, požadavky zákazníka, analogie.", tag: "ROBERTS" },
+    { term: "Roberts — krok 4 (prototyp)", def: "Pracovníci nalézají technická řešení problémů. Plně funkční celek (ne odlitek) — zda bude inovace fungovat.", tag: "ROBERTS" },
+    { term: "Roberts — krok 5 (využití)", def: "Objevené řešení převedeno do využitelného. Uvést na trh první sérii + otestování lead users.", tag: "ROBERTS" },
+    { term: "Kdo je Cooper", def: "Robert G. Cooper (McMaster University). Navrhl formalizovaný 5-stage SGCP. Dnes nejrozšířenější v korporátní praxi (P&G, 3M, J&J).", tag: "COOPER" },
+    { term: "Cooper — 6 stages (0-5)", def: "Stage 0: Discovery, Stage 1: Scoping, Stage 2: Business Case, Stage 3: Development, Stage 4: Testing & Validation, Stage 5: Launch.", tag: "COOPER" },
+    { term: "Cooper — Stage 0 (Discovery)", def: "Nové myšlenky, příležitosti. Vstupní brainstorming, sběr nápadů, market research.", tag: "COOPER" },
+    { term: "Cooper — Stage 2 (Business Case)", def: "Definuje problém, podrobné technické, marketingové, finanční analýzy. Příprava produktu, investice. Druhý gate (důležitý — schvaluje vývoj).", tag: "COOPER" },
+    { term: "Voice of Customer (Cooper)", def: "Diskuze s lead users ve všech fázích (od Stage 0). Cooper na tom trvá — bez VoC SGCP selhává.", tag: "COOPER" },
+    { term: "Roberts × Cooper", def: "Roberts = 6 stadií, akademický, R&D, deeptech. Cooper = 5 stage (0-5), korporátní, komerční produkty (FMCG, elektronika).", tag: "ROZDÍL" },
+    { term: "Počet stadií podle typu inovace", def: "Radikální = volnější měřítka. Inkrementální = tvrdší měřítka. Každá firma adaptuje SGCP podle svých CSF.", tag: "SGCP" },
+    { term: "7 CSF úspěšného SGCP", def: "1) Dobrá příprava, 2) hlas zákazníka, 3) přidaná hodnota produktu, 4) dobrá definice, 5) uvedení na trh, 6) účinné brány, 7) dobrý tým.", tag: "CSF" },
+    { term: "SGCP v malých firmách", def: "Aplikovatelný i v menších firmách — díky omezenému rozsahu mohou účinně adaptovat na vlastní podmínky. Light Stage Gate = méně stádií, méně dokumentace.", tag: "APLIKACE" },
+    { term: "Co SGCP firmě dává", def: "Usnadňuje a urychluje inovační proces (racionalizace). Minimalizuje chyby. Spoří peníze. Zkracuje čas na trh. Účinnější ochrana IP.", tag: "APLIKACE" },
+    { term: "DT + Lean + SGCP", def: "DT (fuzzy front-end) → Lean/MVP (validace) → SGCP (formální vývoj a launch). Etalon kombinace: Apple, P&G, 3M.", tag: "KOMBINACE" },
+    { term: "Kdy SGCP NEpoužít", def: "Velmi rané fuzzy front-end (jdi do DT), jednorázové malé projekty (overhead větší než přínos), agile SaaS (light SG nebo continuous delivery).", tag: "APLIKACE" },
+  ];
+
+  const quizInov5 = [
+    { q: "Co je SGCP?", opts: ["Marketingová zkratka", "Stage Gate Control Process — nástroj řízení inovačních procesů přes stadia a brány", "Účetní postup", "Statistická metoda"], correct: 1 },
+    { q: "Co jsou 'gates' v SGCP?", opts: ["Brány firmy", "Rozhodovací body mezi stadii, kde se rozhoduje o postupu projektu", "Ploty", "Bezpečnostní kontrola"], correct: 1 },
+    { q: "Kdo jsou gatekeepers?", opts: ["Recepční", "Vedoucí pracovníci, kteří kontrolují přechod projektu mezi stadii", "Kontroloři kvality", "Auditoři"], correct: 1 },
+    { q: "Jaká rozhodnutí může gatekeeper na bráně udělat?", opts: ["Jen GO", "GO / KILL / HOLD / RECYCLE — pokračovat, ukončit, pozastavit, vrátit zpět", "Jen schválit", "Jen finance"], correct: 1 },
+    { q: "Kdo navrhl 6-stadiový SGCP model?", opts: ["Cooper", "Edward Roberts (MIT) — akademický model pro R&D inovace", "Drucker", "Schumpeter"], correct: 1 },
+    { q: "Co je první stadium podle Robertse?", opts: ["Prototyp", "Rozpoznání příležitosti — vyhledání tržní příležitosti, myšlenek, nápadů", "Launch", "Marketing"], correct: 1 },
+    { q: "Kdo navrhl formalizovaný 5-stage SGCP?", opts: ["Roberts", "Robert G. Cooper — manažerský model pro korporátní praxi (P&G, 3M, J&J)", "Drucker", "Maurya"], correct: 1 },
+    { q: "Kolik stages má Cooper model?", opts: ["3", "6 (Stage 0 Discovery až Stage 5 Launch)", "9", "12"], correct: 1 },
+    { q: "Co je Stage 2 podle Coopera?", opts: ["Launch", "Business Case — definuje problém, technické/marketingové/finanční analýzy, příprava investice", "Discovery", "Testing"], correct: 1 },
+    { q: "Co je 'Voice of Customer' v Cooper modelu?", opts: ["Hlasitý zákazník", "Diskuze s lead users ve všech fázích, Cooper na tom trvá od Stage 0", "Call centrum", "Reklama"], correct: 1 },
+    { q: "Hlavní rozdíl Roberts × Cooper?", opts: ["Roberts je novější", "Roberts = 6 stadií akademický R&D, Cooper = 5 stage (0-5) korporátní komerční", "Cooper je delší", "Žádný"], correct: 1 },
+    { q: "Funguje SGCP i v malých firmách?", opts: ["Ne, jen ve velkých", "Ano — díky omezenému rozsahu projektů ho mohou účinně adaptovat na vlastní podmínky", "Jen v IT", "Jen v retail"], correct: 1 },
+    { q: "Kolik kritických faktorů úspěchu SGCP?", opts: ["3", "7 (příprava, hlas zákazníka, hodnota, definice, launch, brány, tým)", "10", "15"], correct: 1 },
+    { q: "Co SGCP firmě přináší?", opts: ["Více byrokracie", "Racionalizaci vývoje, minimalizaci chyb, úsporu peněz, zkrácení času na trh, ochranu IP", "Vyšší ceny", "Pomalejší proces"], correct: 1 },
+    { q: "Kdy NEpoužít SGCP?", opts: ["Vždy", "Ve fuzzy front-end (jdi do DT) nebo u jednorázových malých projektů (overhead větší než přínos)", "Nikdy", "Jen ve startup"], correct: 1 },
+    { q: "Jak kombinovat DT, Lean a SGCP?", opts: ["Nelze", "DT (objevení problému) → Lean/MVP (validace) → SGCP (formální vývoj a launch); etalon: Apple, P&G, 3M", "Jen jedno", "Postupně všechny ráno"], correct: 1 },
+  ];
+
+  const praxeInov5 = {
+    caseStudy: {
+      company: "P&G — etalon Cooper Stage Gate v korporátní praxi",
+      subtitle: "Jak Procter & Gamble řídí inovační procesy přes formální gates",
+      content: (<>
+        <b>Procter & Gamble (P&G)</b> je <b>celosvětový etalon Cooper Stage Gate procesu</b> v korporátní praxi. P&G uvádí ročně stovky nových produktů (Pampers, Ariel, Gillette, Pantene) a všechny procházejí přes <b>formální SGCP gates</b>.<br/><br/>
+        🏭 STAGE 0 — DISCOVERY:<br/><br/>
+        P&G má interní platformu <b>'Connect + Develop'</b> (otevřená inovace — viz Inov 1) pro sběr nápadů. <b>50 % inovací pochází zvenku</b> (univerzity, dodavatelé, startupy, konzumenti). V Stage 0 P&G ročně shromažďuje <b>tisíce nápadů</b>, které jdou do první brány.<br/><br/>
+        🔍 STAGE 1 — SCOPING + GATE 1:<br/><br/>
+        Předběžná tržní a technická analýza. <b>Gate 1 (Idea Screen):</b> strategický fit s firemními kategoriemi, předběžná atraktivita trhu. <b>95 % nápadů KILL.</b> Tato 'tvrdá brána' je důvod, proč P&G nepouští do drahého vývoje slabé nápady.<br/><br/>
+        📊 STAGE 2 — BUSINESS CASE + GATE 2:<br/><br/>
+        Z 50 nápadů, co prošly Gate 1, P&G vyvíjí <b>detailní business case</b> — technická specifikace, finance (NPV, IRR — viz Inov 7), marketing plán, supply chain. <b>Gate 2 (Second Screen):</b> nejvíce kritická brána, schvaluje investici do vývoje. <b>Z 50 zbývá 10-15.</b><br/><br/>
+        🛠️ STAGE 3 — DEVELOPMENT + GATE 3:<br/><br/>
+        Vývoj produktu, prototypy, alfa testy interně. <b>Voice of Customer</b> přes <b>focus groups s lead users</b> (např. mladé maminky pro Pampers, profi sportovci pro Gillette). <b>Gate 3 (Go to Testing):</b> rozhodnutí o investici do beta testů. <b>Zbývá 5-8 projektů.</b><br/><br/>
+        🧪 STAGE 4 — TESTING & VALIDATION + GATE 4:<br/><br/>
+        <b>Pilotní výroba</b> (limitovaná série). <b>Tržní testy</b> v jednom regionu (typicky USA Midwest nebo střední Evropa). Beta testy s 1000+ konzumenty. <b>Gate 4 (Go to Launch):</b> rozhodnutí o uvedení na globální trh. <b>Zbývá 3-5 projektů.</b><br/><br/>
+        🚀 STAGE 5 — LAUNCH:<br/><br/>
+        Plný komerční launch — masová výroba, globální distribuce, TV reklamy, retail listing, sales push. <b>Post-launch review</b> po 6-12 měsících — vyhodnocení vs business case.<br/><br/>
+        💰 PROČ TO FUNGUJE:<br/><br/>
+        Z <b>tisíce počátečních nápadů</b> v Stage 0 se na trh dostane <b>3-5 produktů</b>. Z toho <b>1-2 jsou hitové</b>. SGCP umožňuje P&G <b>'zabít špatné projekty brzy a levně'</b> — místo, aby šly do drahého launchu. <b>SGCP zkracuje čas na trh</b>, <b>minimalizuje chyby</b>, <b>spoří miliony dolarů</b> ročně.<br/><br/>
+        Robert Cooper sám konzultoval pro P&G v 80. letech — formalizovaný model 'Stage Gate' byl zčásti vyvinut na základě P&G praxe.
+      </>),
+      lessons: "P&G ukazuje <b>Cooper SGCP v plné síle</b> — 6 stages (0-5), 4 gates, voice of customer, multidisciplinární týmy, schopnost KILL projekty brzy. Klíč: <b>SGCP není byrokracie, ale ochrana před plýtváním zdrojů</b>. Z tisíce nápadů na trh 3-5 produktů — to je SGCP filter. Pro PS: aplikovat Cooper na komerční produktovou inovaci (FMCG, elektronika, retail), Roberts spíš na technologickou (deeptech, farmaceutika). Vždy zmínit gatekeeping a 4 rozhodnutí (Go/Kill/Hold/Recycle)."
+    },
+    miniExamples: [
+      { tag: "ROBERTS — TECH/R&D", color: VSE.fph, company: "Pfizer mRNA vakcína — Roberts model v deeptech", content: "Vývoj mRNA vakcín odpovídá Roberts modelu (6 stadií, akademický/R&D focus). Krok 1-2: rozpoznání příležitosti (mRNA technologie z univerzitního výzkumu Katalin Karikó na UPenn) + generování myšlenek. Krok 3: řešení problémů (jak stabilizovat mRNA, jak ji dopravit do buněk — lipidové nanočástice). Krok 4: prototyp (první vakcíny v laboratoři). Krok 5: využití (klinické zkoušky fáze I-III). Krok 6: komerční vývoj (FDA approval, globální výroba). Klasický deeptech proces s důrazem na technickou proveditelnost. Cooper model by tu byl nepřesný — chybí Voice of Customer (zákazník neřekne, jak má fungovat mRNA)." },
+      { tag: "COOPER — FMCG", color: VSE.warning, company: "Škoda Auto (CZ) — Cooper Stage Gate v automotive", content: "Škoda Auto využívá Cooper Stage Gate pro vývoj nových modelů. Stage 0: market research (trendy, segmenty). Stage 1: scoping (předběžná tržní + technická analýza). <b>Gate 1</b>: schvaluje management. Stage 2: business case (detailní finance, target margin, investice, výrobní plán). <b>Gate 2</b>: schvaluje board (Volkswagen Group často veto). Stage 3: development (3-4 roky vývoje, prototypy, crash testy). Stage 4: pre-production (zkušební výroba, dealer training, marketing prep). Stage 5: launch (typically autosalonem v Ženevě/Frankfurtu). Klasický automotive SGCP — od prvního skicáku k showroomu trvá 4-5 let, projektů, co projdou Gate 1 ke Stage 5, je < 10 %." },
+      { tag: "GATEKEEPING — KILL", color: VSE.danger, company: "Google Stadia — KILL po Stage 5 (rare!)", content: "Google Stadia (cloud gaming, 2019-2023) prošla všemi 5 stages Cooperova procesu. Stage 0: nápad (cloud gaming je budoucnost). Stage 1: technická analýza (Google má infrastrukturu). Stage 2: business case (předpoklad růstu cloud gaming trhu). Stage 3: development (3 roky). Stage 4: testing (closed beta). Stage 5: launch (listopad 2019). Ale Google ji <b>'killed' už PO launchu</b> v lednu 2023 — adopce byla pomalá, latence problém, konkurence (Xbox Cloud, GeForce Now) lepší. Ukázka, že 'KILL' rozhodnutí může přijít i pozdě — ideálně ve Gate 2 nebo 3, kde se ušetří nejvíc peněz. SGCP nabádá k brzké KILL, ne pozdní." },
+      { tag: "DT + SGCP — APPLE", color: VSE.success, company: "Apple — DT v early, SGCP v late stages", content: "Apple je etalon kombinace DT (Inov 4) + SGCP. Pro nový produkt (např. iPhone, AirPods, Vision Pro): <b>DT v early</b> — Jonathan Ive a designové studio, vcítění s uživateli, prototypy. <b>SGCP v late</b> — Tim Cook supply chain, formální gates pro každou výrobní fázi (Foxconn, supplier qualification, mass production ramp-up). Steve Jobs etabloval kulturu, kde se může 'KILL' projekt i pozdě (zrušený Apple Car projekt 2024 po 10 letech vývoje — ušetřilo miliardy dolarů budoucích ztrát). Klasická kombinace explorativní (DT) + exekuční (SGCP) metodiky." },
+    ]
+  };
+
+  const examQuestionsInov5 = [
+    { komise: "2025-06-04 Tahal+Cejthamr+Schönfeld, 2025-06-16 Vávra+Mládková+Štamfestová, 2025-02-05 Nový+Kolouchová+Svobodová, 2025-02-05 Krause+Viktora+Tahal, 28.1.2025 Špaček+Palíšková+Machek, Vrbová+Špaček+Machek, 2025-09-11 Stříteský+Schönfeld+Cejthamr, 2026-02-06 Mládková+Kolouchová+Mikan", otazka: "Stage Gate Control Process — stádia, gatekeeping, 2 přístupy (Roberts × Cooper), aplikace na případovku", pozn: "8× tažené (druhá nejvíc po Lean Canvas/BMC). Komise <b>VŽDY chce oba modely</b> (Roberts 6 stadií + Cooper 5 stage 0-5) + rozdíl + gatekeeping + 4 rozhodnutí (Go/Kill/Hold/Recycle). Mládková+Kolouchová+Mikan 2026 explicitně chce rozdíl Roberts × Cooper." },
+    { komise: "2025-06-04 Tahal+Cejthamr+Schönfeld", otazka: "Inovační techniky a SGCP, gatekeeping, 2 přístupy dle 2 pánů", pozn: "Tahalova specifická otázka — chce <b>jména 2 autorů</b> (Roberts a Cooper) + gatekeeping detail. Bez jmen autorů body srážejí." },
+    { komise: "28.1.2025 Špaček+Palíšková+Machek", otazka: "The Stage Gate process — aplikace na případovku (IT firma) + MVP", pozn: "Aplikace na konkrétní typ firmy (IT). MVP v kontextu SGCP — typicky vzniká ve Stage 3 (Development) a testuje se ve Stage 4 (Testing). Light Stage Gate pro agile prostředí." },
+    { komise: "Vrbová+Špaček+Machek", otazka: "SGCP a stádia, lead users, techniky jako klobouky de Bono, brainwriting", pozn: "SGCP + kreativní techniky (lead users, klobouky de Bono = Walt Disney metoda, brainwriting — viz Inov 3 a Inov 4)." },
+    { komise: "2026-02-06 Mládková+Kolouchová+Mikan", otazka: "Nejpoužívanější modely tvorby inovací, podrobně SGCP — co jsou ty brány, kdo jsou gatekeepers, rozdíl v přístupu Roberts a Cooper", pozn: "Nejnovější tažená! <b>VYŽADUJE rozdíl Roberts × Cooper</b> + detail co jsou gates a kdo gatekeepers. Bez toho komise neuspokojí." },
+  ];
+
+  const podcastInov5 = {
+    title: "Inovace 5 — Stage Gate Control Process (SGCP)",
+    description: "Stage Gate Control Process je nástroj řízení inovačních procesů pro jejich postupnou implementaci. Podrobný plán od nápadu po uvedení na trh. Celý proces je rozčleněn do stadií (Stages), mezi kterými jsou brány (Gates), kde se rozhoduje, zda projekt postoupí dál nebo skončí. Posun se řídí gatekeepingem - vedoucí pracovníci (gatekeepers) kontrolují tento proces. Týmy vyvíjející inovace musí splnit předem daná kritéria, aby inovace mohla projít do dalšího kritéria. Hledáme nejlepší řešení = gate control. Jakmile je etapa ukončena, projekt je kriticky posouván s předem stanoveným souborem metrik. Bere v úvahu kritické faktory úspěchu. Počet stádií podle typu inovace - radikální má volnější měřítka, inkrementální tvrdší. Každá firma si SGCP sestaví podle sebe. SGCP bere v úvahu CSF, zkracuje čas vývoje, eliminuje zbytečnou práci a chyby. Tento formalizovaný postup usnadňuje přechod inovačních projektů stadii, stanovuje kritické milníky, bere v úvahu kritické faktory úspěchu. Edward Roberts z MIT navrhl 6-stadiový SGCP model - akademický, R&D fokus, technologické inovace. 6 stadií Robertse - 1) Rozpoznání příležitosti (tržní příležitost, myšlenky, nápady, technická uskutečnitelnost), 2) Generování a třídění myšlenek (nápad přetvořen na model, životaschopnost, první formální přezkoumání), 3) Řešení problémů (validace modelu, odhad poptávky a nákladů, cenová politika, finanční rozpočet), 4) Prototyp (technická řešení problémů, plně funkční celek, zda bude inovace fungovat), 5) Využití řešení (objevené řešení do využitelného, uvést na trh první sérii, otestování lead users), 6) Komerční vývoj (výroba a uvedení na trh, preference zákazníků, výběr dodavatelského modelu). Robert G. Cooper z McMaster University navrhl formalizovaný 5-stage proces - dnes nejrozšířenější v korporátní praxi (P&G, 3M, J&J). Cooper model - formalizovaný proces, zachycení myšlenky a zvládnutí systému, Voice of Customer (diskuze s lead users), generování scénářů, organizační akce. 6 stages Coopera - Stage 0 Discovery (nové myšlenky, příležitosti), Stage 1 Scoping (zhodnocení technických přínosů, předběžná analýza, první gate), Stage 2 Business Case (definuje problém, podrobné analýzy, příprava investice, druhý gate), Stage 3 Development (plány, konkrétní výstupy, vývoj, prototypy, třetí gate), Stage 4 Testing a Validation (beta testy, pilotní výroba, marketingové testy, čtvrtý gate), Stage 5 Launch (komerční výroba a uvedení na trh, plný marketing). Roberts × Cooper - Roberts 6 stadií akademický R&D pro deeptech, Cooper 5 stage 0-5 korporátní pro komerční produkty (FMCG, elektronika). 4 rozhodnutí na bráně - GO (pokračovat), KILL (ukončit), HOLD (pozastavit), RECYCLE (vrátit do předchozí fáze). KILL umožňuje zabít špatné projekty brzy a levně. Kritéria hodnocení - strategický fit, tržní atraktivita, technická proveditelnost, finanční viability (NPV, IRR), konkurenční výhoda, risk. 7 kritických faktorů úspěchu SGCP - dobrá příprava, hlas zákazníka, přidaná hodnota produktu, dobrá definice produktu, uvedení na trh, účinné brány, dobrý tým. Hlavní poznatky - SGCP aplikovatelný i v menších firmách (díky omezenému rozsahu projektů), takto adaptovaný SGCP zohledňuje specifika firmy. SGCP urychluje inovační proces (racionalizace vývoje), minimalizuje chyby, spoří peníze, zkracuje čas do uvedení na trh, účinnější ochrana IP. MVP v kontextu SGCP - vzniká ve Stage 3 (Development) a testuje se ve Stage 4 (Testing). Kombinace DT + Lean + SGCP - DT pro fuzzy front-end (objevení problému), Lean/MVP pro rychlou validaci, SGCP pro formální vývoj a launch. Etalon kombinace - Apple, P&G, 3M. Kdy NEpoužít SGCP - velmi rané fuzzy front-end (jdi do DT), jednorázové malé projekty (overhead větší než přínos), agile prostředí (light Stage Gate).",
+    audioUrl: null,
+    notebookLmUrl: null,
+  };
+
+  const examStrategyInov5 = `
+    <b style="color:#1E938D">1.</b> Definuj SGCP — nástroj řízení inovací přes stadia a brány.<br/>
+    <b style="color:#1E938D">2.</b> <b>Stages × Gates</b> — stadia + rozhodovací body mezi nimi.<br/>
+    <b style="color:#1E938D">3.</b> ⚠️ <b>Gatekeeping</b> — vedoucí pracovníci kontrolují, 4 rozhodnutí (Go/Kill/Hold/Recycle).<br/>
+    <b style="color:#1E938D">4.</b> ⚠️ <b>Roberts (MIT) — 6 stadií, akademický R&D</b>: rozpoznání → generování → řešení → prototyp → využití → komerční vývoj.<br/>
+    <b style="color:#1E938D">5.</b> ⚠️ <b>Cooper (McMaster) — 5 stage (0-5), korporátní</b>: Discovery → Scoping → Business Case → Development → Testing → Launch.<br/>
+    <b style="color:#1E938D">6.</b> <b>Roberts × Cooper rozdíl</b> — komise VŽDY chce porovnání. Roberts = deeptech, Cooper = FMCG/komerční.<br/>
+    <b style="color:#1E938D">7.</b> <b>Voice of Customer</b> (Cooper) — diskuze s lead users od Stage 0.<br/>
+    <b style="color:#1E938D">8.</b> ⚠️ <b>7 CSF úspěšného SGCP</b> — příprava, hlas zákazníka, hodnota, definice, launch, brány, tým.<br/>
+    <b style="color:#1E938D">9.</b> <b>SGCP v malých firmách</b> — light Stage Gate, méně stádií, méně dokumentace (Mládková ráda).<br/>
+    <b style="color:#1E938D">10.</b> <b>MVP v SGCP</b> — Stage 3-4 (Cooper), kroky 4-5 (Roberts). Kombinace s Inov 4 (DT).<br/>
+    <b style="color:#1E938D">11.</b> <b>Kombinace DT + Lean + SGCP</b> — etalon Apple, P&G, 3M.<br/>
+    <b style="color:#1E938D">12.</b> Etalony — P&G (Cooper FMCG), Pfizer mRNA (Roberts deeptech), Škoda (Cooper automotive), Google Stadia (KILL po launchu = anti-vzor).
+  `;
+
+  const caseStudyInov5 = {
+    title: "Marek a vývoj nového produktu v české FMCG firmě",
+    subtitle: "Aplikuj Cooper SGCP + identifikuj gates + 4 rozhodnutí",
+    scenario: "Marek (35 let) je nový innovation manager v české FMCG firmě CzechFresh (220 lidí, výrobce nápojů, sirupů, smoothies). Firma chce inovovat - poslední 3 roky stagnují tržby, mladí kupují raději Coca-Cola/Pepsi nebo malé craft značky. Generální ředitel chce, aby Marek do 18 měsíců přinesl 'něco nového, co odliší CzechFresh od konkurence'.\n\nMarek má rozpočet 8 milionů na vývoj nového produktu. R&D tým 5 lidí, marketing 4 lidi, výroba s flexibilní linkou na nové produkty. Generál mu řekl - 'pracuj jak myslíš, ale chci výsledky'. Žádný formální proces, žádná struktura. Předchozí innovation manager za 2 roky uvedl 3 produkty, všechny flopnuly (jen jeden vydělal a po 6 měsících byl staženy z trhu). Marek si uvědomuje, že bez procesu skončí stejně.\n\nMarek slyšel o Cooper Stage Gate procesu na konferenci. Líbila se mu představa formálních gates s rozhodnutími Go/Kill/Hold/Recycle. Chce ho adaptovat na CzechFresh - menší firma, méně byrokracie, ale stejná logika. Plánuje 5 stages (Discovery → Scoping → Business Case → Development → Testing → Launch) a 4 gates.\n\nUž má v Stage 0 (Discovery) 12 nápadů - od probiotického yogurt drinku přes funkční energy nápoj s adaptogeny po lokální craft sirupy z českého ovoce. Některé jsou technicky náročné (probiotika potřebují cold chain), některé drahé (adaptogeny dovoz z Asie), některé generické (sirupy už dělá konkurence).\n\nMarek také slyšel o Robertsově 6-stadiovém modelu z univerzitního prostředí. Tuší, že Roberts je víc R&D fokused, Cooper víc manažerský/komerční - pro CzechFresh (FMCG, komerční produkty) je Cooper vhodnější. Plánuje formální gatekeeping board - on jako sponsor, R&D ředitel, marketing ředitel, finance ředitel. Rozhodnutí Go/Kill/Hold/Recycle na každé bráně.",
+    signals: [
+      { text: "Předchozí innovation manager za 2 roky uvedl 3 produkty, všechny flopnuly", color: VSE.danger, reason: "Klasický signál pro SGCP (Inov 5) — bez formálního procesu se inovace dělá 'od oka' a 95 % flopne. Cooper SGCP filtr by mnoho slabých nápadů zabil ve Gate 1-2." },
+      { text: "Marek slyšel o Cooper Stage Gate, chce ho adaptovat na CzechFresh (menší FMCG firma)", color: VSE.fph, reason: "SPRÁVNÝ VÝBĚR (Inov 5) — Cooper je vhodný pro komerční produktové inovace (FMCG, elektronika). Roberts by byl nepřesný (R&D/deeptech). SGCP aplikovatelný i v menších firmách." },
+      { text: "12 nápadů v Discovery — některé technicky náročné, drahé, generické", color: VSE.warning, reason: "Stage 0 DISCOVERY (Inov 5) v praxi. Z 12 nápadů přes Gate 1-2 obvykle projde 2-3. Brzký KILL slabých nápadů uspoří miliony." },
+      { text: "Formální gatekeeping board — Marek, R&D, marketing, finance ředitelé. Rozhodnutí Go/Kill/Hold/Recycle.", color: VSE.success, reason: "GATEKEEPING (Inov 5) — gatekeepers musí mít autoritu KILL, jinak SGCP nefunguje. Multidisciplinární board (R&D + marketing + finance) je standard." },
+      { text: "5 stages (Discovery → Scoping → Business Case → Development → Testing → Launch) a 4 gates", color: VSE.primary, reason: "PŘESNÝ COOPER MODEL (Inov 5) — Stage 0-5, 4 gates mezi nimi. Marek to má správně. Pro CzechFresh velikost (220 lidí) ideální." },
+      { text: "Marek tuší, že Roberts je víc R&D, Cooper víc komerční — pro CzechFresh je Cooper vhodnější", color: VSE.warning, reason: "ROBERTS × COOPER ROZDÍL (Inov 5) — Marek to správně chápe. FMCG = Cooper, deeptech/farma = Roberts. Komise tento rozdíl ráda chytí." },
+    ],
+    quiz1: {
+      question: "Co Marek správně dělá?",
+      options: [
+        "Pracuje 'jak myslí' bez procesu, jak řekl generál",
+        "Aplikuje Cooper Stage Gate Process — 5 stages, 4 gates, multidisciplinární gatekeeping board, 4 rozhodnutí Go/Kill/Hold/Recycle, Voice of Customer",
+        "Vyvíjí všech 12 nápadů paralelně",
+        "Najímá víc lidí a doufá",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měl Marek postupovat?",
+      options: [
+        { text: "Aplikovat Cooper SGCP (5 stages, 4 gates) — vhodný pro FMCG komerční produkty, NE Roberts (ten je akademický/R&D pro deeptech).", correct: true, reason: "✓ Inov 5 — Cooper je pro komerční produktové inovace, Roberts pro technologické. CzechFresh = FMCG = Cooper." },
+        { text: "Stage 0 (Discovery) — 12 nápadů na stole. Gate 1 (Idea Screen) zabije 8-10 slabých (drahé adaptogeny, generické sirupy). Zbývá 2-3.", correct: true, reason: "✓ Inov 5 — brzký KILL je esence SGCP. Z 12 nápadů přes Gate 1 obvykle 2-3. P&G přes Gate 1 zabíjí 95 % nápadů." },
+        { text: "Multidisciplinární gatekeeping board — Marek (sponsor), R&D ředitel, marketing ředitel, finance ředitel. Autorita Go/Kill/Hold/Recycle.", correct: true, reason: "✓ Inov 5 — gatekeepers musí mít autoritu KILL. Multidisciplinární zajistí strategický fit + tržní + technický + finanční pohled." },
+        { text: "Voice of Customer od Stage 0 — focus groups s mladými spotřebiteli (cílovka), lead users (vegan, fitness komunita). Cooper na tom trvá.", correct: true, reason: "✓ Inov 5 — VoC je hlavní rozdíl Cooper od Robertse. Pro FMCG kritické — nemůžeš vyvíjet 'do šuplíku', musíš vědět, co chtějí." },
+        { text: "Kritéria na bráně — strategický fit s CzechFresh, tržní atraktivita, technická proveditelnost, finanční viability (NPV, IRR), nefér výhoda, risk.", correct: true, reason: "✓ Inov 5 — 6 standardních kritérií. Bez nich gatekeeping je svévolný." },
+        { text: "Pro adaptaci na menší firmu — light Stage Gate. Méně formální dokumentace, ale stejná logika gates a rozhodnutí.", correct: true, reason: "✓ Inov 5 — SGCP aplikovatelný i v menších firmách (Mládková ráda chytí). Adaptovaný SGCP zohledňuje specifika firmy." },
+        { text: "Kombinovat s DT (Inov 4) — pro Stage 0 (Discovery) využít empathy s mladými konzumenty, pozorování v supermarketech, lead users.", correct: true, reason: "✓ Inov 5 + Inov 4 — DT pro fuzzy front-end, SGCP pro formální vývoj a launch. Klasická kombinace, etalon Apple a P&G." },
+        { text: "Vyvíjet všech 12 nápadů paralelně bez KILL", correct: false, reason: "✗ Klasická chyba. 8 milionů rozpočet je málo na 12 nápadů. SGCP filter musí ZABÍT slabé nápady brzy a levně." },
+        { text: "Pracovat 'jak myslí' bez procesu, jak řekl generál", correct: false, reason: "✗ Tohle vedlo předchozího innovation managera k 3 flopům za 2 roky. Bez SGCP procesu Marek skončí stejně." },
+      ],
+    },
+    summary: "<b>Marek by měl aplikovat Cooper SGCP — 5 stages, 4 gates, multidisciplinární board, Voice of Customer od Stage 0, light verze pro menší firmu.</b><br/><br/><b>Postup:</b><br/><br/>• <b>STAGE 0 — DISCOVERY:</b> 12 nápadů na stole. Doplnit DT (Inov 4) — focus groups s mladými konzumenty, empathy v supermarketech, lead users (vegan/fitness komunita). Cíl: rozšířit perspektivu.<br/><br/>• <b>GATE 1 — IDEA SCREEN:</b> Strategický fit s CzechFresh, předběžná atraktivita trhu. KILL 8-10 nápadů (adaptogeny moc drahé, sirupy generické). <b>Zbývá 2-3 nápady.</b><br/><br/>• <b>STAGE 1 — SCOPING:</b> Předběžná tržní + technická analýza pro 2-3 zbývající. Probiotický yogurt drink se zdá nejatraktivnější (rostoucí segment, CzechFresh má technickou kapacitu, cold chain řešitelný).<br/><br/>• <b>GATE 2 — BUSINESS CASE (nejkritičtější!):</b> Detailní finanční (NPV, IRR — viz Inov 7), tržní (size, growth), technická (cold chain, shelf life), marketing analýza. <b>Schvaluje investici do vývoje.</b> Pokud business case slabý → KILL nebo HOLD.<br/><br/>• <b>STAGE 3 — DEVELOPMENT:</b> R&D vývoj produktu (receptura, balení, design), prototypy, alfa testy interně. <b>MVP</b> (viz Inov 4) — funkční prototyp pro testování. <b>Voice of Customer</b> — focus groups s lead users (vegan, zdravý lifestyle, mladé maminky).<br/><br/>• <b>GATE 3 — GO TO TESTING:</b> Rozhodnutí o investici do beta testů. Pokud prototyp slabý → RECYCLE zpět do Stage 3.<br/><br/>• <b>STAGE 4 — TESTING & VALIDATION:</b> Pilotní výroba (limited series), tržní test v jednom regionu (Praha nebo Brno), beta testy s 200-500 konzumenty. Sběr metriky (likeability, repeat purchase intent, NPS).<br/><br/>• <b>GATE 4 — GO TO LAUNCH:</b> Rozhodnutí o celostátním launch. Pokud testy slabé → KILL nebo iterovat (RECYCLE).<br/><br/>• <b>STAGE 5 — LAUNCH:</b> Plný komerční launch — výroba, distribuce (Tesco, Albert, Globus), marketing kampaň (digitální + retail), sales push. <b>Post-launch review</b> po 6 měsících.<br/><br/>• <b>Gatekeeping board:</b> Marek (sponsor), R&D ředitel, marketing ředitel, finance ředitel. <b>Autorita Go/Kill/Hold/Recycle.</b> Bez autority KILL by SGCP nefungoval.<br/><br/>• <b>Light Stage Gate pro CzechFresh velikost:</b> méně formální dokumentace než P&G (220 vs 100,000 lidí), ale stejná logika gates + rozhodnutí.<br/><br/>• <b>Roberts × Cooper:</b> Cooper je správná volba pro FMCG. Roberts by byl pro deeptech/farmaceutiku (Pfizer mRNA model).<br/><br/><b>Pro komisi:</b> Klíč — <b>oba modely (Roberts 6 + Cooper 5)</b> + <b>rozdíl</b>, <b>gatekeeping + 4 rozhodnutí Go/Kill/Hold/Recycle</b>, <b>7 CSF úspěšného SGCP</b>, <b>aplikace v menších firmách (light SG)</b>, <b>kombinace s DT (Inov 4)</b>. Anti-vzor: 'pracovat jak myslíš' bez procesu — vede k flopům jako u předchozího manažera.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Inovace" subjectId="inov" number={5} title="Stage Gate Control Process (Roberts × Cooper)"
+      subtitle="SGCP — stadia + brány + gatekeeping. Roberts (MIT) 6 stadií akademický R&D × Cooper 5 stage 0-5 korporátní komerční. 7 CSF úspěchu. Aplikace v malých × velkých firmách."
+      color={VSE.primary}
+      questionText="Stage Gate Control Process (SGCP) — nástroj řízení inovačních procesů přes stadia a brány. Gatekeeping (gatekeepers, rozhodnutí Go/Kill/Hold/Recycle). 2 přístupy — Roberts (MIT, 6 stadií, akademický) × Cooper (McMaster, 5 stage 0-5, korporátní). Kritické faktory úspěchu (7 CSF). Aplikace v menších firmách (light Stage Gate). Kombinace s DT a Lean (MVP)."
+      sloz={3} roz={4} freq={5}
+      examStrategy={examStrategyInov5}
+      studySections={studySectionsInov5}
+      flashcards={flashcardsInov5}
+      quiz={quizInov5}
+      praxe={praxeInov5}
+      examQuestions={examQuestionsInov5}
+      podcast={podcastInov5}
+      caseStudy={caseStudyInov5}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   INOVACE 6 — Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)
+   ════════════════════════════════════════════════════════ */
+function OkruhInov6Panel() {
+  const studySectionsInov6 = [
+    { id: "co_je_iast", title: "Co je inovační strategie a kdy ji formulujeme", subtitle: "Strategie zaměřená na inovaci jako KV", color: VSE.primary, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Inovační strategie</b> = dlouhodobý plán, <b>jak firma využívá inovace pro získání konkurenční výhody</b>. Definuje, <b>do čeho budeme inovovat, jak rychle, s jakými zdroji a v jakém pořadí</b>. Není to ad-hoc rozhodování — je to systémová odpověď na otázku 'jak budeme inovativní firma' (viz Inov 2 — inovativní organizace).
+        </Def>
+        <Tag color={VSE.primary}>Proč firmy formulují inovační strategii</Tag>
+        <Bullet items={[
+          "<b>Alokace zdrojů</b> — bez strategie firma rozsype rozpočet na 50 malých projektů, žádný se nedotáhne.",
+          "<b>Sladění s firemní strategií</b> — inovační strategie musí podporovat business strategii (cost leadership × diferenciace × focus).",
+          "<b>Časový horizont</b> — kontinuální (každoroční inkrementální) × průlomové (radikální co 5-10 let).",
+          "<b>Risk profile</b> — kolik kapitálu jsme ochotni dát do nejistých projektů? 70-20-10 pravidlo (70 % core, 20 % adjacent, 10 % transformative).",
+          "<b>Time-to-market</b> — vést trh (first mover) nebo následovat (fast follower)?",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Klíčové otázky inovační strategie</Tag>
+        <Bullet items={[
+          "<b>Kde inovovat?</b> — produkty, procesy, BM (Schumpetrovy typy — viz Inov 1), org. struktura.",
+          "<b>Jak inovovat?</b> — interně (in-house R&D) × otevřená inovace (Connect+Develop, P&G) × akvizice (kupování startupů).",
+          "<b>Kdy?</b> — být první (pioneer) × následovat × imitovat?",
+          "<b>S kým?</b> — dodavatelé, univerzity, startupy, konkurenti (co-opetition)?",
+          "<b>Pro koho?</b> — stávající zákazníci (sustaining inovace) × noví (disruptive)?",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "ansoff", title: "Ansoffova matice — Racionalistický přístup", subtitle: "4 strategické cesty růstu přes produkt × trh", color: VSE.primary, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Igor Ansoff</b> (1957) — otec strategického plánování. Ansoffova matice <b>2×2 (produkt × trh)</b> ukazuje 4 strategické cesty růstu. Komise se na ní ráda ptá jako na <b>racionalistický (plánovaný) přístup k inovační strategii</b>.
+        </Def>
+        <Tag color={VSE.primary}>Ansoffova matice — 4 kvadranty</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.success, t: "1. PENETRACE TRHU (stávající P × stávající T)", d: "<b>Nejmenší riziko.</b> Prodávat víc existujícího produktu na existujícím trhu. Cesta: lepší marketing, slevy, věrnostní programy. Příklad: Coca-Cola — nové reklamní kampaně, balíčky." },
+            { c: VSE.warning, t: "2. ROZVOJ TRHU (stávající P × nový T)", d: "<b>Mírné riziko.</b> Existující produkt do nového segmentu/regionu. Příklad: Škoda Auto expanze na indický trh." },
+            { c: VSE.fmv, t: "3. ROZVOJ PRODUKTU (nový P × stávající T)", d: "<b>Mírné riziko.</b> Nový produkt pro stávající zákazníky. Příklad: Apple iPhone → iPad → Apple Watch — stejní zákazníci, nové produkty." },
+            { c: VSE.danger, t: "4. DIVERZIFIKACE (nový P × nový T)", d: "<b>Nejvyšší riziko.</b> Nový produkt do nového trhu. Příklad: Virgin (hudba → letectví → telekomunikace). Často přes akvizice." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 640 480" maxHeight={500}>
+          <text x="320" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Ansoffova matice - produkt krat trh (1957)</text>
+          <text x="320" y="40" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">riziko stoupa od penetrace k diverzifikaci</text>
+          {/* Axis labels */}
+          <text x="320" y="70" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="700" fill="var(--text)">PRODUKT</text>
+          <text x="180" y="95" textAnchor="middle" fontFamily={fontMono} fontSize="11" fill="var(--text-muted)">stavajici</text>
+          <text x="460" y="95" textAnchor="middle" fontFamily={fontMono} fontSize="11" fill="var(--text-muted)">novy</text>
+          <text x="40" y="265" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="700" fill="var(--text)" transform="rotate(-90 40 265)">TRH</text>
+          <text x="80" y="200" textAnchor="end" fontFamily={fontMono} fontSize="11" fill="var(--text-muted)">stavajici</text>
+          <text x="80" y="360" textAnchor="end" fontFamily={fontMono} fontSize="11" fill="var(--text-muted)">novy</text>
+          {/* 4 quadrants */}
+          {/* Top-left: Penetrace */}
+          <rect x="100" y="110" width="260" height="160" rx="10" fill={VSE.success} opacity="0.18" stroke={VSE.success} strokeWidth="2"/>
+          <text x="230" y="140" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill={VSE.success}>1. PENETRACE TRHU</text>
+          <text x="230" y="162" textAnchor="middle" fontFamily={fontMono} fontSize="10" fontStyle="italic" fill={VSE.success}>(stavajici P krat stavajici T)</text>
+          <text x="230" y="195" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- nejmensi riziko</text>
+          <text x="230" y="215" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- vice marketingu, slevy</text>
+          <text x="230" y="235" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- vernostni programy</text>
+          <text x="230" y="258" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fontStyle="italic" fill="var(--text-muted)">Coca-Cola - nove kampane</text>
+          {/* Top-right: Rozvoj produktu */}
+          <rect x="380" y="110" width="220" height="160" rx="10" fill={VSE.fmv} opacity="0.18" stroke={VSE.fmv} strokeWidth="2"/>
+          <text x="490" y="140" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill={VSE.fmv}>3. ROZVOJ PRODUKTU</text>
+          <text x="490" y="162" textAnchor="middle" fontFamily={fontMono} fontSize="10" fontStyle="italic" fill={VSE.fmv}>(novy P krat stavajici T)</text>
+          <text x="490" y="195" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- mirne riziko</text>
+          <text x="490" y="215" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- novy produkt</text>
+          <text x="490" y="235" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- pro stejne zakazniky</text>
+          <text x="490" y="258" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fontStyle="italic" fill="var(--text-muted)">Apple iPhone-iPad-Watch</text>
+          {/* Bottom-left: Rozvoj trhu */}
+          <rect x="100" y="290" width="260" height="160" rx="10" fill={VSE.warning} opacity="0.18" stroke={VSE.warning} strokeWidth="2"/>
+          <text x="230" y="320" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill={VSE.warning}>2. ROZVOJ TRHU</text>
+          <text x="230" y="342" textAnchor="middle" fontFamily={fontMono} fontSize="10" fontStyle="italic" fill={VSE.warning}>(stavajici P krat novy T)</text>
+          <text x="230" y="375" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- mirne riziko</text>
+          <text x="230" y="395" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- existujici produkt</text>
+          <text x="230" y="415" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- novy segment / region</text>
+          <text x="230" y="438" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fontStyle="italic" fill="var(--text-muted)">Skoda Auto Indie expanze</text>
+          {/* Bottom-right: Diverzifikace */}
+          <rect x="380" y="290" width="220" height="160" rx="10" fill={VSE.danger} opacity="0.20" stroke={VSE.danger} strokeWidth="2.5"/>
+          <text x="490" y="320" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill={VSE.danger}>4. DIVERZIFIKACE</text>
+          <text x="490" y="342" textAnchor="middle" fontFamily={fontMono} fontSize="10" fontStyle="italic" fill={VSE.danger}>(novy P krat novy T)</text>
+          <text x="490" y="375" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- nejvyssi riziko</text>
+          <text x="490" y="395" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- novy produkt + trh</text>
+          <text x="490" y="415" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text)">- casto pres akvizice</text>
+          <text x="490" y="438" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fontStyle="italic" fill="var(--text-muted)">Virgin (hudba-let-telco)</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.warning}>Co Ansoff říká o inovační strategii</Tag>
+        <Bullet items={[
+          "<b>Penetrace</b> není inovace, jen marketing. Inovace začíná u rozvoje produktu nebo trhu.",
+          "<b>Rozvoj produktu</b> = klasická inkrementální/radikální inovace pro stávající zákazníky.",
+          "<b>Diverzifikace</b> = nejvyšší inovační ambice, často přes akvizice startupů (Amazon → AWS, Whole Foods).",
+          "<b>Racionalistický přístup</b> — manažeři vědomě plánují, do kterého kvadrantu jdou.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "mintzberg", title: "Mintzberg — Gradualistický přístup (emergent strategy)", subtitle: "Strategie vzniká i nezáměrně, jak firma reaguje", color: VSE.primary, emoji: "path",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Henry Mintzberg</b> (McGill University) navrhl <b>gradualistický (emergentní) přístup</b> ke strategii. Tvrdí, že <b>strategie nevzniká jen z formálního plánu</b>, ale často <b>emerguje z každodenních rozhodnutí</b> firmy v reakci na trh.
+        </Def>
+        <Tag color={VSE.primary}>Ansoff × Mintzberg — dva přístupy</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "ANSOFF — racionalistický (deliberate)", d: "<b>Strategie vzniká plánováním.</b> Top-down. Analyzuj trh, definuj cíl, vyber kvadrant matice, plánuj implementaci. Funguje ve stabilním prostředí." },
+            { c: VSE.warning, t: "MINTZBERG — gradualistický (emergent)", d: "<b>Strategie emerguje z akcí firmy.</b> Bottom-up. Reaguj na trh, učení z chyb, postupně vykrystalizuje strategický vzorec. Funguje v turbulentním prostředí." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Mintzbergových 5 P strategie</Tag>
+        <Bullet items={[
+          "<b>Plan</b> — strategie jako vědomý plán (Ansoffovo pojetí).",
+          "<b>Ploy</b> — strategie jako manévr, taktika (vyloudit konkurenci, mylné signály).",
+          "<b>Pattern</b> — strategie jako vzorec v chování firmy v čase (emergentní pojetí Mintzberga).",
+          "<b>Position</b> — strategie jako pozice na trhu (Porterův přístup, 5F, generic strategies).",
+          "<b>Perspective</b> — strategie jako úhel pohledu, firemní 'osobnost', kultura.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Co to znamená pro inovační strategii</Tag>
+        <Bullet items={[
+          "<b>Plánovaná inovační strategie</b> (Ansoff přístup) — firma se rozhodne, do kterého kvadrantu jde a vyčlení rozpočet (např. 10 % tržeb do R&D).",
+          "<b>Emergentní inovační strategie</b> (Mintzberg) — firma zkouší různé experimenty, ty úspěšné se postupně stávají strategií (3M 15% pravidlo).",
+          "<b>V praxi kombinace</b> — formální plán + prostor pro experimenty. Etalon: Google (formální OKRs + 20 % pravidlo pro inovace).",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "freeman", title: "Freeman — 6 inovačních strategií (typologie)", subtitle: "Ofenzivní, defenzivní, imitační, závislá, tradiční, oportunistická", color: VSE.primary, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Christopher Freeman</b> (SPRU, University of Sussex) — britský ekonom, jeden z otců economics of innovation. <b>Definoval 6 typů inovační strategie</b> podle vztahu firmy k technologickému vývoji. Komise tuto typologii ráda chytí.
+        </Def>
+        <Tag color={VSE.primary}>6 inovačních strategií Freemana</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.danger, t: "1. OFENZIVNÍ (offensive)", d: "<b>Být PRVNÍ na trhu.</b> Silné R&D, vysoké investice do výzkumu, ochota riskovat. Cíl: technologický leadership. Příklad: Apple iPhone, Tesla, SpaceX." },
+            { c: VSE.warning, t: "2. DEFENZIVNÍ (defensive)", d: "<b>Reagovat na ofenzivní hráče.</b> Neinvestovat do základního výzkumu, ale do aplikovaného. Rychle kopírovat a vylepšovat. Příklad: Samsung jako fast follower Apple." },
+            { c: VSE.fmv, t: "3. IMITAČNÍ (imitative)", d: "<b>Kopírovat etablovaná řešení.</b> Nízké R&D, focus na nízkou cenu. Příklad: čínské generické značky (Xiaomi v early days), Aldi private labels." },
+            { c: VSE.fph, t: "4. ZÁVISLÁ (dependent)", d: "<b>Inovuje pod tlakem zákazníků/dodavatelů.</b> Typicky subdodavatelé velkých firem. Vlastní R&D minimální. Příklad: Foxconn pro Apple, čeští dodavatelé pro VW." },
+            { c: VSE.primary, t: "5. TRADIČNÍ (traditional)", d: "<b>Téměř neinovuje.</b> Produkt stagnuje, trh stabilní (komodity, řemesla). Příklad: tradiční řemeslné výrobky (sklárny, kovárny)." },
+            { c: VSE.success, t: "6. OPORTUNISTICKÁ (opportunist)", d: "<b>Hledá tržní mezery (niches).</b> Bez velkého R&D, využívá rychlosti a flexibility. Příklad: niche e-commerce, specializované značky." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 720 360" maxHeight={380}>
+          <text x="360" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">Freeman - 6 inovacnich strategii podle vztahu k technologii</text>
+          <text x="360" y="40" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">razene podle intenzity R&D investic a rizika</text>
+          {/* Risk axis */}
+          <line x1="60" y1="320" x2="660" y2="320" stroke="var(--text-muted)" strokeWidth="2" markerEnd="url(#arrFreeman)"/>
+          <text x="60" y="345" textAnchor="start" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">nizke R&D, nizke riziko</text>
+          <text x="660" y="345" textAnchor="end" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">vysoke R&D, vysoke riziko</text>
+          {/* 6 strategies left to right by risk */}
+          {[
+            {x: 80,  c: VSE.primary, n: "5", label: "TRADICNI",       sub: "skoro neinovuje",  ex: "remesla, komodity"},
+            {x: 200, c: VSE.fph,     n: "4", label: "ZAVISLA",        sub: "subdodavatel",     ex: "Foxconn, CZ for VW"},
+            {x: 320, c: VSE.success, n: "6", label: "OPORTUNISTICKA", sub: "niches",           ex: "niche e-commerce"},
+            {x: 440, c: VSE.fmv,     n: "3", label: "IMITACNI",       sub: "kopiruje",         ex: "Aldi, Xiaomi early"},
+            {x: 560, c: VSE.warning, n: "2", label: "DEFENZIVNI",     sub: "fast follower",    ex: "Samsung vs Apple"},
+            {x: 640, c: VSE.danger,  n: "1", label: "OFENZIVNI",      sub: "first mover",      ex: "Apple, Tesla"},
+          ].map((s, i) => (
+            <g key={i}>
+              <circle cx={s.x} cy="190" r="34" fill={s.c} opacity="0.85"/>
+              <text x={s.x} y="186" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="800" fill="#fff">{s.n}</text>
+              <text x={s.x} y="202" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="#fff">.</text>
+              {/* tick to axis */}
+              <line x1={s.x} y1="226" x2={s.x} y2="320" stroke={s.c} strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5"/>
+              {/* label below */}
+              <text x={s.x} y="248" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={s.c}>{s.label}</text>
+              <text x={s.x} y="264" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">{s.sub}</text>
+              <text x={s.x} y="290" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fontStyle="italic" fill="var(--text-muted)">{s.ex}</text>
+              {/* number label above */}
+              <text x={s.x} y="140" textAnchor="middle" fontFamily={fontMono} fontSize="11" fontWeight="700" fill={s.c}>#{s.n}</text>
+            </g>
+          ))}
+          {/* Top R&D axis */}
+          <text x="60" y="90" textAnchor="start" fontFamily={fontMono} fontSize="10" fontStyle="italic" fill="var(--text-muted)">cisla 1-6 = Freemanovy puvodni typy</text>
+          <text x="660" y="90" textAnchor="end" fontFamily={fontMono} fontSize="10" fontStyle="italic" fill="var(--text-muted)">poradi zde dle riziko/R&D</text>
+          <defs>
+            <marker id="arrFreeman" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="var(--text-muted)"/>
+            </marker>
+          </defs>
+        </ResponsiveSVG>
+        <Tag color={VSE.warning}>Kdy která Freemanova strategie</Tag>
+        <Bullet items={[
+          "<b>Ofenzivní</b> — silné R&D, vysoký kapitál, ochota riskovat (Apple, Tesla, big pharma).",
+          "<b>Defenzivní</b> — pro firmy s velkou výrobní kapacitou ale slabším R&D (klasický 'fast follower' model — Samsung, Microsoft historicky).",
+          "<b>Imitační</b> — pro nízkonákladové trhy, kde cena dominuje (Aldi, generická léčiva, čínští výrobci elektroniky).",
+          "<b>Závislá</b> — subdodavatelé, kteří inovují pouze v rámci specifikací zadavatele.",
+          "<b>Tradiční</b> — komoditní/stabilní trhy (zemědělství, řemesla).",
+          "<b>Oportunistická</b> — niche hráči s rychlou reakcí.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "pitra_vlcek", title: "Pitra a Vlček — české přístupy k inovační strategii", subtitle: "Specifika české akademické tradice", color: VSE.primary, emoji: "people",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Zbyněk Pitra</b> a <b>Radim Vlček</b> jsou klíčoví čeští akademici v oblasti managementu inovací. Jejich přístupy jsou součástí osnov státnic VŠE — komise může chtít rozlišit od mezinárodních autorů.
+        </Def>
+        <Tag color={VSE.primary}>Pitra — 5 inovačních strategií</Tag>
+        <Bullet items={[
+          "<b>1. Strategie nákladového vůdce</b> — inovace zaměřená na úsporu nákladů (procesní inovace, automatizace). Cíl: nejnižší cena na trhu.",
+          "<b>2. Strategie diferenciace</b> — inovace pro unikátní hodnotu (nové vlastnosti, design, brand). Cíl: prémiová cena.",
+          "<b>3. Strategie tržního výklenku (niche)</b> — focus na úzkou cílovou skupinu, kterou velkým firmám nezvládají obsluhovat.",
+          "<b>4. Strategie kooperace</b> — partnerství s univerzitami, klienty, dodavateli (otevřená inovace). Vlastní R&D minimalizováno.",
+          "<b>5. Strategie akvizic</b> — kupování inovativních startupů místo vlastního R&D. Rychlejší time-to-market.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Vlček — 6 dimenzí inovační strategie</Tag>
+        <Bullet items={[
+          "<b>1. Časová dimenze</b> — kdy inovovat (first mover × follower × pozdní).",
+          "<b>2. Technologická dimenze</b> — vlastní vývoj × nákup technologie × licence.",
+          "<b>3. Tržní dimenze</b> — stávající × nový trh, lokální × globální.",
+          "<b>4. Produktová dimenze</b> — inkrementální × radikální (viz Inov 1), produkt × proces × organizace × marketing.",
+          "<b>5. Organizační dimenze</b> — interní R&D × outsourcing × joint venture × akvizice.",
+          "<b>6. Finanční dimenze</b> — vlastní financování × dluhové × venture capital × granty.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Vlček × ostatní přístupy</Tag>
+        <Bullet items={[
+          "<b>Vlček je nejkomplexnější</b> — kombinuje Ansoffa (kde inovovat), Freemana (jak rychle), Pitru (s jakým cílem).",
+          "<b>Pro českou praxi</b> komise ráda chytá, že Vlček je VŠE-friendly autor — jeho 6 dimenzí je rámec, kterým lze analyzovat každou firmu.",
+          "<b>Vlček a Pitra publikovali společně</b> — jejich přístupy se doplňují. V praxi firma kombinuje 1-2 Pitrovy strategie a všech 6 Vlčkových dimenzí.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Tažené: Inovační strategie (Mladkova+Šperka+Cejthamr, Nový+Mareš+Mladkova, Pichanič+Heřman+Zamazalová)"
+          what="Komise chce <b>typologii inovačních strategií</b> + <b>Ansoff × Mintzberg rozdíl</b> (racionalistický × gradualistický) + <b>Freemanových 6 strategií</b> + <b>Pitrových 5</b> + <b>Vlčkových 6 dimenzí</b>. Klíčové: vědět autora ke každému frameworku."
+        />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na případovku — inovační strategie", subtitle: "Postup + co komise oceňuje × čemu se vyhnout", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Komise tažené inovační strategie 1× ze 45, ale komplexní otázka — chce kombinaci všech 5 autorů (Ansoff, Mintzberg, Vlček, Pitra, Freeman). Tady je postup.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj firmu v PS — jaký typ (FMCG, tech, služby, subdodavatel)?",
+          "<b>2.</b> Aplikuj <b>Ansoffovu matici</b> — který kvadrant je nejvhodnější? Penetrace × Rozvoj produktu × Rozvoj trhu × Diverzifikace.",
+          "<b>3.</b> Doporuč <b>přístup k tvorbě strategie</b> — racionalistický (Ansoff, stabilní trh) × gradualistický (Mintzberg, turbulentní trh) × kombinace.",
+          "<b>4.</b> Vyber <b>Freemanovu typologii</b> — ofenzivní/defenzivní/imitační/závislá/tradiční/oportunistická. Která sedí dané firmě?",
+          "<b>5.</b> Aplikuj <b>Pitrových 5 strategií</b> — náklady × diferenciace × niche × kooperace × akvizice. Která je pro firmu nejvhodnější?",
+          "<b>6.</b> Analyzuj přes <b>Vlčkových 6 dimenzí</b> — časová, technologická, tržní, produktová, organizační, finanční. Toto je nejkomplexnější rámec.",
+          "<b>7.</b> Doporuč konkrétní akce — alokace R&D rozpočtu (70-20-10 pravidlo), klíčové projekty, partnerství, akvizice.",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Vědět <b>všech 5 autorů</b> (Ansoff, Mintzberg, Vlček, Pitra, Freeman) + jejich klíčové frameworky.",
+          "<b>✅ Dobře:</b> <b>Ansoff × Mintzberg rozdíl</b> — racionalistický × gradualistický (plánovaný × emergentní).",
+          "<b>✅ Dobře:</b> <b>Freemanových 6 strategií</b> s jasnými příklady.",
+          "<b>✅ Dobře:</b> <b>Vlčkových 6 dimenzí</b> jako analytický rámec.",
+          "<b>✅ Dobře:</b> Spojit s Schumpeterem (Inov 1), Druckerem (Inov 2), Galbraithem (Inov 2).",
+          "<b>❌ Špatně:</b> Mluvit jen o Ansoffovi a doufat — komise chce všech 5 autorů.",
+          "<b>❌ Špatně:</b> Zaměnit autory (Freeman ≠ Vlček, Pitra ≠ Mintzberg).",
+          "<b>❌ Špatně:</b> Říct, že inovační strategie = R&D rozpočet. Strategie je komplexnější (časová, organizační, finanční dimenze podle Vlčka).",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsInov6 = [
+    { term: "Inovační strategie — definice", def: "Dlouhodobý plán, jak firma využívá inovace pro získání KV. Definuje, do čeho, jak rychle, s jakými zdroji a v jakém pořadí inovovat.", tag: "STRATEGIE" },
+    { term: "Klíčové otázky inovační strategie", def: "Kde inovovat (produkty/procesy/BM), jak (interně/otevřená/akvizice), kdy (first mover/follower), s kým (partneři), pro koho (existující/noví zákazníci).", tag: "STRATEGIE" },
+    { term: "70-20-10 pravidlo inovací", def: "70 % R&D rozpočtu do core (kontinuální), 20 % do adjacent (související trhy), 10 % do transformative (radikální/disruptivní).", tag: "STRATEGIE" },
+    { term: "Ansoff — kdo a kdy", def: "Igor Ansoff (1957) — otec strategického plánování. Vyvinul Ansoffovu matici 2×2 (produkt × trh) — 4 strategie růstu.", tag: "ANSOFF" },
+    { term: "Ansoffova matice — 4 kvadranty", def: "1) Penetrace trhu (stávající P × stávající T, nejmenší riziko), 2) Rozvoj trhu, 3) Rozvoj produktu, 4) Diverzifikace (nejvyšší riziko).", tag: "ANSOFF" },
+    { term: "Penetrace trhu (Ansoff)", def: "Stávající produkt × stávající trh. Nejmenší riziko. Cesta: lepší marketing, slevy, věrnostní programy. NENÍ inovace, jen marketing.", tag: "ANSOFF" },
+    { term: "Diverzifikace (Ansoff)", def: "Nový produkt × nový trh. Nejvyšší riziko. Často přes akvizice. Příklad: Virgin (hudba → letectví → telekomunikace).", tag: "ANSOFF" },
+    { term: "Mintzberg — kdo a co", def: "Henry Mintzberg (McGill University). Gradualistický (emergent) přístup. Strategie emerguje z akcí firmy, ne jen z formálního plánu.", tag: "MINTZBERG" },
+    { term: "Mintzberg 5 P strategie", def: "Plan (plán), Ploy (manévr), Pattern (vzorec v chování), Position (pozice na trhu), Perspective (úhel pohledu, kultura).", tag: "MINTZBERG" },
+    { term: "Ansoff × Mintzberg", def: "Ansoff = racionalistický (deliberate, top-down, plánování). Mintzberg = gradualistický (emergent, bottom-up, učení z akcí). V praxi kombinace.", tag: "MINTZBERG" },
+    { term: "Freeman — kdo a kolik strategií", def: "Christopher Freeman (SPRU, Sussex). Definoval 6 typů inovační strategie podle vztahu firmy k technologickému vývoji.", tag: "FREEMAN" },
+    { term: "Freeman — 6 strategií", def: "1) Ofenzivní, 2) Defenzivní, 3) Imitační, 4) Závislá, 5) Tradiční, 6) Oportunistická.", tag: "FREEMAN" },
+    { term: "Ofenzivní strategie (Freeman)", def: "Být PRVNÍ na trhu. Silné R&D, vysoké investice, ochota riskovat. Cíl: technologický leadership. Příklad: Apple, Tesla, SpaceX.", tag: "FREEMAN" },
+    { term: "Defenzivní strategie (Freeman)", def: "Reagovat na ofenzivní hráče. Nízký základní výzkum, aplikovaný R&D. Fast follower. Příklad: Samsung vs Apple.", tag: "FREEMAN" },
+    { term: "Imitační strategie (Freeman)", def: "Kopírovat etablovaná řešení. Nízké R&D, focus na cenu. Příklad: Aldi private labels, čínští výrobci elektroniky.", tag: "FREEMAN" },
+    { term: "Závislá strategie (Freeman)", def: "Subdodavatelé velkých firem. Inovuje pod tlakem zákazníků. Příklad: Foxconn pro Apple, čeští dodavatelé pro VW.", tag: "FREEMAN" },
+    { term: "Tradiční strategie (Freeman)", def: "Téměř neinovuje. Produkt stagnuje, stabilní trh. Komodity, řemesla. Příklad: tradiční sklárny, kovárny.", tag: "FREEMAN" },
+    { term: "Oportunistická strategie (Freeman)", def: "Hledá niches. Bez velkého R&D, využívá rychlosti a flexibility. Příklad: niche e-commerce, specializované značky.", tag: "FREEMAN" },
+    { term: "Pitra — 5 inovačních strategií", def: "1) Nákladový vůdce, 2) Diferenciace, 3) Tržní výklenek (niche), 4) Kooperace, 5) Akvizice.", tag: "PITRA" },
+    { term: "Vlček — kdo a co", def: "Radim Vlček (VŠE). Definoval 6 dimenzí inovační strategie — nejkomplexnější český rámec.", tag: "VLČEK" },
+    { term: "Vlček — 6 dimenzí inovační strategie", def: "1) Časová, 2) Technologická, 3) Tržní, 4) Produktová, 5) Organizační, 6) Finanční.", tag: "VLČEK" },
+    { term: "Vlček × ostatní", def: "Vlček je nejkomplexnější — kombinuje Ansoffa (kde), Freemana (jak rychle), Pitru (s jakým cílem). Pro českou praxi VŠE-friendly autor.", tag: "VLČEK" },
+  ];
+
+  const quizInov6 = [
+    { q: "Co je inovační strategie?", opts: ["Marketingový plán", "Dlouhodobý plán, jak firma využívá inovace pro KV — kde, jak rychle, s jakými zdroji, v jakém pořadí inovovat", "Účetní výkaz", "Audit"], correct: 1 },
+    { q: "Kdo navrhl matici produkt × trh?", opts: ["Mintzberg", "Igor Ansoff (1957) — otec strategického plánování", "Porter", "Schumpeter"], correct: 1 },
+    { q: "Kolik kvadrantů má Ansoffova matice?", opts: ["3", "4 (Penetrace, Rozvoj trhu, Rozvoj produktu, Diverzifikace)", "5", "9"], correct: 1 },
+    { q: "Co je 'penetrace trhu' podle Ansoffa?", opts: ["Hackování", "Stávající produkt × stávající trh — nejmenší riziko, marketing/slevy, NENÍ inovace", "Diverzifikace", "Akvizice"], correct: 1 },
+    { q: "Která Ansoffova strategie má nejvyšší riziko?", opts: ["Penetrace", "Diverzifikace (nový produkt × nový trh) — často přes akvizice", "Rozvoj trhu", "Rozvoj produktu"], correct: 1 },
+    { q: "Kdo navrhl gradualistický (emergent) přístup ke strategii?", opts: ["Ansoff", "Henry Mintzberg (McGill University)", "Pitra", "Vlček"], correct: 1 },
+    { q: "Hlavní rozdíl Ansoff × Mintzberg?", opts: ["Věk", "Ansoff = racionalistický plánovaný (deliberate), Mintzberg = gradualistický emergentní (z akcí firmy)", "Žádný", "Cena"], correct: 1 },
+    { q: "Kolik 'P' má Mintzberg?", opts: ["3", "5 (Plan, Ploy, Pattern, Position, Perspective)", "7", "10"], correct: 1 },
+    { q: "Kdo definoval 6 typů inovační strategie?", opts: ["Ansoff", "Christopher Freeman (SPRU, Sussex)", "Pitra", "Drucker"], correct: 1 },
+    { q: "Která Freemanova strategie znamená 'být první'?", opts: ["Tradiční", "Ofenzivní — silné R&D, ochota riskovat (Apple, Tesla, SpaceX)", "Imitační", "Závislá"], correct: 1 },
+    { q: "Která Freemanova strategie odpovídá Samsung vs Apple?", opts: ["Ofenzivní", "Defenzivní — fast follower, nízký základní výzkum ale rychlá adaptace", "Tradiční", "Imitační"], correct: 1 },
+    { q: "Která Freemanova strategie sedí Foxconnu (Apple subdodavatel)?", opts: ["Ofenzivní", "Závislá — inovuje pod tlakem zákazníka, vlastní R&D minimální", "Tradiční", "Oportunistická"], correct: 1 },
+    { q: "Kolik strategií má Pitra?", opts: ["3", "5 (nákladový vůdce, diferenciace, niche, kooperace, akvizice)", "6", "10"], correct: 1 },
+    { q: "Kolik dimenzí má Vlčkova inovační strategie?", opts: ["3", "6 (časová, technologická, tržní, produktová, organizační, finanční)", "9", "12"], correct: 1 },
+    { q: "Proč je Vlček 'nejkomplexnější' český autor?", opts: ["Je nejstarší", "Jeho 6 dimenzí kombinuje Ansoffa (kde), Freemana (jak rychle), Pitru (s jakým cílem)", "Žádný důvod", "Marketing"], correct: 1 },
+    { q: "Co znamená 70-20-10 pravidlo?", opts: ["Daňové sazby", "70 % R&D do core (kontinuální), 20 % adjacent (související), 10 % transformative (radikální/disruptivní)", "Pracovní doba", "Cena vs marže"], correct: 1 },
+  ];
+
+  const praxeInov6 = {
+    caseStudy: {
+      company: "Tesla — etalon ofenzivní inovační strategie a Ansoffovy diverzifikace",
+      subtitle: "Jak Elon Musk kombinuje všechny přístupy (Ansoff, Mintzberg, Freeman)",
+      content: (<>
+        <b>Tesla (Elon Musk, 2003)</b> je nejlepší současný příklad <b>ofenzivní inovační strategie</b> podle Freemana + <b>diverzifikace</b> podle Ansoffa + <b>emergentního přístupu</b> podle Mintzberga. Tesla nedělá jednu strategii — kombinuje všechny.<br/><br/>
+        🎯 ANSOFFOVA MATICE — DIVERZIFIKACE:<br/><br/>
+        Tesla začala s <b>Roadster 2008</b> (elektromobil pro bohaté). Když se osvědčila technologie, expandovala přes <b>Model S</b> (sedan) → <b>Model X</b> (SUV) → <b>Model 3</b> (mass market) → <b>Model Y</b> (compact SUV) → <b>Cybertruck</b> (pickup). Klasický <b>rozvoj produktu</b> (nové P × stávající T).<br/><br/>
+        Pak Tesla šla do <b>diverzifikace</b> (nový P × nový T): <b>Powerwall + Solar</b> (energie pro domácnost), <b>Tesla Semi</b> (kamiony), <b>Tesla Energy</b> (baterie pro sítě), <b>Robotaxi/FSD</b> (autonomní mobilita). To je nejrizikovější kvadrant Ansoffa.<br/><br/>
+        ⚡ FREEMAN — OFENZIVNÍ STRATEGIE:<br/><br/>
+        Tesla je etalon <b>ofenzivní strategie</b>:<br/>
+        <b>Silné R&D</b> — 6 % tržeb do R&D (vs 4 % automotive průměr).<br/>
+        <b>První na trhu</b> s EV pro masový trh (Model 3 2017).<br/>
+        <b>Ochota riskovat</b> — Cybertruck design, Robotaxi launch.<br/>
+        <b>Technologický leadership</b> — battery tech, autopilot, OTA updates.<br/>
+        <b>Vertikální integrace</b> — vlastní gigafactories, vlastní baterie, vlastní software (oproti GM/Ford, kteří kupují baterie od LG/CATL).<br/><br/>
+        📈 MINTZBERG — EMERGENTNÍ STRATEGIE:<br/><br/>
+        Tesla původně NEPLÁNOVALA stavět Robotaxi nebo Cybertruck. Strategie <b>emergovala z technologického průlomu</b>:<br/>
+        - Když Tesla dosáhla cost parity baterií, otevřela se cesta k Model 3 (původně neplánovaný).<br/>
+        - Když Tesla dosáhla autonomous driving capabilities, otevřela se cesta k Robotaxi.<br/>
+        - Když Tesla měla solar know-how (akvizice SolarCity 2016), otevřel se trh pro Tesla Energy.<br/>
+        Mintzberg by řekl: 'strategie vzorec emerguje z akcí firmy'. Tesla žije Mintzberg každý den.<br/><br/>
+        🏛️ PITRA + VLČEK PERSPEKTIVA:<br/><br/>
+        <b>Pitra (5 strategií):</b> Tesla je <b>diferenciace</b> (premium brand, unikátní vlastnosti — Autopilot, OTA, supercharger síť) + <b>akvizice</b> (SolarCity, DeepScale, Maxwell Technologies — pro pokročilé baterie).<br/><br/>
+        <b>Vlček (6 dimenzí):</b><br/>
+        - <b>Časová:</b> first mover v EV (2003), first mover v autonomous (2014).<br/>
+        - <b>Technologická:</b> vlastní vývoj + akvizice.<br/>
+        - <b>Tržní:</b> globální (USA → Evropa → Čína → Indie).<br/>
+        - <b>Produktová:</b> radikální (Schumpeter 5. typ — nová organizace odvětví, viz Inov 1).<br/>
+        - <b>Organizační:</b> interní R&D + akvizice (SolarCity, Grohmann Engineering).<br/>
+        - <b>Finanční:</b> IPO 2010 + multiple stock offerings + cash from operations po 2020.<br/><br/>
+        💡 PROČ TO FUNGUJE:<br/><br/>
+        Tesla není jeden kvadrant Ansoffa nebo jedna Freemanova strategie. Je to <b>komplexní portfolio strategií</b>:<br/>
+        - Ansoff: rozvoj produktu + diverzifikace.<br/>
+        - Freeman: ofenzivní (technologický leadership).<br/>
+        - Pitra: diferenciace + akvizice.<br/>
+        - Vlček: všech 6 dimenzí aktivně.<br/>
+        - Mintzberg: emergentní strategie z technologických průlomů.<br/><br/>
+        Klíč: Tesla má jasnou <b>vizi (sustainable energy future)</b>, ale strategie se postupně vyvíjí podle technologie a trhu. Pro PS to znamená — neaplikovat jeden framework, ale kombinovat.
+      </>),
+      lessons: "Tesla ukazuje, že <b>nejlepší inovační strategie kombinují všech 5 autorů</b>. Pro komisi: vědět autory + jejich frameworky + umět je aplikovat na konkrétní firmu. Pro PS: identifikovat Ansoffův kvadrant + Freemanovu kategorii + Pitrovou + Vlčkovu dimenzi + zda je strategie deliberate (Ansoff) nebo emergent (Mintzberg). Anti-vzor: mluvit jen o R&D rozpočtu (to je jen Vlčkova finanční dimenze)."
+    },
+    miniExamples: [
+      { tag: "FREEMAN — DEFENZIVNÍ", color: VSE.warning, company: "Samsung — fast follower jako defenzivní strategie", content: "Samsung je etalon <b>defenzivní strategie</b> podle Freemana. Nevyvíjí radikální průlomy (jako Apple s iPhone 2007 nebo iPad 2010), ale <b>velmi rychle reaguje</b> a vylepšuje. Po iPhone 2007 vydal Samsung Galaxy S 2010 — 3 roky later. Po iPad 2010 vydal Galaxy Tab. Po Apple Watch 2015 vydal Galaxy Watch. Klíč: <b>obrovská výrobní kapacita</b> (Samsung vyrábí čipy pro Apple!) + <b>silný aplikovaný R&D</b> (ne základní výzkum). Výsledek: 20 % světového smartphone trhu vs Apple 17 %. Defenzivní ≠ slabý — je to validní strategie." },
+      { tag: "PITRA — KOOPERACE", color: VSE.fph, company: "Avast (CZ) → Norton akvizice — Pitrova kooperace + akvizice", content: "Avast (česká kybersecurity firma) ukazuje Pitrovu <b>strategii kooperace</b> + <b>akvizice</b>. Avast spolupracoval s univerzitami (ČVUT, MFF UK) pro talent pipeline. Akvizicemi (Piriform CCleaner, Jumpshot data analytics) rozšířil portfolio. V 2021 byl <b>sám akvírován NortonLifeLock za 8 mld USD</b> — to ukazuje, že kooperace + akvizice strategie funguje. Z české firmy se stala součást globálního giganta. Pro PS: Pitra = různé strategie pro různé fáze růstu firmy." },
+      { tag: "VLČEK — 6 DIMENZÍ", color: VSE.fmv, company: "Škoda Auto (CZ) — Vlčkův analytický rámec v praxi", content: "Škoda Auto je etalon Vlčkových <b>6 dimenzí inovační strategie</b>: <b>Časová</b> = fast follower za VW Group (ne first mover). <b>Technologická</b> = sdílení platforem MQB s VW (kooperace), žádný vlastní základní výzkum. <b>Tržní</b> = střední Evropa core, expanze do Indie/Číny/Ruska. <b>Produktová</b> = inkrementální (každoroční facelifty) + radikální v nových segmentech (Enyaq EV 2020). <b>Organizační</b> = interní vývoj v Mladé Boleslavi + VW Group platforma. <b>Finanční</b> = vlastní cash flow + investice z VW Group (zisky reinvestovány). Vlčkův rámec přesně popisuje Škoda strategy." },
+      { tag: "MINTZBERG — EMERGENT", color: VSE.success, company: "3M — Post-it Notes jako emergentní strategie", content: "3M je etalon Mintzbergova <b>emergentního přístupu</b>. Spencer Silver v 1968 omylem vyvinul <b>slabé lepidlo</b> (chtěl silné). 5 let to leželo v šuplíku. Pak Art Fry (taky 3M) v 1974 dostal nápad použít to na záložky do zpěvníku v kostele. Tak vznikl <b>Post-it Note</b>. <b>3M to NEPLÁNOVALA</b> jako strategii — emergovalo to z 15 % pravidla (zaměstnanci mají 15 % času na vlastní projekty). Z emergentní akce vznikl jeden z nejúspěšnějších produktů v historii. Mintzberg by řekl: 'strategie = pattern v chování firmy'. 3M kultura podpory experimentů → emergentní inovační strategie. Pro PS: deliberate (Ansoff) plánuje, emergent (Mintzberg) reaguje. Obojí má místo." },
+    ]
+  };
+
+  const examQuestionsInov6 = [
+    { komise: "Obecně — Inovační strategie (kombinace autorů)", otazka: "Inovační strategie — typy podle Ansoffa, Mintzberga, Vlčka, Pitry, Freemana", pozn: "Tažené 1× ze 45, ale komplexní otázka. Komise chce <b>všech 5 autorů</b> + jejich frameworky + rozdíl Ansoff (deliberate) × Mintzberg (emergent)." },
+    { komise: "Obecně — Ansoffova matice", otazka: "Ansoffova matice produkt × trh — 4 strategie růstu", pozn: "Penetrace × Rozvoj trhu × Rozvoj produktu × Diverzifikace. Riziko stoupá od penetrace k diverzifikaci. Penetrace NENÍ inovace." },
+    { komise: "Obecně — Freeman", otazka: "Freemanových 6 typů inovační strategie", pozn: "Ofenzivní × defenzivní × imitační × závislá × tradiční × oportunistická. Každá s příkladem firmy." },
+    { komise: "Obecně — Vlček", otazka: "Vlčkových 6 dimenzí inovační strategie", pozn: "Časová, technologická, tržní, produktová, organizační, finanční. Vlček = nejkomplexnější český autor, VŠE-friendly." },
+    { komise: "Obecně — Mintzberg vs Ansoff", otazka: "Rozdíl racionalistického (Ansoff) a gradualistického (Mintzberg) přístupu", pozn: "Ansoff = deliberate plánování top-down. Mintzberg = emergent z akcí firmy bottom-up. V praxi kombinace." },
+  ];
+
+  const podcastInov6 = {
+    title: "Inovace 6 — Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)",
+    description: "Inovační strategie je dlouhodobý plán, jak firma využívá inovace pro získání konkurenční výhody. Definuje do čeho budeme inovovat, jak rychle, s jakými zdroji a v jakém pořadí. Není to ad-hoc rozhodování, je to systémová odpověď. Proč firmy formulují inovační strategii - alokace zdrojů (bez strategie firma rozsype rozpočet na 50 malých projektů), sladění s firemní strategií, časový horizont (kontinuální vs průlomové), risk profile (70-20-10 pravidlo - 70 procent core, 20 procent adjacent, 10 procent transformative), time-to-market (first mover vs fast follower). Klíčové otázky - kde inovovat (produkty, procesy, BM), jak (interně in-house vs otevřená vs akvizice), kdy (být první vs následovat vs imitovat), s kým (dodavatelé, univerzity, startupy, konkurenti), pro koho (stávající vs noví zákazníci). Igor Ansoff (1957) je otec strategického plánování. Ansoffova matice 2 krát 2 produkt krát trh, 4 strategické cesty růstu. Racionalistický přístup k inovační strategii. 4 kvadranty - 1) Penetrace trhu (stávající produkt krát stávající trh, nejmenší riziko, lepší marketing, slevy, věrnostní programy, NENÍ inovace), 2) Rozvoj trhu (stávající produkt krát nový trh, mírné riziko, Škoda Auto expanze na Indii), 3) Rozvoj produktu (nový produkt krát stávající trh, Apple iPhone iPad Apple Watch), 4) Diverzifikace (nový produkt krát nový trh, nejvyšší riziko, Virgin hudba letectví telekomunikace, často přes akvizice). Henry Mintzberg z McGill University navrhl gradualistický emergentní přístup. Strategie nevzniká jen z formálního plánu ale emerguje z každodenních rozhodnutí firmy v reakci na trh. Ansoff vs Mintzberg - Ansoff racionalistický deliberate (strategie vzniká plánováním, top-down, stabilní prostředí), Mintzberg gradualistický emergent (strategie emerguje z akcí firmy, bottom-up, turbulentní prostředí). Mintzbergových 5 P strategie - Plan (vědomý plán Ansoff pojetí), Ploy (manévr taktika), Pattern (vzorec v chování firmy v čase emergentní pojetí), Position (pozice na trhu Porterův přístup), Perspective (úhel pohledu firemní osobnost kultura). Christopher Freeman z SPRU University of Sussex je britský ekonom, jeden z otců economics of innovation. Definoval 6 typů inovační strategie podle vztahu firmy k technologickému vývoji. 1) Ofenzivní - být první na trhu, silné R&D, vysoké investice, ochota riskovat, technologický leadership, Apple Tesla SpaceX. 2) Defenzivní - reagovat na ofenzivní hráče, aplikovaný R&D, fast follower, Samsung vs Apple. 3) Imitační - kopírovat etablovaná řešení, nízké R&D, focus na cenu, Aldi private labels, čínští výrobci. 4) Závislá - subdodavatelé velkých firem, inovuje pod tlakem zákazníků, Foxconn pro Apple, čeští dodavatelé pro VW. 5) Tradiční - téměř neinovuje, produkt stagnuje, stabilní trh, komodity, řemesla. 6) Oportunistická - hledá tržní mezery niches, bez velkého R&D, využívá rychlosti, niche e-commerce. Zbyněk Pitra a Radim Vlček jsou čeští akademici. Pitrových 5 inovačních strategií - 1) Nákladového vůdce (procesní inovace, automatizace, nejnižší cena), 2) Diferenciace (unikátní hodnota, design, brand, prémiová cena), 3) Tržního výklenku niche (úzká cílová skupina), 4) Kooperace (partnerství s univerzitami, klienty, otevřená inovace), 5) Akvizice (kupování inovativních startupů místo vlastního R&D). Vlčkových 6 dimenzí inovační strategie - 1) Časová (kdy inovovat - first mover vs follower), 2) Technologická (vlastní vývoj vs nákup vs licence), 3) Tržní (stávající vs nový trh, lokální vs globální), 4) Produktová (inkrementální vs radikální, produkt vs proces vs organizace vs marketing), 5) Organizační (interní R&D vs outsourcing vs joint venture vs akvizice), 6) Finanční (vlastní vs dluhové vs venture capital vs granty). Vlček je nejkomplexnější český autor - kombinuje Ansoffa kde, Freemana jak rychle, Pitru s jakým cílem. Pro českou praxi VŠE-friendly autor.",
+    audioUrl: null,
+    notebookLmUrl: null,
+  };
+
+  const examStrategyInov6 = `
+    <b style="color:#1E938D">1.</b> Definuj inovační strategii — dlouhodobý plán, jak firma využívá inovace pro KV.<br/>
+    <b style="color:#1E938D">2.</b> ⚠️ <b>Ansoff (1957)</b> — racionalistický přístup, matice produkt × trh, 4 kvadranty.<br/>
+    <b style="color:#1E938D">3.</b> ⚠️ <b>Mintzberg</b> — gradualistický (emergent) přístup, strategie z akcí firmy. <b>5 P</b> (Plan, Ploy, Pattern, Position, Perspective).<br/>
+    <b style="color:#1E938D">4.</b> <b>Ansoff × Mintzberg rozdíl</b> — racionalistický × gradualistický (komise se ráda ptá).<br/>
+    <b style="color:#1E938D">5.</b> ⚠️ <b>Freeman — 6 strategií</b>: ofenzivní, defenzivní, imitační, závislá, tradiční, oportunistická. Každá s příkladem.<br/>
+    <b style="color:#1E938D">6.</b> <b>Pitra — 5 strategií</b>: nákladový vůdce, diferenciace, niche, kooperace, akvizice.<br/>
+    <b style="color:#1E938D">7.</b> ⚠️ <b>Vlček — 6 dimenzí</b>: časová, technologická, tržní, produktová, organizační, finanční. <b>Nejkomplexnější český rámec</b>.<br/>
+    <b style="color:#1E938D">8.</b> <b>70-20-10 pravidlo</b> alokace R&D — core × adjacent × transformative.<br/>
+    <b style="color:#1E938D">9.</b> Aplikace na PS — identifikuj Ansoffův kvadrant + Freemanovu kategorii + Vlčkovy dimenze.<br/>
+    <b style="color:#1E938D">10.</b> Spojit s ostatními inovacemi — Schumpeter (Inov 1), Drucker (Inov 2), Galbraith (Inov 2), DT (Inov 4), SGCP (Inov 5).<br/>
+    <b style="color:#1E938D">11.</b> Etalony — Tesla (kombinace všech), Samsung (defenzivní), 3M (emergent), Škoda (Vlčkovy dimenze), Avast (Pitra kooperace+akvizice).<br/>
+    <b style="color:#1E938D">12.</b> Anti-vzor: mluvit jen o R&D rozpočtu, to je jen finanční dimenze Vlčka.
+  `;
+
+  const caseStudyInov6 = {
+    title: "Petr a strategická volba pro výrobce zdravotnické techniky",
+    subtitle: "Aplikuj všech 5 frameworků inovační strategie",
+    scenario: "Petr (45 let) je nový CEO MediCzech (české firmy s 350 zaměstnanci, výrobce zdravotnické techniky - infuzních pump, monitorů, sterilizátorů). Firma 25 let prosperovala, ale poslední 5 let stagnuje. Tržby 850 milionů, ale marže klesají, konkurence (Mindray z Číny, Philips z Nizozemska) tlačí ceny. Hlavní trh - státní nemocnice v ČR a SR, kde tendry vyhrává nejnižší cena.\n\nPetr má 3 hlavní výzvy. Zaprvé, MediCzech má kvalitní výrobky, ale technologicky zaostává - poslední velká inovace byla před 4 lety. Konkurence má AI funkce, cloud connectivity, mobile apps - MediCzech nic z toho. R&D budget je 3 procenta tržeb (oproti 8-12 procent u Philips a Siemens Healthineers).\n\nZadruhé, MediCzech je čistě B2B prodejce do veřejných tendrů. Nemá žádný prodej do soukromých klinik, do zahraničí (kromě Slovenska), ani do home care segmentu (kde rapidně roste poptávka po infuzních pumpách pro pacienty doma).\n\nZatřetí, board chce do 3 let zdvojnásobit tržby (na 1,7 miliardy) nebo prodat firmu zahraničnímu investorovi. Petr nechce prodat - chce zachránit českou firmu.\n\nPetr přemýšlí o strategii. Ansoffova matice mu radí, že MediCzech je v pasti penetrace trhu (stávající produkt krát stávající trh) a musí se posunout. Diverzifikace (nový produkt krát nový trh) je nejrizikovější, ale možná nutná. Mintzberg by řekl, ať Petr experimentuje (emergent), ale board chce konkrétní plán (deliberate). Petr se ptá - kde najít rovnováhu?\n\nPetr studuje Freemanovu typologii. MediCzech je dnes spíš defenzivní až imitační (kopíruje Philips/Mindray funkce s 2-3letým zpožděním). Mohl by jít na ofenzivní (silné R&D, být první) nebo na oportunistickou (specializace na home care niche, kde velcí hráči nemají sílu). Pitra by doporučil kombinaci diferenciace (kvalita made in EU, GDPR, lokální podpora) plus kooperace (partnerství s univerzitami - ČVUT, VUT, FEL).",
+    signals: [
+      { text: "Stagnace 5 let, klesající marže, konkurence (Mindray, Philips) tlačí ceny", color: VSE.danger, reason: "Klasický signál pro INOVAČNÍ STRATEGII (Inov 6) — firma v pasti penetrace trhu (Ansoff kvadrant 1). Bez strategie pro rozvoj produktu/trhu/diverzifikaci stagnace pokračuje až k akvizici nebo bankrotu." },
+      { text: "R&D 3 procenta tržeb vs konkurence 8-12 procent", color: VSE.warning, reason: "FREEMAN (Inov 6) — MediCzech je dnes IMITAČNÍ až DEFENZIVNÍ strategie. Pro skok na OFENZIVNÍ musí razantně zvýšit R&D investice. Bez toho nedohoní konkurenci." },
+      { text: "Žádný prodej do soukromých klinik, zahraničí, home care segmentu", color: VSE.fph, reason: "ANSOFF (Inov 6) — MediCzech nevyužívá ROZVOJ TRHU (nové geo, nové segmenty). Home care je rostoucí trh, kde velcí hráči nemají sílu — vhodný pro OPORTUNISTICKOU strategii (Freeman)." },
+      { text: "Board chce 2× tržby do 3 let nebo prodat firmu", color: VSE.danger, reason: "Tlak na DELIBERATE STRATEGII (Inov 6) — Ansoff přístup. Board chce konkrétní plán s milníky, ne emergent experimenty (Mintzberg). Petr musí najít rovnováhu." },
+      { text: "Petr přemýšlí — Ansoff, Mintzberg, Freeman, Pitra (kooperace s univerzitami)", color: VSE.success, reason: "SPRÁVNÝ PŘÍSTUP (Inov 6) — Petr aplikuje VŠECHNY frameworky najednou. Komise to ocení. Ansoffův kvadrant + Freeman typ + Pitra strategie + Vlček dimenze." },
+      { text: "Made in EU, GDPR, lokální podpora — Petr přemýšlí o diferenciaci", color: VSE.fph, reason: "PITRA DIFERENCIACE (Inov 6) — MediCzech má potenciál premium pozice (EU compliance, GDPR, lokální servis) oproti levné asijské konkurenci. Diferenciace je validní alternative k cenové válce." },
+    ],
+    quiz1: {
+      question: "Jakou strategii by měl Petr doporučit boardu?",
+      options: [
+        "Penetrace trhu (Ansoff 1) — víc tendrů, nižší ceny, lepší marketing",
+        "Kombinace ROZVOJ PRODUKTU (nové AI/cloud funkce pro stávající nemocnice) + ROZVOJ TRHU (home care, soukromé kliniky, EU export) + Freeman OFENZIVNÍ + Pitra DIFERENCIACE + KOOPERACE s univerzitami + Vlčkovy dimenze",
+        "Prodat firmu zahraničnímu investorovi a vzdát to",
+        "Zachovat status quo a doufat",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měl Petr postupovat?",
+      options: [
+        { text: "ANSOFF — vyhnout se penetraci trhu (past), zaměřit se na ROZVOJ PRODUKTU (AI/cloud/mobile features) + ROZVOJ TRHU (home care, EU export, soukromé kliniky) + opatrná DIVERZIFIKACE (specifické niche segmenty).", correct: true, reason: "✓ Inov 6 — Ansoff je první framework analýzy. Rozvoj produktu + trhu má střední riziko, je realizovatelný pro 350 lidí firmu." },
+        { text: "FREEMAN — posun z imitační/defenzivní na hybrid OFENZIVNÍ (nové AI funkce, být první v home care v ČR) + OPORTUNISTICKÁ (niche home care).", correct: true, reason: "✓ Inov 6 — Freemanova taxonomie umožní Petrovi pojmenovat současný stav (imitační) a cílový stav (ofenzivní hybrid)." },
+        { text: "PITRA — kombinovat DIFERENCIACI (Made in EU, GDPR, lokální podpora — premium pozice) + KOOPERACI (univerzity ČVUT, VUT, FEL — pro talent a R&D) + případně AKVIZICE (česká AI/healthtech startup).", correct: true, reason: "✓ Inov 6 — Pitra dává konkrétní akce. Diferenciace + kooperace je realistická pro českou firmu. Akvizice startupu rychlý skok do AI/cloud." },
+        { text: "VLČEK — aplikovat všech 6 dimenzí: časová (fast follower v AI, ne first mover globálně, ale first v ČR home care), technologická (akvizice + univerzitní kooperace), tržní (CZ+SK+EU+home care), produktová (radikální skok v AI), organizační (interní R&D + akvizice), finanční (zvýšit R&D z 3 na 8 procent).", correct: true, reason: "✓ Inov 6 — Vlček je nejkomplexnější rámec. Komise to vždy ocení. Konkrétní akce v každé dimenzi." },
+        { text: "MINTZBERG — najít rovnováhu mezi DELIBERATE (3letý plán pro board) a EMERGENT (pilotní home care projekt 2026, experimentování s AI funkcemi). Některé věci se musí emergent z trhu.", correct: true, reason: "✓ Inov 6 — kompromis. Board chce plán, ale realita vyžaduje flexibilitu. Tesla, 3M, Google to dělají takhle." },
+        { text: "70-20-10 PRAVIDLO alokace R&D — 70 % core (vylepšování stávajících pump/monitorů), 20 % adjacent (cloud, mobile pro stávající), 10 % transformative (AI diagnostika, home care platform).", correct: true, reason: "✓ Inov 6 — konkrétní alokace rozpočtu. Z 3% R&D na 8% (cca 70 mil. ročně) — Petr může reálně udělat všechny tři kategorie." },
+        { text: "Pokračovat v dnešní imitační strategii a doufat, že to vyjde", correct: false, reason: "✗ Klasický anti-vzor. 5 let to nefunguje, dalších 5 nebude. Bez strategické změny firma zanikne nebo bude prodaná." },
+        { text: "Skočit přímo na DIVERZIFIKACI (nový produkt + nový trh) — nejrizikovější kvadrant", correct: false, reason: "✗ Diverzifikace je nejrizikovější. Pro firmu, která 5 let stagnuje a má slabé R&D, je to recept na zánik. Lepší postupně přes rozvoj produktu/trhu." },
+      ],
+    },
+    summary: "<b>Petr by měl aplikovat všech 5 frameworků inovační strategie — Ansoff + Mintzberg + Freeman + Pitra + Vlček.</b><br/><br/><b>Postup:</b><br/><br/>• <b>ANSOFF (4 kvadranty):</b> Vyhnout se PENETRACI TRHU (past). Zaměřit se na <b>ROZVOJ PRODUKTU</b> (nové AI/cloud/mobile features pro stávající nemocnice) + <b>ROZVOJ TRHU</b> (home care, EU export, soukromé kliniky) + opatrná <b>DIVERZIFIKACE</b> (niche segmenty jako veterinární medicína nebo home dialýza).<br/><br/>• <b>MINTZBERG (5P):</b> Najít rovnováhu mezi <b>DELIBERATE</b> (3letý plán pro board s milníky) a <b>EMERGENT</b> (pilotní home care projekt 2026, experimentování s AI). Plan + Pattern současně.<br/><br/>• <b>FREEMAN (6 typů):</b> Posun z dnešní imitační/defenzivní na <b>hybrid OFENZIVNÍ + OPORTUNISTICKÁ</b> — ofenzivní v AI funkcích pro nemocnice, oportunistická v home care niche, kde velcí hráči nemají sílu.<br/><br/>• <b>PITRA (5 strategií):</b> Kombinovat <b>DIFERENCIACI</b> (Made in EU, GDPR, lokální podpora — premium pozice oproti levné Mindray) + <b>KOOPERACI</b> (partnerství s ČVUT/VUT/FEL pro talent a R&D) + případně <b>AKVIZICI</b> (česká AI/healthtech startup — rychlejší než vlastní vývoj).<br/><br/>• <b>VLČEK (6 dimenzí) — konkrétní plán:</b><br/>– <b>Časová:</b> fast follower v AI globálně, ale first mover v ČR home care.<br/>– <b>Technologická:</b> kombinace interní R&D + akvizice + univerzitní kooperace.<br/>– <b>Tržní:</b> rozšířit z CZ+SK na EU export + home care segment + soukromé kliniky.<br/>– <b>Produktová:</b> radikální skok v AI funkcích (Schumpetrův 2. typ — viz Inov 1), inkrementální v hardware.<br/>– <b>Organizační:</b> interní R&D + akvizice startupu pro AI + JV s univerzitou.<br/>– <b>Finanční:</b> zvýšit R&D z 3 % na 8 % (z 25 mil na 70 mil ročně) — financovat z cash flow + případně EIB úvěr.<br/><br/>• <b>70-20-10 alokace R&D (70 mil ročně):</b><br/>– 70 % core (49 mil) — vylepšování stávajících produktů (pumpy, monitory).<br/>– 20 % adjacent (14 mil) — cloud connectivity, mobile apps pro stávající.<br/>– 10 % transformative (7 mil) — AI diagnostika, home care platform, novel segment.<br/><br/>• <b>3letý plán:</b><br/>– Rok 1: zvýšit R&D na 5 %, akvizice AI startup (~50 mil), pilot home care s 2 nemocnicemi.<br/>– Rok 2: launch AI funkcí v stávajících produktech, expanze do EU (Polsko, Rakousko, Maďarsko), scale home care.<br/>– Rok 3: 1,5 miliardy tržeb (těsně pod board cílem 1,7 mld), ale udržitelný růst, nezávislost.<br/><br/><b>Pro komisi:</b> Klíč — <b>všech 5 autorů</b> (Ansoff, Mintzberg, Vlček, Pitra, Freeman) + jejich frameworky + aplikace na firmu. <b>Vědět autora ke každému rámci.</b> Anti-vzor: mluvit jen o R&D rozpočtu — to je jen finanční dimenze Vlčka, ne celá strategie.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Inovace" subjectId="inov" number={6} title="Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)"
+      subtitle="Inovační strategie — Ansoffova matice (racionalistický) × Mintzberg 5P (gradualistický emergent), Freemanových 6 strategií, Pitrových 5 strategií, Vlčkových 6 dimenzí. Kombinace všech 5 autorů."
+      color={VSE.primary}
+      questionText="Inovační strategie — dlouhodobý plán využití inovací pro KV. 5 klíčových autorů: Ansoff (matice produkt × trh, racionalistický), Mintzberg (emergent, 5P), Freeman (6 typů strategie), Pitra (5 strategií), Vlček (6 dimenzí — nejkomplexnější rámec)."
+      sloz={3} roz={4} freq={3}
+      examStrategy={examStrategyInov6}
+      studySections={studySectionsInov6}
+      flashcards={flashcardsInov6}
+      quiz={quizInov6}
+      praxe={praxeInov6}
+      examQuestions={examQuestionsInov6}
+      podcast={podcastInov6}
+      caseStudy={caseStudyInov6}
+    />
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   INOVACE 7 — Bariéry inovací + anatomie selhání + metriky
+   ════════════════════════════════════════════════════════ */
+function OkruhInov7Panel() {
+  const studySectionsInov7 = [
+    { id: "proc_selhavaji", title: "Proč inovace selhávají — Hobcraft × O'Sullivan", subtitle: "Top důvody selhání inovačních projektů", color: VSE.primary, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Většina inovací selhává.</b> Studie ukazují, že <b>70-90 % radikálních inovací nedosáhne komerčního úspěchu</b>. Otázka není 'jestli selžu', ale 'jak často, jak rychle, jak draho a co se z toho naučím'. <b>Paul Hobcraft</b> a <b>David O'Sullivan</b> definovali klíčové důvody, proč to firmy nezvládají.
+        </Def>
+        <Tag color={VSE.primary}>Hobcraft × O'Sullivan — 5 hlavních důvodů selhání</Tag>
+        <Bullet items={[
+          "<b>1. Slabé pochopení zákazníka</b> — firma vyvíjí produkt 'od stolu', bez vcítění (chybí Design Thinking — viz Inov 4). Klasický Henry Ford: 'kdybych se zeptal, lidi by chtěli rychlejšího koně'.",
+          "<b>2. Nejasná inovační strategie</b> — firma neví, do čeho a proč inovuje. Bez frameworku (Ansoff/Mintzberg/Vlček — viz Inov 6) jen rozsype rozpočet.",
+          "<b>3. Špatná exekuce</b> — nápad je dobrý, ale vývoj/launch je chaotický. Chybí SGCP (viz Inov 5) — žádné gates, žádné formální schvalování, žádné KILL.",
+          "<b>4. Firemní kultura</b> — 'imunitní systém' firmy (viz Inov 2 — Galbraith) odmítá nové. Strach z chyby, trest za experimenty, hierarchie potlačuje šampiony.",
+          "<b>5. Nedostatečné zdroje</b> — málo R&D budgetu (méně než 3-5 % tržeb), málo času, nedostatečně kvalifikovaný tým, žádný interní inovační fond.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Další časté důvody (rozšíření Hobcrafta)</Tag>
+        <Bullet items={[
+          "<b>Špatný timing</b> — předběhnutí trhu (Apple Newton 1993, Google Glass 2014) nebo opožděné uvedení.",
+          "<b>Slabý business model</b> — produkt funguje, ale firma neumí vydělat (chybí Lean Canvas/BMC — viz Inov 3).",
+          "<b>Konkurenční reakce</b> — silný incumbent rychle kopíruje (Facebook → Snapchat Stories, Instagram).",
+          "<b>Regulační překážky</b> — Uber v Německu, Airbnb v New Yorku.",
+          "<b>Technologická nezralost</b> — VR brýle 2016 (mnoho firem), autonomous driving 2020+ (Waymo, Cruise).",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "vnitrni_barery", title: "Vnitřní (interní) bariéry inovací — 10 kategorií", subtitle: "Co uvnitř firmy brání úspěchu inovace", color: VSE.primary, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Vnitřní bariéry</b> jsou ty, které firma má pod kontrolou — může je odstranit, ale často neumí. Komise tažené 5× chce <b>vyjmenovat aspoň 6-8 interních bariér</b>.
+        </Def>
+        <Tag color={VSE.primary}>10 klíčových interních bariér</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "1. FIREMNÍ KULTURA", d: "<b>Imunitní systém firmy</b> (viz Inov 2). Strach z chyby, trest za experiment, hierarchie, 'tak se to u nás nedělá'. Nejčastější bariéra." },
+            { c: VSE.warning, t: "2. LEADERSHIP", d: "<b>Vedení nepodporuje inovace</b> aktivně. Žádný 'innovation champion' na C-úrovni. Top management bere inovace jako nákladovou položku." },
+            { c: VSE.fmv, t: "3. ORGANIZAČNÍ STRUKTURA", d: "<b>Strikt hierarchie a silo</b> — R&D, marketing, sales spolu nemluví. Inovace umírá v meziprostoru. Chybí multidisciplinární týmy." },
+            { c: VSE.danger, t: "4. PROCESY", d: "<b>Žádný formální inovační proces</b> (chybí SGCP — viz Inov 5). Nebo naopak <b>příliš byrokratický</b> — schvalování trvá rok." },
+            { c: VSE.success, t: "5. LIDÉ A TALENT", d: "<b>Chybí inovační role</b> (idea šampioni, sponzoři, lídři — viz Inov 2). Žádné vzdělávání v DT, brainstormingu, agile metodikách." },
+            { c: VSE.primary, t: "6. FINANCE", d: "<b>Příliš nízký R&D budget</b> (méně než 3 % tržeb), žádný interní inovační fond, krátkozraké myšlení (ROI do roka, jinak KILL)." },
+            { c: VSE.fph, t: "7. ČAS A KAPACITY", d: "<b>Lidé jsou přetížení provozem</b>, nemají čas na inovace. Chybí 15 % pravidlo (3M) nebo 20 % pravidlo (Google)." },
+            { c: VSE.warning, t: "8. ZNALOSTI A INFORMACE", d: "<b>Firma nezná zákazníky</b> (chybí Vcítění — Inov 4), nezná konkurenci, nezná trendy. Žádný systematický market research." },
+            { c: VSE.fmv, t: "9. ZÁKAZNICKÝ FEEDBACK", d: "<b>Firma nesbírá zpětnou vazbu</b>, nebo ji ignoruje. Žádné focus groups, žádní lead users (viz Inov 4). Vývoj 'od stolu'." },
+            { c: VSE.danger, t: "10. DODAVATELÉ A PARTNERSTVÍ", d: "<b>Žádná otevřená inovace</b> (Connect+Develop). Firma se uzavírá, nespolupracuje s univerzitami, startupy, dodavateli." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 720 380" maxHeight={400}>
+          <text x="360" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">10 internich barier inovaci - vse pod kontrolou firmy</text>
+          <text x="360" y="40" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">razene podle frekvence vyskytu (cervene = nejcastejsi)</text>
+          {/* 10 boxes in 2 rows × 5 columns */}
+          {[
+            {x: 20,  y: 70,  c: VSE.danger,  n: "1", label: "KULTURA",      sub: "imunitni system"},
+            {x: 160, y: 70,  c: VSE.danger,  n: "2", label: "LEADERSHIP",   sub: "zadny champion"},
+            {x: 300, y: 70,  c: VSE.warning, n: "3", label: "STRUKTURA",    sub: "silo, hierarchie"},
+            {x: 440, y: 70,  c: VSE.warning, n: "4", label: "PROCESY",      sub: "zadny SGCP"},
+            {x: 580, y: 70,  c: VSE.fmv,     n: "5", label: "LIDE",         sub: "chybi sampioni"},
+            {x: 20,  y: 210, c: VSE.fmv,     n: "6", label: "FINANCE",      sub: "R&D pod 3%"},
+            {x: 160, y: 210, c: VSE.fph,     n: "7", label: "CAS",          sub: "pretizeni provoz"},
+            {x: 300, y: 210, c: VSE.fph,     n: "8", label: "ZNALOSTI",     sub: "nezna zakazniky"},
+            {x: 440, y: 210, c: VSE.success, n: "9", label: "FEEDBACK",     sub: "zadne focus group"},
+            {x: 580, y: 210, c: VSE.success, n: "10", label: "PARTNERSTVI", sub: "uzavrena firma"},
+          ].map((b, i) => (
+            <g key={i}>
+              <rect x={b.x} y={b.y} width="120" height="120" rx="10" fill={b.c} opacity="0.18" stroke={b.c} strokeWidth="2"/>
+              <circle cx={b.x + 60} cy={b.y + 30} r="16" fill={b.c} opacity="0.9"/>
+              <text x={b.x + 60} y={b.y + 35} textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="800" fill="#fff">{b.n}</text>
+              <text x={b.x + 60} y={b.y + 70} textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="800" fill={b.c}>{b.label}</text>
+              <text x={b.x + 60} y={b.y + 95} textAnchor="middle" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">{b.sub}</text>
+            </g>
+          ))}
+          {/* Legend */}
+          <text x="360" y="365" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)" fontStyle="italic">cervene (1-2) = nejcastejsi - oranzove (3-4) = casto - tealove (5-6) = strednedobe - modre (7-8) = methodicke - zelene (9-10) = vnejsi vztahy</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.warning}>Jak interní bariéry překonat</Tag>
+        <Bullet items={[
+          "<b>Kultura:</b> leadership jako model role, akceptace neúspěchu, psychological safety (Google Project Aristotle).",
+          "<b>Struktura:</b> oddělit R&D od provozu (viz Inov 2 — proč firmy oddělují R&D), multidisciplinární týmy.",
+          "<b>Procesy:</b> implementovat SGCP (viz Inov 5) + DT (viz Inov 4) + Lean Canvas (viz Inov 3).",
+          "<b>Lidé:</b> identifikovat idea šampiony, dát jim sponzory, vzdělávat v inovačních metodikách.",
+          "<b>Finance:</b> zvýšit R&D budget na 5-10 % tržeb, vyčlenit inovační fond (1-2 % tržeb).",
+          "<b>Čas:</b> 15-20 % pravidlo pro inovační projekty.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "vnejsi_barery", title: "Vnější (externí) bariéry inovací", subtitle: "Co mimo firmu komplikuje inovace", color: VSE.primary, emoji: "globe",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Vnější bariéry</b> jsou ty, které firma nekontroluje — musí se s nimi vyrovnat, obejít je, nebo počkat. Komise se ráda ptá na 4-6 hlavních.
+        </Def>
+        <Tag color={VSE.primary}>Hlavní externí bariéry</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.danger, t: "REGULACE A LEGISLATIVA", d: "<b>Příliš přísné zákony</b> (Uber v Německu, Airbnb v NYC), <b>chybějící zákony</b> (autonomous driving, krypto), <b>pomalé schvalování</b> (farma, medical devices — 5-10 let)." },
+            { c: VSE.warning, t: "KONKURENCE", d: "<b>Silný incumbent</b> rychle kopíruje (Meta vůči Snapchatu, Microsoft vůči Slacku) nebo zničí cenou. <b>Bariéra vstupu</b> v networked trzích (network effects)." },
+            { c: VSE.fmv, t: "MAKROEKONOMIKA", d: "<b>Recese</b> snižuje ochotu firem investovat do R&D. <b>Inflace + úrokové sazby</b> snižují dostupnost kapitálu (VC). <b>Trade wars</b> komplikují supply chain." },
+            { c: VSE.success, t: "TECHNOLOGIE", d: "<b>Nezralost technologie</b> (VR 2016, mRNA před COVIDem, AI před 2020). <b>Chybějící infrastruktura</b> (EV bez nabíjecí sítě, 5G před 2022)." },
+            { c: VSE.primary, t: "TRH A ZÁKAZNÍCI", d: "<b>Konzervativní zákazníci</b> (B2B enterprise IT), <b>nízká ochota platit</b> (B2C v rozvojových zemích), <b>kulturní bariéry</b> (Halal/Kosher, Sharia banking)." },
+            { c: VSE.fph, t: "FINANCOVÁNÍ", d: "<b>Banky neradi financují inovace</b> (chybí kolaterál). <b>VC funding cycles</b> (boom-bust). <b>Dotace EU/národní</b> jsou byrokratické a nejisté." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Jak externí bariéry obejít</Tag>
+        <Bullet items={[
+          "<b>Regulace:</b> lobbing, spolupráce s úřady (Tesla Direct Sales legalizace), pilot projekty (regulatory sandbox v UK pro fintech).",
+          "<b>Konkurence:</b> network effects budovat brzy, vendor lock-in, IP ochrana (patenty).",
+          "<b>Makroekonomika:</b> diverzifikace trhů, conservatve cash management, hedging.",
+          "<b>Technologie:</b> partnerství s univerzitami, otevřená inovace, akvizice deep-tech startupů.",
+          "<b>Financování:</b> mix VC + grants + cash flow + strategic investors (corporate VC).",
+        ]} color={VSE.warning} />
+        <ExamAlert
+          komise="Tažené: Vnitřní + externí bariéry inovací (Mladkova+Špaček+Cejthamr 2025, Pichanič+Cejthamr+Schönfeld 2025, Krause+Mladkova+Pernica)"
+          what="Komise chce <b>vyjmenovat aspoň 6-8 interních + 4-6 externích bariér</b> + popsat, jak je překonat. Klíčové: rozdíl mezi tím, co firma kontroluje (interní) a nekontroluje (externí). Hobcraft jako 'extra body' za citaci."
+        />
+      </div>) },
+
+    { id: "ip_ochrana", title: "Ochrana inovace — duševní vlastnictví (IP)", subtitle: "Patenty, know-how, ochranné známky, autorská práva", color: VSE.primary, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Intellectual Property (IP)</b> je <b>klíčový obranný štít</b> inovace — bez něj konkurence okamžitě zkopíruje. Komise může chtít znát typy IP a kroky pro jejich získání.
+        </Def>
+        <Tag color={VSE.primary}>4 hlavní typy duševního vlastnictví</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "PATENTY", d: "<b>Ochrana technického řešení</b> (vynálezu). Trvání 20 let. <b>Veřejně dostupné</b> (popis musí zveřejnit). Náklady 100-500 tis. Kč na 1 patent (EU/USA). Příklad: Nespresso kapsle (patent 1976-1996)." },
+            { c: VSE.warning, t: "OCHRANNÉ ZNÁMKY", d: "<b>Ochrana značky/loga</b>. Trvání 10 let s obnovou. Národní/EU/mezinárodní (Madrid Protocol). Náklady 10-50 tis. Kč. Příklad: Apple jablko, Coca-Cola design." },
+            { c: VSE.fmv, t: "AUTORSKÁ PRÁVA", d: "<b>Ochrana tvůrčího díla</b> (text, software, hudba). <b>Automatická, není třeba registrovat</b>. Trvání 70 let po smrti autora. Příklad: software kód, knihy, hudba." },
+            { c: VSE.danger, t: "KNOW-HOW + OBCHODNÍ TAJEMSTVÍ", d: "<b>Neveřejné informace</b> — recepty, procesy, data. Není časově omezené, pokud zůstane tajemstvím. Příklad: Coca-Cola recept (1886-dodnes!), KFC koření." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Kroky pro získání patentu (zjednodušeně)</Tag>
+        <Bullet items={[
+          "<b>1. Patentová rešerše</b> — ověřit, že podobné řešení už neexistuje (databáze EPO, USPTO).",
+          "<b>2. Sestavení přihlášky</b> — popis vynálezu, nároky (claims), schémata. Obvykle s patentovým zástupcem.",
+          "<b>3. Podání</b> — na Úřad průmyslového vlastnictví ČR (lokálně) nebo EPO (Evropa) nebo PCT (mezinárodně).",
+          "<b>4. Formální průzkum</b> — kontrola formálních náležitostí (6 měsíců).",
+          "<b>5. Věcný průzkum</b> — kontrola novosti, vynálezecké činnosti, průmyslové využitelnosti (1-3 roky).",
+          "<b>6. Udělení patentu</b> — pokud projde. Platí poplatky za udržování (roční).",
+          "<b>Celkem 2-5 let</b>, 100-500 tis. Kč. Patent je <b>investice s nejistým výnosem</b>.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Patent × know-how — strategická volba</Tag>
+        <Bullet items={[
+          "<b>Patent:</b> chrání 20 let, ale vyžaduje zveřejnění. Po expiraci konkurence okamžitě kopíruje.",
+          "<b>Know-how:</b> chrání neomezeně, pokud zůstane tajné. Riziko leaků (zaměstnanci, reverse engineering).",
+          "<b>Volba:</b> složité a snadno reverse-engineerovatelné technologie → patent. Recepty, procesy, algoritmy → know-how.",
+          "<b>Příklad:</b> Coca-Cola nikdy nepatentovala recept — patent by exposed ingredience. 140 let know-how je silnější.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "anatomie_selhani", title: "Anatomie skvělého selhání + učení z chyb", subtitle: "Sitkin — 'intelligent failure' a kritéria", color: VSE.primary, emoji: "brain",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>Sim Sitkin</b> (Duke University, 1992) definoval koncept <b>'intelligent failure'</b> — skvělé selhání, ze kterého se firma něco naučí. Klíč: <b>ne všechna selhání jsou stejná</b>. Některá jsou cenná, jiná katastrofa.
+        </Def>
+        <Tag color={VSE.primary}>4 kritéria 'skvělého' (intelligent) selhání podle Sitkina</Tag>
+        <Bullet items={[
+          "<b>1. Experimentální záměr</b> — selhání pochází z <b>záměrného experimentu</b>, ne z nedbalosti. Firma vědomě testovala hypotézu, ne 'plácala se naslepo'.",
+          "<b>2. Malé riziko (small scale)</b> — selhání je <b>levné a rychlé</b>. Lean Startup MVP (viz Inov 4), pilot projekty, A/B testy. NE celý launch.",
+          "<b>3. Generuje znalosti</b> — z chyby <b>se firma reálně něco dozví</b>, ne jen 'no tak to nefunguje'. Postmortem analýza, root cause (5x Proč — viz Inov 3).",
+          "<b>4. Znalosti se sdílí</b> — naučené je <b>uloženo a sdíleno v organizaci</b>. Knowledge management, internal wiki, lessons learned databáze, blameless postmortems.",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Anatomie selhání — typický průběh</Tag>
+        <Bullet items={[
+          "<b>1. Příliš velká očekávání</b> — board chce 10× ROI za rok, tým slibuje 'breakthrough innovation'.",
+          "<b>2. Nedostatečná validace</b> — žádné MVP, žádní lead users, žádný Lean Canvas. Vývoj 'od stolu'.",
+          "<b>3. Eskalace závazku (escalation of commitment)</b> — i když data ukazují problém, tým tlačí dál ('už jsme investovali 50 milionů, nemůžeme přestat'). <b>Klasická Sunk Cost Fallacy.</b>",
+          "<b>4. Pozdní KILL</b> — místo brzkého KILL na Gate 2-3 (SGCP, Inov 5) projekt jde až do launchu. Google Stadia (Inov 5 příklad).",
+          "<b>5. Bez postmortem</b> — po selhání tým rozpustí, znalosti zmizí. Firma opakuje stejnou chybu.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Jak z chyb učit (kultura učení)</Tag>
+        <Bullet items={[
+          "<b>Blameless postmortems</b> (Google, Amazon) — analýza chyby bez hledání 'koho potrestat'. Cíl: co se naučit, ne kdo za to může.",
+          "<b>Lessons learned databáze</b> — sdílená wiki s 'co fungovalo / nefungovalo' z minulých projektů.",
+          "<b>Innovation graveyards</b> — některé firmy (Google) veřejně publikují seznam zabitých projektů a důvody — pro učení i pro inspiraci.",
+          "<b>Failure resumes</b> — manažeři sdílí svá selhání, ne jen úspěchy. Vytváří kulturu psychological safety.",
+          "<b>Pre-mortems</b> (Gary Klein) — před launchem si tým představí, že projekt selhal, a zpětně analyzuje proč. Identifikuje rizika dopředu.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "metriky", title: "Metriky inovací — co měřit a jak", subtitle: "Input × Process × Output × Outcome metriky", color: VSE.primary, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.primary}>
+          <b>'What gets measured, gets managed.'</b> Firma, která nemá metriky inovací, nemá ani strategii. Komise tažené 3× — chce vědět <b>4 kategorie metrik</b> (input/process/output/outcome) a konkrétní příklady.
+        </Def>
+        <Tag color={VSE.primary}>4 kategorie inovačních metrik</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, t: "INPUT (vstupy)", d: "<b>Kolik a co investujeme do inovací.</b> R&D budget (% tržeb), počet zaměstnanců v R&D, % času na inovace (15 % pravidlo), počet partnerství (univerzity, startupy)." },
+            { c: VSE.warning, t: "PROCESS (proces)", d: "<b>Jak efektivně inovujeme.</b> Time-to-market (od nápadu k launch), pipeline metrics (počet nápadů v každém stage), Gate kill rate (% projektů, co skončí na bráně), průměrná doba na bráně." },
+            { c: VSE.fmv, t: "OUTPUT (výstupy)", d: "<b>Co inovace vyprodukuje.</b> Počet patentů, počet nových produktů ročně, počet zaměstnanců s inovační rolí, počet realizovaných pilotních projektů." },
+            { c: VSE.success, t: "OUTCOME (dopady)", d: "<b>Jaký byznys výsledek to přineslo.</b> % tržeb z nových produktů (≤ 3 roky), ROI inovačních projektů, NPV / IRR (viz Finance), market share growth, customer NPS." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ResponsiveSVG viewBox="0 0 760 360" maxHeight={380}>
+          <text x="380" y="22" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="800" fill="var(--text)">4 kategorie metrik inovaci - inovacni pipeline</text>
+          <text x="380" y="40" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">co merime na vstupu - v procesu - na vystupu - v dopadech</text>
+          {/* 4 stages pipeline */}
+          {[
+            {x: 20,  c: VSE.fph,     n: "1", label: "INPUT",    sub: "vstupy",    examples: ["R&D budget % trzeb", "Pocet lidi v R&D", "% casu na inovace", "Pocet partnerstvi"]},
+            {x: 200, c: VSE.warning, n: "2", label: "PROCESS",  sub: "proces",    examples: ["Time-to-market", "Pipeline metrics", "Gate kill rate", "Doba na brane"]},
+            {x: 380, c: VSE.fmv,     n: "3", label: "OUTPUT",   sub: "vystupy",   examples: ["Pocet patentu/rok", "Nove produkty/rok", "Realizovane piloty", "Idea sampioni"]},
+            {x: 560, c: VSE.success, n: "4", label: "OUTCOME",  sub: "dopady",    examples: ["NPI (% trzeb nove)", "ROI portfolia", "NPV / IRR", "Market share, NPS"]},
+          ].map((s, i, arr) => (
+            <g key={i}>
+              {/* Main box */}
+              <rect x={s.x} y="70" width="160" height="220" rx="10" fill={s.c} opacity="0.18" stroke={s.c} strokeWidth="2"/>
+              {/* Number badge */}
+              <circle cx={s.x + 30} cy="95" r="16" fill={s.c} opacity="0.95"/>
+              <text x={s.x + 30} y="100" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="800" fill="#fff">{s.n}</text>
+              {/* Title */}
+              <text x={s.x + 95} y="100" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="800" fill={s.c}>{s.label}</text>
+              <text x={s.x + 95} y="116" textAnchor="middle" fontFamily={fontMono} fontSize="9" fontStyle="italic" fill="var(--text-muted)">({s.sub})</text>
+              {/* Examples */}
+              {s.examples.map((ex, j) => (
+                <g key={j}>
+                  <circle cx={s.x + 18} cy={148 + j * 30} r="3" fill={s.c}/>
+                  <text x={s.x + 28} y={152 + j * 30} fontFamily={fontMono} fontSize="9.5" fill="var(--text)">{ex}</text>
+                </g>
+              ))}
+              {/* Arrow to next */}
+              {i < arr.length - 1 && <path d={`M ${s.x + 162} 175 L ${s.x + 178} 175`} stroke="var(--text-muted)" strokeWidth="2" markerEnd="url(#arrMetrics)"/>}
+            </g>
+          ))}
+          {/* Bottom note */}
+          <text x="380" y="320" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">NPI cilove hodnoty: 3M = 30%, Apple ~50%, automotive ~15% - R&D Intensity: tech 10-15%, FMCG 3-5%, farma 15-20%</text>
+          <text x="380" y="345" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)">NPV/IRR (Finance subject) - pozor na limitace - neoceni optionality, vysoce nejiste projekty zamita</text>
+          <defs>
+            <marker id="arrMetrics" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+              <path d="M0,0 L7,3 L0,6 Z" fill="var(--text-muted)"/>
+            </marker>
+          </defs>
+        </ResponsiveSVG>
+        <Tag color={VSE.warning}>Klíčové metriky podle 3M (etalon)</Tag>
+        <Bullet items={[
+          "<b>NPI (New Product Index)</b> — % tržeb z produktů uvedených v posledních 5 letech. 3M cíl: 30 %. Apple ~50 %.",
+          "<b>R&D Intensity</b> — R&D / tržby. Tech firmy 10-15 %, FMCG 3-5 %, automotive 5-8 %, farmaceutika 15-20 %.",
+          "<b>Time-to-Market</b> — od idea screen po launch. Lean startup: 3-6 měsíců (SaaS). Automotive: 4-6 let. Farma: 10-15 let.",
+          "<b>Success rate</b> — % projektů, co se dostanou na trh × % co je profitabilní. Industry průměr: 5-10 % z všech idea se stane úspěchem.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fph}>Finanční metriky inovací — odkaz na Finance subject</Tag>
+        <Bullet items={[
+          "<b>NPV (Net Present Value)</b> — současná hodnota budoucích cash flow minus investice. Pokud > 0, projekt vydělává. <b>Detail v Finance subject.</b>",
+          "<b>IRR (Internal Rate of Return)</b> — vnitřní výnosové procento. Pokud > cost of capital, projekt vydělává. <b>Detail v Finance subject.</b>",
+          "<b>Payback period</b> — za jak dlouho se investice vrátí. Inovace typicky 3-7 let.",
+          "<b>ROI</b> — return on investment. Pro inovační portfolio celkové, ne projekt-by-project (mnoho selže).",
+          "<b>Komise může chtít:</b> proč pro inovace NEPOUŽÍVAT samotné NPV — protože nedoceňuje optionality (real options theory) a vysoce nejisté projekty zamítá.",
+        ]} color={VSE.fph} />
+        <ExamAlert
+          komise="Tažené: Metriky inovací (Nový+Kuděj+Zamazalová 2025, Pichanič+Stříteský 2025, Heřman+Mareš+Schönfeld)"
+          what="Komise chce <b>4 kategorie</b> (input/process/output/outcome) + <b>konkrétní příklady</b> (NPI, R&D intensity, time-to-market, success rate). Zmínit NPV/IRR s odkazem na Finance subject. Pichanič chce ROI inovačního portfolia, ne projektu."
+        />
+      </div>) },
+
+    { id: "aplikace", title: "Jak na případovku — bariéry, selhání, metriky", subtitle: "Postup + co komise oceňuje × čemu se vyhnout", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Komise tažené bariéry 5× + metriky 3× ze 45 — komplexní téma. Tady je postup, jak na případovku.
+        </Def>
+        <Tag color={VSE.success}>Postup, jak na případovku</Tag>
+        <Bullet items={[
+          "<b>1.</b> Identifikuj firmu v PS a její situaci — etablovaná × startup, stagnuje × roste, R&D intenzivní × ne.",
+          "<b>2.</b> Diagnostikuj <b>vnitřní bariéry</b> (8-10 kategorií) — která je v případové firmě nejvážnější? Kultura? Leadership? Procesy? Lidi? Finance?",
+          "<b>3.</b> Analyzuj <b>vnější bariéry</b> — regulace? Konkurence? Makroekonomika? Technologie?",
+          "<b>4.</b> Doporuč <b>konkrétní akce</b> pro překonání bariér — leadership change, struktura R&D, SGCP, kultura experimentů.",
+          "<b>5.</b> Navrhni <b>strategii IP ochrany</b> — patent × know-how × ochranné známky (podle typu inovace).",
+          "<b>6.</b> Nastav <b>metriky inovací</b> ve 4 kategoriích (input/process/output/outcome) — co budeme měřit a kdy review.",
+          "<b>7.</b> Zmínit <b>kulturu učení z chyb</b> — blameless postmortems, lessons learned, Sitkin intelligent failure.",
+          "<b>8.</b> Spojit s ostatními inovačními okruhy — Schumpeter (Inov 1), Drucker+Galbraith (Inov 2), Lean Canvas/BMC (Inov 3), DT (Inov 4), SGCP (Inov 5), strategie (Inov 6).",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
+        <Bullet items={[
+          "<b>✅ Dobře:</b> Vyjmenovat <b>aspoň 6-8 interních bariér</b> + <b>4-6 externích</b> + konkrétní akce na překonání.",
+          "<b>✅ Dobře:</b> <b>4 kategorie metrik</b> (input/process/output/outcome) + konkrétní příklady (NPI, R&D intensity, time-to-market).",
+          "<b>✅ Dobře:</b> <b>Sitkinova 4 kritéria 'intelligent failure'</b> — experimentální záměr, malé riziko, generuje znalosti, sdílí znalosti.",
+          "<b>✅ Dobře:</b> <b>IP strategie</b> — patent × know-how kdy co (Coca-Cola příklad: know-how silnější než patent).",
+          "<b>✅ Dobře:</b> <b>Hobcraft × O'Sullivan</b> jako akademický citát.",
+          "<b>❌ Špatně:</b> Mluvit jen o 'firemní kultuře' jako bariéře a doufat — komise chce konkrétní 6-8 kategorií.",
+          "<b>❌ Špatně:</b> Zaměnit interní × externí bariéry (kulturu nemůže firma kontrolovat? Může!).",
+          "<b>❌ Špatně:</b> Říct, že 'metrika je R&D budget' — to je jen 1 input metrika ze 4 kategorií.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsInov7 = [
+    { term: "Selhanost inovací", def: "70-90 % radikálních inovací nedosáhne komerčního úspěchu. Otázka není 'jestli', ale 'jak často, rychle, draho a co se naučím'.", tag: "SELHÁNÍ" },
+    { term: "Hobcraft × O'Sullivan — 5 důvodů selhání", def: "1) Slabé pochopení zákazníka, 2) Nejasná inovační strategie, 3) Špatná exekuce, 4) Firemní kultura, 5) Nedostatečné zdroje.", tag: "SELHÁNÍ" },
+    { term: "Vnitřní bariéry — definice", def: "Bariéry, které firma kontroluje a může je odstranit (kultura, leadership, struktura, procesy, lidi, finance, čas, znalosti, feedback, dodavatelé).", tag: "BARIÉRY" },
+    { term: "10 interních bariér", def: "Kultura, leadership, struktura, procesy, lidi, finance, čas, znalosti/info, zákaznický feedback, dodavatelé/partnerství.", tag: "BARIÉRY" },
+    { term: "Firemní kultura jako bariéra", def: "Imunitní systém firmy. Strach z chyby, trest za experiment, 'tak se to u nás nedělá'. Nejčastější bariéra inovací.", tag: "BARIÉRY" },
+    { term: "Externí bariéry", def: "Bariéry mimo kontrolu firmy: regulace/legislativa, konkurence, makroekonomika, technologie/infrastruktura, trh/zákazníci, financování.", tag: "BARIÉRY" },
+    { term: "Regulace jako bariéra", def: "Příliš přísné zákony (Uber Německo, Airbnb NYC), chybějící zákony (autonomous, krypto), pomalé schvalování (farma 5-10 let).", tag: "BARIÉRY" },
+    { term: "Konkurence jako bariéra", def: "Silný incumbent rychle kopíruje (Meta vs Snapchat), zničí cenou, network effects v jejich prospěch.", tag: "BARIÉRY" },
+    { term: "IP — 4 typy", def: "1) Patenty (20 let, technické řešení, veřejné), 2) Ochranné známky (10 let, brand), 3) Autorská práva (70 let po smrti, automatické), 4) Know-how (neomezené, tajné).", tag: "IP" },
+    { term: "Patent — kroky získání", def: "1) Patentová rešerše, 2) Sestavení přihlášky, 3) Podání, 4) Formální průzkum, 5) Věcný průzkum (1-3 roky), 6) Udělení. Celkem 2-5 let, 100-500 tis. Kč.", tag: "IP" },
+    { term: "Patent × know-how", def: "Patent: 20 let ale vyžaduje zveřejnění. Know-how: neomezené pokud tajné, ale riziko leaků. Coca-Cola = know-how silnější než patent.", tag: "IP" },
+    { term: "Sitkin — intelligent failure", def: "Sim Sitkin (Duke 1992). Koncept 'skvělého selhání', ze kterého se firma naučí. Ne všechna selhání jsou stejná — některá cenná, jiná katastrofa.", tag: "SELHÁNÍ" },
+    { term: "Sitkinova 4 kritéria skvělého selhání", def: "1) Experimentální záměr (záměrný experiment), 2) Malé riziko (levné a rychlé, MVP), 3) Generuje znalosti, 4) Znalosti se sdílí v organizaci.", tag: "SELHÁNÍ" },
+    { term: "Escalation of commitment", def: "Eskalace závazku / Sunk Cost Fallacy. I když data ukazují problém, tým tlačí dál ('už jsme investovali 50 mil'). Klasická chyba inovace.", tag: "SELHÁNÍ" },
+    { term: "Blameless postmortem", def: "Google/Amazon — analýza chyby bez hledání 'koho potrestat'. Cíl: co se naučit, ne kdo za to může. Kultura psychological safety.", tag: "SELHÁNÍ" },
+    { term: "Pre-mortem (Gary Klein)", def: "Před launchem si tým představí, že projekt selhal, a zpětně analyzuje proč. Identifikuje rizika dopředu.", tag: "SELHÁNÍ" },
+    { term: "4 kategorie metrik inovací", def: "INPUT (R&D budget, lidi), PROCESS (time-to-market, gate kill rate), OUTPUT (patenty, nové produkty), OUTCOME (% tržeb z nových, ROI, NPV).", tag: "METRIKY" },
+    { term: "NPI — New Product Index", def: "% tržeb z produktů uvedených v posledních 5 letech. 3M cíl: 30 %, Apple ~50 %. Klíčová outcome metrika.", tag: "METRIKY" },
+    { term: "R&D Intensity", def: "R&D / tržby. Tech 10-15 %, FMCG 3-5 %, automotive 5-8 %, farmaceutika 15-20 %.", tag: "METRIKY" },
+    { term: "Time-to-Market", def: "Od idea screen po launch. SaaS 3-6 měsíců, automotive 4-6 let, farma 10-15 let. Klíčová process metrika.", tag: "METRIKY" },
+    { term: "NPV pro inovace — limitace", def: "NPV nedoceňuje optionality (real options theory) a vysoce nejisté projekty zamítá. Pro inovace lepší kombinace NPV + scénáře + real options.", tag: "METRIKY" },
+    { term: "Success rate inovací", def: "5-10 % z všech idea se stane úspěchem. Z 1000 nápadů ~3-5 produktů na trhu, ~1-2 profitabilní.", tag: "METRIKY" },
+  ];
+
+  const quizInov7 = [
+    { q: "Kolik procent radikálních inovací selhává?", opts: ["10-20 %", "70-90 % radikálních inovací nedosáhne komerčního úspěchu", "30-50 %", "0 %"], correct: 1 },
+    { q: "Kdo definoval 5 hlavních důvodů selhání inovací?", opts: ["Drucker", "Hobcraft × O'Sullivan", "Schumpeter", "Maurya"], correct: 1 },
+    { q: "Která je nejčastější interní bariéra inovací?", opts: ["IT systém", "Firemní kultura — 'imunitní systém', strach z chyby, hierarchie", "Účetnictví", "Logo"], correct: 1 },
+    { q: "Kolik kategorií interních bariér je standardně?", opts: ["3", "10 (kultura, leadership, struktura, procesy, lidi, finance, čas, znalosti, feedback, dodavatelé)", "5", "20"], correct: 1 },
+    { q: "Co je externí bariéra inovací?", opts: ["Firemní kultura", "Bariéry mimo kontrolu firmy — regulace, konkurence, makroekonomika, technologie", "Leadership", "Procesy"], correct: 1 },
+    { q: "Kolik typů duševního vlastnictví?", opts: ["2", "4 (patenty, ochranné známky, autorská práva, know-how)", "6", "10"], correct: 1 },
+    { q: "Jak dlouho trvá ochrana patentu?", opts: ["5 let", "20 let (s povinností zveřejnit popis)", "neomezeně", "70 let"], correct: 1 },
+    { q: "Co je hlavní rozdíl patent × know-how?", opts: ["Cena", "Patent 20 let ale vyžaduje zveřejnění. Know-how neomezené pokud tajné, ale riziko leaků", "Žádný", "Geografie"], correct: 1 },
+    { q: "Proč Coca-Cola nikdy nepatentovala recept?", opts: ["Zapomněli", "Patent by exposed ingredience — know-how 140 let silnější ochrana", "Žádný důvod", "Marketing"], correct: 1 },
+    { q: "Kdo definoval koncept 'intelligent failure'?", opts: ["Drucker", "Sim Sitkin (Duke University, 1992)", "Schumpeter", "Cooper"], correct: 1 },
+    { q: "Kolik kritérií má Sitkinovo 'skvělé selhání'?", opts: ["2", "4 (experimentální záměr, malé riziko, generuje znalosti, sdílí znalosti)", "6", "10"], correct: 1 },
+    { q: "Co je 'escalation of commitment'?", opts: ["Loajalita", "Sunk Cost Fallacy — tým tlačí dál, i když data ukazují problém ('už jsme investovali...')", "Investice", "Plánování"], correct: 1 },
+    { q: "Co je 'blameless postmortem'?", opts: ["Pojišťovna", "Analýza chyby bez hledání viníka — cíl: co se naučit, ne kdo za to může (Google, Amazon)", "Audit", "Sankce"], correct: 1 },
+    { q: "Kolik kategorií metrik inovací?", opts: ["2", "4 (Input, Process, Output, Outcome)", "6", "10"], correct: 1 },
+    { q: "Co je NPI (New Product Index)?", opts: ["Index inflace", "% tržeb z produktů uvedených v posledních 5 letech (3M cíl: 30 %, Apple ~50 %)", "Cenový index", "HDI"], correct: 1 },
+    { q: "Jaká je typická R&D Intensity ve farma?", opts: ["1-2 %", "15-20 % (vysoká, oproti FMCG 3-5 %, automotive 5-8 %, tech 10-15 %)", "50 %", "0 %"], correct: 1 },
+  ];
+
+  const praxeInov7 = {
+    caseStudy: {
+      company: "Kodak — anatomie selhání inovativního giganta",
+      subtitle: "Jak interní bariéry zničily firmu, která vynalezla digitální fotoaparát",
+      content: (<>
+        <b>Kodak</b> je <b>učebnicový příklad anatomie selhání</b> — firma, která <b>vynalezla digitální fotoaparát už v 1975</b> (Steven Sasson, inženýr Kodaku), ale <b>nebyla schopná na svém vlastním vynálezu vydělat</b>. V 2012 zbankrotovala. Co se stalo?<br/><br/>
+        🎯 INTERNÍ BARIÉRY — VŠECH 10 KATEGORIÍ V PRÁCI:<br/><br/>
+        <b>1. Firemní kultura (kanibalizace strachu):</b> Vedení Kodaku vidělo digitální fotografii jako <b>hrozbu pro byznys s filmem</b> (90 % zisku). Místo aby digital podpořili, schovali Sassonův prototyp do šuplíku. <b>'Imunitní systém' firmy</b> (Galbraith — Inov 2) zvítězil.<br/><br/>
+        <b>2. Leadership:</b> CEO George Fisher (90. léta) viděl digital, ale nedokázal přesvědčit board. Žádný 'innovation champion' s autoritou prosadit revoluci.<br/><br/>
+        <b>3. Organizační struktura:</b> Digital tým byl <b>uvnitř film divize</b>, ne oddělený. Inkrementální inovace v rámci filmového byznysu, ne radikální disrupce.<br/><br/>
+        <b>4. Procesy:</b> Kodak měl klasický SGCP (Inov 5), ale gates byly nastavené na <b>filmový byznys metriky</b> — digital projekty nesplňovaly tradiční ROI.<br/><br/>
+        <b>5. Lidé a talent:</b> Inženýři byli vyškoleni na <b>chemii fotografického filmu</b>, ne na elektroniku/software. Když Kodak najímal digital experty, narazili na cultural mismatch.<br/><br/>
+        <b>6. Finance:</b> R&D budget byl primárně do film R&D. Digital dostal zlomek, navzdory rostoucí poptávce.<br/><br/>
+        <b>7. Čas a kapacity:</b> Management byl posedlý kvartálními výsledky filmu. Žádný strategický prostor na 5-10 letý plán pro digital.<br/><br/>
+        <b>8. Znalosti a informace:</b> Kodak ignoroval rostoucí signály — Sony Mavica 1981, Apple QuickTake 1994, Nikon D1 1999. Stále věřili, že 'lidé chtějí fyzické fotografie'.<br/><br/>
+        <b>9. Zákaznický feedback:</b> Nesbírali insights od mladých uživatelů, kteří chtěli okamžitou digital fotku. Vcítění (Inov 4) absentovalo.<br/><br/>
+        <b>10. Dodavatelé a partnerství:</b> Žádná otevřená inovace. Když digital ekosystém rostl, Kodak zůstal uzavřený.<br/><br/>
+        🌍 EXTERNÍ BARIÉRY — TENTOKRÁT V KODAK PROSPĚCH:<br/><br/>
+        Zajímavé — Kodak měl <b>výhodu</b> v externích bariérách:<br/>
+        <b>Regulace:</b> žádné. Digital nebyl regulovaný.<br/>
+        <b>Technologie:</b> Kodak měl prvenství (1975 vynález).<br/>
+        <b>Financování:</b> Kodak byl ziskový gigant s cash flow.<br/><br/>
+        Selhal POUZE z interních důvodů — <b>vlastní imunitní systém firmy ho zničil</b>.<br/><br/>
+        💀 ANATOMIE SELHÁNÍ — KLASICKÉ FÁZE:<br/><br/>
+        <b>1. Příliš velká očekávání filmu:</b> Kodak věřil, že film bude 'navždy'.<br/>
+        <b>2. Nedostatečná validace digital:</b> Žádný MVP s digital, žádní lead users.<br/>
+        <b>3. Eskalace závazku k filmu:</b> 'Už jsme investovali miliardy do film výroby, nemůžeme to opustit'. Klasická Sunk Cost Fallacy.<br/>
+        <b>4. Pozdní KILL:</b> Kodak udělal digital launch až v 2005, kdy už Canon/Nikon/Sony dominovali.<br/>
+        <b>5. Bez postmortem:</b> I po bankrotu 2012 firma nedělala blameless analysis. Vedení odešlo s velkými balíčky, knowledge se rozsypal.<br/><br/>
+        📊 METRIKY, KTERÉ KODAK NESLEDOVAL:<br/><br/>
+        <b>NPI (New Product Index):</b> Kodak měl ~10 % tržeb z nových produktů (vs Apple 50 %).<br/>
+        <b>R&D Intensity:</b> Klesala z 8 % (90. léta) na 4 % (2000s) — místo růstu.<br/>
+        <b>Time-to-Market pro digital:</b> 30 let (1975-2005) — katastrofa.<br/>
+        <b>Success rate:</b> Nízký — žádný major hit po 90. letech.<br/><br/>
+        🎓 CO SE Z KODAKU NAUČIT:<br/><br/>
+        Sitkinovo 'intelligent failure' kritéria — Kodak selhal na všech 4:<br/>
+        <b>1. Experimentální záměr:</b> ✗ Kodak NEEXPERIMENTOVAL s digital, schoval ho.<br/>
+        <b>2. Malé riziko:</b> ✗ Když konečně skočil do digital v 2000s, šel hned do plného launch — žádný MVP.<br/>
+        <b>3. Generuje znalosti:</b> ✗ Sassonův vynález byl 30 let v šuplíku.<br/>
+        <b>4. Znalosti se sdílí:</b> ✗ Po bankrotu se rozpadlo.
+      </>),
+      lessons: "Kodak je etalon, jak <b>všech 10 interních bariér</b> může zničit i giganta s technologickým prvenstvím. Externí bariéry NEBYLY problém — vše bylo interní. <b>Sitkinova 4 kritéria 'intelligent failure'</b> ukazují, že Kodak selhal i v učení z chyb. Pro PS: identifikovat bariéry v případové firmě, navrhnout konkrétní akce na překonání, doporučit IP strategii, nastavit metriky ve 4 kategoriích, vybudovat kulturu učení z chyb. Anti-vzor: říct 'firma má problém s kulturou' a doufat — komise chce detailní analýzu."
+    },
+    miniExamples: [
+      { tag: "IP — KNOW-HOW VS PATENT", color: VSE.fph, company: "Coca-Cola — 140 let know-how silnější než patent", content: "Coca-Cola má recept od 1886 — <b>nikdy ho nepatentovala</b>. Proč? Patent by vyžadoval zveřejnění ingrediencí a po 20 letech (1906) by byl public domain. Místo toho Coca-Cola používá <b>know-how strategii</b> — recept zná jen 2-3 lidé, je uložen v bance Suntrust, neceluje se. 140 let ochrany vs 20 let patentu. Tento příklad ukazuje, kdy <b>know-how je silnější než patent</b> — pro recepty, algoritmy, procesy, které nelze snadno reverse-engineerovat z výsledného produktu." },
+      { tag: "ANATOMIE SELHÁNÍ", color: VSE.warning, company: "Google Stadia — eskalace závazku v praxi", content: "Google Stadia (cloud gaming, 2019-2023) je nedávný příklad <b>eskalace závazku</b>. Google investoval ~5 mld USD do cloud gaming přes 5 let. Stage Gate Process selhal v Gate 2 (Business Case) — adopce byla pomalá, latence problém, konkurence (Microsoft xCloud, GeForce Now) lepší. Místo brzkého KILL (G2 nebo G3) projekt šel až do Stage 5 (Launch listopad 2019). Po 3 letech těžkostí Google KILL až v lednu 2023. <b>Klasický Sunk Cost Fallacy</b> — 'už jsme investovali miliardy, ještě vydržíme'. Sitkin by řekl: <b>není to intelligent failure</b>, je to drahé selhání bez učení (Google nebyl ochotný udělat veřejný blameless postmortem)." },
+      { tag: "METRIKY — 3M ETALON", color: VSE.fmv, company: "3M — vědomé řízení inovací přes metriky", content: "3M je etalon firemních metrik inovací. <b>NPI (New Product Index)</b> = % tržeb z produktů uvedených v posledních 5 letech. 3M má vnitřní cíl <b>30 %</b> a publikuje to ročně. Pokud klesne, board reaguje. <b>R&D Intensity 6 %</b> tržeb (stabilní 50 let). <b>15 % pravidlo</b> = každý zaměstnanec smí 15 % času na vlastní projekty (input metrika). <b>~60 patentů ročně</b> (output). 3M dokazuje, že <b>metriky inovací jsou strategický nástroj</b>, ne accounting položka. Pro PS: doporučit 4 kategorie metrik (input/process/output/outcome) + konkrétní cíle." },
+      { tag: "KULTURA UČENÍ Z CHYB", color: VSE.success, company: "Pixar — Braintrust meeting jako blameless postmortem", content: "Pixar (etalon DT — viz Inov 4) má unikátní mechanismus <b>'Braintrust meeting'</b> — pravidelné setkání režisérů a tvůrců, kde si <b>brutálně upřímně dávají zpětnou vazbu</b> na nedokončené filmy. <b>Blameless postmortem</b> v praxi — žádný 'kdo za to může', jen 'co můžeme zlepšit'. Ed Catmull (CTO Pixar) říkal: 'Mít skvělé nápady je snadné. Dělat z nich skvělé filmy je těžké — Braintrust nás v tom drží.' Toy Story 2 měl být téměř zrušen (klasický Sunk Cost Fallacy by ho dotlačil), Braintrust ho zachránil přepsáním celého scénáře. Sitkin by řekl: <b>Pixar žije všech 4 kritéria 'intelligent failure'</b> — experimentální záměr, malé riziko (early review), učení, sdílení." },
+    ]
+  };
+
+  const examQuestionsInov7 = [
+    { komise: "2025-06-13 Mladkova+Špaček+Cejthamr, 2025-06-16 Pichanič+Cejthamr+Schönfeld, 2025-02-04 Krause+Mladkova+Pernica, 2025-02-05 Stříteský+Heřman+Kuděj, 2026-02-06 Nový+Lorencová+Mikan", otazka: "Bariéry inovací — vnitřní a vnější, jak je překonat", pozn: "5× tažené. Komise chce <b>vyjmenovat 6-8 interních + 4-6 externích bariér</b> + konkrétní akce. Hobcraft × O'Sullivan jako akademický citát. Klíč: kulturu nemůže firma kontrolovat? Může! Interní = pod kontrolou firmy." },
+    { komise: "2025-02-04 Nový+Kuděj+Zamazalová, 2025-06-04 Pichanič+Stříteský, 2026-02-03 Heřman+Mareš+Schönfeld", otazka: "Metriky inovací — co měřit a jak", pozn: "3× tažené. Komise chce <b>4 kategorie</b> (input/process/output/outcome) + příklady (NPI, R&D intensity, time-to-market, success rate). Pichanič chce ROI portfolia, ne projektu." },
+    { komise: "Obecně — Anatomie selhání", otazka: "Proč inovace selhávají + jak z chyb učit (Sitkin intelligent failure)", pozn: "Hobcraft × O'Sullivan 5 důvodů. Sitkinova 4 kritéria. Escalation of commitment. Blameless postmortem. Pre-mortem (Klein)." },
+    { komise: "Obecně — IP ochrana", otazka: "Ochrana inovace — patenty, know-how, ochranné známky", pozn: "4 typy IP. Patent vs know-how (Coca-Cola). Kroky pro získání patentu (rešerše → přihláška → průzkum → udělení, 2-5 let, 100-500 tis. Kč)." },
+  ];
+
+  const podcastInov7 = {
+    title: "Inovace 7 — Bariéry inovací, anatomie selhání, metriky",
+    description: "Většina inovací selhává - 70-90 procent radikálních inovací nedosáhne komerčního úspěchu. Otázka není jestli selžu ale jak často, jak rychle, jak draho a co se z toho naučím. Hobcraft × O'Sullivan definovali 5 hlavních důvodů selhání. 1) Slabé pochopení zákazníka - firma vyvíjí od stolu bez vcítění, Henry Ford rychlejší kůň. 2) Nejasná inovační strategie - firma neví do čeho a proč inovuje. 3) Špatná exekuce - nápad je dobrý ale vývoj chaotický. 4) Firemní kultura - imunitní systém firmy odmítá nové. 5) Nedostatečné zdroje - málo R&D budgetu, málo času, slabý tým. Další důvody - špatný timing (Apple Newton 1993, Google Glass 2014), slabý business model, konkurenční reakce (Facebook proti Snapchat), regulační překážky (Uber Německo), technologická nezralost (VR 2016). Vnitřní bariéry jsou ty, které firma kontroluje. 10 klíčových - 1) Firemní kultura (imunitní systém, strach z chyby, nejčastější bariéra), 2) Leadership (vedení nepodporuje aktivně, žádný innovation champion), 3) Organizační struktura (hierarchie a silo, R&D marketing sales spolu nemluví), 4) Procesy (žádný formální SGCP nebo příliš byrokratický), 5) Lidé a talent (chybí idea šampioni, sponzoři, lídři), 6) Finance (R&D pod 3 procenta tržeb, žádný inovační fond), 7) Čas a kapacity (lidé přetížení provozem), 8) Znalosti a informace (firma nezná zákazníky, konkurenci, trendy), 9) Zákaznický feedback (žádné focus groups, lead users), 10) Dodavatelé a partnerství (žádná otevřená inovace). Vnější bariéry jsou mimo kontrolu - 1) Regulace a legislativa (Uber Německo, Airbnb NYC, farma 5-10 let schvalování), 2) Konkurence (silný incumbent kopíruje, network effects), 3) Makroekonomika (recese, inflace, úrokové sazby), 4) Technologie (nezralost VR, mRNA před COVID, chybějící infrastruktura EV), 5) Trh a zákazníci (konzervativní B2B, nízká ochota platit), 6) Financování (banky neradi inovace, VC cykly). Intellectual Property (IP) - 4 hlavní typy. Patenty - ochrana technického řešení, 20 let, veřejně dostupné, 100-500 tisíc Kč, Nespresso kapsle. Ochranné známky - ochrana značky/loga, 10 let s obnovou, 10-50 tisíc Kč, Apple jablko. Autorská práva - tvůrčí díla, automatické, 70 let po smrti autora, software, knihy, hudba. Know-how a obchodní tajemství - neveřejné informace, není časově omezené pokud zůstane tajemstvím, Coca-Cola recept 140 let, KFC koření. Kroky pro získání patentu - 1) Patentová rešerše, 2) Sestavení přihlášky, 3) Podání (ÚPV ČR, EPO Evropa, PCT mezinárodně), 4) Formální průzkum 6 měsíců, 5) Věcný průzkum 1-3 roky, 6) Udělení. Celkem 2-5 let, 100-500 tisíc Kč. Patent vs know-how - patent chrání 20 let ale vyžaduje zveřejnění, know-how chrání neomezeně pokud zůstane tajné. Coca-Cola nikdy nepatentovala recept - patent by exposed ingredience. Sim Sitkin (Duke University 1992) definoval koncept intelligent failure. Ne všechna selhání jsou stejná - některá cenná, jiná katastrofa. 4 kritéria skvělého selhání - 1) Experimentální záměr (záměrný experiment ne nedbalost), 2) Malé riziko (levné a rychlé, MVP, pilot, A/B test ne celý launch), 3) Generuje znalosti (firma se reálně něco dozví), 4) Znalosti se sdílí (uloženo a sdíleno v organizaci, knowledge management, blameless postmortems). Anatomie selhání - příliš velká očekávání, nedostatečná validace, eskalace závazku (Sunk Cost Fallacy), pozdní KILL, bez postmortem. Kultura učení - blameless postmortems (Google Amazon), lessons learned databáze, innovation graveyards, failure resumes, pre-mortems (Gary Klein - před launchem si představit selhání). Metriky inovací - 4 kategorie. INPUT (kolik a co investujeme - R&D budget, lidi, čas), PROCESS (jak efektivně inovujeme - time-to-market, pipeline, gate kill rate), OUTPUT (co produkuje - patenty, nové produkty), OUTCOME (jaký byznys výsledek - procento tržeb z nových, ROI, NPV). 3M etalon - NPI (% tržeb z produktů posledních 5 let, cíl 30 procent, Apple 50 procent), R&D Intensity (tech 10-15 procent, FMCG 3-5 procent, automotive 5-8 procent, farmaceutika 15-20 procent), Time-to-Market (SaaS 3-6 měsíců, automotive 4-6 let, farma 10-15 let), Success rate (5-10 procent z idea se stane úspěchem). Finanční metriky - NPV (současná hodnota CF, pokud větší než 0 vydělává - detail v Finance subject), IRR (vnitřní výnosové procento - detail v Finance), payback period (3-7 let pro inovace), ROI inovačního portfolia ne projektu. NPV limitace pro inovace - nedoceňuje optionality (real options theory) a vysoce nejisté projekty zamítá.",
+    audioUrl: null,
+    notebookLmUrl: null,
+  };
+
+  const examStrategyInov7 = `
+    <b style="color:#1E938D">1.</b> Definuj selhanost inovací — 70-90 % radikálních selhává.<br/>
+    <b style="color:#1E938D">2.</b> ⚠️ <b>Hobcraft × O'Sullivan</b> — 5 důvodů selhání (zákazník, strategie, exekuce, kultura, zdroje).<br/>
+    <b style="color:#1E938D">3.</b> ⚠️ <b>10 interních bariér</b> — kultura, leadership, struktura, procesy, lidi, finance, čas, znalosti, feedback, dodavatelé.<br/>
+    <b style="color:#1E938D">4.</b> <b>Externí bariéry</b> — regulace, konkurence, makro, technologie, trh, financování.<br/>
+    <b style="color:#1E938D">5.</b> <b>4 typy IP</b> — patenty (20 let), ochranné známky (10 let), autorská práva (70 let po smrti), know-how (neomezeně).<br/>
+    <b style="color:#1E938D">6.</b> <b>Patent × know-how</b> — Coca-Cola příklad (know-how silnější).<br/>
+    <b style="color:#1E938D">7.</b> ⚠️ <b>Sitkinova 4 kritéria 'intelligent failure'</b> — experimentální záměr, malé riziko, generuje znalosti, sdílí znalosti.<br/>
+    <b style="color:#1E938D">8.</b> <b>Anatomie selhání</b> — eskalace závazku (Sunk Cost), pozdní KILL, bez postmortem.<br/>
+    <b style="color:#1E938D">9.</b> ⚠️ <b>4 kategorie metrik inovací</b> — INPUT (R&D budget), PROCESS (time-to-market), OUTPUT (patenty), OUTCOME (NPI, ROI, NPV).<br/>
+    <b style="color:#1E938D">10.</b> <b>NPI</b> = % tržeb z nových produktů (3M 30%, Apple 50%). <b>R&D Intensity</b> dle odvětví.<br/>
+    <b style="color:#1E938D">11.</b> <b>NPV/IRR</b> pro inovace — odkaz na Finance subject. Pozor na limitace (nedoceňuje optionality).<br/>
+    <b style="color:#1E938D">12.</b> Etalony — Kodak (anatomie selhání), Coca-Cola (know-how), Google Stadia (eskalace), 3M (metriky), Pixar (kultura učení).
+  `;
+
+  const caseStudyInov7 = {
+    title: "Adam a R&D projekt v šuplíku — diagnostika bariér + záchrana",
+    subtitle: "Identifikuj bariéry, navrhni IP strategii, nastav metriky",
+    scenario: "Adam (38 let) je nový VP of Innovation v české průmyslové firmě CzechTech (900 zaměstnanců, výroba precizních součástek pro automotive). Firma 30 let prosperovala jako dodavatel pro Škoda, BMW, Audi. Tržby 4,2 miliardy. Marže ale klesají z 12 procent na 7 procent za 5 let - asijská konkurence (Číňané, Indové, Turci) tlačí ceny.\n\nAdam dostal na stůl složku - před 4 lety firma vyvinula prototyp inteligentního senzoru pro EV baterie (predikuje životnost článků, optimalizuje výkon). Senzor je technicky vynikající - 3 inženýři z R&D na něm dělali 18 měsíců. Ale projekt leží v šuplíku. Předchozí inovační manažer ho nedokázal prosadit. Senzor se mohl stát klíčovou inovací pro EV revoluci, ale CzechTech ho ignoruje.\n\nAdam zjišťuje proč. Mluví s 20 lidmi napříč firmou a najde klasické bariéry. CEO Pavel (62 let) říká - 'EV je hype, automotive jede dál na benzín'. CFO blokuje rozpočet na patentování senzoru - 'patent 300 tisíc, nemáme cash'. R&D ředitel říká - 'inženýři jsou přetížení současnými projekty pro Škoda, nemůžou věnovat čas senzoru'. Marketing nikdy neslyšel o senzoru. Sales jezdí jen do Mladé Boleslavi a Mnichova, nikdy v životě nemluvili s Tesla, BYD, NIO.\n\nAdam také zjišťuje, že kultura je toxická pro inovace. Loni jeden mladý inženýr přišel s nápadem na 3D tisk součástek - byl veřejně zesměšněn na poradě. Lessons learned databáze neexistuje. Postmortems se nedělají - když projekt selže, viní se konkrétní lidé a dostávají disciplinární opatření.\n\nAdam má 12 měsíců na to přesvědčit board, že CzechTech musí buď inovovat nebo skončit jako levný subdodavatel. Plánuje 5 věcí - 1) Diagnostikovat všech 10 interních bariér + 4 externí. 2) Patentovat senzor (i přes blok CFO). 3) Vytvořit kulturu učení z chyb. 4) Nastavit metriky inovací ve 4 kategoriích. 5) Najít první zákazníka pro senzor (Tesla, BYD, jiný EV maker).",
+    signals: [
+      { text: "Senzor leží v šuplíku 4 roky, předchozí inovační manažer ho nedokázal prosadit", color: VSE.danger, reason: "KLASICKÁ ANATOMIE SELHÁNÍ (Inov 7) — projekt s technickou prvostí, ale interní bariéry zničily komerční potenciál. Stejný vzorec jako Kodak s digitálním fotoaparátem 1975." },
+      { text: "CEO Pavel - 'EV je hype'. CFO blokuje patent. R&D nemá čas. Marketing neví. Sales nikdy nemluvili s Teslou.", color: VSE.warning, reason: "VŠECH 10 INTERNÍCH BARIÉR (Inov 7) v jednom příběhu - LEADERSHIP (CEO nevěří), FINANCE (CFO blokuje), ČAS (R&D přetížené), STRUKTURA (silo - marketing neví), ZNALOSTI (sales nezná nové trhy)." },
+      { text: "Mladý inženýr s nápadem 3D tisku zesměšněn na poradě, lessons learned neexistuje, postmortems se neděla", color: VSE.danger, reason: "FIREMNÍ KULTURA (Inov 7 + Inov 2) - imunitní systém firmy. Strach z chyby, trest za experiment, blame culture. NEJČASTĚJŠÍ BARIÉRA inovací." },
+      { text: "Patentovat senzor (i přes blok CFO) - 300 tisíc Kč investice", color: VSE.success, reason: "IP STRATEGIE (Inov 7) - Adam správně chápe, že bez patentu konkurence okamžitě zkopíruje. 300 tisíc je nízká investice oproti 18 měsícům R&D vývoje." },
+      { text: "Nastavit metriky inovací ve 4 kategoriích", color: VSE.primary, reason: "METRIKY (Inov 7) - input/process/output/outcome. Bez metrik board nemůže racionálně rozhodovat. NPI, R&D intensity, time-to-market, success rate." },
+      { text: "Vytvořit kulturu učení z chyb (Sitkin intelligent failure)", color: VSE.fph, reason: "KULTURA UČENÍ (Inov 7) - blameless postmortems, lessons learned, pre-mortems. Bez toho firma opakuje stejné chyby. Klíč pro long-term inovační schopnost." },
+    ],
+    quiz1: {
+      question: "Co by měl Adam udělat jako první?",
+      options: [
+        "Patentovat senzor okamžitě a najít zákazníka",
+        "Diagnostikovat všech 10 interních bariér + 4 externí, vytvořit detailní akční plán pro board (s konkrétními akcemi), patentovat senzor (i přes CFO), kulturu učení z chyb, metriky ve 4 kategoriích",
+        "Rezignovat a hledat jinou práci",
+        "Prosit CEO Pavla na kolenou",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měl Adam postupovat?",
+      options: [
+        { text: "DIAGNOSTIKA BARIÉR — všech 10 interních (kultura, leadership, struktura, procesy, lidi, finance, čas, znalosti, feedback, partnerství) + 4 externí (regulace, konkurence, technologie, financování). Detailní mapa s konkrétními příklady.", correct: true, reason: "✓ Inov 7 — bez systematické analýzy bariér nemůže Adam udělat strategii. Komise vždy chce 6-8 interních + 4-6 externích." },
+        { text: "IP STRATEGIE — patentovat senzor (300 tis. Kč) přes EPO (Evropa) + PCT (mezinárodně). Bez patentu konkurence (čínští, indičtí výrobci) zkopíruje za měsíce. Patent + know-how kombinace.", correct: true, reason: "✓ Inov 7 — 300 tis. Kč vs 18 měsíců R&D + potenciální miliardy na EV trhu. Patent je nutná investice." },
+        { text: "KULTURA UČENÍ — zavést blameless postmortems (Google model), lessons learned databázi, pre-mortems (Klein). Aplikovat Sitkinova 4 kritéria intelligent failure (experimentální záměr, malé riziko, generuje a sdílí znalosti).", correct: true, reason: "✓ Inov 7 — bez kultury učení firma opakuje chyby. Sitkin je akademický citát, který komise ocení." },
+        { text: "METRIKY INOVACÍ — nastavit ve 4 kategoriích: INPUT (R&D budget 5-8 % tržeb), PROCESS (time-to-market, gate kill rate), OUTPUT (patenty/rok, nové produkty), OUTCOME (NPI cíl 25 %, ROI portfolia, NPV).", correct: true, reason: "✓ Inov 7 — 4 kategorie + konkrétní KPI. NPI 25 % je realistický cíl pro automotive supplier." },
+        { text: "ZÁKAZNICKÁ STRATEGIE PRO SENZOR — Vcítění s EV maker (Tesla, BYD, NIO, Rivian) přes Design Thinking (Inov 4), MVP demo, lead users testování. Diverzifikovat z Škoda/BMW/Audi.", correct: true, reason: "✓ Inov 7 + Inov 4 + Inov 6 (Ansoff rozvoj trhu) — najít EV zákazníky je rozšíření trhu, klíčové pro snížení závislosti na ICE automotive." },
+        { text: "PŘEKONÁNÍ INTERNÍCH BARIÉR — leadership change (innovation champion na C-úrovni), oddělit R&D pro radikální projekty (Inov 2), R&D budget na 8 % tržeb (z aktuálních 3 %), interní inovační fond (1 % tržeb = 42 mil. ročně).", correct: true, reason: "✓ Inov 7 — konkrétní akce na bariéry. Inovační champion + oddělené R&D + budget = nutné minimum." },
+        { text: "Patentovat senzor okamžitě bez konzultace s boardem a CFO", correct: false, reason: "✗ Bez podpory boardu Adam bude blokován dál. Musí nejdříve diagnostikovat bariéry, prezentovat board case." },
+        { text: "Pokračovat v současné situaci a doufat, že CEO odejde do důchodu", correct: false, reason: "✗ Pasivní přístup. Mezitím čínská konkurence dohání, EV trh roste, CzechTech ztrácí relevanci. Klasická Kodak situace." },
+      ],
+    },
+    summary: "<b>Adam by měl udělat systematickou diagnostiku všech bariér + IP strategii + kulturu učení + metriky + zákaznickou diverzifikaci.</b><br/><br/><b>Postup:</b><br/><br/>• <b>DIAGNOSTIKA BARIÉR:</b><br/>– <b>Interní (všech 10):</b> Kultura (toxická, trest za experiment) + Leadership (CEO nevěří EV) + Struktura (silo) + Procesy (žádný SGCP) + Lidé (přetížení) + Finance (R&D 3 %) + Čas (žádný innovation time) + Znalosti (žádný EV market research) + Feedback (sales nemluví s EV makers) + Partnerství (žádná univerzitní spolupráce).<br/>– <b>Externí (4):</b> Konkurence (asijští výrobci tlačí ceny) + Technologie (EV transition rychlejší než ICE upgrade) + Regulace (EU CO2 cíle 2035) + Financování (banky neradi automotive).<br/><br/>• <b>IP STRATEGIE PRO SENZOR:</b><br/>– <b>Patent</b> přes EPO + PCT (300-500 tis. Kč, 2-3 roky proces).<br/>– <b>Know-how:</b> kalibrace, kód, manufacturing process — neveřejné.<br/>– <b>Ochranná známka</b> pro brand senzoru (50 tis. Kč).<br/>– <b>Defenzivní citation</b> v patentech, aby zabránila čínským kopiím.<br/><br/>• <b>KULTURA UČENÍ Z CHYB (Sitkin):</b><br/>– <b>Blameless postmortems</b> po každém projektu (Google model).<br/>– <b>Lessons learned databáze</b> sdílená pro celou firmu.<br/>– <b>Pre-mortems</b> (Klein) před launchem každého projektu — 'co může selhat?'.<br/>– <b>Failure resumes</b> — vedoucí sdílí selhání, ne jen úspěchy.<br/>– <b>Aplikace Sitkinových 4 kritérií:</b> experimentální záměr (vědomé experimenty s MVP), malé riziko (pilot s 1 zákazníkem, ne plný launch), generuje znalosti (postmortem), sdílí znalosti (lessons learned).<br/><br/>• <b>METRIKY INOVACÍ (4 kategorie):</b><br/>– <b>INPUT:</b> R&D budget z 3 % na 8 % (z 126 mil. na 336 mil. ročně), 15 % pravidlo pro inženýry, 2 nové univerzitní partnerství.<br/>– <b>PROCESS:</b> Time-to-Market cíl 18 měsíců (oproti aktuálním 36+), Gate kill rate 70 % (filtr brzy), pipeline 30 idea v Stage 0 ročně.<br/>– <b>OUTPUT:</b> 8 patentů ročně (oproti 1-2 aktuálním), 3-5 nových produktů ročně.<br/>– <b>OUTCOME:</b> NPI 25 % (oproti aktuálním 8 %), ROI inovačního portfolia 15 %+, NPS od zákazníků 50+.<br/><br/>• <b>ZÁKAZNICKÁ DIVERZIFIKACE:</b><br/>– Vcítění (DT — Inov 4) s EV makers — návštěvy Tesla Berlín, BYD Maďarsko, NIO HQ.<br/>– MVP demo senzoru pro 3-5 lead users.<br/>– Cíl: do 18 měsíců 1 major EV zákazník, do 36 měsíců 3+ EV zákazníci = 20 % tržeb mimo ICE automotive.<br/><br/>• <b>PŘEKONÁNÍ INTERNÍCH BARIÉR:</b><br/>– <b>Leadership:</b> Adam jako 'innovation champion' s direct reportingem na CEO + board. Pokud CEO Pavel nepodporuje, eskalace na board.<br/>– <b>Struktura:</b> Oddělené R&D pro EV/inovace (Inov 2 — proč firmy oddělují R&D).<br/>– <b>Finance:</b> Innovation fund 1 % tržeb (42 mil. ročně) jako budget na pilot projekty.<br/>– <b>Čas:</b> 15 % pravidlo (3M model) pro inženýry.<br/>– <b>Kultura:</b> Workshop o Sitkin intelligent failure, training v blameless postmortems.<br/><br/>• <b>BOARD PRESENTATION 12 MĚSÍCŮ:</b><br/>– <b>Měsíc 1-3:</b> Diagnostika bariér + akční plán + senzor patent application.<br/>– <b>Měsíc 4-6:</b> Pilot s 1 EV maker + R&D budget increase do plánu 2027.<br/>– <b>Měsíc 7-9:</b> Kultura změna (postmortems, lessons learned) + první nové projekty pipeline.<br/>– <b>Měsíc 10-12:</b> Metriky reportování, board approval pro 3letý inovační plán.<br/><br/><b>Pro komisi:</b> Klíč — <b>10 interních + 4-6 externích bariér</b> s konkrétními příklady, <b>4 typy IP</b> (patent vs know-how Coca-Cola), <b>Sitkinova 4 kritéria intelligent failure</b>, <b>4 kategorie metrik</b> (input/process/output/outcome) s NPI/R&D intensity/time-to-market, <b>kombinace s ostatními okruhy</b> (Inov 2 oddělené R&D, Inov 4 DT, Inov 5 SGCP, Inov 6 strategie). Anti-vzor: říct 'firma má problém s kulturou' a doufat — komise chce detailní 10 bariér + akce.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Inovace" subjectId="inov" number={7} title="Bariéry inovací + anatomie selhání + metriky"
+      subtitle="Hobcraft × O'Sullivan 5 důvodů selhání. 10 interních + 6 externích bariér. 4 typy IP (patent/známka/AP/know-how). Sitkinova 4 kritéria intelligent failure. 4 kategorie metrik (input/process/output/outcome)."
+      color={VSE.primary}
+      questionText="Bariéry inovací (vnitřní 10 kategorií + vnější 6) + anatomie selhání (Hobcraft × O'Sullivan, Sitkin intelligent failure, eskalace závazku, blameless postmortems) + ochrana inovací (4 typy IP — patenty/ochranné známky/autorská práva/know-how) + metriky inovací (4 kategorie: input/process/output/outcome). Stručná zmínka NPV/IRR s odkazem na Finance subject."
+      sloz={2} roz={3} freq={4}
+      examStrategy={examStrategyInov7}
+      studySections={studySectionsInov7}
+      flashcards={flashcardsInov7}
+      quiz={quizInov7}
+      praxe={praxeInov7}
+      examQuestions={examQuestionsInov7}
+      podcast={podcastInov7}
+      caseStudy={caseStudyInov7}
+    />
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -29370,7 +32522,7 @@ function OkruhyTab({ navTarget, clearNavTarget }) {
   }
 
   return (
-    <div data-skool-grid style={{ display: "flex", height: "calc(100vh - 105px)" }}>
+    <div data-skool-grid style={{ display: "flex", minHeight: "calc(100vh - 105px)", background: t.bg }}>
       <OkruhySidebar
         selectedSubject={selectedSubject}
         setSelectedSubject={handleSelectSubject}
@@ -30619,6 +33771,12 @@ function App() {
         /* Tabs always scrollable on mobile via touch */
         [data-okruh-tabs]::-webkit-scrollbar { height: 3px; }
         [data-okruh-tabs]::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        /* GLOBAL: html/body/root must inherit theme background — fixes white bleed-through */
+        html, body, #root {
+          background: var(--bg) !important;
+          margin: 0;
+          min-height: 100vh;
+        }
       `}</style>
       <div style={{
         minHeight: "100vh", background: t.bg, color: t.text, fontFamily: fontSans,
