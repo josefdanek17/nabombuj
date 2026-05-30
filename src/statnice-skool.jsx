@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Fragment, createContext, useContext } from "react";
+import React, { useState, useRef, useEffect, useMemo, Fragment, createContext, useContext } from "react";
 
 /* ════════════════════════════════════════════════════════
    NABOMBUJ — BOMBÍK BRAND TOKENS
@@ -45,6 +45,121 @@ const VSE = {
   danger: BOMBIK.danger,
   info: BOMBIK.teal,
 };
+
+// ════════════════════════════════════════════════════════
+// SUBJECT COLORS — pro dashboard a Tracker
+// ════════════════════════════════════════════════════════
+const SUBJECT_COLORS = {
+  mng:       "#1E938D", // Management — teal
+  lead:      "#D04848", // Leadership — červená
+  hr:        "#D85A8C", // Personální — růžová
+  marketing: "#E06D1E", // Marketing — oranžová
+  str:       "#7C4DFF", // Strategie — fialová
+  roz:       "#E0A92C", // Rozhodování — žlutá
+  inov:      "#2E8B57", // Inovace — zelená
+  fin:       "#3B6FD6", // Finance — modrá
+};
+
+// ════════════════════════════════════════════════════════
+// TRACKER — localStorage progress per okruh
+// Struktura: { "mng_1": { read: bool, case: bool, cards: bool, quiz: bool, podcast: bool, repeats: 0-5 } }
+// ════════════════════════════════════════════════════════
+const TRACKER_KEY = "nabombuj_tracker_v1";
+
+function getTrackerState() {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(TRACKER_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+
+function saveTrackerState(state) {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(TRACKER_KEY, JSON.stringify(state));
+    // Dispatch custom event so other components can react
+    window.dispatchEvent(new Event("tracker-updated"));
+  } catch {}
+}
+
+function getOkruhTracker(subjectId, okruhN) {
+  const key = `${subjectId}_${okruhN}`;
+  const state = getTrackerState();
+  return state[key] || { read: false, case: false, cards: false, quiz: false, podcast: false, repeats: 0 };
+}
+
+function setOkruhTracker(subjectId, okruhN, updates) {
+  const key = `${subjectId}_${okruhN}`;
+  const state = getTrackerState();
+  state[key] = { ...getOkruhTracker(subjectId, okruhN), ...updates };
+  saveTrackerState(state);
+}
+
+function useTracker(subjectId, okruhN) {
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    const onUpdate = () => setTick(t => t + 1);
+    window.addEventListener("tracker-updated", onUpdate);
+    window.addEventListener("storage", onUpdate);
+    return () => {
+      window.removeEventListener("tracker-updated", onUpdate);
+      window.removeEventListener("storage", onUpdate);
+    };
+  }, []);
+  return getOkruhTracker(subjectId, okruhN);
+}
+
+function useTrackerAll() {
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    const onUpdate = () => setTick(t => t + 1);
+    window.addEventListener("tracker-updated", onUpdate);
+    window.addEventListener("storage", onUpdate);
+    return () => {
+      window.removeEventListener("tracker-updated", onUpdate);
+      window.removeEventListener("storage", onUpdate);
+    };
+  }, []);
+  return getTrackerState();
+}
+
+// Streak — počítá se jen pokud uživatel checkne `read` nebo `case` v daný den
+const TRACKER_STREAK_KEY = "nabombuj_tracker_streak_v1";
+function bumpTrackerStreak() {
+  if (typeof window === "undefined") return;
+  try {
+    const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+    const raw = localStorage.getItem(TRACKER_STREAK_KEY);
+    const data = raw ? JSON.parse(raw) : { lastDay: null, count: 0, longest: 0 };
+    if (data.lastDay === today) return; // už dnes zapsáno
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    if (data.lastDay === yesterday) {
+      data.count += 1;
+    } else {
+      data.count = 1;
+    }
+    data.lastDay = today;
+    data.longest = Math.max(data.longest || 0, data.count);
+    localStorage.setItem(TRACKER_STREAK_KEY, JSON.stringify(data));
+    window.dispatchEvent(new Event("tracker-updated"));
+  } catch {}
+}
+
+function getTrackerStreakInfo() {
+  if (typeof window === "undefined") return { count: 0, longest: 0, lastDay: null };
+  try {
+    const raw = localStorage.getItem(TRACKER_STREAK_KEY);
+    const data = raw ? JSON.parse(raw) : { count: 0, longest: 0, lastDay: null };
+    // Pokud poslední den není dnes ani včera, streak je 0
+    const today = new Date().toISOString().slice(0, 10);
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    if (data.lastDay !== today && data.lastDay !== yesterday) {
+      return { count: 0, longest: data.longest || 0, lastDay: data.lastDay };
+    }
+    return data;
+  } catch { return { count: 0, longest: 0, lastDay: null }; }
+}
 
 /* Theme tokens — light = cream paper, dark = ink + paper text + teal accent */
 const THEMES = {
@@ -390,7 +505,7 @@ function Icon({ name, size = 20, color = "currentColor", style = {} }) {
    ════════════════════════════════════════════════════════ */
 const SUBJECTS = [
   {
-    id: "mng", name: "Management", color: VSE.ffu, icon: "building",
+    id: "mng", name: "Management", color: SUBJECT_COLORS.mng, icon: "building",
     okruhy: [
       { n: 1, title: "Současné přístupy, BM × MM, inovace managementu", status: "done", difficulty: 2 },
       { n: 2, title: "Výzvy 21. století, paradigmata (Birkinshaw)", status: "done", difficulty: 2 },
@@ -406,7 +521,7 @@ const SUBJECTS = [
     ],
   },
   {
-    id: "lead", name: "Leadership", color: VSE.fmv, icon: "crown",
+    id: "lead", name: "Leadership", color: SUBJECT_COLORS.lead, icon: "crown",
     okruhy: [
       { n: 1, title: "Kompetence leadera, metody rozvoje", status: "done", difficulty: 2 },
       { n: 2, title: "Styly leadershipu", status: "done", difficulty: 2 },
@@ -417,7 +532,7 @@ const SUBJECTS = [
     ],
   },
   {
-    id: "hr", name: "Personální řízení", color: VSE.fph, icon: "people",
+    id: "hr", name: "Personální řízení", color: SUBJECT_COLORS.hr, icon: "people",
     okruhy: [
       { n: 1, title: "Strategie, struktura, kultura × motivace", status: "done", difficulty: 3 },
       { n: 2, title: "Motivace, odměňování zaměstnanců", status: "done", difficulty: 2 },
@@ -431,7 +546,7 @@ const SUBJECTS = [
     ],
   },
   {
-    id: "marketing", name: "Marketing", color: VSE.fis, icon: "chart",
+    id: "marketing", name: "Marketing", color: SUBJECT_COLORS.marketing, icon: "chart",
     okruhy: [
       { n: 1, title: "Marketingový výzkum, metody a jejich limity, mediální výzkumy", status: "done", difficulty: 2 },
       { n: 2, title: "Analytické metody mkt výzkumu, primární × sekundární data", status: "done", difficulty: 3 },
@@ -453,7 +568,7 @@ const SUBJECTS = [
     ],
   },
   {
-    id: "logistika", name: "Logistika", color: BOMBIK.success, icon: "truck",
+    id: "logistika", name: "Logistika", color: SUBJECT_COLORS.marketing, icon: "truck",
     okruhy: [
       { n: 1, title: "Distribuce, distribuční kanály, strategie a Incoterms", status: "done", difficulty: 2 },
       { n: 2, title: "SCM, materiálové strategie a řízení zásob (JIT, KANBAN, cross-docking)", status: "done", difficulty: 3 },
@@ -461,7 +576,7 @@ const SUBJECTS = [
     ],
   },
   {
-    id: "str", name: "Strategie", color: VSE.nf, icon: "target",
+    id: "str", name: "Strategie", color: SUBJECT_COLORS.str, icon: "target",
     okruhy: [
       { n: 1, title: "Strategie + strategické uvažování (foundation)", status: "done", difficulty: 3 },
       { n: 2, title: "Ziskovost × společenská odpovědnost (CSR, CSV)", status: "done", difficulty: 3 },
@@ -476,7 +591,7 @@ const SUBJECTS = [
     ],
   },
   {
-    id: "roz", name: "Manažerské rozhodování", color: VSE.fm, icon: "compass",
+    id: "roz", name: "Manažerské rozhodování", color: SUBJECT_COLORS.roz, icon: "compass",
     okruhy: [
       { n: 1, title: "Rozhodovací problém, Kepner-Tregoe", status: "done", difficulty: 3 },
       { n: 2, title: "Cíle, stakeholdery, kritéria, varianty", status: "done", difficulty: 2 },
@@ -486,7 +601,7 @@ const SUBJECTS = [
     ],
   },
   {
-    id: "inov", name: "Inovace", color: VSE.primary, icon: "lightbulb",
+    id: "inov", name: "Inovace", color: SUBJECT_COLORS.inov, icon: "lightbulb",
     okruhy: [
       { n: 1, title: "Co je inovace, modely inovačního procesu (lineární/nelineární/interaktivní)", status: "done", difficulty: 2 },
       { n: 2, title: "Schumpeter, Drucker 7 zdrojů, inovační podnikání a inovativní organizace", status: "done", difficulty: 3 },
@@ -498,7 +613,7 @@ const SUBJECTS = [
     ],
   },
   {
-    id: "fin", name: "Finance", color: VSE.danger, icon: "coins",
+    id: "fin", name: "Finance", color: SUBJECT_COLORS.fin, icon: "coins",
     okruhy: [
       { n: 1, title: "Finanční analýza, ukazatele výkonnosti", status: "todo", difficulty: 3 },
       { n: 2, title: "Bankrotní modely", status: "todo", difficulty: 2 },
@@ -710,10 +825,22 @@ function Section({ s, isOpen, onToggle, subjectId, okruhN, subjectLabel }) {
   );
 }
 
-function FlashcardsTab({ data }) {
+function FlashcardsTab({ data, subjectId, okruhN }) {
   const t = useTheme();
   const [idx, setIdx] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const [seenIndices, setSeenIndices] = useState(new Set([0]));
+
+  // Auto-track: když uživatel viděl všechny kartičky, odškrtne se "cards"
+  useEffect(() => {
+    if (!subjectId || !okruhN || !data || data.length === 0) return;
+    if (seenIndices.size >= data.length) {
+      const tr = getOkruhTracker(subjectId, okruhN);
+      if (!tr.cards) {
+        setOkruhTracker(subjectId, okruhN, { cards: true });
+      }
+    }
+  }, [seenIndices, data, subjectId, okruhN]);
   // Klíč pro localStorage = hash z první otázky (krátký a stabilní)
   const storageKey = `nabombuj_flashcards_${(data[0]?.term || "").substring(0, 30).replace(/\s/g, "_")}`;
   const [known, setKnown] = useState(() => {
@@ -732,7 +859,9 @@ function FlashcardsTab({ data }) {
       return n;
     });
     setFlipped(false);
-    setIdx((idx + 1) % data.length);
+    const nextIdx = (idx + 1) % data.length;
+    setIdx(nextIdx);
+    setSeenIndices(prev => new Set([...prev, nextIdx]));
     // Streak activity
     try { recordActivity(); window.dispatchEvent(new Event("streak-updated")); } catch {}
   };
@@ -785,7 +914,7 @@ function FlashcardsTab({ data }) {
   );
 }
 
-function QuizTab({ data }) {
+function QuizTab({ data, subjectId, okruhN }) {
   const t = useTheme();
   const storageKey = `nabombuj_quiz_${(data[0]?.q || "").substring(0, 30).replace(/\s/g, "_")}`;
   const [current, setCurrent] = useState(0);
@@ -798,6 +927,16 @@ function QuizTab({ data }) {
       return saved ? JSON.parse(saved) : null;
     } catch { return null; }
   });
+  // Auto-track: pokud uživatel dokončí kvíz s >= 70%, odškrtne se "quiz"
+  useEffect(() => {
+    if (!showResult || !subjectId || !okruhN) return;
+    const finalScore = Object.entries(answers).filter(([k, v]) => data[k].correct === v).length;
+    const pct = (finalScore / data.length) * 100;
+    if (pct >= 70) {
+      const tr = getOkruhTracker(subjectId, okruhN);
+      if (!tr.quiz) setOkruhTracker(subjectId, okruhN, { quiz: true });
+    }
+  }, [showResult, answers, data, subjectId, okruhN]);
   const handleSelect = (i) => {
     if (answers[current] !== undefined) return;
     setSelected(i);
@@ -6839,6 +6978,7 @@ function OkruhMng11Panel() {
    ════════════════════════════════════════════════════════ */
 const NAV_TABS = [
   { id: "okruhy", label: "Okruhy", iconName: "chart" },
+  { id: "tracker", label: "Tracker", iconName: "target" },
   { id: "komunita", label: "Komunita", iconName: "people" },
   { id: "kalendar", label: "Kalendář", iconName: "target" },
   { id: "about", label: "O nás", iconName: "scroll" },
@@ -6953,9 +7093,16 @@ function SkoolNav({ activeTab, setActiveTab, themeMode, setThemeMode, profile, o
 function OkruhySidebar({ selectedSubject, setSelectedSubject, selectedOkruh, setSelectedOkruh, onBackToDashboard }) {
   const t = useTheme();
   const subject = SUBJECTS.find(s => s.id === selectedSubject);
-  const done = subject ? subject.okruhy.filter(o => o.status === "done").length : 0;
+  const trackerState = useTrackerAll();
+  // "done" v sidebaru = projetá teorie (tracker.read), ne status === "done"
+  const totalReadable = subject ? subject.okruhy.filter(o => o.status === "done").length : 0;
+  const readDone = subject ? subject.okruhy.filter(o => {
+    if (o.status !== "done") return false;
+    return trackerState[`${subject.id}_${o.n}`]?.read;
+  }).length : 0;
   const total = subject ? subject.okruhy.length : 0;
-  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  const done = readDone; // backward compat (pct se počítá z done)
+  const pct = totalReadable > 0 ? Math.round((readDone / totalReadable) * 100) : 0;
 
   return (
     <div data-skool-sidebar style={{ width: 320, minWidth: 320, borderRight: `1px solid ${t.borderSoft}`, height: "calc(100vh - 105px)", overflowY: "auto", background: t.bgDeep, display: "flex", flexDirection: "column", position: "sticky", top: 0, alignSelf: "flex-start" }}>
@@ -7005,28 +7152,31 @@ function OkruhySidebar({ selectedSubject, setSelectedSubject, selectedOkruh, set
             {subject.okruhy.map((okruh) => {
               const isDone = okruh.status === "done";
               const isSelected = selectedOkruh === okruh.n;
+              // Tracker state pro checkmark - reaguje na změny
+              const okTracker = trackerState[`${subject.id}_${okruh.n}`] || {};
+              const isRead = !!okTracker.read;
               return (
-                <div key={okruh.n} onClick={() => isDone && setSelectedOkruh(okruh.n)}
+                <div key={okruh.n} onClick={() => setSelectedOkruh(okruh.n)}
                   style={{
                     display: "flex", alignItems: "center", gap: 12,
                     padding: "12px 12px", borderRadius: RADIUS.sm,
-                    cursor: isDone ? "pointer" : "not-allowed",
+                    cursor: "pointer",
                     background: isSelected ? t.surface : "transparent",
                     border: `1px solid ${isSelected ? t.borderStrong : "transparent"}`,
                     marginBottom: 2, transition: "all 0.2s",
-                    opacity: isDone ? 1 : 0.45,
+                    opacity: isDone ? 1 : 0.55,
                   }}
-                  onMouseEnter={(e) => { if (isDone && !isSelected) e.currentTarget.style.background = t.surfaceMuted; }}
-                  onMouseLeave={(e) => { if (isDone && !isSelected) e.currentTarget.style.background = "transparent"; }}
+                  onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.background = t.surfaceMuted; }}
+                  onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.background = "transparent"; }}
                 >
                   <div style={{
                     width: 24, height: 24, borderRadius: 99, flexShrink: 0,
-                    background: isDone ? t.accent : "transparent",
-                    border: isDone ? "none" : `1.5px solid ${t.border}`,
+                    background: isRead ? t.accent : "transparent",
+                    border: isRead ? "none" : `1.5px solid ${t.border}`,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     color: BOMBIK.paper, fontSize: 13, fontWeight: 600, fontFamily: fontMono,
                   }}>
-                    {isDone ? "✓" : <span style={{ color: t.textMuted }}>{okruh.n}</span>}
+                    {isRead ? "✓" : <span style={{ color: t.textMuted }}>{okruh.n}</span>}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{
@@ -7149,6 +7299,12 @@ function OkruhContent({ subjectId, okruhN }) {
   if (subjectId === "inov" && okruhN === 6) return <OkruhInov6Panel />;
   if (subjectId === "inov" && okruhN === 7) return <OkruhInov7Panel />;
 
+  // Fallback placeholder pro okruhy, které ještě nejsou připravené (status: "todo")
+  const _subj = SUBJECTS.find(s => s.id === subjectId);
+  const _ok = _subj?.okruhy.find(o => o.n === okruhN);
+  if (_subj && _ok) {
+    return <OkruhPlaceholder subject={_subj} okruh={_ok} />;
+  }
   return null;
 }
 
@@ -7160,7 +7316,7 @@ function OkruhContent({ subjectId, okruhN }) {
 /* ════════════════════════════════════════════════════════
    CASE STUDY TAB — interaktivní mini-PS s kvízem
    ════════════════════════════════════════════════════════ */
-function CaseStudyTab({ data, color }) {
+function CaseStudyTab({ data, color, subjectId, okruhN }) {
   const t = useTheme();
   const isMobile = useIsMobile();
   const [step, setStep] = useState(1);
@@ -7168,6 +7324,18 @@ function CaseStudyTab({ data, color }) {
   const [answer1Submitted, setAnswer1Submitted] = useState(false);
   const [answer2, setAnswer2] = useState(new Set());
   const [answer2Submitted, setAnswer2Submitted] = useState(false);
+
+  // Auto-track: když uživatel odešle oba quizzy, případovka je hotová
+  useEffect(() => {
+    if (!subjectId || !okruhN) return;
+    if (answer1Submitted && answer2Submitted) {
+      const tr = getOkruhTracker(subjectId, okruhN);
+      if (!tr.case) {
+        setOkruhTracker(subjectId, okruhN, { case: true });
+        bumpTrackerStreak();
+      }
+    }
+  }, [answer1Submitted, answer2Submitted, subjectId, okruhN]);
 
   if (!data) return (
     <GlassBox opacity={0.5} style={{ padding: 24, borderRadius: 14, textAlign: "center" }}>
@@ -7558,12 +7726,21 @@ function ExamTab({ data, color }) {
   );
 }
 
-function PodcastTab({ data, color }) {
+function PodcastTab({ data, color, subjectId, okruhN }) {
   const t = useTheme();
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+
+  // Auto-track: pokud uživatel přehrál 80%+ podcastu
+  useEffect(() => {
+    if (!subjectId || !okruhN || !duration) return;
+    if (currentTime / duration >= 0.8) {
+      const tr = getOkruhTracker(subjectId, okruhN);
+      if (!tr.podcast) setOkruhTracker(subjectId, okruhN, { podcast: true });
+    }
+  }, [currentTime, duration, subjectId, okruhN]);
   const [playbackRate, setPlaybackRate] = useState(() => {
     try {
       const saved = localStorage.getItem("nabombuj_podcast_speed");
@@ -7717,12 +7894,220 @@ function PodcastTab({ data, color }) {
   );
 }
 
+
+/* ════════════════════════════════════════════════════════
+   OKRUH TRACKER WIDGET — kompaktní panel uvnitř okruhu
+   ════════════════════════════════════════════════════════ */
+function OkruhTrackerWidget({ subjectId, okruhN, color, t }) {
+  const data = useTracker(subjectId, okruhN);
+  const isMobile = useIsMobile();
+
+  const toggle = (field) => {
+    const wasRead = data.read;
+    const wasCase = data.case;
+    setOkruhTracker(subjectId, okruhN, { [field]: !data[field] });
+    if ((field === "read" && !wasRead) || (field === "case" && !wasCase)) {
+      bumpTrackerStreak();
+    }
+  };
+
+  const addRepeat = () => {
+    const cur = data.repeats || 0;
+    // Pokud už 5, další klik nuluje
+    const newCount = cur >= 5 ? 0 : cur + 1;
+    setOkruhTracker(subjectId, okruhN, { repeats: newCount });
+  };
+
+  const resetRepeats = () => setOkruhTracker(subjectId, okruhN, { repeats: 0 });
+
+  return (
+    <div data-okruh-tracker style={{
+      marginTop: 16, marginBottom: 18, padding: isMobile ? "12px 14px" : "14px 18px",
+      borderRadius: 12, background: t.surface, border: `1px solid ${t.border}`,
+      borderLeft: `3px solid ${color}`,
+    }}>
+      <div style={{
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        marginBottom: 10, gap: 8, flexWrap: "wrap",
+      }}>
+        <div style={{
+          fontFamily: fontMono, fontSize: 10.5, fontWeight: 700,
+          letterSpacing: "0.12em", textTransform: "uppercase", color: t.textMuted,
+        }}>Moje příprava</div>
+        <div style={{
+          fontFamily: fontMono, fontSize: 11, color: t.textMuted,
+        }}>
+          Auto-check po projití všech sekcí · ručně lze kdykoli přepnout
+        </div>
+      </div>
+      <div style={{
+        display: "flex", gap: isMobile ? 6 : 8, flexWrap: "wrap", alignItems: "center",
+      }}>
+        <TrackerCheckLabeled active={data.read} color={color}
+          label="Teorie" onClick={() => toggle("read")} isMobile={isMobile} />
+        <TrackerCheckLabeled active={data.case} color={color}
+          label="Případovka" onClick={() => toggle("case")} isMobile={isMobile} />
+        <TrackerCheckLabeled active={data.cards} color={color}
+          label="Kartičky" onClick={() => toggle("cards")} isMobile={isMobile} />
+        <TrackerCheckLabeled active={data.quiz} color={color}
+          label="Kvíz" onClick={() => toggle("quiz")} isMobile={isMobile} />
+        <TrackerCheckLabeled active={data.podcast} color={color}
+          label="Podcast" onClick={() => toggle("podcast")} isMobile={isMobile} />
+        <RepeatBarsLabeled count={data.repeats || 0} color={color}
+          onIncrement={addRepeat} onReset={resetRepeats} isMobile={isMobile} t={t} />
+      </div>
+    </div>
+  );
+}
+
+function TrackerCheckLabeled({ active, color, label, onClick, isMobile }) {
+  return (
+    <button onClick={onClick} title={`${active ? "Hotovo" : "Označit jako hotové"} — ${label}`} style={{
+      padding: isMobile ? "6px 10px" : "8px 12px", borderRadius: 8,
+      border: `1.5px solid ${active ? color : "var(--border)"}`,
+      background: active ? color : "transparent",
+      color: active ? "#fff" : "var(--text)",
+      fontFamily: fontMono, fontSize: isMobile ? 11.5 : 12.5, fontWeight: 600,
+      cursor: "pointer", display: "flex", alignItems: "center", gap: 6, transition: "all 0.15s",
+    }}>
+      <span style={{
+        width: 14, height: 14, borderRadius: 4,
+        background: active ? "rgba(255,255,255,0.25)" : "transparent",
+        border: active ? "none" : "1.5px solid var(--text-muted)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontSize: 10, fontWeight: 800, color: "#fff", flexShrink: 0,
+      }}>{active && "✓"}</span>
+      {label}
+    </button>
+  );
+}
+
+function RepeatBarsLabeled({ count, color, onIncrement, onReset, isMobile, t }) {
+  // 6. klik = reset (po dosažení max 5)
+  const handleClick = () => {
+    if (count >= 5) onReset();
+    else onIncrement();
+  };
+  return (
+    <button onClick={handleClick}
+      title={count >= 5 ? "Max 5/5 — další klik nuluje" : `Zopakováno ${count}/5 — klik přidá +1`}
+      style={{
+        padding: isMobile ? "6px 10px" : "8px 12px", borderRadius: 8,
+        border: `1.5px solid ${count > 0 ? color : "var(--border)"}`,
+        background: count > 0 ? `${color}15` : "transparent",
+        cursor: "pointer", display: "flex", alignItems: "center", gap: 8,
+        fontFamily: fontMono, fontSize: isMobile ? 11.5 : 12.5, fontWeight: 600,
+        color: count > 0 ? color : "var(--text-muted)", transition: "all 0.15s",
+      }}>
+      <div style={{ display: "flex", gap: 2 }}>
+        {[0,1,2,3,4].map(i => (
+          <div key={i} style={{
+            width: 3, height: 14,
+            background: i < count ? color : "var(--border)",
+            borderRadius: 1.5,
+          }} />
+        ))}
+      </div>
+      Zopakováno
+    </button>
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   OKRUH PLACEHOLDER — pro todo okruhy
+   ════════════════════════════════════════════════════════ */
+function OkruhPlaceholder({ subject, okruh }) {
+  const t = useTheme();
+  const isMobile = useIsMobile();
+  const color = SUBJECT_COLORS[subject.id] || t.text;
+
+  return (
+    <div data-okruh-panel data-skool-content style={{
+      flex: 1, overflowY: "auto", height: "calc(100vh - 105px)",
+      padding: isMobile ? "24px 16px 48px" : "32px 36px 48px", background: t.bg,
+    }}>
+      <div style={{ maxWidth: 780, margin: "0 auto" }}>
+        <div style={{ marginBottom: 14 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
+            <span style={{
+              fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 600,
+              letterSpacing: "1.6px", textTransform: "uppercase",
+            }}>{subject.name} · Okruh {String(okruh.n).padStart(2, "0")}</span>
+          </div>
+          <h1 data-okruh-hero-title style={{
+            margin: "4px 0 6px", fontSize: isMobile ? 28 : 40, fontWeight: 600,
+            fontFamily: fontSans, color: t.text, letterSpacing: "-0.025em", lineHeight: 1.05,
+          }}>{okruh.title}</h1>
+          <p data-okruh-hero-subtitle style={{
+            margin: "8px 0 0", color: t.textMuted, fontSize: 15.5, fontFamily: fontSans,
+            lineHeight: 1.55, maxWidth: 600,
+          }}>
+            Tento okruh teprve připravujeme. Vrátíme se k němu — sleduj progress.
+          </p>
+        </div>
+
+        <div style={{
+          marginTop: 32, padding: isMobile ? "24px 18px" : "32px 28px", borderRadius: 14,
+          background: t.surface, border: `1px solid ${t.border}`,
+          borderLeft: `4px solid ${color}`,
+        }}>
+          <div style={{
+            display: "inline-block", padding: "4px 12px", borderRadius: 100,
+            background: `${color}18`, color: color,
+            fontFamily: fontMono, fontSize: 11, fontWeight: 700,
+            letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 16,
+          }}>Brzy</div>
+          <h2 style={{
+            fontFamily: fontSans, fontSize: isMobile ? 20 : 24, fontWeight: 700,
+            color: t.text, margin: "0 0 12px", letterSpacing: "-0.02em",
+          }}>Tento okruh ještě není připravený</h2>
+          <p style={{
+            fontFamily: fontSans, fontSize: 15, color: t.text, lineHeight: 1.6,
+            margin: "0 0 18px", textWrap: "pretty",
+          }}>
+            Pracujeme na něm. Mezitím můžeš procházet ostatní okruhy z předmětu <b>{subject.name}</b> nebo se podívat na jiné předměty. <b>Tracker</b> ti pohlídá pokrok napříč všemi.
+          </p>
+          <div style={{
+            fontFamily: fontMono, fontSize: 12, color: t.textMuted,
+            paddingTop: 14, borderTop: `1px solid ${t.borderSoft}`,
+          }}>
+            💡 Tip: Když dáme tento okruh hotový, automaticky se ti objeví obsah — bez toho, abys cokoli musel{"\u202F"}restartovat. Tvůj progress se nikam neztratí.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questionText, sloz, roz, freq, studySections, flashcards, quiz, checklist, praxe, examQuestions, podcast, examStrategy, caseStudy }) {
   const t = useTheme();
   const [tab, setTab] = useState("study");
   const [open, setOpen] = useState(new Set([studySections[0]?.id]));
   const [cheatOpen, setCheatOpen] = useState(false);
-  const toggle = (id) => setOpen(p => { const n = new Set(p); n.has(id) ? n.delete(id) : n.add(id); return n; });
+  const toggle = (id) => {
+    setOpen(p => { const n = new Set(p); n.has(id) ? n.delete(id) : n.add(id); return n; });
+    // Track opened sections
+    setOpenedSections(prev => new Set([...prev, id]));
+  };
+
+  // Tracker — auto-detekce odškrtávání
+  const trackerData = useTracker(subjectId, number);
+  const [openedSections, setOpenedSections] = useState(() => {
+    // Pre-populate s aktuálně otevřenou sekcí
+    return new Set([studySections[0]?.id].filter(Boolean));
+  });
+
+  // Auto-check "read" (Projeto) — když uživatel otevře všechny studySections
+  useEffect(() => {
+    if (!studySections || studySections.length === 0) return;
+    if (trackerData.read) return; // už odškrtnuto
+    const allOpened = studySections.every(s => openedSections.has(s.id));
+    if (allOpened) {
+      setOkruhTracker(subjectId, number, { read: true });
+      bumpTrackerStreak();
+    }
+  }, [openedSections, studySections, subjectId, number, trackerData.read]);
 
   const tabs = [
     { id: "study", label: "Studium", color, icon: "book" },
@@ -7784,6 +8169,9 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
 
         <Difficulty sloz={sloz} roz={roz} freq={freq} />
 
+        {/* Tracker widget */}
+        <OkruhTrackerWidget subjectId={subjectId} okruhN={number} color={color} t={t} />
+
         {/* Tabs — flat segmented control */}
         <div data-okruh-tabs style={{ display: "flex", gap: 0, marginBottom: 18, marginTop: 14, borderBottom: `1px solid ${t.border}`, overflowX: "auto" }}>
           {tabs.map(tb => (
@@ -7816,12 +8204,12 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
             {studySections.map((s) => <Section key={s.id} s={s} isOpen={open.has(s.id)} onToggle={() => toggle(s.id)} subjectId={subjectId} okruhN={number} subjectLabel={subject} />)}
           </>
         )}
-        {tab === "case" && <CaseStudyTab data={caseStudy} color={VSE.warning} />}
+        {tab === "case" && <CaseStudyTab data={caseStudy} color={VSE.warning} subjectId={subjectId} okruhN={number} />}
         {tab === "praxe" && <PraxeTab data={praxe} color={color} />}
         {tab === "exam" && <ExamTab data={examQuestions} color={color} />}
-        {tab === "flashcards" && <FlashcardsTab data={flashcards} />}
-        {tab === "quiz" && <QuizTab data={quiz} />}
-        {tab === "podcast" && <PodcastTab data={podcast} color={color} />}
+        {tab === "flashcards" && <FlashcardsTab data={flashcards} subjectId={subjectId} okruhN={number} />}
+        {tab === "quiz" && <QuizTab data={quiz} subjectId={subjectId} okruhN={number} />}
+        {tab === "podcast" && <PodcastTab data={podcast} color={color} subjectId={subjectId} okruhN={number} />}
       </div>
     </div>
   );
@@ -8151,7 +8539,8 @@ function OkruhLead1Panel() {
         </Def>
         <Tag color={VSE.fmv}>Mini-přehled, abys měl rámec</Tag>
         <Bullet items={[
-          "Behaviorální = co lídr DĚLÁ (3 styly: autoritativní/demokratický/liberální, Likertova 4S)",
+          "Klasická (Lewin 1939) = KDO rozhoduje (3 styly: autoritativní/demokratický/liberální + Likertova 4S)",
+          "Behaviorální (Blake & Mouton, Ohio, Michigan) = CO lídr dělá — osy zájem o úkoly × lidi",
           "GRID 9×9 = osy zájem o lidi × úkoly, 5 stylů + 2 hybridy (ideál 9.9)",
           "Kontingenční = situační, Hersey-Blanchard D1-D4 ↔ S1-S4",
           "Trendy = transformační, autentický, servant, vyvážený (versatilní)",
@@ -8512,7 +8901,7 @@ function OkruhLead2Panel() {
     { id: "klasicka", title: "Klasická teorie vedení", subtitle: "3 styly: autoritativní / demokratický / liberální", color: VSE.fmv, emoji: "scale",
       content: (<div>
         <Def color={VSE.fmv}>
-          Behaviorální přístup. Lewin (1939) rozlišuje 3 základní styly podle toho, <b>kde se rozhoduje</b>.
+          <b>Klasický (Lewinovský) přístup</b>. Kurt Lewin (1939, Iowa State Studies) rozlišuje 3 základní styly podle toho, <b>kde se rozhoduje</b>. Toto NENÍ behaviorální teorie (ta přišla později — Blake & Mouton GRID, Ohio + Michigan studies).
         </Def>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginTop: 8 }}>
           <div style={{ background: `${VSE.danger}08`, border: `1px solid ${VSE.danger}25`, borderRadius: 12, padding: 12 }}>
@@ -8540,10 +8929,44 @@ function OkruhLead2Panel() {
         ]} color={VSE.primary} />
       </div>) },
 
+    { id: "behavioralni", title: "Behaviorální teorie", subtitle: "Ohio + Michigan + Blake-Mouton — zaměření na úkoly × na lidi", color: VSE.fmv, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Behaviorální teorie</b> (1950s-60s) říká, že lídra <b>nedělá to, KDO je</b> (rysy), ale <b>CO DĚLÁ</b>. Klíčová otázka: <b>jak lídr balancuje zájem o úkoly a zájem o lidi?</b> Vznikla ze 3 výzkumných proudů.
+        </Def>
+        <Tag color={VSE.primary}>Ohio State Studies (1945-1950s)</Tag>
+        <Bullet items={[
+          "<b>Initiating Structure (Iniciování struktury)</b> = lídr organizuje, plánuje, definuje role a úkoly — zaměření na úkoly",
+          "<b>Consideration (Ohleduplnost)</b> = lídr buduje vztahy, naslouchá, podporuje, projevuje respekt — zaměření na lidi",
+          "Klíč: tyto dvě dimenze jsou <b>nezávislé</b> — lídr může být vysoký v obou (ideál), nízký v obou, nebo dominovat jen v jedné",
+        ]} color={VSE.primary} />
+        <Tag color={VSE.warning}>Michigan Studies (Likert, 1950s)</Tag>
+        <Bullet items={[
+          "<b>Production-oriented (zaměřený na výrobu)</b> = lídr tlačí na výsledky, plnění norem, deadlines",
+          "<b>Employee-oriented (zaměřený na zaměstnance)</b> = lídr se stará o lidi, jejich rozvoj, well-being",
+          "Likert nejdřív viděl tyto styly jako protipóly, později (4S model) přiznal, že lze kombinovat",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fmv}>Blake & Mouton — Managerial GRID (1964)</Tag>
+        <Bullet items={[
+          "Spojení Ohio + Michigan do <b>jedné mřížky 9×9</b>",
+          "Osy: <b>zájem o úkoly (production)</b> × <b>zájem o lidi (people)</b>",
+          "5 hlavních stylů + 2 hybridy (oportunistický, paternalistický)",
+          "<b>Ideál = 9.9 (Týmový styl)</b> — vysoký zájem o obojí",
+          "Detail GRIDu viz následující sekce",
+        ]} color={VSE.fmv} />
+        <div style={{ marginTop: 12, padding: "10px 14px", background: `${VSE.warning}10`, borderRadius: 10, border: `1px solid ${VSE.warning}30`, fontSize: 14, color: "var(--text)", fontFamily: fontSans }}>
+          <span style={{ color: VSE.warning, fontWeight: 700, fontFamily: fontMono, letterSpacing: "0.5px" }}>⚠️ POZOR:</span> Behaviorální teorie ≠ Klasická teorie. Klasická (Lewin 1939) řeší <b>KDO rozhoduje</b> (autoritativní/demokratický/liberální). Behaviorální řeší <b>CO lídr dělá</b> (osy úkoly × lidi). Komise se na tento rozdíl ráda ptá.
+        </div>
+      </div>) },
+
     { id: "grid", title: "Leadership GRID 9×9", subtitle: "Blake & Mouton — 5 + 2 stylů, který lídr má v PS", color: VSE.fmv, emoji: "grid",
       content: (<div>
         <Def color={VSE.fmv}>
-          <b>Manažerská mřížka 9×9</b> — osy: zájem o lidi × zájem o úkoly. <b>Klíč k identifikaci stylu lídra v PS.</b> Komise nejčastěji chce slyšet konkrétní kvadrant.
+          <b>Behaviorální teorie leadershipu</b> (Blake & Mouton 1964, navazuje na <b>Ohio State Studies</b> a <b>Michigan Studies</b> 1950s). Klíčová otázka: <b>na co se lídr soustředí — na úkoly nebo na lidi?</b><br/><br/>
+          <b>Leadership GRID 9×9</b> je nejznámější vizualizace — mřížka 9×9 se 2 osami:<br/>
+          • <b>Horizontální osa</b> = zájem o úkoly (production, výsledky)<br/>
+          • <b>Vertikální osa</b> = zájem o lidi (concern for people)<br/><br/>
+          Každá osa má škálu 1–9. Lídr má někde na mřížce svou pozici. Blake & Mouton definovali <b>5 hlavních stylů + 2 hybridy</b>.
         </Def>
 
         <Tag color={VSE.fmv}>Mřížka 9×9 graficky — 5 stylů na osách</Tag>
@@ -11304,39 +11727,39 @@ function OkruhHr1Panel() {
     subtitle: "Firma vyrostla, ale duch se vytrácí",
     scenario: "Hanka vede rodinnou pekárnu, kterou založili její rodiče. Když byla malá, znali se v ní všichni jménem. Peklo se s láskou, lidé chodili rádi do práce a zákazníci to cítili. Bylo jasné, proč firma existuje — dělat poctivé pečivo a starat se o lidi.\n\nFirma za posledních pár let pořádně vyrostla. Otevřela nové provozovny, přijala spoustu nových lidí, koupila modernější pece. Jenže s růstem se něco vytratilo. Noví zaměstnanci nevědí, proč se věci dělají tak, jak se dělají. Starší pekaři reptají, že už to není jako dřív. Lidé chodí do práce jen odbýt směnu a odejít.\n\nHanka cítí, že firma ztratila duši. Kdysi měla jasnou kulturu — nepsaná pravidla, hodnoty, společný smysl. Teď je to jen továrna na rohlíky. Fluktuace roste, lidé nejsou zapálení, kvalita kolísá podle toho, kdo má zrovna směnu.\n\nNa poradě jí provozní řekl: 'Hanko, my nemáme problém s pecemi ani s recepturami. My máme problém s lidmi a s tím, čemu věří.' Hanka si uvědomila, že strategie firmy, její kultura a to, jak jsou lidé motivovaní, spolu nějak souvisí — ale neumí to dát dohromady.\n\nVíkend strávila přemýšlením. Jak propojit to, kam firma směřuje, s tím, jak se uvnitř chová a co lidi žene dopředu? Cítí, že pokud to nevyřeší, firma sice poroste v číslech, ale uvnitř bude prázdná.",
     signals: [
-      { text: "Strategie firmy … být premium B2B konzultingem zaměřeným na enterprise klientelu", color: VSE.success, reason: "Jasná strategie — premium B2B, senior konzultanti. Dobrá pozice na trhu." },
-      { text: "Bonus konzultantů se odvíjí výhradně od fakturovaných hodin (utilization 85 % target)", color: VSE.danger, reason: "Klasický nesoulad strategie × motivace. Premium strategie chce kvalitu, motivace odměňuje kvantitu (hodiny). Goodhart law." },
-      { text: "Pavel chválí na all-hands kolegy s nejvíc hodinami", color: VSE.danger, reason: "Kulturní reinforcement špatného metriky. Symbolika top managementu utváří hodnoty." },
-      { text: "kvalita klesá, klienti si stěžují", color: VSE.danger, reason: "Externí důsledek nesouladu. Strategie říká kvalita, motivace odměňuje kvantitu — výsledek konflikt." },
-      { text: "15 % zisků jde jen 8 partnerům, ostatní 22 senioři se tlačí o zbytek", color: VSE.warning, reason: "Strukturální problém. Partnerský model neškáluje — chybí střední vrstva kariérní cesty." },
-      { text: "artefakty = open space, ping-pong, beer fridge — like a tech startup", color: VSE.warning, reason: "Schein 1. vrstva — artefakty napodobují startup. Ale 2. (normy) a 3. (předpoklady) vrstvy říkají něco jiného." },
-      { text: "kdo odejde v 17:00 je slabý", color: VSE.danger, reason: "Schein 2. vrstva — toxické norms. Konflikt s deklarovanou kulturou „svoboda + odpovědnost\"." },
-      { text: "Denison: vypadá jako Adaptability culture, ale chová se jako Consistency", color: VSE.danger, reason: "Klasický nesoulad espoused × enacted culture (Schein). Hodnoty na zdi vs. reálné chování." },
-      { text: "Klienti říkají: chválí senior expertízu, ale dostávají juniory", color: VSE.danger, reason: "Strategický nesoulad: premium pozice slibovaná, junior realita dodávaná. Klasický over-promise + under-deliver." },
+      { text: "rodinná pekárna založená rodiči, kdysi se všichni znali jménem", color: VSE.success, reason: "Schein 3. vrstva — silné základní předpoklady (poctivost, péče o lidi) byly přirozenou součástí firmy díky malé velikosti a osobnímu kontaktu" },
+      { text: "Bylo jasné, proč firma existuje — dělat poctivé pečivo a starat se o lidi", color: VSE.success, reason: "Jasná mise a hodnoty (strategie + kultura). Klasický příklad přirozeně sladěné strategie a kultury v malé firmě" },
+      { text: "Firma za posledních pár let pořádně vyrostla, otevřela nové provozovny, přijala spoustu nových lidí", color: VSE.warning, reason: "Růst bez kulturní integrace = klasický scaling problem. Schein říká: kultura se v malé firmě přenáší osmosou, ve velké firmě potřebuje vědomou kultivaci" },
+      { text: "Noví zaměstnanci nevědí, proč se věci dělají tak, jak se dělají", color: VSE.danger, reason: "Schein 3. vrstva selhává — základní předpoklady nikdo nevysvětluje, noví lidé vidí jen artefakty (1. vrstva) bez kontextu. Chybí onboarding hodnot" },
+      { text: "Starší pekaři reptají, že už to není jako dřív", color: VSE.warning, reason: "Konflikt mezi původní kulturou (espoused) a novou realitou (enacted). Klasický symptom kulturní eroze při růstu" },
+      { text: "Lidé chodí do práce jen odbýt směnu a odejít", color: VSE.danger, reason: "Motivace selhává — chybí vyšší řád potřeb (Maslow: sounáležitost, smysl, seberealizace). Jen hygienické faktory (Herzberg) bez motivátorů" },
+      { text: "Fluktuace roste, lidé nejsou zapálení, kvalita kolísá", color: VSE.danger, reason: "Externí důsledky vnitřního nesouladu strategie × kultura × motivace. Klesající engagement → fluktuace → kvalita → ztráta zákazníků" },
+      { text: "provozní: my máme problém s lidmi a s tím, čemu věří", color: VSE.warning, reason: "Provozní intuitivně chápe jádro problému — víra/hodnoty (Schein 2. vrstva). Manažer ho slyší, ale neumí přeložit do akce" },
+      { text: "Hanka si uvědomila, že strategie firmy, její kultura a motivace spolu nějak souvisí", color: VSE.success, reason: "Bočková/Stříteský triáda — strategie + kultura + motivace musí spolu mluvit. Hanka cítí problém, ale neumí ho strukturovat" },
     ],
     quiz1: {
-      question: "Jaký je hlavní problém propojení 4 prvků v ConsulTech?",
+      question: "Jaký je hlavní problém propojení strategie, kultury a motivace v pekárně?",
       options: [
-        "Strategie je špatná — měla by se změnit na cost leadership",
-        "Strategie (premium) je dobrá, ale motivační systém (hodiny) + kultura (přesčasy) + struktura (úzká špička) ji nepodporují — klasický nesoulad",
-        "HR je problém — Lucie by měla být nahrazena",
-        "Firma je příliš velká — měla by se rozdělit",
+        "Strategie je špatná — pekárna by se měla restrukturalizovat na výrobu hotových jídel",
+        "Firma vyrostla, ale původní kultura (Schein) a motivační systém (Maslow/Herzberg) se nepřenesly z malé firmy do velké — strategie říká poctivé pečivo + péče o lidi, ale realita je továrna na rohlíky",
+        "Hanka by měla propustit reptající staré pekaře",
+        "Problém jsou modernější pece — měly by se vrátit ty staré",
       ],
       correct: 1,
     },
     quiz2: {
-      question: "Co by Lucie měla doporučit pro propojení 4 prvků?",
+      question: "Co by Hanka měla udělat pro propojení 3 prvků (strategie + kultura + motivace)?",
       options: [
-        { text: "Změnit bonus z hodin na výsledky: 50% klientská NPS + 30% kvalita projektu + 20% personální rozvoj", correct: true, reason: "✓ Motivace musí odrážet strategii (premium = kvalita, ne hodiny). Goodhart law: měření definuje chování." },
-        { text: "Otevřít partnerský model — přidat Principal level (mezi Senior a Partner) s podílem na zisku z konkrétní vertikály", correct: true, reason: "✓ Strukturální fix. Kariérní cesta pro 22 seniorů. Sníží turnover, posílí motivaci. Klasický partnership growth model." },
-        { text: "Přepracovat onboarding + values workshop — sladit espoused × enacted kulturu (Schein)", correct: true, reason: "✓ Schein: kultura není slogany na zdi, ale skutečné chování. Pavel musí přestat oslavovat hodiny, oslavovat kvalitu." },
-        { text: "Zvýšit utilization target z 85 % na 95 % — víc hodin = víc tržeb", correct: false, reason: "✗ Opak řešení. Více hodin = nižší kvalita = ztráta klientů. Premium strategie potřebuje opačný směr." },
-        { text: "Pravidelný 360° feedback od klientů (kvartální NPS) propojený s bonusem — externí validace kvality", correct: true, reason: "✓ Klasický mechanismus alignement strategie × motivace. Klient je arbitr kvality, ne počítač hodin." },
-        { text: "Zavést přesnou 9-5 pracovní dobu pro všechny — žádné přesčasy", correct: false, reason: "✗ Přehnaná reakce. Konzulting má varianci, někdy je hodně, někdy málo. Cíl je zdravá kultura, ne striktní hodiny." },
-        { text: "Hofstede + Denison audit — měřit kulturu, aby Lucie viděla reálný stav (ne jen pocit)", correct: true, reason: "✓ Data-driven HR. Měření kultury = první krok k změně. Bez baseline není change." },
+        { text: "Formalizovat misi a hodnoty (poctivé pečivo, péče o lidi) — udělat z nich explicitní pravidla pro nábor, onboarding a hodnocení", correct: true, reason: "✓ Schein 2. vrstva — espoused values musí být jasně artikulovány. V malé firmě se kultura přenášela osmosou, ve velké firmě potřebuje strukturu" },
+        { text: "Onboarding pro nové zaměstnance — vysvětlit historii firmy, proč se věci dělají tak, jak se dělají, kdo byli rodiče zakladatelé", correct: true, reason: "✓ Schein 3. vrstva — základní předpoklady se musí explicitně předávat. Noví lidé potřebují kontext, ne jen pracovní pokyny" },
+        { text: "Zavést motivační systém s vyššími řády potřeb — bonusy za kvalitu (ne objem), pekařské mistrovství, mentorování juniorů staršími", correct: true, reason: "✓ Maslow/Herzberg — chybí motivátory (uznání, růst, sounáležitost). Bonus za kvalitu sladí motivaci se strategií poctivosti" },
+        { text: "Zavést akord — odměna za počet upečených kusů za hodinu", correct: false, reason: "✗ Klasický anti-vzor. Goodhart law: měření kvantity zničí kvalitu. Akord posune firmu k továrně na rohlíky, což je přesně problém" },
+        { text: "Pravidelná setkání starších pekařů s novými — sdílení receptur, historek, tradic (kulturní transfer)", correct: true, reason: "✓ Mentoring + storytelling jako přenos kultury. Staří pekaři jsou nositelé Schein 3. vrstvy — nevyužitý zdroj" },
+        { text: "Propustit reptající starší pekaře a najmout úplně novou směnu", correct: false, reason: "✗ Opak řešení. Starší pekaři jsou klíč k zachování kultury, ne problém. Komise odhalí toto okamžitě" },
+        { text: "Vedoucí provozoven jmenovat z řad starších pekařů — ne najímat externí manažery", correct: true, reason: "✓ Schein říká: kulturu nesou lidé, ne procesy. Promotion zevnitř = zachování DNA firmy + signál hodnotám" },
       ],
     },
-    summary: "<b>ConsulTech má klasický nesoulad 4 prvků: dobrá strategie, špatná motivace + kultura + struktura.</b> Schein by řekl: espoused kultura (svoboda) ≠ enacted (přesčasy). Denison: vypadá jako Adaptability, ale chová se jako Consistency.<br/><br/><b>Propojení 4 prvků — Lucie plán:</b><br/>• <b>Motivace</b>: bonus podle klientské NPS + kvality, ne hodin (Goodhart law fix)<br/>• <b>Struktura</b>: Principal level pro 22 seniorů (kariérní cesta)<br/>• <b>Kultura</b>: Schein audit + values workshop, Pavel přestane oslavovat hodiny<br/>• <b>Strategie</b>: premium B2B zůstává, je správná<br/><br/><b>Pro komisi:</b> Klasický příklad Bočková/Stříteský dilema. 4 prvky (strategie/struktura/kultura/motivace) musí spolu mluvit. Strategie říká kam, struktura to umožní, kultura to drží, motivace to žene. Baťa je vzor — všechny 4 zapadly. ConsulTech má rozsypaný puzzle. Doporučení: motivační redesign + strukturální Principal level + kulturní audit (Hofstede dimenze, Denison 4 typy).",
+    summary: "<b>Hanka má klasický scaling problem: malá firma žila kulturou osmoze, velká firma potřebuje vědomou kultivaci 3 prvků (strategie + kultura + motivace).</b><br/><br/><b>Diagnóza podle teorií:</b><br/>• <b>Schein</b>: artefakty (pece, provozovny) ano, espoused values (mise) ano, ale 3. vrstva (základní předpoklady) se nepřenesla na nové lidi<br/>• <b>Maslow/Herzberg</b>: lidé mají hygienické faktory (mzda, podmínky), ale chybí motivátory (smysl, uznání, růst)<br/>• <b>Bočková/Stříteský</b>: 3 prvky se rozcházejí — strategie říká poctivost a péče, realita je odbýt směnu<br/><br/><b>Hanka plán propojení:</b><br/>• <b>Strategie</b>: zachovat původní misi (poctivé pečivo + péče o lidi), explicitně ji artikulovat<br/>• <b>Kultura</b>: onboarding nových + storytelling od starších pekařů + mentoring + promotion zevnitř<br/>• <b>Motivace</b>: bonus za kvalitu (ne objem), pekařské mistrovství jako kariérní cesta, sounáležitost přes týmové rituály<br/><br/><b>Pro komisi:</b> Klasický příklad propojení 3 prvků. Strategie říká KAM (poctivost), kultura drží HODNOTY (Schein 3 vrstvy), motivace POSILUJE správné chování (Maslow vyšší potřeby + Herzberg motivátory). Anti-vzor: akord (Goodhart) nebo propouštění starších pekařů. Etalon: Baťa — všechny 3 prvky spolu mluvily.",
   };
 
   return (
@@ -11818,10 +12241,10 @@ function OkruhHr3Panel() {
         <Tag color={VSE.fph}>4 orientace EPRG</Tag>
         <ResponsiveGrid cols2>
           {[
-            { c: VSE.danger, t: "E — ETNOCENTRIC", d: "„Naše země je nejlepší.\u201D Klíčové pozice obsazují expatrianti z centrály. Lokální zaměstnanci na nižších pozicích. Vysoké náklady, kulturní mismatch. Japonské firmy 80. let." },
-            { c: VSE.warning, t: "P — POLYCENTRIC", d: "„Každá země je jiná.\u201D Lokální manažeři vedou lokální pobočky. Žádné rotace, žádný transfer know-how. Multinational firmy 70-90. let." },
-            { c: VSE.fmv, t: "R — REGIOCENTRIC", d: "„Region rozhoduje.\u201D Top pozice obsazují regionální manažeři (EMEA, APAC). Mobilita v rámci regionu. Coca-Cola, Unilever model." },
-            { c: VSE.success, t: "G — GEOCENTRIC (Global)", d: "„Nejlepší kandidát odkudkoliv.\u201D Globální talent pool, žádné národnostní preference. Microsoft pod Nadellou (Indian-born CEO), Google (Pichai). Ideál pro transnational." },
+            { c: VSE.danger, t: "E — ETNOCENTRIC", d: "„Naše země je nejlepší.” Klíčové pozice obsazují expatrianti z centrály. Lokální zaměstnanci na nižších pozicích. Vysoké náklady, kulturní mismatch. Japonské firmy 80. let." },
+            { c: VSE.warning, t: "P — POLYCENTRIC", d: "„Každá země je jiná.” Lokální manažeři vedou lokální pobočky. Žádné rotace, žádný transfer know-how. Multinational firmy 70-90. let." },
+            { c: VSE.fmv, t: "R — REGIOCENTRIC", d: "„Region rozhoduje.” Top pozice obsazují regionální manažeři (EMEA, APAC). Mobilita v rámci regionu. Coca-Cola, Unilever model." },
+            { c: VSE.success, t: "G — GEOCENTRIC (Global)", d: "„Nejlepší kandidát odkudkoliv.” Globální talent pool, žádné národnostní preference. Microsoft pod Nadellou (Indian-born CEO), Google (Pichai). Ideál pro transnational." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -12241,7 +12664,7 @@ function OkruhHr4Panel() {
     miniExamples: [
       { tag: "BLIND RECRUITMENT", color: VSE.success, company: "Symphony Orchestras (1980s)", content: "Před 1970 jen 5 % žen v top orchestrách. Zavedli audition za závěs (blind audition). Do 2010 — 35 % žen. Klasický příklad blind recruitment v praxi." },
       { tag: "ANTI-VZOR", color: VSE.danger, company: "Google Memo (2017)", content: "James Damore napsal interní memo o biological differences mezi muži a ženami v tech. Demonstroval, jak unconscious bias žije v open culture. Google ho propustil." },
-      { tag: "INCLUSIVE LEADERSHIP", color: VSE.fmv, company: "Patagonia — Families First", content: "On-site childcare od 1983, parental leave 16 týdnů, pet-friendly office. CEO Rose Marcario: „Nemůžete být inkluzivní, pokud rodiče musí volit mezi prací a rodinou.\u201D 100 % rodičů se vrací po MD." },
+      { tag: "INCLUSIVE LEADERSHIP", color: VSE.fmv, company: "Patagonia — Families First", content: "On-site childcare od 1983, parental leave 16 týdnů, pet-friendly office. CEO Rose Marcario: „Nemůžete být inkluzivní, pokud rodiče musí volit mezi prací a rodinou.” 100 % rodičů se vrací po MD." },
       { tag: "KVÓTY", color: VSE.warning, company: "Norway 40 % rule (2003)", content: "Norsko zavedlo zákonné 40 % zastoupení žen v boardech kotovaných firem. Výsledek: ze 7 % (2002) na 42 % (2010). Kontroverzní (kompenzační strategie), ale data jasná." },
     ]
   };
@@ -12303,7 +12726,7 @@ function OkruhHr4Panel() {
         { text: "Přepsat job descriptions — odstranit gender-coded jazyk (ninja, rockstar). Použít blind recruitment v 1. kole", correct: true, reason: "✓ Levné, vysoký dopad. Studie: gender-neutral JD zvyšuje aplikace žen o 25 %. Blind recruitment redukuje unconscious bias." },
         { text: "Zavést parental leave 16 týdnů placené pro oba rodiče (industry-leading)", correct: true, reason: "✓ Adresuje retention rodičů. Microsoft 20 týdnů, Patagonia 16. Konkurence v talent war." },
         { text: "Zavést 50 % kvótu žen v managementu okamžitě — propustit 7 mužů, najmout ženy", correct: false, reason: "✗ Extrémní kompenzační strategie. Riziko tokenism, reverse discrimination, propuštění bez důvodu = právní problém. Lepší: postupná transformace přes pipeline." },
-        { text: "Zorganizovat povinný workshop „Diversity is good\u201D pro všechny — bez data, bez konkrétních nástrojů", correct: false, reason: "✗ Klasický anti-vzor — performative DEI bez reálných změn. Tolerance fáze (Thomas), ne Inclusion. Demotivuje cynické zaměstnance." },
+        { text: "Zorganizovat povinný workshop „Diversity is good” pro všechny — bez data, bez konkrétních nástrojů", correct: false, reason: "✗ Klasický anti-vzor — performative DEI bez reálných změn. Tolerance fáze (Thomas), ne Inclusion. Demotivuje cynické zaměstnance." },
       ],
     },
     summary: "<b>CodeFlow je v fázi 1-2 (Resistance/Discrimination) podle Roosevelt Thomas modelu.</b> Klasická IT firma s bro culture, glass ceiling, pay gap, žádnými metriky.<br/><br/><b>6měsíční transformace na Inclusion:</b><br/>• <b>Měsíc 1:</b> CEO buy-in přes business case (McKinsey data, konkurence, klient Německo, ESG/CSRD)<br/>• <b>Měsíc 2:</b> Pay equity audit + korekce v rozpočtu<br/>• <b>Měsíc 3:</b> Bias training + inclusive leadership pro manažery (povinné)<br/>• <b>Měsíc 4:</b> Women in Tech ERG + mentoring program + parental leave 16 týdnů<br/>• <b>Měsíc 5:</b> Přepis job descriptions (gender-neutral) + blind recruitment<br/>• <b>Měsíc 6:</b> DEI metriky reporting (zastoupení, pay gap, retention) — externě i interně<br/><br/><b>Pro komisi:</b> Klasický příklad Resistance/Discrimination fáze. Microsoft pod Nadellou cesta — z 26 % žen v tech na 32 %, transparent reporting, ERGs, parental leave, pay equity. Mládková chce výhody I nevýhody — zmiň riziko tokenism, reverse discrimination, vyšší náklady krátkodobě (training, audit). Long-term ROI: +35 % výkon (McKinsey), employer brand, retention.",
@@ -12533,7 +12956,7 @@ function OkruhHr5Panel() {
       lessons: "Komise miluje Google jako příklad <b>data-driven talent managementu</b>. Project Oxygen = jak měřit kvalitu managementu vědecky, ne pocitově. g2g learning = 70-20-10 v praxi. Career Conversations = retence top talentů. Když máš v PS firmu s talent drainem, doporuč Google model: <b>měřit kvalitu manažerů + peer learning + career conversations</b>. Alternativy: <b>GE Crotonville (corporate university), McKinsey up-or-out, Microsoft pod Nadellou (growth mindset)</b>."
     },
     miniExamples: [
-      { tag: "9-BOX", color: VSE.fph, company: "GE pod Jack Welchem", content: "Klasický 9-Box praktikán. Bottom 10 % každý rok exit (vitality curve). Top 20 % top investice. Kontroverzní (cruel?), ale GE byla #1 firma 90. let. Welch: „Vy nestraníte se lidem, když je vyhodíte. Vy jim straníte, když je tam necháte, ale ostatní vědí, že jsou slabí.\u201D" },
+      { tag: "9-BOX", color: VSE.fph, company: "GE pod Jack Welchem", content: "Klasický 9-Box praktikán. Bottom 10 % každý rok exit (vitality curve). Top 20 % top investice. Kontroverzní (cruel?), ale GE byla #1 firma 90. let. Welch: „Vy nestraníte se lidem, když je vyhodíte. Vy jim straníte, když je tam necháte, ale ostatní vědí, že jsou slabí.”" },
       { tag: "CORPORATE UNIVERSITY", color: VSE.success, company: "GE Crotonville (od 1956)", content: "Klasický příklad investice do leadership development. Všichni senior leaders procházejí přes Crotonville. Jack Welch tam strávil 30 % svého času. Vytvořil pipeline CEOs (40+ alumni se stali CEOs jiných firem)." },
       { tag: "UP-OR-OUT", color: VSE.warning, company: "McKinsey & Company", content: "Klasický up-or-out model — když nedostaneš promotion za 2-3 roky, opustíš firmu. Tvrdé, ale buduje extrémní talent pool. Alumni network: 30 000+ ex-McKinsey worldwide, mnoho CEOs (Sundar Pichai, Sheryl Sandberg)." },
       { tag: "GROWTH MINDSET", color: VSE.fmv, company: "Microsoft pod Nadellou", content: "Nahradil Stack Ranking (Bottom 10 % exit) za Growth Mindset (Carol Dweck). Zaměstnanci hodnoceni za learning agility, ne jen výkon. Posun od know-it-all k learn-it-all kultury." },
@@ -13137,7 +13560,7 @@ function OkruhHr7Panel() {
       company: "Google People Operations — data-driven HR",
       subtitle: "Klasický příklad pokročilého HR controllingu",
       content: (<>
-        <b>Google</b> přejmenoval HR oddělení na <b>People Operations</b> (POPS) a transformoval ho z administrativy na <b>data-driven team</b>. Vedl ho <b>Laszlo Bock</b> (kniha „Work Rules!\u201D, 2015).<br/><br/>
+        <b>Google</b> přejmenoval HR oddělení na <b>People Operations</b> (POPS) a transformoval ho z administrativy na <b>data-driven team</b>. Vedl ho <b>Laszlo Bock</b> (kniha „Work Rules!”, 2015).<br/><br/>
         <b style={{ color: VSE.success }}>Klíčové metriky a nástroje:</b><br/>
         • <b>Project Oxygen (2008):</b> Data ze 10 000+ manažerů → 10 chování top managerů. Manažer kvality měřitelná.<br/>
         • <b>Project Aristotle (2012):</b> Co dělá tým efektivní? Analýza 180 týmů. Závěr: psychological safety je #1 faktor.<br/>
@@ -13148,7 +13571,7 @@ function OkruhHr7Panel() {
         • <b>Zaměstnanci:</b> Glassdoor 4,5+, retention top performers 95 %+<br/>
         • <b>Procesy:</b> Time to hire 60 dní (long ale quality first), structured interviews 100 %<br/>
         • <b>Učení:</b> 80 % learning hours = peer-to-peer (g2g), Career Conversations čtvrtletně<br/><br/>
-        <b style={{ color: VSE.warning }}>Klíčový princip:</b> <i>„Trust the data, not your gut.\u201D</i> Laszlo Bock. Promotion rozhodnutí prochází committee s daty, ne single manager intuicí.
+        <b style={{ color: VSE.warning }}>Klíčový princip:</b> <i>„Trust the data, not your gut.”</i> Laszlo Bock. Promotion rozhodnutí prochází committee s daty, ne single manager intuicí.
       </>),
       lessons: "Komise miluje Google jako příklad <b>data-driven HR controllingu</b>. Když máš v PS firmu s primitivním HR měřením, doporuč Google model: <b>Project Oxygen (kvalita manažerů), Project Aristotle (týmová efektivita), strukturovaný engagement reporting, Career Conversations</b>. Alternativy: <b>IBM Watson Talent (AI prediktivní), Microsoft Workplace Analytics, Deloitte Bersin maturity model</b>."
     },
@@ -13466,7 +13889,7 @@ function OkruhHr8Panel() {
       content: (<>
         <b>Patagonia</b> (outdoor značka založená 1973 Yvonem Chouinardem) je <b>učebnicový příklad Soft HRM</b>. Lidé jako hodnota, ne zdroj.<br/><br/>
         <b style={{ color: VSE.success }}>HR strategie Patagonia:</b><br/>
-        • <b>Vize:</b> „We're in business to save our home planet.\u201D HR podporuje purpose-driven kulturu.<br/>
+        • <b>Vize:</b> „We're in business to save our home planet.” HR podporuje purpose-driven kulturu.<br/>
         • <b>Komplexní transformační strategie:</b> Kultura, ne procesy. Vše ŘLZ orientováno na sustainability + employee wellbeing.<br/><br/>
         <b style={{ color: VSE.fmv }}>Konkrétní HR politiky:</b><br/>
         • <b>Politika náboru:</b> Hire surfers — lidé s vášní pro outdoor + sustainability. Skills can be trained.<br/>
@@ -15205,7 +15628,7 @@ function OkruhMkt1Panel() {
         ]} color={VSE.danger} />
         <ExamAlert
           komise="Double Stříteský + Müllerová 2025 (Lázně)"
-          what="Stříteský chytá konkrétně: <b>„Co dělá náhodný výběr náhodným?\u201D</b> Pokud řekneš jen „náhodný výběr je náhodný\u201D, neuděláš. Musíš jmenovat 4 podmínky výše."
+          what="Stříteský chytá konkrétně: <b>„Co dělá náhodný výběr náhodným?”</b> Pokud řekneš jen „náhodný výběr je náhodný”, neuděláš. Musíš jmenovat 4 podmínky výše."
         />
       </div>) },
 
@@ -15290,7 +15713,7 @@ function OkruhMkt1Panel() {
         </Def>
         <ExamAlert
           komise="Stříteský + Bočková + Lorencová 2025 (Horská chata)"
-          what="Klasická Stříteského otázka: <b>„Marketingový výzkum, metody a jejich limity\u201D</b>. Bez explicitního vyjmenování 5 limitů NEUDĚLÍŠ. Limity jsou nedostatek, který musíš dorazit."
+          what="Klasická Stříteského otázka: <b>„Marketingový výzkum, metody a jejich limity”</b>. Bez explicitního vyjmenování 5 limitů NEUDĚLÍŠ. Limity jsou nedostatek, který musíš dorazit."
         />
         <Tag color={VSE.fis}>5 hlavních limitů MV</Tag>
         <Bullet items={[
@@ -15389,7 +15812,7 @@ function OkruhMkt1Panel() {
     miniExamples: [
       { tag: "PRETEST", color: VSE.fmv, company: "Pilsner Urquell, Staropramen — pretest reklamy", content: "České pivovary testují každou TV kampaň přes <b>Adwise (Median)</b> před nasazením. 200 respondentů × 3 verze. Metriky: recall, likability, persuasion. Vítězná verze jde na trh." },
       { tag: "POST-TEST", color: VSE.success, company: "Coca-Cola — Marketing Mix Modeling", content: "Coca-Cola používá MMM pro atribuci sales liftu k TV, online, OOH, sponzoringu. Po 1 roce: 1 USD do online = 1,8 USD obratu, do TV = 1,3 USD → realokace budgetu." },
-      { tag: "ANTI-VZOR", color: VSE.danger, company: "Apple — žádné focus groups", content: "Steve Jobs: <b>„It's not the customer's job to know what they want.\u201D</b> Místo MV insider testing s Jony Ive týmem. Funguje JEN pro Apple — pro většinu firem MV nezbytný." },
+      { tag: "ANTI-VZOR", color: VSE.danger, company: "Apple — žádné focus groups", content: "Steve Jobs: <b>„It's not the customer's job to know what they want.”</b> Místo MV insider testing s Jony Ive týmem. Funguje JEN pro Apple — pro většinu firem MV nezbytný." },
       { tag: "MEDIÁLNÍ", color: VSE.fph, company: "Alza — data-driven media buying", content: "Real-time bidding (RTB) + atribuční model. Každou minutu mění bid podle CTR, conversion rate, hour of day. Google GA4 + Meta Conversions API jako standard." },
     ]
   };
@@ -15490,9 +15913,9 @@ function OkruhMkt2Panel() {
         <Tag color={VSE.fis}>3 hlavní typy analýzy (podle účelu)</Tag>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.fmv, t: "📊 1. SUMARIZACE", d: "Popis dat. Průměr, medián, modus, kvartily, řády. „Kolik %, jaký průměr.\u201D" },
-            { c: VSE.warning, t: "⚖️ 2. SLEDOVÁNÍ DIFERENCÍ", d: "Liší se skupiny? ANOVA, chí-kvadrát, t-test. „Liší se preference žen × mužů?\u201D" },
-            { c: VSE.success, t: "🔗 3. SLEDOVÁNÍ SOUVISLOSTÍ", d: "Co s čím souvisí? Korelace, regrese, faktorová analýza. „Jak cena ovlivňuje prodej?\u201D" },
+            { c: VSE.fmv, t: "📊 1. SUMARIZACE", d: "Popis dat. Průměr, medián, modus, kvartily, řády. „Kolik %, jaký průměr.”" },
+            { c: VSE.warning, t: "⚖️ 2. SLEDOVÁNÍ DIFERENCÍ", d: "Liší se skupiny? ANOVA, chí-kvadrát, t-test. „Liší se preference žen × mužů?”" },
+            { c: VSE.success, t: "🔗 3. SLEDOVÁNÍ SOUVISLOSTÍ", d: "Co s čím souvisí? Korelace, regrese, faktorová analýza. „Jak cena ovlivňuje prodej?”" },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -15507,7 +15930,7 @@ function OkruhMkt2Panel() {
         ]} color={VSE.fph} />
         <ExamAlert
           komise="Kupec + Mládková + Kolouchová 2026 (Coffee Pot)"
-          what="Komise chce <b>konkrétní metody</b> — ANOVA, conjoint, shluková analýza, BPTO. Obecné fráze jako „použila bych analytické metody\u201D nestačí. Musíš vědět, KDY co použít."
+          what="Komise chce <b>konkrétní metody</b> — ANOVA, conjoint, shluková analýza, BPTO. Obecné fráze jako „použila bych analytické metody” nestačí. Musíš vědět, KDY co použít."
         />
       </div>) },
 
@@ -15587,7 +16010,7 @@ function OkruhMkt2Panel() {
           "<b>Jednoduchá regrese:</b> 1 nezávislá X (např. cena → prodej).",
           "<b>Vícenásobná regrese:</b> Více X (cena + reklama + sezóna → prodej).",
           "<b>Koeficient determinace R²:</b> % rozptylu Y vysvětlený X. R² = 0,8 = 80 % rozptylu vysvětleno.",
-          "<b>Použití:</b> Predikce hodnot Y při znalosti X. „Pokud zlevníme o 10 %, prodej vzroste o X.\u201D",
+          "<b>Použití:</b> Predikce hodnot Y při znalosti X. „Pokud zlevníme o 10 %, prodej vzroste o X.”",
         ]} color={VSE.warning} />
         <Tag color={VSE.fph}>Specifické typy regrese</Tag>
         <Bullet items={[
@@ -15627,7 +16050,7 @@ function OkruhMkt2Panel() {
         <Bullet items={[
           "<b>Cíl:</b> Zjistit, <b>kterou kombinaci vlastností produktu</b> respondent preferuje. Hodnotí celkovou utilitu, ne dílčí.",
           "<b>Vstup:</b> Respondent srovnává varianty produktu (např. 5 telefonů s různými kombinacemi: cena/baterie/foťák/váha).",
-          "<b>Výstup:</b> Důležitost (pretence) jednotlivých atributů pro zákazníka. <b>„Kterou vlastnost je ochoten obětovat?\u201D</b>",
+          "<b>Výstup:</b> Důležitost (pretence) jednotlivých atributů pro zákazníka. <b>„Kterou vlastnost je ochoten obětovat?”</b>",
           "<b>Použití:</b> Optimalizace produktové nabídky, pricing, feature prioritization.",
         ]} color={VSE.danger} />
       </div>) },
@@ -15763,7 +16186,7 @@ function OkruhMkt2Panel() {
     scenario: "Marek (35 let) je Data Analytics Lead SnackBar 2 roky. Síť 80 poboček napříč ČR, růst 8 %. Cílovka: pracující 25-45 let, městské, kupují snídani a oběd v práci.\n\nCEO chce, aby Marek odpověděl na 4 otázky pro strategický plán 2026:\n\n1) Které pobočky mají potenciál růst? Které zavřít?\n\n2) Jaké produkty by měli přidat do menu (5 nových položek)?\n\n3) Jaká skupina zákazníků utrácí nejvíc — a co je odlišuje od příležitostných?\n\n4) Jak ovlivnily promo akce v Q3 sales? Vyplatily se?\n\nMarek má k dispozici:\n\n• POS data všech 80 poboček × 24 měsíců (sales po hodině/dni/produktu)\n\n• CRM databáze 120k loyalty karet (frekvence, koš, demo)\n\n• Sekundární data ČSÚ (demografika měst), Google Trends, oborové reporty\n\n• Budget 200k Kč na primární výzkum (CAWI dotazník)\n\nMarek pracuje sám, má SPSS a Power BI. Komise chce vědět: jaké analytické metody by Marek měl použít na každou ze 4 otázek + jak by spojil primární a sekundární data.",
     signals: [
       { text: "Které pobočky mají potenciál růst? Které zavřít?", color: VSE.fmv, reason: "Klasický případ pro <b>regresní analýzu</b> — Y = sales, X = location demografika + size + traffic + competition. R² ukáže model fit. Pobočky s reziduály (skutečné sales − predikované) výrazně níž = problém. + sekundární data ČSÚ pro demografiku každého města." },
-      { text: "Jaké produkty by měli přidat do menu (5 nových položek)?", color: VSE.warning, reason: "<b>Conjoint analýza</b> přes CAWI (primární data, 200k Kč budget). Respondent srovnává různé kombinace (typ produktu × cena × dietní profil × ingredience). Výstup: top 5 atributů + jejich preferované hodnoty. Lepší než ptát „co byste si přidali?\u201D." },
+      { text: "Jaké produkty by měli přidat do menu (5 nových položek)?", color: VSE.warning, reason: "<b>Conjoint analýza</b> přes CAWI (primární data, 200k Kč budget). Respondent srovnává různé kombinace (typ produktu × cena × dietní profil × ingredience). Výstup: top 5 atributů + jejich preferované hodnoty. Lepší než ptát „co byste si přidali?”." },
       { text: "Jaká skupina zákazníků utrácí nejvíc — co je odlišuje od příležitostných?", color: VSE.fph, reason: "2 metody dohromady: <b>Shluková analýza</b> (k-means na CRM datech — 120k zákazníků, vstupy: frekvence, koš, demo) → identifikuje 4-6 segmentů. <b>Diskriminační analýza</b> identifikuje, KTERÉ proměnné nejvíc odlišují top segment od zbytku — vstup do positioning." },
       { text: "Jak ovlivnily promo akce v Q3 sales?", color: VSE.success, reason: "<b>Regresní analýza časových řad</b> — Y = denní sales, X = promo (binární) + den v týdnu + sezónnost + počasí. Vícenásobná regrese s kontrolními proměnnými. + <b>t-test</b> průměrných sales pre × post promo (závislé vzorky)." },
       { text: "POS data + CRM databáze 120k loyalty karet", color: VSE.warning, reason: "Bohatá <b>interní sekundární data</b> — perfektní pro shlukovou analýzu a regrese. Žádný dotazník není potřeba pro otázky 1, 3, 4. Pouze otázka 2 (nové produkty) vyžaduje primární výzkum." },
@@ -15834,7 +16257,7 @@ function OkruhMkt3Panel() {
         ]} color={VSE.fis} />
         <ExamAlert
           komise="Stříteský + Krause + Zamazalová 2026 (Realitní firma)"
-          what="Stříteský chce slyšet definici přesně: <b>„homogenní uvnitř, heterogenní zvenku\u201D</b>. Bez této věty mu odpověď nestačí. + chce vědět, čím se segmenty tvoří (shluková analýza, viz M2)."
+          what="Stříteský chce slyšet definici přesně: <b>„homogenní uvnitř, heterogenní zvenku”</b>. Bez této věty mu odpověď nestačí. + chce vědět, čím se segmenty tvoří (shluková analýza, viz M2)."
         />
         <Tag color={VSE.warning}>STP model — 3 kroky segmentace</Tag>
         <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
@@ -15889,7 +16312,7 @@ function OkruhMkt3Panel() {
           {[
             { c: VSE.fmv, t: "🌍 1. GEOGRAFICKÁ", d: "Stát, region, město, klimatická zóna, hustota osídlení. ČR × SK, Praha × venkov." },
             { c: VSE.warning, t: "👥 2. DEMOGRAFICKÁ", d: "Věk, pohlaví, příjem, vzdělání, rodinný stav, povolání. Klasika pro masový trh." },
-            { c: VSE.fph, t: "🧠 3. PSYCHOGRAFICKÁ", d: "Životní styl, osobnost, hodnoty, postoje. „LOHAS\u201D (Lifestyle of Health & Sustainability)." },
+            { c: VSE.fph, t: "🧠 3. PSYCHOGRAFICKÁ", d: "Životní styl, osobnost, hodnoty, postoje. „LOHAS” (Lifestyle of Health & Sustainability)." },
             { c: VSE.success, t: "🛍️ 4. BEHAVIORÁLNÍ", d: "Jak se chová při nákupu — frekvence, příležitost, loyalty, role kupujícího, mira užívání." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
@@ -15907,8 +16330,8 @@ function OkruhMkt3Panel() {
           "<b>Popisná kritéria:</b> Charakteristiky, které popisují kdo zákazník je (demografika, geografika). Jednoduše měřitelné, ale neříkají PROČ.",
           "<b>Vysvětlující kritéria:</b> Hodnoty, postoje, motivace — vysvětlují PROČ kupuje (psychografika).",
           "<b>Vysvětlované kritérium:</b> Skutečné chování — nákupy, frekvence, koš. Co reálně dělá.",
-          "<b>Forward segmentation:</b> Od vysvětlujících proměnných → k chování. „Lidé s hodnotou A → mají chování B.\u201D",
-          "<b>Backward segmentation:</b> Od chování → k popisným proměnným. „Kdo nás kupuje? Jak je popsat?\u201D",
+          "<b>Forward segmentation:</b> Od vysvětlujících proměnných → k chování. „Lidé s hodnotou A → mají chování B.”",
+          "<b>Backward segmentation:</b> Od chování → k popisným proměnným. „Kdo nás kupuje? Jak je popsat?”",
         ]} color={VSE.warning} />
         <Tag color={VSE.fph}>Tradiční × Netradiční kritéria</Tag>
         <Bullet items={[
@@ -15926,9 +16349,9 @@ function OkruhMkt3Panel() {
         <Tag color={VSE.fis}>3 úrovně segmentace</Tag>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.fmv, t: "🔍 MIKRO SEGMENTACE", d: "Konkrétní úroveň nákupního chování. Individualizace, propojení s konkrétními zákazníky (CRM). „Karel z Brna, 35 let, kupuje měsíčně.\u201D" },
-            { c: VSE.warning, t: "📊 STRATEGICKÁ", d: "Podle hodnoty zákazníka (VIP × normální), scoringové modely, lifetime value. „Top 10 % zákazníků generuje 70 % obratu.\u201D" },
-            { c: VSE.fph, t: "🌐 MAKRO SEGMENTACE", d: "Široké tržní skupiny, dále nesegmentujeme. „Mladí městští\u201D, „Senioři venkov\u201D. Krátkodobá strategie." },
+            { c: VSE.fmv, t: "🔍 MIKRO SEGMENTACE", d: "Konkrétní úroveň nákupního chování. Individualizace, propojení s konkrétními zákazníky (CRM). „Karel z Brna, 35 let, kupuje měsíčně.”" },
+            { c: VSE.warning, t: "📊 STRATEGICKÁ", d: "Podle hodnoty zákazníka (VIP × normální), scoringové modely, lifetime value. „Top 10 % zákazníků generuje 70 % obratu.”" },
+            { c: VSE.fph, t: "🌐 MAKRO SEGMENTACE", d: "Široké tržní skupiny, dále nesegmentujeme. „Mladí městští”, „Senioři venkov”. Krátkodobá strategie." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -15971,7 +16394,7 @@ function OkruhMkt3Panel() {
         </Def>
         <Tag color={VSE.fis}>4 fáze postupu segmentace</Tag>
         <Bullet items={[
-          "<b>1. Vymezení daného trhu</b> — definujeme, na jakém trhu hrajeme. Produkt, geografie, typ zákazníka (B2B × B2C). „Bio kosmetika pro ženy v ČR.\u201D",
+          "<b>1. Vymezení daného trhu</b> — definujeme, na jakém trhu hrajeme. Produkt, geografie, typ zákazníka (B2B × B2C). „Bio kosmetika pro ženy v ČR.”",
           "<b>2. Posílení významných kritérií</b> — výběr 2-4 klíčových segmentačních proměnných. <b>Segmentační báze</b> (klíčové) × <b>popisná</b> (doplňující). Forward segmentation (od vysvětlujících k chování) × Backward (od chování k popisným).",
           "<b>3. Odlišení segmentů</b> — shluková, diskriminační, conjoint analýza (viz M2). Identifikace 3-6 odlišných skupin.",
           "<b>4. Rozvoj segmentů</b> — doplnění detailů, vytvoření person, doporučení strategií pro každý segment.",
@@ -15990,12 +16413,12 @@ function OkruhMkt3Panel() {
         </ResponsiveGrid>
         <Tag color={VSE.fph}>Ad hoc × Post hoc segmentace</Tag>
         <Bullet items={[
-          "<b>Ad hoc:</b> Předem zvolíme kritérium, podle něj rozdělíme. „Rozdělíme zákazníky podle věku.\u201D Rychlé, ale slabší.",
-          "<b>Post hoc:</b> Sledujeme segmenty, identifikujeme společná kritéria pomocí analýzy. „Najdeme přirozené shluky a popíšeme je.\u201D Silnější, ale dražší.",
+          "<b>Ad hoc:</b> Předem zvolíme kritérium, podle něj rozdělíme. „Rozdělíme zákazníky podle věku.” Rychlé, ale slabší.",
+          "<b>Post hoc:</b> Sledujeme segmenty, identifikujeme společná kritéria pomocí analýzy. „Najdeme přirozené shluky a popíšeme je.” Silnější, ale dražší.",
         ]} color={VSE.fph} />
         <ExamAlert
           komise="Vávra + Nový + Heřman 2025"
-          what="Vávra chce <b>postup + aplikaci na PS</b>. Naučit fáze + na případovce ukázat konkrétně: „1. Vymezím trh jako X, 2. Klíčová kritéria jsou A,B,C, 3. Identifikuji 3 segmenty: ..., 4. Pro každý doporučím strategii.\u201D"
+          what="Vávra chce <b>postup + aplikaci na PS</b>. Naučit fáze + na případovce ukázat konkrétně: „1. Vymezím trh jako X, 2. Klíčová kritéria jsou A,B,C, 3. Identifikuji 3 segmenty: ..., 4. Pro každý doporučím strategii.”"
         />
       </div>) },
 
@@ -16086,7 +16509,7 @@ function OkruhMkt3Panel() {
     { term: "Tradiční × Netradiční kritéria", def: "Tradiční: demo, geo (masový mkt). Netradiční: psychografika, behavior, momentová (digitální éra).", tag: "KRITÉRIA" },
     { term: "Mikro segmentace", def: "Konkrétní úroveň nákupního chování, individualizace, CRM propojení. Detail po jednotlivcích.", tag: "TYPY" },
     { term: "Strategická segmentace", def: "Podle hodnoty zákazníka (VIP × normal), scoringové modely, lifetime value (LTV).", tag: "TYPY" },
-    { term: "Makro segmentace", def: "Široké tržní skupiny, dále nesegmentujeme. „Mladí městští\u201D, „Senioři venkov\u201D.", tag: "TYPY" },
+    { term: "Makro segmentace", def: "Široké tržní skupiny, dále nesegmentujeme. „Mladí městští”, „Senioři venkov”.", tag: "TYPY" },
     { term: "RFM segmentace", def: "Recency (doba od posledního nákupu) / Frequency (počet nákupů) / Monetary (objem útrat). Klasika v retailu/e-commerce.", tag: "TYPY" },
     { term: "Nediferencovaný marketing", def: "Masový — 1 nabídka pro celý trh. Coca-Cola classic, sůl, voda.", tag: "MARKETING" },
     { term: "Diferencovaný marketing (STP)", def: "Segmenty × cílení × positioning. Různá nabídka pro různé segmenty. Většina firem.", tag: "MARKETING" },
@@ -16152,13 +16575,13 @@ function OkruhMkt3Panel() {
     miniExamples: [
       { tag: "GEOGRAFIKA", color: VSE.fmv, company: "McDonald's — segmentace podle země", content: "McDonald's segmentuje globálně podle geografiky + kultury. <b>Maharaja Mac v Indii</b> (no beef), <b>Croque McDo ve Francii</b>, <b>Teriyaki burger v Japonsku</b>. Stejná značka, různé menu. Klasická diferencovaná strategie přes geografická + kulturní kritéria." },
       { tag: "DEMOGRAFIKA", color: VSE.warning, company: "Pampers — 5 segmentů podle věku dítěte", content: "Pampers má 5 produktových řad podle <b>věku dítěte</b> (newborn, P1, P2, P3, junior). Každá řada má jiné absorpční vlastnosti, design, marketing. Klasická demografická segmentace s explicitní customizací produktu pro každý segment." },
-      { tag: "PSYCHOGRAFIKA", color: VSE.success, company: "Lululemon — Mindful Athletes", content: "Lululemon segmentuje psychograficky — <b>„Mindful Athletes\u201D</b> (yoga, mindfulness, premium fitness). Demograficky to jsou ženy 25-45 s příjmem 60k+, ale klíč je <b>psychografika</b> (hodnoty zdraví, sebepoznání, sustainability). Allbirds, Patagonia podobně." },
+      { tag: "PSYCHOGRAFIKA", color: VSE.success, company: "Lululemon — Mindful Athletes", content: "Lululemon segmentuje psychograficky — <b>„Mindful Athletes”</b> (yoga, mindfulness, premium fitness). Demograficky to jsou ženy 25-45 s příjmem 60k+, ale klíč je <b>psychografika</b> (hodnoty zdraví, sebepoznání, sustainability). Allbirds, Patagonia podobně." },
       { tag: "BEHAVIORÁLNÍ", color: VSE.fph, company: "Amazon Prime — heavy users segment", content: "Amazon segmentuje <b>behaviorálně</b> — <b>Prime členové</b> (heavy users, frekvence 3+/měsíc) vs casual buyers. Prime členové mají 2× větší LTV. Strategie: investice do retention Prime (Prime Video, Music, free shipping) za stovky USD ročně, abychom udrželi tento behaviorální segment." },
     ]
   };
 
   const examQuestionsMkt3 = [
-    { komise: "2026-02-06 — Stříteský + Krause + Zamazalová (Realitní firma)", otazka: "Segmentace — typy, shluky, pojem, podle Kotlera, induktivní/deduktivní", pozn: "Stříteský chce přesnou definici: <b>„homogenní uvnitř, heterogenní zvenku\u201D</b>. + 4 kritéria Kotlera (geo/demo/psycho/behavior). + shluková analýza (M2). + induktivní × deduktivní přístup." },
+    { komise: "2026-02-06 — Stříteský + Krause + Zamazalová (Realitní firma)", otazka: "Segmentace — typy, shluky, pojem, podle Kotlera, induktivní/deduktivní", pozn: "Stříteský chce přesnou definici: <b>„homogenní uvnitř, heterogenní zvenku”</b>. + 4 kritéria Kotlera (geo/demo/psycho/behavior). + shluková analýza (M2). + induktivní × deduktivní přístup." },
     { komise: "2025-09-11 — Smrčka + Zamazalová + Kučera (Výroba kol)", otazka: "Segmentační kritéria a jejich využití pro logistiku", pozn: "Smrčka chce <b>aplikaci na logistiku</b>. Klíčové: každý segment klade jiné požadavky (rychlost, on-time, customizace, návratky). Příklady segmentů: Speed Lovers / Value Seekers / Reliability Demanders / Premium Experience." },
     { komise: "2025-02-03 — Stříteský + Bočková + Viktora (IT firma)", otazka: "Segmentace s ohledem na logistiku — kritéria dle Zuzčiny tabulky", pozn: "Bočková chce <b>tradiční × netradiční</b> kritéria + <b>popisná × vysvětlující × vysvětlované</b>. + příklady pro každé kritérium. Psychografika (LOHAS), fyziografika (zdraví). Tabulka ze Zuzčiných materiálů." },
     { komise: "2025-02-04 — Mikovcová + Kolouchová + Viktora (Hrnce)", otazka: "Parametry segmentace s ohledem na logistické služby", pozn: "Mikovcová chce <b>4 klasická kritéria + příklady</b>. Logistika jí moc nezajímala — stačila zmínka, že segmenty mají různé požadavky na dodání." },
@@ -16350,9 +16773,9 @@ function OkruhMkt4Panel() {
         </div>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.fmv, t: "🔬 1. SPECIFICKÝ POS", d: "Specifika produktu — USP, ESP. „Co konkrétně produkt umí lépe?\u201D Atributy, vlastnosti, funkce." },
-            { c: VSE.warning, t: "⚖️ 2. NADSTAVBOVÝ POS", d: "Cena × užitek / hodnota. „Co zákazník dostane oproti tomu, co dá?\u201D Value proposition." },
-            { c: VSE.success, t: "💎 3. TOTAL VALUE POS", d: "Celková propozice značky. „Proč máme jako značka existovat? Co znamenáme?\u201D Brand essence." },
+            { c: VSE.fmv, t: "🔬 1. SPECIFICKÝ POS", d: "Specifika produktu — USP, ESP. „Co konkrétně produkt umí lépe?” Atributy, vlastnosti, funkce." },
+            { c: VSE.warning, t: "⚖️ 2. NADSTAVBOVÝ POS", d: "Cena × užitek / hodnota. „Co zákazník dostane oproti tomu, co dá?” Value proposition." },
+            { c: VSE.success, t: "💎 3. TOTAL VALUE POS", d: "Celková propozice značky. „Proč máme jako značka existovat? Co znamenáme?” Brand essence." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -16388,9 +16811,9 @@ function OkruhMkt4Panel() {
         <Tag color={VSE.warning}>Vymezení kategorie — 3 přístupy</Tag>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.fmv, t: "🔬 ÚZKÉ VYMEZENÍ", d: "„Premium ekologická kosmetika.\u201D Konkurence úzká, snadno identifikovatelná. Niche pozice." },
-            { c: VSE.warning, t: "🌐 ŠIROKÉ VYMEZENÍ", d: "„Krása a péče o sebe.\u201D Větší trh, ale složitější komunikace. Mass-market." },
-            { c: VSE.success, t: "✨ NETRADIČNÍ", d: "„Lifestyle značka.\u201D Můžeme bojovat napříč kategoriemi (Patagonia, Apple)." },
+            { c: VSE.fmv, t: "🔬 ÚZKÉ VYMEZENÍ", d: "„Premium ekologická kosmetika.” Konkurence úzká, snadno identifikovatelná. Niche pozice." },
+            { c: VSE.warning, t: "🌐 ŠIROKÉ VYMEZENÍ", d: "„Krása a péče o sebe.” Větší trh, ale složitější komunikace. Mass-market." },
+            { c: VSE.success, t: "✨ NETRADIČNÍ", d: "„Lifestyle značka.” Můžeme bojovat napříč kategoriemi (Patagonia, Apple)." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -16448,9 +16871,9 @@ function OkruhMkt4Panel() {
         <Tag color={VSE.fis}>POP — Body shody (Points of Parity)</Tag>
         <Bullet items={[
           "<b>Co to je:</b> Asociace, které <b>sdílíme s konkurencí</b> v rámci kategorie.",
-          "<b>Účel:</b> Zákazník nás musí <b>uznat jako legitimního hráče v kategorii</b>. Bez POP nejsme „v kategorii\u201D.",
-          "<b>2 typy POP:</b> Kategoriální POP (musíme mít, abychom byli „bankou\u201D — pobočky, ATM, online banking) + Konkurenční POP (vyrovnáváme se konkurenci v jejich silných stránkách).",
-          "<b>Interval tolerance:</b> POP nemusí být perfektní — stačí být „dost dobří\u201D v kategoriální normě.",
+          "<b>Účel:</b> Zákazník nás musí <b>uznat jako legitimního hráče v kategorii</b>. Bez POP nejsme „v kategorii”.",
+          "<b>2 typy POP:</b> Kategoriální POP (musíme mít, abychom byli „bankou” — pobočky, ATM, online banking) + Konkurenční POP (vyrovnáváme se konkurenci v jejich silných stránkách).",
+          "<b>Interval tolerance:</b> POP nemusí být perfektní — stačí být „dost dobří” v kategoriální normě.",
           "<b>Příklad:</b> Tesla musí mít stejnou bezpečnost jako BMW (POP). Nemusí mít lepší — stačí stejnou.",
         ]} color={VSE.fis} />
         <Tag color={VSE.warning}>POD — Body rozdílnosti (Points of Difference)</Tag>
@@ -16483,7 +16906,7 @@ function OkruhMkt4Panel() {
         <Bullet items={[
           "<b>Pro</b> [cílová skupina + potřeba] <b>je</b> [naše značka] [tržní kategorie], <b>která přináší</b> [klíčový benefit/POD], <b>jelikož</b> [reason to believe / důkaz].",
           "<b>Příklad Tesla:</b> Pro tech-savvy environmentálně uvědomělé klienty s vyšším příjmem je Tesla premium auto, které přináší zero-emission luxury performance, jelikož kombinuje 0-100 za 2,5s, autonomní funkce a Supercharger network.",
-          "<b>Účel:</b> Jasný směr pro veškerou komunikaci, design, R&D. „Pokud něco nezapadá, nedělejme to.\u201D",
+          "<b>Účel:</b> Jasný směr pro veškerou komunikaci, design, R&D. „Pokud něco nezapadá, nedělejme to.”",
         ]} color={VSE.fis} />
         <Tag color={VSE.warning}>Mantra značky (Brand Mantra)</Tag>
         <Bullet items={[
@@ -16496,7 +16919,7 @@ function OkruhMkt4Panel() {
           "<b>Vizuální vyjádření</b> vnímání a preferencí spotřebitelů.",
           "<b>2 osy</b> = 2 klíčové atributy (cena × kvalita, premium × mass, traditional × modern).",
           "<b>Body</b> = pozice značek na trhu podle vnímání zákazníků.",
-          "<b>Použití:</b> Identifikace mezery v trhu (white space). „Kde není nikdo? Můžeme tam být.\u201D",
+          "<b>Použití:</b> Identifikace mezery v trhu (white space). „Kde není nikdo? Můžeme tam být.”",
           "<b>Tvořeno přes výzkum</b> — dotazník hodnotící značky na škále podle atributů (M1) + faktorová analýza (M2).",
         ]} color={VSE.fph} />
         <Tag color={VSE.danger}>Motivační positioning</Tag>
@@ -16521,7 +16944,7 @@ function OkruhMkt4Panel() {
           "<b>5. Aktivity:</b> Spojení s činností. Gambrinus = fotbal, Red Bull = extrémní sporty.",
           "<b>6. Osobnost:</b> Lidská charakteristika značky. Harley Davidson = rebel, Disney = magie.",
           "<b>7. Původ:</b> Geografická vazba. Irská whiskey, švýcarské hodinky, německá auta.",
-          "<b>8. Proti konkurenci:</b> Definujeme se proti někomu. Avis: „We try harder.\u201D 7Up = non-cola.",
+          "<b>8. Proti konkurenci:</b> Definujeme se proti někomu. Avis: „We try harder.” 7Up = non-cola.",
           "<b>9. Příslušnost ke třídě:</b> Kategorizace. Mercedes = luxus, Škoda = praktická volba.",
         ]} color={VSE.fis} />
         <Tag color={VSE.warning}>Diferenciace — 3 cesty</Tag>
@@ -16556,7 +16979,7 @@ function OkruhMkt4Panel() {
     { term: "ESP (Emotional Selling Proposition)", def: "Emocionální benefit. Dává osobnost a energii. Coca-Cola = štěstí. Nike = Just Do It.", tag: "USP/ESP" },
     { term: "Referenční rámec (Frame of Reference)", def: "Určuje kategorii, do které značka patří, a tím identifikuje konkurenci. Bez něj nelze určit POP/POD.", tag: "RÁMEC" },
     { term: "Vymezení kategorie", def: "Úzké (premium EV) × Široké (premium auto) × Netradiční (lifestyle značka). Volba určuje konkurenci.", tag: "RÁMEC" },
-    { term: "POP — Body shody", def: "Points of Parity. Asociace, které sdílíme s konkurencí. Bez nich nejsme „v kategorii\u201D. 2 typy: kategoriální + konkurenční.", tag: "POP/POD" },
+    { term: "POP — Body shody", def: "Points of Parity. Asociace, které sdílíme s konkurencí. Bez nich nejsme „v kategorii”. 2 typy: kategoriální + konkurenční.", tag: "POP/POD" },
     { term: "POD — Body rozdílnosti", def: "Points of Difference. Asociace jedinečné pro značku. Důvod, proč zákazník volí nás. Uvěřitelné, prosaditelné, sdělitelné.", tag: "POP/POD" },
     { term: "3 podmínky kvalitního POD", def: "Uvěřitelný (věřím že to dokážete) + Prosaditelný (umíte to dlouhodobě) + Jednoduše sdělitelný (1 věta).", tag: "POP/POD" },
     { term: "Vztah POP × POD", def: "POP otevírá dveře ke kategorii. POD vyhrává volbu. Bez POP nejsme seriózní hráč. Bez POD jsme komodita.", tag: "POP/POD" },
@@ -16568,7 +16991,7 @@ function OkruhMkt4Panel() {
     { term: "9 strategií positioningu", def: "Atributy / Užitek / Příležitost / Uživatelé / Aktivity / Osobnost / Původ / Proti konkurenci / Příslušnost ke třídě.", tag: "STRATEGIE" },
     { term: "Positioning podle atributů", def: "Technické parametry. Volvo = bezpečnost, Duracell = vydrží déle.", tag: "STRATEGIE" },
     { term: "Positioning podle aktivity", def: "Spojení s činností. Gambrinus = fotbal, Red Bull = extrémní sporty.", tag: "STRATEGIE" },
-    { term: "Positioning proti konkurenci", def: "Definujeme se proti někomu. Avis: „We try harder.\u201D 7Up = non-cola.", tag: "STRATEGIE" },
+    { term: "Positioning proti konkurenci", def: "Definujeme se proti někomu. Avis: „We try harder.” 7Up = non-cola.", tag: "STRATEGIE" },
     { term: "Positioning podle původu", def: "Geografická vazba. Irská whiskey, švýcarské hodinky, německá auta.", tag: "STRATEGIE" },
     { term: "Diferenciace — 3 cesty", def: "Konkurenční výhoda (cena × užitek) / Strategická (produkt, kanál, image) / Salient (viditelnost).", tag: "DIFERENCIACE" },
     { term: "Konzistence positioningu", def: "Positioning (strategie) → značka (M10) → komunikace (M13-16). Bez konzistence je zákazník zmatený.", tag: "DIFERENCIACE" },
@@ -16580,7 +17003,7 @@ function OkruhMkt4Panel() {
     { q: "Co je nejvyšší úroveň positioningu?", opts: ["Specifický", "Nadstavbový", "Total Value Positioning", "USP"], correct: 2 },
     { q: "Jaký je rozdíl USP × ESP?", opts: ["Není rozdíl", "USP = racionální benefit. ESP = emocionální benefit.", "USP je dražší", "ESP je jen v reklamě"], correct: 1 },
     { q: "Co je referenční rámec?", opts: ["Náš tým", "Určuje kategorii, do které značka patří + identifikuje konkurenci", "Reklamní rámec", "Cenový strop"], correct: 1 },
-    { q: "Co jsou POP (Points of Parity)?", opts: ["Body popularity", "Asociace, které sdílíme s konkurencí — bez nich nejsme „v kategorii\u201D", "Reklamní body", "Cenové body"], correct: 1 },
+    { q: "Co jsou POP (Points of Parity)?", opts: ["Body popularity", "Asociace, které sdílíme s konkurencí — bez nich nejsme „v kategorii”", "Reklamní body", "Cenové body"], correct: 1 },
     { q: "Co jsou POD (Points of Difference)?", opts: ["Body Of Distinction", "Asociace jedinečné pro značku — důvod, proč zákazník volí nás", "Druh papíru", "Body za diferenciaci"], correct: 1 },
     { q: "Které 3 podmínky musí splňovat kvalitní POD?", opts: ["Drahý, prémiový, originální", "Uvěřitelný + Prosaditelný + Jednoduše sdělitelný", "Online, offline, hybridní", "Pro děti, dospělé, seniory"], correct: 1 },
     { q: "Co dělá POP × POD v positioningu?", opts: ["Stejnou věc", "POP otevírá dveře ke kategorii. POD vyhrává volbu zákazníka.", "POP je novější", "POD je pouze pro luxus"], correct: 1 },
@@ -16588,7 +17011,7 @@ function OkruhMkt4Panel() {
     { q: "K čemu slouží percepční mapa?", opts: ["Geografická mapa", "Vizualizace vnímání spotřebitelů + identifikace white space", "Mapa konkurence", "Mapa prodejen"], correct: 1 },
     { q: "Kolik klasických strategií positioningu existuje?", opts: ["3", "5", "9 (atributy / užitek / příležitost / uživatelé / aktivity / osobnost / původ / proti konkurenci / třída)", "12"], correct: 2 },
     { q: "Volvo = bezpečnost je positioning podle:", opts: ["Aktivity", "Atributu produktu", "Osobnosti", "Původu"], correct: 1 },
-    { q: "Avis „We try harder\u201D je positioning podle:", opts: ["Užitku", "Proti konkurenci", "Příležitosti", "Třídy"], correct: 1 },
+    { q: "Avis „We try harder” je positioning podle:", opts: ["Užitku", "Proti konkurenci", "Příležitosti", "Třídy"], correct: 1 },
   ];
 
   const praxeMkt4 = {
@@ -16598,7 +17021,7 @@ function OkruhMkt4Panel() {
       content: (<>
         <b>Volvo</b> je <b>učebnicový příklad konzistentního positioningu</b> postaveného na jednom POD — <b>bezpečnost</b>. 65 let stejná pozice v mysli zákazníků.<br/><br/>
         <b style={{ color: VSE.success }}>Volvo Positioning Statement:</b><br/>
-        „Pro rodinně orientované řidiče, kteří si cení své bezpečí, je Volvo prémiové švédské auto, které přináší nejvyšší standard pasivní a aktivní bezpečnosti, jelikož vynalezlo trojbodový bezpečnostní pás (1959) a dodnes leads v crash test ratings.\u201D<br/><br/>
+        „Pro rodinně orientované řidiče, kteří si cení své bezpečí, je Volvo prémiové švédské auto, které přináší nejvyšší standard pasivní a aktivní bezpečnosti, jelikož vynalezlo trojbodový bezpečnostní pás (1959) a dodnes leads v crash test ratings.”<br/><br/>
         <b style={{ color: VSE.warning }}>POP (body shody) Volva v premium segmentu:</b><br/>
         • Premium materiály a finishing (Volvo se vyrovnává Mercedesu, BMW)<br/>
         • Moderní infotainment a tech features<br/>
@@ -16608,7 +17031,7 @@ function OkruhMkt4Panel() {
         • <b>Bezpečnost #1</b> — nejvíce IIHS Top Safety Pick+ ocenění v segmentu<br/>
         • <b>Vize Zero</b> — žádný řidič nezemře ani vážně nezraní ve Volvu od 2020 (ambicióznější než konkurence)<br/>
         • <b>Trojbodový pás</b> — vynalezli ho 1959 a otevřeli patent zdarma celému světu (zachránil 1M+ životů)<br/><br/>
-        <b style={{ color: VSE.fmv }}>Mantra značky:</b> <b>„For Life\u201D</b> (3 slova — bezpečnost, rodina, dlouhověkost)<br/><br/>
+        <b style={{ color: VSE.fmv }}>Mantra značky:</b> <b>„For Life”</b> (3 slova — bezpečnost, rodina, dlouhověkost)<br/><br/>
         <b style={{ color: VSE.fph }}>Konzistence napříč dekádami:</b><br/>
         • 1959: Trojbodový pás → komunikace o bezpečnosti<br/>
         • 1991: Boční airbagy<br/>
@@ -16620,9 +17043,9 @@ function OkruhMkt4Panel() {
       lessons: "Volvo je <b>etalon disciplinovaného positioningu</b>. Klíče: <b>1 POD (bezpečnost) konzistentně 65 let, silné POP v premium kategorii, jasná mantra (For Life), kontinuální innovation v jádru POD</b>. Pro PS doporuč: <b>identifikovat 1 silný POD a držet ho dlouhodobě</b>. Alternativy: <b>Apple (design + UX), Patagonia (environment), Disney (family magic), IKEA (affordable design)</b>."
     },
     miniExamples: [
-      { tag: "POD ATRIBUTY", color: VSE.fmv, company: "Duracell — POD vydrží déle", content: "Duracell má 1 jasný POD: <b>vydrží déle než konkurence</b>. Slogan „The Coppertop\u201D + zlatý vrchol baterie = visual cue. POP: standardní velikosti, dostupnost v retailu. Marketing 40+ let stejný — disciplinovaný positioning." },
+      { tag: "POD ATRIBUTY", color: VSE.fmv, company: "Duracell — POD vydrží déle", content: "Duracell má 1 jasný POD: <b>vydrží déle než konkurence</b>. Slogan „The Coppertop” + zlatý vrchol baterie = visual cue. POP: standardní velikosti, dostupnost v retailu. Marketing 40+ let stejný — disciplinovaný positioning." },
       { tag: "POD AKTIVITY", color: VSE.warning, company: "Red Bull — gives you wings", content: "Red Bull positionuje přes <b>aktivity</b> — extrémní sporty, F1, Wings for Life. POD: energetický nápoj pro <b>moment akce a překonání limitů</b>. POP: cena, dostupnost. Net Worth 35 mld. USD postavené na 1 positioning." },
-      { tag: "POD PROTI", color: VSE.success, company: "Avis — We try harder", content: "Avis byl #2 v půjčovnách aut (za Hertz). Místo skrývání udělali z toho POD: <b>„We're #2. We try harder.\u201D</b> (1962). Geniální positioning proti konkurenci. Tržní podíl vzrostl o 28 % za 4 roky." },
+      { tag: "POD PROTI", color: VSE.success, company: "Avis — We try harder", content: "Avis byl #2 v půjčovnách aut (za Hertz). Místo skrývání udělali z toho POD: <b>„We're #2. We try harder.”</b> (1962). Geniální positioning proti konkurenci. Tržní podíl vzrostl o 28 % za 4 roky." },
       { tag: "PERCEPČNÍ MAPA", color: VSE.fph, company: "Tesla — white space v EV premium", content: "V 2008 byla percepční mapa: osa cena × osa eco-friendly. Mercedes/BMW = high price, low eco. Toyota Prius = low price, eco. <b>White space:</b> high price, high eco. Tesla obsadila → 80 % EV market share v premium segmentu." },
     ]
   };
@@ -16661,8 +17084,8 @@ function OkruhMkt4Panel() {
     signals: [
       { text: "Zákazníci si nepamatují, co BrewHouse stojí za", color: VSE.danger, reason: "Klasický signál chybějícího positioningu. Bez POD nemají na co se chytit. Generic craft není POD." },
       { text: "Konkurence má jasný POD — Matuška IPA, Sibeeria Belgian, Cobolis experimental", color: VSE.danger, reason: "Benchmark — všichni konkurenti měli pochopení, BrewHouse ne. Bez POD = bez důvodu volby." },
-      { text: "BrewHouse vaří „všechno všeho\u201D — žádný jasný POD", color: VSE.danger, reason: "Klasická chyba startupu. Bez specializace v craft segmentu = neviditelnost." },
-      { text: "Web: „Kvalitní craft piva pro náročné\u201D (vague)", color: VSE.danger, reason: "Generic message. Tohle by mohl říct kdokoli. Chybí specifický POD + emocionální nadstavba (ESP)." },
+      { text: "BrewHouse vaří „všechno všeho” — žádný jasný POD", color: VSE.danger, reason: "Klasická chyba startupu. Bez specializace v craft segmentu = neviditelnost." },
+      { text: "Web: „Kvalitní craft piva pro náročné” (vague)", color: VSE.danger, reason: "Generic message. Tohle by mohl říct kdokoli. Chybí specifický POD + emocionální nadstavba (ESP)." },
       { text: "Pavel se učil v Belgii — málokdo to ví", color: VSE.warning, reason: "<b>Skrytý POD!</b> Belgian brewing tradition + 18 let experience = unikátní příběh. Lze postavit positioning na origin (strategie #7) + atributu kvality." },
       { text: "Belgian Tripel vyhrál bronz na World Beer Cup 2024 — skoro nepoužívají v marketingu", color: VSE.warning, reason: "<b>Konkrétní reason to believe!</b> WBC bronz je world-class ocenění. Hana to musí použít v positioning statement." },
       { text: "2 piva (IPA, lager) prodávají dobře, 4 slabé", color: VSE.fph, reason: "Signal pro fokus na portfolio. Místo 6 piv → 3-4 piva, ale s jasnou strategií (Belgian heritage)." },
@@ -16681,13 +17104,13 @@ function OkruhMkt4Panel() {
       question: "Co by Hana měla udělat pro repositioning?",
       options: [
         { text: "POD: Belgian-inspired craft beer od sládka s belgickou tradicí. Hluboce belgické styly + WBC ocenění jako reason to believe", correct: true, reason: "✓ Konkrétní, defendable, ownable POD. Belgie = unikátní origin v ČR craft scéně. Pavel + 18 let + Belgie + WBC bronz = silný foundation." },
-        { text: "Vymezit referenční rámec: úzké = Belgian-inspired craft. Konkurence: Sibeeria (jediná belgická v ČR), ne masový Matuška/Cobolis", correct: true, reason: "✓ Úzký rámec = jasná konkurence + jasná pozice. Lepší než „craft pivo\u201D obecně." },
-        { text: "POP: standardní craft kvalita (čerstvost, hop forward), 3 prodejní kanály (pivnice, retail, web). Zákazník nás musí uznat jako legitimní craft.", correct: true, reason: "✓ Bez POP nejsme „v kategorii\u201D. Musíme být dobří v základech craft brewing." },
-        { text: "Positioning Statement: „Pro craft beer enthusiasty 28-45 je BrewHouse autentický belgický craft pivovar, který přináší world-class belgické styly inspirované 18letou tradicí sládka, jelikož Pavel vyhrál bronz na World Beer Cup 2024.\u201D", correct: true, reason: "✓ Plný PS vzor. Vše prvky: cílovka, kategorie, POD, reason to believe." },
-        { text: "Brand Mantra: „Belgian Soul, Czech Craft\u201D (3-4 slova — heritage, místo, kvalita)", correct: true, reason: "✓ Interní zkratka. Inspiruje tým, sjednocuje komunikaci." },
+        { text: "Vymezit referenční rámec: úzké = Belgian-inspired craft. Konkurence: Sibeeria (jediná belgická v ČR), ne masový Matuška/Cobolis", correct: true, reason: "✓ Úzký rámec = jasná konkurence + jasná pozice. Lepší než „craft pivo” obecně." },
+        { text: "POP: standardní craft kvalita (čerstvost, hop forward), 3 prodejní kanály (pivnice, retail, web). Zákazník nás musí uznat jako legitimní craft.", correct: true, reason: "✓ Bez POP nejsme „v kategorii”. Musíme být dobří v základech craft brewing." },
+        { text: "Positioning Statement: „Pro craft beer enthusiasty 28-45 je BrewHouse autentický belgický craft pivovar, který přináší world-class belgické styly inspirované 18letou tradicí sládka, jelikož Pavel vyhrál bronz na World Beer Cup 2024.”", correct: true, reason: "✓ Plný PS vzor. Vše prvky: cílovka, kategorie, POD, reason to believe." },
+        { text: "Brand Mantra: „Belgian Soul, Czech Craft” (3-4 slova — heritage, místo, kvalita)", correct: true, reason: "✓ Interní zkratka. Inspiruje tým, sjednocuje komunikaci." },
         { text: "Portfolio fokus: redukovat z 6 piv na 3 belgické styly + 1 IPA jako bestseller. Stout/pšeničné zrušit (slabé prodeje + nezapadají do positioningu)", correct: true, reason: "✓ Strategická diferenciace přes produkt. Méně = lepší zaměření." },
         { text: "Komunikace: storytelling Pavla a belgické tradice, příprava videa o WBC ocenění, foodpairing belgických piv (POD aktivita)", correct: true, reason: "✓ Salient positioning — být viditelní v relevantním kontextu (foodie events, gastronomie)." },
-        { text: "Pokračovat ve strategii „kvalitní craft piva pro náročné\u201D", correct: false, reason: "✗ Generic, nediferencované. Pokračovat = pomalá smrt v konkurenci." },
+        { text: "Pokračovat ve strategii „kvalitní craft piva pro náročné”", correct: false, reason: "✗ Generic, nediferencované. Pokračovat = pomalá smrt v konkurenci." },
         { text: "Zaměřit se jen na IPA (Matuška-style), opustit ostatní", correct: false, reason: "✗ Zbytečně boj s Matuškou, který už má pozici. Belgian je white space." },
       ],
     },
@@ -16913,7 +17336,7 @@ function OkruhMkt5Panel() {
             <text x="370" y="220" textAnchor="middle" fontSize="20" fill="#fff">💎</text>
             <text x="370" y="248" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">DIFFERENTIATION FOCUS</text>
             <text x="370" y="268" textAnchor="middle" fontSize="10" fill="#fff" fontFamily="Inter Tight">Rolex, Ferrari</text>
-            <text x="250" y="312" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">⚠️ „stuck in the middle\u201D = bez jasné strategie ztratíme</text>
+            <text x="250" y="312" textAnchor="middle" fontSize="11" fill="var(--text-muted, #888)" fontFamily="JetBrains Mono">⚠️ „stuck in the middle” = bez jasné strategie ztratíme</text>
           </svg>
         </div>
         <Tag color={VSE.fis}>3 generické strategie (Porter)</Tag>
@@ -17058,7 +17481,7 @@ function OkruhMkt5Panel() {
         <Bullet items={[
           "<b>1. Nové trhy (market development):</b> Expand to new countries/segments. Apple → China.",
           "<b>2. Nové produkty (product development):</b> Inovace v existujícím trhu. iPhone → iPad → Apple Watch.",
-          "<b>3. Více užití (usage):</b> Více příležitostí pro existující produkt. „Coca-Cola na snídani.\u201D",
+          "<b>3. Více užití (usage):</b> Více příležitostí pro existující produkt. „Coca-Cola na snídani.”",
           "<b>4. Více uživatelů (penetration):</b> Cílit na nové cílovky. Lego pro dospělé.",
         ]} color={VSE.warning} />
         <Tag color={VSE.fph}>Jak se pozná dobrý konkurent (Porter)</Tag>
@@ -17138,7 +17561,7 @@ function OkruhMkt5Panel() {
         <b style={{ color: VSE.success }}>Porterova strategie:</b><br/>
         • <b>Differentiation Focus</b> (2008-2017): Niche premium EV. Konkurence: jenom hybridy (Prius).<br/>
         • <b>Differentiation</b> (2017+): Mainstream Model 3, Y. Konkurence: BMW, Mercedes, Audi.<br/>
-        • Vyhnula se „stuck in the middle\u201D — vždy jasná pozice.<br/><br/>
+        • Vyhnula se „stuck in the middle” — vždy jasná pozice.<br/><br/>
         <b style={{ color: VSE.warning }}>VRIO Tesly:</b><br/>
         • <b>Valuable:</b> Zero-emission + performance + tech UX → max hodnota pro eco+tech segment.<br/>
         • <b>Rare:</b> Žádný auto výrobce v 2010 neměl battery+motor+SW integraci.<br/>
@@ -17234,7 +17657,7 @@ function OkruhMkt5Panel() {
         { text: "Zůstat stuck in the middle — pomalu klesat se stávající strategií", correct: false, reason: "✗ Porter to varuje — stuck in the middle = pomalá smrt. Muset si vybrat jasnou pozici." },
       ],
     },
-    summary: "<b>TextilCZ trpí klasickým „stuck in the middle\u201D — nejde se vyhnout volbě.</b> Klíč: <b>Differentiation Focus + Quick Response + 3PL outsourcing</b>.<br/><br/><b>Plán 12 měsíců:</b><br/>• <b>Q1:</b> Differentiation Focus pozice — premium Czech-made B2B uniformy s 2-týdenním delivery + customizací<br/>• <b>Q2:</b> QR strategy implementation — komunikace 2 týdnů jako KV ve všech kanálech + B2B e-shop launch<br/>• <b>Q2-Q3:</b> Customizační KV — digital print technologie + samostatný sales process pro custom orders<br/>• <b>Q3:</b> Outsourcing distribuce na DHL/Geis (úspora 6 % obratu = 19 mil. Kč/rok)<br/>• <b>Q3-Q4:</b> Sustainability roadmap — recycled materials + CSRD compliance do 2027<br/>• <b>Q4:</b> Vertikální backward — automatizace v Náchodě (úspora 15 % výrobních nákladů)<br/><br/><b>Pro komisi:</b> Klasický B2B follower v cenové válce. <b>Porter generic strategies</b> + <b>VRIO</b> + <b>Value Chain</b> + <b>Logistika jako KV (QR jako Zara)</b>. Anti-vzor: Cost Leadership proti Cervě = sebevražda. Vzor: <b>Engelbert Strauss</b> (Differentiation premium) + <b>Zara</b> (QR rychlost) + <b>Toyota</b> (vertikální integrace) jako benchmarky.",
+    summary: "<b>TextilCZ trpí klasickým „stuck in the middle” — nejde se vyhnout volbě.</b> Klíč: <b>Differentiation Focus + Quick Response + 3PL outsourcing</b>.<br/><br/><b>Plán 12 měsíců:</b><br/>• <b>Q1:</b> Differentiation Focus pozice — premium Czech-made B2B uniformy s 2-týdenním delivery + customizací<br/>• <b>Q2:</b> QR strategy implementation — komunikace 2 týdnů jako KV ve všech kanálech + B2B e-shop launch<br/>• <b>Q2-Q3:</b> Customizační KV — digital print technologie + samostatný sales process pro custom orders<br/>• <b>Q3:</b> Outsourcing distribuce na DHL/Geis (úspora 6 % obratu = 19 mil. Kč/rok)<br/>• <b>Q3-Q4:</b> Sustainability roadmap — recycled materials + CSRD compliance do 2027<br/>• <b>Q4:</b> Vertikální backward — automatizace v Náchodě (úspora 15 % výrobních nákladů)<br/><br/><b>Pro komisi:</b> Klasický B2B follower v cenové válce. <b>Porter generic strategies</b> + <b>VRIO</b> + <b>Value Chain</b> + <b>Logistika jako KV (QR jako Zara)</b>. Anti-vzor: Cost Leadership proti Cervě = sebevražda. Vzor: <b>Engelbert Strauss</b> (Differentiation premium) + <b>Zara</b> (QR rychlost) + <b>Toyota</b> (vertikální integrace) jako benchmarky.",
   };
 
   return (
@@ -17615,7 +18038,7 @@ function OkruhMkt6Panel() {
       lessons: "Apple je <b>etalon holistického přístupu k produktu</b>. Pro PS firmu doporuč: <b>identifikovat 5 vrstev produktu</b>, <b>aplikovat 6 charakteristik</b>, <b>najít 2-3 cesty diferenciace</b>, <b>spojit s mkt strategií</b> (komodita → cost / diferencovaný → premium). Alternativy: <b>Tesla (auto + ecosystem), BMW (driving experience), Patagonia (purpose-driven), IKEA (affordable design)</b>."
     },
     miniExamples: [
-      { tag: "VRSTVY", color: VSE.fmv, company: "Starbucks — třetí místo (jádro = ne káva)", content: "Starbucks <b>jádro</b> není káva (commodity), ale <b>třetí místo</b> mezi domovem a prací — místo, kde se setkat, pracovat, být sám. <b>Vylepšený produkt:</b> WiFi, židle, hudba, „my name on cup\u201D experience. Klasický příklad jak <b>jádro definuje value proposition</b>." },
+      { tag: "VRSTVY", color: VSE.fmv, company: "Starbucks — třetí místo (jádro = ne káva)", content: "Starbucks <b>jádro</b> není káva (commodity), ale <b>třetí místo</b> mezi domovem a prací — místo, kde se setkat, pracovat, být sám. <b>Vylepšený produkt:</b> WiFi, židle, hudba, „my name on cup” experience. Klasický příklad jak <b>jádro definuje value proposition</b>." },
       { tag: "DIFERENCIACE", color: VSE.warning, company: "Dyson — Forma + Funkčnost", content: "Dyson <b>diferencoval</b> staré kategorie přes <b>radikální design</b>. Vysavač bez sáčku, fén bez větráku, ventilátor bez lopatek. Klíčové: <b>forma</b> (futuristický look) + <b>funkce</b> (cyklonová technologie). Premium cena 5-10× nad konkurencí." },
       { tag: "KLASIFIKACE", color: VSE.success, company: "Tesla — Specialty → Mainstream", content: "Tesla v 2008 byla <b>specialty</b> (Roadster za 110k USD pro early adopters). 2017 Model 3 přesunul Teslu do <b>shopping kategorie</b> (35-55k USD, srovnává se s BMW). 2024 Cybertruck = zpátky k <b>specialty</b> (extrémní design)." },
       { tag: "VERTIKÁLNÍ DIVERZIFIKACE", color: VSE.fph, company: "Amazon — z e-shopu na ecosystem", content: "Amazon začal jako <b>e-shop knih</b>. <b>Vertikální diverzifikace</b>: AWS (cloud), Kindle (HW), Prime Video (content), Whole Foods (retail), Amazon Logistics. Každá vrstva podporuje core. Klasický příklad propojené diverzifikace." },
@@ -17662,7 +18085,7 @@ function OkruhMkt6Panel() {
       { text: "Diferenciace nejasná — co dělá NORDIC jiný než Tefal?", color: VSE.danger, reason: "Chybí jasné <b>6 cest diferenciace</b>. Skandinávský design + lokální výroba + patent na povlak = 3 silné páky, ale málo komunikované." },
       { text: "1 patent na tytanový povlak", color: VSE.warning, reason: "<b>Inimitable</b> z VRIO (M5). Konkurence to nemůže napodobit. Silná diferenciace přes <b>kvalitu</b>." },
       { text: "Sustainability story: recyklované hliníky, lokální výroba — málo komunikováno", color: VSE.warning, reason: "Skrytý <b>symbolický náboj produktu</b>. Mladí spotřebitelé (25-40 let, premium segment) milují eco brand. CSRD od 2026 to vyžaduje od B2B klientů." },
-      { text: "2 designeři ze Skandinávie", color: VSE.warning, reason: "Klíč pro <b>USP a positioning</b> (M4). „Skandinávský design vyrobený v Česku\u201D = unikátní příběh. Klasický příklad diferenciace přes <b>design</b> (1 z 6 cest)." },
+      { text: "2 designeři ze Skandinávie", color: VSE.warning, reason: "Klíč pro <b>USP a positioning</b> (M4). „Skandinávský design vyrobený v Česku” = unikátní příběh. Klasický příklad diferenciace přes <b>design</b> (1 z 6 cest)." },
       { text: "CEO uvažuje o expanzi do hot beverages", color: VSE.fph, reason: "Klasická úvaha o <b>diverzifikaci</b> (M6). Horizontální (varné konvice = stále kuchyně + B2C zákazník) vs konglomerátní. Klíčová strategická volba." },
       { text: "Žádný vlastní e-shop", color: VSE.warning, reason: "Chybí <b>vertikální integrace forward</b> (M5 + Log 1). Direct-to-consumer e-shop = lepší marže + customer data + brand control." },
     ],
@@ -17683,14 +18106,14 @@ function OkruhMkt6Panel() {
         { text: "6 cest diferenciace: Design (skandinávský) + Kvalita (patent) + Trvanlivost (doživotní záruka) = trojice klíčových odlišovačů", correct: true, reason: "✓ 3 silné páky z 6 cest. Tefal nemá. Le Creuset je dražší. NORDIC mezi = sweet spot." },
         { text: "Branding konzistence: jednotný design obalu napříč všemi řadami (Pro/Home/Steel) + sjednocená komunikace skandinávského příběhu", correct: true, reason: "✓ Obal jako klíčová charakteristika (1 z 6). 5 funkcí obalu + brand architecture." },
         { text: "Vertikální integrace forward: launchovat vlastní e-shop nordic.cz pro D2C prodej + sběr customer data", correct: true, reason: "✓ Direct-to-consumer kanál = lepší marže (no retail margin), brand control, customer relationship. Standard moderního premium brandu." },
-        { text: "Symbolický náboj: budovat „skandinávský design vyrobený v Česku\u201D + sustainability story (eco materials, lokální výroba)", correct: true, reason: "✓ Symbolický náboj = klíč pro premium positioning. Mladí milují story + eco." },
+        { text: "Symbolický náboj: budovat „skandinávský design vyrobený v Česku” + sustainability story (eco materials, lokální výroba)", correct: true, reason: "✓ Symbolický náboj = klíč pro premium positioning. Mladí milují story + eco." },
         { text: "Horizontální diverzifikace: launchnout hot beverages řadu (varné konvice, kávovary) — stejní zákazníci, stejný kanál", correct: true, reason: "✓ Horizontální má smysl — kuchyně + premium + design. Ne konglomerát." },
         { text: "Specialty positioning: cena 3000-5000 Kč za pánev jako Le Creuset — eliminovat NORDIC Home (middle range)", correct: false, reason: "✗ Příliš radikální. NORDIC Home je 30 % obratu. Místo eliminace = lepší propozice (premium ale dostupný = sweet spot mezi Tefalem a Le Creuset)." },
         { text: "Cost Leadership: snížit ceny pod Tefal masovou výrobou v Číně", correct: false, reason: "✗ Sebevražda — ztratí premium positioning + skandinávský příběh + patent advantage. Tefal v Cost Leadership lépe vybavený." },
         { text: "Konglomerátní diverzifikace: vstup do nábytku jako IKEA (skandinávský design)", correct: false, reason: "✗ Příliš velký skok. Konglomerát = high risk. Lepší zůstat v kuchyni a horizontálně rozšířit." },
       ],
     },
-    summary: "<b>NORDIC má skvělý produkt, ale slabou komunikaci a roztříštěnou strategii.</b> Klíč: <b>konzistentní brand architecture + komunikace diferenciace + horizontální diverzifikace</b>.<br/><br/><b>Plán 6 měsíců:</b><br/>• <b>Q1-Q2:</b> Brand architecture — sjednocený design obalů napříč řadami (Pro/Home/Steel) + brand book<br/>• <b>Q2:</b> Komunikace 3 differentiatorů — Design (Skandinávie) + Kvalita (patent) + Trvanlivost (lifetime záruka)<br/>• <b>Q2-Q3:</b> E-shop launch (nordic.cz) — D2C kanál + customer data + lepší marže<br/>• <b>Q3:</b> Symbolický náboj — „Czech-made Scandinavian design\u201D + sustainability story (CSRD ready)<br/>• <b>Q3-Q4:</b> Horizontální diverzifikace — launch NORDIC Brew (hot beverages: konvice, kávovary) pro stejnou cílovku<br/><br/><b>Pro komisi:</b> Klasický B2C premium brand s product strategy gaps. <b>Apple, Dyson, Le Creuset</b> jako benchmark holistického přístupu k produktu. <b>Kotlerových 5 vrstev</b> jako framework. <b>6 charakteristik + 6 cest diferenciace</b> jako diagnostika. <b>Diverzifikace horizontálně</b> (ne konglomerát) = bezpečná cesta. Anti-vzor: Cost Leadership proti Tefalu = sebevražda.",
+    summary: "<b>NORDIC má skvělý produkt, ale slabou komunikaci a roztříštěnou strategii.</b> Klíč: <b>konzistentní brand architecture + komunikace diferenciace + horizontální diverzifikace</b>.<br/><br/><b>Plán 6 měsíců:</b><br/>• <b>Q1-Q2:</b> Brand architecture — sjednocený design obalů napříč řadami (Pro/Home/Steel) + brand book<br/>• <b>Q2:</b> Komunikace 3 differentiatorů — Design (Skandinávie) + Kvalita (patent) + Trvanlivost (lifetime záruka)<br/>• <b>Q2-Q3:</b> E-shop launch (nordic.cz) — D2C kanál + customer data + lepší marže<br/>• <b>Q3:</b> Symbolický náboj — „Czech-made Scandinavian design” + sustainability story (CSRD ready)<br/>• <b>Q3-Q4:</b> Horizontální diverzifikace — launch NORDIC Brew (hot beverages: konvice, kávovary) pro stejnou cílovku<br/><br/><b>Pro komisi:</b> Klasický B2C premium brand s product strategy gaps. <b>Apple, Dyson, Le Creuset</b> jako benchmark holistického přístupu k produktu. <b>Kotlerových 5 vrstev</b> jako framework. <b>6 charakteristik + 6 cest diferenciace</b> jako diagnostika. <b>Diverzifikace horizontálně</b> (ne konglomerát) = bezpečná cesta. Anti-vzor: Cost Leadership proti Tefalu = sebevražda.",
   };
 
   return (
@@ -18069,7 +18492,7 @@ function OkruhMkt7Panel() {
   const caseStudyMkt7 = {
     title: "Štěpán — CEO LumenTech, výrobce LED osvětlení (105 mil. Kč, 65 zaměstnanců)",
     subtitle: "Identifikuj problémy v mixu + navrhni 4 dimenze + cenovou strategii",
-    scenario: "Štěpán (41 let) vede LumenTech 6 let. Český výrobce LED osvětlení (interiér + exteriér + průmyslové). 65 zaměstnanců, tržby 105 mil. Kč, růst 6 %. B2B (60 %) + B2C přes Hornbach, OBI (40 %).\n\nAktuální mix:\n\n• Řada A — Interiérová LED svítidla (lustry, stropní, nástěnné) — 35 produktů, 50 % obratu\n\n• Řada B — Venkovní LED svítidla (zahradní, fasádní) — 18 produktů, 25 % obratu\n\n• Řada C — Průmyslová LED (haly, sklady) — 25 produktů, 20 % obratu\n\n• Řada D — Chytré LED s WiFi (smart home) — 8 produktů, 5 % obratu (nová řada 2024)\n\nProblémy:\n\n• Příliš mnoho produktů v řadě A (35) — některé prodávají 5 ks/měsíc, kanibalizace mezi sebou\n\n• Hloubka neuspořádaná — různé barvy/velikosti chaoticky, nelze najít „rodinu produktů\u201D\n\n• Řada D (smart) má potenciál, ale obrat tenký — nevidí na ní šanci\n\n• Konzistence chybí — každá řada má jiný design (industrial × moderní × klasický)\n\n• Cenotvorba ad hoc — žádná strategická logika, „cena minimum + marže 35 %\u201D\n\n• Žádný bundle pricing — zákazník koupí 1 lampu, ne sadu (lustr + nástěnné)\n\nKonkurence:\n\n• Philips Hue (smart) — ekosystém, premium, captive (mostek + žárovky)\n\n• OSRAM, IKEA — masový segment, cost leadership\n\n• Lokální výrobci — niche, customizace\n\nKlíčové vstupy:\n\n• Vlastní výroba v Hradci Králové, vlastní design tým 4 lidí\n\n• 2025 plánují vstup do hospitality (hotely, restaurace) — nový segment\n\n• ICT integrátoři (B2B partneři) tlačí na full ekosystem řešení (osvětlení + senzory + řízení)\n\n• Účetní data: top 10 produktů generuje 70 % obratu (Pareto signal)\n\nŠtěpán má 6 měsíců na restrukturalizaci mixu + nový pricing strategy.",
+    scenario: "Štěpán (41 let) vede LumenTech 6 let. Český výrobce LED osvětlení (interiér + exteriér + průmyslové). 65 zaměstnanců, tržby 105 mil. Kč, růst 6 %. B2B (60 %) + B2C přes Hornbach, OBI (40 %).\n\nAktuální mix:\n\n• Řada A — Interiérová LED svítidla (lustry, stropní, nástěnné) — 35 produktů, 50 % obratu\n\n• Řada B — Venkovní LED svítidla (zahradní, fasádní) — 18 produktů, 25 % obratu\n\n• Řada C — Průmyslová LED (haly, sklady) — 25 produktů, 20 % obratu\n\n• Řada D — Chytré LED s WiFi (smart home) — 8 produktů, 5 % obratu (nová řada 2024)\n\nProblémy:\n\n• Příliš mnoho produktů v řadě A (35) — některé prodávají 5 ks/měsíc, kanibalizace mezi sebou\n\n• Hloubka neuspořádaná — různé barvy/velikosti chaoticky, nelze najít „rodinu produktů”\n\n• Řada D (smart) má potenciál, ale obrat tenký — nevidí na ní šanci\n\n• Konzistence chybí — každá řada má jiný design (industrial × moderní × klasický)\n\n• Cenotvorba ad hoc — žádná strategická logika, „cena minimum + marže 35 %”\n\n• Žádný bundle pricing — zákazník koupí 1 lampu, ne sadu (lustr + nástěnné)\n\nKonkurence:\n\n• Philips Hue (smart) — ekosystém, premium, captive (mostek + žárovky)\n\n• OSRAM, IKEA — masový segment, cost leadership\n\n• Lokální výrobci — niche, customizace\n\nKlíčové vstupy:\n\n• Vlastní výroba v Hradci Králové, vlastní design tým 4 lidí\n\n• 2025 plánují vstup do hospitality (hotely, restaurace) — nový segment\n\n• ICT integrátoři (B2B partneři) tlačí na full ekosystem řešení (osvětlení + senzory + řízení)\n\n• Účetní data: top 10 produktů generuje 70 % obratu (Pareto signal)\n\nŠtěpán má 6 měsíců na restrukturalizaci mixu + nový pricing strategy.",
     signals: [
       { text: "Příliš mnoho produktů v řadě A (35) — některé prodávají 5 ks/měsíc, kanibalizace", color: VSE.danger, reason: "Klasický signál pro <b>Line Pruning</b>. Steve Jobs 1997 model — focus přes redukci. Pareto: top 20 % produktů = 70-80 % obratu." },
       { text: "Hloubka neuspořádaná — různé barvy/velikosti chaoticky", color: VSE.danger, reason: "Chybí systematická hloubka. Klíč: definovat <b>matrici variant</b> (např. 3 velikosti × 4 barvy × 2 výkony) konzistentně napříč produkty." },
@@ -19120,12 +19543,12 @@ function OkruhMkt10Panel() {
         <Tag color={VSE.fis}>6 hlavních prvků značky</Tag>
         <ResponsiveGrid cols2>
           {[
-            { c: VSE.fmv, t: "📛 JMÉNO (Brand Name)", d: "Slovní označení. Apple, Google, Tesla. Kritérium: snadno vyslovit, zapamatovat, ne kontroverzní v jiných jazycích (Chevy Nova \u2192 \u201Cnevozí\u201D ve španělštině)." },
+            { c: VSE.fmv, t: "📛 JMÉNO (Brand Name)", d: "Slovní označení. Apple, Google, Tesla. Kritérium: snadno vyslovit, zapamatovat, ne kontroverzní v jiných jazycích (Chevy Nova → “nevozí” ve španělštině)." },
             { c: VSE.warning, t: "🎨 LOGO", d: "Vizuální symbol. Apple jablko, Nike swoosh, Mercedes hvězda. Klíč: jednoduchý, škálovatelný, rozpoznatelný i bez textu." },
-            { c: VSE.fph, t: "💬 SLOGAN (Tagline)", d: "Krátká zapamatovatelná fráze. „Just Do It\u201D, „Think Different\u201D, „I'm Lovin' It\u201D. Komunikuje value proposition." },
+            { c: VSE.fph, t: "💬 SLOGAN (Tagline)", d: "Krátká zapamatovatelná fráze. „Just Do It”, „Think Different”, „I'm Lovin' It”. Komunikuje value proposition." },
             { c: VSE.success, t: "🌈 BARVY", d: "Brand colors. Coca-Cola červená, Tiffany blue, McDonald's žlutá. Vyvolávají emoce + okamžité rozpoznání." },
             { c: VSE.danger, t: "✍️ FONT (Typography)", d: "Specifické písmo. Apple SF Pro, Google Product Sans, Coca-Cola Spencerian. Posiluje identitu napříč kanály." },
-            { c: VSE.fis, t: "🔊 ZVUK (Sonic Branding)", d: "Audio identity. Intel jingle (5 not), McDonald's „ba-da-ba-ba-baa\u201D, Netflix „ta-dum\u201D. Vyvolává recall i bez vizuálu." },
+            { c: VSE.fis, t: "🔊 ZVUK (Sonic Branding)", d: "Audio identity. Intel jingle (5 not), McDonald's „ba-da-ba-ba-baa”, Netflix „ta-dum”. Vyvolává recall i bez vizuálu." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -19145,7 +19568,7 @@ function OkruhMkt10Panel() {
           "<b>Memorability:</b> Snadno zapamatovat (krátké jméno, jednoduchý logo).",
           "<b>Meaningfulness:</b> Komunikuje něco o produktu (Burger King = víme, co prodávají).",
           "<b>Likability:</b> Líbí se cílovce, evokuje pozitivní emoce.",
-          "<b>Transferability:</b> Funguje napříč produktovými kategoriemi (Apple z PC \u2192 phones \u2192 watches) i jazyky.",
+          "<b>Transferability:</b> Funguje napříč produktovými kategoriemi (Apple z PC → phones → watches) i jazyky.",
           "<b>Adaptability:</b> Lze upravit pro různé éry (Pepsi logo update každých 10-15 let).",
           "<b>Protectability:</b> Lze chránit ochrannou známkou (TM/®).",
         ]} color={VSE.fph} />
@@ -19240,11 +19663,11 @@ function OkruhMkt10Panel() {
         </Def>
         <Tag color={VSE.fis}>1️⃣ NPS (Net Promoter Score)</Tag>
         <Bullet items={[
-          "<b>Otázka:</b> „Na škále 0-10, jak pravděpodobně doporučíte XY příteli?\u201D",
+          "<b>Otázka:</b> „Na škále 0-10, jak pravděpodobně doporučíte XY příteli?”",
           "<b>Výpočet:</b> Promoters (9-10) − Detractors (0-6) = NPS. Passives (7-8) se nepočítají.",
           "<b>Benchmarky:</b> 30+ = výborný, 50+ = world-class. Apple 75, Tesla 96, Netflix 64.",
           "<b>Výhody:</b> Jednoduchý, srovnatelný napříč firmami, predictor loyalty + růstu.",
-          "<b>Nevýhody:</b> Jen 1 otázka — málo insight. Doporučuje se kombinovat s NPS+ (otevřená otázka „proč?\u201D).",
+          "<b>Nevýhody:</b> Jen 1 otázka — málo insight. Doporučuje se kombinovat s NPS+ (otevřená otázka „proč?”).",
         ]} color={VSE.fis} />
         <Tag color={VSE.warning}>2️⃣ BrandZ (WPP / Millward Brown / Kantar)</Tag>
         <Bullet items={[
@@ -19299,7 +19722,7 @@ function OkruhMkt10Panel() {
         ]} color={VSE.fis} />
         <Tag color={VSE.warning}>Řízení značky služeb — 5 klíčových pravidel</Tag>
         <Bullet items={[
-          "<b>1. Brand promise = service delivery</b> — co slibujeme, to musíme dodat (Ritz-Carlton: „Ladies and gentlemen serving ladies and gentlemen\u201D).",
+          "<b>1. Brand promise = service delivery</b> — co slibujeme, to musíme dodat (Ritz-Carlton: „Ladies and gentlemen serving ladies and gentlemen”).",
           "<b>2. Empowering employees:</b> Frontline zaměstnanci jako brand ambassadors. Investice do trainingu a kultury.",
           "<b>3. Physical evidence (servicescape):</b> Prostředí komunikuje brand. Apple Store design, Starbucks atmosféra.",
           "<b>4. Standardization vs personalization balance:</b> McDonald's = standardizace, Ritz-Carlton = personalizace. Obojí brand strategie.",
@@ -19334,8 +19757,8 @@ function OkruhMkt10Panel() {
     { term: "6 prvků značky", def: "Jméno / Logo / Slogan / Barvy / Font / Zvuk (sonic branding). + doplňky: packaging, mascot, brand voice, environment.", tag: "PRVKY" },
     { term: "Brand Name (jméno)", def: "Slovní označení. Apple, Google, Tesla. Snadno vyslovit, zapamatovat, bez kontroverze v jiných jazycích.", tag: "PRVKY" },
     { term: "Logo", def: "Vizuální symbol. Apple jablko, Nike swoosh, Mercedes hvězda. Jednoduchý, škálovatelný, rozpoznatelný i bez textu.", tag: "PRVKY" },
-    { term: "Slogan", def: "Krátká zapamatovatelná fráze. „Just Do It\u201D, „Think Different\u201D, „I'm Lovin' It\u201D.", tag: "PRVKY" },
-    { term: "Sonic branding", def: "Audio identity. Intel jingle (5 not), McDonald's „ba-da-ba-ba-baa\u201D, Netflix „ta-dum\u201D.", tag: "PRVKY" },
+    { term: "Slogan", def: "Krátká zapamatovatelná fráze. „Just Do It”, „Think Different”, „I'm Lovin' It”.", tag: "PRVKY" },
+    { term: "Sonic branding", def: "Audio identity. Intel jingle (5 not), McDonald's „ba-da-ba-ba-baa”, Netflix „ta-dum”.", tag: "PRVKY" },
     { term: "Kritéria dobrých prvků (Kotler)", def: "Memorability / Meaningfulness / Likability / Transferability / Adaptability / Protectability.", tag: "PRVKY" },
     { term: "Aakerův model — 5 dimenzí", def: "Brand Loyalty / Brand Awareness / Perceived Quality / Brand Associations / Other Proprietary Assets (patenty, trademarks).", tag: "MODELY" },
     { term: "Brand Loyalty (Aaker)", def: "Opakované nákupy, switching resistance. Apple users 90 % loyalty. Klíčová dimenze brand equity.", tag: "MODELY" },
@@ -32711,15 +33134,28 @@ function Dashboard({ onSelectOkruh }) {
     };
   }, []);
 
-  // Spočítej progress per subject
+  // Tracker state pro % výpočet (jen "projetá teorie" - read)
+  const trackerState = useTrackerAll();
+
+  // Spočítej progress per subject — JEN podle tracker.read (projetá teorie)
   const progressBySubject = SUBJECTS.map(subj => {
     const okruhy = subj.okruhy;
-    const done = okruhy.filter(o => o.status === "done").length;
+    // Připravené okruhy od nás (status === "done") jsou jediné, které lze trackovat
+    const readable = okruhy.filter(o => o.status === "done").length;
+    // Z těch, které jsou připravené, kolik uživatel projel
+    const readDone = okruhy.filter(o => {
+      if (o.status !== "done") return false;
+      return trackerState[`${subj.id}_${o.n}`]?.read;
+    }).length;
     return {
       ...subj,
-      done,
+      done: readDone, // backward compat
+      readDone,
+      readable,
       total: okruhy.length,
-      pct: okruhy.length > 0 ? Math.round((done / okruhy.length) * 100) : 0,
+      pct: readable > 0 ? Math.round((readDone / readable) * 100) : 0,
+      // Subject barva pro dashboard
+      subjColor: SUBJECT_COLORS[subj.id] || subj.color,
     };
   });
 
@@ -32816,16 +33252,20 @@ function Dashboard({ onSelectOkruh }) {
             {progressBySubject.map(subj => (
               <div key={subj.id} onClick={() => onSelectOkruh && onSelectOkruh(subj.id, null)} style={{
                 ...cardStyle(t), padding: 18, cursor: "pointer", transition: "all 0.15s",
-              }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = t.text; }}
-                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = t.border; }}>
+                borderLeft: `3px solid ${subj.subjColor}`,
+              }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = subj.subjColor; e.currentTarget.style.borderLeftColor = subj.subjColor; }}
+                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.borderLeftColor = subj.subjColor; }}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 12 }}>
-                  <div style={{ fontSize: 15.5, fontWeight: 600, color: t.text, fontFamily: fontSans, letterSpacing: "-0.01em" }}>{subj.name}</div>
-                  <div style={{ fontSize: 13, color: t.textMuted, fontFamily: fontMono, letterSpacing: "0.4px" }}>{subj.done}/{subj.total}</div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 8, height: 8, borderRadius: 99, background: subj.subjColor }} />
+                    <div style={{ fontSize: 15.5, fontWeight: 600, color: t.text, fontFamily: fontSans, letterSpacing: "-0.01em" }}>{subj.name}</div>
+                  </div>
+                  <div style={{ fontSize: 13, color: t.textMuted, fontFamily: fontMono, letterSpacing: "0.4px" }}>{subj.readDone}/{subj.readable}</div>
                 </div>
-                <div style={{ height: 4, background: t.borderSoft, borderRadius: 99, overflow: "hidden" }}>
-                  <div style={{ height: "100%", width: `${subj.pct}%`, background: t.text, transition: "width 0.4s" }} />
+                <div style={{ height: 6, background: t.borderSoft, borderRadius: 99, overflow: "hidden" }}>
+                  <div style={{ height: "100%", width: `${subj.pct}%`, background: subj.subjColor, transition: "width 0.4s" }} />
                 </div>
-                <div style={{ fontSize: 13, color: t.textMuted, fontFamily: fontMono, marginTop: 8, letterSpacing: "0.4px" }}>{subj.pct}%</div>
+                <div style={{ fontSize: 13, color: subj.subjColor, fontFamily: fontMono, marginTop: 8, letterSpacing: "0.4px", fontWeight: 600 }}>{subj.pct}% projetá teorie</div>
               </div>
             ))}
           </div>
@@ -33654,6 +34094,348 @@ function SearchButton({ onClick }) {
   );
 }
 
+
+/* ════════════════════════════════════════════════════════
+   TRACKER TAB — odškrtávání okruhů (Projeto/Případovka/Kartičky/Kvíz/Podcast/Zopakováno)
+   ════════════════════════════════════════════════════════ */
+function TrackerTab({ onNavigate }) {
+  const t = useTheme();
+  const isMobile = useIsMobile();
+  const trackerState = useTrackerAll();
+  const streakInfo = getTrackerStreakInfo();
+  const [filterSubject, setFilterSubject] = useState("all");
+
+  // Spočítáme statistiky napříč předměty
+  const stats = useMemo(() => {
+    let totalReadable = 0; // pouze "done" okruhy se počítají do %
+    let readDone = 0;
+    let caseDone = 0;
+    let cardsDone = 0;
+    let quizDone = 0;
+    let podcastDone = 0;
+    let totalRepeats = 0;
+
+    const perSubject = {};
+    SUBJECTS.forEach(subj => {
+      let sTotal = 0, sRead = 0, sCase = 0;
+      subj.okruhy.forEach(okruh => {
+        if (okruh.status !== "done") return; // todo okruhy se nepočítají do %
+        const t = trackerState[`${subj.id}_${okruh.n}`] || {};
+        sTotal++; totalReadable++;
+        if (t.read) { sRead++; readDone++; }
+        if (t.case) { sCase++; caseDone++; }
+        if (t.cards) cardsDone++;
+        if (t.quiz) quizDone++;
+        if (t.podcast) podcastDone++;
+        if (t.repeats) totalRepeats += t.repeats;
+      });
+      perSubject[subj.id] = {
+        total: sTotal, read: sRead, case: sCase,
+        pct: sTotal > 0 ? Math.round((sRead / sTotal) * 100) : 0,
+      };
+    });
+
+    return {
+      totalReadable, readDone, caseDone, cardsDone, quizDone, podcastDone, totalRepeats,
+      readPct: totalReadable > 0 ? Math.round((readDone / totalReadable) * 100) : 0,
+      casePct: totalReadable > 0 ? Math.round((caseDone / totalReadable) * 100) : 0,
+      perSubject,
+    };
+  }, [trackerState]);
+
+  const visibleSubjects = filterSubject === "all" ? SUBJECTS : SUBJECTS.filter(s => s.id === filterSubject);
+
+  return (
+    <div data-tracker-container style={{ padding: "32px 24px 80px", maxWidth: 1200, margin: "0 auto" }}>
+      {/* Hero */}
+      <div style={{ marginBottom: 28 }}>
+        <div style={{
+          display: "inline-block", padding: "4px 12px", borderRadius: 100,
+          background: BOMBIK.tealSoft, color: BOMBIK.tealDeep,
+          fontFamily: fontMono, fontSize: 11, fontWeight: 700,
+          letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 14,
+        }}>
+          Moje příprava
+        </div>
+        <h1 style={{
+          fontFamily: fontSans, fontSize: isMobile ? 28 : 44, fontWeight: 800,
+          letterSpacing: "-0.03em", color: t.text, margin: 0, lineHeight: 1.1,
+        }}>
+          Tracker
+        </h1>
+        <p style={{
+          fontFamily: fontSans, fontSize: isMobile ? 14 : 16, color: t.textMuted,
+          margin: "10px 0 0", maxWidth: 720, lineHeight: 1.5,
+        }}>
+          Odškrtávej si okruhy jak je procházíš. Procenta v dashboardu počítají jen <b>projetou teorii</b>. Kartičky, kvíz a podcast jsou bonus — pomáhají, ale nepočítají se do statistik. <b>Streak</b> ti naskočí, když v daný den projdeš teorii nebo dokončíš případovku.
+        </p>
+      </div>
+
+      {/* Souhrn statistik */}
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
+        gap: 12, marginBottom: 28,
+      }}>
+        <StatCard label="Teorie projetá" value={`${stats.readPct} %`} sub={`${stats.readDone} / ${stats.totalReadable} okruhů`} color={BOMBIK.teal} t={t} />
+        <StatCard label="Případovky" value={`${stats.casePct} %`} sub={`${stats.caseDone} / ${stats.totalReadable} hotovo`} color={BOMBIK.cta} t={t} />
+        <StatCard label="Streak" value={streakInfo.count} sub={streakInfo.count === 1 ? "den" : "dní v řadě"} color={SUBJECT_COLORS.roz} t={t} />
+        <StatCard label="Zopakováno" value={stats.totalRepeats} sub="celkem opakování" color={SUBJECT_COLORS.inov} t={t} />
+      </div>
+
+      {/* Filtr předmětů */}
+      <div data-tracker-filter style={{
+        display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20,
+        overflowX: "auto", WebkitOverflowScrolling: "touch",
+      }}>
+        <FilterChip active={filterSubject === "all"} onClick={() => setFilterSubject("all")} color={t.text} label="Všechny" />
+        {SUBJECTS.map(s => (
+          <FilterChip key={s.id} active={filterSubject === s.id}
+            onClick={() => setFilterSubject(s.id)}
+            color={SUBJECT_COLORS[s.id] || t.text}
+            label={s.name}
+            pct={stats.perSubject[s.id]?.pct} />
+        ))}
+      </div>
+
+      {/* Per-subject sekce */}
+      {visibleSubjects.map(subj => (
+        <TrackerSubjectSection key={subj.id} subj={subj} trackerState={trackerState} onNavigate={onNavigate} isMobile={isMobile} t={t} />
+      ))}
+
+      {/* Reset tlačítko */}
+      <div style={{ marginTop: 40, textAlign: "center" }}>
+        <button onClick={() => {
+          if (window.confirm("Opravdu vymazat všechen progress? Tato akce je nevratná.")) {
+            localStorage.removeItem(TRACKER_KEY);
+            localStorage.removeItem(TRACKER_STREAK_KEY);
+            window.dispatchEvent(new Event("tracker-updated"));
+          }
+        }} style={{
+          padding: "10px 20px", borderRadius: 8,
+          border: `1px solid ${t.border}`, background: "transparent",
+          color: t.textMuted, fontSize: 12.5, fontFamily: fontMono,
+          letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", fontWeight: 600,
+        }}>Vymazat progress</button>
+      </div>
+    </div>
+  );
+}
+
+function StatCard({ label, value, sub, color, t }) {
+  return (
+    <div style={{
+      padding: "18px 16px", borderRadius: 14, background: t.surface,
+      border: `1px solid ${t.border}`, position: "relative", overflow: "hidden",
+    }}>
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: color }} />
+      <div style={{
+        fontFamily: fontMono, fontSize: 10.5, fontWeight: 700,
+        letterSpacing: "0.12em", textTransform: "uppercase",
+        color: t.textMuted, marginBottom: 8,
+      }}>{label}</div>
+      <div style={{
+        fontFamily: fontSans, fontSize: 32, fontWeight: 800,
+        letterSpacing: "-0.02em", color: t.text, lineHeight: 1,
+      }}>{value}</div>
+      <div style={{
+        fontFamily: fontMono, fontSize: 11, color: t.textMuted, marginTop: 6,
+      }}>{sub}</div>
+    </div>
+  );
+}
+
+function FilterChip({ active, onClick, color, label, pct }) {
+  return (
+    <button onClick={onClick} style={{
+      padding: "8px 14px", borderRadius: 100,
+      border: `1.5px solid ${active ? color : "transparent"}`,
+      background: active ? `${color}18` : "transparent",
+      color: active ? color : "var(--text-muted)",
+      fontFamily: fontMono, fontSize: 12, fontWeight: 600,
+      letterSpacing: "0.04em", cursor: "pointer", transition: "all 0.15s",
+      whiteSpace: "nowrap", display: "flex", alignItems: "center", gap: 8,
+    }}>
+      {label}
+      {pct !== undefined && (
+        <span style={{
+          fontSize: 10, opacity: 0.7, fontWeight: 500,
+        }}>{pct}%</span>
+      )}
+    </button>
+  );
+}
+
+function TrackerSubjectSection({ subj, trackerState, onNavigate, isMobile, t }) {
+  const color = SUBJECT_COLORS[subj.id] || BOMBIK.teal;
+  const total = subj.okruhy.filter(o => o.status === "done").length;
+  const readCount = subj.okruhy.filter(o => {
+    if (o.status !== "done") return false;
+    return trackerState[`${subj.id}_${o.n}`]?.read;
+  }).length;
+
+  return (
+    <div data-tracker-subject style={{ marginBottom: 28 }}>
+      {/* Subject header */}
+      <div style={{
+        display: "flex", alignItems: "baseline", gap: 12, marginBottom: 14,
+        paddingBottom: 10, borderBottom: `2px solid ${color}30`,
+      }}>
+        <div style={{
+          width: 10, height: 10, borderRadius: 100, background: color,
+        }} />
+        <h2 style={{
+          fontFamily: fontSans, fontSize: isMobile ? 18 : 22, fontWeight: 800,
+          letterSpacing: "-0.02em", color: t.text, margin: 0, flex: 1,
+        }}>{subj.name}</h2>
+        <span style={{
+          fontFamily: fontMono, fontSize: 12, color: t.textMuted, fontWeight: 600,
+        }}>
+          {readCount} / {total}
+        </span>
+      </div>
+
+      {/* Okruh rows */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+        {subj.okruhy.map(okruh => (
+          <TrackerOkruhRow key={okruh.n} subjectId={subj.id} okruh={okruh} color={color}
+            onNavigate={onNavigate} isMobile={isMobile} t={t} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TrackerOkruhRow({ subjectId, okruh, color, onNavigate, isMobile, t }) {
+  const data = useTracker(subjectId, okruh.n);
+  const isDone = okruh.status === "done";
+
+  const toggle = (field) => {
+    if (!isDone) return; // todo okruh — nedá se trackovat
+    const wasRead = data.read;
+    const wasCase = data.case;
+    setOkruhTracker(subjectId, okruh.n, { [field]: !data[field] });
+    // Streak bump pokud se právě teď odškrtla nová teorie nebo případovka
+    if ((field === "read" && !wasRead) || (field === "case" && !wasCase)) {
+      bumpTrackerStreak();
+    }
+  };
+
+  const addRepeat = () => {
+    if (!isDone) return;
+    const cur = data.repeats || 0;
+    // Pokud už 5, další klik nuluje
+    const newCount = cur >= 5 ? 0 : cur + 1;
+    setOkruhTracker(subjectId, okruh.n, { repeats: newCount });
+  };
+
+  const resetRepeats = () => {
+    if (!isDone) return;
+    setOkruhTracker(subjectId, okruh.n, { repeats: 0 });
+  };
+
+  return (
+    <div data-tracker-row style={{
+      display: "flex", alignItems: "center", gap: isMobile ? 8 : 12,
+      padding: isMobile ? "10px 12px" : "12px 16px",
+      borderRadius: 10, background: t.surface,
+      border: `1px solid ${t.border}`,
+      opacity: isDone ? 1 : 0.55,
+    }}>
+      {/* Číslo + název okruhu (klikatelný pro navigaci) */}
+      <button onClick={() => isDone && onNavigate(subjectId, okruh.n)} style={{
+        flex: 1, minWidth: 0, padding: 0, background: "transparent", border: "none",
+        textAlign: "left", cursor: isDone ? "pointer" : "default", color: t.text,
+        display: "flex", alignItems: "center", gap: 10,
+      }}>
+        <div style={{
+          flexShrink: 0, width: isMobile ? 26 : 30, height: isMobile ? 26 : 30,
+          borderRadius: 6, background: `${color}20`, color,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          fontFamily: fontMono, fontSize: isMobile ? 12 : 13, fontWeight: 700,
+        }}>{okruh.n}</div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{
+            fontFamily: fontSans, fontSize: isMobile ? 13 : 14, fontWeight: 600,
+            color: t.text, lineHeight: 1.3, overflow: "hidden", textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}>{okruh.title}</div>
+          {!isDone && (
+            <div style={{
+              fontFamily: fontMono, fontSize: 10, color: t.textMuted,
+              marginTop: 2, letterSpacing: "0.06em", textTransform: "uppercase",
+            }}>Brzy</div>
+          )}
+        </div>
+      </button>
+
+      {/* Tracker checkboxy */}
+      <div data-tracker-checks style={{
+        display: "flex", alignItems: "center", gap: isMobile ? 4 : 6, flexShrink: 0,
+      }}>
+        <TrackerCheck active={data.read} disabled={!isDone} color={color}
+          label="Teorie" mobileLabel="T" onClick={() => toggle("read")} isMobile={isMobile} />
+        <TrackerCheck active={data.case} disabled={!isDone} color={color}
+          label="Případovka" mobileLabel="P" onClick={() => toggle("case")} isMobile={isMobile} />
+        <TrackerCheck active={data.cards} disabled={!isDone} color={color}
+          label="Kartičky" mobileLabel="K" onClick={() => toggle("cards")} isMobile={isMobile} />
+        <TrackerCheck active={data.quiz} disabled={!isDone} color={color}
+          label="Kvíz" mobileLabel="Q" onClick={() => toggle("quiz")} isMobile={isMobile} />
+        <TrackerCheck active={data.podcast} disabled={!isDone} color={color}
+          label="Podcast" mobileLabel="🎧" onClick={() => toggle("podcast")} isMobile={isMobile} />
+        <RepeatBars count={data.repeats || 0} color={color}
+          onIncrement={addRepeat} onReset={resetRepeats} isMobile={isMobile} disabled={!isDone} t={t} />
+      </div>
+    </div>
+  );
+}
+
+function TrackerCheck({ active, disabled, color, label, mobileLabel, onClick, isMobile }) {
+  const size = isMobile ? 30 : 34;
+  return (
+    <button onClick={onClick} disabled={disabled} title={label}
+      style={{
+        width: size, height: size, borderRadius: 8, padding: 0,
+        border: `1.5px solid ${active ? color : "var(--border)"}`,
+        background: active ? color : "transparent",
+        color: active ? "#fff" : "var(--text-muted)",
+        cursor: disabled ? "default" : "pointer",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        fontFamily: fontMono, fontSize: isMobile ? 11 : 12, fontWeight: 700,
+        opacity: disabled ? 0.4 : 1, transition: "all 0.15s",
+      }}>
+      {active ? "✓" : mobileLabel}
+    </button>
+  );
+}
+
+function RepeatBars({ count, color, onIncrement, onReset, isMobile, disabled, t }) {
+  // 6. klik = reset (po dosažení max 5)
+  const handleClick = () => {
+    if (count >= 5) onReset();
+    else onIncrement();
+  };
+  return (
+    <button onClick={handleClick}
+      disabled={disabled} title={count >= 5 ? "Max 5/5 — další klik nuluje" : `Zopakováno ${count}/5 — klik přidá +1`}
+      style={{
+        height: isMobile ? 30 : 34, padding: isMobile ? "0 8px" : "0 10px",
+        borderRadius: 8, border: `1.5px solid ${count > 0 ? color : "var(--border)"}`,
+        background: count > 0 ? `${color}15` : "transparent",
+        cursor: disabled ? "default" : "pointer", display: "flex", alignItems: "center", gap: 2,
+        opacity: disabled ? 0.4 : 1, transition: "all 0.15s",
+      }}>
+      {[0,1,2,3,4].map(i => (
+        <div key={i} style={{
+          width: 2.5, height: isMobile ? 12 : 14,
+          background: i < count ? color : "var(--border)",
+          borderRadius: 1,
+        }} />
+      ))}
+    </button>
+  );
+}
+
 function App() {
   const [themeMode, setThemeMode] = useState("light");
   const [activeTab, setActiveTab] = useState("okruhy");
@@ -33752,10 +34534,145 @@ function App() {
           /* Disable hover transforms (annoying on touch) */
           *:hover { transform: none !important; }
         }
+        @media (max-width: 720px) {
+          /* === FLASHCARDS — full width, větší tap target === */
+          [data-flashcard] {
+            min-height: 220px !important;
+            padding: 18px 16px !important;
+            font-size: 15px !important;
+          }
+          [data-flashcard-term] { font-size: 18px !important; }
+          [data-flashcard-def] { font-size: 14px !important; line-height: 1.5 !important; }
+          [data-flashcard-nav] { gap: 8px !important; flex-wrap: wrap !important; }
+          [data-flashcard-nav] button { min-height: 44px !important; min-width: 80px !important; flex: 1 1 auto !important; }
+          
+          /* === QUIZ — větší options + lepší vertikální spacing === */
+          [data-quiz-option] {
+            padding: 14px 16px !important;
+            min-height: 56px !important;
+            font-size: 14.5px !important;
+            line-height: 1.45 !important;
+            border-radius: 12px !important;
+          }
+          [data-quiz-nav] button { min-height: 48px !important; padding: 0 18px !important; }
+          [data-quiz-question] { font-size: 16px !important; line-height: 1.4 !important; }
+          
+          /* === CASE STUDY — quiz2 options === */
+          [data-case-quiz-option] {
+            padding: 14px 16px !important;
+            min-height: 56px !important;
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+          }
+          
+          /* === MODAL / DRAWER === */
+          [data-modal-content] {
+            max-width: 100vw !important;
+            max-height: 90vh !important;
+            border-radius: 16px 16px 0 0 !important;
+            padding: 18px 14px !important;
+          }
+          [data-modal-overlay] { padding: 0 !important; align-items: flex-end !important; }
+          
+          /* === TABLES — horizontální scroll === */
+          [data-okruh-panel] table {
+            display: block !important;
+            overflow-x: auto !important;
+            max-width: 100% !important;
+            white-space: nowrap;
+          }
+          
+          /* === CODE BLOCKS — horizontální scroll, žádný overflow === */
+          [data-okruh-panel] pre, [data-okruh-panel] code {
+            overflow-x: auto !important;
+            max-width: 100% !important;
+            font-size: 12px !important;
+          }
+          
+          /* === BULLET LISTS — kompaktnější === */
+          [data-bullet] { padding: 10px 12px !important; font-size: 14px !important; }
+          [data-bullet] li { padding-left: 22px !important; margin-bottom: 6px !important; }
+          
+          /* === DEF + TAG boxes — kompaktnější === */
+          [data-def-box] { padding: 12px 14px !important; font-size: 14px !important; }
+          [data-tag] { font-size: 11px !important; padding: 4px 9px !important; }
+          
+          /* === SECTION NADPISY — menší === */
+          [data-section-title] { font-size: 17px !important; line-height: 1.3 !important; }
+          [data-section-subtitle] { font-size: 13px !important; }
+          
+          /* === EXAM ALERT box === */
+          [data-exam-alert] { padding: 12px 14px !important; font-size: 13.5px !important; }
+          
+          /* === SECTION GRID — single column === */
+          [data-section-grid] { grid-template-columns: 1fr !important; gap: 10px !important; }
+          
+          /* === SKOOL SIDEBAR nav — kompaktnější === */
+          [data-skool-sidebar] [data-okruh-item] {
+            padding: 10px 12px !important;
+            font-size: 13.5px !important;
+            min-height: 44px !important;
+          }
+          
+          /* === BOMBÍK hero img — menší === */
+          [data-bombik-img] { width: 80px !important; height: 80px !important; }
+          
+          /* === TAP feedback === */
+          button, [role="button"] { -webkit-tap-highlight-color: rgba(30, 147, 141, 0.15); }
+          
+          /* === Disable text selection in nav (lepší UX na mobilu) === */
+          [data-skool-nav], [data-okruh-tabs] { -webkit-user-select: none; user-select: none; }
+        }
+        
         @media (max-width: 480px) {
           [data-okruh-hero-title] { font-size: 20px !important; }
           body { font-size: 14px; }
-          [data-okruh-panel] { padding: 14px 12px 48px !important; }
+          [data-okruh-panel] { padding: 14px 10px 48px !important; }
+          [data-section-content] { padding: 12px !important; }
+          [data-flashcard] { min-height: 200px !important; padding: 16px 12px !important; }
+          [data-quiz-option] { font-size: 14px !important; padding: 12px 14px !important; }
+          [data-case-quiz-option] { font-size: 13.5px !important; padding: 12px 14px !important; }
+          [data-dashboard-hero] h1 { font-size: 32px !important; }
+          [data-section-title] { font-size: 16px !important; }
+          /* SVG min-width override pro velmi malé screens */
+          [data-okruh-panel] svg { font-size: 10px; }
+        }
+        
+        @media (max-width: 380px) {
+          [data-okruh-panel] { padding: 12px 8px 48px !important; }
+          [data-okruh-tabs] { margin-left: -8px; margin-right: -8px; padding-left: 8px; padding-right: 8px; }
+          [data-bullet] { padding: 8px 10px !important; font-size: 13px !important; }
+          [data-def-box] { padding: 10px 12px !important; font-size: 13px !important; }
+          body { font-size: 13.5px; }
+        }
+        
+        /* === iOS safe areas (notch, home indicator) === */
+        @supports (padding: max(0px)) {
+          [data-skool-nav] {
+            padding-left: max(14px, env(safe-area-inset-left)) !important;
+            padding-right: max(14px, env(safe-area-inset-right)) !important;
+            padding-top: max(8px, env(safe-area-inset-top)) !important;
+          }
+          [data-search-btn] {
+            bottom: max(16px, env(safe-area-inset-bottom)) !important;
+          }
+        }
+        
+        /* === Prefers reduced motion — vypnout animace === */
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+          }
+        }
+        
+        /* === Touch device — větší tap targets globálně === */
+        @media (hover: none) and (pointer: coarse) {
+          button, [role="button"], a { min-height: 40px; }
+          /* Disable transform na touch (sticky look) */
+          *:active { transform: none !important; }
         }
         /* Czech typography & text wrapping */
         [data-okruh-panel] {
@@ -33788,6 +34705,7 @@ function App() {
         <div style={{ position: "relative", zIndex: 1 }}>
           <SkoolNav activeTab={activeTab} setActiveTab={setActiveTab} themeMode={themeMode} setThemeMode={setThemeMode} />
           {activeTab === "okruhy" && <OkruhyTab navTarget={navTarget} clearNavTarget={() => setNavTarget(null)} />}
+          {activeTab === "tracker" && <TrackerTab onNavigate={(s, n) => { setNavTarget({ subjectId: s, okruhN: n }); setActiveTab("okruhy"); }} />}
           {activeTab === "komunita" && <KomunitaTab />}
           {activeTab === "kalendar" && <KalendarTab />}
           {activeTab === "about" && <AboutTab />}
