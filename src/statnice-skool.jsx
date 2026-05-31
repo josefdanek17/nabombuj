@@ -615,13 +615,13 @@ const SUBJECTS = [
   {
     id: "fin", name: "Finance", color: SUBJECT_COLORS.fin, icon: "coins",
     okruhy: [
-      { n: 1, title: "Finanční analýza, ukazatele výkonnosti", status: "todo", difficulty: 3 },
-      { n: 2, title: "Bankrotní modely", status: "todo", difficulty: 2 },
-      { n: 3, title: "Pracovní kapitál, ČPK, optimální výše", status: "todo", difficulty: 3 },
-      { n: 4, title: "Kapitálová struktura, WACC", status: "todo", difficulty: 3 },
-      { n: 5, title: "Časová hodnota peněz, hodnocení investic", status: "todo", difficulty: 3 },
-      { n: 6, title: "Řízení rizika, finanční deriváty", status: "todo", difficulty: 3 },
-      { n: 7, title: "Krize a úpadek podniku, řešení úpadku", status: "todo", difficulty: 3 },
+      { n: 1, title: "Finanční analýza, ukazatele výkonnosti", status: "done", difficulty: 3 },
+      { n: 2, title: "Bankrotní modely", status: "done", difficulty: 2 },
+      { n: 3, title: "Pracovní kapitál, ČPK, optimální výše", status: "done", difficulty: 3 },
+      { n: 4, title: "Kapitálová struktura, WACC", status: "done", difficulty: 3 },
+      { n: 5, title: "Časová hodnota peněz, hodnocení investic", status: "done", difficulty: 3 },
+      { n: 6, title: "Řízení rizika, finanční deriváty", status: "done", difficulty: 3 },
+      { n: 7, title: "Krize a úpadek podniku, řešení úpadku", status: "done", difficulty: 3 },
     ],
   },
 ];
@@ -7255,6 +7255,13 @@ function OkruhContent({ subjectId, okruhN }) {
   if (subjectId === "hr" && okruhN === 7) return <OkruhHr7Panel />;
   if (subjectId === "hr" && okruhN === 8) return <OkruhHr8Panel />;
   if (subjectId === "hr" && okruhN === 9) return <OkruhHr9Panel />;
+  if (subjectId === "fin" && okruhN === 1) return <OkruhFin1Panel />;
+  if (subjectId === "fin" && okruhN === 2) return <OkruhFin2Panel />;
+  if (subjectId === "fin" && okruhN === 3) return <OkruhFin3Panel />;
+  if (subjectId === "fin" && okruhN === 4) return <OkruhFin4Panel />;
+  if (subjectId === "fin" && okruhN === 5) return <OkruhFin5Panel />;
+  if (subjectId === "fin" && okruhN === 6) return <OkruhFin6Panel />;
+  if (subjectId === "fin" && okruhN === 7) return <OkruhFin7Panel />;
   if (subjectId === "logistika" && okruhN === 1) return <OkruhLog1Panel />;
   if (subjectId === "logistika" && okruhN === 2) return <OkruhLog2Panel />;
   if (subjectId === "logistika" && okruhN === 3) return <OkruhLog3Panel />;
@@ -11434,6 +11441,2092 @@ function OkruhLead6Panel() {
    HR 1 — Strategie + kultura + motivace
    Propojení strategie ↔ kultura ↔ struktura ↔ motivace
    ════════════════════════════════════════════════════════ */
+function OkruhFin7Panel() {
+  const studySectionsFin7 = [
+    { id: "krize", title: "Krize podniku — příčiny + going concern", subtitle: "Co je krize, interní × externí příčiny", color: VSE.danger, emoji: "bolt",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Krize podniku</b> = situace v životním cyklu podniku, kdy dochází k <b>poklesu klíčových výkonových ukazatelů</b>. Firma přestává plnit cíle a hrozí, že nebude schopná dál fungovat.
+        </Def>
+        <Tag color={VSE.danger}>Příčiny krize — interní × externí</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Interní příčiny (může za ně firma sama)" color={VSE.danger} items={["Vysoká zadluženost, nízká likvidita.", "Špatná cenová politika.", "Ztráta konkurenceschopnosti, neumí inovovat.", "Špatný marketing, nedostatečné zaměření na zákazníka.", "Rozpor mezi vlastníky a managementem."]} />
+          <ModelCard name="Externí příčiny (z okolí)" color={VSE.warning} items={["Makroekonomické vlivy — vysoké úrokové sazby.", "Legislativa, regulace.", "Recese, propad poptávky.", "Změny na trhu, nová konkurence."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.fis}>Going concern + 3 otázky přežití</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.fis}10`, border: `1px solid ${VSE.fis}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>Going concern</b> = účetní princip, který předpokládá, že firma bude fungovat i v budoucnu. Pokud podnik tento předpoklad nesplňuje, účetní závěrka se sestavuje s předpokladem <b>likvidace</b>.
+        </div>
+        <Bullet items={[
+          "<b>3 otázky pro posouzení schopnosti dalšího fungování:</b>",
+          "1. Existuje smysluplný produkt?",
+          "2. Je konkurenceschopný?",
+          "3. Bude firma směřovat k trvalému generování zisku?",
+        ]} color={VSE.fis} />
+      </div>) },
+
+    { id: "upadek", title: "📉 Úpadek — kdy nastává", subtitle: "Platební neschopnost × předlužení (vazba na bankrotní modely)", color: VSE.warning, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.warning}>
+          <b>Úpadek</b> nastává, když se firma dostane do situace, kdy nedokáže plnit své závazky. Insolvenční zákon rozlišuje <b>2 formy úpadku</b>: platební neschopnost a předlužení.
+        </Def>
+        <Tag color={VSE.warning}>2 formy úpadku</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Platební neschopnost (insolvence)" color={VSE.danger} items={["Firma <b>není schopna plnit splatné závazky</b> — má víc věřitelů a peníze po splatnosti déle než 30 dní.", "Týká se hotovosti — i zisková firma může být platebně neschopná (vázaný kapitál)."]} />
+          <ModelCard name="Předlužení" color={VSE.warning} items={["<b>Závazky převyšují majetek</b> — firma dluží víc, než vlastní.", "Týká se jen právnických osob a podnikajících fyzických osob."]} />
+        </ResponsiveGrid>
+        <div style={{ marginTop: 8, padding: "10px 14px", background: `${VSE.fmv}10`, border: `1px solid ${VSE.fmv}30`, borderRadius: 10, fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          📎 <b>Napojení na okruh 2:</b> <b>Bankrotní modely</b> (Altman, IN) slouží k tomu, aby se úpadek <b>předvídal dřív</b>, než nastane. Krize je proces — bankrotní modely jsou včasný varovný systém.
+        </div>
+      </div>) },
+
+    { id: "reseni", title: "⚖️ Řešení úpadku — konkurz / reorganizace / oddlužení", subtitle: "3 způsoby insolvenčního řízení + insolvenční správce", color: VSE.fis, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Když firma je v úpadku, řeší se to v <b>insolvenčním řízení</b>. Existují <b>3 hlavní způsoby řešení</b>. O průběhu rozhoduje soud a <b>insolvenční správce</b> (firma ztrácí kontrolu nad majetkem).
+        </Def>
+        <Tag color={VSE.fis}>3 způsoby řešení úpadku</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.danger, n: "KONKURZ", d: "Majetek firmy se rozprodá (zpeněží) a výtěžek se rozdělí mezi věřitele. Vede k zániku firmy — výmaz z obchodního rejstříku. Likvidační řešení." },
+            { c: VSE.warning, n: "REORGANIZACE", d: "Firma pokračuje v provozu podle ozdravného plánu, postupně splácí věřitele. Pro větší firmy, kde má smysl je zachovat. Sanační řešení." },
+            { c: VSE.success, n: "ODDLUŽENÍ", d: "Pro fyzické osoby a menší dlužníky — splátkový kalendář nebo zpeněžení části majetku, část dluhů se odpustí." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontMono, marginBottom: 4 }}>{b.n}</div>
+              <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fmv}>Insolvenční správce</Tag>
+        <Bullet items={[
+          "Rozhoduje o průběhu insolvence — <b>firma ztrácí kontrolu nad svým majetkem</b>.",
+          "Spravuje majetkovou podstatu, dohlíží na uspokojení věřitelů.",
+          "<b>Konkurz vede k zániku</b> firmy (výmaz z rejstříku), <b>reorganizace</b> se ji snaží zachránit a zachovat provoz.",
+        ]} color={VSE.fmv} />
+      </div>) },
+
+    { id: "recept", title: "🎯 Jak to podat na komisi + napojení", subtitle: "Recept + vazba na bankrotní modely a finanční analýzu", color: VSE.fmv, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Komise u tohoto okruhu chce hlavně <b>rámcový přehled a praxi</b>, ne hlubokou teorii. Drž se jednoduché linky: co je krize → kdy nastane úpadek → jak se řeší. A napoj na ostatní finanční okruhy.
+        </Def>
+        <Tag color={VSE.fmv}>Recept na odpověď</Tag>
+        <Bullet items={[
+          "<b>1.</b> Krize = pokles klíčových ukazatelů. Příčiny <b>interní</b> (zadluženost, ztráta konkurenceschopnosti) × <b>externí</b> (recese, legislativa).",
+          "<b>2.</b> Going concern — předpoklad dalšího fungování. Když neplatí → likvidace.",
+          "<b>3.</b> Úpadek: <b>platební neschopnost</b> (nezvládá splatné závazky) × <b>předlužení</b> (závazky > majetek).",
+          "<b>4.</b> Řešení: <b>konkurz</b> (rozprodej, zánik), <b>reorganizace</b> (záchrana, ozdravný plán), <b>oddlužení</b> (fyzické osoby). Rozhoduje insolvenční správce.",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>📎 Napojení na ostatní okruhy</Tag>
+        <Bullet items={[
+          "<b>Okruh 2 (Bankrotní modely):</b> Altman, IN predikují úpadek dřív, než nastane — včasné varování.",
+          "<b>Okruh 1 (Finanční analýza):</b> ukazatele likvidity a zadluženosti signalizují blížící se krizi.",
+          "<b>Okruh 3 (Pracovní kapitál):</b> záporná mezera krytí (OA < KZ) = platební neschopnost.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const praxeFin7 = {
+    caseStudy: {
+      company: "Reorganizace vs konkurz — kdy firmu zachránit a kdy rozprodat",
+      subtitle: "Jak se v praxi rozhoduje o osudu firmy v úpadku",
+      content: (<>
+        Když se firma dostane do úpadku, klíčová otázka zní: zachránit, nebo rozprodat?<br/><br/>
+        <b style={{ color: VSE.warning }}>Reorganizace (záchrana)</b> — dává smysl, když firma má <b>životaschopné jádro</b>: funkční produkt, zákazníky, know-how, jen se zadlužila nebo měla dočasný problém. Ozdravný plán, firma běží dál a postupně splácí. Věřitelé často dostanou víc než při rozprodeji.<br/>
+        <b style={{ color: VSE.danger }}>Konkurz (rozprodej)</b> — když už firma nemá budoucnost: zastaralý produkt, ztracený trh, žádná cesta k zisku. Majetek se zpeněží, věřitelé dostanou výtěžek, firma zaniká.<br/><br/>
+        <b>Rozhoduje:</b> má firma smysluplný a konkurenceschopný produkt s výhledem na zisk (going concern 3 otázky)? Pokud ano → reorganizace. Pokud ne → konkurz.<br/><br/>
+        <b>Proč to komise zajímá:</b> chtějí hlavně praxi — umět rozhodnout, jestli firmu zachraňovat (reorganizace) nebo ukončit (konkurz), a podle čeho. Ne memorovat paragrafy.
+      </>),
+      lessons: "Úpadek neznamená automaticky konec. Reorganizace zachrání životaschopnou firmu (funkční jádro, jen zadlužení), konkurz ukončí firmu bez budoucnosti (rozprodej majetku). Rozhoduje, jestli má firma smysluplný konkurenceschopný produkt s výhledem na zisk."
+    },
+    miniExamples: [
+      { company: "Bankrotní model jako prevence", tag: "VAZBA NA OKRUH 2", color: VSE.fis, content: "Kdyby firma sledovala Altman Z-skóre nebo index IN, viděla by blížící se úpadek dřív (pokles do rizikové zóny) a mohla zasáhnout včas — restrukturalizovat dluh, snížit náklady. Bankrotní modely = včasné varování před krizí." },
+      { company: "Zisková firma v platební neschopnosti", tag: "LIKVIDITA ≠ ZISK", color: VSE.danger, content: "Firma může být v účetnictví zisková, ale platebně neschopná — peníze jsou vázané v zásobách a pohledávkách (dlouhý obratový cyklus, okruh 3). Úpadek se týká hotovosti, ne zisku. Proto se sleduje likvidita, ne jen rentabilita." },
+      { company: "Going concern v auditu", tag: "ÚČETNÍ DOPAD", color: VSE.warning, content: "Auditor musí posoudit, jestli firma splňuje going concern. Pokud má vážné pochybnosti (vysoké ztráty, předlužení), upozorní na to ve zprávě — a účetní závěrka se pak sestavuje s předpokladem likvidace, ne pokračování." },
+    ]
+  };
+
+  const flashcardsFin7 = [
+    { q: "Co je krize podniku?", a: "Situace v životním cyklu, kdy dochází k poklesu klíčových výkonových ukazatelů. Firma přestává plnit cíle." },
+    { q: "Interní příčiny krize?", a: "Vysoká zadluženost, nízká likvidita, špatná cenová politika, ztráta konkurenceschopnosti, neumí inovovat, špatný marketing." },
+    { q: "Externí příčiny krize?", a: "Makroekonomické vlivy (vysoké úroky), legislativa, recese, propad poptávky, nová konkurence." },
+    { q: "Co je going concern?", a: "Účetní princip předpokládající, že firma bude fungovat i v budoucnu. Pokud neplatí, závěrka se sestavuje s předpokladem likvidace." },
+    { q: "3 otázky posouzení přežití firmy?", a: "1. Existuje smysluplný produkt? 2. Je konkurenceschopný? 3. Bude směřovat k trvalému generování zisku?" },
+    { q: "2 formy úpadku?", a: "Platební neschopnost (nezvládá splatné závazky, >30 dní po splatnosti, víc věřitelů) a předlužení (závazky > majetek)." },
+    { q: "Platební neschopnost × předlužení?", a: "Platební neschopnost = nemá na splatné závazky (i zisková firma). Předlužení = závazky převyšují majetek (jen PO a podnikající FO)." },
+    { q: "3 způsoby řešení úpadku?", a: "Konkurz (rozprodej majetku, zánik), reorganizace (záchrana podle ozdravného plánu), oddlužení (fyzické osoby, splátkový kalendář)." },
+    { q: "Co je konkurz?", a: "Majetek firmy se rozprodá (zpeněží), výtěžek se rozdělí mezi věřitele. Vede k zániku firmy (výmaz z rejstříku). Likvidační řešení." },
+    { q: "Co je reorganizace?", a: "Firma pokračuje v provozu podle ozdravného plánu a postupně splácí věřitele. Pro větší firmy, kde má smysl je zachovat. Sanační řešení." },
+    { q: "Role insolvenčního správce?", a: "Rozhoduje o průběhu insolvence, firma ztrácí kontrolu nad majetkem. Spravuje majetkovou podstatu, dohlíží na uspokojení věřitelů." },
+    { q: "Jak souvisí krize s bankrotními modely?", a: "Bankrotní modely (Altman, IN) predikují úpadek dřív, než nastane — slouží jako včasný varovný systém před krizí." },
+  ];
+
+  const quizFin7 = [
+    { q: "Krize podniku je:", opts: ["Pokles klíčových výkonových ukazatelů", "Vysoký zisk", "Růst tržeb", "Nová investice"], correct: 0 },
+    { q: "Která je interní příčina krize?", opts: ["Recese", "Legislativa", "Vysoká zadluženost a ztráta konkurenceschopnosti", "Vysoké úrokové sazby"], correct: 2 },
+    { q: "Going concern je předpoklad, že:", opts: ["Firma zkrachuje", "Firma bude fungovat i v budoucnu", "Firma se rozprodá", "Firma má zisk"], correct: 1 },
+    { q: "Pokud going concern neplatí, závěrka se sestavuje:", opts: ["Normálně", "S předpokladem likvidace", "Vůbec ne", "S předpokladem růstu"], correct: 1 },
+    { q: "Platební neschopnost znamená:", opts: ["Závazky > majetek", "Firma nezvládá splatné závazky", "Firma má vysoký zisk", "Firma nemá dluhy"], correct: 1 },
+    { q: "Předlužení znamená:", opts: ["Firma nezvládá splatné závazky", "Závazky převyšují majetek", "Vysoká likvidita", "Žádné dluhy"], correct: 1 },
+    { q: "Konkurz vede k:", opts: ["Záchraně firmy", "Rozprodeji majetku a zániku firmy", "Růstu firmy", "Snížení daní"], correct: 1 },
+    { q: "Reorganizace je:", opts: ["Rozprodej a zánik", "Záchrana firmy podle ozdravného plánu", "Oddlužení fyzické osoby", "Likvidace"], correct: 1 },
+    { q: "O průběhu insolvence rozhoduje:", opts: ["Majitel firmy", "Insolvenční správce (firma ztrácí kontrolu)", "Zaměstnanci", "Konkurence"], correct: 1 },
+    { q: "Bankrotní modely vůči krizi slouží k:", opts: ["Vyřešení úpadku", "Předvídání úpadku dřív, než nastane (včasné varování)", "Výplatě věřitelů", "Likvidaci"], correct: 1 },
+  ];
+
+  const examQuestionsFin7 = [
+    { komise: "LS 2025 — Nový, Müllerová, Kolouchová", otazka: "Krize a úpadek podniku, možnosti řešení úpadku.", pozn: "Krize (příčiny) → úpadek (2 formy) → řešení (konkurz/reorganizace/oddlužení). Důraz na možnosti řešení úpadku." },
+    { komise: "LS 2025 — Kolouchová, Viktora, Hönig", otazka: "Krize podniku, řešení krize/úpadku podniku.", pozn: "Komisi nezajímala teorie, hlavně PRAXE — jak to udělat reálně. Stačily rámcové odpovědi. Zaměř se na praktické řešení (zachránit × rozprodat)." },
+    { komise: "ZS 2025 — Krause, Viktora, Tahal", otazka: "Krize a úpadek podniku.", pozn: "Základní přehled: co je krize, kdy nastane úpadek, jak se řeší. Napoj na bankrotní modely (predikce, okruh 2)." },
+  ];
+
+  const podcastFin7 = { title: "Finance 7 — Krize a úpadek podniku", description: "Krize podniku (interní × externí příčiny), going concern, 2 formy úpadku (platební neschopnost × předlužení), řešení úpadku (konkurz / reorganizace / oddlužení), insolvenční správce, vazba na bankrotní modely.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyFin7 = `
+    <b style="color:#E06D1E">1.</b> <b>Krize</b> = pokles klíčových ukazatelů. Příčiny <b>interní</b> (zadluženost, ztráta konkurenceschopnosti) × <b>externí</b> (recese, legislativa).<br/>
+    <b style="color:#E06D1E">2.</b> <b>Going concern</b> — předpoklad dalšího fungování. Když neplatí → likvidace. Zmiň 3 otázky přežití.<br/>
+    <b style="color:#E06D1E">3.</b> <b>Úpadek</b>: <b>platební neschopnost</b> (nezvládá splatné závazky) × <b>předlužení</b> (závazky > majetek).<br/>
+    <b style="color:#E06D1E">4.</b> <b>Řešení úpadku</b> (Nový to chce): <b>konkurz</b> (rozprodej, zánik), <b>reorganizace</b> (záchrana, ozdravný plán), <b>oddlužení</b> (FO). Insolvenční správce.<br/>
+    <b style="color:#E06D1E">5.</b> 🔴 Komise chce <b>hlavně praxi</b> — umět rozhodnout zachránit (reorganizace) × rozprodat (konkurz) a podle čeho.<br/>
+    <b style="color:#E06D1E">6.</b> <b>Napoj</b>: bankrotní modely (okruh 2 — predikce úpadku), finanční analýza (okruh 1 — likvidita/zadluženost signalizuje krizi).
+  `;
+
+  const caseStudyFin7 = {
+    title: "Jakub — krizový manažer posuzuje firmu v úpadku StrojTech",
+    subtitle: "Rozliš formu úpadku a navrhni řešení (zachránit × rozprodat)",
+    scenario: "Jakub (48) je krizový manažer, kterého věřitelé povolali do StrojTech — strojírenské firmy se 120 zaměstnanci, tržby 200 mil. Kč. Firma se dostala do problémů: má závazky po splatnosti u dodavatelů (déle než 30 dní) a u tří bank, celkem dluží 90 mil. Kč. Majetek firmy (stroje, budovy, zásoby) má hodnotu kolem 110 mil. Kč.\n\nJakub zjišťuje: firma má pořád dobré jméno, kvalitní produkt (přesné strojní díly pro automotive) a stálé zákazníky, kteří by rádi pokračovali. Problém vznikl kombinací — velký zákazník zkrachoval a nezaplatil (výpadek 25 mil.), firma si na novou linku vzala úvěr, který teď nezvládá splácet, a koruna posílila (firma exportuje).\n\nVěřitelé se ptají Jakuba: je StrojTech v úpadku? Jakou formou? A má smysl firmu zachraňovat, nebo ji rozprodat? Jakub vidí, že jádro byznysu je zdravé — jen se sešlo víc nešťastných okolností najednou.",
+    signals: [
+      { text: "závazky po splatnosti u dodavatelů (déle než 30 dní) a u tří bank", color: VSE.danger, reason: "Platební neschopnost — víc věřitelů, závazky po splatnosti déle než 30 dní. Klasický znak úpadku." },
+      { text: "celkem dluží 90 mil. Kč. Majetek firmy ... má hodnotu kolem 110 mil. Kč", color: VSE.fis, reason: "Majetek (110) > závazky (90) → NENÍ předlužená. Jde o platební neschopnost, ne předlužení." },
+      { text: "dobré jméno, kvalitní produkt ... a stálé zákazníky, kteří by rádi pokračovali", color: VSE.success, reason: "Životaschopné jádro — funkční produkt, zákazníci, jméno. Going concern 3 otázky: produkt ano, konkurenceschopný ano." },
+      { text: "velký zákazník zkrachoval a nezaplatil (výpadek 25 mil.)", color: VSE.warning, reason: "Externí příčina krize — výpadek pohledávky. Dočasný problém, ne fundamentální slabost firmy." },
+      { text: "jádro byznysu je zdravé — jen se sešlo víc nešťastných okolností", color: VSE.success, reason: "Indikátor pro reorganizaci, ne konkurz. Firmu má smysl zachránit, ne rozprodat." },
+    ],
+    quiz1: {
+      question: "V jaké formě úpadku je StrojTech?",
+      options: [
+        "Předlužení — závazky převyšují majetek",
+        "Platební neschopnost — nezvládá splatné závazky (>30 dní, víc věřitelů), ale majetek (110) stále převyšuje závazky (90)",
+        "Není v úpadku vůbec",
+        "Konkurz",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Co Jakub navrhne věřitelům?",
+      options: [
+        { text: "Reorganizaci — firma má životaschopné jádro (produkt, zákazníci, jméno), problém je dočasný", correct: true, reason: "✓ Reorganizace zachrání zdravou firmu. Going concern otázky vychází kladně. Věřitelé pravděpodobně dostanou víc než při rozprodeji." },
+        { text: "Ozdravný plán: restrukturalizovat dluh, dořešit výpadek pohledávky, případně zajistit měnové riziko derivátem", correct: true, reason: "✓ Konkrétní kroky reorganizace. Řeší příčiny (dluh, pohledávka, kurz — okruh 6), ne jen symptomy." },
+        { text: "Posoudit going concern — má firma smysluplný konkurenceschopný produkt s výhledem na zisk? (ano → zachránit)", correct: true, reason: "✓ Správné kritérium rozhodnutí. 3 otázky going concern vychází kladně → reorganizace dává smysl." },
+        { text: "Okamžitý konkurz — rozprodat všechen majetek", correct: false, reason: "✗ Konkurz je pro firmy bez budoucnosti. StrojTech má zdravé jádro — rozprodej by zničil hodnotu a věřitelé by dostali míň." },
+        { text: "Do budoucna sledovat bankrotní modely (Altman, IN), aby se krize odhalila dřív", correct: true, reason: "✓ Prevence — včasné varování by umožnilo zasáhnout dřív, než firma spadla do platební neschopnosti (vazba na okruh 2)." },
+        { text: "Nedělat nic a počkat, jestli se to samo zlepší", correct: false, reason: "✗ Pasivita v úpadku je nebezpečná — závazky narůstají, věřitelé můžou podat insolvenční návrh. Krizi je třeba aktivně řešit." },
+      ],
+    },
+    summary: "<b>StrojTech je v platební neschopnosti, ale má zdravé jádro — proto reorganizace, ne konkurz.</b><br/><br/><b>Diagnóza:</b><br/>• Forma úpadku = <b>platební neschopnost</b> (závazky po splatnosti >30 dní, víc věřitelů) — NE předlužení, protože majetek (110 mil.) převyšuje závazky (90 mil.)<br/>• Příčina = kombinace externích vlivů (výpadek velkého zákazníka, posílení koruny, úvěr)<br/>• Going concern: produkt smysluplný ✓, konkurenceschopný ✓, výhled na zisk ✓<br/><br/><b>Jakub navrhne reorganizaci:</b><br/>• ozdravný plán — restrukturalizace dluhu, dořešení výpadku pohledávky, zajištění měnového rizika (okruh 6)<br/>• firma běží dál a postupně splácí → věřitelé dostanou víc než při rozprodeji<br/><br/><b>Pro komisi:</b> Tohle je přesně to, co Nový/Hönig chtějí — praktické rozhodnutí zachránit × rozprodat. Klíč: <b>platební neschopnost × předlužení</b> (forma úpadku), <b>konkurz</b> (rozprodej, zánik) × <b>reorganizace</b> (záchrana zdravého jádra). A napoj na bankrotní modely (okruh 2) jako prevenci — krizi se vyplatí předvídat dřív.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Finance" subjectId="fin" number={7} title="Krize a úpadek podniku, řešení úpadku"
+      subtitle="Krize, going concern, úpadek (2 formy), konkurz / reorganizace / oddlužení"
+      color={VSE.danger}
+      questionText="Krize a úpadek podniku, možnosti řešení úpadku"
+      sloz={2} roz={2} freq={2}
+      studySections={studySectionsFin7}
+      flashcards={flashcardsFin7}
+      quiz={quizFin7}
+      praxe={praxeFin7}
+      examQuestions={examQuestionsFin7}
+      podcast={podcastFin7}
+      examStrategy={examStrategyFin7}
+      caseStudy={caseStudyFin7}
+    />
+  );
+}
+
+
+function OkruhFin6Panel() {
+  const studySectionsFin6 = [
+    { id: "riziko", title: "Riziko — druhy, klasifikace, pojmy", subtitle: "Co je riziko + systematické × nesystematické + míry rizika", color: VSE.danger, emoji: "bolt",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Riziko</b> = nebezpečí, že se dosažené výsledky budou odchylovat od očekávaných. Stupeň nejistoty spojený s realizací budoucích výnosů. Ve financích řízení rizika znamená to riziko nejdřív poznat (analýza) a pak s ním pracovat (řízení).
+        </Def>
+        <Tag color={VSE.danger}>Druhy rizika</Tag>
+        <Bullet items={[
+          "<b>Provozní</b> (stávky, nehoda, porucha stroje) · <b>tržní</b> (změny v ekonomice, postihne všechny — koeficient β) · <b>inovační</b> (nový výrobek na trhu).",
+          "<b>Investiční</b> (špatná investice) · <b>finanční</b> (platební schopnost, míra zapojení CK) · <b>podnikatelské</b> (jiné výsledky než očekávané — vliv na hodnotu podniku).",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.warning}>🔴 Klasifikace — systematické × nesystematické (klíčové)</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Systematické riziko" color={VSE.danger} items={["<b>NELZE eliminovat</b> diverzifikací.", "Společné pro všechny firmy na trhu (ekonomika, úroky, politika).", "Promítá se do CAPM (koeficient β)."]} />
+          <ModelCard name="Nesystematické riziko" color={VSE.success} items={["<b>LZE eliminovat</b> diverzifikací.", "Specifické pro danou firmu (management, produkt).", "Rozložením investic ho odstraním."]} />
+        </ResponsiveGrid>
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.fis}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans }}>
+          Dále: <b>objektivní</b> (nezávislé na firmě — počasí, politika) × <b>subjektivní</b> (ovlivním — znalosti, rozhodnutí manažera).
+        </div>
+        <Tag color={VSE.fmv}>Pojmy — míry rizika</Tag>
+        <Bullet items={[
+          "<b>Střední hodnota</b> = vážený průměr výnosů × pravděpodobnosti.",
+          "<b>Rozptyl</b> = průměrná čtvercová odchylka od střední hodnoty. <b>Směrodatná odchylka</b> = odmocnina rozptylu = <b>absolutní míra rizika</b>.",
+          "<b>Variační koeficient</b> = sm. odchylka / průměr = <b>relativní míra rizika</b> (chci co nejnižší, riziko na jednotku výnosu).",
+          "<b>Korelační koeficient</b> = míra závislosti mezi 2 investicemi (−1 až +1).",
+        ]} color={VSE.fmv} />
+      </div>) },
+
+    { id: "portfolio", title: "🎲 Teorie portfolia + diverzifikace", subtitle: "Jak rozložením investic snížit riziko + role korelace", color: VSE.fis, emoji: "circles",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Teorie portfolia</b> — snaha co nejlépe vyvážit výnos a riziko. Cíl: portfolio s co nejvyšším výnosem při co nejnižším riziku. Klíčový nástroj je <b>diverzifikace</b> — rozložení investic tak, aby propad jedné neohrozil celek.
+        </Def>
+        <Bullet items={[
+          "<b>Výnos portfolia</b> = vážený průměr středních hodnot jednotlivých aktiv.",
+          "<b>Riziko portfolia</b> = vážený průměr směrodatných odchylek.",
+          "Diverzifikací omezujeme <b>nesystematické (jedinečné) riziko</b>. Systematické riziko zůstává — nejde diverzifikovat.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.fis}>🔴 Korelace — proč na ní záleží</Tag>
+        <ResponsiveSVG viewBox="0 0 600 180" maxHeight={170}>
+          {[
+            { x: 110, c: VSE.danger, v: "+1", t: "stejný směr", d: "nevhodné — rizika se sčítají" },
+            { x: 300, c: VSE.success, v: "0", t: "nezávislé", d: "ideál pro diverzifikaci" },
+            { x: 490, c: VSE.fis, v: "−1", t: "opačný směr", d: "riziko zcela eliminováno (vzácné)" },
+          ].map((p, i) => (
+            <g key={i}>
+              <circle cx={p.x} cy="60" r="32" fill={`${p.c}1a`} stroke={p.c} strokeWidth="2"/>
+              <text x={p.x} y="68" textAnchor="middle" fontFamily={fontMono} fontSize="22" fontWeight="700" fill={p.c}>{p.v}</text>
+              <text x={p.x} y="118" textAnchor="middle" fontFamily={fontSans} fontSize="12" fontWeight="700" fill={p.c}>{p.t}</text>
+              <text x={p.x} y="140" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fill="var(--text-muted)">{p.d.split("—")[0]}</text>
+              <text x={p.x} y="153" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fill="var(--text-muted)">{p.d.split("—")[1]||""}</text>
+            </g>
+          ))}
+        </ResponsiveSVG>
+        <Bullet items={[
+          "<b>Korelace +1</b> — výnosy se pohybují stejně → rizika se sčítají, k diverzifikaci nevhodné.",
+          "<b>Korelace 0</b> — výnosy spolu nesouvisí → ideální pro diverzifikaci, riziko portfolia klesá.",
+          "<b>Korelace −1</b> — výnosy se pohybují opačně → riziko by bylo zcela eliminováno, ale to je v reálu vzácné.",
+        ]} color={VSE.fis} />
+      </div>) },
+
+    { id: "capm", title: "📈 CAPM + beta + SML", subtitle: "Ocenění systematického rizika (vazba na okruh 4)", color: VSE.success, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.success}>
+          <b>CAPM</b> (Capital Asset Pricing Model) oceňuje <b>systematické riziko</b> a říká, jaký výnos může investor očekávat podle míry rizika. Stejný model se používá pro odhad nákladů VK (okruh 4).
+        </Def>
+        <div style={{ textAlign: "center", margin: "10px 0", padding: "12px", background: `${VSE.success}12`, borderRadius: 10, fontFamily: fontMono, fontSize: 15.5, fontWeight: 700, color: VSE.success }}>
+          re = rf + β · (rm − rf)
+        </div>
+        <Bullet items={[
+          "<b>rf</b> = bezriziková sazba · <b>rm</b> = očekávaný výnos trhu · <b>β</b> = koeficient beta · <b>(rm − rf)</b> = riziková prémie trhu.",
+          "<b>β měří citlivost na výkyvy trhu</b> (systematické riziko): β > 1 rizikovější než trh, β < 1 stabilnější, β = 1 stejně jako trh, β = 0 nezávislé (státní dluhopisy).",
+        ]} color={VSE.success} />
+        <Tag color={VSE.success}>SML — Security Market Line</Tag>
+        <ResponsiveSVG viewBox="0 0 600 240" maxHeight={230}>
+          <line x1="70" y1="200" x2="540" y2="200" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <line x1="70" y1="40" x2="70" y2="200" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <text x="305" y="228" textAnchor="middle" fontFamily={fontMono} fontSize="11" fill="var(--text-muted)">RIZIKO (β) →</text>
+          <text x="45" y="120" textAnchor="middle" fontFamily={fontMono} fontSize="11" fill="var(--text-muted)" transform="rotate(-90 45 120)">OČEKÁVANÝ VÝNOS</text>
+          <line x1="70" y1="170" x2="530" y2="60" stroke={VSE.success} strokeWidth="2.5"/>
+          <text x="500" y="50" textAnchor="middle" fontFamily={fontMono} fontSize="11" fontWeight="700" fill={VSE.success}>SML</text>
+          <circle cx="70" cy="170" r="4" fill={VSE.fis}/>
+          <text x="95" y="174" fontFamily={fontSans} fontSize="10" fill={VSE.fis}>rf (β=0)</text>
+          <circle cx="250" cy="100" r="6" fill={VSE.success}/>
+          <text x="250" y="88" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fill={VSE.success}>nad SML = podhodnocené (koupit)</text>
+          <circle cx="350" cy="160" r="6" fill={VSE.danger}/>
+          <text x="350" y="180" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fill={VSE.danger}>pod SML = nadhodnocené (prodat)</text>
+        </ResponsiveSVG>
+        <Bullet items={[
+          "SML začíná na bezrizikové sazbě (rf, β=0) a stoupá — vyšší riziko (β) = vyšší očekávaný výnos.",
+          "<b>CP nad SML = podhodnocené</b> → nabízí vyšší výnos než odpovídá riziku → <b>vhodné k nákupu</b>.",
+          "<b>CP pod SML = nadhodnocené</b> → nižší výnos než odpovídá riziku → prodat.",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "rizeni", title: "🛡️ Řízení rizika + snižování", subtitle: "Analýza × řízení, finanční rizika, jak snížit", color: VSE.warning, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.warning}>
+          <b>Řízení rizika</b> má 2 kroky: <b>analýza rizika</b> (identifikace + stanovení významnosti) a <b>řízení rizika</b> (příprava a realizace opatření pro snížení). Cíl: minimalizovat dopady nejistých hrozeb.
+        </Def>
+        <Tag color={VSE.warning}>Finanční rizika — odkud plynou</Tag>
+        <Bullet items={[
+          "<b>Z provozu</b> — měnová struktura nákladů či výnosů (nákup surovin v EUR).",
+          "<b>Ze struktury financování</b> — měnová či úroková (vše na PRIBOR).",
+          "<b>Z vývoje cen</b> — kurzová.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.success}>Snížení rizika</Tag>
+        <Bullet items={[
+          "<b>Diverzifikací</b> — omezuje jedinečné (nesystematické) riziko. Systematické riziko je zbytkové, nejde snižovat.",
+          "<b>Zajištěním (hedging)</b> — finanční deriváty (forward, swap, opce) proti měnovému a úrokovému riziku.",
+          "Rizika lze do jisté míry <b>předvídat</b>: ekonomický cyklus (expanze/recese), politika centrální banky, vývoj na světových trzích.",
+        ]} color={VSE.success} />
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.fmv}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans }}>
+          2 hlavní rizika, která se zajišťují deriváty: <b>úrokové</b> (úrokový swap, opce, FRA) a <b>kurzové/měnové</b> (měnový forward, swap, opce).
+        </div>
+      </div>) },
+
+    { id: "derivaty", title: "💱 Finanční deriváty — přehled", subtitle: "Co to je + dělení + 4 druhy (Svobodová chce přesné názvy)", color: VSE.fmv, emoji: "refresh",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Finanční deriváty</b> = finanční nástroje (smlouvy), jejichž hodnota závisí na hodnotě jiného <b>podkladového aktiva</b> (akcie, komodity, měny, úrokové sazby). Forma termínovaného obchodu — dohoda dnes, plnění v budoucnu. Slouží k zajištění proti riziku nebo ke spekulaci.
+        </Def>
+        <ExamAlert komise="Svobodová (ZS 2026)" color={VSE.danger} what="Svobodová chce <b>přesné názvy</b>: „chápu, že tomu rozumíte, ale jak se to teda přesně jmenuje...” → Měj jistotu v názvech: forward, futures, swap, opce. A uměj rozdíl podmíněné × nepodmíněné." />
+        <Tag color={VSE.fmv}>Dělení derivátů</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Dle uskutečnění obchodu" color={VSE.fmv} items={["<b>Nepodmíněné</b> — obě strany mají povinnost (obchod MUSÍ proběhnout): forward, futures, swap.", "<b>Podmíněné</b> — jedna strana má právo, druhá povinnost: opce."]} />
+          <ModelCard name="Dle trhu" color={VSE.fis} items={["<b>Burzovní</b> — organizované burzy, podmínky standardizovány (futures).", "<b>Mimoburzovní (OTC)</b> — nestandardizované, soukromé (forward, swap)."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>4 druhy finančních derivátů</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.warning, n: "FORWARD", d: "Dohoda koupit/prodat aktivum za dnes stanovenou cenu (povinnost). Mimo burzu (OTC)." },
+            { c: VSE.fis, n: "FUTURES", d: "Obdoba forwardu, ale obchoduje se na burze, standardizované. Emitenti většinou banky." },
+            { c: VSE.success, n: "SWAP", d: "Směna jednoho toku hotovosti za jiný (pevná × pohyblivá sazba, měny). Dohoda o výměně plateb." },
+            { c: VSE.danger, n: "OPCE", d: "Právo (ne povinnost) koupit/prodat aktivum v budoucnu. Jako forward, ale PRÁVO." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14.5, fontWeight: 700, color: b.c, fontFamily: fontMono, marginBottom: 4 }}>{b.n}</div>
+              <div style={{ fontSize: 13, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "menove_urokove", title: "🌍 Měnové + úrokové riziko", subtitle: "Forward/swap/opce + IRS, cap, floor, FRA, PRIBOR", color: VSE.danger, emoji: "globe",
+      content: (<div>
+        <Def color={VSE.danger}>
+          Dva nejčastější typy finančního rizika, která se zajišťují deriváty: <b>měnové</b> (riziko změny kurzu) a <b>úrokové</b> (riziko změny úrokových sazeb).
+        </Def>
+        <Tag color={VSE.danger}>Měnové riziko</Tag>
+        <Bullet items={[
+          "<b>Čistý exportér</b> (víc vyváží, inkasuje v €) → výhodné <b>oslabení Kč</b> (za € dostane víc Kč). <b>Čistý importér</b> → výhodné <b>posílení Kč</b>.",
+          "<b>Měnový forward</b> — smlouva o nákupu/prodeji měny za pevný kurz k danému datu. Forwardový kurz = spotový kurz + forwardové body (dle rozdílu úrokových sazeb).",
+          "<b>Měnová opce</b> — právo koupit (call) nebo prodat (put) měnu za strike price. Platí se opční prémie.",
+          "<b>Měnový swap</b> — 2 strany si vymění částky v různých měnách, platí si úroky, na konci vrátí zpět za dohodnutý kurz.",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.fis}>Úrokové riziko</Tag>
+        <Bullet items={[
+          "<b>Úrokový swap (IRS)</b> — 2 strany si vyměňují úrokové platby: jedna platí fixní, druhá pohyblivou (PRIBOR). Kdo čeká růst sazeb, chce fixní; kdo čeká pokles, chce pohyblivou.",
+          "<b>CAP</b> — strop úrokové sazby, chrání proti <b>růstu</b> sazby nad limit (pro dlužníka). <b>FLOOR</b> — podlaha, garantuje <b>minimální</b> sazbu (pro investora).",
+          "<b>FRA (Forward Rate Agreement)</b> — dohoda o pevné úrokové sazbě na budoucí období. Porovná se dohodnutá vs tržní sazba (PRIBOR), vyrovná se rozdíl.",
+          "<b>PRIBOR</b> = sazba, za kterou si banky v ČR mezi sebou půjčují. Referenční pohyblivá sazba.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>CAP × FLOOR</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="CAP (strop)" color={VSE.danger} items={["Chrání <b>dlužníka</b> proti růstu sazby.", "Př.: půjčka PRIBOR+2 %, ale nechci platit víc než 5 % → cap s limitem 5 %."]} />
+          <ModelCard name="FLOOR (podlaha)" color={VSE.success} items={["Chrání <b>investora</b> proti poklesu sazby.", "Př.: půjčka za PRIBOR−1 %, chci výnos min. 2 % → floor."]} />
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "opce", title: "🎯 Opce — call/put + long/short", subtitle: "Právo × povinnost, strike/spot, opční prémie", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          <b>Opce</b> = smlouva, která dává kupujícímu <b>právo (ne povinnost)</b> koupit nebo prodat aktivum za předem dohodnutou cenu v dohodnutém čase. Za toto právo platí kupující prodávajícímu <b>opční prémii</b> (poplatek). Slouží ke snížení rizika / jako pojistka.
+        </Def>
+        <Tag color={VSE.success}>Call × Put</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="CALL opce (nákupní)" color={VSE.success} items={["Právo <b>koupit</b> aktivum za strike price.", "Využiju, když čekám, že cena <b>poroste</b>."]} />
+          <ModelCard name="PUT opce (prodejní)" color={VSE.danger} items={["Právo <b>prodat</b> aktivum za strike price.", "Využiju, když čekám, že cena <b>klesne</b>."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.fis}>Long × Short pozice</Tag>
+        <Bullet items={[
+          "<b>LONG pozice</b> — pozice kupujícího, čeká nárůst (poroste).",
+          "<b>SHORT pozice</b> — pozice prodávajícího, čeká pokles (klesne).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>Ceny u opce</Tag>
+        <Bullet items={[
+          "<b>STRIKE price (realizační cena)</b> — předem určená cena, za kterou lze opci uplatnit.",
+          "<b>SPOT price (spotová cena)</b> — aktuální tržní cena aktiva právě teď.",
+          "<b>Opční prémie</b> — poplatek, který kupující platí za právo (i když opci nevyužije, prémii ztratí).",
+        ]} color={VSE.warning} />
+        <div style={{ marginTop: 8, padding: "10px 14px", background: `${VSE.fmv}10`, border: `1px solid ${VSE.fmv}30`, borderRadius: 10, fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>Příklad:</b> Domluvím se, že si za měsíc koupím kolo za 10 000, dnes zaplatím 500 (opční prémie). Pokud cena vzroste na 15 000 → koupím za 10 000 (vyplatí se). Pokud klesne na 8 000 → opci nevyužiju, ztratím jen 500.
+        </div>
+      </div>) },
+  ];
+
+  const praxeFin6 = {
+    caseStudy: {
+      company: "Aerolinky a palivo — zajištění rizika deriváty v praxi",
+      subtitle: "Jak firmy chrání marži před výkyvy cen a kurzů",
+      content: (<>
+        Aerolinky jsou učebnicový příklad řízení finančního rizika přes deriváty.<br/><br/>
+        <b style={{ color: VSE.danger }}>Riziko</b> — palivo je obrovská část nákladů a jeho cena divoce kolísá. Když cena vyletí, marže se rozplyne.<br/>
+        <b style={{ color: VSE.fis }}>Zajištění (hedging)</b> — aerolinky nakupují deriváty na palivo (forwardy, swapy, opce), které jim zafixují cenu dopředu. Když cena vzroste, derivát pokryje rozdíl → náklady zůstanou pod kontrolou.<br/>
+        <b style={{ color: VSE.warning }}>Měnové riziko</b> — palivo se kupuje v dolarech, ale tržby jsou v lokálních měnách. Měnové forwardy fixují kurz, aby kurzový pohyb nesnědl zisk.<br/><br/>
+        <b>Proč to komise zajímá:</b> ukazuje, že deriváty nejsou jen abstraktní teorie — slouží k <b>zajištění</b> (ne nutně spekulaci). Firma fixuje budoucí cenu/kurz, aby měla jistotu a mohla plánovat. Přesně to chce Nový — aplikace na případovku.
+      </>),
+      lessons: "Finanční deriváty slouží primárně k zajištění (hedging) — firma fixuje budoucí cenu nebo kurz, aby chránila marži před výkyvy. Forward/swap = povinnost, opce = právo (za prémii). Pozor: deriváty lze použít i ke spekulaci, což je rizikové."
+    },
+    miniExamples: [
+      { company: "Exportér a měnový forward", tag: "MĚNOVÉ RIZIKO", color: VSE.danger, content: "Česká firma vyváží do Německa, za 3 měsíce dostane 100 000 EUR. Bojí se, že koruna posílí (dostane míň Kč). Uzavře měnový forward na pevný kurz → má jistotu, kolik Kč dostane, bez ohledu na pohyb kurzu." },
+      { company: "Firma s úvěrem a úrokový swap", tag: "ÚROKOVÉ RIZIKO", color: VSE.fis, content: "Firma má úvěr s pohyblivou sazbou (PRIBOR+2 %) a bojí se růstu sazeb. Úrokovým swapem (IRS) ho promění na fixní → získá jistotu pevné splátky a může plánovat. Nebo koupí cap = strop sazby." },
+      { company: "Diverzifikace portfolia", tag: "TEORIE PORTFOLIA", color: VSE.success, content: "Investor nedá vše do jedné akcie, ale rozloží do aktiv, která spolu nekorelují (akcie + dluhopisy + zlato). Tím odstraní nesystematické riziko. Systematické (celý trh spadne) ale zůstává — to nejde diverzifikovat." },
+    ]
+  };
+
+  const flashcardsFin6 = [
+    { q: "Co je riziko?", a: "Nebezpečí, že se dosažené výsledky budou odchylovat od očekávaných. Stupeň nejistoty spojený s budoucími výnosy." },
+    { q: "Systematické × nesystematické riziko?", a: "Systematické = nelze eliminovat diverzifikací (celý trh, promítá se do CAPM/β). Nesystematické = lze eliminovat diverzifikací (specifické pro firmu)." },
+    { q: "Směrodatná odchylka × variační koeficient?", a: "Sm. odchylka = absolutní míra rizika (odmocnina rozptylu). Variační koeficient = relativní míra rizika (sm. odchylka/průměr), chci co nejnižší." },
+    { q: "Co je teorie portfolia?", a: "Snaha vyvážit výnos a riziko — portfolio s co nejvyšším výnosem při co nejnižším riziku. Nástroj: diverzifikace." },
+    { q: "Role korelace v diverzifikaci?", a: "Korelace +1 = stejný směr (nevhodné). 0 = nezávislé (ideál). −1 = opačný směr (riziko eliminováno, vzácné)." },
+    { q: "CAPM — vzorec?", a: "re = rf + β(rm − rf). rf = bezriziková sazba, rm = výnos trhu, β = koeficient beta. Oceňuje systematické riziko." },
+    { q: "Koeficient beta?", a: "Měří citlivost na výkyvy trhu (systematické riziko). β>1 rizikovější než trh, β<1 stabilnější, β=1 stejně, β=0 nezávislé." },
+    { q: "CP nad/pod SML?", a: "Nad SML = podhodnocené (vyšší výnos než odpovídá riziku) → koupit. Pod SML = nadhodnocené → prodat." },
+    { q: "Jak snížit riziko?", a: "Diverzifikací (omezí nesystematické riziko) a zajištěním = hedging (deriváty proti měnovému a úrokovému riziku)." },
+    { q: "Co jsou finanční deriváty?", a: "Smlouvy, jejichž hodnota závisí na podkladovém aktivu (akcie, měny, sazby). Termínovaný obchod — dohoda dnes, plnění v budoucnu." },
+    { q: "Podmíněné × nepodmíněné deriváty?", a: "Nepodmíněné = obě strany mají povinnost (forward, futures, swap). Podmíněné = jedna má právo (opce)." },
+    { q: "4 druhy finančních derivátů?", a: "Forward (OTC, povinnost), futures (burza, standardizované), swap (směna toků), opce (právo)." },
+    { q: "Forward × futures?", a: "Forward = mimo burzu (OTC), nestandardizovaný. Futures = na burze, standardizovaný, emitenti banky." },
+    { q: "IRS (úrokový swap) + cap/floor?", a: "IRS = výměna fixní a pohyblivé úrokové platby. CAP = strop sazby (chrání dlužníka před růstem). FLOOR = podlaha (chrání investora před poklesem)." },
+    { q: "FRA a PRIBOR?", a: "FRA = dohoda o pevné úrokové sazbě na budoucí období. PRIBOR = sazba, za kterou si banky v ČR půjčují (referenční pohyblivá sazba)." },
+    { q: "Call × put opce + long/short?", a: "Call = právo koupit (čekám růst). Put = právo prodat (čekám pokles). Long = pozice kupujícího, short = prodávajícího." },
+  ];
+
+  const quizFin6 = [
+    { q: "Systematické riziko:", opts: ["Lze eliminovat diverzifikací", "Nelze eliminovat diverzifikací (celý trh)", "Je specifické pro firmu", "Neexistuje"], correct: 1 },
+    { q: "Nesystematické riziko:", opts: ["Nelze eliminovat", "Lze eliminovat diverzifikací (specifické pro firmu)", "Je společné všem firmám", "Promítá se do CAPM"], correct: 1 },
+    { q: "Variační koeficient je:", opts: ["Absolutní míra rizika", "Relativní míra rizika (sm. odchylka/průměr)", "Střední hodnota", "Výnos portfolia"], correct: 1 },
+    { q: "Pro diverzifikaci je ideální korelace:", opts: ["+1 (stejný směr)", "0 (nezávislé)", "Vysoká kladná", "Na korelaci nezáleží"], correct: 1 },
+    { q: "CAPM vzorec re = rf + β(rm − rf) oceňuje:", opts: ["Nesystematické riziko", "Systematické riziko", "Likviditu", "Zadluženost"], correct: 1 },
+    { q: "Beta = 1 znamená:", opts: ["Investice nezávislá na trhu", "Investice se pohybuje stejně jako trh", "Rizikovější než trh", "Bezriziková"], correct: 1 },
+    { q: "CP nad SML přímkou je:", opts: ["Nadhodnocené, prodat", "Podhodnocené, koupit", "Bezrizikové", "Nelze hodnotit"], correct: 1 },
+    { q: "Finanční derivát je:", opts: ["Akcie", "Smlouva, jejíž hodnota závisí na podkladovém aktivu", "Bankovní úvěr", "Dividenda"], correct: 1 },
+    { q: "Opce je derivát:", opts: ["Nepodmíněný (povinnost)", "Podmíněný (právo, ne povinnost)", "Pouze burzovní", "Bez prémie"], correct: 1 },
+    { q: "Forward se obchoduje:", opts: ["Na burze, standardizovaný", "Mimo burzu (OTC), nestandardizovaný", "Jen v bankách", "Nikde"], correct: 1 },
+    { q: "CAP (úrokový) chrání:", opts: ["Investora před poklesem sazby", "Dlužníka před růstem sazby nad limit", "Před měnovým rizikem", "Před inflací"], correct: 1 },
+    { q: "Call opce dává právo:", opts: ["Prodat (čekám pokles)", "Koupit (čekám růst)", "Nic", "Půjčit si"], correct: 1 },
+  ];
+
+  const examQuestionsFin6 = [
+    { komise: "LS 2025 — Nový, Müllerová, Kolouchová", otazka: "Řízení rizika, zajištění proti riziku, finanční deriváty.", pozn: "Vždy aplikace na případovku. Druhy rizika → snižování (diverzifikace + zajištění deriváty) → 4 deriváty (forward/futures/swap/opce)." },
+    { komise: "ZS 2026 — Svobodová, Nový, Machek", otazka: "Finanční deriváty, riziko, časová hodnota peněz.", pozn: "🔴 Svobodová chce PŘESNÉ NÁZVY — forward, futures, swap, opce. Měj jistotu v terminologii, nestačí 'rozumím tomu'." },
+    { komise: "ZS 2025 — Nový, Vávra, Heřman", otazka: "Finanční riziko, metody snižování rizika, časová hodnota peněz, úloha finančních derivátů při řízení rizika, hodnocení investic a rizika u investic.", pozn: "Komplexní — finanční riziko + snižování (diverzifikace, hedging) + role derivátů. Spojeno s časovou hodnotou peněz (okruh 5)." },
+    { komise: "ZS 2026 — Smrčka, Zamazalová, Kučera", otazka: "Riziko a finanční deriváty.", pozn: "Kučera chce vždy tu jednu konkrétní věc — měj jistotu v definicích a dělení derivátů (podmíněné × nepodmíněné, burzovní × OTC)." },
+    { komise: "ZS 2026 — Bočková, Nový, Kolouchová", otazka: "Rizika podniku.", pozn: "Druhy a klasifikace rizik (systematické × nesystematické, finanční rizika). Stačí základy + aplikace na PS." },
+    { komise: "LS 2025 — Machek, Kolouchová, Legnerová", otazka: "Řízení finančních rizik, časová hodnota peněz, finanční deriváty.", pozn: "Machek se hodně doptává. Řízení rizik (analýza + řízení) + deriváty + propojení s časovou hodnotou peněz." },
+  ];
+
+  const podcastFin6 = { title: "Finance 6 — Řízení rizika, finanční deriváty", description: "Druhy a klasifikace rizika (systematické × nesystematické), míry rizika, teorie portfolia a diverzifikace, CAPM/beta/SML, řízení a snižování rizika, finanční deriváty (forward/futures/swap/opce), měnové a úrokové riziko (IRS, cap, floor, FRA), opce call/put.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyFin6 = `
+    <b style="color:#E06D1E">1.</b> <b>Riziko</b>: definice + druhy + klasifikace <b>systematické × nesystematické</b> (diverzifikovatelné?) + míry (sm. odchylka, variační koef.).<br/>
+    <b style="color:#E06D1E">2.</b> <b>Teorie portfolia</b>: diverzifikace omezí nesystematické riziko. Role korelace (0 = ideál pro diverzifikaci).<br/>
+    <b style="color:#E06D1E">3.</b> <b>CAPM</b>: re = rf + β(rm−rf), beta = systematické riziko. SML — nad = podhodnocené (koupit).<br/>
+    <b style="color:#E06D1E">4.</b> <b>Řízení rizika</b>: analýza + řízení. Snížení = diverzifikace + zajištění (hedging deriváty).<br/>
+    <b style="color:#E06D1E">5.</b> 🔴 <b>Finanční deriváty</b> (Svobodová — přesné názvy!): forward, futures, swap, opce. Podmíněné × nepodmíněné, burzovní × OTC.<br/>
+    <b style="color:#E06D1E">6.</b> <b>Měnové riziko</b> (forward/swap/opce) + <b>úrokové</b> (IRS, cap = strop, floor = podlaha, FRA, PRIBOR).<br/>
+    <b style="color:#E06D1E">7.</b> <b>Opce</b>: call (právo koupit, čekám růst) × put (právo prodat, čekám pokles). Strike/spot, opční prémie.<br/>
+    <b style="color:#E06D1E">8.</b> <b>Napoj na případovku</b> (Nový) — najdi v PS finanční riziko (měnové/úrokové) a navrhni zajištění konkrétním derivátem.
+  `;
+
+  const caseStudyFin6 = {
+    title: "Tereza — finanční ředitelka exportéra skla CzechGlass, 140 lidí",
+    subtitle: "Najdi finanční riziko a navrhni zajištění derivátem",
+    scenario: "Tereza (44) je finanční ředitelka v CzechGlass, výrobci uměleckého skla se 140 zaměstnanci. Firma vyváží 80 % produkce do eurozóny (Německo, Rakousko, Itálie), tržby 320 mil. Kč. Je to tedy čistý exportér — fakturuje v eurech, ale náklady (mzdy, energie, materiál) platí v korunách.\n\nProblém: koruna v posledním roce kolísá. Když Tereza podepíše kontrakt na dodávku za 500 000 EUR se splatností 3 měsíce, neví, kolik korun nakonec dostane. Pokud koruna mezitím posílí (z 25 na 23 Kč/EUR), dostane o 1 mil. Kč míň — a to sní celou marži zakázky.\n\nNavíc firma má investiční úvěr 30 mil. Kč s pohyblivou sazbou navázanou na PRIBOR. ČNB signalizuje možné zvyšování sazeb, takže Tereza se obává, že splátky úroků porostou.\n\nMajitel Karel je konzervativní a chce hlavně jistotu — umět dopředu naplánovat, kolik firma dostane a zaplatí. Spekulovat na pohyby kurzů ani sazeb nechce. Tereza zvažuje, jak obě rizika zajistit.",
+    signals: [
+      { text: "vyváží 80 % produkce do eurozóny ... fakturuje v eurech, ale náklady ... v korunách", color: VSE.warning, reason: "Čistý exportér s měnovým rizikem — inkasuje EUR, platí CZK. Posílení koruny mu ubere zisk." },
+      { text: "neví, kolik korun nakonec dostane", color: VSE.danger, reason: "Klasické transakční měnové riziko. Nejistota kurzu mezi podpisem a platbou." },
+      { text: "Pokud koruna mezitím posílí ... dostane o 1 mil. Kč míň — a to sní celou marži", color: VSE.danger, reason: "Konkrétní dopad měnového rizika na marži. Přesně to, proti čemu chrání měnový forward." },
+      { text: "investiční úvěr 30 mil. Kč s pohyblivou sazbou navázanou na PRIBOR", color: VSE.warning, reason: "Úrokové riziko — pohyblivá sazba. Při růstu PRIBOR rostou splátky úroků." },
+      { text: "ČNB signalizuje možné zvyšování sazeb", color: VSE.danger, reason: "Konkrétní hrozba růstu úrokových sazeb → vyšší splátky. Zajistitelné úrokovým swapem nebo capem." },
+      { text: "Karel ... chce hlavně jistotu ... Spekulovat ... nechce", color: VSE.fis, reason: "Cíl je ZAJIŠTĚNÍ (hedging), ne spekulace. Deriváty se použijí na fixaci, ne na sázku." },
+    ],
+    quiz1: {
+      question: "Jaká dvě finanční rizika CzechGlass má?",
+      options: [
+        "Pouze provozní riziko",
+        "Měnové riziko (exportér, inkasuje EUR) + úrokové riziko (úvěr s pohyblivou sazbou na PRIBOR)",
+        "Pouze úrokové riziko",
+        "Žádná finanční rizika",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by Tereza měla obě rizika zajistit?",
+      options: [
+        { text: "Měnové riziko: měnovým forwardem zafixovat kurz EUR/CZK pro budoucí inkaso → jistota, kolik Kč dostane", correct: true, reason: "✓ Forward fixuje kurz dopředu. Přesně to, co exportér potřebuje pro jistotu marže." },
+        { text: "Úrokové riziko: úrokovým swapem (IRS) proměnit pohyblivou sazbu na fixní → jistota výše splátek", correct: true, reason: "✓ IRS promění PRIBOR+x na pevnou sazbu. Karel získá jistotu splátek." },
+        { text: "Alternativně koupit cap = strop úrokové sazby → ochrana proti růstu PRIBOR nad limit", correct: true, reason: "✓ Cap chrání dlužníka před růstem sazby. Za prémii získá strop. Vhodná alternativa k IRS." },
+        { text: "Spekulovat na posílení koruny a nakoupit eura napřed", correct: false, reason: "✗ To je spekulace, ne zajištění. Karel spekulovat nechce — cíl je jistota, ne sázka na kurz." },
+        { text: "Měnová opce jako alternativa forwardu — právo (ne povinnost) prodat EUR za strike, za opční prémii", correct: true, reason: "✓ Opce dá flexibilitu (právo, ne povinnost) za cenu prémie. Pokud kurz vyjde líp, nevyužije ji. Dražší než forward, ale flexibilnější." },
+        { text: "Nedělat nic a doufat, že kurz a sazby vyjdou příznivě", correct: false, reason: "✗ To je ponechání rizika nezajištěného. Karel chce jistotu — pasivní doufání není řízení rizika." },
+      ],
+    },
+    summary: "<b>CzechGlass má dvě klasická finanční rizika — měnové (exportér) a úrokové (pohyblivý úvěr) — a obě jdou zajistit deriváty.</b><br/><br/><b>Co Tereza navrhne:</b><br/>• <b>Měnové riziko</b>: měnový forward zafixuje kurz EUR/CZK pro budoucí inkaso → jistota, kolik Kč dostane (alternativa: měnová opce za prémii, dá flexibilitu)<br/>• <b>Úrokové riziko</b>: úrokový swap (IRS) promění pohyblivou sazbu na fixní, nebo cap = strop sazby proti růstu PRIBOR<br/>• Vše jako <b>zajištění (hedging)</b>, ne spekulace — přesně podle Karlova požadavku na jistotu<br/><br/><b>Pro komisi:</b> Tohle je přesně to, co Nový/Svobodová chtějí — najít finanční riziko v případovce a navrhnout konkrétní derivát k zajištění. Klíč: <b>forward/swap = povinnost</b> (fixuje napevno), <b>opce = právo za prémii</b> (flexibilita). A pozor na přesné názvy (Svobodová): forward, swap, IRS, cap, floor, FRA. Deriváty slouží k zajištění, ne nutně ke spekulaci.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Finance" subjectId="fin" number={6} title="Řízení rizika, finanční deriváty"
+      subtitle="Riziko, portfolio, CAPM, deriváty (forward/swap/opce), měnové a úrokové riziko"
+      color={VSE.danger}
+      questionText="Řízení rizika, zajištění proti riziku, finanční deriváty"
+      sloz={3} roz={3} freq={3}
+      studySections={studySectionsFin6}
+      flashcards={flashcardsFin6}
+      quiz={quizFin6}
+      praxe={praxeFin6}
+      examQuestions={examQuestionsFin6}
+      podcast={podcastFin6}
+      examStrategy={examStrategyFin6}
+      caseStudy={caseStudyFin6}
+    />
+  );
+}
+
+
+function OkruhFin5Panel() {
+  const studySectionsFin5 = [
+    { id: "tvm", title: "Časová hodnota peněz (PV/FV) + diskontování", subtitle: "Proč Kč dnes > Kč zítra + riziko v diskontní sazbě", color: VSE.danger, emoji: "coins",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Časová hodnota peněz</b> — koruna dnes má větší hodnotu než koruna za rok. Dnešní peníze můžu investovat a vydělat úrok, navíc je tu inflace a riziko. Proto budoucí peníze přepočítáváme na dnešní hodnotu (diskontujeme).
+        </Def>
+        <Tag color={VSE.danger}>2 směry přepočtu</Tag>
+        <ResponsiveSVG viewBox="0 0 600 210" maxHeight={200}>
+          <line x1="110" y1="105" x2="490" y2="105" stroke="var(--text-muted)" strokeWidth="2"/>
+          <circle cx="110" cy="105" r="6" fill={VSE.success}/>
+          <circle cx="490" cy="105" r="6" fill={VSE.warning}/>
+          <text x="110" y="92" textAnchor="middle" fontFamily={fontMono} fontSize="12" fill={VSE.success} fontWeight="700">DNES (PV)</text>
+          <text x="490" y="92" textAnchor="middle" fontFamily={fontMono} fontSize="12" fill={VSE.warning} fontWeight="700">BUDOUCNOST (FV)</text>
+          <path d="M140 88 Q300 48 460 88" fill="none" stroke={VSE.warning} strokeWidth="2" markerEnd="url(#arr5a)"/>
+          <text x="300" y="42" textAnchor="middle" fontFamily={fontSans} fontSize="12" fill={VSE.warning} fontWeight="600">úročení →  FV = PV · (1 + i)</text>
+          <path d="M460 138 Q300 178 140 138" fill="none" stroke={VSE.fis} strokeWidth="2" markerEnd="url(#arr5b)"/>
+          <text x="300" y="175" textAnchor="middle" fontFamily={fontSans} fontSize="12" fill={VSE.fis} fontWeight="600">← diskontování   PV = FV / (1 + i)</text>
+          <defs>
+            <marker id="arr5a" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0 0 L7 4.5 L0 9 Z" fill={VSE.warning}/></marker>
+            <marker id="arr5b" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0 0 L7 4.5 L0 9 Z" fill={VSE.fis}/></marker>
+          </defs>
+        </ResponsiveSVG>
+        <Bullet items={[
+          "<b>Současná hodnota (PV)</b> = kolik dnes znamenají budoucí peníze. PV = FV / (1+i)^n. <b>Diskontování</b> = přepočet budoucí hodnoty na současnou.",
+          "<b>Budoucí hodnota (FV)</b> = kolik budou peníze mít hodnotu, když je dnes investuju. FV = PV · (1+i)^n.",
+          "Diskontní sazba zohledňuje inflaci, úrokové sazby a oportunitní náklady. U firem se používá <b>WACC</b>.",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.warning}>🔴 Riziko v diskontní sazbě (Vávra/Štamfestová past)</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>Vyšší riziko → vyšší diskontní sazba → nižší současná hodnota budoucích peněz.</b><br/>
+          U rizikové investice (start-up) použiju vyšší sazbu → budoucí příjmy mají menší PV, protože není jisté, že je dostanu. U stabilní investice (státní dluhopis) nižší sazbu → vyšší PV. Čím delší horizont, tím víc nejistoty (inflace, změny trhu).
+        </div>
+      </div>) },
+
+    { id: "investice_deleni", title: "💼 Investice — dělení + faktory výhodnosti", subtitle: "Co je investice, jak se dělí, podle čeho hodnotím", color: VSE.fis, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Investice</b> = jednorázové finanční výdaje, které budou vynášet příjmy během delšího období. Předpokládám budoucí výnos. Úkol finančního manažera: najít vhodné příležitosti a vyhodnotit je vzhledem k výnosu, času a riziku.
+        </Def>
+        <Tag color={VSE.fis}>Členění investic</Tag>
+        <Bullet items={[
+          "<b>Podle vztahu k rozvoji:</b> rozvojové (nový produkt, technologie), obnovovací (výměna stroje), regulatorní (EU, emise, BOZP).",
+          "<b>Podle účetnictví:</b> finanční (CP, akcie, podíly), hmotné (budovy, stroje), nehmotné (licence, software, patenty).",
+          "<b>Podle vzájemného vlivu:</b> konfliktní (vylučují se), nezávislé, komplementární (doplňují se).",
+          "<b>Podle charakteru CF:</b> <b>konvenční</b> (zainvestuju a pak už to vynáší) × <b>nekonvenční</b> (záporné toky se opakují i později) — důležité pro IRR!",
+          "<b>Podle věcné náplně:</b> projekt na zelené louce (nový) × koupě zavedeného podniku.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>3 faktory vyhodnocení investice</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.success, t: "Výnosnost", d: "Kolik investice vynese" },
+            { c: VSE.danger, t: "Riziko", d: "Jistota dosažení výnosu" },
+            { c: VSE.fis, t: "Čas", d: "Za jak dlouho se vrátí" },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10, textAlign: "center" }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 3 }}>{b.t}</div>
+              <div style={{ fontSize: 13, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "faze", title: "🔄 Fáze investičního procesu", subtitle: "Předinvestiční → investiční → provozní → postaudit", color: VSE.fmv, emoji: "path",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Investiční proces má <b>4 fáze</b>. Komise je chce umět vyjmenovat a popsat — a hlavně poslední fázi (postaudit), která má vlastní sekci, protože padá nejčastěji.
+        </Def>
+        <Tag color={VSE.fmv}>4 fáze — timeline</Tag>
+        <ResponsiveSVG viewBox="0 0 600 220" maxHeight={210}>
+          <line x1="60" y1="60" x2="540" y2="60" stroke="var(--text-muted)" strokeWidth="2"/>
+          {[
+            { x: 110, c: VSE.fis, n: "1. Předinvestiční", d: ["identifikace projektu,", "studie proveditelnosti"] },
+            { x: 250, c: VSE.warning, n: "2. Investiční", d: ["právní/finanční základna,", "pořízení majetku"] },
+            { x: 390, c: VSE.success, n: "3. Provozní", d: ["řízení realizace", "projektu"] },
+            { x: 510, c: VSE.danger, n: "4. Postaudit", d: ["zpětné vyhodnocení,", "doporučení"] },
+          ].map((p, i) => (
+            <g key={i}>
+              <circle cx={p.x} cy="60" r="9" fill={p.c}/>
+              {i < 3 && <line x1={p.x+12} y1="60" x2={p.x+118} y2="60" stroke="var(--text-muted)" strokeWidth="1.5" strokeDasharray="3,3"/>}
+              <text x={p.x} y="95" textAnchor="middle" fontFamily={fontSans} fontSize="11.5" fontWeight="700" fill={p.c}>{p.n}</text>
+              <text x={p.x} y="118" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">{p.d[0]}</text>
+              <text x={p.x} y="131" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text-muted)">{p.d[1]}</text>
+            </g>
+          ))}
+        </ResponsiveSVG>
+        <Bullet items={[
+          "<b>1. Předinvestiční</b> — identifikace projektu, studie proveditelnosti, předběžný výběr výhodných investic (technicky i finančně).",
+          "<b>2. Investiční</b> — vytvoření právní, finanční a organizační základny, získání majetku (technologie, personál, zaběhnutí provozu).",
+          "<b>3. Provozní</b> — řízení realizace projektu.",
+          "<b>4. Postinvestiční audit (postaudit)</b> — vyhodnocení dosažených příjmů, doporučení pro budoucí projekty. (viz vlastní sekce ↓)",
+        ]} color={VSE.fmv} />
+      </div>) },
+
+    { id: "postaudit", title: "🎯 POSTAUDIT — nejčastější otázka okruhu", subtitle: "Postaudit ≠ kontrola! Aplikace na PS, bariéry, doporučení", color: VSE.danger, emoji: "target",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Postaudit (postinvestiční audit)</b> = zpětné vyhodnocení dokončeného investičního projektu. Porovnává, jak projekt dopadl oproti plánu, a dává <b>doporučení pro budoucí projekty</b>. Je to <b>poslední fáze investičního procesu</b>.
+        </Def>
+        <ExamAlert komise="15+ komisí — Mikovcová, Viktora, Špaček, Krause, Stříteský..." color={VSE.danger} what="<b>Nejčastější finanční otázka vůbec.</b> Mikovcová/Viktora explicitně: <b>POSTAUDIT NENÍ KONTROLA!</b> Vždy <b>aplikovat na případovku</b> (která část postauditu se dá využít). Chtějí: rozdíl postaudit × kontrola, bariéry, doporučení (kdy po projektu)." />
+        <Tag color={VSE.danger}>🔴 Postaudit × kontrola — klíčový rozdíl</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Postaudit" color={VSE.success} items={["<b>Učení do budoucna</b> — co příště dělat líp.", "Zpětné vyhodnocení <b>po dokončení</b> projektu.", "Hledá poučení, ne viníka.", "Doporučení pro budoucí investiční rozhodování."]} />
+          <ModelCard name="Kontrola" color={VSE.danger} items={["<b>Hledání chyb a viníků</b> — kdo pochybil.", "Průběžná, během projektu.", "Zaměřena na dodržení pravidel a plánu.", "Sankce, náprava odchylek."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Bariéry postauditu</Tag>
+        <Bullet items={[
+          "Neochota přiznat chyby (strach z obviňování — proto je důležité, že postaudit hledá poučení, ne viníka).",
+          "Časový odstup — efekty projektu se projeví až po čase, těžko se izolují.",
+          "Náročnost na data — porovnat plán vs realita vyžaduje dobré záznamy.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fmv}>Doporučení — jak postaudit dělat</Tag>
+        <Bullet items={[
+          "Provést s <b>časovým odstupem</b> po dokončení (až se projeví reálné efekty), ne hned.",
+          "Zaměřit se na <b>velké/rizikové projekty</b>, ne na každou drobnost.",
+          "<b>Aplikace na případovku:</b> najdi v PS dokončený nebo běžící projekt → urči, co by se dalo auditovat (dosáhla investice plánovaného výnosu? jaké předpoklady neseděly? co příště jinak?).",
+        ]} color={VSE.fmv} />
+      </div>) },
+
+    { id: "metody", title: "📊 Statické × dynamické metody hodnocení", subtitle: "Statické ignorují čas, dynamické diskontují", color: VSE.warning, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.warning}>
+          Metody hodnocení investic se dělí podle toho, jestli berou v úvahu <b>časovou hodnotu peněz</b>. Statické ji ignorují (jednoduché, ale nepřesné), dynamické diskontují (přesnější, zohledňují čas i riziko).
+        </Def>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Statické metody" color={VSE.warning} items={["Neberou v potaz časovou hodnotu peněz ani riziko.", "<b>Průměrný roční výnos</b> = celkové příjmy / životnost.", "<b>Průměrná doba návratnosti</b> = investiční výdaj / průměrný roční výnos.", "<b>Doba návratnosti</b> = počet let, za které se vrátí investice."]} />
+          <ModelCard name="Dynamické metody" color={VSE.success} items={["Reflektují čas — <b>diskontují</b> → zohledňují čas i riziko.", "<b>NPV</b> — čistá současná hodnota.", "<b>IRR</b> — vnitřní výnosové procento.", "<b>PI</b> — index ziskovosti. <b>PP</b> — diskontovaná doba návratnosti. Diskontovaná EVA."]} />
+        </ResponsiveGrid>
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.fis}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          Na komisi: zmiň obě skupiny, ale těžiště dej na dynamické (NPV, IRR) — ty komise chtějí do hloubky.
+        </div>
+      </div>) },
+
+    { id: "npv_irr", title: "💰 NPV + IRR + PI + PP", subtitle: "Vzorce, kritéria + IRR u nekonvenčních toků (Tahal!)", color: VSE.success, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.success}>
+          Čtyři klíčové dynamické metody. <b>NPV</b> a <b>IRR</b> jsou nejdůležitější — komise je chce umět vysvětlit, znát kritérium přijetí a rozumět jejich vztahu k WACC.
+        </Def>
+        <Tag color={VSE.success}>NPV — čistá současná hodnota</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.success}10`, border: `1px solid ${VSE.success}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>NPV = Σ CF / (1+r)^t − počáteční investice</b> (= PV − I). Říká, o kolik vzroste hodnota podniku.<br/>
+          <b>Kritérium: NPV &gt; 0 → přijmout.</b> Diskontuje se WACC. Je aditivní (lze sčítat). Slabina: absolutní výsledek, citlivá na výši úrokových měr.
+        </div>
+        <Tag color={VSE.fis}>IRR — vnitřní výnosové procento</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.fis}10`, border: `1px solid ${VSE.fis}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          Relativní výnos (rentabilita), který projekt přináší. Je to <b>diskontní sazba, při které NPV = 0</b>.<br/>
+          <b>Kritérium: IRR &gt; WACC (resp. IRR &gt; r) → přijmout.</b> Čím vyšší IRR, tím lepší relativní výhodnost.
+        </div>
+        <ExamAlert komise="Tahal (ZS 2025)" color={VSE.danger} what="<b>Proč se IRR nedá vždy použít?</b> → IRR funguje jen u <b>konvenčních toků</b> (na začátku záporný tok, pak už jen kladné). U <b>nekonvenčních toků</b> (záporné toky se opakují i později) může mít IRR víc řešení nebo žádné → výsledek je nejednoznačný. Tam se spoléhej na NPV." />
+        <Tag color={VSE.warning}>PI a PP</Tag>
+        <Bullet items={[
+          "<b>PI (index ziskovosti)</b> = NPV / investice (resp. diskontované příjmy / investice). Kritérium <b>PI &gt; 1 → přijmout</b>. Vhodný pro srovnání projektů (ranking).",
+          "<b>PP (doba návratnosti)</b> = počet let, za které se přes CF vrátí investice. Přijatelné, když <b>PP &lt; doba životnosti</b>.",
+          "<b>Diskontovaná EVA</b> — investice se přijme, je-li DEVA &gt; 0 (kapitál musí mít větší výnos než náklady na něj).",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "planovani_cf", title: "📋 Plánování CF investic + financování", subtitle: "8 kroků od kap. výdajů po NPV + zdroje financování", color: VSE.ffu, emoji: "scroll",
+      content: (<div>
+        <Def color={VSE.ffu}>
+          <b>Plánování CF investic</b> pomáhá odhadnout, kolik peněz firma do investice vloží a kolik získá zpět. Postupuje se v krocích od počátečních výdajů až po výpočet NPV. <b>Vávra/Štamfestová chtějí fáze plánování CF + určení diskontní sazby.</b>
+        </Def>
+        <Tag color={VSE.ffu}>8 kroků plánování CF</Tag>
+        <Bullet items={[
+          "<b>1.</b> Počáteční kapitálové výdaje — kolik to bude stát (nákup stroje).",
+          "<b>2.</b> Budoucí hotovostní toky — kolik to přinese (příjmy − výdaje).",
+          "<b>3.</b> Změna čistého pracovního kapitálu — co to ovlivní v provozu (zásoby, pohledávky).",
+          "<b>4.</b> Odpisy — jak dlouho to vydrží (neovlivňují CF přímo, ale snižují daň).",
+          "<b>5.</b> Způsob financování — vlastní nebo cizí zdroje.",
+          "<b>6.</b> Diskontní faktor — náklady kapitálu (WACC).",
+          "<b>7.</b> Zohlednění inflace — snižuje reálnou hodnotu budoucích příjmů.",
+          "<b>8.</b> Výpočet NPV — vyplatí se to? (NPV &gt; 0 = ano).",
+        ]} color={VSE.ffu} />
+        <Tag color={VSE.success}>Financování investic</Tag>
+        <Bullet items={[
+          "<b>Vlastní kapitál:</b> interní (zisk, odpisy) × externí (navýšení základního kapitálu).",
+          "<b>Cizí kapitál:</b> úvěry, dluhopisy.",
+          "<b>Leasing:</b> (+) nedochází k jednorázovému výdaji, lze dát do nákladů; (−) dražší, majetek je leasingové společnosti.",
+          "<b>Brutto</b> = celková hodnota bez odečtení nákladů. <b>Netto</b> = po odečtení všech nákladů (skutečná využitelná hodnota).",
+        ]} color={VSE.success} />
+      </div>) },
+  ];
+
+  const praxeFin5 = {
+    caseStudy: {
+      company: "Tesla Gigafactory — investiční rozhodnutí a postaudit v praxi",
+      subtitle: "Jak se hodnotí miliardová investice a co se z ní učí zpětně",
+      content: (<>
+        Když Tesla stavěla Gigafactory, prošla přesně tím, co učí investiční teorie.<br/><br/>
+        <b style={{ color: VSE.fis }}>Předinvestiční fáze</b> — studie proveditelnosti: kolik baterií, za kolik, jaká poptávka. Odhad budoucích CF a diskontování na NPV.<br/>
+        <b style={{ color: VSE.warning }}>Hodnocení</b> — obrovská počáteční investice (miliardy), návratnost v dlouhém horizontu. Vysoké riziko → vysoká diskontní sazba → budoucí příjmy mají nižší současnou hodnotu.<br/>
+        <b style={{ color: VSE.danger }}>Postaudit</b> — po náběhu výroby Tesla zpětně vyhodnotila: seděly odhady nákladů? Náběh výroby byl pomalejší a dražší, než plán („výrobní peklo” Modelu 3). To je přesně poučení pro další Gigafactory (Berlín, Texas) — kde náběh řídili líp.<br/><br/>
+        <b>Proč to komise zajímá:</b> ukazuje celý cyklus — od hodnocení investice (NPV, riziko v diskontní sazbě) po postaudit (poučení do dalších projektů, ne hledání viníka). Přesně to, co chtějí napojit na případovku.
+      </>),
+      lessons: "Investiční rozhodnutí není jen spočítat NPV. Je to proces: odhadnout CF, zvolit diskontní sazbu podle rizika, rozhodnout — a po dokončení udělat postaudit, který dá poučení pro příští projekty. Postaudit = učení, ne kontrola."
+    },
+    miniExamples: [
+      { company: "IRR u nekonvenčních toků", tag: "TAHAL PAST", color: VSE.danger, content: "Těžební projekt: na začátku investice (−), pak roky zisky (+), ale na konci velká investice do rekultivace krajiny (−). Tyto nekonvenční toky způsobí, že IRR má víc řešení nebo žádné. Proto se u nich spoléhá na NPV, ne IRR." },
+      { company: "Postaudit ve firmách", tag: "≠ KONTROLA", color: VSE.success, content: "Velké firmy dělají post-implementation review půl roku až rok po dokončení projektu. Cíl není potrestat, kdo se spletl v odhadu, ale zlepšit odhady u dalších investic. Kdo to bere jako hon na čarodějnice, zabije ochotu lidí být upřímní." },
+      { company: "Diskontní sazba podle rizika", tag: "TVM", color: VSE.warning, content: "Stejný budoucí milion má jinou současnou hodnotu pro státní dluhopis (nízké riziko, nízká sazba → vyšší PV) a pro start-up (vysoké riziko, vysoká sazba → nižší PV). Riziko se promítá přímo do diskontní sazby." },
+    ]
+  };
+
+  const flashcardsFin5 = [
+    { q: "Co je časová hodnota peněz?", a: "Koruna dnes má větší hodnotu než koruna zítra — dnešní peníze lze investovat a vydělat úrok, navíc je tu inflace a riziko." },
+    { q: "PV a FV — vzorce?", a: "PV = FV / (1+i)^n (diskontování). FV = PV · (1+i)^n (úročení)." },
+    { q: "Co je diskontování?", a: "Přepočet budoucí hodnoty peněz na současnou hodnotu pomocí diskontní sazby (u firem WACC)." },
+    { q: "Jak riziko ovlivňuje diskontní sazbu?", a: "Vyšší riziko → vyšší diskontní sazba → nižší současná hodnota budoucích peněz. U rizikové investice budoucí příjmy mají menší PV." },
+    { q: "Co je investice?", a: "Jednorázové finanční výdaje, které budou vynášet příjmy během delšího období. Předpokládá budoucí výnos." },
+    { q: "Konvenční × nekonvenční CF?", a: "Konvenční = na začátku záporný tok, pak už jen kladné. Nekonvenční = záporné toky se opakují i později (problém pro IRR)." },
+    { q: "3 faktory vyhodnocení investice?", a: "Výnosnost, riziko, čas." },
+    { q: "4 fáze investičního procesu?", a: "Předinvestiční (studie), investiční (pořízení), provozní (realizace), postinvestiční audit (postaudit)." },
+    { q: "Co je postaudit?", a: "Zpětné vyhodnocení dokončeného projektu — porovná plán vs realitu a dá doporučení pro budoucí projekty. Poslední fáze investičního procesu." },
+    { q: "Postaudit × kontrola — rozdíl?", a: "Postaudit = učení do budoucna, po dokončení, hledá poučení ne viníka. Kontrola = hledání chyb/viníků, průběžná, sankce." },
+    { q: "Bariéry postauditu?", a: "Neochota přiznat chyby, časový odstup (efekty se projeví později), náročnost na data." },
+    { q: "Statické × dynamické metody?", a: "Statické ignorují časovou hodnotu peněz (doba návratnosti, prům. výnos). Dynamické diskontují (NPV, IRR, PI, PP)." },
+    { q: "NPV — vzorec a kritérium?", a: "NPV = Σ CF/(1+r)^t − investice. Kritérium: NPV > 0 → přijmout. Diskontuje se WACC. Aditivní." },
+    { q: "IRR — co to je a kritérium?", a: "Vnitřní výnosové procento = diskontní sazba, při které NPV = 0. Kritérium: IRR > WACC → přijmout." },
+    { q: "Proč IRR nejde vždy použít? (Tahal)", a: "Funguje jen u konvenčních toků. U nekonvenčních (opakované záporné toky) má víc řešení nebo žádné → nejednoznačné. Tam použij NPV." },
+    { q: "PI a PP?", a: "PI = NPV/investice, kritérium PI > 1. PP = doba návratnosti, kritérium PP < doba životnosti." },
+  ];
+
+  const quizFin5 = [
+    { q: "Časová hodnota peněz říká, že:", opts: ["Koruna zítra > koruna dnes", "Koruna dnes > koruna zítra", "Peníze nemají hodnotu", "Inflace neexistuje"], correct: 1 },
+    { q: "Diskontování je:", opts: ["Přepočet budoucí hodnoty na současnou", "Přepočet současné na budoucí", "Výpočet úroku", "Snížení ceny zboží"], correct: 0 },
+    { q: "Vyšší riziko investice znamená:", opts: ["Nižší diskontní sazbu", "Vyšší diskontní sazbu → nižší současnou hodnotu", "Žádnou změnu", "Vyšší současnou hodnotu"], correct: 1 },
+    { q: "Regulatorní investice je:", opts: ["Nový produkt", "Výměna stroje", "Vynucená např. EU, emise, BOZP", "Nákup akcií"], correct: 2 },
+    { q: "Kolik je fází investičního procesu?", opts: ["2", "3", "4", "5"], correct: 2 },
+    { q: "Postaudit je:", opts: ["Kontrola během projektu", "Zpětné vyhodnocení dokončeného projektu + doporučení do budoucna", "Hledání viníka", "Účetní závěrka"], correct: 1 },
+    { q: "Hlavní rozdíl postaudit × kontrola:", opts: ["Žádný", "Postaudit = učení do budoucna (ne viník), kontrola = hledání chyb/viníků", "Postaudit je průběžný", "Kontrola je po dokončení"], correct: 1 },
+    { q: "Statické metody hodnocení investic:", opts: ["Diskontují", "Neberou v potaz časovou hodnotu peněz", "Jsou nejpřesnější", "Používají WACC"], correct: 1 },
+    { q: "NPV se přijímá, když:", opts: ["NPV < 0", "NPV = 0", "NPV > 0", "NPV = WACC"], correct: 2 },
+    { q: "IRR je:", opts: ["Současná hodnota", "Diskontní sazba, při které NPV = 0", "Doba návratnosti", "Index ziskovosti"], correct: 1 },
+    { q: "Proč IRR nejde vždy použít (Tahal)?", opts: ["Je moc složitá", "Funguje jen u konvenčních toků, u nekonvenčních má víc řešení nebo žádné", "Nikdo ji nezná", "Je zakázaná"], correct: 1 },
+    { q: "Index ziskovosti PI se přijímá, když:", opts: ["PI < 1", "PI > 1", "PI = 0", "PI = WACC"], correct: 1 },
+  ];
+
+  const examQuestionsFin5 = [
+    { komise: "ZS 2025 — Mikovcová, Kolouchová, Viktora", otazka: "Postaudit — jaký je rozdíl mezi postauditem a kontrolou, jaké příležitosti z případovky by se měly auditovat.", pozn: "🔴 NEJDŮLEŽITĚJŠÍ: postaudit ≠ kontrola! Postaudit = učení do budoucna (po dokončení), kontrola = hledání chyb/viníků (průběžná). Vždy aplikovat na PS." },
+    { komise: "LS 2025 — Vávra, Lorencová, Krause", otazka: "Postaudit — obecně, bariéry, doporučení (např. kdy po projektu).", pozn: "Postaudit dělat s časovým odstupem (až se projeví efekty). Bariéry: neochota přiznat chyby, časový odstup, data. Vždy napoj na případovku." },
+    { komise: "ZS 2025 — Tahal, Kuděj, Kučera", otazka: "Finanční a nefinanční metriky při měření inovací — u IRR proč se nedá vždy použít.", pozn: "🔴 IRR funguje jen u konvenčních toků. U nekonvenčních (opakované záporné toky) má víc řešení nebo žádné → použij NPV." },
+    { komise: "LS 2025 — Vávra, Štamfestová, Mládková", otazka: "Fáze investičního procesu, plánování CF investic, riziko, jak ohodnotit riziko, určení diskontní sazby.", pozn: "4 fáze + 8 kroků plánování CF + riziko v diskontní sazbě (vyšší riziko = vyšší sazba)." },
+    { komise: "ZS 2025 — Stříteský, Bočková, Lorenzová", otazka: "Investice — dělení, fáze investičního procesu, plánování CF, riziko, snižování rizika.", pozn: "Členění investic (5 způsobů) + 4 fáze + plánování CF. Napoj na případovku." },
+    { komise: "ZS 2026 — Stříteský, Sieber, Vítečková", otazka: "Investice, vyhodnocení investic, riziko, ošetření rizika.", pozn: "NPV/IRR/PI/PP + jak ošetřit riziko (diskontní sazba, scénáře). Hodně mluvit, chytat se podle otázek komise." },
+  ];
+
+  const podcastFin5 = { title: "Finance 5 — Časová hodnota peněz a hodnocení investic", description: "Časová hodnota peněz (PV/FV, diskontování, riziko v sazbě), dělení investic, 4 fáze investičního procesu, POSTAUDIT (≠ kontrola), statické × dynamické metody, NPV/IRR/PI/PP, IRR u nekonvenčních toků, plánování CF.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyFin5 = `
+    <b style="color:#E06D1E">1.</b> <b>Časová hodnota peněz</b>: Kč dnes > Kč zítra. PV = FV/(1+i)^n. Vyšší riziko → vyšší diskontní sazba → nižší PV.<br/>
+    <b style="color:#E06D1E">2.</b> <b>Dělení investic</b> (rozvoj/účetnictví/vliv/CF/náplň) + 3 faktory (výnos, riziko, čas).<br/>
+    <b style="color:#E06D1E">3.</b> <b>4 fáze</b> investičního procesu: předinvestiční → investiční → provozní → postaudit.<br/>
+    <b style="color:#E06D1E">4.</b> 🔴 <b>POSTAUDIT</b> (nejčastější!): zpětné vyhodnocení + doporučení. <b>NENÍ kontrola</b> (učení vs hledání viníka). Bariéry, doporučení, <b>aplikace na PS</b>.<br/>
+    <b style="color:#E06D1E">5.</b> <b>Statické × dynamické</b> metody (dynamické diskontují).<br/>
+    <b style="color:#E06D1E">6.</b> <b>NPV</b> (>0 přijmout, diskont WACC) + <b>IRR</b> (NPV=0, >WACC přijmout). 🔴 IRR jen u <b>konvenčních toků</b> (Tahal).<br/>
+    <b style="color:#E06D1E">7.</b> <b>PI</b> (>1) + <b>PP</b> (< životnost) + plánování CF (8 kroků) + financování (VK/CK/leasing).<br/>
+    <b style="color:#E06D1E">8.</b> <b>Napoj na případovku</b> — najdi investici/projekt, vyhodnoť (NPV/IRR), a navrhni postaudit.
+  `;
+
+  const caseStudyFin5 = {
+    title: "Adam — finanční manažer pekárny PecivoPlus, rozhoduje o nové lince",
+    subtitle: "Vyhodnoť investici (NPV/IRR) a navrhni postaudit",
+    scenario: "Adam (36) je finanční manažer v PecivoPlus, regionální pekárně se 70 zaměstnanci, tržby 110 mil. Kč. Majitel Roman zvažuje investici do nové automatizované pečicí linky za 12 mil. Kč. Linka by měla běžet 8 let a ročně přinést dodatečné CF asi 2,5 mil. Kč (úspora práce + vyšší kapacita).\n\nAdam počítá: při diskontní sazbě (WACC firmy) 9 % vychází NPV kladné, IRR kolem 12 % — tedy nad WACC. Statická doba návratnosti je necelých 5 let, dynamická o něco delší. Na papíře investice vychází.\n\nRoman ale váhá. Před třemi lety firma investovala do balicí linky, která měla taky „skvělé NPV”, ale realita byla horší — náběh trval dýl, poruchovost vyšší, úspora menší. Nikdo to tehdy zpětně nevyhodnotil, prostě se jelo dál. Roman se ptá Adama: jak zajistit, aby se to neopakovalo, a jak poznat, jestli nová linka skutečně dodá, co slibuje.\n\nAdam navrhuje: rozhodnout podle NPV a IRR, ale tentokrát po roce provozu udělat pořádný postaudit.",
+    signals: [
+      { text: "při diskontní sazbě (WACC firmy) 9 % vychází NPV kladné, IRR kolem 12 % — tedy nad WACC", color: VSE.success, reason: "Obě dynamická kritéria splněna: NPV > 0 a IRR > WACC. Investice je na papíře výhodná." },
+      { text: "ročně přinést dodatečné CF asi 2,5 mil. Kč", color: VSE.fis, reason: "Odhad budoucích CF — klíčový vstup pro NPV. Pozor: je to odhad, realita se může lišit (proto postaudit)." },
+      { text: "balicí linka, která měla taky „skvělé NPV”, ale realita byla horší", color: VSE.danger, reason: "Klasický problém: NPV je jen tak dobré jako odhady CF. Optimistické odhady → nadhodnocené NPV." },
+      { text: "Nikdo to tehdy zpětně nevyhodnotil, prostě se jelo dál", color: VSE.danger, reason: "Chybějící postaudit. Firma se nepoučila z minulé investice → opakuje stejné chyby v odhadech." },
+      { text: "po roce provozu udělat pořádný postaudit", color: VSE.success, reason: "Správně — postaudit s časovým odstupem. Porovná plán vs realitu a dá poučení pro příští investice." },
+    ],
+    quiz1: {
+      question: "Jak by měl Adam rozhodnout o investici do linky?",
+      options: [
+        "Zamítnout — minulá linka dopadla špatně",
+        "Přijmout — NPV je kladné a IRR (12 %) je nad WACC (9 %), obě dynamická kritéria jsou splněna",
+        "Rozhodnout podle statické doby návratnosti, NPV ignorovat",
+        "Počkat, až klesne WACC na 0 %",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Co Adam navrhne ohledně postauditu a proč?",
+      options: [
+        { text: "Po roce provozu porovnat skutečné CF linky s plánem — splnila investice NPV očekávání?", correct: true, reason: "✓ Jádro postauditu: plán vs realita. Zjistí, jestli odhady seděly." },
+        { text: "Postaudit pojmout jako učení pro příští investice, ne jako hledání viníka u balicí linky", correct: true, reason: "✓ Postaudit ≠ kontrola. Cíl je zlepšit budoucí odhady, ne trestat. Jinak lidi přestanou být upřímní." },
+        { text: "Identifikovat, proč minulé odhady (balicí linka) neseděly, a poučit se pro odhady u pečicí linky", correct: true, reason: "✓ Přesně k tomu postaudit slouží — doporučení pro budoucí projekty. Lepší odhady příště." },
+        { text: "Udělat postaudit ihned v den spuštění linky", correct: false, reason: "✗ Moc brzy. Postaudit se dělá s časovým odstupem, až se projeví reálné efekty (náběh, poruchovost, skutečná úspora)." },
+        { text: "Postaudit zaměřit na potrestání toho, kdo špatně odhadl balicí linku", correct: false, reason: "✗ To je kontrola, ne postaudit. Hledání viníka zabije ochotu lidí dávat upřímné odhady. Postaudit hledá poučení." },
+        { text: "U rozhodnutí se víc spolehnout na NPV než na samotnou IRR, protože NPV dává jasnější výsledek", correct: true, reason: "✓ NPV je robustnější (absolutní hodnota, aditivní). IRR může u nekonvenčních toků selhat. Rozumný přístup." },
+      ],
+    },
+    summary: "<b>Investice do linky se na základě dynamických metod vyplatí — ale klíč je nepřestat u rozhodnutí a udělat postaudit.</b> NPV je kladné, IRR (12 %) nad WACC (9 %) → kritéria splněna.<br/><br/><b>Co Adam udělá:</b><br/>• <b>Rozhodne přijmout</b> podle NPV > 0 a IRR > WACC (spolehne se hlavně na NPV — robustnější)<br/>• <b>Po roce provozu udělá postaudit</b>: porovná skutečné CF s plánem<br/>• Postaudit pojme jako <b>učení</b> (ne hledání viníka u balicí linky) → zlepší odhady příště<br/>• Poučí se, proč minulé odhady neseděly (optimismus, náběh, poruchovost)<br/><br/><b>Pro komisi:</b> Tohle spojuje celý okruh — hodnocení investice (NPV/IRR, kritéria) i POSTAUDIT (nejčastější otázka). Klíčové věty: <b>postaudit ≠ kontrola</b> (učení vs viník), dělá se <b>s časovým odstupem</b>, dává <b>doporučení pro budoucí projekty</b>. A IRR se spoléhej jen u konvenčních toků — jinak NPV.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Finance" subjectId="fin" number={5} title="Časová hodnota peněz, hodnocení investic"
+      subtitle="PV/FV, fáze investice, POSTAUDIT, NPV/IRR/PI/PP, plánování CF"
+      color={VSE.danger}
+      questionText="Investice — dělení, fáze investičního procesu, hodnocení (NPV, IRR), postaudit, plánování CF"
+      sloz={3} roz={3} freq={3}
+      studySections={studySectionsFin5}
+      flashcards={flashcardsFin5}
+      quiz={quizFin5}
+      praxe={praxeFin5}
+      examQuestions={examQuestionsFin5}
+      podcast={podcastFin5}
+      examStrategy={examStrategyFin5}
+      caseStudy={caseStudyFin5}
+    />
+  );
+}
+
+
+function OkruhFin4Panel() {
+  const studySectionsFin4 = [
+    { id: "struktura", title: "Finanční × kapitálová struktura + složky VK", subtitle: "Rozdíl FS vs KS + složky vlastního kapitálu (kapitálové fondy!)", color: VSE.danger, emoji: "building",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Finanční struktura</b> = struktura celkového kapitálu, ze kterého se financují všechna aktiva (širší pojem — zahrnuje i krátkodobé závazky). <b>Kapitálová struktura</b> = jen struktura <b>dlouhodobého</b> kapitálu (podíl VK a CK), používá se k financování dlouhodobých aktiv.
+        </Def>
+        <Tag color={VSE.danger}>Rozdíl — kde je hranice</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { color: VSE.fis, title: "Finanční struktura (širší)", desc: "Veškeré závazky + VK. Zahrnuje i KRÁTKODOBÉ závazky (vůči dodavatelům). Vztahuje se k financování CELKOVÝCH aktiv." },
+            { color: VSE.danger, title: "Kapitálová struktura (užší)", desc: "Jen DLOUHODOBÝ kapitál — podíl VK a CK. Vztahuje se k financování DLOUHODOBÝCH aktiv. Je částí finanční struktury." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.color}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14.5, fontWeight: 700, color: b.color, fontFamily: fontSans, marginBottom: 4 }}>{b.title}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.desc}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.fmv}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          Př.: VK 1 mil. + dl. úvěr 0,5 mil. + kr. závazky 0,2 mil. → <b>Kap. struktura = 1,5 mil.</b> (VK 67 %, CK 33 %). <b>Fin. struktura = 1,7 mil.</b>
+        </div>
+        <ExamAlert komise="„3 týpci” (LS 2025)" color={VSE.warning} what="V kapitálové struktuře se <b>můžou zeptat na cokoliv</b>. Konkrétně se hodně vyptávali na <b>kapitálové fondy</b> a chtěli <b>všechny druhy financování VK</b>. Měj proto složky VK pevně v hlavě." />
+        <Tag color={VSE.fmv}>Složky vlastního kapitálu</Tag>
+        <Bullet items={[
+          "<b>Základní kapitál</b> — souhrn peněžních i nepeněžních vkladů společníků, vzniká při založení.",
+          "<b>Kapitálové fondy</b> — vznik vkladem hotovosti / nepeněžním vkladem / z přecenění aktiv. Patří sem <b>emisní ážio</b> = částka při emisi nových akcií nad nominální hodnotu (rozdíl mezi tržní a nominální hodnotou akcie).",
+          "<b>Fondy ze zisku</b> — část zisku nerozdělená mezi akcionáře, ponechaná ve firmě (rezerva na investice, úhradu dluhu, náhlé potřeby). Např. zákonné rezervní fondy.",
+          "<b>Výsledek hospodaření</b> — část zisku nerozdělená mezi společníky (zisk/ztráta za období) + nerozdělený zisk z minulých let.",
+        ]} color={VSE.fmv} />
+      </div>) },
+
+    { id: "optimalni_ukrivka", title: "⚖️ Optimální kapitálová struktura + U-křivka", subtitle: "Min WACC = max hodnota podniku", color: VSE.warning, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.warning}>
+          <b>Optimální kapitálová struktura</b> = taková, kdy jsou <b>WACC minimální</b> a maximalizuje se hodnota podniku. V praxi vyvážení mezi VK a CK tak, aby firma dosáhla nejlepšího poměru mezi náklady a rizikem.
+        </Def>
+        <Tag color={VSE.warning}>U-křivka — proč nejde jen pumpovat dluh</Tag>
+        <ResponsiveSVG viewBox="0 0 600 320" maxHeight={300}>
+          <line x1="70" y1="270" x2="560" y2="270" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <line x1="70" y1="40" x2="70" y2="270" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <text x="315" y="300" textAnchor="middle" fontFamily={fontMono} fontSize="11" fill="var(--text-muted)">podíl cizího kapitálu (zadlužení) →</text>
+          <text x="50" y="155" textAnchor="middle" fontFamily={fontMono} fontSize="11" fill="var(--text-muted)" transform="rotate(-90 50 155)">WACC</text>
+          {/* U křivka */}
+          <path d="M100 90 Q300 320 540 90" fill="none" stroke={VSE.danger} strokeWidth="3"/>
+          {/* bod minima */}
+          <circle cx="320" cy="232" r="7" fill={VSE.success}/>
+          <line x1="320" y1="232" x2="320" y2="270" stroke={VSE.success} strokeWidth="1.5" strokeDasharray="4,3"/>
+          <text x="320" y="255" textAnchor="middle" fontFamily={fontSans} fontSize="11" fontWeight="700" fill={VSE.success}>optimum</text>
+          <text x="160" y="80" textAnchor="middle" fontFamily={fontSans} fontSize="11" fill={VSE.danger}>moc VK = drahé</text>
+          <text x="470" y="80" textAnchor="middle" fontFamily={fontSans} fontSize="11" fill={VSE.danger}>moc CK = riziko,</text>
+          <text x="470" y="96" textAnchor="middle" fontFamily={fontSans} fontSize="11" fill={VSE.danger}>věřitelé chtějí víc</text>
+          <text x="320" y="285" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill={VSE.success}>min WACC = max hodnota podniku</text>
+        </ResponsiveSVG>
+        <Bullet items={[
+          "Přidáváním CK klesá WACC (CK je levnější — daňový štít, finanční páka) → dojdu do <b>bodu minima WACC</b>.",
+          "<b>ALE</b> když to přeženu, věřitelé vidí firmu jako rizikovou a chtějí <b>vyšší odměnu</b> → WACC zase roste.",
+          "Optimum = bod minima U-křivky. Tam: nejnižší náklady na kapitál, minimální riziko (firma nepřežije zadlužením), maximální hodnota.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.danger}>Limitující faktory (co brzdí zadlužování)</Tag>
+        <Bullet items={[
+          "Požadavky na finanční stabilitu (přiměřená zadluženost), stabilita zisku a CF pro obsluhu CK.",
+          "Požadavky věřitelů, postoje manažerů a vlastníků k riziku, likvidita (úrokové platby).",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "wacc", title: "📊 WACC — vážené průměrné náklady na kapitál", subtitle: "Vzorec, na čem závisí, ratingový model", color: VSE.fis, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>WACC</b> = úroková sazba, kterou firma v průměru musí platit těm, kdo financují její aktiva. Je to <b>vážený průměr nákladů na VK a CK</b>. Snahou vlastníka je volit takovou kapitálovou strukturu, aby byl WACC minimální (= optimální kap. struktura). Používá se jako diskontní sazba při hodnocení investic.
+        </Def>
+        <div style={{ textAlign: "center", margin: "10px 0", padding: "12px", background: `${VSE.fis}10`, borderRadius: 10, fontFamily: fontMono, fontSize: 15, fontWeight: 700, color: VSE.fis }}>
+          WACC = re · (VK/C) + rd · (1−d) · (CK/C)
+        </div>
+        <Bullet items={[
+          "<b>r_e</b> = náklady VK (požadovaná výnosnost akcionářů) · <b>r_d</b> = náklady CK (úrok) · <b>d</b> = sazba daně z příjmu · <b>C</b> = VK + CK",
+          "Člen <b>(1−d)</b> u CK = daňový štít — úroky snižují daňový základ, proto je CK „po zdanění” levnější.",
+          "Pokud firma používá víc VK, mají větší váhu; pokud víc CK, mají větší váhu ty.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.fis}>Na čem velikost WACC závisí</Tag>
+        <Bullet items={[
+          "Náklady na jednotlivé složky kapitálu (N na VK = požadovaná výnosnost, N na CK = úrok věřitele).",
+          "Kapitálová struktura (míra zadlužení) a míra zdanění (ovlivňuje úroky přes daňový štít).",
+        ]} color={VSE.fis} />
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.fmv}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          Př.: a) VK 1 mil., CK 0,5 mil. → WACC 8 %. b) VK 1 mil., CK 2 mil. → WACC 6 % (víc CK = daňový štít stáhne WACC dolů).
+        </div>
+        <Tag color={VSE.warning}>Ratingový (stavebnicový) model — pro malé/střední firmy</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          Stanoví WACC metodou <b>přirážek za specifická rizika</b>: <b>WACC = r_f + r_LA + r_PS + r_FS</b> (bezriziková míra + přirážka za malou velikost firmy + za nižší podnikatelskou stabilitu + za nižší finanční stabilitu). Vhodný pro ekonomiku s nedokonalými kapitálovými trhy.
+        </div>
+      </div>) },
+
+    { id: "naklady_vk_ck", title: "💸 Náklady VK (CAPM) × CK — proč je CK levnější", subtitle: "Špaček past: důvody rozdílné ceny VK a CK", color: VSE.success, emoji: "coins",
+      content: (<div>
+        <Def color={VSE.success}>
+          <b>Náklady CK jsou většinou nižší než náklady VK.</b> Špaček se ptá přímo na <b>důvody rozdílné ceny VK a CK</b> — musíš znát proč.
+        </Def>
+        <ExamAlert komise="Špaček, Palíšková, Machek (ZS 2025)" color={VSE.danger} what="„Optimální kapitálová struktura, WACC, <b>důvody rozdílné ceny VK a CK</b>.” → Musíš umět vysvětlit, <b>proč je CK levnější</b>: (1) věřitelé podstupují menší riziko než akcionáři, (2) daňový štít." />
+        <Tag color={VSE.danger}>🔴 Proč je CK levnější než VK</Tag>
+        <Bullet items={[
+          "<b>Věřitelé podstupují menší riziko než akcionáři</b> — v případě úpadku mají věřitelé <b>přednostní nárok na aktiva</b>. Vlastník jde až jako poslední. Menší riziko = nižší požadovaná odměna.",
+          "<b>Daňový štít</b> — úroky z CK jsou daňově uznatelný náklad, snižují daňový základ. To dál snižuje efektivní náklad CK.",
+          "Akcionáři chtějí výnos vyšší než bezriziková investice (riziková prémie), protože akcie jsou rizikovější → náklady VK jsou vyšší.",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.fmv}>Model CAPM — odhad nákladů VK</Tag>
+        <Def color={VSE.fmv}>
+          <b>CAPM</b> (Capital Asset Pricing Model) = nejčastější způsob odhadu nákladů VK. Investoři očekávají kompenzaci za 2 věci: bezrizikovou míru + rizikovou prémii.
+        </Def>
+        <div style={{ textAlign: "center", margin: "10px 0", padding: "12px", background: `${VSE.fmv}10`, borderRadius: 10, fontFamily: fontMono, fontSize: 15, fontWeight: 700, color: VSE.fmv }}>
+          re = rf + β · (rm − rf)
+        </div>
+        <Bullet items={[
+          "<b>r_f</b> = bezriziková sazba (výnos bez rizika, např. státní dluhopisy) · <b>r_m</b> = očekávaný výnos trhu · <b>β</b> = koeficient beta.",
+          "<b>β měří citlivost na výkyvy trhu</b> (systematické riziko): β > 1 rizikovější než trh, β < 1 stabilnější, β = 1 stejně jako trh.",
+          "<b>Náklady CK</b> = úrok věřitele + poplatky. Bankovní úvěry (fixní/PRIBOR), dluhopisy (kuponová sazba), leasing (úroky), KZ obvykle 0 (při včasné platbě).",
+        ]} color={VSE.fmv} />
+      </div>) },
+
+    { id: "paka_stit", title: "🔧 Finanční páka + daňový štít", subtitle: "Páka = A/VK, kdy působí pozitivně/negativně", color: VSE.ffu, emoji: "muscle",
+      content: (<div>
+        <Def color={VSE.ffu}>
+          <b>Finanční páka = aktiva / VK.</b> Efekt, který vyjadřuje, že <b>použití CK zvedá rentabilitu VK</b> — umožňuje zvýšit zisky pomocí cizího kapitálu. Firma si půjčí (CK) a investuje; pokud investice přinese vyšší výnos než úrok z úvěru, firma dosáhne vyššího zisku.
+        </Def>
+        <div style={{ marginTop: 8, padding: "10px 14px", background: `${VSE.ffu}10`, border: `1px solid ${VSE.ffu}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          Mám 100 000, investuju, vydělá 10 % → mám 10 000. <b>ALE</b>: mám 100 000, půjčím si 100 000 → mám 200 000, investuju, vydělá 10 % → mám 20 000 (musím ale vydělat víc, než jsou náklady CK).
+        </div>
+        <Tag color={VSE.ffu}>Působení páky přes ROA (= EBIT/aktiva)</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.success, n: "POZITIVNĚ", v: "EBIT/A > úrok CK", d: "Páka zvyšuje ROE — investice vydělá víc než stojí úrok." },
+            { c: VSE.danger, n: "NEGATIVNĚ", v: "EBIT/A < úrok CK", d: "Páka snižuje ROE — úrok je dražší než výnos investice." },
+            { c: VSE.warning, n: "NEUTRÁLNĚ", v: "EBIT/A = úrok CK", d: "Páka neovlivňuje ROE — výnos přesně pokryje úrok." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.n}</div>
+              <div style={{ fontSize: 12.5, color: b.c, fontFamily: fontMono, marginBottom: 6, padding: "3px 6px", background: `${b.c}12`, borderRadius: 5, display: "inline-block" }}>{b.v}</div>
+              <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.fmv}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          Zvyšování podílu CK je efektivní, dokud EBIT/A = náklady CK (dokud se to nevyrovná).
+        </div>
+        <Tag color={VSE.warning}>Daňový štít — 3 typy</Tag>
+        <Bullet items={[
+          "Způsob, jak si firma sníží daňový základ. Úroky z CK jsou součástí nákladů → sníží základ → sníží daň. Platí jen když firma dosahuje zisku.",
+          "<b>3 typy:</b> úrokový (nejčastější — použitím CK roste rentabilita VK), odpisový, leasingový.",
+        ]} color={VSE.warning} />
+      </div>) },
+
+    { id: "financovani", title: "💰 Financování kapitálu + cizí zdroje", subtitle: "VK × CK × kombinace + cizí a mimobilanční zdroje", color: VSE.fmv, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Financování kapitálu</b> = získávání peněz na činnost, růst a investice. Dvě hlavní možnosti: vlastní kapitál a cizí kapitál. Jejich kombinace = kapitálová struktura.
+        </Def>
+        <Tag color={VSE.fmv}>VK × CK</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Vlastní kapitál (VK)" color={VSE.success} items={["Peníze od vlastníků/investorů — akcie, vklady společníků.", "<b>+</b> nemusím splácet, jen sdílím zisky (dividendy).", "<b>−</b> dávám část kontroly, musím zisky rozdělovat."]} />
+          <ModelCard name="Cizí kapitál (CK)" color={VSE.danger} items={["Půjčky a úvěry od bank, dluhopisy, leasing.", "<b>+</b> zachovám kontrolu, úroky daňově odečtu (štít).", "<b>−</b> musím splácet úroky i jistinu, vysoké zadlužení ohrožuje stabilitu."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Cizí zdroje — typy</Tag>
+        <Bullet items={[
+          "<b>Rezervy</b> — nejsou závazkem, jsou dluhem. Tvoří se z nákladů (ne ze zisku), na nepředvídatelné ztráty (kurzové rozdíly, nedobytné pohledávky).",
+          "<b>Dlouhodobé závazky</b> — bankovní úvěry, dluhopisy, leasing. Kovenanty = smluvní podmínky úvěru. Kuponové platby = pravidelný úrok držitelům dluhopisů.",
+          "<b>Ostatní:</b> akcionářské půjčky, mezaninové úvěry (vyšší riziko = vyšší úrok / podíl na zisku), konvertibilní půjčky (věřitel si vybere splacení nebo podíl), tiché společenství.",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.warning}>Mimobilanční závazky</Tag>
+        <Bullet items={[
+          "Závazky, které nejsou přímo v rozvaze, ale mohou ovlivnit kap. strukturu.",
+          "<b>Deriváty</b> (úrokové/měnové — zajištění rizika), <b>vydané záruky a směnky</b> (firma ručí za jiného, může nést následky když dlužník nesplní).",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const praxeFin4 = {
+    caseStudy: {
+      company: "Apple — proč si firma s horou hotovosti půjčuje",
+      subtitle: "Optimalizace kapitálové struktury a daňový štít v praxi",
+      content: (<>
+        Apple sedí na desítkách miliard dolarů hotovosti — a přesto <b>vydává dluhopisy a půjčuje si</b>. Proč by zadlužená firma dělala dluh, když má peníze?<br/><br/>
+        <b style={{ color: VSE.success }}>Daňový štít</b> — úroky z dluhopisů jsou daňově uznatelné, snižují daňový základ. CK je tak po zdanění levnější než VK.<br/>
+        <b style={{ color: VSE.fis }}>Levný kapitál</b> — Apple má skvělý rating, půjčí si za velmi nízký úrok. Náklady CK jsou výrazně pod náklady VK.<br/>
+        <b style={{ color: VSE.warning }}>Finanční páka</b> — dluh + odkup vlastních akcií zvedá ROE (méně VK ve jmenovateli).<br/>
+        <b style={{ color: VSE.danger }}>Daně z repatriace</b> — část hotovosti byla historicky v zahraničí, převést ji domů by znamenalo vysokou daň. Levnější bylo půjčit si doma.<br/><br/>
+        <b>Proč to komise zajímá:</b> ukazuje, že optimální kapitálová struktura <b>není „žádný dluh = bezpečno”</b>. Rozumná míra CK snižuje WACC a zvyšuje hodnotu firmy. Apple cíleně míří k bodu minima U-křivky.
+      </>),
+      lessons: "Optimální kapitálová struktura není nulový dluh. Přiměřený podíl CK snižuje WACC (daňový štít + levnější kapitál) a přes finanční páku zvyšuje ROE. Klíč je nepřehnat to — za bodem minima U-křivky riziko a náklady zase rostou."
+    },
+    miniExamples: [
+      { company: "Startup vs korporát", tag: "STRUKTURA DLE FÁZE", color: VSE.fis, content: "Startup financuje skoro vše vlastním kapitálem (investoři, VC) — banky mu nepůjčí, nemá historii ani zajištění. Zavedený korporát naopak může jet na vysokém podílu CK díky stabilnímu CF a dobrému ratingu. Optimální struktura závisí na fázi a stabilitě firmy." },
+      { company: "Energetika a infrastruktura", tag: "VYSOKÉ CK", color: VSE.danger, content: "Energetické a infrastrukturní firmy běžně jedou na vysokém podílu CK. Mají stabilní, předvídatelné CF a drahá dlouhodobá aktiva, která se financují dluhem s využitím daňového štítu. Vysoká zadluženost tu není poplach jako u malé služby." },
+      { company: "Páka v krizi", tag: "RIZIKO PÁKY", color: VSE.warning, content: "Finanční páka funguje oběma směry. Když EBIT/A klesne pod úrok z CK (recese, výpadek tržeb), páka působí NEGATIVNĚ — vysoce zadlužené firmy padají rychleji. Proto má optimální struktura limity (stabilita zisku, požadavky věřitelů)." },
+    ]
+  };
+
+  const flashcardsFin4 = [
+    { q: "Finanční × kapitálová struktura?", a: "Finanční (širší) = celý kapitál vč. krátkodobých závazků, financuje celková aktiva. Kapitálová (užší) = jen dlouhodobý kapitál (VK + CK), financuje dlouhodobá aktiva." },
+    { q: "Složky vlastního kapitálu?", a: "Základní kapitál, kapitálové fondy (vč. emisního ážia), fondy ze zisku, výsledek hospodaření + nerozdělený zisk." },
+    { q: "Co je emisní ážio?", a: "Částka při emisi nových akcií nad nominální hodnotu — rozdíl mezi tržní a nominální hodnotou akcie. Patří do kapitálových fondů." },
+    { q: "Optimální kapitálová struktura?", a: "Taková, kdy je WACC minimální a maximalizuje se hodnota podniku. Vyvážení VK a CK pro nejlepší poměr náklady × riziko." },
+    { q: "Co popisuje U-křivka?", a: "Přidáváním CK klesá WACC (daňový štít, páka) až do bodu minima. Když to přeženu, věřitelé chtějí vyšší odměnu → WACC zase roste. Optimum = bod minima." },
+    { q: "Co je WACC?", a: "Vážené průměrné náklady na kapitál. Úroková sazba, kterou firma v průměru platí za financování aktiv. Diskontní sazba při hodnocení investic." },
+    { q: "Vzorec WACC?", a: "WACC = re·(VK/C) + rd·(1−d)·(CK/C). re = náklady VK, rd = náklady CK, d = daň, C = VK+CK. Člen (1−d) = daňový štít." },
+    { q: "Proč je CK levnější než VK? (Špaček)", a: "1) Věřitelé mají menší riziko — v úpadku přednostní nárok na aktiva (vlastník jde poslední). 2) Daňový štít — úroky snižují daňový základ." },
+    { q: "Co je model CAPM?", a: "Nejčastější odhad nákladů VK. re = rf + β·(rm − rf). Investor chce bezrizikovou míru + rizikovou prémii." },
+    { q: "Co měří koeficient beta?", a: "Citlivost investice na výkyvy trhu (systematické riziko). β>1 rizikovější než trh, β<1 stabilnější, β=1 stejně jako trh." },
+    { q: "Co je finanční páka?", a: "= aktiva / VK. Použití CK zvedá rentabilitu VK — umožňuje zvýšit zisky pomocí cizího kapitálu." },
+    { q: "Kdy páka působí pozitivně/negativně?", a: "Pozitivně: EBIT/A > úrok CK (zvyšuje ROE). Negativně: EBIT/A < úrok CK (snižuje ROE). Neutrálně: EBIT/A = úrok CK." },
+    { q: "Co je daňový štít a 3 typy?", a: "Snížení daňového základu díky odečitatelným nákladům. Platí jen při zisku. 3 typy: úrokový (nejčastější), odpisový, leasingový." },
+    { q: "Ratingový (stavebnicový) model WACC?", a: "Pro malé/střední firmy. WACC = rf + rLA + rPS + rFS (bezriziková + přirážky za malou velikost, nižší podnikatelskou a finanční stabilitu)." },
+    { q: "VK × CK — výhody a nevýhody?", a: "VK: nemusím splácet, ale dávám kontrolu a dělím zisk. CK: zachovám kontrolu + daňový štít, ale musím splácet a zadlužení ohrožuje stabilitu." },
+    { q: "Co jsou mimobilanční závazky?", a: "Závazky mimo rozvahu, které mohou ovlivnit kap. strukturu — deriváty (zajištění rizika), vydané záruky a směnky (ručení za jiného)." },
+  ];
+
+  const quizFin4 = [
+    { q: "Kapitálová struktura (užší pojem) zahrnuje:", opts: ["I krátkodobé závazky", "Jen dlouhodobý kapitál — podíl VK a CK", "Jen hotovost", "Jen zásoby"], correct: 1 },
+    { q: "Emisní ážio je:", opts: ["Úrok z dluhopisu", "Částka při emisi akcií nad nominální hodnotu", "Daň z dividend", "Bankovní poplatek"], correct: 1 },
+    { q: "Optimální kapitálová struktura znamená:", opts: ["Žádný dluh", "Maximální dluh", "WACC minimální a max hodnota podniku", "Jen vlastní kapitál"], correct: 2 },
+    { q: "U-křivka ukazuje, že:", opts: ["WACC stále klesá s dluhem", "WACC klesá s CK do bodu minima, pak zase roste (věřitelé chtějí víc)", "WACC je konstantní", "CK je vždy špatný"], correct: 1 },
+    { q: "WACC je:", opts: ["Jen náklady VK", "Vážený průměr nákladů na VK a CK", "Jen úrok z úvěru", "Daň z příjmu"], correct: 1 },
+    { q: "Proč je CK obvykle levnější než VK? (Špaček)", opts: ["Je ho víc", "Věřitelé mají menší riziko (přednostní nárok) + daňový štít", "Banky jsou hodné", "VK se nedaní"], correct: 1 },
+    { q: "Model CAPM odhaduje:", opts: ["Náklady CK", "Náklady VK (re = rf + β·(rm−rf))", "Daňový štít", "Likviditu"], correct: 1 },
+    { q: "Koeficient beta měří:", opts: ["Likviditu", "Citlivost na výkyvy trhu (systematické riziko)", "Zadluženost", "Zisk"], correct: 1 },
+    { q: "Finanční páka se počítá jako:", opts: ["VK / aktiva", "Aktiva / VK", "CK / tržby", "EBIT / úroky"], correct: 1 },
+    { q: "Finanční páka působí pozitivně, když:", opts: ["EBIT/A < úrok CK", "EBIT/A > úrok CK", "Firma nemá dluh", "VK = CK"], correct: 1 },
+    { q: "Daňový štít funguje, protože:", opts: ["Dividendy se neodečítají", "Úroky z CK snižují daňový základ", "VK je levnější", "Stát dotuje firmy"], correct: 1 },
+    { q: "Výhoda financování cizím kapitálem:", opts: ["Nemusím splácet", "Zachovám kontrolu + úroky daňově odečtu", "Nemám žádné riziko", "Nedávám podíl, ale dělím zisk"], correct: 1 },
+  ];
+
+  const examQuestionsFin4 = [
+    { komise: "ZS 2025 — Špaček, Palíšková, Machek", otazka: "Optimální kapitálová struktura, WACC, důvody rozdílné ceny VK a CK.", pozn: "🔴 Špaček chce DŮVODY rozdílné ceny VK a CK: (1) věřitelé mají menší riziko — přednostní nárok na aktiva, (2) daňový štít. Plus optimální struktura (U-křivka) a WACC." },
+    { komise: "LS 2025 — Stříteský, Andera, Kučera", otazka: "Kapitálová struktura, její optimalizace a financování, WACC.", pozn: "Andera chce propojení s praxí. Stříteský se hodně doptává. Měj připravené reálné příklady (Apple, energetika) + U-křivku." },
+    { komise: "LS 2025 — „3 týpci”", otazka: "Kapitálová struktura, její optimalizace a financování, WACC.", pozn: "🔴 Můžou se zeptat na COKOLIV — hodně se vyptávali na KAPITÁLOVÉ FONDY a chtěli VŠECHNY druhy financování VK. Měj složky VK pevně v hlavě." },
+    { komise: "LS 2025 — Double Stříteský, Müllerová", otazka: "Kapitálová struktura, její optimalizace a financování.", pozn: "Definice FS vs KS + optimalizace (WACC, U-křivka) + zdroje financování VK a CK." },
+  ];
+
+  const podcastFin4 = { title: "Finance 4 — Kapitálová struktura, WACC, finanční páka", description: "Finanční × kapitálová struktura, složky VK (kapitálové fondy, emisní ážio), optimální struktura a U-křivka, WACC a ratingový model, náklady VK (CAPM) × CK a proč je CK levnější, finanční páka, daňový štít, financování.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyFin4 = `
+    <b style="color:#E06D1E">1.</b> Rozliš <b>finanční × kapitálovou strukturu</b> (širší vč. KZ × jen dlouhodobý kapitál VK+CK).<br/>
+    <b style="color:#E06D1E">2.</b> Znej <b>složky VK</b> (základní kapitál, kapitálové fondy + emisní ážio, fondy ze zisku, VH) — „3 týpci” se ptají na kapitálové fondy!<br/>
+    <b style="color:#E06D1E">3.</b> <b>Optimální struktura</b> = min WACC = max hodnota. Nakresli <b>U-křivku</b> a vysvětli bod minima.<br/>
+    <b style="color:#E06D1E">4.</b> <b>WACC</b> = re·(VK/C) + rd·(1−d)·(CK/C). Na čem závisí + ratingový model pro malé firmy.<br/>
+    <b style="color:#E06D1E">5.</b> 🔴 <b>Špaček: proč je CK levnější než VK</b> — věřitelé mají menší riziko (přednostní nárok) + daňový štít.<br/>
+    <b style="color:#E06D1E">6.</b> <b>Náklady VK</b> přes CAPM (re = rf + β·(rm−rf)), beta = systematické riziko.<br/>
+    <b style="color:#E06D1E">7.</b> <b>Finanční páka</b> = A/VK. Pozitivně když EBIT/A > úrok CK. + daňový štít (3 typy).<br/>
+    <b style="color:#E06D1E">8.</b> <b>Napoj na praxi</b> (Andera) — Apple si půjčuje i s hotovostí (daňový štít, levný kapitál), energetika jede na CK.
+  `;
+
+  const caseStudyFin4 = {
+    title: "Adam — CFO rostoucí e-commerce firmy ShopFast, 120 lidí",
+    subtitle: "Rozhodni o poměru VK/CK a spočítej dopad na WACC a ROE",
+    scenario: "Adam (40) je CFO v ShopFast, česká e-commerce firma (elektronika, doplňky). 120 zaměstnanců, tržby 400 mil. Kč, stabilní růst 15 %, zdravý zisk. Firma je financovaná skoro výhradně vlastním kapitálem — zakladatelé do ní vložili peníze a roky reinvestovali zisk. CK je minimální.\n\nMajitelé chtějí postavit nový automatizovaný sklad za 60 mil. Kč. Adam řeší, jak to financovat. Náklady VK (požadovaná výnosnost akcionářů) jsou kolem 14 %, banka by půjčila za 6 % (firma má dobrý rating a stabilní CF). Daňová sazba 21 %.\n\nProvozní rentabilita aktiv (EBIT/A) je 12 %. Adam si všiml, že firma má extrémně nízkou zadluženost — skoro vše VK. Spočítá, že přidáním levnějšího CK by mohl stáhnout WACC dolů a přes finanční páku zvednout ROE. Banka navíc chce úroky, které jsou daňově uznatelné (daňový štít).\n\nJeden z majitelů se ale bojí dluhu: „Dluh je nebezpečný, radši všechno z vlastního.” Adam musí vysvětlit, proč přiměřený dluh dává smysl — a kde je hranice.",
+    signals: [
+      { text: "financovaná skoro výhradně vlastním kapitálem", color: VSE.warning, reason: "Extrémně nízká zadluženost = firma je vlevo na U-křivce, kde je WACC zbytečně vysoký (VK je drahé). Prostor pro optimalizaci." },
+      { text: "Náklady VK ... 14 %, banka by půjčila za 6 %", color: VSE.fis, reason: "CK je výrazně levnější než VK. Klasický důvod přidat dluh — sníží vážené náklady na kapitál." },
+      { text: "úroky, které jsou daňově uznatelné (daňový štít)", color: VSE.success, reason: "Daňový štít dál snižuje efektivní náklad CK — po zdanění je 6 % úrok ještě levnější." },
+      { text: "Provozní rentabilita aktiv (EBIT/A) je 12 %", color: VSE.success, reason: "EBIT/A 12 % > úrok CK 6 % → finanční páka by působila POZITIVNĚ (zvedla by ROE)." },
+      { text: "„Dluh je nebezpečný, radši všechno z vlastního.”", color: VSE.danger, reason: "Častý omyl. Nulový dluh = drahá kapitálová struktura (vysoký WACC). Ale pozor — i přehnaný dluh je špatně (pravá strana U-křivky)." },
+    ],
+    quiz1: {
+      question: "Proč by Adam měl doporučit přidat (přiměřený) cizí kapitál?",
+      options: [
+        "Protože dluh je vždy lepší než vlastní kapitál",
+        "CK je levnější (6 % vs 14 %) + daňový štít → sníží WACC; a protože EBIT/A (12 %) > úrok (6 %), finanční páka zvedne ROE",
+        "Aby firma vypadala zadluženě a odradila investory",
+        "Protože banka to vyžaduje",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by měl Adam vysvětlit majiteli hranice zadlužování?",
+      options: [
+        { text: "U-křivka: přidáváním CK klesá WACC do bodu minima, ale za ním věřitelé chtějí vyšší odměnu a riziko roste → WACC zase stoupá", correct: true, reason: "✓ Přesně princip U-křivky. Cíl je bod minima, ne maximální dluh." },
+        { text: "Finanční páka funguje oběma směry — když by EBIT/A klesl pod úrok (recese, výpadek tržeb), páka by ROE srážela dolů", correct: true, reason: "✓ Klíčové varování. Vysoký dluh zvyšuje zranitelnost v krizi. Proto přiměřenost." },
+        { text: "Limitující faktory: stabilita zisku a CF pro splácení, požadavky věřitelů, likvidita na úrokové platby", correct: true, reason: "✓ Reálné brzdy zadlužování. ShopFast má stabilní CF, takže prostor má — ale ne neomezený." },
+        { text: "Financovat sklad výhradně dluhem na 100 %, čím víc CK tím líp", correct: false, reason: "✗ Opak přiměřenosti. Maximální dluh = pravá strana U-křivky, vysoké riziko a rostoucí WACC." },
+        { text: "Přiměřený podíl CK sníží WACC a zvýší hodnotu firmy — cíl je optimální struktura, ne nulový dluh", correct: true, reason: "✓ Jádro odpovědi. Optimální struktura = bod minima U-křivky, ne extrémy." },
+        { text: "Dluh se nikdy nevyplatí, majitel má pravdu", correct: false, reason: "✗ Nepravda. Nulový dluh = zbytečně drahý kapitál (WACC vysoký). Přiměřený CK hodnotu firmy zvyšuje." },
+      ],
+    },
+    summary: "<b>ShopFast je podfinancovaná dluhem — skoro vše VK znamená zbytečně vysoký WACC.</b> Adam má pravdu, že přidání přiměřeného CK dává smysl, a umí to obhájit čísly.<br/><br/><b>Proč přidat CK:</b><br/>• CK levnější (6 %) než VK (14 %) + <b>daňový štít</b> → stáhne WACC dolů<br/>• EBIT/A (12 %) > úrok (6 %) → <b>finanční páka působí pozitivně</b>, zvedne ROE<br/>• firma má stabilní CF a dobrý rating → unese splácení<br/><br/><b>Kde je hranice (pro majitele):</b><br/>• <b>U-křivka</b> — WACC klesá do bodu minima, pak zase roste (věřitelé chtějí víc, roste riziko)<br/>• páka funguje <b>oběma směry</b> — v krizi (EBIT/A pod úrok) by srážela ROE dolů<br/>• limitující faktory: stabilita zisku, požadavky věřitelů, likvidita<br/><br/><b>Pro komisi:</b> Přesně Špačkovo téma — důvody rozdílné ceny VK a CK (věřitelé mají menší riziko + daňový štít) a optimální struktura. A Andera ocení napojení na praxi (Apple si půjčuje i s hotovostí). Klíč: optimum = bod minima U-křivky, ne extrémy.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Finance" subjectId="fin" number={4} title="Kapitálová struktura, WACC"
+      subtitle="FS × KS, optimální struktura, U-křivka, WACC, CAPM, finanční páka"
+      color={VSE.danger}
+      questionText="Optimální kapitálová struktura, WACC, důvody rozdílné ceny VK a CK, finanční páka"
+      sloz={3} roz={3} freq={3}
+      studySections={studySectionsFin4}
+      flashcards={flashcardsFin4}
+      quiz={quizFin4}
+      praxe={praxeFin4}
+      examQuestions={examQuestionsFin4}
+      podcast={podcastFin4}
+      examStrategy={examStrategyFin4}
+      caseStudy={caseStudyFin4}
+    />
+  );
+}
+
+
+function OkruhFin3Panel() {
+  const studySectionsFin3 = [
+    { id: "intro", title: "Co je pracovní kapitál + 4 složky", subtitle: "Kapitál, který v podniku neustále obíhá — týká se všech útvarů", color: VSE.danger, emoji: "refresh",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Pracovní kapitál</b> = finanční zdroje, které má firma k dispozici na krytí <b>krátkodobých provozních potřeb</b>. Kapitál v podniku <b>neustále obíhá</b> (hotovostní cyklus) — po dobu cyklu je hotovost investovaná ve výrobě. Řídit PK znamená řídit jeho složky.
+        </Def>
+        <ExamAlert komise="Hönig" color={VSE.warning} what="Hönig se ptá: <b>„Jakých útvarů se týká pracovní kapitál?”</b> → Odpověď: <b>úplně všech</b>. PK prochází celou firmou — nákup (zásoby), výroba, obchod (pohledávky), finance (hotovost). Není to jen věc financí." />
+        <Tag color={VSE.danger}>4 složky pracovního kapitálu</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { color: VSE.warning, title: "📦 Zásoby (aktivum)", desc: "Materiál a suroviny, nedokončená výroba, hotové výrobky. Cíl: co nejmenší, ale aby umožnily chod. Nejméně likvidní část OA." },
+            { color: VSE.fis, title: "🧾 Pohledávky (aktivum)", desc: "Vznikají po dodání zboží — odběratel převezme, ale platí později. Skonto = pobídka k rychlejší platbě (sleva)." },
+            { color: VSE.success, title: "💵 Kr. finanční majetek (aktivum)", desc: "Hotovost (pokladna, BÚ) + krátkodobé CP (drženy < 1 rok). Rychle likvidní, na nenadálé výdaje." },
+            { color: VSE.danger, title: "📉 Krátkodobé závazky (pasivum)", desc: "Zdroj financování krátkodobého majetku — vůči dodavatelům, kr. úvěry, půjčky. Toto firma DLUŽÍ." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.color}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14.5, fontWeight: 700, color: b.color, fontFamily: fontSans, marginBottom: 4 }}>{b.title}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.desc}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <div style={{ marginTop: 10, padding: "10px 14px", background: `${VSE.fis}10`, border: `1px solid ${VSE.fis}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>Zásoby + pohledávky + kr. fin. majetek = oběžná aktiva</b> (aktiva PK). <b>Krátkodobé závazky = pasiva PK.</b>
+        </div>
+      </div>) },
+
+    { id: "cpk_likvidita", title: "🎯 ČPK + nefinanční PK + likvidita", subtitle: "Jak se ČPK počítá + vzorce likvidity (Machek/Kučera chtěli)", color: VSE.fmv, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Pracovní kapitál = oběžná aktiva</b> (majetek pro provoz). <b>Čistý pracovní kapitál = OA − krátkodobé závazky</b> — kolik prostředků má firma na každodenní provoz po zaplacení KZ. <b>Machek a Kučera chtějí znát výpočet ČPK i vzorce likvidity.</b>
+        </Def>
+        <Tag color={VSE.fmv}>Druhy pracovního kapitálu</Tag>
+        <ResponsiveGrid cols3>
+          <ModelCard name="Pracovní kapitál" color={VSE.danger} items={["= oběžná aktiva", "Majetek potřebný pro provoz podniku."]} />
+          <ModelCard name="Čistý PK (ČPK)" color={VSE.fmv} items={["= OA − krátkodobé závazky", "<b>Kladný</b> (OA > KZ) = dostatek na pokrytí KZ.", "<b>Záporný</b> (OA < KZ) = riziko platební neschopnosti."]} />
+          <ModelCard name="Nefinanční PK" color={VSE.warning} items={["= zásoby + pohledávky", "OA, která nejsou peníze, ale jsou klíčová pro provoz."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.fis}>🔴 Vzorce likvidity + jakých čísel dosahovat (Machek/Kučera past)</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.fis, n: "Běžná", v: "OA / KZ", d: "Kolikrát OA pokrývají KZ.", cil: "ideál 1,5–2,5" },
+            { c: VSE.warning, n: "Pohotová", v: "(OA − zásoby) / KZ", d: "Bez nejméně likvidních zásob.", cil: "ideál ~1,0" },
+            { c: VSE.success, n: "Okamžitá", v: "PP / KZ", d: "Jen peníze. Nejlépe měří platby.", cil: "ideál 0,2–0,5" },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 15, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.n}</div>
+              <div style={{ fontSize: 12.5, color: b.c, fontFamily: fontMono, marginBottom: 6, padding: "3px 6px", background: `${b.c}12`, borderRadius: 5, display: "inline-block" }}>{b.v}</div>
+              <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans, marginBottom: 4 }}>{b.d}</div>
+              <div style={{ fontSize: 12, color: b.c, fontFamily: fontMono, fontWeight: 600 }}>{b.cil}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <div style={{ marginTop: 8, padding: "10px 14px", background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          Likvidita je propojená s PK — vysoká likvidita = peníze leží ladem (neefektivní), nízká = riziko platební neschopnosti. (detail v okruhu 1)
+        </div>
+      </div>) },
+
+    { id: "ocp", title: "🔄 Obratový cyklus peněz (OCP)", subtitle: "Doba, než se z peněz zase stanou peníze", color: VSE.fis, emoji: "circles",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Obratový cyklus peněz</b> (= hotovostní cyklus = cyklus ČPK) = doba, po kterou jsou peníze vázány v oběžných aktivech, než se přemění zpět na hotovost. Začíná platbou za materiál a končí inkasem prodeje výrobků. <b>Obrátkový cyklus zmiňuje Mikovcová.</b>
+        </Def>
+        <Tag color={VSE.fis}>Cyklus oběhu peněz</Tag>
+        <ResponsiveSVG viewBox="0 0 600 360" maxHeight={350}>
+          {/* Vodicí kružnice */}
+          <circle cx="300" cy="175" r="120" fill="none" stroke="var(--text-muted)" strokeWidth="1" strokeDasharray="3,5" opacity="0.4"/>
+          {/* Šipky po směru hod. ručiček (oblouky podél kružnice mezi uzly) */}
+          <path d="M338 70 A120 120 0 0 1 410 116" fill="none" stroke={VSE.fis} strokeWidth="2.2" markerEnd="url(#arrOcp)"/>
+          <path d="M420 162 A120 120 0 0 1 392 250" fill="none" stroke={VSE.fis} strokeWidth="2.2" markerEnd="url(#arrOcp)"/>
+          <path d="M349 288 A120 120 0 0 1 251 288" fill="none" stroke={VSE.fis} strokeWidth="2.2" markerEnd="url(#arrOcp)"/>
+          <path d="M208 250 A120 120 0 0 1 180 162" fill="none" stroke={VSE.fis} strokeWidth="2.2" markerEnd="url(#arrOcp)"/>
+          <path d="M190 116 A120 120 0 0 1 262 70" fill="none" stroke={VSE.fis} strokeWidth="2.2" markerEnd="url(#arrOcp)"/>
+          {/* 5 uzlů rovnoměrně na kružnici */}
+          {[
+            { x: 300, y: 55, c: VSE.success, t: "Hotovost" },
+            { x: 414, y: 138, c: VSE.warning, t: "Zásoby materiálu" },
+            { x: 371, y: 272, c: VSE.warning, t: "Nedokončená výroba" },
+            { x: 229, y: 272, c: VSE.fis, t: "Hotové výrobky" },
+            { x: 186, y: 138, c: VSE.danger, t: "Pohledávky" },
+          ].map((p, i) => {
+            const w = Math.max(96, p.t.length * 7.2 + 30);
+            return (
+              <g key={i}>
+                <rect x={p.x - w/2} y={p.y - 16} width={w} height="32" fill="var(--bg)" stroke={p.c} strokeWidth="1.8" rx="16"/>
+                <circle cx={p.x - w/2 + 14} cy={p.y} r="4.5" fill={p.c}/>
+                <text x={p.x - w/2 + 26} y={p.y + 4.5} textAnchor="start" fontFamily={fontSans} fontSize="12" fontWeight="600" fill={p.c}>{p.t}</text>
+              </g>
+            );
+          })}
+          {/* Střed */}
+          <text x="300" y="170" textAnchor="middle" fontFamily={fontMono} fontSize="12.5" fill="var(--text-muted)" fontWeight="700" letterSpacing="2px">OBĚH PENĚZ</text>
+          <text x="300" y="190" textAnchor="middle" fontFamily={fontMono} fontSize="9.5" fill="var(--text-muted)" fontStyle="italic">po směru hodinových ručiček</text>
+          <defs><marker id="arrOcp" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0 0 L7 4.5 L0 9 Z" fill={VSE.fis}/></marker></defs>
+        </ResponsiveSVG>
+        <div style={{ textAlign: "center", margin: "10px 0", padding: "12px", background: `${VSE.fis}10`, borderRadius: 10, fontFamily: fontMono, fontSize: 14.5, fontWeight: 700, color: VSE.fis }}>
+          OCP = DO zásob + DO pohledávek − Doba splatnosti kr. závazků
+        </div>
+        <Bullet items={[
+          "<b>Cílem je co nejkratší OCP</b> — firma rychleji přetváří výdaje na příjmy.",
+          "Dobré <b>snižovat</b>: dobu pohledávek (rychleji inkasovat) a dobu zásob (rychleji prodávat).",
+          "<b>Provozní cyklus</b> = DO zásob + DO pohledávek (doba, kdy je hotovost v nepeněžní formě).",
+          "<b>Peněžní cyklus = OCP</b> = provozní cyklus − doba splatnosti závazků.",
+        ]} color={VSE.fis} />
+      </div>) },
+
+    { id: "optimalni_strategie", title: "⚖️ Optimální výše + 3 strategie PK", subtitle: "Optimální objem, agresivní × konzervativní × umírněná + nulový PK", color: VSE.warning, emoji: "path",
+      content: (<div>
+        <Def color={VSE.warning}>
+          <b>Optimální výše PK</b> = objem prostředků, které firma potřebuje k plynulému fungování. <b>Vysoký objem</b> = neefektivní (přebytek hotovosti/zásob). <b>Nízký objem</b> = problém s likviditou. Cíl: rovnováha mezi dostatečnou likviditou a efektivním využíváním prostředků. <b>Hönig a Nový se ptají na optimální výši.</b>
+        </Def>
+        <Tag color={VSE.warning}>3 strategie řízení PK — na škále riziko ↔ jistota</Tag>
+        <ResponsiveSVG viewBox="0 0 600 200" maxHeight={190}>
+          <line x1="50" y1="100" x2="560" y2="100" stroke="var(--text-muted)" strokeWidth="2"/>
+          <text x="55" y="135" textAnchor="start" fontFamily={fontMono} fontSize="10" fill={VSE.danger}>vyšší riziko / efektivita</text>
+          <text x="555" y="135" textAnchor="end" fontFamily={fontMono} fontSize="10" fill={VSE.success}>vyšší jistota / rezervy</text>
+          <g>
+            <rect x="50" y="40" width="160" height="50" fill={`${VSE.danger}20`} stroke={VSE.danger} strokeWidth="2" rx="8"/>
+            <text x="130" y="62" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="700" fill={VSE.danger}>AGRESIVNÍ</text>
+            <text x="130" y="79" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fill="var(--text)">minimum PK, max efektivita</text>
+          </g>
+          <g>
+            <rect x="220" y="40" width="160" height="50" fill={`${VSE.warning}20`} stroke={VSE.warning} strokeWidth="2" rx="8"/>
+            <text x="300" y="62" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="700" fill={VSE.warning}>UMÍRNĚNÁ</text>
+            <text x="300" y="79" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fill="var(--text)">rovnováha riziko × zisk</text>
+          </g>
+          <g>
+            <rect x="390" y="40" width="160" height="50" fill={`${VSE.success}20`} stroke={VSE.success} strokeWidth="2" rx="8"/>
+            <text x="470" y="62" textAnchor="middle" fontFamily={fontSans} fontSize="13" fontWeight="700" fill={VSE.success}>KONZERVATIVNÍ</text>
+            <text x="470" y="79" textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fill="var(--text)">vyšší PK, dost rezerv</text>
+          </g>
+        </ResponsiveSVG>
+        <Bullet items={[
+          "<b>Agresivní</b> — minimalizovat objem PK (nízké zásoby, pohledávky, fin. maj.). Rychlý obrat, max efektivnost, nižší N. Hrozí <b>vysoké riziko likvidity</b> (minimum rezerv).",
+          "<b>Konzervativní</b> — vyšší úroveň PK, dost rezerv pro krytí KZ a nečekaných výdajů. Větší flexibilita a ochrana. Nevýhoda: blokuje kapitál → může snížit návratnost.",
+          "<b>Umírněná</b> — rovnováha mezi rizikem a ziskovostí. Optimalizace zásob, zkrácení inkasa pohledávek, prodloužení splatnosti závazků bez ohrožení vztahů s dodavateli.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fmv}>Nulový pracovní kapitál (OA = KZ)</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.fmv}10`, border: `1px solid ${VSE.fmv}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          Firma <b>neblokuje žádné peníze</b> v pohledávkách ani zásobách (JIT model). Platby od zákazníků pokryjí závazky → <b>nepotřebuje VK, ale potřebuje cizí zdroje</b>. Znamení vysoce efektivního řízení, ale firma nemá rezervu na nečekané výdaje.
+        </div>
+      </div>) },
+
+    { id: "financovani", title: "💰 Financování PK + krátkodobé zdroje", subtitle: "Zdroje + kontokorent × revolving + mezera krytí", color: VSE.success, emoji: "coins",
+      content: (<div>
+        <Def color={VSE.success}>
+          PK se financuje <b>krátkodobými zdroji</b>. Existuje několik možností — od zadrženého zisku přes bankovní úvěry až po prodej pohledávek. <b>Hönig a Nový chtějí znát zdroje financování.</b>
+        </Def>
+        <Tag color={VSE.success}>Zdroje financování PK</Tag>
+        <Bullet items={[
+          "<b>Zadržený zisk</b> — nevyplacené dividendy reinvestované do PK.",
+          "<b>Krátkodobý úvěr</b> — od banky, splatný do 1 roku.",
+          "<b>Factoring a forfaiting</b> — prodej pohledávek → firma má hotovost hned, zrychlí CF.",
+          "<b>Interní půjčky</b> — od mateřské firmy nebo akcionářů (nižší úrok).",
+          "<b>Krátkodobé půjčky od dodavatelů</b> — nákup na úvěr se splatností (neplatím hned, ale později).",
+        ]} color={VSE.success} />
+        <Tag color={VSE.fis}>Kontokorent × revolving</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Kontokorentní úvěr" color={VSE.fis} items={["Úvěr poskytovaný k BÚ — umožňuje jít do „mínusu” do limitu.", "Pro krátkodobé a <b>neplánované</b> výdaje."]} />
+          <ModelCard name="Revolvingový úvěr" color={VSE.warning} items={["Samostatný produkt, <b>není vázán na BÚ</b>. Čerpá se, splácí a znovu čerpá.", "Úrok z reálně čerpané částky (vyšší, ale flexibilní). Dobrý na sezónní výkyvy."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>Mezera krytí = test platební schopnosti</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.danger}10`, border: `1px solid ${VSE.danger}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>Mezera krytí = OA − KZ.</b> Když peněžní prostředky nestačí na pokrytí závazků → insolvence. Pokud je mezera menší než desetina závazků, dlužník je schopen je plnit. <b>Kladná</b> = dost OA na KZ → schopná splácet. <b>Záporná</b> = víc KZ než OA → platební neschopnost.
+        </div>
+      </div>) },
+
+    { id: "rizeni_slozek", title: "📦 Řízení zásob, pohledávek a peněz", subtitle: "ABC, EOQ, JIT + factoring/skonto + Baumol/Miller-Orr", color: VSE.ffu, emoji: "tools",
+      content: (<div>
+        <Def color={VSE.ffu}>
+          Řízení 3 hlavních složek PK: <b>zásoby</b> (kolik a kdy objednávat), <b>pohledávky</b> (jak rychle inkasovat) a <b>peníze</b> (kolik hotovosti držet). Každá má své nástroje.
+        </Def>
+        <Tag color={VSE.warning}>📦 Řízení zásob</Tag>
+        <Bullet items={[
+          "<b>Metoda ABC</b> — rozdělí zásoby podle významu: A = nejhodnotnější (10–20 % položek = 70–80 % hodnoty, přísné sledování), B = střední, C = nejlevnější (50–70 % položek = 5–10 % hodnoty, minimální kontrola).",
+          "<b>EOQ</b> = optimální velikost objednávky, která minimalizuje celkové roční N na skladování (v prostředí jistoty).",
+          "<b>JIT</b> (Just In Time) — dodávka „v čase potřeby”, minimum skladování (Toyota). <b>JIS</b> = ve správném pořadí pro výrobu (automobilky).",
+          "<b>FIFO</b> (první dovnitř, první ven — potraviny) × <b>LIFO</b> (poslední dovnitř, první ven). <b>KANBAN</b> = doplňování dle signálu, že dochází.",
+          "<b>Konsignační sklad</b> — dodavatel uskladní zboží u odběratele, vlastní ho dokud ho odběratel nepoužije a pak zaplatí.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fis}>🧾 Řízení pohledávek</Tag>
+        <Bullet items={[
+          "<b>Credit scoring</b> — bodové ohodnocení klienta → jestli mu dát obchodní úvěr.",
+          "<b>Skonto</b> — sleva za rychlou platbu (např. 2 % při platbě do 10 dní). Zkracuje dobu inkasa.",
+          "<b>Factoring</b> — prodej krátkodobých pohledávek faktoringové firmě (vyplatí 70–90 % hned). <b>Forfaiting</b> — prodej střednědobých a dlouhodobých pohledávek (často export).",
+          "<b>Obchodní deficit = DOP − DOZ.</b> Chci DOP < DOZ (záporný = dobrý — lidi mi platí dřív, než platím dodavatelům).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.success}>🏦 Řízení peněz — 2 modely</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Baumolův model" color={VSE.success} items={["Předpokládá <b>rovnoměrnou</b> spotřebu peněz — výše průběžně klesá.", "Když dojdou, firma je doplní prodejem likvidních CP.", "Omezení: rovnoměrné čerpání je v praxi vzácné."]} />
+          <ModelCard name="Miller-Orrův model" color={VSE.fmv} items={["Peníze se vynakládají <b>nahodile</b>, zůstatky se pohybují v mantinelech.", "<b>Horní limit</b> → nakoupit likvidní CP. <b>Dolní limit</b> → prodat CP.", "Realističtější než Baumol."]} />
+        </ResponsiveGrid>
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.fmv}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          Funkce peněz: <b>transakční</b> (držím, abych platila závazky) × <b>investiční</b> (držím, abych investovala a získala odměnu).
+        </div>
+      </div>) },
+  ];
+
+  const praxeFin3 = {
+    caseStudy: {
+      company: "Amazon — záporný pracovní kapitál jako konkurenční zbraň",
+      subtitle: "Jak firma vydělává na cizích penězích, než zaplatí dodavatelům",
+      content: (<>
+        Amazon roky funguje se <b>záporným pracovním kapitálem</b> — a je to záměr, ne problém.<br/><br/>
+        <b style={{ color: VSE.success }}>Inkasuje rychle</b> — zákazník zaplatí kartou ve chvíli objednávky.<br/>
+        <b style={{ color: VSE.danger }}>Platí pomalu</b> — dodavatelům platí klidně až za 60–90 dní.<br/><br/>
+        Výsledek: Amazon má peníze od zákazníků <b>dřív</b>, než musí zaplatit za zboží. Po tu dobu „drží” cizí peníze a může je používat — třeba na investice nebo provoz. To je extrémně krátký (až záporný) <b>obratový cyklus peněz</b>: doba splatnosti závazků je delší než doba obratu zásob a pohledávek dohromady.<br/><br/>
+        <b>Proč to komise zajímá:</b> ukazuje, že záporný ČPK <b>není automaticky špatný</b>. U firmy s rychlým obratem a silnou vyjednávací pozicí je to chytrá strategie financování provozu cizími penězi. Klíč je rozumět tomu, proč je záporný.
+      </>),
+      lessons: "Záporný ČPK může být buď riziko platební neschopnosti (firma nemá na závazky), NEBO chytrá strategie (firma inkasuje dřív, než platí). Rozdíl je v obratovém cyklu peněz a vyjednávací síle. Vždy se ptej PROČ je záporný."
+    },
+    miniExamples: [
+      { company: "Toyota / JIT", tag: "ŘÍZENÍ ZÁSOB", color: VSE.warning, content: "Toyota zavedla Just In Time — díly dorazí přesně ve chvíli montáže, ne dřív. Minimum peněz vázaných v zásobách = nižší pracovní kapitál. Cena za to: extrémní závislost na spolehlivosti dodavatelů (jedno zpoždění zastaví výrobu)." },
+      { company: "Supermarkety (Kaufland, Lidl)", tag: "OBRATOVÝ CYKLUS", color: VSE.fis, content: "Potraviny mají bleskový obrat zásob (rohlík se prodá za den) a zákazník platí hned hotově/kartou. Přitom dodavatelům platí se splatností. Krátký obratový cyklus peněz = málo vázaného kapitálu, hodně hotovosti k dispozici." },
+      { company: "Stavební firmy", tag: "RIZIKO LIKVIDITY", color: VSE.danger, content: "Opačný extrém: dlouhé projekty, materiál a mzdy se platí průběžně, ale od investora se inkasuje až po etapách nebo dokončení. Dlouhý obratový cyklus → velká potřeba pracovního kapitálu a riziko mezery krytí." },
+    ]
+  };
+
+  const flashcardsFin3 = [
+    { q: "Co je pracovní kapitál?", a: "Finanční zdroje na krytí krátkodobých provozních potřeb. Kapitál neustále obíhá v hotovostním cyklu." },
+    { q: "Jakých útvarů se týká PK? (Hönig)", a: "Úplně všech — prochází celou firmou: nákup (zásoby), výroba, obchod (pohledávky), finance (hotovost)." },
+    { q: "4 složky pracovního kapitálu?", a: "Zásoby, pohledávky, krátkodobý finanční majetek (aktiva) + krátkodobé závazky (pasivum)." },
+    { q: "Pracovní kapitál vs ČPK?", a: "PK = oběžná aktiva. ČPK = OA − krátkodobé závazky (kolik zbude na provoz po zaplacení KZ)." },
+    { q: "Kladný × záporný ČPK?", a: "Kladný (OA > KZ) = dostatek na pokrytí KZ. Záporný (OA < KZ) = riziko platební neschopnosti (nebo chytrá strategie u firem s rychlým obratem)." },
+    { q: "Nefinanční pracovní kapitál?", a: "= zásoby + pohledávky. Oběžná aktiva, která nejsou peníze, ale jsou klíčová pro provoz." },
+    { q: "Vzorce 3 likvidit + ideální hodnoty? (Machek/Kučera)", a: "Běžná = OA/KZ (1,5–2,5). Pohotová = (OA−zásoby)/KZ (~1,0). Okamžitá = PP/KZ (0,2–0,5)." },
+    { q: "Co je obratový cyklus peněz (OCP)?", a: "Doba, po kterou jsou peníze vázány v OA, než se přemění zpět na hotovost. Začíná platbou za materiál, končí inkasem prodeje." },
+    { q: "Vzorec OCP?", a: "OCP = DO zásob + DO pohledávek − Doba splatnosti krátkodobých závazků. Chci ho co nejkratší." },
+    { q: "Provozní × peněžní cyklus?", a: "Provozní = DO zásob + DO pohledávek. Peněžní (= OCP) = provozní cyklus − doba splatnosti závazků." },
+    { q: "3 strategie řízení PK?", a: "Agresivní (minimum PK, riziko likvidity), konzervativní (vyšší PK, rezervy), umírněná (rovnováha riziko × zisk)." },
+    { q: "Nulový pracovní kapitál?", a: "OA = KZ. Firma neblokuje peníze v zásobách/pohledávkách (JIT). Nepotřebuje VK, ale potřebuje cizí zdroje. Nemá rezervu." },
+    { q: "Kontokorent × revolving?", a: "Kontokorent = úvěr k BÚ, jdu do mínusu do limitu, neplánované výdaje. Revolving = samostatný produkt, čerpá/splácí/znovu čerpá, na sezónní výkyvy." },
+    { q: "Mezera krytí?", a: "= OA − KZ. Test platební schopnosti. Když PP nestačí na závazky → insolvence. Kladná = schopná splácet." },
+    { q: "Metoda ABC u zásob?", a: "Rozdělí zásoby podle významu: A = nejhodnotnější (málo položek, hodně hodnoty, přísné sledování), C = nejlevnější (hodně položek, málo hodnoty, minimální kontrola)." },
+    { q: "Baumol × Miller-Orr model?", a: "Baumol = rovnoměrná spotřeba peněz. Miller-Orr = nahodilá spotřeba, zůstatky v mantinelech (horní limit → koupit CP, dolní → prodat CP). Miller-Orr realističtější." },
+  ];
+
+  const quizFin3 = [
+    { q: "Pracovní kapitál slouží k:", opts: ["Dlouhodobým investicím", "Krytí krátkodobých provozních potřeb", "Výplatě dividend", "Nákupu budov"], correct: 1 },
+    { q: "Kterých útvarů se PK týká (Hönig)?", opts: ["Jen financí", "Jen nákupu", "Úplně všech", "Jen výroby"], correct: 2 },
+    { q: "ČPK se počítá jako:", opts: ["OA + KZ", "OA − krátkodobé závazky", "Aktiva − VK", "Tržby − náklady"], correct: 1 },
+    { q: "Záporný ČPK znamená:", opts: ["Vždy bankrot", "OA < KZ — riziko platební neschopnosti (nebo chytrá strategie u rychlého obratu)", "Vysoký zisk", "Žádné zásoby"], correct: 1 },
+    { q: "Nefinanční pracovní kapitál =", opts: ["Hotovost + CP", "Zásoby + pohledávky", "Jen závazky", "VK + CK"], correct: 1 },
+    { q: "Běžná likvidita se počítá jako:", opts: ["PP / KZ", "OA / KZ", "(OA − zásoby) / KZ", "EBIT / úroky"], correct: 1 },
+    { q: "Obratový cyklus peněz chci:", opts: ["Co nejdelší", "Co nejkratší", "Přesně 365 dní", "Záporný vždy"], correct: 1 },
+    { q: "OCP se počítá jako:", opts: ["DO zásob + DO pohledávek − doba splatnosti KZ", "DO zásob × DO pohledávek", "OA − KZ", "Tržby / aktiva"], correct: 0 },
+    { q: "Agresivní strategie PK:", opts: ["Vysoké rezervy, nízké riziko", "Minimum PK, vysoká efektivita, riziko likvidity", "Žádné zásoby vůbec", "Maximum hotovosti"], correct: 1 },
+    { q: "Nulový pracovní kapitál (OA = KZ) znamená:", opts: ["Firma nemá žádný majetek", "Firma neblokuje peníze v zásobách/pohledávkách, potřebuje cizí zdroje ne VK", "Firma je v bankrotu", "Firma má jen dlouhodobý majetek"], correct: 1 },
+    { q: "Factoring je:", opts: ["Prodej dlouhodobých pohledávek", "Prodej krátkodobých pohledávek faktoringové firmě (70–90 % hned)", "Nákup zásob", "Bankovní úvěr na budovy"], correct: 1 },
+    { q: "Miller-Orrův model předpokládá:", opts: ["Rovnoměrnou spotřebu peněz", "Nahodilou spotřebu, zůstatky v mantinelech (horní/dolní limit)", "Žádnou hotovost", "Konstantní zásoby"], correct: 1 },
+  ];
+
+  const examQuestionsFin3 = [
+    { komise: "LS 2025 — Machek, Kučera, Kolouchová", otazka: "Pracovní kapitál. Řízení PK, jak se počítá ČPK, z čeho se skládá. Chtěli i vzorečky na likviditu a jakých čísel by měla dosahovat.", pozn: "🔴 Detail: ČPK = OA − KZ, ze 4 složek. Vzorce všech 3 likvidit + ideální hodnoty (běžná 1,5–2,5, pohotová ~1, okamžitá 0,2–0,5). Kučera tlačí na napojení na případovku." },
+    { komise: "LS 2025 — Mládková, Vávra, Hönig", otazka: "Pracovní kapitál — co to je, řízení, optimální výše, možné zdroje financování. Jakých útvarů se týká PK?", pozn: "Hönig: PK se týká ÚPLNĚ VŠECH útvarů. Důraz na optimální výši + zdroje financování (zadržený zisk, kr. úvěr, factoring, dodavatelský úvěr)." },
+    { komise: "ZS 2025 — Nový, Machek, Kolouchová", otazka: "Pracovní kapitál, optimální výše pracovního kapitálu, možnosti financování.", pozn: "Optimální výše (rovnováha likvidita × efektivita) + 3 strategie + zdroje financování." },
+    { komise: "LS 2025 — Mikovcová, Vávra, Viktora", otazka: "Pracovní kapitál — jak ho financovat, obrátkový cyklus. (napojení na případovku nešlo, tak to skipla)", pozn: "Obrátkový cyklus (OCP) + financování. Měj připravený vzorec OCP a kruhový diagram oběhu." },
+    { komise: "ZS 2026 — Svobodová, Nový, Machek", otazka: "Pracovní kapitál.", pozn: "U Svobodové náročné — měj jistotu ve vzorcích (ČPK, likvidita, OCP) a uměj propojit se strategiemi PK." },
+  ];
+
+  const podcastFin3 = { title: "Finance 3 — Pracovní kapitál", description: "ČPK (OA − KZ), 4 složky, vzorce likvidity, obratový cyklus peněz (OCP), 3 strategie PK (agresivní/konzervativní/umírněná), nulový PK, financování, řízení zásob (ABC, EOQ, JIT), pohledávek (factoring, skonto) a peněz (Baumol, Miller-Orr).", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyFin3 = `
+    <b style="color:#E06D1E">1.</b> Definuj PK: zdroje na <b>krátkodobé provozní potřeby</b>, kapitál neustále obíhá. Týká se <b>všech útvarů</b> (Hönig).<br/>
+    <b style="color:#E06D1E">2.</b> Vyjmenuj <b>4 složky</b>: zásoby, pohledávky, kr. fin. majetek (aktiva) + krátkodobé závazky (pasivum).<br/>
+    <b style="color:#E06D1E">3.</b> <b>ČPK = OA − KZ</b> (kladný/záporný). Buď připravená na <b>Machka/Kučeru</b> — vzorce likvidity + ideální čísla.<br/>
+    <b style="color:#E06D1E">4.</b> <b>Obratový cyklus peněz</b>: OCP = DO zásob + DO pohledávek − doba splatnosti KZ. Chci ho krátký.<br/>
+    <b style="color:#E06D1E">5.</b> <b>Optimální výše</b> (rovnováha likvidita × efektivita) + 3 strategie (agresivní/konzervativní/umírněná) + nulový PK.<br/>
+    <b style="color:#E06D1E">6.</b> <b>Financování</b>: zadržený zisk, kr. úvěr, factoring/forfaiting, dodavatelský úvěr, kontokorent × revolving. Mezera krytí = test platební schopnosti.<br/>
+    <b style="color:#E06D1E">7.</b> <b>Řízení složek</b>: zásoby (ABC, EOQ, JIT), pohledávky (factoring, skonto, credit scoring), peníze (Baumol, Miller-Orr).<br/>
+    <b style="color:#E06D1E">8.</b> <b>Napoj na případovku</b> (Kučera) — spočítej ČPK/OCP firmy, najdi kde váže kapitál, doporuč zkrácení cyklu.
+  `;
+
+  const caseStudyFin3 = {
+    title: "Pavel — finanční manažer výrobce nábytku DřevoStyl, 90 lidí",
+    subtitle: "Spočítej ČPK + obratový cyklus a najdi, kde firma váže kapitál",
+    scenario: "Pavel (42) je finanční manažer v DřevoStyl, česká firma vyrábějící masivní nábytek na zakázku. 90 zaměstnanců, tržby 150 mil. Kč. Firma roste, ale Pavel má pocit, že pořád „nemá peníze”, i když je zisková.\n\nZ výkazů: oběžná aktiva 70 mil. (zásoby dřeva a rozpracovaného nábytku 45 mil., pohledávky 20 mil., hotovost 5 mil.), krátkodobé závazky 35 mil. ČPK je tedy 35 mil. — vypadá zdravě. Běžná likvidita 2,0, pohotová ale jen 0,7 (hodně vázáno v zásobách), okamžitá 0,14.\n\nObratový cyklus: doba obratu zásob 95 dní (dřevo se suší a leží, rozpracovaný nábytek čeká), doba obratu pohledávek 55 dní (zákazníci platí pomalu), doba splatnosti závazků 40 dní. OCP tedy vychází 95 + 55 − 40 = 110 dní. Pavel zjistí, že firma má peníze vázané přes 3 měsíce, než se vrátí.\n\nMajitelka Jana chce vzít konzervativní strategii — držet ještě víc zásob dřeva „pro jistotu”, aby výroba nikdy nestála. Pavel tuší, že to firmě s likviditou nepomůže.",
+    signals: [
+      { text: "pořád „nemá peníze”, i když je zisková", color: VSE.warning, reason: "Klasický příznak vázaného pracovního kapitálu. Zisk je v účetnictví, ale hotovost je zaseknutá v zásobách a pohledávkách." },
+      { text: "zásoby dřeva a rozpracovaného nábytku 45 mil.", color: VSE.danger, reason: "Zásoby tvoří 64 % oběžných aktiv — obrovský podíl. Tady je zablokovaný kapitál." },
+      { text: "běžná likvidita 2,0, pohotová ale jen 0,7", color: VSE.danger, reason: "Velký rozdíl běžná vs pohotová = většina OA jsou zásoby. Pohotová pod 1 signalizuje, že bez prodeje zásob firma KZ nepokryje." },
+      { text: "doba obratu zásob 95 dní", color: VSE.danger, reason: "Zásoby leží přes 3 měsíce. Hlavní tahoun dlouhého obratového cyklu." },
+      { text: "OCP tedy vychází 95 + 55 − 40 = 110 dní", color: VSE.danger, reason: "Peníze vázané 110 dní, než se vrátí. Příliš dlouhý cyklus = velká potřeba financování provozu." },
+      { text: "Jana chce držet ještě víc zásob dřeva „pro jistotu”", color: VSE.danger, reason: "Konzervativní strategie zhorší problém — víc zásob = víc vázaného kapitálu = ještě delší cyklus a horší likvidita." },
+    ],
+    quiz1: {
+      question: "Proč DřevoStyl „nemá peníze”, i když je zisková?",
+      options: [
+        "Firma je ve skutečnosti ztrátová",
+        "Má dlouhý obratový cyklus peněz (110 dní) — kapitál je vázaný hlavně v zásobách (95 dní) a pohledávkách (55 dní), než se vrátí jako hotovost",
+        "Vyplácí příliš vysoké dividendy",
+        "Má příliš málo zásob",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Co by měl Pavel doporučit?",
+      options: [
+        { text: "Zkrátit dobu obratu zásob — lepší plánování nákupu dřeva, rychlejší průchod rozpracovaného nábytku výrobou", correct: true, reason: "✓ Zásoby (95 dní) jsou hlavní tahoun cyklu. Zkrácení uvolní nejvíc kapitálu." },
+        { text: "Zkrátit dobu inkasa pohledávek — skonto za rychlou platbu, kratší splatnost faktur", correct: true, reason: "✓ 55 dní je dlouhé. Skonto nebo kratší splatnost zrychlí návrat peněz." },
+        { text: "Vyjednat delší splatnost u dodavatelů dřeva — prodlouží dobu splatnosti závazků a zkrátí OCP", correct: true, reason: "✓ Delší splatnost závazků (z 40 dní výš) přímo zkracuje obratový cyklus. Financování provozu cizími penězi." },
+        { text: "Přijmout Janin návrh a navýšit zásoby dřeva pro jistotu", correct: false, reason: "✗ Opak řešení. Víc zásob = víc vázaného kapitálu = delší cyklus a horší likvidita. Zhoršilo by to problém." },
+        { text: "Zvážit umírněnou strategii PK místo konzervativní — optimalizovat zásoby, ne je maximalizovat", correct: true, reason: "✓ Umírněná strategie hledá rovnováhu. DřevoStyl nepotřebuje víc rezerv, ale rychlejší obrat." },
+        { text: "Vzít si dlouhodobý úvěr na nákup budovy, to vyřeší likviditu", correct: false, reason: "✗ Nesouvisí s problémem. Likviditu neřeší dlouhodobý úvěr na DM, ale zkrácení obratového cyklu pracovního kapitálu." },
+      ],
+    },
+    summary: "<b>DřevoStyl je zisková, ale má peníze zaseknuté v dlouhém obratovém cyklu (110 dní).</b> ČPK 35 mil. vypadá zdravě, ale rozklad ukáže problém: 64 % oběžných aktiv jsou zásoby, pohotová likvidita jen 0,7.<br/><br/><b>Co řízení PK odhalilo:</b><br/>• <b>Obratový cyklus</b>: OCP = 95 (zásoby) + 55 (pohledávky) − 40 (závazky) = 110 dní vázaných peněz<br/>• <b>Zásoby</b> jsou hlavní tahoun — dřevo leží, rozpracovaný nábytek čeká<br/>• <b>Likvidita</b>: pohotová 0,7 pod 1 = bez prodeje zásob firma KZ nepokryje<br/><br/><b>Pavel doporučí (zkrátit OCP ze 3 stran):</b><br/>• zkrátit dobu zásob (plánování nákupu, rychlejší výroba)<br/>• zkrátit inkaso pohledávek (skonto, kratší splatnost)<br/>• prodloužit splatnost u dodavatelů<br/>• <b>umírněná</b> strategie místo konzervativní (Janin návrh víc zásob by problém zhoršil)<br/><br/><b>Pro komisi:</b> Přesně to, co Machek/Kučera/Hönig chtějí — umět spočítat ČPK a OCP, interpretovat likviditu a najít, kde firma váže kapitál. A doporučit konkrétní akci (zkrátit cyklus), ne obecné fráze.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Finance" subjectId="fin" number={3} title="Pracovní kapitál, ČPK, optimální výše"
+      subtitle="ČPK, obratový cyklus peněz, strategie PK, financování, řízení složek"
+      color={VSE.danger}
+      questionText="Pracovní kapitál, optimální výše pracovního kapitálu, možnosti financování"
+      sloz={3} roz={3} freq={3}
+      studySections={studySectionsFin3}
+      flashcards={flashcardsFin3}
+      quiz={quizFin3}
+      praxe={praxeFin3}
+      examQuestions={examQuestionsFin3}
+      podcast={podcastFin3}
+      examStrategy={examStrategyFin3}
+      caseStudy={caseStudyFin3}
+    />
+  );
+}
+
+
+function OkruhFin2Panel() {
+  const studySectionsFin2 = [
+    { id: "intro", title: "Co jsou bankrotní modely + proč je komise chce", subtitle: "Predikce úpadku — bonitní × bankrotní modely", color: VSE.danger, emoji: "scroll",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Bankrotní modely</b> hodnotí finanční zdraví podniku a <b>předpovídají riziko úpadku (bankrotu)</b>. Pomáhají určit, jestli firma čelí finančním problémům, které by mohly vést k insolvenci. Jsou to v podstatě „včasné varovné systémy” postavené na kombinaci finančních ukazatelů.
+        </Def>
+        <Tag color={VSE.danger}>K čemu slouží — řekni komisi</Tag>
+        <Bullet items={[
+          "<b>Identifikují rizika</b> spojená s finančním zdravím firmy a její schopností splácet závazky.",
+          "Jsou <b>zásadní pro investory a věřitele</b> — ukazují, jestli firma dokáže dlouhodobě generovat hodnotu a udržet se na trhu.",
+          "Kombinují <b>několik finančních ukazatelů</b> (likvidita, zadluženost, rentabilita) do jednoho čísla, které hodnotí stabilitu a riziko.",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.fis}>Bonitní × bankrotní modely — rozdíl</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { color: VSE.danger, title: "💀 Bankrotní modely", desc: "Předpovídají PRAVDĚPODOBNOST ÚPADKU. „Zkrachuje firma?” Altman Z-skóre, Indexy IN, Taffler, Beaver." },
+            { color: VSE.success, title: "✅ Bonitní modely", desc: "Hodnotí FINANČNÍ ZDRAVÍ / důvěryhodnost. „Jak je firma na tom?” Index bonity. Bonita = schopnost dostát závazkům." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.color}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14.5, fontWeight: 700, color: b.color, fontFamily: fontSans, marginBottom: 4 }}>{b.title}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.desc}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <ExamAlert komise="Tahal / Svobodová (opakovaně)" color={VSE.danger} what="U bankrotních modelů komise většinou chtějí <b>jen vyjmenovat a k čemu slouží</b> — <b>žádné vzorečky</b>. Stačí znát názvy, k čemu jsou a rozdíl Altman (USA) × IN (ČR). Nepřetěžuj to detaily." />
+      </div>) },
+
+    { id: "altman", title: "🇺🇸 Altmanovo Z-skóre", subtitle: "Nejznámější model, 3 pásma, americký původ", color: VSE.warning, emoji: "target",
+      content: (<div>
+        <Def color={VSE.warning}>
+          <b>Altmanovo Z-skóre</b> je nejznámější bankrotní model. Americký, ale rozšířený celosvětově. Hodnotí finanční stabilitu firmy pomocí <b>5 finančních ukazatelů</b> složených do jednoho čísla Z.
+        </Def>
+        <Tag color={VSE.warning}>5 ukazatelů (jen pro přehled — vzorce komise nechce)</Tag>
+        <Bullet items={[
+          "Pracovní kapitál / aktiva · nerozdělený zisk / aktiva · EBIT / aktiva · VK / cizí zdroje · tržby / aktiva.",
+          "Každý má svou váhu, sečtou se → výsledné číslo <b>Z</b>.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.warning}>3 pásma — jako semafor</Tag>
+        <ResponsiveSVG viewBox="0 0 600 200" maxHeight={190}>
+          <rect x="40" y="50" width="160" height="90" fill={`${VSE.success}20`} stroke={VSE.success} strokeWidth="2" rx="8"/>
+          <circle cx="120" cy="78" r="13" fill={VSE.success}/>
+          <text x="120" y="108" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="700" fill={VSE.success}>BEZPEČNÁ</text>
+          <text x="120" y="126" textAnchor="middle" fontFamily={fontMono} fontSize="12" fill="var(--text)">Z &gt; 2,99</text>
+          <rect x="220" y="50" width="160" height="90" fill={`${VSE.warning}20`} stroke={VSE.warning} strokeWidth="2" rx="8"/>
+          <circle cx="300" cy="78" r="13" fill={VSE.warning}/>
+          <text x="300" y="108" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="700" fill={VSE.warning}>ŠEDÁ ZÓNA</text>
+          <text x="300" y="126" textAnchor="middle" fontFamily={fontMono} fontSize="12" fill="var(--text)">1,8 – 2,99</text>
+          <rect x="400" y="50" width="160" height="90" fill={`${VSE.danger}20`} stroke={VSE.danger} strokeWidth="2" rx="8"/>
+          <circle cx="480" cy="78" r="13" fill={VSE.danger}/>
+          <text x="480" y="108" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="700" fill={VSE.danger}>RIZIKO BANKROTU</text>
+          <text x="480" y="126" textAnchor="middle" fontFamily={fontMono} fontSize="12" fill="var(--text)">Z &lt; 1,8</text>
+          <text x="300" y="30" textAnchor="middle" fontFamily={fontMono} fontSize="11" fill="var(--text-muted)" letterSpacing="1.5px">VYŠŠÍ Z = ZDRAVĚJŠÍ FIRMA →</text>
+          <text x="300" y="170" textAnchor="middle" fontFamily={fontSans} fontSize="11" fill="var(--text-muted)" fontStyle="italic">Šedá zóna = nejednoznačné, střední riziko</text>
+        </ResponsiveSVG>
+        <Tag color={VSE.danger}>⚠️ Nevýhoda — řekni ji</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.danger}10`, border: `1px solid ${VSE.danger}30`, borderRadius: 10, fontSize: 14.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          Altman <b>nemusí být vhodný pro firmy v českém prostředí</b> — pracuje s tržními hodnotami a vznikl na amerických datech. Proto vznikly české indexy IN.
+        </div>
+      </div>) },
+
+    { id: "in_ostatni", title: "🇨🇿 Indexy IN (Neumaierovi) + ostatní modely", subtitle: "Český model + Taffler, Beaver, Index bonity", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Indexy IN</b> jsou český bankrotní model manželů <b>Neumaierových</b>, vyvinutý tak, aby předpovídal finanční stabilitu podniku <b>v podmínkách ČR</b>. Na rozdíl od Altmana nepracuje s tržní hodnotou → vhodnější pro malé firmy.
+        </Def>
+        <Tag color={VSE.fis}>4 verze IN — časová osa</Tag>
+        <ResponsiveSVG viewBox="0 0 600 170" maxHeight={160}>
+          <line x1="50" y1="90" x2="560" y2="90" stroke="var(--text-muted)" strokeWidth="2"/>
+          {[
+            { x: 110, n: "IN95", d: "transformace, změny vlastnictví" },
+            { x: 240, n: "IN99", d: "transformace, změny vlastnictví" },
+            { x: 370, n: "IN01", d: "stabilní průměrné podmínky" },
+            { x: 500, n: "IN05", d: "nejaktuálnější, univerzální" },
+          ].map((p, i) => (
+            <g key={i}>
+              <circle cx={p.x} cy="90" r="8" fill={i===3 ? VSE.success : VSE.fis}/>
+              <rect x={p.x-55} y="38" width="110" height="30" fill={`${i===3 ? VSE.success : VSE.fis}15`} stroke={i===3 ? VSE.success : VSE.fis} strokeWidth="1.5" rx="6"/>
+              <text x={p.x} y="58" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="700" fill={i===3 ? VSE.success : VSE.fis}>{p.n}</text>
+              <text x={p.x} y="112" textAnchor="middle" fontFamily={fontSans} fontSize="8.5" fill="var(--text)">{p.d.split(",")[0]}</text>
+              <text x={p.x} y="124" textAnchor="middle" fontFamily={fontSans} fontSize="8.5" fill="var(--text)">{p.d.split(",")[1]||""}</text>
+            </g>
+          ))}
+          <text x="500" y="148" textAnchor="middle" fontFamily={fontMono} fontSize="9" fill={VSE.success} fontStyle="italic">← dnes nejpoužívanější</text>
+        </ResponsiveSVG>
+        <Bullet items={[
+          "<b>IN pracují i se závazky po splatnosti</b> a nepoužívají tržní hodnotu jako Altman → vhodnější pro <b>malé firmy</b> a české podmínky.",
+          "Kombinují likviditu, zadluženost, rentabilitu aktiv → výsledkem je číslo hodnotící stabilitu a riziko.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.ffu}>Ostatní modely — jen znát názvy</Tag>
+        <ResponsiveGrid cols3>
+          <ModelCard name="Tafflerův model" color={VSE.ffu} items={["Používá se hlavně v <b>Británii</b>.", "Bankrotní model na bázi finančních ukazatelů."]} />
+          <ModelCard name="Beaverův model" color={VSE.ffu} items={["<b>Jeden z prvních</b> bankrotních modelů.", "Historicky významný (jednorozměrný)."]} />
+          <ModelCard name="Index bonity" color={VSE.success} items={["Bonitní (ne bankrotní) — jednodušší, méně ukazatelů.", "<b>Bonita</b> = schopnost dostát závazkům. Pro menší podniky."]} />
+        </ResponsiveGrid>
+        <div style={{ marginTop: 10, padding: "10px 14px", background: `${VSE.success}10`, border: `1px solid ${VSE.success}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>Index bonity — pásma:</b> B &gt; 1,8 = ok · 0–1,8 = nic moc · B &lt; 0 = špatné. Vysoká hodnota = firma je finančně stabilní.
+        </div>
+      </div>) },
+
+    { id: "recept", title: "🎯 Jak to podat na komisi + napojení", subtitle: "Recept na odpověď + vazba na okruh 1 a 7", color: VSE.fmv, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Bankrotní modely <b>nikdy nejdou samostatně</b> — komise je vždy spojuje s finanční analýzou (okruh 1) nebo s krizí a úpadkem podniku (okruh 7). Drž se jednoduchého receptu: vyjmenuj, řekni k čemu, srovnej Altman × IN, napoj.
+        </Def>
+        <Tag color={VSE.fmv}>Recept na odpověď (30 sekund)</Tag>
+        <Bullet items={[
+          "<b>1.</b> Co to je: modely, které <b>předpovídají riziko úpadku</b> z kombinace finančních ukazatelů.",
+          "<b>2.</b> Vyjmenuj: <b>Altman Z-skóre</b> (USA), <b>Indexy IN</b> (ČR, Neumaierovi), Taffler (UK), Beaver, Index bonity.",
+          "<b>3.</b> Rozdíl Altman × IN: Altman = americký, tržní hodnoty; IN = český, závazky po splatnosti, vhodnější pro malé firmy.",
+          "<b>4.</b> K čemu: pro <b>investory a věřitele</b> — posouzení, jestli firma dlouhodobě generuje hodnotu a přežije.",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>📎 Napojení na ostatní okruhy</Tag>
+        <Bullet items={[
+          "<b>Okruh 1 (Finanční analýza):</b> bankrotní modely jsou rozšířením finanční analýzy — místo jednotlivých ukazatelů dají jedno souhrnné číslo. Komise je často ptá v jednom dechu.",
+          "<b>Okruh 7 (Krize a úpadek):</b> bankrotní modely jsou nástroj, jak krizi <b>předvídat dřív</b>, než dojde ke konkurzu/insolvenci.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const flashcardsFin2 = [
+    { q: "Co jsou bankrotní modely?", a: "Modely, které hodnotí finanční zdraví podniku a předpovídají riziko úpadku (bankrotu) z kombinace finančních ukazatelů." },
+    { q: "K čemu bankrotní modely slouží?", a: "Identifikují riziko spojené s finančním zdravím a schopností splácet závazky. Zásadní pro investory a věřitele." },
+    { q: "Bonitní × bankrotní model — rozdíl?", a: "Bankrotní = předpovídá pravděpodobnost úpadku. Bonitní = hodnotí finanční zdraví / důvěryhodnost firmy." },
+    { q: "Co je Altmanovo Z-skóre?", a: "Nejznámější bankrotní model, americký. Hodnotí finanční stabilitu pomocí 5 ukazatelů složených do jednoho čísla Z." },
+    { q: "Altman Z-skóre — 3 pásma?", a: "Z > 2,99 = bezpečná zóna. 1,8–2,99 = šedá zóna (střední riziko). Z < 1,8 = riziko bankrotu." },
+    { q: "Nevýhoda Altmanova modelu?", a: "Nemusí být vhodný pro české prostředí — pracuje s tržními hodnotami a vznikl na amerických datech." },
+    { q: "Co jsou Indexy IN?", a: "Český bankrotní model manželů Neumaierových, vyvinutý pro podmínky ČR. Nepracuje s tržní hodnotou → vhodný pro malé firmy." },
+    { q: "4 verze indexu IN?", a: "IN95 a IN99 (transformace, změny vlastnictví), IN01 (stabilní podmínky), IN05 (nejaktuálnější, univerzální)." },
+    { q: "Proč jsou IN vhodnější pro ČR než Altman?", a: "Pracují i se závazky po splatnosti a nepoužívají tržní hodnotu jako Altman → vhodnější pro malé firmy a české podmínky." },
+    { q: "Tafflerův a Beaverův model?", a: "Taffler = používá se hlavně v Británii. Beaver = jeden z prvních bankrotních modelů." },
+    { q: "Co je Index bonity?", a: "Bonitní (ne bankrotní) model — jednodušší, méně ukazatelů, pro menší podniky. Bonita = schopnost dostát závazkům." },
+    { q: "Index bonity — pásma?", a: "B > 1,8 = ok. 0–1,8 = nic moc. B < 0 = špatné. Vysoká hodnota = finančně stabilní firma." },
+  ];
+
+  const quizFin2 = [
+    { q: "Co bankrotní modely předpovídají?", opts: ["Tržní podíl", "Riziko úpadku (bankrotu)", "Spokojenost zákazníků", "Výši dividend"], correct: 1 },
+    { q: "Bankrotní modely jsou zásadní hlavně pro:", opts: ["Zákazníky", "Marketing", "Investory a věřitele", "Zaměstnance"], correct: 2 },
+    { q: "Rozdíl bonitní × bankrotní model:", opts: ["Žádný", "Bankrotní = pravděpodobnost úpadku, bonitní = finanční zdraví/důvěryhodnost", "Bonitní je americký", "Bankrotní se nepoužívá"], correct: 1 },
+    { q: "Nejznámější bankrotní model je:", opts: ["Index bonity", "Altmanovo Z-skóre", "Du Pont", "CAPM"], correct: 1 },
+    { q: "Altman Z > 2,99 znamená:", opts: ["Riziko bankrotu", "Šedá zóna", "Bezpečná zóna", "Firma už zkrachovala"], correct: 2 },
+    { q: "Altman Z < 1,8 znamená:", opts: ["Bezpečná zóna", "Riziko bankrotu", "Vysoký zisk", "Šedá zóna"], correct: 1 },
+    { q: "Hlavní nevýhoda Altmanova modelu:", opts: ["Je moc levný", "Nemusí být vhodný pro české prostředí (tržní hodnoty, americká data)", "Nikdo ho nezná", "Je zakázaný"], correct: 1 },
+    { q: "Indexy IN vytvořili:", opts: ["Edward Altman", "Manželé Neumaierovi", "ČNB", "Beaver"], correct: 1 },
+    { q: "Nejaktuálnější a nejuniverzálnější verze IN je:", opts: ["IN95", "IN99", "IN01", "IN05"], correct: 3 },
+    { q: "Proč jsou IN vhodnější pro ČR než Altman?", opts: ["Jsou dražší", "Nepracují s tržní hodnotou, počítají i se závazky po splatnosti → vhodné pro malé firmy", "Jsou americké", "Nepoužívají žádné ukazatele"], correct: 1 },
+  ];
+
+  const examQuestionsFin2 = [
+    { komise: "LS 2025 — Tahal, Cejthamr, Schönfeld", otazka: "Finanční analýza, ukazatele a bankrotní model — jen vyjmenovat a na co se používá.", pozn: "🔴 Klíčový signál: jen VYJMENOVAT a K ČEMU SLOUŽÍ. Žádné vzorce. Stačí názvy (Altman, IN, Taffler, Beaver, bonita) + účel." },
+    { komise: "ZS 2025 — Tahal, Cejthamr, Svobodová", otazka: "Finanční analýza podniku + bankrotní indexy — jen k čemu slouží, jaké existují a nic víc, žádné vzorečky.", pozn: "Svobodová potvrzuje: u bankrotních indexů chce jen účel a výčet. Vzorce nechtěla." },
+    { komise: "ZS 2026 — Schönfeld, Legnerová, Zamazalová", otazka: "Úloha finanční analýzy při finančním řízení podniku, posouzení výkonnosti podniku, využití bankrotních modelů.", pozn: "Bankrotní modely jako součást finanční analýzy. Napoj na okruh 1 — modely dají jedno souhrnné číslo místo jednotlivých ukazatelů." },
+    { komise: "LS 2025 — Abíková, Kolouchová, Smrčka", otazka: "Úloha finanční analýzy, ukazatele výkonnosti, bankrotní modely.", pozn: "Spojené s okruhem 1. Po ukazatelích plynule přejdi na bankrotní modely." },
+    { komise: "ZS 2025 — Vávra, Mládková, Svobodová", otazka: "Finanční analýza, bankrotní modely.", pozn: "Stručné — výčet 4 skupin ukazatelů (okruh 1) + bankrotní modely (vyjmenovat + účel)." },
+  ];
+
+  const podcastFin2 = { title: "Finance 2 — Bankrotní modely", description: "Predikce úpadku: bonitní × bankrotní modely. Altmanovo Z-skóre (3 pásma), české Indexy IN (Neumaierovi), Taffler, Beaver, Index bonity. Rozdíl Altman × IN.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyFin2 = `
+    <b style="color:#E06D1E">1.</b> Definuj: bankrotní modely <b>předpovídají riziko úpadku</b> z kombinace finančních ukazatelů.<br/>
+    <b style="color:#E06D1E">2.</b> Rozliš <b>bonitní × bankrotní</b> (zdraví/důvěryhodnost × pravděpodobnost úpadku).<br/>
+    <b style="color:#E06D1E">3.</b> <b>Vyjmenuj</b>: Altman Z-skóre (USA), Indexy IN (ČR), Taffler (UK), Beaver, Index bonity. <b>Vzorce komise většinou nechce!</b><br/>
+    <b style="color:#E06D1E">4.</b> <b>Altman</b>: 5 ukazatelů, 3 pásma (Z&gt;2,99 bezpečná / 1,8–2,99 šedá / &lt;1,8 riziko). Nevýhoda = americká data.<br/>
+    <b style="color:#E06D1E">5.</b> <b>Indexy IN</b>: český model (Neumaierovi), nepracují s tržní hodnotou → vhodné pro malé firmy. IN05 = nejaktuálnější.<br/>
+    <b style="color:#E06D1E">6.</b> Řekni <b>k čemu</b>: pro investory a věřitele — posouzení, jestli firma přežije.<br/>
+    <b style="color:#E06D1E">7.</b> <b>Napoj</b>: na finanční analýzu (okruh 1 — souhrnné číslo místo jednotlivých ukazatelů) nebo krizi (okruh 7 — předvídání úpadku).
+  `;
+
+  const caseStudyFin2 = {
+    title: "Tereza — úvěrová analytička v bance, posuzuje žádost o úvěr",
+    subtitle: "Vyber správný model a interpretuj výsledek (nepočítáš, rozhoduješ)",
+    scenario: "Tereza (29) pracuje jako úvěrová analytička v komerční bance. Na stůl jí přistála žádost o provozní úvěr 8 mil. Kč od firmy StrojMont — česká strojírenská firma, 60 zaměstnanců, tržby 120 mil. Kč, neobchodovaná na burze (rodinné vlastnictví).\n\nTereza musí posoudit, jestli firmě hrozí úpadek, než schválí úvěr. Má k dispozici účetní výkazy za poslední 3 roky. Kolega jí radí: „Hoď to do Altmana, to je nejznámější model.” Tereza ale váhá — Altman vznikl na amerických datech burzovně obchodovaných firem a pracuje s tržní hodnotou kapitálu, kterou u neobchodované rodinné firmy nemá jak spočítat.\n\nZ výkazů vidí: rentabilita mírně klesá, ale je kladná. Likvidita běžná 1,3 (spíš nízká), zadluženost roste — firma už má dva úvěry. Závazky po splatnosti se objevily poprvé loni. Tereza chce model, který tohle umí zachytit a sedí na české malé firmy.",
+    signals: [
+      { text: "neobchodovaná na burze (rodinné vlastnictví)", color: VSE.danger, reason: "Klíčový signál proti Altmanovi. Altman pracuje s tržní hodnotou kapitálu, kterou neobchodovaná firma nemá. → směřuje k IN." },
+      { text: "Altman vznikl na amerických datech burzovně obchodovaných firem a pracuje s tržní hodnotou", color: VSE.warning, reason: "Správné rozpoznání limitu Altmana. Pro českou neobchodovanou firmu není ideální." },
+      { text: "Závazky po splatnosti se objevily poprvé loni", color: VSE.danger, reason: "Indexy IN pracují právě se závazky po splatnosti — Altman to nezachytí. Další důvod pro IN." },
+      { text: "firma už má dva úvěry", color: VSE.warning, reason: "Rostoucí zadluženost = vstup do bankrotního modelu. Riziková známka pro věřitele." },
+      { text: "Tereza musí posoudit, jestli firmě hrozí úpadek", color: VSE.fis, reason: "Přesně k tomu slouží bankrotní modely — predikce úpadku pro věřitele/banku." },
+    ],
+    quiz1: {
+      question: "Který model by měla Tereza použít a proč?",
+      options: [
+        "Altmanovo Z-skóre — je nejznámější, na typu firmy nezáleží",
+        "Index IN — firma je česká, neobchodovaná na burze a má závazky po splatnosti; IN nepracuje s tržní hodnotou a tyto závazky zohledňuje",
+        "Du Pont rozklad — ten předpovídá bankrot nejlépe",
+        "Žádný model, banka se rozhoduje podle pocitu",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak by Tereza měla výsledek interpretovat a co doporučit?",
+      options: [
+        { text: "Bankrotní model dá jedno souhrnné číslo o riziku úpadku — ale doplnit ho klasickou finanční analýzou (likvidita, zadluženost)", correct: true, reason: "✓ Bankrotní model je nadstavba nad finanční analýzou, ne náhrada. Kombinace dá nejlepší obrázek." },
+        { text: "Zaměřit se na rostoucí zadluženost a závazky po splatnosti — to jsou varovné signály pro věřitele", correct: true, reason: "✓ Přesně to bankrotní model i banka sledují. Závazky po splatnosti = červená vlajka." },
+        { text: "Pokud model ukáže riziko, neznamená to automaticky zamítnutí — může navrhnout vyšší zajištění nebo nižší limit úvěru", correct: true, reason: "✓ Model je nástroj rozhodování, ne ortel. Banka může upravit podmínky." },
+        { text: "Altman a IN dají vždy stejný výsledek, takže je jedno který použije", correct: false, reason: "✗ Nepravda. Liší se vstupy (tržní hodnota vs ne) i váhy. Pro českou neobchodovanou firmu dají jiný a relevantnější výsledek IN." },
+        { text: "Spočítat přesné vzorce a uvést je do protokolu jako jediné kritérium", correct: false, reason: "✗ Model je jen jeden vstup. Banka kombinuje s finanční analýzou, historií a zajištěním. Slepě podle čísla se nerozhoduje." },
+      ],
+    },
+    summary: "<b>Bankrotní model si vybíráš podle typu firmy — ne automaticky Altman.</b> Pro českou neobchodovanou rodinnou firmu se závazky po splatnosti je <b>Index IN</b> vhodnější než Altman, protože nepracuje s tržní hodnotou (kterou neobchodovaná firma nemá) a zohledňuje závazky po splatnosti.<br/><br/><b>Co Tereza udělá:</b><br/>• Použije <b>Index IN</b> (český model, sedí na malé neobchodované firmy)<br/>• Výsledek <b>doplní klasickou finanční analýzou</b> (likvidita 1,3 je nízká, zadluženost roste) — model je nadstavba, ne náhrada<br/>• Zaměří se na <b>varovné signály</b>: závazky po splatnosti, dva běžící úvěry<br/>• Pokud model ukáže riziko → nemusí úvěr zamítnout, ale navrhne <b>vyšší zajištění nebo nižší limit</b><br/><br/><b>Pro komisi:</b> Tohle je přesně to, co Tahal/Svobodová chtějí — vědět, k čemu modely slouží a kdy který použít. Ne počítat vzorce. Klíč: Altman = USA, tržní hodnoty, velké obchodované firmy. IN = ČR, závazky po splatnosti, malé firmy. A bankrotní model vždy doplň finanční analýzou (okruh 1).",
+  };
+
+  const praxeFin2 = {
+    caseStudy: {
+      company: "ČNB a banky — jak se bankrotní modely používají v reálu",
+      subtitle: "Od akademické teorie k dennímu rozhodování o úvěrech",
+      content: (<>
+        Bankrotní modely nejsou jen učebnicová teorie — banky a regulátoři je používají denně.<br/><br/>
+        <b style={{ color: VSE.danger }}>Banky při schvalování úvěrů</b> — než banka půjčí firmě, prožene její výkazy bankrotním/bonitním modelem. Výsledek ovlivní, jestli úvěr dostane, za jaký úrok a jaké zajištění bude banka chtít. Rizikovější firma = vyšší úrok (riziková přirážka).<br/>
+        <b style={{ color: VSE.fis }}>Ratingové agentury</b> (Moody's, S&P) — dělají v principu totéž ve velkém: hodnotí riziko úpadku firem a států a přidělují rating. Lepší rating = levnější dluhopisy.<br/>
+        <b style={{ color: VSE.warning }}>Dodavatelé a obchodní úvěr</b> — i firma, která dodává zboží na fakturu se splatností, si může protějšek prověřit, jestli zaplatí.<br/><br/>
+        <b>Proč to komise zajímá:</b> ukazuje, že finanční analýza a bankrotní modely nejsou samoúčelné počty — jsou to nástroje, podle kterých se reálně rozhoduje o penězích.
+      </>),
+      lessons: "Bankrotní modely převádějí spoustu finančních ukazatelů do jednoho srozumitelného čísla o riziku. Banky, ratingové agentury i dodavatelé je používají k rozhodnutí, komu a za jakých podmínek půjčit. Model je vstup do rozhodnutí, ne automatický verdikt."
+    },
+    miniExamples: [
+      { company: "Altman Z-skóre", tag: "VZNIK", color: VSE.warning, content: "Edward Altman publikoval model v roce 1968. Sestavil ho na datech amerických výrobních firem obchodovaných na burze. Proto pracuje s tržní hodnotou kapitálu — a proto se nehodí 1:1 na české neobchodované malé firmy." },
+      { company: "Indexy IN", tag: "ČESKÁ ADAPTACE", color: VSE.fis, content: "Manželé Inka a Ivan Neumaierovi vytvořili IN jako odpověď na to, že Altman nesedí na české podmínky. IN95 vznikl v době transformace, postupně IN99, IN01 a IN05 — každý kalibrovaný na aktuální stav české ekonomiky." },
+      { company: "Šedá zóna", tag: "INTERPRETACE", color: VSE.danger, content: "Pozor na šedou zónu Altmana (1,8–2,99) — model neříká jednoznačně. Firma není ani zdravá, ani v ohrožení. V praxi to znamená: model sám nestačí, musíš doplnit klasickou finanční analýzu a kontext." },
+    ]
+  };
+
+  return (
+    <OkruhPanel
+      subject="Finance" subjectId="fin" number={2} title="Bankrotní modely"
+      subtitle="Altman Z-skóre, Indexy IN, Taffler, Beaver, Index bonity"
+      color={VSE.danger}
+      questionText="Bankrotní modely — predikce úpadku, využití při posouzení finančního zdraví"
+      sloz={2} roz={2} freq={2}
+      studySections={studySectionsFin2}
+      flashcards={flashcardsFin2}
+      quiz={quizFin2}
+      praxe={praxeFin2}
+      examQuestions={examQuestionsFin2}
+      podcast={podcastFin2}
+      examStrategy={examStrategyFin2}
+      caseStudy={caseStudyFin2}
+    />
+  );
+}
+
+
+function OkruhFin1Panel() {
+  const studySectionsFin1 = [
+    { id: "intro", title: "Co je finanční analýza + proč ji komise chce", subtitle: "Nástroj na hodnocení výkonnosti, stability a rentability podniku", color: VSE.danger, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Finanční analýza</b> je nástroj, kterým hodnotíš, jak si podnik finančně stojí — jeho <b>výkonnost, stabilitu a rentabilitu</b>. Bere čísla z účetních výkazů a převádí je na ukazatele, které ti řeknou, jestli firma vydělává, jestli umí splácet a jestli neefektivně neleží na penězích.
+        </Def>
+        <Tag color={VSE.danger}>2 základní pohledy na výkazy</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { color: VSE.danger, title: "↕️ Vertikální analýza", desc: "Struktura výkazu v JEDNOM období. Jedna položka se staví k celku. Např. „DHM tvoří 40 % aktiv.” Odpovídá: z čeho se to skládá?" },
+            { color: VSE.fis, title: "↔️ Horizontální analýza", desc: "Vývoj veličiny V ČASE (3–5 let). Jak se položka mění mezi obdobími. Odpovídá: roste to, nebo klesá? Hledá trend." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.color}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14.5, fontWeight: 700, color: b.color, fontFamily: fontSans, marginBottom: 4 }}>{b.title}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.desc}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.fmv}>Druhy poměrových ukazatelů</Tag>
+        <Bullet items={[
+          "<b>Paralelní</b> — počítají se vedle sebe, každý měří jinou oblast: likvidita, zadluženost, rentabilita, aktivita.",
+          "<b>Pyramidové</b> — rozkládají jeden vrcholový ukazatel na dílčí. Např. Du Pont rozklad ROE, systém INFA rozklad EVA. (detail v sekci 7)",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.warning}>⚠️ Nevýhoda — řekni ji komisi</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.warning}10`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, fontSize: 14.5, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          Finanční analýza pracuje s <b>účetními hodnotami</b>, které ne vždy zobrazují realitu (historické ceny, různé účetní metody). Proto se kombinuje s dalšími pohledy.
+        </div>
+      </div>) },
+
+    { id: "ctyri_skupiny", title: "🎯 4 skupiny poměrových ukazatelů — mapa", subtitle: "Rentabilita / Likvidita / Aktivita / Zadluženost", color: VSE.fmv, emoji: "compass",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Poměrové ukazatele se dělí do <b>4 skupin</b>. Každá odpovídá na jinou otázku o firmě. Tohle je kostra celé odpovědi na komisi — nauč se ji jako mapu a pak doplň vzorce.
+        </Def>
+        <Tag color={VSE.fmv}>4 skupiny — co měří + co chci</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { color: VSE.success, title: "💰 RENTABILITA", q: "Vydělává firma?", desc: "Výnosnost vloženého kapitálu. ROA, ROE, ROS. Chci CO NEJVYŠŠÍ." },
+            { color: VSE.fis, title: "💧 LIKVIDITA", q: "Umí firma platit?", desc: "Schopnost splatit splatné závazky. Běžná, pohotová, okamžitá. Ani vysoká, ani nízká." },
+            { color: VSE.warning, title: "🔄 AKTIVITA", q: "Hospodaří efektivně?", desc: "Jak rychle se obrací majetek. Obrat a doba obratu zásob, pohledávek, aktiv. Obrat chci vysoký, dobu krátkou." },
+            { color: VSE.danger, title: "⚖️ ZADLUŽENOST", q: "Jak je zadlužená?", desc: "Míra využití cizího kapitálu. Celková zadluženost, úrokové krytí. Vyvážit." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.color}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 14.5, fontWeight: 700, color: b.color, fontFamily: fontSans, marginBottom: 2 }}>{b.title}</div>
+              <div style={{ fontSize: 12.5, color: b.color, fontFamily: fontMono, marginBottom: 5, fontStyle: "italic" }}>{b.q}</div>
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.desc}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "rentabilita", title: "💰 Rentabilita — ROA / ROE / ROS (+ ROI past)", subtitle: "Svobodová tu chce detail: proč je v ROI EBIT a ne EAT", color: VSE.success, emoji: "coins",
+      content: (<div>
+        <Def color={VSE.success}>
+          <b>Rentabilita = ukazatel výnosnosti.</b> Kolik vydělám z každé vložené koruny. Maximalizační ukazatel — čím vyšší, tím líp podnik hospodaří. Vždy porovnávej s odvětvím a konkurencí.
+        </Def>
+        <Tag color={VSE.success}>3 hlavní ukazatele rentability</Tag>
+        <ResponsiveGrid cols3>
+          {[
+            { c: VSE.success, n: "ROA", v: "EAT / aktiva", d: "Rentabilita celkových aktiv = produkční síla. Kolik čistého zisku přinese 1 Kč aktiv — bez ohledu na to, jestli byl podnik financován VK nebo CK." },
+            { c: VSE.success, n: "ROE", v: "EAT / VK", d: "Rentabilita vlastního kapitálu. Kolik čistého zisku přinese 1 Kč vloženého kapitálu. Klíčový ukazatel pro akcionáře a společníky." },
+            { c: VSE.success, n: "ROS", v: "EAT / tržby", d: "Rentabilita tržeb. Kolik čistého zisku připadá na 1 Kč tržeb. Tvoří jádro efektivnosti podniku." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 16, fontWeight: 700, color: b.c, fontFamily: fontMono, marginBottom: 4 }}>{b.n}</div>
+              <div style={{ fontSize: 13, color: b.c, fontFamily: fontMono, marginBottom: 6, padding: "3px 6px", background: `${b.c}12`, borderRadius: 5, display: "inline-block" }}>{b.v}</div>
+              <div style={{ fontSize: 13, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <Tag color={VSE.danger}>🔴 SVOBODOVÁ PAST — musíš umět vysvětlit</Tag>
+        <div style={{ padding: "12px 14px", background: `${VSE.danger}10`, border: `1px solid ${VSE.danger}35`, borderRadius: 10, fontSize: 14.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>ROI = EBIT / celkový kapitál.</b> Svobodová se ptá: <b>proč je v ROI EBIT a ne EAT?</b><br/>
+          → Protože <b>ROI měří výnosnost CELÉHO kapitálu</b> (vlastního i cizího). EBIT je zisk <b>před</b> úroky a daněmi — tedy ještě před tím, než se rozdělí věřitelům (úroky) a státu (daně). Kdybys použila EAT (zisk až po úrocích), počítala bys výnos jen pro vlastníky, ne pro všechny, kdo kapitál poskytli. EBIT proto sedí k „celkovému kapitálu” ve jmenovateli.
+        </div>
+      </div>) },
+
+    { id: "likvidita", title: "💧 Likvidita — běžná / pohotová / okamžitá", subtitle: "3 stupně + jakých čísel dosahovat (Machek/Kučera to chtěli)", color: VSE.fis, emoji: "circles",
+      content: (<div>
+        <Def color={VSE.fis}>
+          <b>Likvidita = schopnost splatit aktuálně splatné závazky.</b> Schopnost přeměnit aktiva rychle a bez velkých ztrát na peníze a tím včas hradit závazky. Tři stupně se liší tím, kolik aktiv počítáme — od všech oběžných až po čistou hotovost.
+        </Def>
+        <Tag color={VSE.fis}>3 stupně — od nejširšího k nejpřísnějšímu</Tag>
+        <ResponsiveSVG viewBox="0 0 600 320" maxHeight={300}>
+          <polygon points="60,30 540,30 470,110 130,110" fill={`${VSE.fis}25`} stroke={VSE.fis} strokeWidth="2"/>
+          <polygon points="130,115 470,115 410,195 190,195" fill={`${VSE.warning}25`} stroke={VSE.warning} strokeWidth="2"/>
+          <polygon points="190,200 410,200 350,285 250,285" fill={`${VSE.success}25`} stroke={VSE.success} strokeWidth="2"/>
+          <text x="300" y="62" textAnchor="middle" fontFamily={fontSans} fontSize="15" fontWeight="700" fill={VSE.fis}>BĚŽNÁ = OA / KZ</text>
+          <text x="300" y="82" textAnchor="middle" fontFamily={fontSans} fontSize="10.5" fill="var(--text)">všechna oběžná aktiva · ideál 1,5–2,5</text>
+          <text x="300" y="145" textAnchor="middle" fontFamily={fontSans} fontSize="15" fontWeight="700" fill={VSE.warning}>POHOTOVÁ = (OA − zásoby) / KZ</text>
+          <text x="300" y="165" textAnchor="middle" fontFamily={fontSans} fontSize="10.5" fill="var(--text)">bez zásob · ideál ~1,0</text>
+          <text x="300" y="232" textAnchor="middle" fontFamily={fontSans} fontSize="14" fontWeight="700" fill={VSE.success}>OKAMŽITÁ = PP / KZ</text>
+          <text x="300" y="252" textAnchor="middle" fontFamily={fontSans} fontSize="10.5" fill="var(--text)">jen peníze · ideál 0,2–0,5</text>
+          <text x="40" y="40" textAnchor="end" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">široké</text>
+          <text x="40" y="285" textAnchor="end" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">přísné</text>
+        </ResponsiveSVG>
+        <Bullet items={[
+          "<b>Běžná = oběžná aktiva / krátkodobé závazky.</b> Kolikrát OA pokrývají KZ. Kolikrát je podnik schopen uspokojit věřitele, kdyby přeměnil všechna OA na peníze. (OA = hotovost, akcie, dluhopisy, pohledávky, zásoby)",
+          "<b>Pohotová = (OA − zásoby) / KZ.</b> Odečteme nejméně likvidní část — zásoby (suroviny, materiál, nedokončená výroba se nejhůř mění na peníze).",
+          "<b>Okamžitá = peněžní prostředky / KZ.</b> Nejlépe měří schopnost hradit závazky. Do PP patří i krátkodobě obchodovatelné CP.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.warning}>⚠️ Ani moc vysoká, ani nízká</Tag>
+        <ResponsiveGrid cols2>
+          <PlusMinus type="minus" items={[
+            "<b>Vysoká</b> = podnik má hodně volných peněz → neefektivní využití zdrojů. Peníze leží ladem místo investování.",
+            "<b>Nízká</b> = podnik má problém pokrýt KZ → riziko platební neschopnosti.",
+          ]} />
+          <GlassBox opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${VSE.success}`, borderRadius: 10 }}>
+            <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>Cíl je <b>zlatá střední cesta</b> — dost peněz na splacení závazků, ale ne tolik, aby ladem ležel kapitál, který by mohl vydělávat.</div>
+          </GlassBox>
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "aktivita_zadluzenost", title: "🔄 Aktivita + ⚖️ Zadluženost", subtitle: "Obrat × doba obratu + daňový štít", color: VSE.warning, emoji: "refresh",
+      content: (<div>
+        <Def color={VSE.warning}>
+          <b>Aktivita</b> měří, jak efektivně podnik hospodaří se svými aktivy — jak rychle se obrací zásoby a pohledávky. <b>Zadluženost</b> měří, v jakém poměru podnik využívá k financování dluh.
+        </Def>
+        <Tag color={VSE.warning}>Aktivita — obrat × doba obratu</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="OBRAT (chci vysoký)" color={VSE.warning} items={[
+            "<b>Obrat zásob</b> = tržby / průměrné zásoby. Kolikrát za rok se zásoby prodají a doplní.",
+            "<b>Obrat pohledávek</b> = tržby / prům. pohledávky. Kolikrát firma inkasovala pohledávky za rok.",
+            "<b>Obrat aktiv</b> = tržby / celková aktiva. Kolik tržeb generuje 1 Kč majetku.",
+          ]} />
+          <ModelCard name="DOBA OBRATU (chci krátkou)" color={VSE.fis} items={[
+            "<b>DO zásob</b> = prům. zásoby / (tržby/360). Jak dlouho jsou zásoby vázány do spotřeby.",
+            "<b>DO pohledávek</b> = prům. pohledávky / (tržby/360). Jak dlouho trvá, než zákazníci zaplatí.",
+            "<b>Doba splatnosti KZ</b> = KZ / (tržby/360). Jak dlouho čerpáme bezplatný obchodní úvěr od dodavatelů.",
+          ]} />
+        </ResponsiveGrid>
+        <Bullet items={[
+          "<b>Nízká aktivita</b> = majetek se využívá neefektivně (pomalý obrat).",
+          "<b>Vysoká aktivita</b> = může signalizovat riziko přetížení zdrojů. <b>Správná úroveň</b> = spíš vysoká, ale ne tak, aby firma riskovala nedostatek zásob.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.danger}>Zadluženost + daňový štít</Tag>
+        <ModelCard name="Ukazatele zadluženosti" color={VSE.danger} items={[
+          "<b>Celková zadluženost</b> = cizí zdroje / aktiva. Vlastníci chtějí vyšší (zvyšuje výnosnost VK), věřitelé nižší (vysoký CK = riziko).",
+          "<b>Zadluženost VK</b> = CK / VK.",
+          "<b>Úrokové krytí</b> = EBIT / nákladové úroky. Kolikrát zisk převyšuje úroky — posuzuje schopnost splácet úroky.",
+        ]} />
+        <div style={{ marginTop: 10, padding: "10px 14px", background: `${VSE.success}10`, border: `1px solid ${VSE.success}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>Proč firmy chtějí dluh?</b> CK je relativně <b>levnější</b> než vlastní zdroje díky <b>daňovému štítu</b> — úrokové náklady si firma odečte z daňového základu, takže platí nižší daň.
+        </div>
+      </div>) },
+
+    { id: "zisky_eva", title: "📊 EAT / EBT / EBIT / EBITDA + EVA", subtitle: "Svobodová chce znát všechny + co je EVA", color: VSE.fis, emoji: "scale",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Kategorie zisku se liší tím, co všechno je už odečteno. Postupuje se odshora dolů: od provozního zisku (EBITDA) až k tomu, co zůstane akcionářům (EAT). <b>Svobodová chce, abys znala všechny čtyři a uměla přechod mezi nimi.</b>
+        </Def>
+        <Tag color={VSE.fis}>Schody zisku — odshora dolů</Tag>
+        <ResponsiveSVG viewBox="0 0 600 340" maxHeight={320}>
+          <rect x="40" y="30" width="520" height="55" fill={`${VSE.fis}20`} stroke={VSE.fis} strokeWidth="1.5" rx="6"/>
+          <text x="55" y="55" fontFamily={fontMono} fontSize="15" fontWeight="700" fill={VSE.fis}>EBITDA</text>
+          <text x="55" y="74" fontFamily={fontSans} fontSize="11" fill="var(--text)">zisk před úroky, daněmi, odpisy a amortizací · nejlepší pro srovnání firem</text>
+          <text x="545" y="62" textAnchor="end" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">− odpisy a amortizace ↓</text>
+          <rect x="70" y="95" width="490" height="55" fill={`${VSE.success}20`} stroke={VSE.success} strokeWidth="1.5" rx="6"/>
+          <text x="85" y="120" fontFamily={fontMono} fontSize="15" fontWeight="700" fill={VSE.success}>EBIT</text>
+          <text x="85" y="139" fontFamily={fontSans} fontSize="11" fill="var(--text)">= provozní zisk · zisk před úroky a daněmi · měří provozní výkonnost</text>
+          <text x="545" y="127" textAnchor="end" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">− nákladové úroky ↓</text>
+          <rect x="100" y="160" width="460" height="55" fill={`${VSE.warning}20`} stroke={VSE.warning} strokeWidth="1.5" rx="6"/>
+          <text x="115" y="185" fontFamily={fontMono} fontSize="15" fontWeight="700" fill={VSE.warning}>EBT</text>
+          <text x="115" y="204" fontFamily={fontSans} fontSize="11" fill="var(--text)">zisk před zdaněním</text>
+          <text x="545" y="192" textAnchor="end" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)">− daň z příjmů ↓</text>
+          <rect x="130" y="225" width="430" height="55" fill={`${VSE.danger}20`} stroke={VSE.danger} strokeWidth="1.5" rx="6"/>
+          <text x="145" y="250" fontFamily={fontMono} fontSize="15" fontWeight="700" fill={VSE.danger}>EAT</text>
+          <text x="145" y="269" fontFamily={fontSans} fontSize="11" fill="var(--text)">= čistý zisk · pro akcionáře · dividendy nebo reinvestice</text>
+          <text x="300" y="308" textAnchor="middle" fontFamily={fontSans} fontSize="11" fill="var(--text-muted)" fontStyle="italic">EBITDA → (−odpisy) → EBIT → (−úroky) → EBT → (−daň) → EAT</text>
+        </ResponsiveSVG>
+        <Bullet items={[
+          "<b>EAT</b> = čistý zisk, zisk po zdanění. Pro akcionáře. Použití: rozhodnutí o dividendách / reinvestici.",
+          "<b>EBT</b> = zisk před zdaněním. EBT = EAT + daň.",
+          "<b>EBIT</b> = provozní zisk, před úroky a daněmi. EBIT = EBT + nákladové úroky. Měří provozní výkonnost bez vlivu financování.",
+          "<b>EBITDA</b> = EBIT + odpisy a amortizace. Vhodnější pro porovnání firem — odstraní vliv různých odpisových metod.",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.danger}>🔴 EVA — Svobodová se ptá „co je EVA?”</Tag>
+        <Def color={VSE.danger}>
+          <b>EVA = ekonomická přidaná hodnota.</b> Měří, jestli firma vytváří hodnotu <b>nad rámec</b> nákladů na kapitál. Bere v úvahu oportunitní náklady (ušlou příležitost) — ukazuje, jestli firma vydělává víc, než kolik stojí její financování.
+        </Def>
+        <div style={{ textAlign: "center", margin: "10px 0", padding: "12px", background: `${VSE.danger}10`, borderRadius: 10, fontFamily: fontMono, fontSize: 16, fontWeight: 700, color: VSE.danger }}>
+          EVA = NOPAT − (WACC · C)
+        </div>
+        <Bullet items={[
+          "<b>NOPAT</b> = čistý provozní zisk po zdanění = EBIT · (1 − d)",
+          "<b>WACC</b> = vážené průměrné náklady na kapitál · <b>C</b> = celkový kapitál (VK + CK)",
+          "<b>Kladná EVA</b> = zisk > náklady na kapitál → firma tvoří hodnotu pro akcionáře.",
+          "<b>Záporná EVA</b> = zisk < náklady na kapitál → firma nepokrývá náklady, aktiva nejsou efektivně využívána.",
+        ]} color={VSE.danger} />
+      </div>) },
+
+    { id: "pyramidy", title: "🔺 Pyramidové rozklady — Du Pont + INFA", subtitle: "Rozklad ROE a EVA na dílčí ukazatele", color: VSE.ffu, emoji: "grid",
+      content: (<div>
+        <Def color={VSE.ffu}>
+          <b>Pyramidový rozklad</b> rozloží jeden vrcholový ukazatel na dílčí a ukáže vazby mezi nimi. Vidíš, <b>co přesně</b> daný ukazatel táhne nahoru nebo dolů. Dva nejdůležitější: Du Pont (rozklad ROE) a INFA (rozklad EVA).
+        </Def>
+        <Tag color={VSE.ffu}>Du Pont — rozklad ROE</Tag>
+        <ResponsiveSVG viewBox="0 0 600 280" maxHeight={260}>
+          <rect x="220" y="20" width="160" height="45" fill={`${VSE.success}20`} stroke={VSE.success} strokeWidth="2" rx="6"/>
+          <text x="300" y="42" textAnchor="middle" fontFamily={fontMono} fontSize="14" fontWeight="700" fill={VSE.success}>ROE</text>
+          <text x="300" y="58" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="var(--text)">EAT / VK</text>
+          <line x1="300" y1="65" x2="160" y2="110" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <line x1="300" y1="65" x2="440" y2="110" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <rect x="70" y="110" width="180" height="45" fill={`${VSE.fis}20`} stroke={VSE.fis} strokeWidth="1.5" rx="6"/>
+          <text x="160" y="132" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="700" fill={VSE.fis}>ROA</text>
+          <text x="160" y="148" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="var(--text)">EAT / aktiva</text>
+          <rect x="350" y="110" width="180" height="45" fill={`${VSE.warning}20`} stroke={VSE.warning} strokeWidth="1.5" rx="6"/>
+          <text x="440" y="132" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="700" fill={VSE.warning}>Finanční páka</text>
+          <text x="440" y="148" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="var(--text)">aktiva / VK</text>
+          <text x="300" y="100" textAnchor="middle" fontFamily={fontMono} fontSize="16" fontWeight="700" fill="var(--text-muted)">×</text>
+          <line x1="160" y1="155" x2="100" y2="200" stroke="var(--text-muted)" strokeWidth="1.2"/>
+          <line x1="160" y1="155" x2="220" y2="200" stroke="var(--text-muted)" strokeWidth="1.2"/>
+          <rect x="40" y="200" width="120" height="40" fill={`${VSE.fis}12`} stroke={VSE.fis} strokeWidth="1" rx="5"/>
+          <text x="100" y="218" textAnchor="middle" fontFamily={fontMono} fontSize="11" fontWeight="700" fill={VSE.fis}>ROS</text>
+          <text x="100" y="232" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text)">EAT / tržby</text>
+          <rect x="170" y="200" width="120" height="40" fill={`${VSE.fis}12`} stroke={VSE.fis} strokeWidth="1" rx="5"/>
+          <text x="230" y="218" textAnchor="middle" fontFamily={fontMono} fontSize="11" fontWeight="700" fill={VSE.fis}>Obrat aktiv</text>
+          <text x="230" y="232" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text)">tržby / aktiva</text>
+          <text x="165" y="195" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="700" fill="var(--text-muted)">×</text>
+        </ResponsiveSVG>
+        <Bullet items={[
+          "<b>ROE = ROA × finanční páka</b> (= EAT/aktiva × aktiva/VK). A ROA se dál rozkládá na ROS × obrat aktiv.",
+          "Vidíš tak, jestli ROE táhne <b>zisková marže</b> (ROS), <b>efektivita využití aktiv</b> (obrat), nebo <b>zadlužení</b> (páka).",
+          "<b>Systém INFA — rozklad EVA:</b> EVA = NOPAT − WACC·C, kde NOPAT = EBIT·(1−d) a C = celkový kapitál. Český systém pro rozklad tvorby hodnoty.",
+        ]} color={VSE.ffu} />
+      </div>) },
+  ];
+
+  const flashcardsFin1 = [
+    { q: "Co je finanční analýza?", a: "Nástroj pro hodnocení výkonnosti, finanční stability a rentability podniku. Z účetních výkazů počítá ukazatele." },
+    { q: "Vertikální × horizontální analýza?", a: "Vertikální = struktura výkazu v jednom období (položka k celku). Horizontální = vývoj veličiny v čase (trend 3–5 let)." },
+    { q: "4 skupiny poměrových ukazatelů?", a: "Rentabilita, likvidita, aktivita, zadluženost." },
+    { q: "ROA — vzorec a význam?", a: "ROA = EAT / aktiva. Rentabilita celkových aktiv = produkční síla. Kolik čistého zisku přinese 1 Kč aktiv bez ohledu na financování." },
+    { q: "ROE — vzorec a význam?", a: "ROE = EAT / VK. Rentabilita vlastního kapitálu. Klíčový ukazatel pro akcionáře." },
+    { q: "ROS — vzorec a význam?", a: "ROS = EAT / tržby. Rentabilita tržeb. Kolik čistého zisku připadá na 1 Kč tržeb." },
+    { q: "Proč je v ROI EBIT a ne EAT? (Svobodová)", a: "ROI měří výnosnost celého kapitálu (VK i CK). EBIT je zisk před úroky a daněmi — před rozdělením věřitelům a státu. EAT by počítal výnos jen pro vlastníky." },
+    { q: "Běžná likvidita — vzorec?", a: "Oběžná aktiva / krátkodobé závazky. Kolikrát OA pokrývají KZ. Ideál 1,5–2,5." },
+    { q: "Pohotová likvidita — vzorec?", a: "(OA − zásoby) / KZ. Odečteme nejméně likvidní část — zásoby. Ideál ~1,0." },
+    { q: "Okamžitá likvidita — vzorec?", a: "Peněžní prostředky / KZ. Nejlépe měří schopnost hradit závazky. Ideál 0,2–0,5." },
+    { q: "Proč nechci ani vysokou, ani nízkou likviditu?", a: "Vysoká = peníze leží ladem, neefektivní. Nízká = problém splácet KZ, riziko platební neschopnosti." },
+    { q: "Obrat × doba obratu — co chci?", a: "Obrat chci vysoký (kolikrát za rok), dobu obratu chci krátkou (kolik dní)." },
+    { q: "Úrokové krytí — vzorec?", a: "EBIT / nákladové úroky. Kolikrát zisk převyšuje úroky. Měří schopnost splácet úroky." },
+    { q: "EAT → EBT → EBIT → EBITDA — co se přičítá?", a: "EBT = EAT + daň. EBIT = EBT + úroky. EBITDA = EBIT + odpisy a amortizace." },
+    { q: "Co je EVA a vzorec? (Svobodová)", a: "Ekonomická přidaná hodnota. Měří, jestli firma tvoří hodnotu nad rámec nákladů na kapitál. EVA = NOPAT − (WACC · C)." },
+    { q: "Du Pont rozklad ROE?", a: "ROE = ROA × finanční páka (EAT/aktiva × aktiva/VK). ROA = ROS × obrat aktiv. Ukáže, co táhne ROE." },
+  ];
+
+  const quizFin1 = [
+    { q: "Co měří finanční analýza?", opts: ["Jen zisk firmy", "Výkonnost, finanční stabilitu a rentabilitu podniku", "Pouze likviditu", "Tržní podíl"], correct: 1 },
+    { q: "Vertikální analýza zkoumá:", opts: ["Vývoj v čase (3–5 let)", "Strukturu výkazu v jednom období", "Konkurenci", "Budoucí prognózy"], correct: 1 },
+    { q: "ROA se počítá jako:", opts: ["EAT / VK", "EAT / aktiva", "EAT / tržby", "EBIT / úroky"], correct: 1 },
+    { q: "ROE je klíčový ukazatel hlavně pro:", opts: ["Věřitele", "Stát", "Akcionáře a společníky", "Dodavatele"], correct: 2 },
+    { q: "Proč je v ROI EBIT a ne EAT?", opts: ["EBIT je vyšší číslo", "ROI měří výnosnost celého kapitálu (VK i CK), EBIT je před úroky a daněmi", "Je to účetní chyba", "EAT se nedá zjistit"], correct: 1 },
+    { q: "Pohotová likvidita odečítá od oběžných aktiv:", opts: ["Pohledávky", "Hotovost", "Zásoby", "Krátkodobé CP"], correct: 2 },
+    { q: "Vysoká likvidita znamená:", opts: ["Firma efektivně investuje", "Peníze leží ladem, neefektivní využití zdrojů", "Firma je v bankrotu", "Vysoké tržby"], correct: 1 },
+    { q: "U ukazatelů aktivity chci:", opts: ["Vysoký obrat, krátkou dobu obratu", "Nízký obrat, dlouhou dobu obratu", "Vysoký obrat, dlouhou dobu obratu", "Na obratu nezáleží"], correct: 0 },
+    { q: "Úrokové krytí = EBIT / nákladové úroky měří:", opts: ["Ziskovost", "Schopnost splácet úroky", "Likviditu", "Obrat zásob"], correct: 1 },
+    { q: "EBITDA vznikne z EBIT:", opts: ["Odečtením daně", "Odečtením úroků", "Přičtením odpisů a amortizace", "Přičtením daně"], correct: 2 },
+    { q: "EVA = NOPAT − (WACC · C). Kladná EVA znamená:", opts: ["Firma je v bankrotu", "Firma tvoří hodnotu nad rámec nákladů na kapitál", "Firma má vysokou likviditu", "Firma nemá dluhy"], correct: 1 },
+    { q: "Du Pont rozklad: ROE = ?", opts: ["ROS × obrat aktiv", "ROA × finanční páka", "EBIT / úroky", "EAT / tržby"], correct: 1 },
+  ];
+
+  const examQuestionsFin1 = [
+    { komise: "ZS 2026 — Schönfeld, Legnerová, Zamazalová", otazka: "Úloha finanční analýzy při finančním řízení podniku, posouzení výkonnosti podniku, využití bankrotních modelů.", pozn: "Spoj finanční analýzu s posouzením výkonnosti. Bankrotní modely viz okruh 2 — stačí k čemu slouží." },
+    { komise: "ZS 2025 — Tahal, Cejthamr, Svobodová", otazka: "Finanční analýza podniku. U rentability i ROI a proč je v ROI EBIT a ne EAT, co je EVA, znát EAT/EBT/EBIT/EBITDA.", pozn: "🔴 Svobodová tlačí na detail. Musíš umět: ROI=EBIT/kapitál (proč EBIT), definici EVA a všechny 4 kategorie zisku." },
+    { komise: "LS 2025 — Tahal, Cejthamr, Schönfeld", otazka: "Finanční analýza, ukazatele a bankrotní model — jen vyjmenovat a na co se používá.", pozn: "Tady stačí přehled — vyjmenuj 4 skupiny ukazatelů a k čemu slouží. Bez hloubky." },
+    { komise: "LS 2025 — Abíková, Kolouchová, Smrčka", otazka: "Úloha finanční analýzy, ukazatele výkonnosti, bankrotní modely.", pozn: "Ústřední formulace okruhu. 4 skupiny + napojení na případovku." },
+    { komise: "ZS 2025 — Vávra, Mládková, Svobodová", otazka: "Finanční analýza, bankrotní modely.", pozn: "Stručná formulace — projdi 4 skupiny ukazatelů, pak přejdi na bankrotní modely (okruh 2)." },
+  ];
+
+  const praxeFin1 = {
+    caseStudy: {
+      company: "Apple — proč extrémně vysoké ROE neznamená jen „skvělé hospodaření”",
+      subtitle: "Du Pont rozklad odhalí, že za číslem stojí i zadlužení",
+      content: (<>
+        Apple dlouhodobě vykazuje <b>ROE přes 100 %</b> — na první pohled neuvěřitelná výnosnost vlastního kapitálu. Kdybys to brala naivně, řekla bys „Apple hospodaří 5× líp než konkurence”. Du Pont rozklad ale ukáže, co se za tím skrývá.<br/><br/>
+        <b style={{ color: VSE.fis }}>ROS (marže)</b> — Apple má vysokou ziskovou marži (~25 %), to sedí, premium produkty.<br/>
+        <b style={{ color: VSE.warning }}>Obrat aktiv</b> — slušný, Apple efektivně otáčí majetek.<br/>
+        <b style={{ color: VSE.danger }}>Finanční páka (aktiva/VK)</b> — a tady je klíč. Apple si <b>záměrně půjčuje</b> (vydává dluhopisy) a odkupuje vlastní akcie. Tím snižuje VK ve jmenovateli ROE → páka roste → ROE vystřelí nahoru.<br/><br/>
+        <b>Proč je to důležité na komisi:</b> ukazuje to, proč nestačí citovat jedno číslo. <b>Vysoké ROE může táhnout marže, efektivita NEBO zadlužení.</b> Du Pont ti řekne který. Apple = zdravá marže + agresivní finanční páka.
+      </>),
+      lessons: "Jeden ukazatel sám o sobě klame. ROE 100 % vypadá skvěle, ale Du Pont rozklad odhalí, že část táhne finanční páka (zadlužení), ne jen provozní výkonnost. Proto komise chce rozklad — vidět, co je za číslem."
+    },
+    miniExamples: [
+      { company: "Tesla 2017–2018", tag: "LIKVIDITA", color: VSE.fis, content: "Tesla v té době vykazovala slušnou běžnou likviditu, ale okamžitá byla nízká — peníze vázané v zásobách rozdělaných aut a v rozjeté výrobě Modelu 3. Učebnicový příklad, proč se nestačí dívat jen na běžnou likviditu — pohotová a okamžitá ukážou skutečný stav hotovosti." },
+      { company: "Amazon (roky růstu)", tag: "RENTABILITA × ZÁMĚR", color: VSE.warning, content: "Amazon měl roky téměř nulový čistý zisk → nízká ROA/ROE. Ne proto, že by neuměl hospodařit, ale protože všechno reinvestoval do růstu. Připomínka: nízká rentabilita ≠ vždy špatně. Vždy interpretuj v kontextu strategie firmy." },
+      { company: "ČEZ / energetika", tag: "ZADLUŽENOST + DAŇOVÝ ŠTÍT", color: VSE.danger, content: "Kapitálově náročné firmy (energetika, telekomy) běžně jedou na vyšší zadluženosti — drahá infrastruktura se financuje dluhem a využívá daňový štít. Vysoká zadluženost u energetiky není poplach jako u malé služby. Vždy srovnávej s odvětvím." },
+    ]
+  };
+
+  const podcastFin1 = { title: "Finance 1 — Finanční analýza a ukazatele výkonnosti", description: "Vertikální × horizontální analýza, 4 skupiny poměrových ukazatelů (rentabilita, likvidita, aktivita, zadluženost), kategorie zisku EAT/EBT/EBIT/EBITDA, EVA, Du Pont a INFA rozklad.", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyFin1 = `
+    <b style="color:#E06D1E">1.</b> Definuj <b>finanční analýzu</b>: nástroj na hodnocení výkonnosti, stability a rentability z účetních výkazů.<br/>
+    <b style="color:#E06D1E">2.</b> Zmiň <b>vertikální × horizontální</b> analýzu + paralelní × pyramidové ukazatele.<br/>
+    <b style="color:#E06D1E">3.</b> Projdi <b>4 skupiny ukazatelů</b>: rentabilita / likvidita / aktivita / zadluženost — co měří a co chci.<br/>
+    <b style="color:#E06D1E">4.</b> <b>Rentabilita</b>: ROA, ROE, ROS se vzorci. Buď připravená na <b>Svobodovou</b> — ROI=EBIT/kapitál a <b>proč EBIT a ne EAT</b>.<br/>
+    <b style="color:#E06D1E">5.</b> <b>Likvidita</b>: 3 stupně (běžná/pohotová/okamžitá) + jakých čísel dosahovat + proč ani moc vysoká, ani nízká.<br/>
+    <b style="color:#E06D1E">6.</b> Znát <b>EAT/EBT/EBIT/EBITDA</b> (přechody) + definici <b>EVA</b> = NOPAT − WACC·C.<br/>
+    <b style="color:#E06D1E">7.</b> Pokud chce hloubku → <b>Du Pont</b> rozklad ROE (ROA × páka) nebo INFA rozklad EVA.<br/>
+    <b style="color:#E06D1E">8.</b> <b>Napoj na případovku</b> — spočítej pár ukazatelů z PS a doporuč, co firma má zlepšit.
+  `;
+
+  const caseStudyFin1 = {
+    title: "Marek — finanční ředitel výrobní firmy NaradiPlus, 180 lidí",
+    subtitle: "Spočítej ukazatele výkonnosti a najdi, kde má firma problém",
+    scenario: "Marek (38) je rok finanční ředitel v NaradiPlus, česká firma vyrábějící ruční nářadí (kleště, šroubováky, sady). 180 zaměstnanců, tržby 240 mil. Kč, mírný růst 4 %. Firma dodává do hobbymarketů (OBI, Hornbach) a B2B distributorům.\n\nVlastník Jiří chce vědět, jak na tom firma finančně je — zvažuje, jestli vzít úvěr na novou výrobní linku, nebo radši ne. Marek vytáhl čísla: EAT 12 mil. Kč, aktiva 200 mil., VK 80 mil., tržby 240 mil. Rentabilita aktiv (ROA) tedy 6 %, ROE 15 %, ROS 5 %. V odvětví je běžná ROA kolem 9 % a ROE 18 %.\n\nLikvidita: oběžná aktiva 90 mil. (z toho zásoby 50 mil.), krátkodobé závazky 40 mil. Běžná likvidita 2,25, pohotová jen 1,0, okamžitá 0,15. Jiří se diví, proč má firma „tolik peněz” (běžná 2,25), ale na účtu skoro nic.\n\nAktivita: doba obratu zásob 75 dní (v odvětví 45), doba obratu pohledávek 68 dní (odběratelé z hobbymarketů platí pomalu). Zadluženost: celková 60 %, úrokové krytí 4,5. Marek tuší, že problém není v ziskovosti, ale jinde.",
+    signals: [
+      { text: "ROA tedy 6 %, ROE 15 %, ROS 5 %. V odvětví je běžná ROA kolem 9 % a ROE 18 %", color: VSE.warning, reason: "Rentabilita pod odvětvovým průměrem. Firma vydělává, ale méně efektivně než konkurence. Není to katastrofa, ale prostor ke zlepšení." },
+      { text: "Běžná likvidita 2,25, pohotová jen 1,0, okamžitá 0,15", color: VSE.danger, reason: "Velký rozdíl mezi běžnou a pohotovou = hodně peněz vázáno v zásobách. Okamžitá 0,15 je nízká — na účtu skoro nic." },
+      { text: "Jiří se diví, proč má firma „tolik peněz” (běžná 2,25), ale na účtu skoro nic", color: VSE.danger, reason: "Klasické nepochopení likvidity. Běžná likvidita počítá i zásoby, které nejsou hotovost. Vysoká běžná ≠ peníze na účtu." },
+      { text: "doba obratu zásob 75 dní (v odvětví 45)", color: VSE.danger, reason: "Zásoby leží skoro dvakrát dýl než u konkurence. Tady je vázaný kapitál — to táhne dolů likviditu i rentabilitu aktiv." },
+      { text: "doba obratu pohledávek 68 dní (odběratelé z hobbymarketů platí pomalu)", color: VSE.warning, reason: "Pomalé inkaso. Hobbymarkety mají vyjednávací sílu a platí pozdě. Vázané peníze v pohledávkách." },
+      { text: "celková 60 %, úrokové krytí 4,5", color: VSE.success, reason: "Zadluženost ok, úrokové krytí 4,5 je zdravé — firma bez problému splácí úroky. Prostor na další úvěr existuje." },
+    ],
+    quiz1: {
+      question: "Kde má NaradiPlus hlavní problém?",
+      options: [
+        "V ziskovosti — firma je ztrátová",
+        "Ne v ziskovosti (ta je jen mírně pod odvětvím), ale v aktivitě — pomalý obrat zásob (75 dní) a pohledávek (68 dní) váže kapitál a snižuje likviditu",
+        "V zadluženosti — firma je předlužená",
+        "Nemá žádný problém, čísla jsou v pořádku",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Co by měl Marek doporučit Jiřímu?",
+      options: [
+        { text: "Vysvětlit, že vysoká běžná likvidita ≠ peníze na účtu — peníze jsou vázané v zásobách a pohledávkách", correct: true, reason: "✓ Jiří nechápe rozdíl běžná vs okamžitá likvidita. Edukace je první krok." },
+        { text: "Snížit dobu obratu zásob (z 75 na ~45 dní) — uvolní vázaný kapitál a zlepší likviditu i ROA", correct: true, reason: "✓ Jádro problému. Rychlejší obrat zásob = méně vázaného kapitálu = lepší aktivita i rentabilita aktiv." },
+        { text: "Zkrátit dobu inkasa pohledávek — skonto za rychlou platbu, kratší splatnost", correct: true, reason: "✓ 68 dní je moc. Skonto nebo kratší splatnost zrychlí inkaso a uvolní peníze." },
+        { text: "Okamžitě zastavit výrobu, firma je v bankrotu", correct: false, reason: "✗ Firma je zisková (EAT 12 mil.) a úrokové krytí 4,5 je zdravé. Žádný bankrot." },
+        { text: "Úrokové krytí 4,5 a zadluženost 60 % ukazují, že firma úvěr na linku unese", correct: true, reason: "✓ Zdravé úrokové krytí a přiměřená zadluženost — prostor na investici je. Ale nejdřív vyřešit zásoby." },
+        { text: "Maximálně navýšit zásoby, aby běžná likvidita stoupla ještě výš", correct: false, reason: "✗ Přesný opak. Vyšší zásoby = víc vázaného kapitálu = horší aktivita a okamžitá likvidita. Zhoršilo by to problém." },
+      ],
+    },
+    summary: "<b>NaradiPlus není ztrátová firma — je zisková, ale neefektivní v řízení oběžného majetku.</b> Finanční analýza ukázala, že problém není v rentabilitě (ta je jen mírně pod odvětvím), ale v <b>aktivitě</b>: zásoby leží 75 dní (odvětví 45) a pohledávky se inkasují 68 dní.<br/><br/><b>Co ukazatele řekly:</b><br/>• <b>Rentabilita</b>: ROA 6 % vs 9 % odvětví — prostor ke zlepšení, ne krize<br/>• <b>Likvidita</b>: běžná 2,25 vypadá dobře, ale pohotová 1,0 a okamžitá 0,15 odhalí, že peníze jsou vázané v zásobách<br/>• <b>Aktivita</b>: pomalý obrat zásob a pohledávek = jádro problému<br/>• <b>Zadluženost</b>: zdravá, úrokové krytí 4,5 → na úvěr je prostor<br/><br/><b>Pro komisi:</b> Tohle je přesně to, co Schönfeld/Abíková chtějí — finanční analýza jako nástroj řízení. Nestačí spočítat čísla, musíš je <b>interpretovat</b> a <b>doporučit akci</b>. Marek doporučí: nejdřív zrychlit obrat zásob a inkaso pohledávek (uvolní kapitál, zlepší likviditu i ROA), pak teprve řešit úvěr na linku. A Jiřímu vysvětlit rozdíl mezi běžnou a okamžitou likviditou.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Finance" subjectId="fin" number={1} title="Finanční analýza, ukazatele výkonnosti"
+      subtitle="Vertikální × horizontální, 4 skupiny ukazatelů, EVA, Du Pont"
+      color={VSE.danger}
+      questionText="Úloha finanční analýzy při finančním řízení podniku, posouzení výkonnosti podniku"
+      sloz={3} roz={3} freq={3}
+      studySections={studySectionsFin1}
+      flashcards={flashcardsFin1}
+      quiz={quizFin1}
+      praxe={praxeFin1}
+      examQuestions={examQuestionsFin1}
+      podcast={podcastFin1}
+      examStrategy={examStrategyFin1}
+      caseStudy={caseStudyFin1}
+    />
+  );
+}
+
+
 function OkruhHr1Panel() {
   const studySectionsHr1 = [
     { id: "intro", title: "Propojení 4 prvků — proč to komise chce slyšet", subtitle: "Strategie ↔ Struktura ↔ Kultura ↔ Motivace musí na sebe sedět", color: VSE.fmv, emoji: "target",
