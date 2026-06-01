@@ -561,10 +561,8 @@ const SUBJECTS = [
       { n: 11, title: "Cenotvorba, cena, spotřebitelské stanovování ceny, diskriminace", status: "done", difficulty: 3 },
       { n: 12, title: "Cenový výzkum, efekty (citlivost) a metodologie cenových testů", status: "done", difficulty: 3 },
       { n: 13, title: "Integrovaná mkt komunikace, komunikační mix", status: "done", difficulty: 3 },
-      { n: 14, title: "Hromadná mkt komunikace — 5M, reklama, PR, mass", status: "done", difficulty: 3 },
-      { n: 15, title: "Osobní složka mkt komunikace, direct marketing, prodejní síly", status: "done", difficulty: 3 },
-      { n: 16, title: "Výzkum marketingové komunikace, mediální komunikace", status: "done", difficulty: 3 },
-      { n: 17, title: "Řízení marketingových kampaní", status: "done", difficulty: 3 },
+      { n: 14, title: "Nástroje komunikačního mixu — hromadná + osobní", status: "done", difficulty: 3 },
+      { n: 16, title: "Řízení a výzkum komunikační kampaně", status: "done", difficulty: 3 },
     ],
   },
   {
@@ -7279,9 +7277,7 @@ function OkruhContent({ subjectId, okruhN }) {
   if (subjectId === "marketing" && okruhN === 12) return <OkruhMkt12Panel />;
   if (subjectId === "marketing" && okruhN === 13) return <OkruhMkt13Panel />;
   if (subjectId === "marketing" && okruhN === 14) return <OkruhMkt14Panel />;
-  if (subjectId === "marketing" && okruhN === 15) return <OkruhMkt15Panel />;
   if (subjectId === "marketing" && okruhN === 16) return <OkruhMkt16Panel />;
-  if (subjectId === "marketing" && okruhN === 17) return <OkruhMkt17Panel />;
 
   if (subjectId === "str" && okruhN === 1) return <OkruhStr1Panel />;
   if (subjectId === "str" && okruhN === 2) return <OkruhStr2Panel />;
@@ -9023,7 +9019,7 @@ function OkruhLead2Panel() {
           <circle cx="420" cy="40" r="28" fill={VSE.success} opacity="0.95" stroke={VSE.success} strokeWidth="2"/>
           <text x="420" y="38" textAnchor="middle" fontFamily={fontMono} fontSize="13" fill="#fff" fontWeight="800">9.9</text>
           <text x="420" y="52" textAnchor="middle" fontFamily={fontSans} fontSize="8" fill="#fff" fontWeight="700">IDEÁL</text>
-          <text x="420" y="84" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill={VSE.success} fontWeight="700">Týmový ⭐</text>
+          <text x="420" y="84" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill={VSE.success} fontWeight="700">Týmový</text>
 
           {/* Šipka k 9.9 */}
           <path d="M 240 200 Q 340 100 400 60" stroke={VSE.success} strokeWidth="1.5" fill="none" strokeDasharray="4 3" opacity="0.6"/>
@@ -13227,7 +13223,7 @@ function OkruhFin1Panel() {
         <Tag color={VSE.success}>3 hlavní ukazatele rentability</Tag>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.success, n: "ROA", v: "EAT / aktiva", d: "Rentabilita celkových aktiv = produkční síla. Kolik čistého zisku přinese 1 Kč aktiv — bez ohledu na to, jestli byl podnik financován VK nebo CK." },
+            { c: VSE.success, n: "ROA", v: "EBIT / aktiva", d: "Rentabilita celkových aktiv = produkční síla. Měří výnos CELÉHO kapitálu (VK i CK), proto EBIT (zisk před úroky a daněmi) — nezáleží na způsobu financování." },
             { c: VSE.success, n: "ROE", v: "EAT / VK", d: "Rentabilita vlastního kapitálu. Kolik čistého zisku přinese 1 Kč vloženého kapitálu. Klíčový ukazatel pro akcionáře a společníky." },
             { c: VSE.success, n: "ROS", v: "EAT / tržby", d: "Rentabilita tržeb. Kolik čistého zisku připadá na 1 Kč tržeb. Tvoří jádro efektivnosti podniku." },
           ].map((b, i) => (
@@ -13373,7 +13369,7 @@ function OkruhFin1Panel() {
           <line x1="300" y1="65" x2="440" y2="110" stroke="var(--text-muted)" strokeWidth="1.5"/>
           <rect x="70" y="110" width="180" height="45" fill={`${VSE.fis}20`} stroke={VSE.fis} strokeWidth="1.5" rx="6"/>
           <text x="160" y="132" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="700" fill={VSE.fis}>ROA</text>
-          <text x="160" y="148" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="var(--text)">EAT / aktiva</text>
+          <text x="160" y="148" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="var(--text)">EBIT / aktiva</text>
           <rect x="350" y="110" width="180" height="45" fill={`${VSE.warning}20`} stroke={VSE.warning} strokeWidth="1.5" rx="6"/>
           <text x="440" y="132" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="700" fill={VSE.warning}>Finanční páka</text>
           <text x="440" y="148" textAnchor="middle" fontFamily={fontSans} fontSize="10" fill="var(--text)">aktiva / VK</text>
@@ -13381,15 +13377,15 @@ function OkruhFin1Panel() {
           <line x1="160" y1="155" x2="100" y2="200" stroke="var(--text-muted)" strokeWidth="1.2"/>
           <line x1="160" y1="155" x2="220" y2="200" stroke="var(--text-muted)" strokeWidth="1.2"/>
           <rect x="40" y="200" width="120" height="40" fill={`${VSE.fis}12`} stroke={VSE.fis} strokeWidth="1" rx="5"/>
-          <text x="100" y="218" textAnchor="middle" fontFamily={fontMono} fontSize="11" fontWeight="700" fill={VSE.fis}>ROS</text>
-          <text x="100" y="232" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text)">EAT / tržby</text>
+          <text x="100" y="218" textAnchor="middle" fontFamily={fontMono} fontSize="10" fontWeight="700" fill={VSE.fis}>Zisk. rozpětí</text>
+          <text x="100" y="232" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text)">EBIT / tržby</text>
           <rect x="170" y="200" width="120" height="40" fill={`${VSE.fis}12`} stroke={VSE.fis} strokeWidth="1" rx="5"/>
           <text x="230" y="218" textAnchor="middle" fontFamily={fontMono} fontSize="11" fontWeight="700" fill={VSE.fis}>Obrat aktiv</text>
           <text x="230" y="232" textAnchor="middle" fontFamily={fontSans} fontSize="9" fill="var(--text)">tržby / aktiva</text>
           <text x="165" y="195" textAnchor="middle" fontFamily={fontMono} fontSize="13" fontWeight="700" fill="var(--text-muted)">×</text>
         </ResponsiveSVG>
         <Bullet items={[
-          "<b>ROE = ROA × finanční páka</b> (= EAT/aktiva × aktiva/VK). A ROA se dál rozkládá na ROS × obrat aktiv.",
+          "<b>ROE = ROA × finanční páka</b> (produkční síla EBIT/aktiva × využití cizího kapitálu). A ROA se dál rozkládá na ziskové rozpětí × obrat aktiv.",
           "Vidíš tak, jestli ROE táhne <b>zisková marže</b> (ROS), <b>efektivita využití aktiv</b> (obrat), nebo <b>zadlužení</b> (páka).",
           "<b>Systém INFA — rozklad EVA:</b> EVA = NOPAT − WACC·C, kde NOPAT = EBIT·(1−d) a C = celkový kapitál. Český systém pro rozklad tvorby hodnoty.",
         ]} color={VSE.ffu} />
@@ -13400,7 +13396,7 @@ function OkruhFin1Panel() {
     { q: "Co je finanční analýza?", a: "Nástroj pro hodnocení výkonnosti, finanční stability a rentability podniku. Z účetních výkazů počítá ukazatele." },
     { q: "Vertikální × horizontální analýza?", a: "Vertikální = struktura výkazu v jednom období (položka k celku). Horizontální = vývoj veličiny v čase (trend 3–5 let)." },
     { q: "4 skupiny poměrových ukazatelů?", a: "Rentabilita, likvidita, aktivita, zadluženost." },
-    { q: "ROA — vzorec a význam?", a: "ROA = EAT / aktiva. Rentabilita celkových aktiv = produkční síla. Kolik čistého zisku přinese 1 Kč aktiv bez ohledu na financování." },
+    { q: "ROA — vzorec a význam?", a: "ROA = EBIT / aktiva. Rentabilita celkových aktiv = produkční síla. Měří výnos celého kapitálu (VK i CK), proto EBIT — nezáleží na způsobu financování." },
     { q: "ROE — vzorec a význam?", a: "ROE = EAT / VK. Rentabilita vlastního kapitálu. Klíčový ukazatel pro akcionáře." },
     { q: "ROS — vzorec a význam?", a: "ROS = EAT / tržby. Rentabilita tržeb. Kolik čistého zisku připadá na 1 Kč tržeb." },
     { q: "Proč je v ROI EBIT a ne EAT? (Svobodová)", a: "ROI měří výnosnost celého kapitálu (VK i CK). EBIT je zisk před úroky a daněmi — před rozdělením věřitelům a státu. EAT by počítal výnos jen pro vlastníky." },
@@ -13412,13 +13408,13 @@ function OkruhFin1Panel() {
     { q: "Úrokové krytí — vzorec?", a: "EBIT / nákladové úroky. Kolikrát zisk převyšuje úroky. Měří schopnost splácet úroky." },
     { q: "EAT → EBT → EBIT → EBITDA — co se přičítá?", a: "EBT = EAT + daň. EBIT = EBT + úroky. EBITDA = EBIT + odpisy a amortizace." },
     { q: "Co je EVA a vzorec? (Svobodová)", a: "Ekonomická přidaná hodnota. Měří, jestli firma tvoří hodnotu nad rámec nákladů na kapitál. EVA = NOPAT − (WACC · C)." },
-    { q: "Du Pont rozklad ROE?", a: "ROE = ROA × finanční páka (EAT/aktiva × aktiva/VK). ROA = ROS × obrat aktiv. Ukáže, co táhne ROE." },
+    { q: "Du Pont rozklad ROE?", a: "ROE = ROA × finanční páka. ROA = EBIT/aktiva (produkční síla), dál se rozkládá na ziskové rozpětí × obrat aktiv. Ukáže, co táhne ROE." },
   ];
 
   const quizFin1 = [
     { q: "Co měří finanční analýza?", opts: ["Jen zisk firmy", "Výkonnost, finanční stabilitu a rentabilitu podniku", "Pouze likviditu", "Tržní podíl"], correct: 1 },
     { q: "Vertikální analýza zkoumá:", opts: ["Vývoj v čase (3–5 let)", "Strukturu výkazu v jednom období", "Konkurenci", "Budoucí prognózy"], correct: 1 },
-    { q: "ROA se počítá jako:", opts: ["EAT / VK", "EAT / aktiva", "EAT / tržby", "EBIT / úroky"], correct: 1 },
+    { q: "ROA se počítá jako:", opts: ["EAT / VK", "EBIT / aktiva", "EAT / tržby", "EBIT / úroky"], correct: 1 },
     { q: "ROE je klíčový ukazatel hlavně pro:", opts: ["Věřitele", "Stát", "Akcionáře a společníky", "Dodavatele"], correct: 2 },
     { q: "Proč je v ROI EBIT a ne EAT?", opts: ["EBIT je vyšší číslo", "ROI měří výnosnost celého kapitálu (VK i CK), EBIT je před úroky a daněmi", "Je to účetní chyba", "EAT se nedá zjistit"], correct: 1 },
     { q: "Pohotová likvidita odečítá od oběžných aktiv:", opts: ["Pohledávky", "Hotovost", "Zásoby", "Krátkodobé CP"], correct: 2 },
@@ -22562,7 +22558,7 @@ function OkruhMkt12Panel() {
             
             {/* OPP popisek */}
             <rect x="240" y="142" width="100" height="38" rx="6" fill={VSE.fis} fillOpacity="0.15" stroke={VSE.fis} strokeWidth="1.5"/>
-            <text x="290" y="158" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">⭐ OPP</text>
+            <text x="290" y="158" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">OPP</text>
             <text x="290" y="172" textAnchor="middle" fontSize="9" fill={VSE.fis} fontFamily="JetBrains Mono">Optimal Price Point</text>
             
             {/* Akceptovatelné cenové pásmo */}
@@ -22631,7 +22627,7 @@ function OkruhMkt12Panel() {
             {/* Optimum marker - revenue maximization */}
             <circle cx="280" cy="140" r="9" fill="none" stroke={VSE.success} strokeWidth="3"/>
             <rect x="200" y="55" width="160" height="38" rx="6" fill={VSE.success} fillOpacity="0.15" stroke={VSE.success} strokeWidth="1.5"/>
-            <text x="280" y="71" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">⭐ Optimum: 199 Kč</text>
+            <text x="280" y="71" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.success} fontFamily="Inter Tight">Optimum: 199 Kč</text>
             <text x="280" y="86" textAnchor="middle" fontSize="9" fill={VSE.success} fontFamily="JetBrains Mono">55 % × 199 = nejvyšší revenue</text>
             
             {/* Revenue calculation table */}
@@ -23120,43 +23116,38 @@ function OkruhMkt13Panel() {
     { id: "komunikacni_mix", title: "Komunikační mix — 6 hlavních nástrojů", subtitle: "Reklama / Podpora prodeje / Události / PR / Osobní prodej / Direct", color: VSE.fis, emoji: "grid",
       content: (<div>
         <Def color={VSE.fis}>
-          <b>Komunikační mix</b> = soubor nástrojů, které firma používá pro komunikaci se zákazníkem. <b>Kotler definuje 6 hlavních.</b> Komise <b>Bočková</b> chytá explicitně <b>kdy se používá jaký druh médií (B2B osobní prodej, B2C reklama)</b>.
+          <b>Komunikační mix</b> = soubor nástrojů, které firma používá pro komunikaci se zákazníkem. <b>Kotler definuje 6 hlavních.</b> Tady je <b>přehled</b> — detail každého nástroje (reklama, PR, osobní prodej, direct) je v <b>M14</b>. Komise <b>Bočková</b> chytá <b>kdy jaký druh médií (B2B osobní prodej, B2C reklama)</b>.
         </Def>
-        <Tag color={VSE.fis}>6 nástrojů komunikačního mixu (Kotler)</Tag>
+        <Tag color={VSE.fis}>6 nástrojů komunikačního mixu (Kotler) — přehled</Tag>
         <ResponsiveGrid cols2>
           {[
-            { c: VSE.fmv, t: "📺 1. REKLAMA (Advertising)", d: "Placená nepersonální komunikace. TV, print, online, billboardy, plakáty. Vhodné pro masu, brand awareness." },
-            { c: VSE.warning, t: "🎁 2. PODPORA PRODEJE (Sales Promotion)", d: "Krátkodobé pobídky. Soutěže, hry, slevy, kupóny, vzorky, ochutnávky, věrnostní programy. Pro rychlý sales push." },
-            { c: VSE.fph, t: "🎪 3. UDÁLOSTI A ZÁŽITKY (Events)", d: "Sport, zábava, festivaly, umění, příležitosti. Red Bull Air Race, Heineken UEFA. Brand experience." },
-            { c: VSE.success, t: "📰 4. PUBLIC RELATIONS (PR)", d: "Vztahy s veřejností. Tiskové zprávy, projevy, semináře, výroční zprávy, sponzoring. Nepřímé, věrohodnější než reklama." },
-            { c: VSE.danger, t: "🤝 5. OSOBNÍ PRODEJ (Personal Selling)", d: "Face-to-face komunikace. Prodejní prezentace, schůzky, demos. Vhodné pro B2B + high-value B2C (auta, nemovitosti)." },
-            { c: VSE.fis, t: "📧 6. DIRECT MARKETING", d: "Přímá komunikace. Katalogy, email, telemarketing, hlasová pošta, fax. Měřitelné, targetované." },
+            { c: VSE.fmv, t: "📺 1. Reklama", d: "Placená neosobní masová komunikace přes média." },
+            { c: VSE.warning, t: "🎁 2. Podpora prodeje", d: "Krátkodobé pobídky — slevy, kupóny, soutěže." },
+            { c: VSE.fph, t: "🎪 3. Události a zážitky", d: "Sport, festivaly, brand experience." },
+            { c: VSE.success, t: "📰 4. Public Relations", d: "Vztahy s veřejností, věrohodnější než reklama." },
+            { c: VSE.danger, t: "🤝 5. Osobní prodej", d: "Face-to-face, vhodné pro B2B." },
+            { c: VSE.fis, t: "📧 6. Direct marketing", d: "Přímá adresná komunikace, měřitelná." },
           ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            <GlassBox key={i} opacity={0.5} style={{ padding: "10px 13px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13.5, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 2 }}>{b.t}</div>
+              <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
             </GlassBox>
           ))}
         </ResponsiveGrid>
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.fis}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          📎 Detail každého nástroje (definice reklamy, typy PR, proces osobního prodeje, organizace direct mkt) → <b>M14</b>.
+        </div>
         <Tag color={VSE.warning}>3 faktory výběru komunikačního mixu (Bočková chytá!)</Tag>
         <Bullet items={[
-          "<b>1. Typ výrobkového trhu (B2B × B2C):</b>",
-          "&nbsp;&nbsp;<b>B2C</b> (spotřebitelské):</b> Podpora prodeje + reklama. Coca-Cola TV + slevy v Lidlu.",
-          "&nbsp;&nbsp;<b>B2B</b> (firmy):</b> Osobní prodej + PR + direct. Cisco, IBM, Salesforce — sales schůzky + white papers.",
-          "<b>2. Připravenost spotřebitele (úroveň povědomí):</b>",
-          "&nbsp;&nbsp;<b>Iniciální fáze:</b> reklama, publicita pro awareness.",
-          "&nbsp;&nbsp;<b>Pokročilejší:</b> osobní prodej, podpora prodeje pro action.",
-          "<b>3. Stadium ŽC produktu (M8):</b>",
-          "&nbsp;&nbsp;<b>Zavádění:</b> reklama + PR (awareness).",
-          "&nbsp;&nbsp;<b>Růst:</b> reklama + akce (akvizice).",
-          "&nbsp;&nbsp;<b>Zralost:</b> reklama + osobní prodej + podpora (loyalty).",
-          "&nbsp;&nbsp;<b>Úpadek:</b> podpora prodeje (vyprodání zásob).",
+          "<b>1. Typ trhu:</b> B2C → podpora prodeje + reklama. B2B → osobní prodej + PR + direct.",
+          "<b>2. Připravenost spotřebitele:</b> iniciální fáze → reklama (awareness); pokročilá → osobní prodej + podpora (action).",
+          "<b>3. Stadium ŽC produktu (M8):</b> zavádění → reklama + PR; růst → reklama + akce; zralost → osobní prodej + podpora; úpadek → podpora prodeje (vyprodání).",
         ]} color={VSE.warning} />
         <Tag color={VSE.fph}>Push × Pull komunikační strategie</Tag>
         <ResponsiveGrid cols2>
           {[
-            { c: VSE.danger, t: "👉 PUSH strategie", d: "Výrobce TLAČÍ produkt skrz distribuční kanál. Reklama na distributory, slevy retailerům, osobní prodej. B2B + komodity." },
-            { c: VSE.success, t: "🧲 PULL strategie", d: "Výrobce TÁHNE zákazníky reklamou → zákazníci ji žádají v retailu. Coca-Cola, Apple — masová reklama vytvoří poptávku." },
+            { c: VSE.danger, t: "👉 PUSH strategie", d: "Výrobce TLAČÍ produkt skrz distribuční kanál — slevy retailerům, osobní prodej. B2B + komodity." },
+            { c: VSE.success, t: "🧲 PULL strategie", d: "Výrobce TÁHNE zákazníky reklamou → žádají produkt v retailu. Coca-Cola, Apple — masová reklama vytvoří poptávku." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
@@ -23218,39 +23209,6 @@ function OkruhMkt13Panel() {
           komise="Heřman + Schovancová + Vávra 2026 (Výroba kol)"
           what="Heřman EXPLICITNĚ chce: <b>5M + aplikace na PS + Možnosti PR (co to je, typy, jak se měří úspěšnost)</b>. Naučit 5M + PR detail + měření (AVE, share of voice, sentiment, reach)."
         />
-      </div>) },
-
-    { id: "pr_vyzkum", title: "PR jako 1 ze 6 nástrojů + výzkum komunikace", subtitle: "PR detail v M14 (hromadná). Tady jen role v IMK + výzkum komunikace.", color: VSE.fis, emoji: "chart",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Public Relations (PR)</b> je 1 ze 6 nástrojů komunikačního mixu. <b>Detail PR (6 typů, AVE, SOV, sentiment, měření)</b> je v <b>M14 (hromadná komunikace)</b>. Zde jen role v IMK + výzkum komunikace.
-        </Def>
-        <Tag color={VSE.fis}>Role PR v IMK</Tag>
-        <Bullet items={[
-          "<b>Věrohodnost</b> — 3rd party endorsement, lidé věří víc než reklamě (Edelman Trust Barometer: PR/news 65 % vs reklama 24 %).",
-          "<b>Awareness + image</b> — buduje brand image v dlouhodobém horizontu.",
-          "<b>Nákladová efektivnost</b> — AVE 3-5× vyšší než equivalent paid reklama.",
-          "<b>Crisis management</b> — kritické pro reputation management (KFC FCK, Tylenol crisis).",
-          "<b>Komplement k ostatním nástrojům</b> — PR podpoří launch (Apple keynote), event mkt (Red Bull Stratos), CSR (Patagonia).",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Výzkum mkt komunikace (Mikovcová + Stříteský chytá!)</Tag>
-        <Bullet items={[
-          "<b>1. Pre-testing (před spuštěním kampaně):</b>",
-          "&nbsp;&nbsp;Concept testing — co respondent myslí o creative.",
-          "&nbsp;&nbsp;Focus groups — emocionální reakce.",
-          "&nbsp;&nbsp;A/B testing variant — 2 verze headlinev banner.",
-          "<b>2. Pre-test + Post-test (klasická metoda):</b>",
-          "&nbsp;&nbsp;Měření brand awareness/recall PŘED a PO kampani.",
-          "&nbsp;&nbsp;Klasické: aided + unaided + top-of-mind recall.",
-          "<b>3. Trackingové studie (kontinuální):</b>",
-          "&nbsp;&nbsp;Brand health tracker — měsíčně/kvartálně awareness, image, NPS.",
-          "&nbsp;&nbsp;TOTE model — funnel awareness → consideration → purchase.",
-          "<b>4. Effectiveness studies:</b>",
-          "&nbsp;&nbsp;Marketing Mix Modeling (MMM) — atribuce sales na různé kanály (detail v M14).",
-          "&nbsp;&nbsp;Multi-touch attribution (MTA) — digital journey tracking (detail v M14).",
-          "<b>5. Mystery shopping:</b>",
-          "&nbsp;&nbsp;Kontrola execution — jaký je real-world zážitek se značkou.",
-        ]} color={VSE.warning} />
       </div>) },
 
     { id: "trendy", title: "Moderní trendy v mkt komunikaci", subtitle: "Pichanič + Cejthamr chytá trendy!", color: VSE.fis, emoji: "growth",
@@ -23504,1856 +23462,541 @@ function OkruhMkt13Panel() {
    ════════════════════════════════════════════════════════ */
 function OkruhMkt14Panel() {
   const studySectionsMkt14 = [
-    { id: "intro", title: "Hromadná komunikace — definice + nástroje", subtitle: "Mass komunikace vs osobní (M15) + 4 hlavní nástroje", color: VSE.fis, emoji: "people",
+    { id: "prehled", title: "Hromadná × osobní komunikace — kdy co", subtitle: "Dvě větve komunikačního mixu a kdy kterou použít", color: VSE.fis, emoji: "grid",
       content: (<div>
         <Def color={VSE.fis}>
-          <b>Hromadná marketingová komunikace (Mass Marketing Communication)</b> = nepersonální komunikace zaměřená na <b>masu zákazníků</b>. Cíl: maximum awareness, brand image, reach. Komise <b>Nový, Heřman</b> chytá explicitně.
+          Komunikační mix (6 nástrojů — viz <b>M13</b>) se dělí na dvě větve podle toho, jestli oslovujeme <b>masu najednou</b>, nebo <b>člověka individuálně</b>. Tento okruh jde do hloubky obou — hromadné (reklama, PR, podpora prodeje) i osobní (osobní prodej, direct marketing).
         </Def>
-        <Tag color={VSE.fis}>Hromadná × Osobní komunikace</Tag>
+        <Tag color={VSE.fis}>2 větve komunikace</Tag>
         <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "📢 HROMADNÁ (M14)", d: "Mass reach, jednosměrná, nepersonální. Reklama TV/online, PR, sponzoring, event mkt. Pro B2C, brand building, awareness." },
-            { c: VSE.success, t: "🤝 OSOBNÍ (M15)", d: "1-on-1, obousměrná, personální. Direct mkt, osobní prodej, telemarketing. Pro B2B, high-value B2C, konverze." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
+          <ModelCard name="Hromadná (masová)" color={VSE.warning} items={["Oslovuje <b>velkou skupinu najednou</b>: reklama, podpora prodeje, PR, sponzoring.", "<b>+</b> dosah, budování image, nízké náklady na osloveného.", "<b>−</b> neosobní, jednostranná, zpožděný a hůř měřitelný efekt."]} />
+          <ModelCard name="Osobní" color={VSE.success} items={["Oslovuje <b>jednotlivce / malé segmenty</b>: osobní prodej, direct marketing.", "<b>+</b> přímý kontakt, okamžitý feedback, customizace, vztah.", "<b>−</b> nižší počet oslovených, časově náročné, dražší na kontakt."]} />
         </ResponsiveGrid>
-        <Tag color={VSE.warning}>4 hlavní nástroje hromadné komunikace</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "📺 REKLAMA (Advertising)", d: "Placená nepersonální komunikace. TV, print, online, OOH (out-of-home), rádio, kino. Největší rozpočtová položka v B2C." },
-            { c: VSE.warning, t: "📰 PUBLIC RELATIONS (PR)", d: "Budování vztahů s veřejností. Media relations, krize management, CSR, internal PR. Věrohodnější než reklama." },
-            { c: VSE.fph, t: "🏆 SPONZORING", d: "Investice do sponzorovaného subjektu (sport, kultura, charita). Brand association + visibility. Red Bull, Heineken Champions League." },
-            { c: VSE.success, t: "🎪 EVENT MARKETING", d: "Vlastní eventy + experience. Apple WWDC, Google I/O, Tesla Battery Day. Brand experience + PR coverage." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.fph}>Kdy použít hromadnou komunikaci</Tag>
-        <Bullet items={[
-          "<b>Masová cílovka:</b> Coca-Cola, McDonald's, Lidl — cílí miliony zákazníků.",
-          "<b>Brand building:</b> Tvorba awareness, image, asociací. Long-term.",
-          "<b>Zavádění nového produktu:</b> Apple keynote = 100M+ lidí. Pro launch awareness.",
-          "<b>Maintain awareness:</b> Konkurence komunikuje, musíš taky (share of voice).",
-          "<b>Loyalty + emotional bond:</b> Nike, Patagonia — emocionální storytelling.",
-        ]} color={VSE.fph} />
-        <ExamAlert
-          komise="Nový + Bočková + Tahal 2025 (Výroba kol) + Heřman 2026"
-          what="Nový + Heřman chytají <b>hromadnou komunikaci = reklama + PR</b>. Naučit všechny 4 nástroje (reklama, PR, sponzoring, event) + kdy se používá který."
-        />
+        <ExamAlert komise="Bočková + Nový + Kolouchová 2026" what="Komise se ptá <b>kdy se používá jaký druh médií</b>: <b>B2B → osobní prodej</b> (málo velkých zákazníků, složitý produkt, vysoká hodnota), <b>B2C → reklama</b> (masa zákazníků, levné produkty). Tohle umět rozlišit!" />
+        <div style={{ marginTop: 8, padding: "10px 14px", background: `${VSE.fmv}10`, border: `1px solid ${VSE.fmv}30`, borderRadius: 10, fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          📎 <b>Plánování kampaně (5M model)</b> a <b>komunikační modely (makro/mikro, AIDA)</b> jsou v <b>M13</b> — sem patří samotné nástroje a jak fungují.
+        </div>
       </div>) },
 
-    { id: "reklama_typy", title: "Reklama — typy, média, formáty", subtitle: "Klasifikace reklamy + media mix + advertising appeals", color: VSE.fis, emoji: "chart",
+    { id: "reklama", title: "📺 Reklama", subtitle: "Definice (Tahal z učebnice!), cíle, typy, média", color: VSE.warning, emoji: "chart",
       content: (<div>
-        <Def color={VSE.fis}>
-          <b>Reklama</b> je placená nepersonální komunikace o produktu/službě/myšlence prostřednictvím masmédií. Největší rozpočtová položka v hromadné komunikaci (typicky 60-80 % budget).
+        <Def color={VSE.warning}>
+          <b>Reklama</b> = placená neosobní forma masové komunikace prostřednictvím médií, jejímž cílem je <b>informovat, přesvědčit nebo připomenout</b>. Slouží ke zvyšování povědomí a budování značky.
         </Def>
-        <Tag color={VSE.fis}>Klasifikace reklamy</Tag>
-        <Bullet items={[
-          "<b>Podle CÍLE:</b>",
-          "&nbsp;&nbsp;<b>Informativní</b> — uvádění nového produktu (M8 zavádění). &quot;Apple Vision Pro is here&quot;.",
-          "&nbsp;&nbsp;<b>Přesvědčovací</b> — diferenciace vs konkurence (M8 růst). &quot;Pepsi Challenge&quot;.",
-          "&nbsp;&nbsp;<b>Připomínací</b> — udržení awareness (M8 zralost). Coca-Cola Christmas.",
-          "&nbsp;&nbsp;<b>Posilující</b> — utvrzení existujících zákazníků (post-purchase). Apple loyalty content.",
-          "<b>Podle ZAMĚŘENÍ:</b>",
-          "&nbsp;&nbsp;<b>Produktová</b> — konkrétní produkt (Tide Pods).",
-          "&nbsp;&nbsp;<b>Značková</b> — celá značka (Apple &quot;Think Different&quot;).",
-          "&nbsp;&nbsp;<b>Institucionální</b> — firma jako instituce (Patagonia &quot;Don't buy this jacket&quot;).",
-          "&nbsp;&nbsp;<b>Sociální</b> — pro CSR / společenskou věc (Always &quot;Like a Girl&quot;).",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Reklamní média (kanály)</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "📺 TELEVIZE", d: "Klasika pro mass reach. Vysoká cena (ČT 1 prime-time 30s = 150-400k Kč). Klesající mladá cílovka, rostoucí 50+." },
-            { c: VSE.warning, t: "📰 PRINT (noviny, časopisy)", d: "Klesající. Pro premium cílovku (Vogue, Forbes). MF Dnes 1 strana 600k Kč." },
-            { c: VSE.fph, t: "📻 RÁDIO", d: "Lokální dosah, řidičská cílovka, ranní/odpolední peaky. Cena cca 30-80k Kč/spot prime time." },
-            { c: VSE.success, t: "🌐 ONLINE (Google, Meta)", d: "Dominantní (60 % budget 2024). Performance marketing, search, social, display, programmatic." },
-            { c: VSE.danger, t: "🏙️ OOH (outdoor)", d: "Billboardy, MHD, CLV. Brand visibility, contextual targeting. Praha CLV: 80-200k/měsíc." },
-            { c: VSE.fis, t: "🎬 KINO + STREAMING", d: "Vyšší engagement (forced viewing). Netflix ads tier (2022+), HBO Max ads. Captive audience." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.fph}>Advertising Appeals — emocionální × racionální</Tag>
-        <Bullet items={[
-          "<b>RACIONÁLNÍ appeals:</b> Fakty, benefity, čísla. &quot;Tide pere 20× účinněji&quot;. Pro high-involvement nákupy (auta, B2B, finance).",
-          "<b>EMOCIONÁLNÍ appeals:</b> Pocity, příběhy. Coca-Cola happiness, Nike inspirace. Pro low-involvement nákupy + brand building.",
-          "<b>HUMOR:</b> Old Spice, Dollar Shave Club, Geico. Pamatovatelnost, ale risk overshadowing.",
-          "<b>STRACH (Fear appeals):</b> Pojištění, bezpečnost, zdraví. &quot;Nesedněte za volant opilí&quot;.",
-          "<b>SOCIAL PROOF:</b> Testimonials, reviews, &quot;1 milion satisfied customers&quot;.",
-          "<b>CELEBRITY endorsement:</b> Michael Jordan + Nike, Charlize Theron + Dior.",
-          "<b>SLICE-OF-LIFE:</b> Reálné situace (P&G &quot;Thank You Mom&quot;, Mastercard &quot;Priceless&quot;).",
-        ]} color={VSE.fph} />
-      </div>) },
-
-    { id: "mediální_plán", title: "Mediální plánování — Reach × Frequency × GRP × CPP", subtitle: "Klíčové metriky mediálního plánování", color: VSE.fis, emoji: "target",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Mediální plán</b> = konkrétní rozdělení rozpočtu mezi média + termíny + frekvence. Klíčové metriky: <b>Reach × Frequency × GRP × CPP × CPM</b>.
-        </Def>
-        <Tag color={VSE.fis}>Klíčové metriky mediálního plánování</Tag>
-        <Bullet items={[
-          "<b>📊 Reach (Dosah):</b> Kolik unikátních lidí vidělo reklamu. 1M reach = 1M lidí. Cíl: maximální coverage cílovky.",
-          "<b>🔁 Frequency (Frekvence):</b> Kolikrát průměrně viděl jeden člověk. Optimum 3-5× pro recall. Pod 3 = málo, nad 7 = wear-out.",
-          "<b>📈 GRP (Gross Rating Points):</b> Reach × Frequency. 200 GRP = např. 50 % cílovky × 4× viděno. Měří tlak kampaně.",
-          "<b>💰 CPP (Cost Per Point):</b> Cena za 1 GRP. Pomáhá srovnat efektivitu kanálů.",
-          "<b>💰 CPM (Cost Per Mille):</b> Cena za 1000 impressions. Standard pro digital media. Google Ads, Meta Ads.",
-          "<b>👁️ Impressions:</b> Celkový počet zobrazení (může zhlédnout stejný člověk vícekrát). Reach × Frequency.",
-          "<b>👆 CTR (Click-Through Rate):</b> % kliklo na ad. Digital metric. Benchmark 1-3 %.",
-          "<b>💸 CPC (Cost Per Click):</b> Cena za klik. Google Ads, Meta Ads. Vyhledávání drahší než display.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Mediální strategie — Reach vs Frequency trade-off</Tag>
-        <Bullet items={[
-          "<b>🌐 REACH strategie:</b> Oslovit maximum lidí, méně často. Vhodné pro brand awareness (Coca-Cola Christmas).",
-          "<b>🔁 FREQUENCY strategie:</b> Oslovit menší cílovku víckrát. Vhodné pro persuasion + new product launch.",
-          "<b>🎯 EFFECTIVE FREQUENCY:</b> Optimum kontaktů s reklamou = 3-7×. Klíč pro decision o GRP.",
-          "<b>💸 BUDGET:</b> Reach + frequency dohromady = budget. Trade-off: víc reach × méně frequency × více měsíců.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Postup mediálního plánování (5 kroků)</Tag>
-        <Bullet items={[
-          "<b>1.</b> Definuj <b>cíle kampaně</b> (z 5M Mission).",
-          "<b>2.</b> Identifikuj <b>cílovku</b> (M3 segmentace) + její media behavior.",
-          "<b>3.</b> Vyber <b>media mix</b> — TV vs digital vs OOH atd. Podle reach + cílovky + budget.",
-          "<b>4.</b> Stanov <b>mediální plán</b> — konkrétní GRP, frekvence, timing (pulsing × continuous × flighting).",
-          "<b>5.</b> Měření a optimalizace — pre-test, mid-campaign adjustments, post-test.",
-        ]} color={VSE.fph} />
-      </div>) },
-
-    { id: "sponzoring_event", title: "Sponzoring + Event marketing", subtitle: "Brand association přes 3rd party + brand experience", color: VSE.fis, emoji: "trophy",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Sponzoring</b> = finanční nebo věcná podpora sponzorovaného subjektu (sport, kultura, charita) <b>výměnou za brand visibility + association</b>. <b>Event marketing</b> = vlastní eventy.
-        </Def>
-        <Tag color={VSE.fis}>Typy sponzoringu</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "⚽ SPORTOVNÍ", d: "Champions League (Heineken, Mastercard), F1 (Red Bull, Rolex), Tennis Grand Slam (Rolex, Wilson). Highest visibility, premium ceny." },
-            { c: VSE.warning, t: "🎨 KULTURNÍ", d: "Muzea, divadla, koncerty. Apatyka v Národním muzeu, Komerční banka v Národním divadle. Prestige + CSR." },
-            { c: VSE.fph, t: "❤️ CSR / CHARITA", d: "Sponzorování charit, neziskovek, environmentálních projektů. Patagonia (1 % obratu na životní prostředí)." },
-            { c: VSE.success, t: "🏆 EVENT-BASED", d: "Konkrétní event — Olympics (Coca-Cola, P&G), Eurovision, Masters golf turnaj." },
-            { c: VSE.danger, t: "📺 MEDIÁLNÍ", d: "Sponzoring TV pořadů, podcastů, YouTube channels. &quot;This Old House sponsored by State Farm&quot;." },
-            { c: VSE.fis, t: "🎓 VZDĚLÁVACÍ", d: "Univerzity, scholarships, research grants. Google Faculty Awards, Microsoft Research." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>Event Marketing — typy</Tag>
-        <Bullet items={[
-          "<b>🎪 Trade shows (B2B):</b> CES Las Vegas, MWC Barcelona, FOR ARCH Praha. Networking + product launches.",
-          "<b>🎤 Product launches:</b> Apple WWDC keynotes, Tesla Battery Day, Samsung Unpacked. Brand spectacle.",
-          "<b>👥 Conferences:</b> Salesforce Dreamforce (170k attendees), Adobe Summit, AWS re:Invent.",
-          "<b>🎉 Brand experiences:</b> Red Bull Air Race, Coca-Cola Truck Tour, IKEA pop-up sleepovers.",
-          "<b>🏃 Sport events:</b> Coca-Cola Olympic Run, Color Run sponsored by brands.",
-          "<b>📱 Virtual events (post-COVID):</b> Apple keynotes 100 % digital, GitHub Universe online.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Měření sponzoringu</Tag>
-        <Bullet items={[
-          "<b>AVE (Advertising Value Equivalent):</b> Kolik by stála placená reklama za stejnou expozici. Red Bull Stratos = 6 mld. USD AVE.",
-          "<b>Brand recall:</b> % lidí, kteří si pamatují sponzora po eventu.",
-          "<b>Sentiment analysis:</b> Pozitivní × negativní zmínky social media + tisk.",
-          "<b>Sales lift:</b> Bezprostřední sales impact po eventu.",
-          "<b>Audience engagement:</b> Sociální shares, hashtag použití, user-generated content.",
-        ]} color={VSE.fph} />
-      </div>) },
-
-    { id: "medialni_vyzkum", title: "Mediální výzkum — měření reklamy a komunikace", subtitle: "Smrčka + Stříteský chytá MĚŘENÍ reklamy + online metriky", color: VSE.fis, emoji: "microscope",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Mediální výzkum</b> = systematické měření efektivity reklamních kampaní a mediálních investic. Komise <b>Smrčka, Stříteský</b> chytají EXPLICITNĚ <b>jak měříme reklamu + online metriky</b>.
-        </Def>
-        <Tag color={VSE.fis}>3 fáze měření reklamní kampaně</Tag>
+        <ExamAlert komise="Tahal (Nový + Bočková 2026)" what="<b>Tahal chce definici reklamy přesně jako z učebnice</b> — placená, neosobní, masová komunikace přes média za účelem informovat / přesvědčit / připomenout. Naučit doslova." />
+        <Tag color={VSE.warning}>Cíle reklamy podle fáze (dle životního cyklu)</Tag>
         <ResponsiveGrid cols3>
           {[
-            { c: VSE.fmv, t: "🧪 PRE-TEST (před spuštěním)", d: "Concept testing, focus groups, A/B test creative. Cíl: vybrat nejsilnější verzi PŘED investicí." },
-            { c: VSE.warning, t: "📊 MID-CAMPAIGN (během)", d: "Tracking awareness, CTR, sales lift weekly. Cíl: real-time optimization, allocate budget na top kanály." },
-            { c: VSE.success, t: "📈 POST-TEST (po skončení)", d: "Brand recall lift, NPS změna, sales attribution, ROI. Cíl: učení pro další kampaň." },
+            { c: VSE.fis, t: "Informativní", d: "Uvedení produktu — buduje povědomí. Fáze zavádění." },
+            { c: VSE.warning, t: "Přesvědčovací", d: "Růst + konkurence — proč právě my. Často srovnávací." },
+            { c: VSE.success, t: "Připomínací", d: "Zralost — udržet značku v hlavě. Coca-Cola, i když ji všichni znají." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 3 }}>{b.t}</div>
+              <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
             </GlassBox>
           ))}
         </ResponsiveGrid>
-        <Tag color={VSE.warning}>Tradiční metriky (TV, print, OOH)</Tag>
+        <Tag color={VSE.warning}>Média (kde reklama běží)</Tag>
         <Bullet items={[
-          "<b>Reach:</b> Počet unikátních lidí, kteří viděli reklamu. Měřeno přes panel data (Nielsen, Kantar).",
-          "<b>Frequency:</b> Průměrný počet kontaktů jednoho diváka.",
-          "<b>GRP (Gross Rating Points):</b> Reach × Frequency. Klasická TV metric.",
-          "<b>TRP (Target Rating Points):</b> GRP jen v cílovce.",
-          "<b>Brand recall:</b> Aided + Unaided recall research po kampani.",
-          "<b>Top-of-Mind awareness:</b> Která značka první napadne v kategorii.",
+          "<b>TV, rozhlas, tisk, online, venkovní</b> (billboardy), kino.",
+          "<b>Product placement</b> — značka umístěná do filmu/seriálu (James Bond a auta).",
+          "<b>Šíření sdělení</b>: souvislé (stále) × pulzující (vlny) × nárazové (kampaň).",
+          "<b>False fame effect</b> — když značku vidíme často, působí důvěryhodněji, i když ji neznáme.",
         ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Online metriky (digital, programmatic)</Tag>
-        <Bullet items={[
-          "<b>Impressions:</b> Počet zobrazení reklamy (může zhlédnout stejný uživatel vícekrát).",
-          "<b>CTR (Click-Through Rate):</b> Impressions → kliky. Benchmark 1-3 %. Search 5-10 %.",
-          "<b>CPC (Cost Per Click):</b> Google Ads ČR: search 5-50 Kč/klik podle kategorie. Display 1-5 Kč.",
-          "<b>CPM (Cost Per Mille):</b> 1000 impressions = standard pricing. ČR: display 30-100 Kč, video 80-300 Kč.",
-          "<b>Conversion rate:</b> % kliků → konverze (sale, signup). E-commerce benchmark 2-3 %.",
-          "<b>CPA (Cost Per Acquisition):</b> Cena za získání jednoho zákazníka. Klíčový metric.",
-          "<b>ROAS (Return On Ad Spend):</b> Revenue / Ad Spend. Benchmark 3-5×.",
-          "<b>View-through rate:</b> % video reklam dosledovaných do konce.",
-          "<b>Engagement rate:</b> Likes + comments + shares / impressions (sociální média).",
-          "<b>Attribution models:</b> Last click × First click × Linear × Time-decay × Data-driven.",
-        ]} color={VSE.fph} />
-        <Tag color={VSE.danger}>Pokročilé metody měření</Tag>
-        <Bullet items={[
-          "<b>Marketing Mix Modeling (MMM):</b> Statistická analýza vlivu jednotlivých kanálů na sales. Top-down pohled.",
-          "<b>Multi-Touch Attribution (MTA):</b> Sledování customer journey napříč kanály. Bottom-up.",
-          "<b>Incrementality testing:</b> A/B test geographic regions s a bez reklamy. Pravá kauzální analýza.",
-          "<b>Brand Lift Study:</b> Survey-based měření brand metrics (recall, consideration) pre vs post kampaň.",
-          "<b>Media Mix Optimization:</b> Algoritmus doporučí optimální budget allocation napříč kanály.",
-        ]} color={VSE.danger} />
-        <ExamAlert
-          komise="Smrčka + Kolouchová + Říhová 2025 (případovka)"
-          what="Smrčka chytá <b>mediální výzkum</b>. Naučit 3 fáze (pre/mid/post) + tradiční metriky (GRP, reach, frequency) + online metriky (CTR, CPC, CPM, CPA, ROAS) + pokročilé (MMM, MTA, incrementality)."
-        />
       </div>) },
 
-    { id: "trendy", title: "Trendy v hromadné komunikaci + aplikace na PS", subtitle: "Programmatic, video, sociální, native + checklist", color: VSE.fis, emoji: "growth",
+    { id: "podpora", title: "🎁 Podpora prodeje", subtitle: "Krátkodobé pobídky k okamžitému nákupu", color: VSE.fph, emoji: "gift",
       content: (<div>
-        <Def color={VSE.fis}>
-          Hromadná komunikace se rychle digitalizuje a personalizuje. <b>Programmatic + video + native</b> jsou klíčové trendy 2024-2026.
+        <Def color={VSE.fph}>
+          <b>Podpora prodeje</b> = krátkodobé stimuly, které mají vyvolat <b>okamžitý nákup</b>. Na rozdíl od reklamy (buduje dlouhodobě) je podpora prodeje rychlá a výsledky jsou ihned viditelné.
         </Def>
-        <Tag color={VSE.fis}>Hlavní trendy 2024+</Tag>
+        <Tag color={VSE.fph}>Nástroje</Tag>
         <Bullet items={[
-          "<b>📊 Programmatic advertising:</b> Algoritmické nákupy ad spots v real-time. 80 % digital display je programmatic. Google DV360, The Trade Desk.",
-          "<b>🎬 Video first:</b> YouTube, TikTok, Instagram Reels. Krátký video (15-30s) dominuje. Brand storytelling.",
-          "<b>📱 Social commerce:</b> TikTok Shop, Instagram Shopping, Pinterest Shopping. Integrace e-commerce a reklamy.",
-          "<b>📰 Native advertising:</b> Reklama vypadá jako obsah (Forbes BrandVoice, NYT sponsored). Less intrusive.",
-          "<b>🎯 Hyper-personalizace:</b> Dynamic creative optimization (DCO) — reklama se mění real-time podle uživatele.",
-          "<b>🔊 Audio renaissance:</b> Podcast advertising (Spotify, Joe Rogan), smart speaker ads (Alexa Voice Ads).",
-          "<b>🌐 Connected TV (CTV):</b> Netflix Ads (2022+), Disney+ Ads, HBO Max Ads. TV reach + digital targeting.",
-          "<b>🤖 AI v reklamě:</b> AI-generated creative (Midjourney ads), AI-driven media buying, ChatGPT pro copywriting.",
-          "<b>🔐 Cookie-less era:</b> Apple ATT, Google sunset 3rd party cookies. Shift k 1st party data + contextual.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Reach × Frequency × Cost trade-off podle médií</Tag>
-        <Bullet items={[
-          "<b>TV:</b> Max reach, vysoká cena, slabé targeting. Pro broad awareness (FMCG, telco).",
-          "<b>Online display:</b> Střední reach, nízká cena, dobré targeting. Performance kampaně.",
-          "<b>Sociální sítě:</b> Hyper-targeting, střední cena, vysoký engagement. Brand building + performance.",
-          "<b>Search (Google):</b> Demand capture, dražší ale konverzní. Bottom-of-funnel.",
-          "<b>OOH:</b> Lokální reach, fixní náklady, dobré pro brand. Praha CLV: 80-200k/měsíc.",
-          "<b>Podcast:</b> Niche reach, vysoký engagement, brand association. Host-read ads 3-5× lepší recall.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Checklist pro PS</Tag>
-        <Bullet items={[
-          "<b>1.</b> Identifikuj <b>cíle kampaně</b> — awareness × consideration × conversion × loyalty.",
-          "<b>2.</b> Vyber <b>nástroje hromadné komunikace</b> — reklama × PR × sponzoring × events.",
-          "<b>3.</b> Definuj <b>media mix</b> — TV vs online vs OOH podle cílovky.",
-          "<b>4.</b> Stanov <b>reach + frequency + GRP</b> pro masová média, <b>CTR + CPC + CPA</b> pro digital.",
-          "<b>5.</b> Vyber <b>advertising appeals</b> — racionální × emocionální × humor podle produktu.",
-          "<b>6.</b> Plán <b>měření</b> — pre/mid/post-test + atribution model.",
-          "<b>7.</b> Aplikuj <b>5M framework</b> (M13) + <b>AIDA</b> (M13) v creative.",
+          "Samplingy (vzorky), slevy, kupóny, bonusy, prémie, dárky, soutěže, věrnostní programy.",
+          "<b>Komunikace v místě prodeje</b>: stojany, plakáty, modely. <b>POP</b> = point of purchase, <b>POS</b> = point of sale (dvojhmotná umístění).",
         ]} color={VSE.fph} />
+        <ResponsiveGrid cols2>
+          <PlusMinus type="plus" items={["Přitáhne pozornost, okamžitý impuls a rychlá odezva.", "Výsledky ihned viditelné — funguje na brand switchers (lidi snadno měnící značku)."]} />
+          <PlusMinus type="minus" items={["Krátkodobý efekt, méně účinné při získávání dlouhodobých preferencí.", "Účinnost podmíněna nabídkou skutečné hodnoty (jinak jen sleva navíc)."]} />
+        </ResponsiveGrid>
       </div>) },
-  ];
 
-  const flashcardsMkt14 = [
-    { term: "Hromadná mkt komunikace", def: "Nepersonální komunikace zaměřená na masu zákazníků. Cíl: maximum awareness, brand image, reach.", tag: "POJEM" },
-    { term: "4 hlavní nástroje hromadné komunikace", def: "Reklama / Public Relations (PR) / Sponzoring / Event marketing.", tag: "POJEM" },
-    { term: "Hromadná × Osobní komunikace", def: "Hromadná = mass, jednosměrná, nepersonální (TV, PR). Osobní = 1-on-1, obousměrná (sales, direct).", tag: "POJEM" },
-    { term: "4 cíle reklamy", def: "Informativní (zavádění) / Přesvědčovací (růst) / Připomínací (zralost) / Posilující (loyalty).", tag: "REKLAMA" },
-    { term: "4 typy reklamy podle zaměření", def: "Produktová / Značková / Institucionální / Sociální (CSR).", tag: "REKLAMA" },
-    { term: "Reklamní média", def: "TV / Print / Rádio / Online (Google, Meta) / OOH (outdoor) / Kino + streaming.", tag: "REKLAMA" },
-    { term: "Racionální × Emocionální appeals", def: "Racionální = fakty, benefity (high-involvement). Emocionální = pocity, příběhy (low-involvement, brand).", tag: "APPEALS" },
-    { term: "Advertising appeals — typy", def: "Racionální / Emocionální / Humor / Strach / Social proof / Celebrity / Slice-of-life.", tag: "APPEALS" },
-    { term: "Reach (Dosah)", def: "Počet unikátních lidí, kteří viděli reklamu. 1M reach = 1M lidí.", tag: "MEDIA" },
-    { term: "Frequency (Frekvence)", def: "Průměrný počet kontaktů jednoho diváka. Optimum 3-5× pro recall.", tag: "MEDIA" },
-    { term: "GRP (Gross Rating Points)", def: "Reach × Frequency. 200 GRP = např. 50 % cílovky × 4× viděno. Měří tlak kampaně.", tag: "MEDIA" },
-    { term: "CPP (Cost Per Point)", def: "Cena za 1 GRP. Pomáhá srovnat efektivitu kanálů.", tag: "MEDIA" },
-    { term: "CPM (Cost Per Mille)", def: "Cena za 1000 impressions. Standard pro digital. Google, Meta Ads.", tag: "MEDIA" },
-    { term: "CTR (Click-Through Rate)", def: "% kliklo na ad. Digital metric. Benchmark 1-3 %, search 5-10 %.", tag: "DIGITAL" },
-    { term: "CPC (Cost Per Click)", def: "Cena za klik. ČR: search 5-50 Kč, display 1-5 Kč.", tag: "DIGITAL" },
-    { term: "CPA (Cost Per Acquisition)", def: "Cena za získání 1 zákazníka. Klíčový metric pro performance.", tag: "DIGITAL" },
-    { term: "ROAS (Return On Ad Spend)", def: "Revenue / Ad Spend. Benchmark 3-5×.", tag: "DIGITAL" },
-    { term: "Effective Frequency", def: "Optimum kontaktů 3-7×. Pod 3 = málo, nad 7 = wear-out.", tag: "MEDIA" },
-    { term: "Reach vs Frequency strategie", def: "Reach = maximum lidí, méně často (awareness). Frequency = menší cílovka víckrát (persuasion).", tag: "MEDIA" },
-    { term: "Sponzoring", def: "Finanční/věcná podpora sponzorovaného subjektu výměnou za brand visibility + association.", tag: "SPONZ" },
-    { term: "6 typů sponzoringu", def: "Sportovní / Kulturní / CSR-charita / Event-based / Mediální / Vzdělávací.", tag: "SPONZ" },
-    { term: "Event marketing", def: "Vlastní eventy + experience. Apple WWDC, Salesforce Dreamforce (170k attendees), Tesla Battery Day.", tag: "SPONZ" },
-    { term: "AVE (Advertising Value Equivalent)", def: "Kolik by stála placená reklama za stejnou expozici. Red Bull Stratos = 6 mld. USD AVE.", tag: "MĚŘENÍ" },
-    { term: "3 fáze měření kampaně", def: "Pre-test (před spuštěním) / Mid-campaign (během) / Post-test (po skončení).", tag: "MĚŘENÍ" },
-    { term: "Marketing Mix Modeling (MMM)", def: "Statistická analýza vlivu kanálů na sales. Top-down pohled, klasický pro velké firmy.", tag: "MĚŘENÍ" },
-    { term: "Multi-Touch Attribution (MTA)", def: "Sledování customer journey napříč kanály. Bottom-up. Pro digital.", tag: "MĚŘENÍ" },
-    { term: "Incrementality testing", def: "A/B test geographic regions s a bez reklamy. Pravá kauzální analýza.", tag: "MĚŘENÍ" },
-    { term: "Brand Lift Study", def: "Survey-based měření brand metrics (recall, consideration) pre vs post kampaň.", tag: "MĚŘENÍ" },
-    { term: "Programmatic advertising", def: "Algoritmické nákupy ad spots v real-time. 80 % digital display. Google DV360, The Trade Desk.", tag: "TRENDY" },
-    { term: "Connected TV (CTV)", def: "Netflix Ads, Disney+ Ads, HBO Max Ads. Kombinace TV reach + digital targeting.", tag: "TRENDY" },
-    { term: "Cookie-less era", def: "Apple ATT, Google sunset 3rd party cookies. Shift k 1st party data + contextual.", tag: "TRENDY" },
-  ];
+    { id: "pr", title: "📣 PR + sponzoring + event", subtitle: "Budování vztahů a důvěryhodnosti", color: VSE.success, emoji: "star",
+      content: (<div>
+        <Def color={VSE.success}>
+          <b>Public Relations (PR)</b> = budování vztahů se stakeholdery a péče o image firmy, aby média vyvolávala <b>pozitivní publicitu</b>. Na rozdíl od reklamy je <b>velmi levné</b>, ale firma má <b>malou kontrolu nad výsledkem</b>.
+        </Def>
+        <ExamAlert komise="Heřman + Schovancová + Vávra 2026" what="Komise chce: <b>co je PR a jeho typy + jak se měří úspěšnost</b>. PR = budování vztahů; typy: tisková zpráva, konference, firemní publikace, krizová komunikace, event, sponzoring. Měření: počet zmínek v médiích, dosah, sentiment." />
+        <Tag color={VSE.success}>Nástroje PR</Tag>
+        <Bullet items={[
+          "Tisková zpráva, tisková konference, firemní publikace, speciální akce, krizová komunikace.",
+          "<b>Event marketing</b> — speciální forma: firemní akce, zážitky pro zákazníky (Red Bull akce).",
+          "<b>Sponzoring</b> — podpora akce/týmu výměnou za viditelnost značky (Red Bull a sport).",
+        ]} color={VSE.success} />
+        <ResponsiveGrid cols2>
+          <PlusMinus type="plus" items={["Velmi levné oproti reklamě.", "Vysoká důvěryhodnost — lidé věří médiím víc než reklamě."]} />
+          <PlusMinus type="minus" items={["Malá kontrola nad výsledkem — média napíšou, co chtějí.", "Hůř měřitelný přímý dopad na prodej."]} />
+        </ResponsiveGrid>
+      </div>) },
 
-  const quizMkt14 = [
-    { q: "Co je hromadná mkt komunikace?", opts: ["Personální komunikace", "Nepersonální komunikace zaměřená na masu zákazníků (TV, PR, sponzoring, events)", "B2B sales", "Direct mail"], correct: 1 },
-    { q: "Kolik je hlavních nástrojů hromadné komunikace?", opts: ["2", "3", "4 (reklama / PR / sponzoring / event marketing)", "6"], correct: 2 },
-    { q: "Která NENÍ ze 4 cílů reklamy?", opts: ["Informativní", "Přesvědčovací", "Připomínací", "Likvidační"], correct: 3 },
-    { q: "Co je informativní reklama?", opts: ["Reklama o akci", "Uvádění nového produktu, awareness fáze (M8 zavádění)", "Sleva", "PR"], correct: 1 },
-    { q: "Co je GRP?", opts: ["Gross Revenue Profit", "Gross Rating Points — Reach × Frequency. Klasická TV metric.", "Google Rating Process", "Gross Reach Period"], correct: 1 },
-    { q: "Optimální effective frequency je:", opts: ["1×", "2×", "3-7×", "10+×"], correct: 2 },
-    { q: "Reach × Frequency = ?", opts: ["CPM", "GRP (Gross Rating Points)", "CPA", "CTR"], correct: 1 },
-    { q: "Co je CTR?", opts: ["Cost Through Rate", "Click-Through Rate — % kliklo na ad", "Cost Trade Ratio", "Click Time Reach"], correct: 1 },
-    { q: "Co je CPM?", opts: ["Cost Per Million", "Cost Per Mille — cena za 1000 impressions", "Click Per Minute", "Conversion Per Month"], correct: 1 },
-    { q: "Co je ROAS?", opts: ["Rate Of Ad Spend", "Return On Ad Spend = Revenue / Ad Spend. Benchmark 3-5×.", "Return Of Annual Sales", "Reach Of All Sources"], correct: 1 },
-    { q: "Která NENÍ ze 6 typů sponzoringu?", opts: ["Sportovní", "Kulturní", "CSR / charita", "Politický"], correct: 3 },
-    { q: "Red Bull, Heineken Champions League jsou příklady:", opts: ["PR", "Sportovní sponzoring", "Direct marketing", "Native advertising"], correct: 1 },
-    { q: "Co je AVE?", opts: ["Average Value Estimate", "Advertising Value Equivalent — hodnota PR/sponzoringu přepočítaná na ekvivalent placené reklamy", "Annual Visibility Earnings", "Audio-Visual Element"], correct: 1 },
-    { q: "Kolik fází má měření reklamní kampaně?", opts: ["2", "3 (pre-test / mid-campaign / post-test)", "4", "5"], correct: 1 },
-    { q: "Co je Marketing Mix Modeling (MMM)?", opts: ["Mix produktů", "Statistická analýza vlivu kanálů na sales (top-down)", "4P koncept", "Brand model"], correct: 1 },
-    { q: "Co je programmatic advertising?", opts: ["Software reklama", "Algoritmické nákupy ad spots v real-time (80 % digital display)", "TV program", "Programming language ads"], correct: 1 },
+    { id: "osobni_prodej", title: "🤝 Osobní prodej", subtitle: "Přímý kontakt prodejce se zákazníkem", color: VSE.fmv, emoji: "people",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          <b>Osobní prodej</b> = osobní komunikace prováděná prodejcem za účelem prodeje a budování vztahu. Funguje hlavně na <b>průmyslových (B2B) trzích</b>, kde je málo velkých zákazníků a složité produkty.
+        </Def>
+        <Tag color={VSE.fmv}>Proces osobního prodeje</Tag>
+        <ResponsiveSVG viewBox="0 0 600 130" maxHeight={120}>
+          <line x1="55" y1="55" x2="545" y2="55" stroke="var(--text-muted)" strokeWidth="1.5" strokeDasharray="3,3"/>
+          {[
+            { x: 90, t: "Kontaktování", d: "zákazníka" },
+            { x: 220, t: "Určení potřeb", d: "požadavky, přání" },
+            { x: 350, t: "Předvedení", d: "vyzkoušení produktu" },
+            { x: 460, t: "Uzavření", d: "prodeje" },
+            { x: 545, t: "Poprodej", d: "péče, vztah" },
+          ].map((p, i) => (
+            <g key={i}>
+              <circle cx={p.x} cy="55" r="7" fill={VSE.fmv}/>
+              <text x={p.x} y="80" textAnchor="middle" fontFamily={fontSans} fontSize="10.5" fontWeight="700" fill={VSE.fmv}>{p.t}</text>
+              <text x={p.x} y="94" textAnchor="middle" fontFamily={fontSans} fontSize="8.5" fill="var(--text-muted)">{p.d}</text>
+            </g>
+          ))}
+        </ResponsiveSVG>
+        <ResponsiveGrid cols2>
+          <PlusMinus type="plus" items={["Přímý kontakt, okamžitý feedback a možnost reakce.", "Součástí je neverbální komunikace, customizace, dlouhodobý důvěryhodný vztah."]} />
+          <PlusMinus type="minus" items={["Nákladné, nižší počet kontaktovaných zákazníků.", "Časově náročné, potřeba zaškolených prodejců."]} />
+        </ResponsiveGrid>
+        <Bullet items={[
+          "Formy: prodejní prezentace, schůzky, výstavy, veletrhy.",
+          "<b>Vhodné pro B2B</b> nebo menší loajální trh s velkými zisky, složité produkty na vysvětlení.",
+        ]} color={VSE.fmv} />
+      </div>) },
+
+    { id: "direct", title: "📬 Direct marketing", subtitle: "Personalizovaná komunikace + organizace (Stříteský!)", color: VSE.danger, emoji: "target",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Direct marketing</b> = personalizovaná komunikace s malými segmenty, která usiluje o <b>vyvolání okamžité reakce</b> oslovených. Levnější alternativa osobního prodeje, ale zachovává adresnost.
+        </Def>
+        <ExamAlert komise="Stříteský 2026 + Svobodová + Mikovcová" what="<b>Stříteský chce organizaci direct marketingu</b>: prodejní síly organizované podle <b>regionu / typu zákazníka / zboží / prémiové</b>. A <b>rozdíl osobní × direct</b>: osobní přímo ponouká k okamžité akci (telemarketing). Svobodová chce <b>přesné názvy zdrojů</b>." />
+        <Tag color={VSE.danger}>Nástroje a principy</Tag>
+        <Bullet items={[
+          "<b>Nástroje</b>: direct mail, katalog, e-mail, telemarketing, mobilní marketing.",
+          "Přesné zacílení, adaptace sdělení individuálně, zaměření na klíčové a významné zákazníky.",
+          "<b>Nutnost kvalitní databáze (DTB)</b> a CRM — bez dat to nefunguje.",
+          "<b>Cross-selling</b> (související zboží) × <b>up-selling</b> (lepší/dražší produkt).",
+        ]} color={VSE.danger} />
+        <Tag color={VSE.warning}>Měření direct marketingu</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Response rate" color={VSE.warning} items={["= počet příjemců, kteří zareagovali / počet rozeslaných zpráv.", "Měří, jak dobře sdělení vyvolalo reakci."]} />
+          <ModelCard name="Conversion rate" color={VSE.success} items={["= počet příjemců, kteří produkt koupili / počet oslovených.", "Měří skutečný prodejní dopad."]} />
+        </ResponsiveGrid>
+      </div>) },
+
+    { id: "prodejni_sily", title: "👔 Řízení prodejních sil a CRM", subtitle: "Organizace, nábor, motivace prodejců + CRM", color: VSE.ffu, emoji: "crown",
+      content: (<div>
+        <Def color={VSE.ffu}>
+          <b>Prodejní síly</b> = tým prodejců, který firma organizuje, školí, řídí a motivuje. Komise (Svobodová, Stříteský) na tom v 2026 explicitně trvali — navrhování a řízení prodejních sil.
+        </Def>
+        <Tag color={VSE.ffu}>Organizace prodejních týmů (Stříteský)</Tag>
+        <Bullet items={[
+          "Podle <b>regionu</b> (každý prodejce má území), <b>typu zákazníka</b> (B2B / B2C / klíčoví), <b>zboží</b> (produktové řady), <b>prémiové</b> (key account management pro velké klienty).",
+          "Cyklus řízení: <b>zaškolení → určení a sledování prodejních akcí → variabilní složka mzdy</b> (motivace přes provize).",
+        ]} color={VSE.ffu} />
+        <Tag color={VSE.fis}>CRM — Customer Relationship Management</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.fis}10`, border: `1px solid ${VSE.fis}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>CRM</b> = systém řízení vztahů se zákazníky. Sbírá data o zákaznících (historie nákupů, preference, kontakt) a umožňuje personalizovanou komunikaci. Páteř direct marketingu i B2B prodeje — bez kvalitní databáze nelze cílit ani měřit.
+        </div>
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.warning}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          📎 Měření kampaní a výzkum komunikace (pre/post testy, mediální metriky) → <b>M16</b>.
+        </div>
+      </div>) },
   ];
 
   const praxeMkt14 = {
     caseStudy: {
-      company: "Red Bull — etalon hromadné komunikace přes sponzoring + event marketing",
-      subtitle: "Z 0 na 12 mld. USD obrat díky 'Red Bull Gives You Wings' + extreme sports",
+      company: "Jak Nike míchá hromadnou a osobní komunikaci",
+      subtitle: "Jeden brand, dvě úplně jiné komunikační větve",
       content: (<>
-        <b>Red Bull</b> je <b>učebnicový příklad nelineární hromadné komunikace</b>. Místo tradiční TV reklamy investuje 30 % obratu (3+ mld. USD ročně) do sponzoringu + vlastních eventů.<br/><br/>
-        <b style={{ color: VSE.fmv }}>📺 REKLAMNÍ STRATEGIE — minimal TV, maximum content:</b><br/><br/>
-        • <b>Reklamní budget &lt; 20 %</b> total marketing (vs Coca-Cola 60 %+)<br/><br/>
-        • Klasický slogan &quot;Red Bull Gives You Wings&quot; od 1987<br/><br/>
-        • Animované TV spoty (low budget, charakteristické)<br/><br/>
-        • <b>Apellové:</b> Humor + slice-of-life situace<br/><br/>
-        <b style={{ color: VSE.warning }}>🏆 SPONZORING — sport jako brand asset:</b><br/><br/>
-        • <b>F1:</b> Red Bull Racing (2 vlastní týmy — Red Bull + AlphaTauri). 150 mil. EUR ročně.<br/><br/>
-        • <b>Extreme sports:</b> Cliff diving, freerunning, motocross. 600+ sponzorovaných sportovců.<br/><br/>
-        • <b>Esports:</b> Red Bull League of Legends, gaming tournaments.<br/><br/>
-        • <b>Music:</b> Red Bull Music Academy, festivals.<br/><br/>
-        <b style={{ color: VSE.fph }}>🎪 EVENT MARKETING — vlastní spektakulární eventy:</b><br/><br/>
-        • <b>Red Bull Stratos 2012:</b> Felix Baumgartner skok ze stratosféry. Stálo 65 mil. USD, <b>AVE = 6 mld. USD</b> (92× ROI). 8 milionů live diváků na YouTube.<br/><br/>
-        • <b>Red Bull Cliff Diving World Series:</b> Roční tournament 8 destinací.<br/><br/>
-        • <b>Red Bull Air Race:</b> Aerobatic závody nad městy.<br/><br/>
-        • <b>Wings for Life World Run:</b> Charitativní běh ve 53 zemích současně.<br/><br/>
-        <b style={{ color: VSE.success }}>📰 PR / OWNED MEDIA — Red Bull Media House:</b><br/><br/>
-        • Red Bull TV — vlastní streaming platforma s extreme sports content<br/><br/>
-        • Red Bull Bulletin — vlastní magazine 4 mil. čtenářů/měsíc<br/><br/>
-        • YouTube kanál 11 mil. subs, Instagram 18 mil.<br/><br/>
-        <b style={{ color: VSE.danger }}>📊 MĚŘENÍ — atypické metriky:</b><br/><br/>
-        • <b>AVE z PR/sponzoringu:</b> 3-5× vyšší než ROI z paid ads<br/><br/>
-        • <b>Brand recall:</b> 95 % aided awareness globálně<br/><br/>
-        • <b>Brand association &quot;extreme&quot;:</b> 87 % spontánně asociuje<br/><br/>
-        <b style={{ color: VSE.success }}>Výsledek:</b> Red Bull prodává 12 mld. plechovek/rok, obrat 12 mld. USD (2023). 41 % market share v energy drinks. <b>Bez tradiční dominantní TV reklamy</b> — místo toho <b>sponzoring + event mkt + owned media</b>.
+        Nike je učebnice toho, jak se hromadná a osobní komunikace doplňují.<br/><br/>
+        Pro <b>běžné spotřebitele (B2C)</b> jede Nike masově — velké reklamní kampaně se sportovci, „Just Do It", sponzoring týmů a olympiád. Cílem je budovat značku a emoci v milionech lidí najednou. Tady by osobní prodej nedával smysl: produkt je levný a zákazníků je moře.<br/><br/>
+        Ale když Nike prodává <b>vybavení velkému sportovnímu klubu nebo síti fitness center (B2B)</b>, přepne do osobní větve — obchodní zástupce jezdí na schůzky, řeší objemy, customizaci dresů, dlouhodobý kontrakt. Tady se vyplatí čas a osobní vztah, protože jeden klient znamená velkou hodnotu.<br/><br/>
+        A direct marketing? Nike sbírá data přes appku a věrnostní program (CRM), pak posílá personalizované nabídky — „k tvým běžeckým botám se hodí tyhle ponožky" (cross-selling). To je adresné, levné a měřitelné přes conversion rate.
       </>),
-      lessons: "Red Bull je <b>etalon non-traditional hromadné komunikace</b>. Pro PS doporuč: <b>sponzoring + event mkt + owned content media place reklamy + AVE jako klíčová metrika</b>. Alternativy: <b>Coca-Cola (max reach TV + Olympic sponsoring), Heineken (UEFA Champions League sponsoring), Apple (event marketing — keynotes 100M views), Patagonia (CSR + film content), McDonald's (mass TV + Olympic + lokální events)</b>."
+      lessons: "Tentýž brand používá hromadnou komunikaci na masu (B2C reklama, sponzoring), osobní prodej na velké klienty (B2B schůzky) a direct marketing na personalizaci přes data. Volba nástroje závisí na hodnotě zákazníka a typu trhu — ne na tom, co je lepsi v uvozovkach."
     },
     miniExamples: [
-      { tag: "MEDIA MIX", color: VSE.fmv, company: "Coca-Cola Christmas — klasický mass reach", content: "Coca-Cola Christmas kampaň (od 1995, &quot;Holidays Are Coming&quot;) — <b>klasická hromadná komunikace</b>. Media mix: 40 % TV (mass reach 80 %+ populace), 25 % OOH (Christmas truck tour), 20 % sociální sítě, 15 % event mkt. GRP 1200+, frequency 6×. Brand recall 95 %, sales lift +18 % v Q4." },
-      { tag: "APPEALS", color: VSE.warning, company: "Nike 'Just Do It' — emocionální appeal mistrovství", content: "Nike používá <b>emocionální appeals</b> 30+ let. Slogan &quot;Just Do It&quot; (1988) + storytelling kampaně (Michael Jordan, Serena Williams, Colin Kaepernick). Místo benefitů (Nike má lepší boty než Adidas) komunikuje aspirace. Brand value 53 mld. USD, NPS 75." },
-      { tag: "PROGRAMMATIC", color: VSE.fph, company: "Amazon Display — programmatic mistrovství", content: "Amazon investuje <b>40 % marketing budget</b> do programmatic display ads. Real-time bidding přes Amazon DSP, targeting podle browsing history (1st party data). CPM nižší než Google, ale 3× vyšší conversion. CPA 5-15 USD per zákazník v US." },
-      { tag: "AVE + STRATOS", color: VSE.success, company: "Red Bull Stratos 2012 — etalon ROI z eventu", content: "Red Bull Stratos: Felix Baumgartner skočil z 39 km výšky. <b>Investment 65 mil. USD, AVE 6 mld. USD = 92× ROI</b>. 8 milionů live diváků YouTube (rekord 2012). 500+ TV stanic broadcast. Brand recall +13 % během 1 dne. Klasický důkaz síly event marketingu vs tradiční reklamy." },
-      { tag: "MMM", color: VSE.danger, company: "Procter & Gamble — Marketing Mix Modeling", content: "P&G provozuje <b>MMM jako standardní praxe</b> u všech 80+ značek. Statistická analýza zhodnotí: TV přinese 25 % sales lift, digital 40 %, retail in-store 25 %, sponzoring 10 %. <b>Reallocation budget</b>: digital +30 %, TV −15 %. Sales +12 % YoY 2022." },
+      { company: "Tahalova definice reklamy", tag: "UČEBNICE", color: VSE.warning, content: "Tahal chce slyšet definici doslova: reklama = placená, neosobní, masová komunikace přes média za účelem informovat, přesvědčit nebo připomenout. Když řekneš jen 'reklama je když firma dělá reklamu', neprojdeš. Nauč se přesné znění." },
+      { company: "PR vs reklama u krize", tag: "PR", color: VSE.success, content: "Když značce praskne skandál, reklama nepomůže (lidi jí nevěří). Nastupuje krizová komunikace přes PR — tisková zpráva, vyjádření, vztahy s médii. PR je levné a důvěryhodné, ale firma nemá plnou kontrolu nad tím, co média napíšou." },
+      { company: "B2B telemarketing", tag: "DIRECT × OSOBNÍ", color: VSE.danger, content: "Stříteský chytá rozdíl: telemarketing (direct) přímo ponouká k okamžité akci ('kupte teď'). Osobní prodej staví dlouhodobý vztah přes schůzky. Hranice je v tom, jestli jde o okamžitou reakci, nebo budování vztahu." },
     ]
   };
 
-  const examQuestionsMkt14 = [
-    { komise: "2025-09-12 — Nový + Bočková + Tahal (Výroba kol)", otazka: "Hromadná marketingová komunikace, reklama, PR", pozn: "Nový chce <b>hromadnou komunikaci = reklama + PR</b>. Naučit 4 nástroje (reklama + PR + sponzoring + events) + typy reklamy + media mix." },
-    { komise: "2026-02-06 — Heřman + Schovancová + Vávra (Výroba kol)", otazka: "Hromadná marketingová komunikace — plánování a řízení marketingové kampaně, 5M, aplikovat na PS, Možnosti PR (co to je, typy, jak se měří úspěšnost)", pozn: "Heřman chce <b>5M + PR typy + měření</b>. Detail v M13, ale tady aplikovat na hromadnou kampaň: GRP, reach, frequency, AVE." },
-    { komise: "2025-01-28 — Smrčka + Kolouchová + Říhová (PS firma)", otazka: "Výzkum marketingového výzkumu. Mediální výzkumy.", pozn: "Smrčka chytá <b>mediální výzkum</b>. Naučit 3 fáze (pre/mid/post-test) + tradiční metriky (GRP, reach, frequency) + online metriky (CTR, CPC, CPM, CPA, ROAS) + pokročilé (MMM, MTA)." },
-    { komise: "2025-06-10 — Stříteský + Müllerová (Neziskovka)", otazka: "Mediální výzkum — jak měříme reklamu, online, naučit se různý metriky", pozn: "Stříteský EXPLICITNĚ chce <b>online metriky + jak měříme reklamu</b>. Naučit kompletní digital metrics: CTR, CPC, CPM, CPA, ROAS, conversion rate, view-through rate, attribution models." },
-    { komise: "2025-02-03 — Bočková + Nový + Kolouchová (Software)", otazka: "Integrovaná komunikace, kdy se používá jaký druhy médií (B2B osobní prodej, B2C reklama)", pozn: "Bočková chytá <b>volbu média podle B2B/B2C</b>. Pro B2C = mass reklama + sociální + sponzoring. Pro B2B = trade shows + LinkedIn + content." },
+  const flashcardsMkt14 = [
+    { q: "Hromadná × osobní komunikace?", a: "Hromadná = oslovuje masu najednou (reklama, PR, podpora prodeje). Osobní = jednotlivce/malé segmenty (osobní prodej, direct marketing)." },
+    { q: "Kdy B2B a kdy B2C média?", a: "B2B → osobní prodej (málo velkých zákazníků, složitý produkt). B2C → reklama (masa zákazníků, levné produkty)." },
+    { q: "Definice reklamy (Tahal)?", a: "Placená neosobní forma masové komunikace přes média za účelem informovat, přesvědčit nebo připomenout." },
+    { q: "3 cíle reklamy podle fáze?", a: "Informativní (zavádění), přesvědčovací (růst/konkurence), připomínací (zralost)." },
+    { q: "Co je product placement?", a: "Umístění značky do filmu/seriálu (James Bond a auta). Forma reklamy v obsahu." },
+    { q: "Co je podpora prodeje?", a: "Krátkodobé stimuly k okamžitému nákupu: slevy, kupóny, vzorky, soutěže, věrnostní programy. Rychlý, ale krátkodobý efekt." },
+    { q: "POP × POS?", a: "POP = point of purchase (místo nákupu), POS = point of sale (místo prodeje). Komunikace v místě prodeje — stojany, plakáty." },
+    { q: "Co je PR a jeho výhoda/nevýhoda?", a: "Budování vztahů se stakeholdery a péče o image. + velmi levné a důvěryhodné, − malá kontrola nad výsledkem." },
+    { q: "Nástroje PR?", a: "Tisková zpráva, konference, firemní publikace, krizová komunikace, event marketing, sponzoring." },
+    { q: "Proces osobního prodeje?", a: "Kontaktování → určení potřeb → předvedení/vyzkoušení → uzavření prodeje → poprodejní péče." },
+    { q: "Kdy je vhodný osobní prodej?", a: "B2B trhy, složité produkty na vysvětlení, menší loajální trh s velkými zisky. Málo velkých zákazníků." },
+    { q: "Co je direct marketing?", a: "Personalizovaná komunikace s malými segmenty usilující o okamžitou reakci. Nástroje: direct mail, e-mail, telemarketing, mobil." },
+    { q: "Organizace direct mkt (Stříteský)?", a: "Prodejní síly podle regionu, typu zákazníka, zboží, prémiové (key account)." },
+    { q: "Response rate × conversion rate?", a: "Response = zareagovali/rozeslaní. Conversion = koupili/oslovení. Response měří reakci, conversion měří prodej." },
+    { q: "Cross-selling × up-selling?", a: "Cross-selling = související zboží (ponožky k botám). Up-selling = lepší/dražší produkt." },
+    { q: "Co je CRM a proč je důležité?", a: "Systém řízení vztahů se zákazníky — sbírá data (historie, preference). Páteř direct marketingu a B2B prodeje, bez dat nelze cílit ani měřit." },
   ];
 
-  const podcastMkt14 = { title: "Marketing 14 — Hromadná marketingová komunikace", description: "Definice hromadné komunikace + rozdíl vs osobní (M15). 4 hlavní nástroje: Reklama / PR / Sponzoring / Event marketing. Klasifikace reklamy (4 cíle, 4 typy podle zaměření, 6 médií). Advertising appeals (racionální × emocionální × humor × strach × social proof × celebrity × slice-of-life). Mediální plánování: Reach × Frequency × GRP × CPP × CPM × CTR × CPC × CPA × ROAS. Sponzoring (6 typů) + Event marketing. Mediální výzkum: 3 fáze (pre/mid/post-test) + tradiční metriky + online metriky + pokročilé (MMM, MTA, incrementality, Brand Lift). Trendy 2024+: programmatic, video first, social commerce, native, hyper-personalizace, audio, CTV, AI, cookie-less. Red Bull, Coca-Cola Christmas, Nike, Amazon, P&G.", audioUrl: null, notebookLmUrl: null };
+  const quizMkt14 = [
+    { q: "Hromadná komunikace oslovuje:", opts: ["Jednotlivce", "Velkou skupinu najednou", "Jen B2B", "Jen prodejce"], correct: 1 },
+    { q: "Pro B2B trh s málo velkými zákazníky se hodí:", opts: ["Masová reklama", "Osobní prodej", "Billboardy", "TV spot"], correct: 1 },
+    { q: "Definice reklamy (Tahal) zahrnuje:", opts: ["Osobní bezplatná komunikace", "Placená neosobní masová komunikace přes média", "Komunikace jen na internetu", "Prodej v obchodě"], correct: 1 },
+    { q: "Připomínací reklama se používá ve fázi:", opts: ["Zavádění", "Růstu", "Zralosti", "Úpadku"], correct: 2 },
+    { q: "Podpora prodeje má efekt:", opts: ["Dlouhodobý", "Krátkodobý, okamžitý nákup", "Žádný", "Jen na image"], correct: 1 },
+    { q: "POS znamená:", opts: ["Point of sale (místo prodeje)", "Point of service", "Price of sale", "Product on shelf"], correct: 0 },
+    { q: "Hlavní výhoda PR oproti reklamě:", opts: ["Plná kontrola", "Velmi levné a důvěryhodné", "Okamžitý prodej", "Masový dosah"], correct: 1 },
+    { q: "Osobní prodej začíná:", opts: ["Uzavřením", "Kontaktováním zákazníka", "Poprodejem", "Reklamou"], correct: 1 },
+    { q: "Direct marketing usiluje o:", opts: ["Budování image", "Vyvolání okamžité reakce oslovených", "Masový dosah", "Snížení nákladů na reklamu"], correct: 1 },
+    { q: "Organizace direct mkt podle Stříteského:", opts: ["Jen podle ceny", "Region / typ zákazníka / zboží / prémiové", "Náhodně", "Podle abecedy"], correct: 1 },
+    { q: "Conversion rate měří:", opts: ["Kdo zareagoval", "Kdo koupil / kolik osloveno", "Počet rozeslaných", "Náklady"], correct: 1 },
+    { q: "CRM slouží k:", opts: ["Výrobě produktů", "Řízení vztahů se zákazníky a sběru dat", "Účetnictví", "Logistice"], correct: 1 },
+  ];
+
+  const examQuestionsMkt14 = [
+    { komise: "ZS 2026 — Heřman, Schovancová, Vávra (Horská chata)", otazka: "Hromadná marketingová komunikace, reklama, možnosti PR — co to je, typy, jak se měří úspěšnost.", pozn: "Reklama (definice) + PR (typy + měření: zmínky, dosah, sentiment). 5M model je v M13 — odkaž na něj." },
+    { komise: "ZS 2026 — Nový, Bočková, Tahal", otazka: "Hromadná marketingová komunikace, reklama, PR.", pozn: "🔴 Tahal chce definici reklamy přesně z učebnice. Nový chce propojení s případovkou. Stačí základy + doptávání." },
+    { komise: "ZS 2026 — Stříteský, Sieber, Vítečková", otazka: "Osobní marketing a direct marketing, organizace direct marketingu.", pozn: "🔴 Stříteský: organizace podle regionu/typu zákazníka/zboží/prémiové. Rozdíl osobní × direct (osobní ponouká k okamžité akci - telemarketing)." },
+    { komise: "ZS 2026 — Svobodová, Nový, Machek", otazka: "Osobní marketing, zdroje direct marketingu, navrhování a řízení prodejních sil.", pozn: "🔴 Na řízení prodejních sil trvali. Svobodová chce přesné názvy zdrojů direct mkt. Organizace + motivace prodejců (variabilní složka)." },
+    { komise: "ZS 2026 — Stříteský, Krause, Zamazalová", otazka: "Osobní a direct marketing — navázat na PS, CRM a B2B marketing, navrhnout doporučení.", pozn: "CRM + B2B + napojení na případovku. Navrhnout konkrétní doporučení pro firmu z PS." },
+    { komise: "ZS 2026 — Bočková, Nový, Kolouchová", otazka: "Integrovaná komunikace, kdy se používá jaký druh médií (B2B osobní prodej, B2C reklama).", pozn: "Rozlišit B2B → osobní prodej, B2C → reklama podle typu trhu a produktu." },
+  ];
+
+  const podcastMkt14 = { title: "Marketing 14 — Nástroje komunikačního mixu (hromadná + osobní)", description: "Hromadná × osobní komunikace (kdy B2B osobní prodej, kdy B2C reklama). Reklama (definice, cíle, média), podpora prodeje (POP/POS), PR + sponzoring + event, osobní prodej (proces), direct marketing (organizace, nástroje, response/conversion rate), řízení prodejních sil a CRM.", audioUrl: null, notebookLmUrl: null };
 
   const examStrategyMkt14 = `
-    <b style="color:#A82A5F">1.</b> Začni definicí — <b>hromadná komunikace = nepersonální mass komunikace</b> vs osobní (M15).<br/>
-    <b style="color:#A82A5F">2.</b> ⚠️ <b>4 hlavní nástroje</b> (Nový, Heřman chytají!) — reklama / PR / sponzoring / events.<br/>
-    <b style="color:#A82A5F">3.</b> Klasifikace reklamy — 4 cíle (informativní/přesvědčovací/připomínací/posilující) × 4 zaměření (produktová/značková/institucionální/sociální).<br/>
-    <b style="color:#A82A5F">4.</b> Reklamní média — TV / Print / Rádio / Online / OOH / Kino+streaming.<br/>
-    <b style="color:#A82A5F">5.</b> Advertising appeals — racionální × emocionální × humor × strach × social proof × celebrity × slice-of-life.<br/>
-    <b style="color:#A82A5F">6.</b> ⚠️ <b>Mediální plánování</b> — Reach × Frequency × GRP × CPP × CPM × effective frequency 3-7×.<br/>
-    <b style="color:#A82A5F">7.</b> ⚠️ <b>Online metriky</b> (Stříteský chytá!) — CTR / CPC / CPM / CPA / ROAS / conversion rate / attribution models.<br/>
-    <b style="color:#A82A5F">8.</b> Sponzoring (6 typů) + Event marketing (Apple WWDC, Red Bull Stratos).<br/>
-    <b style="color:#A82A5F">9.</b> ⚠️ <b>Mediální výzkum</b> (Smrčka chytá!) — 3 fáze (pre/mid/post-test) + tradiční + online + pokročilé (MMM, MTA).<br/>
-    <b style="color:#A82A5F">10.</b> Trendy 2024+ — programmatic, video first, social commerce, native, CTV, AI, cookie-less era.<br/>
-    <b style="color:#A82A5F">11.</b> Aplikace na PS — cíle + media mix + reach/frequency + GRP/CPA + měření.
+    <b style="color:#A82A5F">1.</b> Rozliš <b>hromadnou × osobní</b> komunikaci — kdy co (<b>B2B → osobní prodej</b>, <b>B2C → reklama</b>).<br/>
+    <b style="color:#A82A5F">2.</b> <b>Reklama</b> — definice přesně (Tahal!): placená, neosobní, masová, přes média, informovat/přesvědčit/připomenout. Cíle podle fáze + média.<br/>
+    <b style="color:#A82A5F">3.</b> <b>Podpora prodeje</b> — krátkodobé pobídky (slevy, kupóny, soutěže), POP/POS.<br/>
+    <b style="color:#A82A5F">4.</b> <b>PR</b> — budování vztahů + typy + měření (Heřman). Levné, důvěryhodné, malá kontrola.<br/>
+    <b style="color:#A82A5F">5.</b> <b>Osobní prodej</b> — proces (kontakt → potřeby → předvedení → uzavření → poprodej), B2B.<br/>
+    <b style="color:#A82A5F">6.</b> <b>Direct marketing</b> — organizace (Stříteský: region/zákazník/zboží/prémiové), nástroje, response × conversion rate.<br/>
+    <b style="color:#A82A5F">7.</b> <b>Řízení prodejních sil + CRM</b> (Svobodová) + <b>napoj na případovku</b>.<br/>
+    <b style="color:#A82A5F">8.</b> 📎 5M model a komunikační modely → <b>M13</b>. Měření a výzkum → <b>M16</b>.
   `;
 
   const caseStudyMkt14 = {
-    title: "Lukáš — CMO ZdravýOběd, food-tech startupu pro retail brand awareness (35 mil. Kč budget)",
-    subtitle: "Postavit hromadnou kampaň pro launch retail produktu (do Albertu a Lidlu)",
-    scenario: "Lukáš (38 let) sedí v Karlíně před prezentací pro board. ZdravýOběd právě podepsal smlouvu s Albertem a Lidlem — od září budou prodávat jejich hotové polévky a saláty ve 800 obchodech. Cíl: do 6 měsíců dostat alespoň 50 % cílovky (zdraví uvědomělí Pražáci + Brňáci 28-45 let) na úroveň aided awareness 60 %.\n\nLukáš má 35 mil. Kč budget na hromadnou kampaň. Z předchozího výzkumu ví: cílovka tráví průměrně 3,5 h denně online (60 % mobile), sleduje TV večer 18-22 h (40 % populace), v MHD ráno 7-9 h (35 % cílovky v Praze). Konkurence (Vitalité, BistroFresh, Crocodille) investuje 20-50 mil. Kč ročně do reklamy.\n\nMarketing tým má 4 lidi + Lukáš. Předchozí kampaně byly hlavně online performance (Google + Meta), brand awareness slabá (8 % aided). CEO David chce do reportu pro board konkrétní mediální plán: GRP, reach, frequency, allocation per kanál, + jak budou měřit úspěšnost kampaně. Tři otázky si Lukáš zapsal: Jaký media mix pro mass awareness? Jaké GRP / reach / frequency targets? A jak měřit, jestli kampaň dovedla cílovku z 8 % na 60 % aided awareness?",
+    title: "Klára — marketérka v TechStart, B2B softwarové firmě",
+    subtitle: "Vyber správný mix nástrojů pro každý segment",
+    scenario: "Klára (31) řeší komunikaci v TechStart, firmě, která prodává projektový software. Mají dva úplně jiné typy zákazníků a Klára musí pro každý zvolit jiný přístup.\n\nPrvní segment jsou velké korporace — jen pár klientů, ale každý kontrakt za miliony. Software je složitý, vyžaduje demo, customizaci a vyjednávání. Šéf chce, aby Klára rozjela masivní TV kampaň, aby je vsichni znali.\n\nDruhý segment jsou malé firmy a živnostníci — tisíce potenciálních zákazníků, levnější verze softwaru, koupí ji online bez schůzky. Tady Klára zvažuje e-mailové kampaně a reklamu.\n\nKlára taky řeší, jak měřit e-mailové kampaně do malých firem, a jestli má smysl budovat databázi zákazníků. A přemýšlí, jak zorganizovat tři obchodníky, které zrovna najali.",
     signals: [
-      { text: "do 6 měsíců dostat 50 % cílovky na aided awareness 60 %", color: VSE.danger, reason: "<b>5M Mission</b> jasně definované — awareness goal. Z 8 % na 60 % = velký lift, vyžaduje masivní mass kampaň + vysoký GRP." },
-      { text: "35 mil. Kč budget na hromadnou kampaň", color: VSE.warning, reason: "<b>5M Money</b> — significantní budget umožňuje multi-channel kampaň včetně TV (která je drahá, ale dává reach). Lukáš musí ale alokovat efektivně." },
-      { text: "cílovka tráví 3,5 h denně online (60 % mobile), TV večer 18-22 h (40 %), v MHD ráno 7-9 h (35 %)", color: VSE.fph, reason: "<b>Media behavior</b> dává media mix recommendation: online (primary), TV (večer), OOH (MHD prime). Multi-touch potential." },
-      { text: "Konkurence (Vitalité, BistroFresh, Crocodille) investuje 20-50 mil. Kč ročně", color: VSE.warning, reason: "<b>Share of Voice</b> benchmark — ZdravýOběd s 35 mil. má comparable SOV. Musí být <b>kreativnější + frequency-focused</b> aby vyniknul." },
-      { text: "Předchozí kampaně byly hlavně online performance (Google + Meta), brand awareness slabá (8 % aided)", color: VSE.danger, reason: "<b>Performance ≠ brand building</b>. Pro mass awareness potřebuje shift od performance (Google search) k brand reach kanálům (TV, OOH, video)." },
-      { text: "konkrétní mediální plán: GRP, reach, frequency, allocation per kanál", color: VSE.fph, reason: "Klíčové <b>mediální KPI</b>. Pro mass awareness optimum 200-400 GRP, 70-80 % reach v cílovce, frequency 4-6×." },
-      { text: "jak budou měřit úspěšnost kampaně", color: VSE.warning, reason: "<b>5M Measurement</b> + mediální výzkum. Pre-test (concept + 8 % baseline) → mid-campaign tracking → post-test (aided awareness 60 %). Brand Lift Study standardní." },
+      { text: "jen pár klientů, ale každý kontrakt za miliony. Software je složitý, vyžaduje demo, customizaci a vyjednávání", color: VSE.fmv, reason: "Klasický B2B segment pro osobní prodej — málo velkých zákazníků, složitý produkt, vysoká hodnota. Osobní kontakt se vyplatí." },
+      { text: "Šéf chce, aby Klára rozjela masivní TV kampaň", color: VSE.danger, reason: "Špatná volba pro pár korporátních klientů. TV reklama je plýtvání — oslovuje masu, ale tady je cílovka úzká. Osobní prodej je efektivnější." },
+      { text: "tisíce potenciálních zákazníků, levnější verze softwaru, koupí ji online bez schůzky", color: VSE.warning, reason: "B2C-like segment pro hromadnou/direct komunikaci — masa zákazníků, levný produkt, žádná schůzka. Reklama a direct marketing dávají smysl." },
+      { text: "jak měřit e-mailové kampaně", color: VSE.fis, reason: "Direct marketing se měří přes response rate (kdo zareagoval) a conversion rate (kdo koupil)." },
+      { text: "jestli má smysl budovat databázi zákazníků", color: VSE.success, reason: "CRM je páteř direct marketingu i B2B prodeje. Bez databáze nelze personalizovat ani měřit. Jednoznačně ano." },
     ],
     quiz1: {
-      question: "Jaký je hlavní strategický challenge Lukáše?",
+      question: "Jaký nástroj zvolit pro velké korporátní klienty?",
       options: [
-        "Špatný produkt",
-        "Příliš mnoho konkurentů",
-        "Shift od performance marketing (Google + Meta) k mass brand building (TV + OOH + video) pro brand awareness lift z 8 % na 60 %",
-        "Nedostatek budget",
+        "Masivní TV kampaň, jak chce šéf",
+        "Osobní prodej — málo velkých klientů, složitý produkt, demo a customizace; osobní kontakt a vztah se vyplatí",
+        "E-mailový spam",
+        "Billboardy u dálnice",
       ],
-      correct: 2,
+      correct: 1,
     },
     quiz2: {
-      question: "Jakou hromadnou kampaň by Lukáš měl postavit pro 35 mil. Kč budget + 60 % awareness goal v 6 měsících?",
+      question: "Co Klára navrhne pro celou komunikaci?",
       options: [
-        { text: "Media mix: 40 % TV (mass reach 60-70 % cílovky), 25 % online video (YouTube + sociální video), 20 % OOH (MHD + CLV Praha/Brno), 10 % rádio (drive-time peaks), 5 % print premium (Reflex, Marianne)", correct: true, reason: "✓ Klasický mass mix pro brand awareness. TV maximizes reach, OOH brand visibility, video engagement. Reklama dominuje budget." },
-        { text: "Mediální plán: 300 GRP v Q1 (launch) + 200 GRP Q2-Q3 (maintenance), reach 75 % cílovky × frequency 4-5×, effective frequency 3-7× kontaktů", correct: true, reason: "✓ High GRP launch + maintenance pulsing. Effective frequency hit pro brand recall. Klasický awareness pattern." },
-        { text: "Advertising appeals: emocionální storytelling + slice-of-life (zdravý život, family, work-life balance) + lokální CZ celebrity endorsement", correct: true, reason: "✓ Pro low-involvement category (food) emocionální appeals fungují lépe než racionální. Celebrity zvyšuje recall." },
-        { text: "Měření: Pre-test (concept + baseline 8 % awareness), Mid-campaign brand tracking (weekly recall), Post-test Brand Lift Study (aided + unaided awareness, NPS, purchase intent)", correct: true, reason: "✓ 3 fáze (pre/mid/post). Smrčka, Stříteský chytá! Brand Lift Study standardní pro awareness kampaně." },
-        { text: "Sponzoring + event marketing: ZdravýOběd Prague Marathon partner + sponzoring zdravotních akcí + vlastní lifestyle eventy 'Zdravý oběd na dvorku'", correct: true, reason: "✓ Sponzoring posiluje brand association (zdraví) + AVE metric. Event mkt brand experience + UGC." },
-        { text: "PR strategie: tiskové zprávy o launchu (E15, Lidové noviny, ELLE), influencer outreach (zdraví influenceři 50k+ followers), CEO David v Forbes podcastech", correct: true, reason: "✓ PR věrohodnější než reklama. Heřman chytá PR + měření AVE + SOV. Complementary k paid kampani." },
-        { text: "Programmatic display + retargeting pro lower-funnel — visitors retargeted across web s product ads", correct: true, reason: "✓ Programmatic naplnit funnel po awareness phase. Retargeting + dynamic creative pro conversion (e-shop + retail finder)." },
-        { text: "100 % budget na Google Search Ads + Meta Performance", correct: false, reason: "✗ Performance marketing nedělá brand building. Awareness vyžaduje reach kanály (TV, OOH, video). Z 8 % na 60 % nelze dostat search ads." },
-        { text: "100 % budget na influencer marketing TikTok", correct: false, reason: "✗ Cílovka 28-45 nemá TikTok jako dominant kanál. Single-channel strategy = vysoký risk. Multi-channel mix lepší." },
-        { text: "Nedělat hromadnou kampaň, místo toho B2B sales k Albert + Lidl ředitelům", correct: false, reason: "✗ Smlouva s retailery už podepsaná. Hromadná kampaň cílí na end consumers (B2C), aby produkt v shelfu byl koupený." },
+        { text: "Korporace: osobní prodej s demem a customizací (B2B logika)", correct: true, reason: "✓ Málo velkých klientů, složitý produkt = osobní prodej. Přesně B2B přístup." },
+        { text: "Malé firmy: reklama + direct marketing (e-mail) — masa levných zákazníků", correct: true, reason: "✓ Tisíce zákazníků, levný produkt, online nákup = hromadná + direct komunikace." },
+        { text: "Vysvětlit šéfovi, že TV kampaň na pár korporátů je plýtvání", correct: true, reason: "✓ TV oslovuje masu, ale cílovka je úzká. Osobní prodej je efektivnější a levnější na výsledek." },
+        { text: "E-mailové kampaně měřit přes response a conversion rate", correct: true, reason: "✓ Standardní metriky direct marketingu — reakce a skutečný prodej." },
+        { text: "Postavit CRM databázi pro personalizaci a měření", correct: true, reason: "✓ Bez dat nelze cílit ani měřit. CRM je základ pro oba segmenty." },
+        { text: "Tři obchodníky nechat bez organizace, ať si dělají, co chtějí", correct: false, reason: "✗ Prodejní síly se organizují (region/zákazník/zboží) a motivují variabilní složkou. Bez řízení to nefunguje." },
       ],
     },
-    summary: "<b>Lukáš potřebuje multi-channel mass kampaň s TV + online video + OOH dominantní, plus měření přes Brand Lift Study.</b><br/><br/><b>6-měsíční plán (35 mil. Kč):</b><br/><br/>• <b>Media mix:</b> 40 % TV (14 mil. — Nova, Prima prime time + reklamní bloky 18-22 h) / 25 % online video (8,75 mil. — YouTube + Instagram Reels + TikTok pro mladší cílovku) / 20 % OOH (7 mil. — CLV Praha + Brno + MHD prime hours) / 10 % rádio (3,5 mil. — drive-time 7-9 + 16-18) / 5 % print premium (1,75 mil. — Reflex, ELLE, Forbes).<br/><br/>• <b>Mediální KPI:</b> 300 GRP Q1 (launch heavy) + 200 GRP Q2-Q3 (maintenance) + 150 GRP Q4 (Christmas push). Reach 75 % cílovky × Frequency 4-5×.<br/><br/>• <b>Creative:</b> Emocionální storytelling (slice-of-life rodina, work-life balance), CZ celebrity (Eva Burešová nebo Tomáš Klus) endorsement, 3 verze TV spotu (30s hero + 15s cutdown + 6s bumper), social media adaptations.<br/><br/>• <b>Sponzoring + events:</b> Prague Marathon partner (Q2), &quot;Zdravý oběd na dvorku&quot; tour 10 měst (Q2-Q3), pop-up tasting v Albertech a Lidlech.<br/><br/>• <b>PR:</b> Launch press release, influencer outreach (15 zdraví influenceři 50k+ followers), CEO David v Forbes/ČT podcastech.<br/><br/>• <b>Měření (5M Measurement):</b> Pre-test (baseline 8 % aided awareness, concept testing creative), Mid-campaign monthly brand health tracker, Post-test Brand Lift Study (aided + unaided awareness, NPS, purchase intent, attribution analysis MMM).<br/><br/><b>Pro komisi:</b> Klasický B2C food-tech mass kampaň pro retail launch. <b>Coca-Cola Christmas (TV-led mass reach)</b>, <b>Red Bull (sponzoring + events)</b>, <b>Nike (emocionální storytelling)</b> jako benchmark. <b>5M framework (Heřman!)</b> + <b>media metrics GRP/Reach/Frequency</b> + <b>online metriky CPM/CTR/CPA</b> + <b>3 fáze měření (pre/mid/post) + Brand Lift Study (Smrčka!)</b>. Anti-vzor: 100 % performance marketing = neudělá awareness. Vzor: <b>mass reach kanály + emocionální appeals + sponzoring + multi-fázové měření</b>.",
+    summary: "<b>Jeden produkt, dva segmenty, dva úplně jiné komunikační mixy.</b><br/><br/><b>Co Klára udělá:</b><br/>• <b>Velké korporace (B2B)</b>: osobní prodej — demo, customizace, vztah. Pár klientů s vysokou hodnotou se vyplatí oslovit osobně, ne TV reklamou (to by bylo plýtvání)<br/>• <b>Malé firmy (B2C-like)</b>: reklama + direct marketing (e-mail) — masa levných zákazníků, online nákup<br/>• <b>Měření</b> e-mailů: response rate (reakce) + conversion rate (prodej)<br/>• <b>CRM databáze</b>: páteř pro personalizaci i měření obou segmentů<br/>• <b>Tři obchodníky</b> zorganizovat (podle regionu/zákazníka) a motivovat variabilní složkou<br/><br/><b>Pro komisi:</b> Tohle ukazuje jádro okruhu — volba nástroje podle typu trhu a hodnoty zákazníka. B2B = osobní prodej, B2C = reklama/direct. A vždy napoj na případovku: jaké nástroje by firma z PS měla použít a proč.",
   };
 
   return (
     <OkruhPanel
-      subject="Marketing" subjectId="marketing" number={14} title="Hromadná marketingová komunikace"
-      subtitle="4 nástroje (reklama/PR/sponzoring/events) + mediální plán + online metriky + měření"
+      subject="Marketing" subjectId="marketing" number={14} title="Nástroje komunikačního mixu — hromadná + osobní"
+      subtitle="Reklama, podpora prodeje, PR, osobní prodej, direct marketing, CRM"
       color={VSE.fis}
-      questionText="Hromadná marketingová komunikace — nástroje, plánování, měření."
-      sloz={3} roz={4} freq={4}
-      examStrategy={examStrategyMkt14}
+      questionText="Hromadná i osobní marketingová komunikace — reklama, PR, podpora prodeje, osobní prodej, direct marketing, řízení prodejních sil"
+      sloz={3} roz={3} freq={3}
       studySections={studySectionsMkt14}
       flashcards={flashcardsMkt14}
       quiz={quizMkt14}
       praxe={praxeMkt14}
       examQuestions={examQuestionsMkt14}
       podcast={podcastMkt14}
+      examStrategy={examStrategyMkt14}
       caseStudy={caseStudyMkt14}
     />
   );
 }
 
-/* ════════════════════════════════════════════════════════
-   MARKETING 15 — Osobní komunikace (Direct marketing + Osobní prodej + Sales force management)
-   ════════════════════════════════════════════════════════ */
-function OkruhMkt15Panel() {
-  const studySectionsMkt15 = [
-    { id: "intro", title: "Osobní × Direct marketing — odlišení", subtitle: "Stříteský chytá: definice + rozdíl + okamžitá akce", color: VSE.fis, emoji: "people",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Osobní marketingová komunikace</b> = personalizovaná, obousměrná komunikace zaměřená na <b>individuálního zákazníka</b>. Cíl: konverze, vztah, retention. Komise <b>Stříteský</b> CHYTÁ explicitně <b>odlišení osobního a direct marketingu</b>.
-        </Def>
-        <Tag color={VSE.fis}>Osobní marketing × Direct marketing — Stříteského odlišení</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "🤝 OSOBNÍ MARKETING (širší pojem)", d: "Pojetí osobních vztahů se zákazníky. Zahrnuje osobní prodej, direct mkt, telemarketing, vztahový mkt. Nepřímo ponouká k okamžité akci." },
-            { c: VSE.warning, t: "📧 DIRECT MARKETING (užší — subkategorie)", d: "Přímá komunikace s předem definovanou cílovkou. <b>Přímo ponouká k okamžité akci</b> — koupit teď, kliknout, zavolat. Telemarketing, email, SMS." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>Hromadná × Osobní komunikace (M14 vs M15)</Tag>
-        <Bullet items={[
-          "<b>Hromadná (M14):</b> Nepersonální, jednosměrná, mass reach. TV reklama, PR, sponzoring. Pro B2C brand awareness.",
-          "<b>Osobní (M15):</b> Personalizovaná, obousměrná, individual reach. Direct mkt, osobní prodej. Pro B2B + high-value B2C conversion.",
-          "<b>IMK kombinuje obojí:</b> Hromadná pro top-of-funnel awareness, osobní pro bottom-of-funnel konverze.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Kdy použít osobní komunikaci</Tag>
-        <Bullet items={[
-          "<b>B2B kontext:</b> Multi-stakeholder rozhodování, long sales cycle, komplexní produkty (Cisco, Salesforce, IBM).",
-          "<b>High-value B2C:</b> Nemovitosti, auta, finanční služby, luxury items.",
-          "<b>Existující zákazníci:</b> Cross-sell + upsell (CRM databáze).",
-          "<b>Komplexní produkty:</b> Vyžadují vysvětlení (B2B SaaS, enterprise software).",
-          "<b>Vyšší marže:</b> Osobní mkt je dražší per kontakt, ale konverzní rate vyšší.",
-        ]} color={VSE.fph} />
-        <ExamAlert
-          komise="Stříteský + Sieber + Vítečková 2026 (Káva)"
-          what="Stříteský EXPLICITNĚ chytá <b>odlišení osobního a direct marketingu</b>. Naučit: direct mkt = subkategorie osobního, přímo ponouká k akci (telemarketing). Osobní = širší pojem."
-        />
-      </div>) },
 
-    { id: "direct_marketing", title: "Direct marketing — nástroje + organizace", subtitle: "Stříteský chytá organizaci (region/zákazník/zboží/premium)", color: VSE.fis, emoji: "tools",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Direct marketing</b> = přímá adresovaná komunikace s předem definovanou cílovkou s cílem vyvolat okamžitou reakci (klik, hovor, koupě). Měřitelné, targetované. Komise <b>Nový</b> chce <b>nástroje direct marketingu</b>.
-        </Def>
-        <Tag color={VSE.fis}>9 hlavních nástrojů direct marketingu</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "📧 EMAIL MARKETING", d: "Hromadné personalizované emaily. Mailchimp, Ecomail (ČR), HubSpot. CTR 2-5 %, ROI 36:1 (DMA studie)." },
-            { c: VSE.warning, t: "📱 SMS / WHATSAPP MARKETING", d: "Krátké zprávy s CTA. Open rate 98 % (vs email 20 %). Vhodné pro flash sales, urgent updates. GDPR compliance!" },
-            { c: VSE.fph, t: "📞 TELEMARKETING", d: "Telefonické oslovení. Inbound (customer service) × Outbound (sales calls). Stále efektivní pro B2B leads." },
-            { c: VSE.success, t: "📬 DIRECT MAIL (poštovní)", d: "Tištěné katalogy, brožury, personalizované letáky. Klesající trend, ale stále funkční pro premium B2C (IKEA katalog, luxury)." },
-            { c: VSE.danger, t: "📰 KATALOGY", d: "Tištěné nebo digital. IKEA klasický katalog (210 mil. kopií ročně do 2020), Amazon weekly digital." },
-            { c: VSE.fis, t: "🎯 RETARGETING + REMARKETING", d: "Online ads zaměřené na lidi co už navštívili web. Google + Meta retargeting. Conversion 5-10× vyšší než cold ads." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>Doplňkové direct nástroje</Tag>
-        <Bullet items={[
-          "<b>📺 Teleshopping:</b> TV shopping kanály (HSN, QVC). Klesá, ale pořád 5 mld. USD market v US.",
-          "<b>🤖 Chatboty:</b> WhatsApp, Messenger, web chatboty. Automated direct conversation 24/7.",
-          "<b>📱 Push notifications:</b> Mobile app notifications, web push. Pro retention, re-engagement.",
-          "<b>🎫 Voucher / kupón marketing:</b> Slevomat, voucher kódy přes email/SMS. Direct response.",
-          "<b>📨 LinkedIn DM / Sales Navigator:</b> B2B direct outreach. Account-based marketing.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>⚠️ Organizace direct marketingu (Stříteský chytá EXPLICITNĚ!)</Tag>
-        <Bullet items={[
-          "<b>📍 Podle REGIONU (geografie):</b> Sales reps pro Prahu, Brno, Ostravu. Lokální specifika, doprava efektivnější.",
-          "<b>👥 Podle TYPU ZÁKAZNÍKA:</b> Enterprise vs SMB, B2B vs B2C, government vs commercial. Specializace na segment.",
-          "<b>📦 Podle ZBOŽÍ (produktu):</b> Sales reps specializovaní na konkrétní produkt linii. Hluboká produktová expertise.",
-          "<b>💎 Podle PREMIA (klíčových účtů):</b> Klíčoví zákazníci dostávají dedikovaného Key Account Managera. Cisco, Microsoft model.",
-          "<b>🔄 Hybridní organizace:</b> Kombinace 2-3 dimenzí. Region × typ zákazníka × produkt = matrix organization.",
-        ]} color={VSE.fph} />
-        <ExamAlert
-          komise="Stříteský + Sieber + Vítečková 2026 (Káva)"
-          what="Stříteský EXPLICITNĚ chytá <b>organizaci direct marketingu</b>. Naučit 4 hlavní dimenze: region / typ zákazníka / zboží / premium. Plus hybridní organizace."
-        />
-      </div>) },
-
-    { id: "osobni_prodej", title: "Osobní prodej — typy + 7-step proces + SPIN", subtitle: "Klasický B2B sales framework + consultative selling", color: VSE.fis, emoji: "target",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Osobní prodej (Personal Selling)</b> = face-to-face komunikace mezi prodejcem a zákazníkem. <b>Nejdražší, ale nejefektivnější</b> komunikační nástroj. Konverze 30-50 % (vs reklama 1-5 %).
-        </Def>
-        <Tag color={VSE.fis}>Typy osobního prodeje</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "🏢 B2B FIELD SALES", d: "Sales reps navštěvují klienty. Cisco, IBM, Salesforce. Long sales cycle (3-12 měsíců), high-value deals (50k+ USD)." },
-            { c: VSE.warning, t: "💼 B2B INSIDE SALES", d: "Telefonický / video prodej z office. Levnější než field sales, ale méně relationship. SaaS startupy." },
-            { c: VSE.fph, t: "🛍️ MALOOBCHODNÍ PRODEJ", d: "Apple Store Genius, parfumerie consultants, automobile dealers. High-value B2C." },
-            { c: VSE.success, t: "🚪 DOOR-TO-DOOR", d: "Klesající (regulace, no-call lists). Stále existuje u energií, telco, pojištění. ČR: pojišťováci, ESET sales." },
-            { c: VSE.danger, t: "🤝 KEY ACCOUNT MANAGEMENT", d: "Dedikovaní sales managers pro top zákazníky. Microsoft pro Apple, Google pro Procter & Gamble." },
-            { c: VSE.fis, t: "🎯 ACCOUNT-BASED SELLING", d: "Targeted approach na konkrétní účty. Marketing + sales spolu pracují. HubSpot, Demandbase model." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>7-krokový sales proces (klasika)</Tag>
-        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
-          <svg viewBox="0 0 720 200" style={{ width: "100%", maxWidth: 720, height: "auto" }}>
-            <defs>
-              <marker id="arrowSales" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
-              </marker>
-            </defs>
-            {[
-              { x: 10, c: VSE.fph, icon: "🔍", t: "1. PROSPECT" },
-              { x: 105, c: VSE.fmv, icon: "📞", t: "2. APPROACH" },
-              { x: 200, c: VSE.warning, icon: "❓", t: "3. NEEDS" },
-              { x: 295, c: VSE.warning, icon: "📊", t: "4. PRESENT" },
-              { x: 390, c: VSE.danger, icon: "🛡️", t: "5. OBJECT" },
-              { x: 485, c: VSE.success, icon: "🤝", t: "6. CLOSE" },
-              { x: 580, c: VSE.fis, icon: "♻️", t: "7. FOLLOW" },
-            ].map((s, i) => (
-              <g key={i}>
-                <rect x={s.x} y="60" width="85" height="90" rx="8" fill={s.c} opacity="0.85"/>
-                <text x={s.x + 42} y="92" textAnchor="middle" fontSize="22" fill="#fff">{s.icon}</text>
-                <text x={s.x + 42} y="120" textAnchor="middle" fontSize="10" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t.split('. ')[0]}.</text>
-                <text x={s.x + 42} y="134" textAnchor="middle" fontSize="9" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t.split('. ')[1]}</text>
-              </g>
-            ))}
-            {[95, 190, 285, 380, 475, 570].map((x, i) => (
-              <line key={i} x1={x} y1="105" x2={x + 13} y2="105" stroke="#666" strokeWidth="2" markerEnd="url(#arrowSales)"/>
-            ))}
-            <text x="360" y="180" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">Klasický 7-krokový sales proces</text>
-          </svg>
-        </div>
-        <Bullet items={[
-          "<b>🔍 1. Prospecting:</b> Identifikace potenciálních zákazníků. Cold lists, LinkedIn, referrals, inbound leads.",
-          "<b>📞 2. Approach (Pre-approach + Approach):</b> Research o klientovi + první kontakt. Telefonát, email, schůzka.",
-          "<b>❓ 3. Needs Analysis:</b> Pochopení potřeb klienta. SPIN selling klíčový framework (viz dále).",
-          "<b>📊 4. Presentation:</b> Prezentace řešení. Tailored na klientovy potřeby z fáze 3. Demo, ROI calculator.",
-          "<b>🛡️ 5. Handling Objections:</b> Odpovědi na námitky (cena, čas, autorita, potřeba). LAARC framework (Listen, Acknowledge, Assess, Respond, Confirm).",
-          "<b>🤝 6. Closing:</b> Uzavření obchodu. Closing techniques: Assumptive close, Alternative close, Summary close.",
-          "<b>♻️ 7. Follow-up + Retention:</b> Po-prodejní servis, cross-sell/upsell, referrals. CRM systém klíčový.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>SPIN Selling (Neil Rackham 1988) — Needs Analysis framework</Tag>
-        <Bullet items={[
-          "<b>S — Situation:</b> &quot;Jak řešíte X dnes?&quot; Pochopení současné situace.",
-          "<b>P — Problem:</b> &quot;Co vás na tom trápí?&quot; Identifikace problému.",
-          "<b>I — Implication:</b> &quot;Co se stane, když to nevyřešíte?&quot; Eskalace dopadů.",
-          "<b>N — Need-payoff:</b> &quot;Jak by vám pomohlo, kdyby to bylo vyřešeno?&quot; Vize budoucnosti.",
-          "<b>Použití:</b> Standard v B2B sales. Salesforce, IBM, HubSpot trénují své sales na SPIN.",
-        ]} color={VSE.fph} />
-        <Tag color={VSE.danger}>Další sales metodiky</Tag>
-        <Bullet items={[
-          "<b>Consultative Selling:</b> Prodejce jako poradce, ne pusher. Long-term relationship focus.",
-          "<b>Challenger Sale:</b> Dillon Adamson 2011. Vyzývatelský přístup — prodejce učí klienta o problémech, kterých si není vědom.",
-          "<b>Solution Selling:</b> Mike Bosworth. Fokus na řešení komplexních problémů, ne prodej produktu.",
-          "<b>Sandler Sales Method:</b> Reverse psychology, qualification heavy. Hodně populární v US.",
-          "<b>MEDDIC framework:</b> Metrics / Economic buyer / Decision criteria / Decision process / Identified pain / Champion. Pro enterprise sales.",
-        ]} color={VSE.danger} />
-      </div>) },
-
-    { id: "sales_force", title: "Sales Force Management — návrh + řízení prodejních týmů", subtitle: "Svobodová + Mikovcová chytá ŘÍZENÍ prodejních sil!", color: VSE.fis, emoji: "compass",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Sales Force Management</b> = strategické a operativní řízení prodejních týmů. Komise <b>Svobodová, Mikovcová</b> CHYTÁ EXPLICITNĚ <b>návrh a řízení prodejních sil</b>. Naučit detail.
-        </Def>
-        <Tag color={VSE.fis}>6 fází Sales Force Managementu (Kotler)</Tag>
-        <Bullet items={[
-          "<b>1. STANOVENÍ CÍLŮ prodejní síly:</b> Akvizice nových zákazníků × udržení × cross-sell × průzkum trhu × poradenství.",
-          "<b>2. STRATEGIE prodejní síly:</b> Direct sales × indirect (distribuce) × hybrid. In-house × outsourced.",
-          "<b>3. STRUKTURA prodejní síly:</b> Podle území / produktu / zákazníka / komplexní. Region, segment, key accounts.",
-          "<b>4. VELIKOST prodejní síly:</b> Workload approach — počet zákazníků × frekvence návštěv × čas na návštěvu / čas dostupný = počet salesů.",
-          "<b>5. KOMPENZACE:</b> Plat + provize + bonusy. Typický poměr 60 % plat + 30 % provize + 10 % bonusy v B2B.",
-          "<b>6. NÁBOR + TRAINING + MOTIVACE + EVALUACE:</b> Lifecycle managementu sales týmu.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>4 struktury prodejní síly</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "📍 ÚZEMNÍ (geographic)", d: "Sales rep zodpovídá za vše v daném regionu. Jednoduchá struktura, nízké náklady. Vhodné pro homogenní portfolio." },
-            { c: VSE.warning, t: "📦 PRODUKTOVÁ", d: "Sales reps specializovaní na konkrétní produktovou linii. Hluboká expertise. Pro firmy s diversified portfolio (J&J, P&G)." },
-            { c: VSE.fph, t: "👥 ZÁKAZNICKÁ (vertical)", d: "Sales reps specializovaní na typ zákazníka (banking vs healthcare). Pro B2B s komplexními sektory (IBM, Cisco vertical sales)." },
-            { c: VSE.success, t: "🔄 KOMPLEXNÍ (matrix)", d: "Kombinace 2-3 dimenzí. Region × produkt × zákazník. Pro velké korporace (Microsoft, Salesforce)." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.fph}>Kompenzační schémata sales</Tag>
-        <Bullet items={[
-          "<b>Straight Salary (jen plat):</b> Pro nové sales reps, dlouhé sales cycles, customer service-heavy. Nemotivační pro top performers.",
-          "<b>Straight Commission (jen provize):</b> Realitní makléři, finanční poradci. Maximální motivace, ale risk pro sales reps.",
-          "<b>Salary + Commission (kombinace):</b> Standard v B2B. 60-70 % plat + 30-40 % provize. Balance security + motivation.",
-          "<b>Salary + Bonus:</b> Bonus za specifické cíle (quarterly quota, new accounts). Pro key account managery.",
-          "<b>Salary + Commission + Bonus:</b> Komplexní schéma pro enterprise sales (Salesforce, Oracle).",
-        ]} color={VSE.fph} />
-        <Tag color={VSE.danger}>Evaluace sales týmu — KPIs</Tag>
-        <Bullet items={[
-          "<b>Quota attainment:</b> % cílů splněných. Standard goal 80-90 % team meets quota.",
-          "<b>Sales velocity:</b> Rychlost movement deals přes pipeline. Days to close.",
-          "<b>Win rate:</b> % oslovených dealů uzavřených. B2B benchmark 20-30 %.",
-          "<b>Average Deal Size:</b> Velikost průměrné smlouvy. Trend roste = upselling funguje.",
-          "<b>Pipeline coverage:</b> Pipeline value / quarterly quota = 3-4× (B2B benchmark).",
-          "<b>Customer Acquisition Cost (CAC):</b> Náklad na získání 1 zákazníka. Sales + marketing budget / new customers.",
-          "<b>Customer Lifetime Value (CLV):</b> Předpokládaný profit z 1 zákazníka. CLV/CAC ratio ideálně 3:1+.",
-        ]} color={VSE.danger} />
-        <ExamAlert
-          komise="Svobodová + Nový + Machek 2026 (Horská chata) + Mikovcová 2026 (Vinařství)"
-          what="Svobodová + Mikovcová chytají <b>navrhování a řízení prodejních sil</b>. Naučit 6 fází Kotler + 4 struktury + kompenzace + KPIs (quota, win rate, CAC, CLV)."
-        />
-      </div>) },
-
-    { id: "crm_b2b", title: "CRM + B2B mkt + budování vztahů", subtitle: "Stříteský chytá CRM + B2B + navrhnout doporučení!", color: VSE.fis, emoji: "construction",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>CRM (Customer Relationship Management)</b> = strategie + systém pro řízení vztahů se zákazníky. Komise <b>Stříteský</b> chytá <b>CRM + B2B mkt + doporučení</b>.
-        </Def>
-        <Tag color={VSE.fis}>CRM — 3 dimenze</Tag>
-        <ResponsiveGrid cols3>
-          {[
-            { c: VSE.fmv, t: "💻 OPERATIVNÍ CRM", d: "Software pro denní práci — sales pipeline, ticketing, marketing automation. Salesforce, HubSpot, Pipedrive." },
-            { c: VSE.warning, t: "📊 ANALYTICKÝ CRM", d: "Data + insights — customer segmentation, churn prediction, LTV analysis. Tableau, PowerBI integrace." },
-            { c: VSE.fph, t: "🤝 KOLABORATIVNÍ CRM", d: "Sdílení dat napříč týmy (sales + marketing + service). 360° pohled na zákazníka." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>B2B Marketing — specifika vs B2C</Tag>
-        <Bullet items={[
-          "<b>Multi-stakeholder rozhodování:</b> CFO + CTO + CEO + end user. Min 3-7 osob v B2B nákupu.",
-          "<b>Long sales cycle:</b> 3-12 měsíců (vs B2C dny-týdny). Komplexní nákupní proces.",
-          "<b>Vysoká hodnota deals:</b> 50k+ USD per smlouva (vs B2C průměr 50-500 USD).",
-          "<b>Racionální appeals:</b> ROI, productivity, cost saving. Méně emocionální.",
-          "<b>Relationship-driven:</b> Trust + reputation kritické. WOM v B2B velmi důležitý.",
-          "<b>Less consumers, more impact:</b> Menší množina zákazníků, ale velký individual revenue.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Vztahový marketing (Relationship Marketing)</Tag>
-        <Bullet items={[
-          "<b>Akvizice × Retence:</b> 5× dražší získat nového než udržet stávajícího (HBR studie).",
-          "<b>Customer Lifecycle:</b> Awareness → Consideration → Purchase → Onboarding → Retention → Loyalty → Advocacy.",
-          "<b>Customer Lifetime Value (CLV):</b> Suma profitu z 1 zákazníka za celou dobu spolupráce. Klíčový metric.",
-          "<b>NPS (Net Promoter Score, M10):</b> Měření loyality + advocacy potenciálu.",
-          "<b>Loyalty programy:</b> Body, levels, exkluzivní benefity. Air miles, Starbucks Rewards.",
-          "<b>Cross-sell + Upsell:</b> Prodej dalších produktů existujícím zákazníkům. Amazon &quot;Customers who bought&quot;.",
-        ]} color={VSE.fph} />
-        <Tag color={VSE.success}>Klíčoví CRM hráči v B2B</Tag>
-        <Bullet items={[
-          "<b>Salesforce:</b> Market lídr, 23 % market share. Cena: 25-330 USD/user/month. Enterprise standard.",
-          "<b>HubSpot:</b> Inbound + CRM all-in-one. Free tier + paid tiers. Mid-market favorite.",
-          "<b>Microsoft Dynamics 365:</b> Integrace s Office 365 + Teams. Pro Microsoft ecosystem firmy.",
-          "<b>Pipedrive:</b> Sales-focused, levnější. SMB friendly. ČR oblíbený.",
-          "<b>Zoho CRM:</b> Komplexní suite za nižší cenu. Asijský origin, rostoucí v EU.",
-        ]} color={VSE.success} />
-      </div>) },
-
-    { id: "trendy_aplikace", title: "Trendy v osobní komunikaci + aplikace na PS", subtitle: "AI sales, ABM, video selling + checklist", color: VSE.fis, emoji: "growth",
-      content: (<div>
-        <Def color={VSE.fis}>
-          Osobní komunikace se digitalizuje a personalizuje. <b>AI + automation + video</b> jsou klíčové trendy. ABM (Account-Based Marketing) dominuje B2B.
-        </Def>
-        <Tag color={VSE.fis}>Hlavní trendy 2024+</Tag>
-        <Bullet items={[
-          "<b>🎯 Account-Based Marketing (ABM):</b> B2B targeting konkrétních enterprise klientů. Spolupráce sales + marketing. Salesforce, Demandbase, HubSpot.",
-          "<b>🤖 AI v sales:</b> Lead scoring (predikce konverze), conversation intelligence (Gong, Chorus), AI copywriting (chatGPT pro emails).",
-          "<b>🎥 Video selling:</b> Loom, Vidyard, Sendspark — personalizovaná video zpráva místo email. Open rate 70 %+.",
-          "<b>📊 Sales engagement platforms:</b> Outreach, SalesLoft — multi-channel sequence automation. Email + LinkedIn + telefon koordinovaně.",
-          "<b>🔍 Intent data:</b> Bombora, ZoomInfo — predikce, kdo má buying intent. Targeting přes signály (job changes, web searches).",
-          "<b>📱 LinkedIn Sales Navigator:</b> Standard pro B2B prospecting. 80M+ profesionálů, advanced search.",
-          "<b>🤝 Customer Success teams:</b> Po-prodejní role pro retention + upsell. Mezi sales a support. Standard v SaaS.",
-          "<b>🎙️ Podcast advertising:</b> Host-read ads, podcast sponsoring. Pro thought leadership + B2B awareness.",
-          "<b>📲 WhatsApp Business + Conversational Commerce:</b> Direct customer messaging. Klíčový v Asii, rostoucí v Evropě.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Etika + GDPR v osobní komunikaci</Tag>
-        <Bullet items={[
-          "<b>GDPR (EU 2018):</b> Explicit consent před email/SMS marketing. Right to be forgotten. Pokuty až 4 % global obratu.",
-          "<b>CAN-SPAM Act (US):</b> Identifikace odesílatele, unsubscribe link, no deceptive headers.",
-          "<b>ePrivacy Directive:</b> Cookies consent banner. Tracking limitations.",
-          "<b>Do Not Call lists:</b> Telemarketing regulace. ČR — Úřad pro ochranu osobních údajů (ÚOOÚ).",
-          "<b>Apple ATT (App Tracking Transparency):</b> 2021+. Klesající přesnost tracking u iOS users.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Checklist pro PS</Tag>
-        <Bullet items={[
-          "<b>1.</b> Identifikuj <b>typ trhu</b> (B2B vs B2C) → mix osobní × hromadná komunikace.",
-          "<b>2.</b> Vyber <b>nástroje direct marketingu</b> — email, SMS, telemarketing, retargeting, katalogy.",
-          "<b>3.</b> Pro B2B — definuj <b>sales force strukturu</b> (region/produkt/zákazník/matrix).",
-          "<b>4.</b> Implementuj <b>CRM systém</b> (Salesforce, HubSpot, Pipedrive).",
-          "<b>5.</b> Aplikuj <b>SPIN selling</b> nebo jinou sales metodiku.",
-          "<b>6.</b> Nastav <b>kompenzaci sales</b> (plat + provize + bonus).",
-          "<b>7.</b> Měření — quota attainment, win rate, CAC, CLV, CLV/CAC ratio.",
-          "<b>8.</b> Zahrň <b>moderní trendy</b> — ABM, AI, video selling, intent data.",
-        ]} color={VSE.fph} />
-      </div>) },
-  ];
-
-  const flashcardsMkt15 = [
-    { term: "Osobní mkt komunikace", def: "Personalizovaná, obousměrná komunikace zaměřená na individuálního zákazníka. Cíl: konverze, vztah, retention.", tag: "POJEM" },
-    { term: "Direct marketing (vs osobní)", def: "Subkategorie osobního — přímá komunikace s definovanou cílovkou. PŘÍMO ponouká k OKAMŽITÉ AKCI (telemarketing).", tag: "POJEM" },
-    { term: "Hromadná × Osobní", def: "Hromadná = nepersonální, jednosměrná, mass. Osobní = personalizovaná, obousměrná, individual. IMK kombinuje obojí.", tag: "POJEM" },
-    { term: "Kdy osobní komunikace", def: "B2B kontext / High-value B2C / Existující zákazníci / Komplexní produkty / Vyšší marže.", tag: "POJEM" },
-    { term: "Nástroje direct marketingu", def: "Email / SMS-WhatsApp / Telemarketing / Direct mail / Katalogy / Retargeting / Teleshopping / Chatboty / Push notif / LinkedIn DM.", tag: "DIRECT" },
-    { term: "Email marketing", def: "Hromadné personalizované emaily. CTR 2-5 %, ROI 36:1 (DMA studie). Mailchimp, Ecomail, HubSpot.", tag: "DIRECT" },
-    { term: "SMS marketing", def: "Open rate 98 % (vs email 20 %). Flash sales, urgent updates. GDPR compliance!", tag: "DIRECT" },
-    { term: "Telemarketing", def: "Telefonické oslovení. Inbound (customer service) × Outbound (sales calls). Efektivní pro B2B leads.", tag: "DIRECT" },
-    { term: "Retargeting + Remarketing", def: "Online ads pro lidi co už navštívili web. Google + Meta retargeting. Conversion 5-10× vyšší než cold.", tag: "DIRECT" },
-    { term: "4 dimenze organizace direct mktu (Stříteský!)", def: "Region (geografie) / Typ zákazníka / Zboží (produkt) / Premium (key accounts).", tag: "DIRECT" },
-    { term: "Osobní prodej (Personal Selling)", def: "Face-to-face komunikace prodejce-zákazník. Nejdražší, ale nejefektivnější. Konverze 30-50 %.", tag: "PRODEJ" },
-    { term: "Typy osobního prodeje", def: "B2B Field / B2B Inside / Maloobchodní / Door-to-door / Key Account Management / Account-Based Selling.", tag: "PRODEJ" },
-    { term: "7-krokový sales proces", def: "Prospecting / Approach / Needs Analysis / Presentation / Handling Objections / Closing / Follow-up.", tag: "PRODEJ" },
-    { term: "SPIN Selling (Neil Rackham 1988)", def: "Situation / Problem / Implication / Need-payoff. Standard v B2B sales (Salesforce, IBM, HubSpot).", tag: "PRODEJ" },
-    { term: "Consultative Selling", def: "Prodejce jako poradce, ne pusher. Long-term relationship focus. Vhodné pro komplexní B2B produkty.", tag: "PRODEJ" },
-    { term: "Challenger Sale", def: "Dillon Adamson 2011. Vyzývatelský přístup — prodejce učí klienta o problémech, kterých si není vědom.", tag: "PRODEJ" },
-    { term: "MEDDIC framework", def: "Metrics / Economic buyer / Decision criteria / Decision process / Identified pain / Champion. Pro enterprise sales.", tag: "PRODEJ" },
-    { term: "Sales Force Management — 6 fází", def: "Cíle / Strategie / Struktura / Velikost / Kompenzace / Nábor + Training + Motivace + Evaluace.", tag: "SFM" },
-    { term: "4 struktury prodejní síly", def: "Územní (geographic) / Produktová / Zákaznická (vertical) / Komplexní (matrix).", tag: "SFM" },
-    { term: "Kompenzace sales — standard", def: "60-70 % plat + 30-40 % provize + bonusy. Balance security + motivation. B2B standard.", tag: "SFM" },
-    { term: "Quota attainment", def: "% cílů splněných sales rep. Goal 80-90 % team meets quota.", tag: "SFM" },
-    { term: "Win rate", def: "% oslovených dealů uzavřených. B2B benchmark 20-30 %.", tag: "SFM" },
-    { term: "Pipeline coverage", def: "Pipeline value / quarterly quota = 3-4× (B2B benchmark).", tag: "SFM" },
-    { term: "CAC (Customer Acquisition Cost)", def: "Náklad na získání 1 zákazníka. Sales + marketing budget / new customers.", tag: "SFM" },
-    { term: "CLV/CAC ratio", def: "Customer Lifetime Value / Customer Acquisition Cost. Ideální 3:1+.", tag: "SFM" },
-    { term: "CRM (Customer Relationship Management)", def: "Strategie + systém pro řízení vztahů se zákazníky. Salesforce, HubSpot, Pipedrive.", tag: "CRM" },
-    { term: "3 dimenze CRM", def: "Operativní (denní práce) / Analytický (data) / Kolaborativní (sdílení).", tag: "CRM" },
-    { term: "B2B specifika", def: "Multi-stakeholder / Long cycle 3-12 měs / High value 50k+ / Racionální appeals / Relationship-driven.", tag: "B2B" },
-    { term: "Customer Lifetime Value (CLV)", def: "Suma profitu z 1 zákazníka za celou dobu spolupráce. Klíčový metric pro retention focus.", tag: "B2B" },
-    { term: "Akvizice × Retence", def: "5× dražší získat nového než udržet stávajícího (HBR studie). Klíč relationship marketingu.", tag: "B2B" },
-    { term: "ABM (Account-Based Marketing)", def: "B2B targeting konkrétních enterprise klientů. Marketing + sales spolupráce. Salesforce, Demandbase, HubSpot.", tag: "TRENDY" },
-    { term: "Video selling", def: "Loom, Vidyard — personalizovaná video zpráva místo email. Open rate 70 %+.", tag: "TRENDY" },
-    { term: "Intent data", def: "Bombora, ZoomInfo — predikce, kdo má buying intent přes signály (job changes, web searches).", tag: "TRENDY" },
-    { term: "GDPR (EU 2018)", def: "Explicit consent před email/SMS marketing. Right to be forgotten. Pokuty 4 % global obratu.", tag: "GDPR" },
-  ];
-
-  const quizMkt15 = [
-    { q: "Co je rozdíl mezi osobním a direct marketingem (Stříteský)?", opts: ["Žádný", "Osobní = širší pojem, direct = subkategorie, přímo ponouká k OKAMŽITÉ AKCI (telemarketing)", "Direct je dražší", "Osobní je online"], correct: 1 },
-    { q: "Která NENÍ z nástrojů direct marketingu?", opts: ["Email marketing", "SMS marketing", "Telemarketing", "TV reklama"], correct: 3 },
-    { q: "Kolik je hlavních dimenzí organizace direct marketingu (Stříteský chytá!)?", opts: ["2", "3", "4 (region / typ zákazníka / zboží / premium)", "6"], correct: 2 },
-    { q: "Email marketing ROI je:", opts: ["1:1", "10:1", "36:1 (DMA studie)", "100:1"], correct: 2 },
-    { q: "Open rate SMS marketingu:", opts: ["20 %", "50 %", "98 % (vs email 20 %)", "10 %"], correct: 2 },
-    { q: "Kolik kroků má klasický sales proces?", opts: ["3", "5", "7 (prospect/approach/needs/present/object/close/follow)", "10"], correct: 2 },
-    { q: "Kdo definoval SPIN Selling?", opts: ["Kotler 1960", "Neil Rackham 1988", "Porter 1980", "Adamson 2011"], correct: 1 },
-    { q: "Co znamená S v SPIN?", opts: ["Sales", "Situation — pochopení současné situace klienta", "Strategy", "Solution"], correct: 1 },
-    { q: "Kolik je struktur prodejní síly?", opts: ["2", "3", "4 (územní / produktová / zákaznická / komplexní matrix)", "5"], correct: 2 },
-    { q: "Standard kompenzace B2B sales:", opts: ["100 % plat", "100 % provize", "60-70 % plat + 30-40 % provize + bonusy", "50/50"], correct: 2 },
-    { q: "Win rate B2B benchmark:", opts: ["5-10 %", "20-30 %", "50-70 %", "80-90 %"], correct: 1 },
-    { q: "Ideální CLV/CAC ratio:", opts: ["1:1", "2:1", "3:1+ (CLV minimálně 3× CAC)", "10:1"], correct: 2 },
-    { q: "Kolik je dražší získat nového vs udržet stávajícího zákazníka?", opts: ["2×", "3×", "5× (HBR studie)", "10×"], correct: 2 },
-    { q: "Co je ABM?", opts: ["Account Brand Marketing", "Account-Based Marketing — B2B targeting konkrétních enterprise klientů, spolupráce sales + marketing", "Annual Business Meeting", "Advanced Brand Management"], correct: 1 },
-    { q: "Která NENÍ z 3 dimenzí CRM?", opts: ["Operativní", "Analytický", "Kolaborativní", "Reklamní"], correct: 3 },
-    { q: "GDPR pokuty mohou být až:", opts: ["1 mil. EUR", "10 mil. EUR", "4 % global obratu firmy", "100 mil. EUR fixed"], correct: 2 },
-  ];
-
-  const praxeMkt15 = {
-    caseStudy: {
-      company: "Salesforce — etalon B2B osobního prodeje + ABM + CRM",
-      subtitle: "Z 0 na 35 mld. USD obrat díky sofistikované sales force + ABM",
-      content: (<>
-        <b>Salesforce</b> je <b>učebnicový příklad sofistikovaného B2B osobního prodeje</b>. 1999 založeno, 2024 obrat 35 mld. USD, 80 000 zaměstnanců (z toho 40 % sales).<br/><br/>
-        <b style={{ color: VSE.fmv }}>🎯 ABM (Account-Based Marketing) strategie:</b><br/><br/>
-        • Targetují konkrétní <b>Fortune 500</b> klienty (top 50 = 40 % obratu)<br/><br/>
-        • Marketing + sales <b>úzce spolupracují</b> per account (1 SDR + 1 AE + 1 SE per deal)<br/><br/>
-        • Personalizovaný content per account — case studies, ROI calculators, custom demos<br/><br/>
-        • Win rate u ABM accounts 3× vyšší než traditional inbound<br/><br/>
-        <b style={{ color: VSE.warning }}>🏢 SALES FORCE STRUKTURA — matrix model:</b><br/><br/>
-        • <b>Region:</b> AMER, EMEA, APAC, Japan (4 mega regiony)<br/><br/>
-        • <b>Segment:</b> Enterprise (1000+ employees), Commercial (100-1000), SMB (&lt;100)<br/><br/>
-        • <b>Industry:</b> Financial Services, Healthcare, Government, Retail, atd. (15 vertikálů)<br/><br/>
-        • <b>Product:</b> Sales Cloud / Service Cloud / Marketing Cloud / Tableau / MuleSoft<br/><br/>
-        • Matrix = region × segment × industry. Komplexní, ale precizní coverage.<br/><br/>
-        <b style={{ color: VSE.fph }}>📞 7-STEP SALES PROCES s SPIN selling:</b><br/><br/>
-        • <b>1. Prospect:</b> LinkedIn Sales Navigator + intent data (ZoomInfo, Bombora)<br/><br/>
-        • <b>2. Approach:</b> SDR (Sales Development Rep) cold outreach — email + LinkedIn + call<br/><br/>
-        • <b>3. Needs (SPIN):</b> Discovery call — Situation, Problem, Implication, Need-payoff<br/><br/>
-        • <b>4. Presentation:</b> Tailored demo + ROI calculator + custom integration plan<br/><br/>
-        • <b>5. Objection handling:</b> LAARC framework + reference calls (existing customers)<br/><br/>
-        • <b>6. Close:</b> Multi-stakeholder negotiation, MEDDIC qualification, contract signing<br/><br/>
-        • <b>7. Follow-up:</b> Onboarding manager → Customer Success Manager → renewal/upsell<br/><br/>
-        <b style={{ color: VSE.success }}>💰 KOMPENZACE — sophisticated structure:</b><br/><br/>
-        • <b>SDR (entry):</b> 60k USD plat + 30k USD OTE bonusy = 90k OTE<br/><br/>
-        • <b>Account Executive:</b> 100-150k plat + 100-200k provize = 200-350k OTE<br/><br/>
-        • <b>Enterprise AE (Fortune 500 deals):</b> 150-200k plat + 500k-2M provize = 650k-2M OTE<br/><br/>
-        • <b>Quota multipliers:</b> Po splnění 100 % quota → 2× provize na overachievement<br/><br/>
-        <b style={{ color: VSE.danger }}>📊 KPIs + EVALUACE:</b><br/><br/>
-        • Quota attainment 100 % target, 30 % AEs hit President's Club (top performers)<br/><br/>
-        • Win rate 28 % (B2B SaaS benchmark)<br/><br/>
-        • Average Deal Size enterprise 250k-2M USD<br/><br/>
-        • Pipeline coverage 4× quarterly quota<br/><br/>
-        • CAC payback 18 měsíců, CLV/CAC ratio 5:1<br/><br/>
-        <b style={{ color: VSE.success }}>Výsledek:</b> Salesforce drží <b>23 % market share v CRM</b> globálně. 150 000 enterprise klientů. Klasický důkaz síly <b>ABM + matrix struktury + SPIN selling + sophisticated CRM-driven proces</b>.
-      </>),
-      lessons: "Salesforce je <b>etalon B2B osobního prodeje a sales force management</b>. Pro PS doporuč: <b>ABM strategie + matrix sales struktura + SPIN selling proces + sophisticated CRM + multi-tier kompenzace + KPI-driven evaluace</b>. Alternativy: <b>Cisco (channel partner sales), HubSpot (inbound + ABM hybrid), Microsoft (vertical sales), Mediafly (Challenger Sale framework), Pipedrive (SMB sales), Oracle (enterprise key accounts)</b>."
-    },
-    miniExamples: [
-      { tag: "DIRECT EMAIL", color: VSE.fmv, company: "Mailchimp — etalon email marketing platform", content: "Mailchimp (acq. Intuit 2021 za 12 mld. USD) postavil business na <b>email direct marketing</b>. 13 milionů uživatelů. Email marketing ROI 36:1. Klíčové features: segmentace, automation flows, A/B testing, personalized templates. ČR alternative: Ecomail.cz." },
-      { tag: "TELEMARKETING", color: VSE.warning, company: "ESET — door-to-door + outbound sales", content: "ESET (slovenský antivirus) historicky budoval B2B sales přes <b>outbound telemarketing</b> a door-to-door v SMB segmentu. 30 sales reps v ČR, kompenzace 60 % plat + 40 % provize. Win rate 22 %. Klíčový kanál pre-internet (1990s-2010s), dnes hybrid s digital." },
-      { tag: "SPIN SELLING", color: VSE.fph, company: "IBM — etalon SPIN selling enterprise", content: "IBM trénuje 12 000 sales reps na <b>SPIN selling</b> jako standard. Pro enterprise deals (500k-50M USD) prochází SPIN discovery sessions s 5-15 stakeholdery per account. Win rate 30 %, average deal size 1,2M USD. Klasický příklad consultative B2B prodeje." },
-      { tag: "ABM", color: VSE.success, company: "Demandbase — ABM pioneer platform", content: "Demandbase (1 mld. USD valuation) je <b>ABM platform standard</b>. Klienti targetují 50-500 konkrétních enterprise accounts. Multi-channel campaigns per account (LinkedIn + display + email + sales). Win rate u ABM 3-5× vyšší než inbound. CAC dvakrát vyšší, ale ARPU 10× vyšší = lepší unit economics." },
-      { tag: "VIDEO SELLING", color: VSE.danger, company: "Loom — etalon video selling", content: "Loom (acq. Atlassian 2023 za 975 mil. USD) revolucionizoval <b>video selling</b>. Místo text emailů sales reps posílají 1-2 min personalizovaná videa. <b>Open rate 70 %+, response rate 3× vyšší než text email</b>. Klíčové pro warm outreach a follow-ups. ČR rostoucí trend." },
-    ]
-  };
-
-  const examQuestionsMkt15 = [
-    { komise: "2026-01-28 — Stříteský + Sieber + Vítečková (Káva)", otazka: "Osobní marketing a direct marketing, organizace direct marketingu (region/typ zákazníka/zboží/premium), odlišení osobního a direct mktu (osobní přímo ponouká k okamžité akci viz telemarketing)", pozn: "Stříteský chytá KOMPLET: <b>odlišení osobního/direct + organizace direct mktu (4 dimenze)</b>. Naučit explicitně Stříteského strukturu." },
-    { komise: "2026-01-29 — Svobodová + Nový + Machek (Horská chata)", otazka: "Osobní marketing, zdroje direct marketingu a NAVRHOVÁNÍ A ŘÍZENÍ PRODEJNÍCH SIL", pozn: "Svobodová chytá <b>NAVRHOVÁNÍ A ŘÍZENÍ prodejních sil</b> — &quot;celkem na tom trvali&quot;. Naučit 6 fází Kotler SFM + 4 struktury + kompenzace + KPIs." },
-    { komise: "2026-02-04 — Mikovcová + Viktora + Vávra (Vinařství)", otazka: "Osobní a direct marketing. Řízení prodejních týmů", pozn: "Mikovcová chytá <b>řízení prodejních týmů</b>. Naučit sales force management + KPIs (quota, win rate, CAC, CLV) + kompenzace." },
-    { komise: "2026-02-06 — Stříteský + Krause + Zamazalová (Realitní firma)", otazka: "Osobní a direct MKT — navázat na PS, CRM a B2B mkt a navrhnout doporučení", pozn: "Stříteský chytá <b>CRM + B2B mkt + DOPORUČENÍ</b>. Naučit 3 dimenze CRM + B2B specifika + relationship marketing. Pro realitní firmu: ABM key accounts." },
-    { komise: "2026-02-03 — Bočková + Nový + Kolouchová (Software)", otazka: "Direct marketing", pozn: "Bočková chce <b>direct mkt</b>. Naučit 9 nástrojů + 4 dimenze organizace + nástroje (email/SMS/tele/retargeting/katalogy)." },
-    { komise: "2025-06-02 — Nový + Müllerová + Kolouchová (Prádlo)", otazka: "Osobní marketingová komunikace, nástroje direct marketingu, principy osobního prodeje", pozn: "Nový chce <b>NÁSTROJE direct mktu + PRINCIPY osobního prodeje</b>. Naučit nástroje + 7-krokový sales proces + SPIN selling + consultative selling." },
-    { komise: "2025-02-03 — Stříteský + Bočková + Lorenzová (Horská chata)", otazka: "Osobní komunikace (Direct Marketing a Osobní prodej)", pozn: "Stříteský chce kompletní balík <b>direct mkt + osobní prodej</b>. Naučit obojí + odlišení (Stříteského definice)." },
-    { komise: "2025-02-04 — Tahal + Cejthamr + Svobodová (Prádlo)", otazka: "Osobní prodej a direct marketing", pozn: "Tahal chce kompletní obraz. Naučit obojí + B2B vs B2C aplikace." },
-  ];
-
-  const podcastMkt15 = { title: "Marketing 15 — Osobní komunikace (Direct + Osobní prodej)", description: "Odlišení osobního a direct marketingu (Stříteský chytá — direct přímo ponouká k akci). 9 nástrojů direct mktu (email/SMS/telemarketing/direct mail/katalogy/retargeting/teleshopping/chatboty/push). 4 dimenze organizace direct mktu (region/zákazník/zboží/premium). 6 typů osobního prodeje (B2B Field/Inside/Retail/Door/KAM/ABM). 7-krokový sales proces. SPIN Selling (Neil Rackham 1988). Consultative + Challenger + Solution + Sandler + MEDDIC frameworks. Sales Force Management 6 fází Kotler + 4 struktury (územní/produktová/zákaznická/matrix) + kompenzace + KPIs (quota, win rate, CAC, CLV). CRM (3 dimenze) + B2B specifika + relationship marketing. Trendy: ABM, AI sales, video selling, intent data, LinkedIn Sales Navigator. Salesforce, Mailchimp, ESET, IBM, Demandbase, Loom.", audioUrl: null, notebookLmUrl: null };
-
-  const examStrategyMkt15 = `
-    <b style="color:#A82A5F">1.</b> Začni definicí — <b>osobní mkt = personalizovaná obousměrná komunikace</b> vs hromadná (M14).<br/>
-    <b style="color:#A82A5F">2.</b> ⚠️ <b>Odlišení osobního × direct mktu</b> (Stříteský chytá!) — direct je subkategorie, přímo ponouká k okamžité akci.<br/>
-    <b style="color:#A82A5F">3.</b> 9 nástrojů direct mktu — email / SMS / telemarketing / direct mail / katalogy / retargeting / teleshopping / chatboty / push.<br/>
-    <b style="color:#A82A5F">4.</b> ⚠️ <b>4 dimenze organizace direct mktu</b> (Stříteský chytá!) — region / typ zákazníka / zboží / premium.<br/>
-    <b style="color:#A82A5F">5.</b> 6 typů osobního prodeje + 7-krokový sales proces (prospect/approach/needs/present/object/close/follow).<br/>
-    <b style="color:#A82A5F">6.</b> ⚠️ <b>SPIN Selling</b> (Neil Rackham 1988) — Situation/Problem/Implication/Need-payoff. Standard v B2B.<br/>
-    <b style="color:#A82A5F">7.</b> Další sales metodiky — Consultative / Challenger / Solution / Sandler / MEDDIC.<br/>
-    <b style="color:#A82A5F">8.</b> ⚠️ <b>Sales Force Management 6 fází Kotler</b> (Svobodová, Mikovcová chytají!) — cíle/strategie/struktura/velikost/kompenzace/lifecycle.<br/>
-    <b style="color:#A82A5F">9.</b> 4 struktury prodejní síly — územní / produktová / zákaznická / matrix.<br/>
-    <b style="color:#A82A5F">10.</b> Kompenzace + KPIs — plat + provize + bonus / quota / win rate / CAC / CLV / pipeline coverage.<br/>
-    <b style="color:#A82A5F">11.</b> ⚠️ <b>CRM + B2B mkt</b> (Stříteský chytá!) — 3 dimenze CRM + B2B specifika + relationship mkt.<br/>
-    <b style="color:#A82A5F">12.</b> Trendy — ABM, AI sales, video selling, intent data, LinkedIn Sales Navigator.<br/>
-    <b style="color:#A82A5F">13.</b> Aplikace na PS — sales struktura + CRM + ABM + kompenzace + KPIs.
-  `;
-
-  const caseStudyMkt15 = {
-    title: "Filip — Sales Director v Krones CZ, českém B2B dodavateli HR softwaru pro enterprise (98 mil. Kč, 45 zaměstnanců)",
-    subtitle: "Restrukturalizovat sales tým pro enterprise expanze do Polska a Slovenska",
-    scenario: "Filip (42 let) vede sales tým v Krones CZ 4 roky. Firma je český B2B SaaS dodavatel HR software (mzdy, docházka, performance management) — 280 enterprise klientů v ČR, obrat 98 mil. Kč, růst 18 % YoY. CEO Marek právě oznámil, že firma získala investici 80 mil. Kč na expansi do Polska a Slovenska — Filip má za úkol postavit sales tým pro tyto trhy a restructurovat český tým, který je teď nestrukturovaný.\n\nAktuální stav českého sales týmu: 12 sales reps, organizovaní geograficky (Praha 5, Brno 3, Ostrava 2, Plzeň 1, Hradec 1). Všichni prodávají všechny produkty (mzdy, docházka, performance), všechny segmenty (SMB 50-200 employees i Enterprise 1000+). Win rate 22 % (B2B benchmark 20-30 %), průměrný deal size 380k Kč/rok, ale enterprise deals (1M+) má jen 8 % konverzi. CRM používají Pipedrive, ale data nepravidelně updatovaná. Kompenzace: 100 % plat fixní 50-80k/měsíc, bez provize — Filip ví, že to demotivuje top performery.\n\nKonkurence v ČR: ATTIS Software (lídr, 35 % share), AGEMA (15 %), Vema (10 %), pak menší. Krones drží 8 %, ale rychle rostou. Pro Polsko/Slovensko cílovka 2000+ enterprise firem (500+ employees), ale konkurence (SAP SuccessFactors, Workday) je silnější — vyžaduje sofistikovaný sales přístup. Marek očekává 50 mil. Kč new revenue z Polsko/Slovensko v prvním roce.\n\nFilip má 6 měsíců na restrukturalizaci + nábor 8 nových sales reps (4 pro Polsko, 4 pro Slovensko). Tři otázky si zapsal: Jak strukturovat sales tým pro multi-country + multi-segment + multi-product? Jaký kompenzační model nasadit, aby motivoval top performery? A jak zajistit, že enterprise deals (>1M Kč/rok) mají vyšší win rate než 8 %?",
-    signals: [
-      { text: "12 sales reps, organizovaní geograficky", color: VSE.warning, reason: "Aktuální <b>územní struktura</b> (M15 — geographic). Funguje pro homogenní portfolio, ale Krones má 3 produkty + 2 segmenty = příliš komplexní pro pure územní." },
-      { text: "Všichni prodávají všechny produkty (mzdy, docházka, performance), všechny segmenty", color: VSE.danger, reason: "Klasický problém — <b>jacks of all trades, masters of none</b>. Bez specializace nemá nikdo deep expertise. Enterprise sales potřebuje hluboké pochopení produktu + zákaznického segmentu." },
-      { text: "Win rate 22 %, ale enterprise deals (1M+) má jen 8 % konverzi", color: VSE.danger, reason: "Silný signál pro <b>vertical/segment specializaci</b>. Enterprise vyžaduje SPIN selling + MEDDIC + multi-stakeholder management. Generic sales rep nedokáže." },
-      { text: "Kompenzace: 100 % plat fixní 50-80k/měsíc, bez provize", color: VSE.danger, reason: "<b>Demotivační model</b> pro top performers. B2B standard: 60-70 % plat + 30-40 % provize. Top sales může generovat 5-10× value, ale dostane stejnou kompenzaci jako průměrný." },
-      { text: "CRM používají Pipedrive, ale data nepravidelně updatovaná", color: VSE.warning, reason: "<b>CRM hygiene problém</b> (Stříteský chytá CRM!). Bez čistých dat nelze měřit pipeline, win rate, forecasting. Klíčová investice pro Filipa." },
-      { text: "expanze do Polska a Slovenska", color: VSE.fph, reason: "Multi-country expansion vyžaduje <b>matrix strukturu</b> (region × segment × produkt). Salesforce model. Nelze pokračovat s pure územní strukturou." },
-      { text: "konkurence (SAP SuccessFactors, Workday) je silnější — vyžaduje sofistikovaný sales přístup", color: VSE.warning, reason: "Proti enterprise behemothům Krones potřebuje <b>ABM (Account-Based Marketing)</b> — koncentrovat zdroje na 50-100 top enterprise klientů s personalizovaným přístupem." },
-      { text: "Marek očekává 50 mil. Kč new revenue z Polsko/Slovensko v prvním roce", color: VSE.danger, reason: "Agresivní revenue target = 50 mil. / 8 sales reps = 6,25 mil. Kč/rep/rok. Při 380k průměrném dealu = 16 deals/rep ročně. Realistické jen s <b>správnou strukturou + kompenzací</b>." },
-      { text: "nábor 8 nových sales reps (4 pro Polsko, 4 pro Slovensko)", color: VSE.warning, reason: "Nábor + onboarding zabere 6+ měsíců na productivity. Filipovi nutné <b>strukturovaný onboarding program</b> + sales training (SPIN, produktové znalosti)." },
-    ],
-    quiz1: {
-      question: "Jaký je hlavní strukturální problém Filipova sales týmu?",
-      options: [
-        "Příliš málo lidí",
-        "Špatná lokace",
-        "Generic struktura — všichni prodávají všechny produkty všem segmentům, chybí specializace pro enterprise deals (kde win rate je jen 8 %)",
-        "Špatné CRM",
-      ],
-      correct: 2,
-    },
-    quiz2: {
-      question: "Jak by Filip měl restructurovat sales tým + nastavit kompenzaci?",
-      options: [
-        { text: "Matrix struktura: Region (ČR/PL/SK) × Segment (SMB/Enterprise) × Product (HR core/payroll/performance). Pro 20 reps total = 4 reps per segment kombinaci.", correct: true, reason: "✓ Salesforce matrix model. Pro multi-country + multi-product nezbytné. Specializace zvyšuje win rate (zejména enterprise)." },
-        { text: "Vytvořit dedikovaný Enterprise Account Executive (EAE) tým — 4 EAE specializovaní jen na deals 1M+ Kč. Jiný kompenzační model než SMB sales.", correct: true, reason: "✓ Enterprise vyžaduje specifický skill set (SPIN, MEDDIC, multi-stakeholder). Dedikované AE zvedne win rate z 8 % na 25-30 % (benchmark)." },
-        { text: "Kompenzace: SMB sales 60 % plat + 30 % provize + 10 % bonus. Enterprise AE 50 % plat + 35 % provize + 15 % bonus. Quota multipliers (2× provize na overachievement).", correct: true, reason: "✓ B2B standard 60-70 % plat. Quota multipliers motivují top 30 % performers. Salesforce model." },
-        { text: "Implementovat ABM (Account-Based Marketing) pro top 100 enterprise accounts (50 ČR + 30 PL + 20 SK). Marketing + sales spolupracují per account.", correct: true, reason: "✓ ABM 3-5× vyšší win rate než inbound. Pro enterprise targeting konkrétních firem nezbytné. Stříteský chytá!" },
-        { text: "SPIN Selling training pro celý sales tým (2-week intensive). Plus MEDDIC framework pro enterprise AE. CRM hygiene rules (weekly updates, deal stage discipline).", correct: true, reason: "✓ SPIN je B2B standard. MEDDIC pro enterprise qualifikaci. CRM data klíčové pro forecasting + management." },
-        { text: "Nábor 8 nových reps — 4 pro Polsko (Warszawa lokace) + 4 pro Slovensko (Bratislava). Lokální native speakers + B2B SaaS zkušenost (5+ let).", correct: true, reason: "✓ Lokální sales reps essential pro relationship-driven B2B. Lokalizace produktu + komunikace." },
-        { text: "Customer Success team (3 lidi) pro post-sales — onboarding, renewals, upsell. Klíčové pro retention v SaaS (mezi sales a support).", correct: true, reason: "✓ SaaS standard. CSM zvedá CLV o 30-50 % přes upsell + retention. Cross-sell mezi 3 produkty (HR core/payroll/performance)." },
-        { text: "Pokračovat s územní strukturou + 100 % fixním platem", correct: false, reason: "✗ Územní struktura nefunguje pro multi-country + multi-product. 100 % plat demotivuje top performers — top quartile generuje 50 % revenue." },
-        { text: "Outsourcovat sales agentuře pro Polsko + Slovensko", correct: false, reason: "✗ B2B SaaS vyžaduje deep product knowledge + long-term relationships. Outsourced sales nemůže poskytnout. In-house jediná cesta." },
-      ],
-    },
-    summary: "<b>Filip potřebuje matrix sales strukturu + dedikované enterprise AE + ABM strategie + kompenzace s provizí + SPIN/MEDDIC training.</b><br/><br/><b>6-měsíční restrukturalizační plán:</b><br/><br/>• <b>Měsíc 1-2 (Struktura):</b> Matrix model: Region (ČR/PL/SK) × Segment (SMB/Enterprise) × Product. Vytvořit dedikovaný Enterprise team (4 EAE pro deals 1M+ Kč). Approval CEO Marek + board.<br/><br/>• <b>Měsíc 2-3 (Nábor):</b> 8 nových sales reps — 4 Polsko (Warszawa) + 4 Slovensko (Bratislava). Lokální B2B SaaS background, 5+ let zkušeností. Plus 2-3 CSM (Customer Success Managers) pro retention.<br/><br/>• <b>Měsíc 3-4 (Kompenzace):</b> Restructure: SMB sales 60/30/10 (plat/provize/bonus), Enterprise AE 50/35/15. Quota multipliers (2× provize na overachievement). President's Club pro top 10 % performers.<br/><br/>• <b>Měsíc 4-5 (Training):</b> SPIN Selling intensive 2-week training pro celý tým. MEDDIC framework pro enterprise AE. CRM hygiene rules (weekly updates, deal stage discipline). Sales playbook s case studies.<br/><br/>• <b>Měsíc 5-6 (ABM):</b> Implementace ABM pro top 100 enterprise accounts. Marketing + sales joint planning per account. LinkedIn Sales Navigator + Bombora intent data. Personalized content per account.<br/><br/>• <b>Měření (KPIs):</b> Quota attainment, win rate (target enterprise 25 %+, SMB 30 %+), CAC payback 18-24 měsíců, CLV/CAC 3:1+, pipeline coverage 4× quota, customer NPS.<br/><br/><b>Pro komisi:</b> Klasický B2B SaaS sales restructure pro multi-country expansion. <b>Salesforce (matrix struktura + ABM)</b>, <b>HubSpot (inbound + outbound hybrid)</b>, <b>SAP (enterprise vertical sales)</b> jako benchmark. <b>4 dimenze organizace direct mktu (Stříteský!)</b> + <b>SFM 6 fází Kotler (Svobodová/Mikovcová!)</b> + <b>SPIN selling + MEDDIC</b> + <b>CRM + ABM + B2B specifika (Stříteský!)</b>. Anti-vzor: generic geographic structure + 100 % fixní plat = demotivace top performers + slabý enterprise win rate. Vzor: <b>matrix struktura + dedikované enterprise team + variabilní kompenzace + ABM + sophisticated training</b>.",
-  };
-
-  return (
-    <OkruhPanel
-      subject="Marketing" subjectId="marketing" number={15} title="Osobní komunikace — Direct mkt + Osobní prodej + SFM"
-      subtitle="Odlišení osobní/direct + organizace + 7-step sales + SPIN + Sales Force Management + CRM + ABM"
-      color={VSE.fis}
-      questionText="Osobní marketingová komunikace — direct marketing, osobní prodej, řízení prodejních sil."
-      sloz={3} roz={4} freq={5}
-      examStrategy={examStrategyMkt15}
-      studySections={studySectionsMkt15}
-      flashcards={flashcardsMkt15}
-      quiz={quizMkt15}
-      praxe={praxeMkt15}
-      examQuestions={examQuestionsMkt15}
-      podcast={podcastMkt15}
-      caseStudy={caseStudyMkt15}
-    />
-  );
-}
-
-/* ════════════════════════════════════════════════════════
-   MARKETING 16 — Výzkum mkt komunikace + Mediální výzkum + MIS + data acquisition
-   ════════════════════════════════════════════════════════ */
 function OkruhMkt16Panel() {
   const studySectionsMkt16 = [
-    { id: "intro", title: "Výzkum mkt komunikace — proč a co měříme", subtitle: "5 typů + návaznost na M1, M13, M14", color: VSE.fis, emoji: "microscope",
+    { id: "postup_kampane", title: "Postup komunikační kampaně — od cíle po vyhodnocení", subtitle: "Jak kampaň proběhne, než ji začneme měřit", color: VSE.fis, emoji: "path",
       content: (<div>
         <Def color={VSE.fis}>
-          <b>Výzkum marketingové komunikace</b> = systematické měření efektivity komunikačních aktivit. Komise <b>Smrčka, Stříteský</b> chytá EXPLICITNĚ <b>jak měřit reklamu + online metriky</b>.
+          Než se pustíme do výzkumu kampaně, musíme rozumět, <b>jak kampaň vůbec běží</b>. Řízení kampaně = naplánovat, spustit a vyhodnotit komunikaci tak, aby splnila cíl. Kostrou plánování je <b>5M model</b> (detail v <b>M13</b>).
         </Def>
-        <Tag color={VSE.fis}>Návaznost na předchozí okruhy</Tag>
-        <Bullet items={[
-          "<b>M1</b> = obecný MV (kvant × kval). <b>M16</b> aplikuje na komunikaci.",
-          "<b>M12</b> = cenový výzkum (Van Westendorp, Conjoint). <b>M16</b> = komunikační výzkum.",
-          "<b>M13</b> = IMK + 5M framework (Mission/Money/Message/Media/<b>Measurement</b>). M16 detailuje to Measurement.",
-          "<b>M14</b> = mediální plán + online metriky (CTR/CPC/CPM/CPA/ROAS). M16 = výzkumné metody.",
-          "<b>Rozdíl M14 vs M16:</b> M14 = standardní metriky kampaní (operational). M16 = výzkumné metody pro evaluation (strategic).",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>5 hlavních typů výzkumu komunikace</Tag>
-        <ResponsiveGrid cols2>
+        <Tag color={VSE.fis}>Fáze komunikační kampaně</Tag>
+        <ResponsiveSVG viewBox="0 0 600 150" maxHeight={140}>
+          <line x1="55" y1="60" x2="545" y2="60" stroke="var(--text-muted)" strokeWidth="1.5" strokeDasharray="3,3"/>
           {[
-            { c: VSE.fmv, t: "🧪 PRE-TESTING (před launchem)", d: "Concept testing, focus groups, A/B testing creative. Cíl: vybrat nejsilnější verzi PŘED investicí." },
-            { c: VSE.warning, t: "📊 TRACKING STUDIE (continuous)", d: "Brand health tracker — měsíčně/kvartálně. Měření awareness, image, NPS přes čas. Klíč pro long-term decisions." },
-            { c: VSE.fph, t: "📈 POST-CAMPAIGN EFFECTIVENESS", d: "Brand Lift Studies, sales attribution, ROI měření. Co kampaň přinesla?" },
-            { c: VSE.success, t: "🔄 MMM + MTA (atribuce)", d: "Marketing Mix Modeling (top-down) + Multi-Touch Attribution (bottom-up). Atribuce sales na kanály." },
-            { c: VSE.danger, t: "🕵️ MYSTERY SHOPPING", d: "Kontrola execution — jak prodává konkurence vs nás. Real-world brand experience." },
-            { c: VSE.fis, t: "📱 SOCIAL LISTENING", d: "Sledování zmínek na sociálních sítích, sentiment, share of voice. Brandwatch, Mention, Sprinklr." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
+            { x: 85, c: VSE.fis, t: "1. Cíle", d: "co chceme (5M: Mission)" },
+            { x: 215, c: VSE.warning, t: "2. Rozpočet", d: "kolik (Money)" },
+            { x: 345, c: VSE.fph, t: "3. Sdělení + média", d: "co a kde (Message, Media)" },
+            { x: 480, c: VSE.success, t: "4. Realizace", d: "spuštění kampaně" },
+            { x: 555, c: VSE.danger, t: "5. Měření", d: "(Measurement)" },
+          ].map((p, i) => (
+            <g key={i}>
+              <circle cx={p.x} cy="60" r="7" fill={p.c}/>
+              <text x={p.x} y="85" textAnchor="middle" fontFamily={fontSans} fontSize="10" fontWeight="700" fill={p.c}>{p.t}</text>
+              <text x={p.x} y="99" textAnchor="middle" fontFamily={fontSans} fontSize="8" fill="var(--text-muted)">{p.d}</text>
+            </g>
           ))}
+        </ResponsiveSVG>
+        <div style={{ padding: "10px 14px", background: `${VSE.fmv}10`, border: `1px solid ${VSE.fmv}30`, borderRadius: 10, fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          📎 <b>5M model</b> (Mission / Money / Message / Media / Measurement) je rozebraný v <b>M13</b>. Poslední M — <b>Measurement</b> — je přesně to, čím se zabývá zbytek tohoto okruhu: jak změřit, jestli kampaň fungovala.
+        </div>
+        <ExamAlert komise="Heřman 2026 + Stříteský + Lorencová" what="Komise chce <b>plánování a řízení kampaně + napojení na případovku</b>. Umět projít fáze kampaně a u konkrétní firmy z PS navrhnout, jak by kampaň vypadala a jak by se měřila." />
+      </div>) },
+
+    { id: "vyzkum_uvod", title: "🔬 Výzkum mkt komunikace — co měříme × testujeme", subtitle: "Měření účinnosti komunikace, hlavně reklamy", color: VSE.warning, emoji: "microscope",
+      content: (<div>
+        <Def color={VSE.warning}>
+          <b>Výzkum marketingové komunikace</b> = měření účinnosti komunikace, zejména reklamy — jejího vlivu na nákupní chování. Cíl: <b>zvýšit efektivitu a zaměřit vynaložené prostředky na realizaci neefektivní kampaně eliminovat</b>.
+        </Def>
+        <Tag color={VSE.warning}>Co měříme × co testujeme × cíle</Tag>
+        <ResponsiveGrid cols3>
+          <ModelCard name="MĚŘÍME" color={VSE.fis} items={["Vnímání obsahu", "Emoční vazby", "Dosah cílové skupiny", "Mediální chování CS", "Adekvátnost použitých metod"]} />
+          <ModelCard name="TESTUJEME" color={VSE.warning} items={["Slova, slogany", "Obrazy, barvy", "Zvuky, melodie, hlasitost", "Osoby v reklamě", "Kulturní fenomény, kreativitu"]} />
+          <ModelCard name="CÍLE" color={VSE.success} items={["Zaujetí CS", "Srozumitelnost sdělení", "Informační hodnota", "Motivace k nákupu", "Zapamatovatelnost"]} />
         </ResponsiveGrid>
-        <ExamAlert
-          komise="Smrčka + Kolouchová + Říhová 2025 + Stříteský 2025 (Double)"
-          what="Smrčka chytá <b>mediální výzkum + výzkum mkt komunikace</b>. Stříteský chce DETAIL <b>jak měříme reklamu online + různé metriky</b>. Naučit 5 typů výzkumu + tradiční + online metriky."
-        />
       </div>) },
 
-    { id: "pretest", title: "Pre-testing — výběr nejsilnější verze před launchem", subtitle: "Concept testing + focus groups + A/B testing creative", color: VSE.fis, emoji: "target",
+    { id: "testy_v_case", title: "⏱️ Testy podle načasování — pre / korekční / post", subtitle: "Mikovcová: stačily pre-testy, korekční, post-testy", color: VSE.fph, emoji: "refresh",
       content: (<div>
-        <Def color={VSE.fis}>
-          <b>Pre-testing</b> = výzkum PŘED spuštěním kampaně. Cíl: vybrat nejsilnější creative/message/media plán a vyhnout se 80 % budget waste na špatnou kreativu.
+        <Def color={VSE.fph}>
+          Komunikační výzkum se dělí podle toho, <b>kdy v průběhu kampaně</b> ho děláme. Tři fáze: před spuštěním, během, po skončení. <b>Mikovcová na tuhle trojici explicitně cílí.</b>
         </Def>
-        <Tag color={VSE.fis}>Metody pre-testingu</Tag>
-        <Bullet items={[
-          "<b>🎯 Concept testing:</b> Test idejí/storyboardů PŘED výrobou. Respondenti hodnotí na škále 1-10: appeal, clarity, motivation to buy, brand fit.",
-          "<b>👥 Focus groups (qualitative):</b> 6-10 lidí v skupině, 90-120 min diskuse o creative. Emocionální reakce, brand associations. 50-150k Kč per group.",
-          "<b>📊 A/B testing variant:</b> 2-4 verze headlinev banner / video / email. Quantitative voting. CAWI 500-1000 respondentů, 80-200k Kč.",
-          "<b>🧠 Neuromarketing:</b> EEG, eye tracking, facial coding. Měří podvědomé reakce. Drahé (300k-1M Kč), používá P&G, Coca-Cola.",
-          "<b>📺 Animatic testing:</b> Test animovaného storyboardu PŘED výrobou TV spotu. Cena 100-300k Kč vs natáčení 2-10M Kč.",
-          "<b>👁️ Eye tracking:</b> Měření, kam se dívá respondent v reklamě/web/store. Identifikace pozornosti vs distrakce.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Klíčové metriky pre-testing</Tag>
-        <Bullet items={[
-          "<b>Recall (vybavitelnost):</b> Kolik respondentů si pamatuje key message po 24 h.",
-          "<b>Brand linkage:</b> Spojí si reklamu se správnou značkou? (Problém — někdy si pamatují reklamu, ale ne značku.)",
-          "<b>Purchase intent:</b> Po vidění reklamy, jak pravděpodobně koupíte produkt (škála 1-10).",
-          "<b>Likeability:</b> Líbila se vám reklama? Klesající váha (likability ≠ effectiveness).",
-          "<b>Comprehension:</b> Pochopili respondenti hlavní message? Critical for new product launches.",
-          "<b>Brand fit:</b> Sedí reklama k brandu? (Nesedící creative ničí brand equity.)",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>ROI pre-testingu</Tag>
-        <Bullet items={[
-          "<b>Cena pre-testu:</b> 100-500k Kč (concept + animatic + 1-2 focus groups).",
-          "<b>Riziko bez pre-testu:</b> 5-15 mil. Kč produkce TV spotu + 10-50 mil. Kč media spend.",
-          "<b>ROI pre-testu:</b> 10-50× (chrání před wasted spend).",
-          "<b>P&G standard:</b> Pre-test EVERY campaign before launch.",
-        ]} color={VSE.fph} />
-      </div>) },
-
-    { id: "tracking", title: "Tracking studie — brand health + funnel", subtitle: "Continuous měření přes čas — brand health tracker, TOTE model", color: VSE.fis, emoji: "chart",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Tracking studie</b> = pravidelné měření brand metrics přes čas (měsíčně/kvartálně). <b>Nejdůležitější dlouhodobý research</b> pro management. Bez trackingu neuvidíš trendy.
-        </Def>
-        <Tag color={VSE.fis}>Brand Health Tracker — standardní setup</Tag>
-        <Bullet items={[
-          "<b>Frekvence:</b> Měsíční (rychlé reakce na trh) nebo kvartální (long-term trendy).",
-          "<b>Sample:</b> 500-1500 respondentů z cílovky per wave.",
-          "<b>Metoda:</b> CAWI (online dotazník), 10-15 min, 200-400 Kč per respondent.",
-          "<b>Cena:</b> 150-400k Kč per wave, 600k-1,6M Kč ročně.",
-          "<b>Key metrics:</b> Awareness (aided, unaided, top-of-mind), Consideration, Preference, NPS, Brand image attributes.",
-          "<b>Praktici:</b> Kantar (BrandDynamics), Ipsos, Nielsen, Median (ČR).",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>TOTE Model (Mikovcová chytá!) — Test-Operate-Test-Exit</Tag>
-        <Bullet items={[
-          "<b>Test 1:</b> Měření baseline (awareness, image, intent) PŘED kampaní.",
-          "<b>Operate:</b> Spuštění kampaně.",
-          "<b>Test 2:</b> Měření PO kampani — stejné metriky.",
-          "<b>Exit:</b> Vyhodnocení — co lift kampaně (Test 2 minus Test 1)? Stojí to za investici?",
-          "<b>Použití:</b> Standardní validační framework pro každou kampaň. Mikovcová chytá!",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Funnel tracking — od awareness k loyalty</Tag>
-        <Bullet items={[
-          "<b>Awareness</b> (top-of-funnel): &quot;Slyšel/a jste o značce X?&quot; Cíl: 60-80 % v cílovce pro mass brands.",
-          "<b>Consideration</b> (mid-funnel): &quot;Zvážil/a byste koupi?&quot; Cíl: 30-50 % consideration mezi aware.",
-          "<b>Preference</b>: &quot;Která značka je vaše top 3 volba?&quot; Cíl: 10-20 % preference (vs konkurence).",
-          "<b>Purchase intent:</b> &quot;Jak pravděpodobně koupíte v příštích 3 měsících?&quot; Cíl: 5-15 %.",
-          "<b>Trial:</b> Skutečně koupili poprvé.",
-          "<b>Loyalty + Advocacy:</b> NPS, opakovaný nákup, doporučení. Klíč pro retention.",
-        ]} color={VSE.fph} />
-      </div>) },
-
-    { id: "posttest_mmm", title: "Post-test + MMM + Attribution — co kampaň přinesla", subtitle: "Brand Lift, MMM, MTA, Incrementality testing", color: VSE.fis, emoji: "growth",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Post-campaign effectiveness</b> = jak měříme co kampaň reálně přinesla. <b>Marketing Mix Modeling (MMM)</b> + <b>Multi-Touch Attribution (MTA)</b> + <b>Brand Lift Studies</b>.
-        </Def>
-        <Tag color={VSE.fis}>Brand Lift Study (klasika pro awareness kampaně)</Tag>
-        <Bullet items={[
-          "<b>Co to je:</b> Survey-based měření brand metrics PŘED a PO kampani.",
-          "<b>Setup:</b> 2 skupiny respondentů — exposed (vystavena kampani) × control (nevystavena). Měření lift mezi nimi.",
-          "<b>Metriky:</b> Awareness lift, ad recall, brand consideration, purchase intent, brand attributes.",
-          "<b>Cena:</b> 300-800k Kč per study, 6-8 týdnů.",
-          "<b>Praktici:</b> Google Brand Lift (free pro YouTube ads), Nielsen, Kantar, IPSOS.",
-          "<b>Benchmarks:</b> Awareness lift +3-7 pp (percentage points) považován za úspěch.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Marketing Mix Modeling (MMM) — top-down attribution</Tag>
-        <Bullet items={[
-          "<b>Co to je:</b> Statistická regrese — kolik každý kanál přispěl k sales za poslední 2-3 roky.",
-          "<b>Input data:</b> Weekly sales, spend per kanál (TV, digital, OOH), externí faktory (počasí, holidays, ekonomika).",
-          "<b>Output:</b> ROI per kanál + optimal budget allocation pro příští rok.",
-          "<b>Příklad:</b> P&G dělá MMM pro 80+ značek ročně. Output: TV 25 % sales lift, digital 40 %, retail 25 %, sponzoring 10 %.",
-          "<b>Cena:</b> 1-5 mil. Kč ročně (econometrický tým + data).",
-          "<b>Použití:</b> Strategic budget allocation, long-term decisions.",
-          "<b>Praktici:</b> Nielsen, Analytic Partners, MMM Studio (open source).",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Multi-Touch Attribution (MTA) — bottom-up</Tag>
-        <Bullet items={[
-          "<b>Co to je:</b> Sledování individual customer journey napříč kanály. Která reklama mu způsobila konverzi?",
-          "<b>Modely:</b>",
-          "&nbsp;&nbsp;<b>Last Click:</b> 100 % credit poslednímu kontaktu. Default Google Analytics.",
-          "&nbsp;&nbsp;<b>First Click:</b> 100 % credit prvnímu kontaktu.",
-          "&nbsp;&nbsp;<b>Linear:</b> Rovnoměrně mezi všechny touchpointy.",
-          "&nbsp;&nbsp;<b>Time-decay:</b> Více credit poslednímu (recent biased).",
-          "&nbsp;&nbsp;<b>Data-driven:</b> AI/ML model, váha podle historických dat. Google Ads, Meta Ads.",
-          "<b>Use case:</b> Optimalizace digital media buying. Vidíš jaké touchpointy assist konverzi.",
-          "<b>Cena:</b> 0-500k Kč ročně (záleží na platformě). Google Analytics 4 free.",
-        ]} color={VSE.fph} />
-        <Tag color={VSE.danger}>Incrementality Testing — gold standard</Tag>
-        <Bullet items={[
-          "<b>Co to je:</b> A/B test geografických regionů s reklamou a bez reklamy. Pravá kauzální analýza.",
-          "<b>Setup:</b> Test market (vystaven reklamě) vs Control market (bez). Měření sales lift.",
-          "<b>Výhoda:</b> Eliminace correlation vs causation problému. Vidíš REÁLNÝ impact reklamy.",
-          "<b>Cena:</b> 0 (jen ušlý revenue v control market) + měřící infrastruktura.",
-          "<b>Použití:</b> Google, Meta, Amazon dělají incrementality tests kontinuálně.",
-          "<b>Pro mid-large firmy</b> s dostatečným sales volume pro statistical significance.",
-        ]} color={VSE.danger} />
-      </div>) },
-
-    { id: "mis_data", title: "Mkt informační systémy + data acquisition", subtitle: "Tahal chytá DATA — jak se získávají, jaké druhy (ne jen Google Analytics)", color: VSE.fis, emoji: "construction",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Marketingový informační systém (MIS)</b> = systematický framework pro získávání, zpracování a analýzu mkt dat. Komise <b>Tahal</b> EXPLICITNĚ chce <b>jak se získávají data + jaké druhy</b> (Google Analytics nestačí!).
-        </Def>
-        <Tag color={VSE.fis}>4 zdroje dat v MIS (Kotler)</Tag>
-        <ResponsiveGrid cols2>
+        <ResponsiveSVG viewBox="0 0 600 180" maxHeight={170}>
+          <line x1="60" y1="70" x2="540" y2="70" stroke="var(--text-muted)" strokeWidth="2"/>
           {[
-            { c: VSE.fmv, t: "📊 INTERNÍ ZÁZNAMY (Internal Records)", d: "Sales data, CRM, accounting, customer service. Vlastní data, free, ale strukturovaná pro účetnictví, ne mkt." },
-            { c: VSE.warning, t: "🔍 MKT INTELLIGENCE", d: "Sledování konkurence, trade journals, mystery shopping, sales force feedback. Externí, qualitative, lokální." },
-            { c: VSE.fph, t: "📈 MKT RESEARCH (M1)", d: "Aktivní sběr dat — surveys, focus groups, conjoint, A/B testy. Strukturované, nákladné (50k-2M Kč)." },
-            { c: VSE.success, t: "🤖 DECISION SUPPORT SYSTEMS", d: "Analytické nástroje pro management — dashboards, AI predikce, scenario planning. Tableau, PowerBI, custom BI." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
+            { x: 140, c: VSE.fis, t: "PRE-TEST", d: "před spuštěním", d2: "úprava, ověření reakce" },
+            { x: 300, c: VSE.warning, t: "KOREKČNÍ TEST", d: "v průběhu", d2: "ověření akceptace, vedl. efekty" },
+            { x: 460, c: VSE.success, t: "POST-TEST", d: "po ukončení", d2: "zásah, rozpoznatelnost, výsledky" },
+          ].map((p, i) => (
+            <g key={i}>
+              <circle cx={p.x} cy="70" r="9" fill={p.c}/>
+              <text x={p.x} y="40" textAnchor="middle" fontFamily={fontMono} fontSize="12" fontWeight="700" fill={p.c}>{p.t}</text>
+              <text x={p.x} y="95" textAnchor="middle" fontFamily={fontSans} fontSize="10" fontWeight="600" fill="var(--text)">{p.d}</text>
+              <text x={p.x} y="110" textAnchor="middle" fontFamily={fontSans} fontSize="8.5" fill="var(--text-muted)">{p.d2}</text>
+            </g>
           ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>Druhy dat — primary × secondary, structured × unstructured</Tag>
+        </ResponsiveSVG>
         <Bullet items={[
-          "<b>📥 PRIMARY data:</b> Vlastní sběr pro konkrétní účel. Surveys, focus groups, A/B testy. Drahé, ale relevant.",
-          "<b>📚 SECONDARY data:</b> Existující data — ČSÚ, GfK, Nielsen panel data, government statistics. Levné/free, ale ne tailored.",
-          "<b>🗄️ STRUCTURED data:</b> Tabulky, čísla, kategorie (Excel, SQL). Sales data, CRM, web analytics.",
-          "<b>📝 UNSTRUCTURED data:</b> Text, video, audio (social posts, customer reviews). Vyžaduje NLP/ML zpracování.",
-          "<b>🔄 First-party data:</b> Naše vlastní (CRM, website analytics). Cookie-less era favorit.",
-          "<b>🤝 Second-party data:</b> Partner data (např. Tesla sdílí data s pojišťovnami).",
-          "<b>🌐 Third-party data:</b> Externí (Bombora, ZoomInfo, Acxiom). Apple ATT a Google sunset 3rd-party cookies omezují.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Klíčové analytické nástroje (víc než Google Analytics!)</Tag>
-        <Bullet items={[
-          "<b>Web Analytics:</b>",
-          "&nbsp;&nbsp;Google Analytics 4 (free) — basic web tracking, attribution.",
-          "&nbsp;&nbsp;Adobe Analytics (enterprise) — komplexní, drahý ($150k+/year).",
-          "&nbsp;&nbsp;Mixpanel, Amplitude — product analytics, user behavior.",
-          "<b>CRM Analytics:</b>",
-          "&nbsp;&nbsp;Salesforce Tableau (acq. 2019, 15 mld. USD) — enterprise BI.",
-          "&nbsp;&nbsp;HubSpot Reports — SMB friendly.",
-          "<b>Social Analytics:</b>",
-          "&nbsp;&nbsp;Sprinklr, Brandwatch, Talkwalker — social listening, sentiment.",
-          "&nbsp;&nbsp;Meta Business Suite, Google Ads — native platform analytics.",
-          "<b>Market Intelligence:</b>",
-          "&nbsp;&nbsp;Nielsen panel data — TV ratings, FMCG retail.",
-          "&nbsp;&nbsp;Kantar Worldpanel — consumer panel.",
-          "&nbsp;&nbsp;Statista, IBISWorld — industry reports.",
-          "&nbsp;&nbsp;Bombora, ZoomInfo — B2B intent data.",
-          "<b>Mkt Mix Modeling:</b>",
-          "&nbsp;&nbsp;Nielsen Marketing Mix, Analytic Partners — enterprise MMM.",
-          "&nbsp;&nbsp;Open-source: Robyn (Meta), LightweightMMM (Google), MMM Studio.",
+          "<b>PRE-TEST</b> — před spuštěním, pro úpravu a ověření reakce (vyladit, než utratíme peníze).",
+          "<b>Korekční test</b> — v průběhu, ověří akceptaci, zjistí nežádoucí vedlejší efekty (stihneme upravit).",
+          "<b>POST-TEST</b> — po ukončení, jestli pokračovat nebo měnit. Měří zásah, rozpoznatelnost, výsledky.",
         ]} color={VSE.fph} />
-        <Tag color={VSE.danger}>GDPR + cookie-less era — data acquisition challenges</Tag>
-        <Bullet items={[
-          "<b>GDPR (EU 2018):</b> Explicit consent před tracking. Pokuty 4 % global obratu.",
-          "<b>Apple ATT (2021):</b> App tracking transparency. 80 % uživatelů odmítlo tracking.",
-          "<b>Google sunset 3rd-party cookies (2025):</b> Konec retargeting přes 3rd-party data.",
-          "<b>Shift k 1st-party data:</b> Newsletter signups, login, loyalty programs. Klíčová asset.",
-          "<b>Server-side tracking:</b> Místo client-side cookies — server-to-server data transfer.",
-          "<b>Privacy Sandbox (Google):</b> Anonymous cohort targeting místo individual tracking.",
-        ]} color={VSE.danger} />
-        <ExamAlert
-          komise="Tahal + Lorencová + Schonfeld 2025 (Sucho)"
-          what="Tahal chytá <b>mkt + logistické informační systémy</b> s důrazem na DATA — &quot;jak se získávají, jaké druhy&quot;. <b>Google Analytics mu nestačí!</b> Naučit 4 zdroje MIS + primary/secondary + 1st/2nd/3rd-party + komplet analytical tooling."
-        />
       </div>) },
 
-    { id: "aplikace", title: "Aplikace na PS + checklist", subtitle: "Jak vybrat správný výzkum pro situaci + kombinace metod", color: VSE.fis, emoji: "path",
+    { id: "kvali_kvanti", title: "📊 Kvalitativní × kvantitativní přístup", subtitle: "Hloubka vs reprezentativnost", color: VSE.fmv, emoji: "scale",
       content: (<div>
-        <Def color={VSE.fis}>
-          V praxi se metody <b>kombinují</b> pro robustní výsledek. Single method = single point of failure. Klíč: <b>vybrat 2-3 metody podle cíle + budget</b>.
+        <Def color={VSE.fmv}>
+          Dva základní přístupy k výzkumu komunikace, které se liší tím, jestli hledají <b>hloubku porozumění</b>, nebo <b>reprezentativní čísla</b>.
         </Def>
-        <Tag color={VSE.fis}>Doporučená kombinace podle situace</Tag>
-        <Bullet items={[
-          "<b>🚀 Nová kampaň launch:</b> Pre-test creative (concept + focus groups) + Brand Lift Study post-launch + tracking studie každý měsíc.",
-          "<b>📈 Optimalizace běžící kampaně:</b> A/B testing creative + MTA pro digital kanály + incrementality testing pro causation.",
-          "<b>📊 Strategic budget allocation (annual):</b> MMM (long-term ROI per kanál) + Brand Health Tracker (image trends).",
-          "<b>🆕 New product launch:</b> Concept testing + animatic testing + Brand Lift po launchi + tracking studie 12 měsíců.",
-          "<b>🌍 International expansion:</b> Market intelligence (Statista, Kantar) + brand health tracker per zemi + local focus groups.",
-          "<b>⚠️ Brand crisis:</b> Social listening (real-time sentiment) + brand tracker (recovery monitoring) + qualitative deep-dive.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Checklist pro PS</Tag>
-        <Bullet items={[
-          "<b>1.</b> Identifikuj <b>cíl výzkumu</b> — pre-test creative? Post-launch effectiveness? Long-term tracking? Strategic allocation?",
-          "<b>2.</b> Vyber <b>2-3 metody</b> z 5 typů (pre-test / tracking / post-test / MMM-MTA / mystery-social).",
-          "<b>3.</b> Definuj <b>data sources</b> — primary (vlastní survey) vs secondary (Nielsen, ČSÚ).",
-          "<b>4.</b> Stanov <b>sample + budget</b> — 500-1500 respondentů, 150-800k Kč per study.",
-          "<b>5.</b> Vyber <b>analytický tooling</b> — GA4 (free) → Adobe (enterprise) → MMM platforms (Robyn).",
-          "<b>6.</b> Plán <b>GDPR compliance</b> — consent management, 1st-party data strategy.",
-          "<b>7.</b> Setup <b>continuous tracking</b> (brand health tracker) pro long-term trends.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Aplikace na PS — frameworks</Tag>
-        <Bullet items={[
-          "<b>Pre-launch:</b> Concept testing + A/B testing creative + brand fit assessment.",
-          "<b>Launch:</b> Brand Lift Study + first 90 days tracking.",
-          "<b>Growth phase (M8):</b> MMM annual + brand health tracker monthly.",
-          "<b>Mature phase (M8):</b> Continuous tracking + mystery shopping + competitive monitoring.",
-          "<b>Decline phase (M8):</b> Customer churn research + win-back campaign testing.",
-        ]} color={VSE.fph} />
+        <ResponsiveGrid cols2>
+          <div>
+            <ModelCard name="Kvalitativní" color={VSE.fis} items={["Skupinové diskuse, rozhovory (focus group).", "Hlubší vhled do způsobů a procesů vnímání.", "Snadná organizace, rychlost, průběžná modifikace."]} />
+            <PlusMinus type="minus" items={["Malé vzorky → nelze zobecnit.", "Koncentruje se na detaily exekuce, ne klíčové parametry."]} />
+          </div>
+          <div>
+            <ModelCard name="Kvantitativní" color={VSE.warning} items={["Standardizované metodiky, ve studiu (TV spoty), in-store.", "Dotazování v domácnostech, CATI (telefonické).", "Dobré srovnání kampaní (benchmarking), větší vzorky."]} />
+            <PlusMinus type="minus" items={["Menší možnost poznání příčin dopadů.", "Nutnost standardizace."]} />
+          </div>
+        </ResponsiveGrid>
       </div>) },
-  ];
 
-  const flashcardsMkt16 = [
-    { term: "Výzkum mkt komunikace", def: "Systematické měření efektivity komunikačních aktivit. Měření v rámci 5M frameworku (M13).", tag: "POJEM" },
-    { term: "5 typů výzkumu komunikace", def: "Pre-testing / Tracking studie / Post-campaign effectiveness / MMM-MTA / Mystery shopping + Social listening.", tag: "POJEM" },
-    { term: "Pre-testing", def: "Výzkum PŘED spuštěním kampaně. Concept testing, focus groups, A/B testing. ROI 10-50× (chrání před waste).", tag: "PRETEST" },
-    { term: "Concept testing", def: "Test idejí/storyboardů PŘED výrobou. Škála 1-10: appeal, clarity, motivation, brand fit.", tag: "PRETEST" },
-    { term: "Animatic testing", def: "Test animovaného storyboardu PŘED TV produkcí. Cena 100-300k Kč vs natáčení 2-10M.", tag: "PRETEST" },
-    { term: "Neuromarketing", def: "EEG, eye tracking, facial coding. Měří podvědomé reakce. P&G, Coca-Cola používají.", tag: "PRETEST" },
-    { term: "6 klíčových pretest metrik", def: "Recall / Brand linkage / Purchase intent / Likeability / Comprehension / Brand fit.", tag: "PRETEST" },
-    { term: "Brand Health Tracker", def: "Pravidelné měření brand metrics měsíčně/kvartálně. 500-1500 respondentů, 150-400k Kč per wave.", tag: "TRACKING" },
-    { term: "Klíčové brand tracker metriky", def: "Awareness (aided/unaided/TOM) / Consideration / Preference / NPS / Brand image attributes.", tag: "TRACKING" },
-    { term: "TOTE Model", def: "Test-Operate-Test-Exit. Standardní validační framework — baseline → kampaň → post-test → vyhodnocení lift.", tag: "TRACKING" },
-    { term: "Funnel tracking", def: "Awareness → Consideration → Preference → Purchase intent → Trial → Loyalty + Advocacy.", tag: "TRACKING" },
-    { term: "Top-of-Mind awareness", def: "Která značka první napadne v kategorii. Klíč pro mass brands. 'Energy drink' → Red Bull.", tag: "TRACKING" },
-    { term: "Brand Lift Study", def: "Survey-based měření brand metrics PŘED a PO kampani. Exposed × control groups. Google free pro YouTube.", tag: "POSTTEST" },
-    { term: "Awareness lift benchmark", def: "+3-7 pp (percentage points) považován za úspěch po kampani.", tag: "POSTTEST" },
-    { term: "Marketing Mix Modeling (MMM)", def: "Statistická regrese — kolik každý kanál přispěl k sales za 2-3 roky. Top-down attribution. P&G standard.", tag: "MMM" },
-    { term: "MMM input data", def: "Weekly sales, spend per kanál (TV/digital/OOH), externí faktory (počasí, holidays, ekonomika).", tag: "MMM" },
-    { term: "MMM output", def: "ROI per kanál + optimal budget allocation pro příští rok. Strategic decisions.", tag: "MMM" },
-    { term: "Multi-Touch Attribution (MTA)", def: "Sledování individual customer journey napříč kanály. Bottom-up. Digital focused.", tag: "MTA" },
-    { term: "5 MTA modelů", def: "Last Click / First Click / Linear / Time-decay / Data-driven (AI/ML).", tag: "MTA" },
-    { term: "Last Click model", def: "100 % credit poslednímu kontaktu před konverzí. Default Google Analytics. Underestimates upper-funnel.", tag: "MTA" },
-    { term: "Data-driven attribution", def: "AI/ML model, váha podle historických dat. Google Ads, Meta Ads. Nejpřesnější pro digital.", tag: "MTA" },
-    { term: "Incrementality testing", def: "A/B test geographic regions s reklamou × bez. Pravá kauzální analýza. Gold standard.", tag: "POSTTEST" },
-    { term: "Mystery shopping", def: "Kontrola execution v retailu — jak prodává konkurence vs nás. Real-world brand experience.", tag: "MYSTERY" },
-    { term: "Social listening", def: "Sledování zmínek na sociálních sítích, sentiment, share of voice. Brandwatch, Mention, Sprinklr.", tag: "SOCIAL" },
-    { term: "Marketingový informační systém (MIS)", def: "Systematický framework pro získávání, zpracování a analýzu mkt dat. Kotler.", tag: "MIS" },
-    { term: "4 zdroje dat v MIS (Kotler)", def: "Interní záznamy / Mkt intelligence / Mkt research / Decision Support Systems.", tag: "MIS" },
-    { term: "Primary × Secondary data", def: "Primary = vlastní sběr (surveys, A/B). Secondary = existující (ČSÚ, Nielsen).", tag: "DATA" },
-    { term: "1st × 2nd × 3rd party data", def: "1st = vlastní (CRM). 2nd = partner. 3rd = externí (Bombora). Cookie-less era ohrožuje 3rd-party.", tag: "DATA" },
-    { term: "Structured × Unstructured data", def: "Structured = tabulky, čísla (Excel, SQL). Unstructured = text, video, audio (social posts) — vyžaduje NLP.", tag: "DATA" },
-    { term: "Cookie-less era", def: "Apple ATT (2021) + Google sunset 3rd-party cookies (2025). Shift k 1st-party + server-side tracking.", tag: "DATA" },
-    { term: "Privacy Sandbox (Google)", def: "Anonymous cohort targeting místo individual tracking. Nahrazení 3rd-party cookies.", tag: "DATA" },
-  ];
+    { id: "efekty", title: "🎯 Měření komunikačních a prodejních efektů", subtitle: "Co kampaň udělala s hlavou × s prodejem", color: VSE.success, emoji: "target",
+      content: (<div>
+        <Def color={VSE.success}>
+          Výsledky kampaně se měří ve dvou rovinách: <b>komunikační efekty</b> (co se stalo v hlavě zákazníka) a <b>prodejní efekty</b> (co se stalo s tržbami).
+        </Def>
+        <Tag color={VSE.success}>Měření komunikačních efektů</Tag>
+        <Bullet items={[
+          "<b>Test vybavení</b> — co lidé znají, co je zaujalo, jaké reklamy si vybaví (bez/s pomocí).",
+          "<b>Test rozpoznání</b> — do jaké míry znají reklamu, když ji vidí.",
+          "<b>Přímé dotazování</b> — focus group, srovnání reklam, portfolio testy → působivost sdělení.",
+          "<b>Test mkt komunikace</b> — zachycení postoje, měření změny postojů.",
+          "<b>Fyziologické testování</b> — měření reakcí (eye tracking, tep).",
+        ]} color={VSE.success} />
+        <Tag color={VSE.warning}>Měření prodejních efektů</Tag>
+        <Bullet items={[
+          "<b>Řízené experimenty</b> — porovnání trhu s kampaní vs bez.",
+          "<b>Analýza prodejních a reklamních dat</b> — korelace investice do reklamy a tržeb.",
+        ]} color={VSE.warning} />
+      </div>) },
 
-  const quizMkt16 = [
-    { q: "Co je výzkum mkt komunikace?", opts: ["Cenový výzkum", "Systematické měření efektivity komunikačních aktivit", "Brand research", "Audit"], correct: 1 },
-    { q: "Kolik typů výzkumu komunikace rozlišujeme?", opts: ["3", "5 (pre-test/tracking/post-test/MMM-MTA/mystery+social)", "7", "10"], correct: 1 },
-    { q: "Co je pre-testing?", opts: ["Test po kampani", "Výzkum PŘED spuštěním kampaně — concept testing, focus groups, A/B testing", "Náklady kampaně", "Sales test"], correct: 1 },
-    { q: "ROI pre-testingu vs riziko bez testu:", opts: ["1×", "5×", "10-50× (chrání před waste velkého media spend)", "100×"], correct: 2 },
-    { q: "Co je Brand Health Tracker?", opts: ["Audit", "Pravidelné měření brand metrics měsíčně/kvartálně, 500-1500 respondentů", "Marketing kampaň", "Reklama"], correct: 1 },
-    { q: "Co je TOTE model?", opts: ["Total Effect", "Test-Operate-Test-Exit — baseline → kampaň → post-test → vyhodnocení lift", "Time Of The End", "Top-of-the-Brand metric"], correct: 1 },
-    { q: "Co je Top-of-Mind awareness?", opts: ["Vrcholná reklama", "Která značka první napadne v kategorii (Energy → Red Bull)", "Premium brand", "Brand image"], correct: 1 },
-    { q: "Co je Brand Lift Study?", opts: ["Náklady reklamy", "Survey-based měření brand metrics PŘED a PO kampani (exposed × control groups)", "Brand value", "Sales lift"], correct: 1 },
-    { q: "Co je Marketing Mix Modeling (MMM)?", opts: ["4P koncept", "Statistická regrese — kolik každý kanál přispěl k sales za 2-3 roky. Top-down", "Mix produktů", "Mediální plán"], correct: 1 },
-    { q: "Co je Multi-Touch Attribution (MTA)?", opts: ["Multi-channel reklama", "Sledování individual customer journey napříč kanály. Bottom-up. Digital focused.", "Attribution model", "Audit"], correct: 1 },
-    { q: "Která NENÍ z 5 MTA modelů?", opts: ["Last Click", "First Click", "Linear", "Maximum Click"], correct: 3 },
-    { q: "Co je Incrementality testing?", opts: ["Postupné navyšování", "A/B test geographic regions s reklamou × bez. Gold standard pro causation.", "Inkrementální cena", "Testování velikosti"], correct: 1 },
-    { q: "Kolik je zdrojů dat v MIS (Kotler)?", opts: ["2", "3", "4 (interní záznamy / mkt intelligence / mkt research / Decision Support Systems)", "6"], correct: 2 },
-    { q: "Rozdíl primary × secondary data:", opts: ["První × druhý", "Primary = vlastní sběr pro účel. Secondary = existující data (ČSÚ, Nielsen)", "Hlavní × vedlejší", "Online × offline"], correct: 1 },
-    { q: "Co je 1st party data?", opts: ["První na trhu", "Vlastní data (CRM, web analytics). Klíč v cookie-less era", "Premium data", "Levný zdroj"], correct: 1 },
-    { q: "Co znamená cookie-less era?", opts: ["Konec cookies sušenek", "Apple ATT (2021) + Google sunset 3rd-party cookies (2025). Shift k 1st-party", "Web bez session", "Free internet"], correct: 1 },
+    { id: "medialni", title: "📡 Mediální výzkum + metriky", subtitle: "Stříteský chytá online metriky!", color: VSE.danger, emoji: "globe",
+      content: (<div>
+        <Def color={VSE.danger}>
+          <b>Mediální výzkum</b> měří účinnost reklamy podle toho, jak se šíří a předává spotřebiteli. Komise <b>Stříteský explicitně chce online metriky</b> — Google Analytics nestačí, musíš znát konkrétní ukazatele.
+        </Def>
+        <Tag color={VSE.danger}>Tradiční mediální metriky</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Klasické" color={VSE.warning} items={["<b>Sledovanost (rating)</b> = % všech, co viděli.", "<b>Reach</b> = % CS, která to viděla (dosah).", "<b>Share</b> = podíl, frekvence, afinita (vhodnost).", "<b>GRP</b> = intenzita = rating × frekvence."]} />
+          <ModelCard name="Online metriky (Stříteský!)" color={VSE.fis} items={["<b>CTR</b> = míra prokliku. <b>CPC</b> = cena za proklik.", "<b>CPM</b> = cena za 1000 zobrazení. <b>CPA</b> = cena za akci.", "<b>ROAS</b> = Return On Ad Spend = výnos / náklady na reklamu.", "Conversion rate, attribution models."]} />
+        </ResponsiveGrid>
+        <ExamAlert komise="Stříteský 2025 + Smrčka" what="🔴 <b>Stříteský EXPLICITNĚ chce online metriky a jak měříme reklamu online</b> — &quot;že znáte Google Analytics, to mi nestačí&quot;. Naučit: CTR, CPC, CPM, CPA, ROAS, conversion rate. Smrčka chytá mediální výzkum (pre/mid/post fáze)." />
+        <div style={{ marginTop: 8, padding: "8px 12px", background: `${VSE.fmv}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic" }}>
+          Účinnost reklamy závisí na způsobu, jakým se šíří a předává spotřebiteli.
+        </div>
+      </div>) },
   ];
 
   const praxeMkt16 = {
     caseStudy: {
-      company: "Procter & Gamble — etalon výzkumu mkt komunikace + MMM",
-      subtitle: "P&G dělá MMM pro 80+ značek + standardní pre-test KAŽDÉ kampaně",
+      company: "Jak se testuje reklama, než stojí miliony",
+      subtitle: "Cesta od nápadu k vyhodnocení kampaně",
       content: (<>
-        <b>Procter & Gamble (P&G)</b> je <b>etalon sofistikovaného výzkumu mkt komunikace</b>. 80+ značek (Tide, Pampers, Gillette, Pantene, Ariel), roční mkt budget 8 mld. USD, z toho ~2 % (160 mil. USD) na research.<br/><br/>
-        <b style={{ color: VSE.fmv }}>🧪 PRE-TESTING — standard pro KAŽDOU kampaň:</b><br/><br/>
-        • <b>Concept testing</b> 500+ respondentů per koncept před výrobou<br/><br/>
-        • <b>Animatic testing</b> každého TV spotu (cena 200k vs natáčení 5M)<br/><br/>
-        • <b>Neuromarketing</b> pro top-tier brands (Tide, Pampers) — EEG + facial coding<br/><br/>
-        • <b>Brand fit testing</b> — sedí creative ke značce?<br/><br/>
-        • Klasické metriky: Recall, Brand linkage, Purchase intent, Likeability, Comprehension<br/><br/>
-        <b style={{ color: VSE.warning }}>📊 BRAND HEALTH TRACKER — měsíčně pro top 30 brands:</b><br/><br/>
-        • Sample 1000+ respondentů per brand per zemi per měsíc<br/><br/>
-        • Metriky: Awareness (aided/unaided/TOM), Consideration, Preference, NPS<br/><br/>
-        • Budget: 600k-1.6M Kč ročně per brand per zemi<br/><br/>
-        • Tracking 50+ zemí = 1500+ waves ročně<br/><br/>
-        • Insights informují monthly brand reviews + quarterly board reports<br/><br/>
-        <b style={{ color: VSE.fph }}>📈 MARKETING MIX MODELING — ročně pro každou značku:</b><br/><br/>
-        • <b>Input:</b> Weekly sales 156 týdnů zpět + spend per kanál (TV/digital/OOH/retail) + externí faktory<br/><br/>
-        • <b>Output:</b> ROI per kanál — TV 25 %, digital 40 %, retail in-store 25 %, sponzoring 10 %<br/><br/>
-        • <b>2022 P&G insight:</b> Digital ROI rostou, TV klesají u Gen Z brands<br/><br/>
-        • <b>Reallocation:</b> Digital +30 %, TV −15 % pro mladší značky<br/><br/>
-        • <b>Sales impact:</b> +12 % YoY 2022 vs +6 % před MMM<br/><br/>
-        <b style={{ color: VSE.success }}>🎯 MTA + Incrementality testing pro digital:</b><br/><br/>
-        • <b>Data-driven attribution</b> v Google Ads + Meta Ads<br/><br/>
-        • <b>Incrementality tests</b> kontinuálně — Texas vs California s reklamou × bez<br/><br/>
-        • Skutečný impact: digital reklama 60 % incremental sales (zbytek by koupili stejně)<br/><br/>
-        • Vyhozeno 40 % digital budget bez impact = 800M USD savings ročně<br/><br/>
-        <b style={{ color: VSE.danger }}>🤖 P&G GROWTH OFFICE — dedikovaný research team:</b><br/><br/>
-        • 200+ market researchers globálně<br/><br/>
-        • Vlastní in-house panel 50k respondentů<br/><br/>
-        • Real-time consumer feedback loops<br/><br/>
-        • AI-powered text mining (reviews, social) — analyzuje 10M zmínek ročně<br/><br/>
-        <b style={{ color: VSE.success }}>Výsledek:</b> P&G drží #1 nebo #2 pozici v 65 % kategorií. <b>Marketing efficiency vzrostla 30 % od 2015</b> díky sofistikovanému výzkumu. Klasický důkaz, že <b>research-driven marketing</b> poráží gut-feel rozhodování.
+        Představ si, že značka chystá velkou vánoční kampaň. Než ji pustí do TV za desítky milionů, prochází celým výzkumným cyklem.<br/><br/>
+        <b>Nejdřív pre-test</b> — kreativci vytvoří několik verzí spotu a pustí je malé skupině (focus group). Zjišťují: zaujme to? Je sdělení srozumitelné? Nevyvolává to špatné asociace? Levné a včas — než se utratí balík.<br/><br/>
+        <b>Během kampaně korekční test</b> — sleduje se, jestli reklama funguje podle plánu a nevznikají nežádoucí efekty. Kdyby něco skřípalo, dá se ještě upravit nasazení.<br/><br/>
+        <b>Po skončení post-test</b> — měří se zásah (kolik lidí to vidělo), zapamatovatelnost (vybaví si značku?) a hlavně prodejní efekt (zvedly se tržby?). Online část kampaně se měří přes CTR, conversion rate a ROAS — jestli každá investovaná koruna přinesla víc, než stála.<br/><br/>
+        Teprve tahle čísla řeknou, jestli byla kampaň úspěšná, nebo jestli příště dělat něco jinak.
       </>),
-      lessons: "P&G je <b>etalon sofistikovaného výzkumu mkt komunikace</b>. Pro PS doporuč: <b>pre-testing standard pro každou kampaň + Brand Health Tracker měsíčně + MMM ročně + MTA + Incrementality testing</b>. Alternativy: <b>Coca-Cola (sophisticated brand tracking globálně), Unilever (purpose-driven research), Nestlé (regional MMM), Henkel (BHM brand health), Mondelez (data-driven attribution)</b>."
+      lessons: "Výzkum komunikace běží ve třech časech: pre-test (vyladit před spuštěním), korekční (upravit během), post-test (vyhodnotit po skončení). Komunikační efekt měří, co se stalo v hlavě (zapamatování), prodejní efekt měří tržby. Online se přidávají metriky jako CTR a ROAS."
     },
     miniExamples: [
-      { tag: "PRE-TEST", color: VSE.fmv, company: "Apple iPhone Keynote — pre-test obsahu", content: "Apple <b>pre-testuje každou keynote</b> před vystoupením Tima Cooka. Animatic versions story flow, focus groups na key messages (\"Pro vs Air\" positioning), neuromarketing pro top reveal moments. Recall testing 24 h post-event. Cena 500k-1M USD per keynote, ale ROI v billions stock price + sales lift." },
-      { tag: "TRACKING", color: VSE.warning, company: "Coca-Cola — globální Brand Health Tracker", content: "Coca-Cola dělá <b>continuous tracking ve 200+ zemích</b>. Měsíční surveys 100 000+ respondentů celkem. Klíčové KPI: Brand Power Score (Kantar), TOM awareness (cíl 95 %+), purchase intent, brand attributes. Insights informují regional CMOs měsíčně + global board kvartálně. Budget 50M USD ročně." },
-      { tag: "MMM", color: VSE.fph, company: "Unilever — MMM driven 30 % efficiency lift", content: "Unilever (Dove, Hellmann's, Knorr) implementoval <b>MMM pro 400 brands globálně</b> 2018+. Insights: digital ROI 1.8× higher than TV pro Gen Z brands, but TV stále lepší pro mass FMCG. Reallocation budget = +30 % marketing efficiency. CEO Alan Jope (2022) volal MMM klíčovou capability." },
-      { tag: "INCREMENTALITY", color: VSE.success, company: "Meta Conversion Lift Studies", content: "Meta nabízí <b>Conversion Lift Studies</b> pro inzerenty 100k+ USD spend. A/B test: kontrolní skupina nevidí reklamy 7-14 dní vs exposed group. Měření true incremental conversions. Insights: 35-50 % konverzí v Last Click attribuovaných Meta byly false attribution. Klíčové pro budget reallocation." },
-      { tag: "MIS + DATA", color: VSE.danger, company: "Amazon — 1st-party data dominance", content: "Amazon je <b>etalon 1st-party data strategy</b>. 300M+ active customers, purchase data, browsing history, Alexa data, Prime Video viewing. <b>Žádná závislost na 3rd-party cookies</b>. Vlastní DSP (Demand-Side Platform) inzeruje Amazon-only audiences. CPM 30 % lower, conversion 3× higher než Google/Meta v retail." },
+      { company: "ROAS jako král online metrik", tag: "STŘÍTESKÝ", color: VSE.danger, content: "Stříteský nechce slyšet jen mit Google Analytics. Chce konkrétní metriky: ROAS (kolik korun tržeb na korunu reklamy), CTR (kolik lidí kliklo), CPA (kolik stojí jedna konverze). Kdo zná jen názvy nástrojů, ale ne metriky, neprojde." },
+      { company: "Pre-test šetří miliony", tag: "TESTY V ČASE", color: VSE.fis, content: "Slavné selhání: kampaň, která vtipně urazila cílovku, by se odhalila v pre-testu na focus group za pár tisíc. Bez pre-testu se to zjistí až po odvysílání za miliony. Proto se testuje předem." },
+      { company: "Komunikační vs prodejní efekt", tag: "EFEKTY", color: VSE.success, content: "Kampaň může zvednout zapamatovatelnost značky (komunikační efekt), ale prodeje se nehnou (prodejní efekt). Obojí se měří jinak a obojí může vyjít různě. Proto se sledují obě roviny." },
     ]
   };
 
-  const examQuestionsMkt16 = [
-    { komise: "2025-01-28 — Smrčka + Kolouchová + Říhová (PS firma)", otazka: "Výzkum marketingového výzkumu. Mediální výzkumy.", pozn: "Smrčka chytá <b>výzkum mkt + mediální výzkumy</b>. Naučit 5 typů (pre-test/tracking/post-test/MMM-MTA/mystery+social) + Brand Lift Study + MMM detail." },
-    { komise: "2025-06-10 — Double Stříteský + Müllerová (Neziskovka)", otazka: "Mediální výzkum — jak měříme reklamu, online, naučit se různý metriky", pozn: "Stříteský EXPLICITNĚ chce <b>jak měříme reklamu online + metriky</b>. Naučit Brand Lift Study + MMM + MTA (5 modelů) + incrementality testing + online metriky (M14 odkaz: CTR/CPC/CPM/CPA/ROAS)." },
-    { komise: "2025-06-04 — Mikovcová + Viktora + Kolouchová (Horská bouda)", otazka: "Výzkum marketingové komunikace", pozn: "Mikovcová otevřená otázka — naučit kompletní 5 typů výzkumu + TOTE model + Brand Health Tracker + funnel tracking." },
-    { komise: "2025-06-10 — Stříteský + Andera + Kučera (Developerská společnost)", otazka: "Výzkum marketingové komunikace, šlo dobře aplikovat na PS", pozn: "Stříteský chce <b>výzkum + aplikaci</b>. Pro developera: pre-test creative (lifestyle vs investiční), brand health tracker měsíčně, lead attribution per touchpoint." },
-    { komise: "2025-06-09 — Tahal + Lorencová + Schonfeld (Sucho)", otazka: "Marketingové a logistické informační systémy (zaměření hodně na data — jak se získávají, jaké druhy. Google Analytics nestačí!)", pozn: "Tahal EXPLICITNĚ chce <b>data acquisition</b>. Naučit 4 zdroje MIS (interní záznamy / mkt intelligence / mkt research / DSS) + primary/secondary + 1st/2nd/3rd party + GDPR + cookie-less era + analytical tooling (Adobe, Mixpanel, Brandwatch, Robyn, MMM platforms)." },
+  const flashcardsMkt16 = [
+    { q: "Fáze komunikační kampaně?", a: "Cíle → rozpočet → sdělení a média → realizace → měření. Kostra je 5M model (M13)." },
+    { q: "Co je výzkum mkt komunikace?", a: "Měření účinnosti komunikace, hlavně reklamy a jejího vlivu na nákupní chování. Cíl: zvýšit efektivitu." },
+    { q: "Co u komunikace měříme?", a: "Vnímání obsahu, emoční vazby, dosah CS, mediální chování, adekvátnost metod." },
+    { q: "Co u reklamy testujeme?", a: "Slova/slogany, obrazy/barvy, zvuky/melodie, osoby, kulturní fenomény a kreativitu." },
+    { q: "Pre-test, korekční test, post-test?", a: "Pre = před spuštěním (úprava). Korekční = během (akceptace, vedlejší efekty). Post = po skončení (zásah, rozpoznatelnost, výsledky)." },
+    { q: "Proč dělat pre-test?", a: "Ověřit reakci a upravit reklamu předtím, než se utratí peníze za nasazení. Levné a včas." },
+    { q: "Kvalitativní výzkum komunikace?", a: "Focus group, rozhovory. Hloubka porozumění, ale malé vzorky → nelze zobecnit." },
+    { q: "Kvantitativní výzkum komunikace?", a: "Standardizované metodiky, CATI, in-store. Velké vzorky, benchmarking, ale menší poznání příčin." },
+    { q: "Měření komunikačních efektů?", a: "Test vybavení (co si vybaví), test rozpoznání, přímé dotazování, test postojů, fyziologické testování." },
+    { q: "Měření prodejních efektů?", a: "Řízené experimenty (trh s kampaní vs bez) a analýza prodejních a reklamních dat." },
+    { q: "Reach × rating × GRP?", a: "Reach = % CS, která to viděla. Rating = % všech. GRP = intenzita = rating × frekvence." },
+    { q: "CTR a CPC?", a: "CTR = míra prokliku (kolik kliklo). CPC = cena za proklik." },
+    { q: "CPM a CPA?", a: "CPM = cena za 1000 zobrazení. CPA = cena za akci/konverzi." },
+    { q: "Co je ROAS?", a: "Return On Ad Spend = výnos / náklady na reklamu. Kolik korun tržeb přinesla 1 koruna reklamy." },
+    { q: "Komunikační × prodejní efekt?", a: "Komunikační = co se stalo v hlavě (zapamatování, postoj). Prodejní = co se stalo s tržbami." },
+    { q: "Co chce Stříteský u mediálního výzkumu?", a: "Konkrétní online metriky (CTR, CPC, CPM, CPA, ROAS), ne jen 'mám Google Analytics'." },
   ];
 
-  const podcastMkt16 = { title: "Marketing 16 — Výzkum mkt komunikace + MIS + data acquisition", description: "Definice výzkumu mkt komunikace + návaznost na M1, M13, M14. 5 typů výzkumu: Pre-testing (concept, animatic, focus groups, A/B, neuromarketing) / Tracking studie (Brand Health Tracker, TOTE model, funnel tracking) / Post-campaign effectiveness (Brand Lift Study) / MMM + MTA + Incrementality testing / Mystery shopping + Social listening. Pretest metriky (recall, brand linkage, purchase intent, likeability, comprehension, brand fit). MMM detail — input/output/use cases. MTA 5 modelů (Last Click/First Click/Linear/Time-decay/Data-driven). Mkt informační systém (MIS) Kotler 4 zdroje (interní záznamy/mkt intelligence/mkt research/DSS). Primary × Secondary data. 1st/2nd/3rd party data. Structured × Unstructured. Cookie-less era (Apple ATT, Google sunset). Privacy Sandbox. Analytical tooling (GA4, Adobe Analytics, Mixpanel, Tableau, Brandwatch, Sprinklr, Robyn MMM). P&G, Apple, Coca-Cola, Unilever, Meta, Amazon.", audioUrl: null, notebookLmUrl: null };
+  const quizMkt16 = [
+    { q: "Kostra plánování kampaně je:", opts: ["4P", "5M model (M13)", "SWOT", "PESTLE"], correct: 1 },
+    { q: "Výzkum mkt komunikace měří hlavně:", opts: ["Účetnictví", "Účinnost komunikace, hlavně reklamy", "Logistiku", "Cenu produktu"], correct: 1 },
+    { q: "Pre-test se dělá:", opts: ["Po kampani", "Před spuštěním, pro úpravu", "Během kampaně", "Nikdy"], correct: 1 },
+    { q: "Korekční test se dělá:", opts: ["Před spuštěním", "V průběhu kampaně", "Po skončení", "Místo pre-testu"], correct: 1 },
+    { q: "Post-test měří:", opts: ["Reakci před spuštěním", "Zásah, rozpoznatelnost, výsledky po skončení", "Rozpočet", "Cenu médií"], correct: 1 },
+    { q: "Kvalitativní výzkum má nevýhodu:", opts: ["Je drahý", "Malé vzorky → nelze zobecnit", "Je pomalý", "Nelze modifikovat"], correct: 1 },
+    { q: "CATI je metoda:", opts: ["Kvalitativní", "Kvantitativní (telefonické dotazování)", "Fyziologická", "Mediální"], correct: 1 },
+    { q: "Test vybavení měří:", opts: ["Tržby", "Co si lidé z reklamy vybaví", "Cenu", "Dosah"], correct: 1 },
+    { q: "Reach znamená:", opts: ["Intenzita", "% cílové skupiny, která reklamu viděla", "Cena za proklik", "Počet zobrazení"], correct: 1 },
+    { q: "GRP je:", opts: ["Cena za akci", "Intenzita = rating × frekvence", "Míra prokliku", "Dosah"], correct: 1 },
+    { q: "ROAS měří:", opts: ["Počet zobrazení", "Výnos / náklady na reklamu", "Míru prokliku", "Cenu za 1000 zobrazení"], correct: 1 },
+    { q: "Stříteský u mediálního výzkumu chce:", opts: ["Jen Google Analytics", "Konkrétní online metriky (CTR, CPC, ROAS)", "Pouze teorii", "Nic"], correct: 1 },
+  ];
+
+  const examQuestionsMkt16 = [
+    { komise: "LS 2025 — Mikovcová, Vávra, Viktora", otazka: "Marketingové výzkumy — stačily pre-testy, korekční testy, post-testy.", pozn: "🔴 Mikovcová cílí na trojici pre/korekční/post test. Umět, kdy se který dělá a co měří." },
+    { komise: "LS 2025 — Mikovcová, Viktora, Kolouchová", otazka: "Výzkum marketingové komunikace.", pozn: "Hodně se soustředí na případovku. Co měříme × testujeme × cíle + testy v čase." },
+    { komise: "LS 2025 — Double Stříteský, Müllerová", otazka: "Mediální výzkum — jak měříme reklamu, online, naučit se různé metriky.", pozn: "🔴 Stříteský EXPLICITNĚ chce online metriky: CTR, CPC, CPM, CPA, ROAS. Google Analytics nestačí." },
+    { komise: "LS 2025 — Stříteský, Andera, Kučera", otazka: "Výzkum marketingové komunikace — dobře aplikovat na případovku.", pozn: "Šlo dobře napojit na PS. Andera chce propojení s praxí. Logické otázky, ne memorování." },
+    { komise: "ZS 2026 — Heřman, Schovancová, Vávra", otazka: "Hromadná komunikace — plánování a řízení kampaně, 5M, jak se měří úspěšnost.", pozn: "Plánování kampaně (5M → M13) + jak měřit úspěšnost (komunikační + prodejní efekty). Aplikovat na PS." },
+    { komise: "ZS 2025 — Smrčka, Kolouchová, Říhová", otazka: "Výzkum marketingové komunikace. Mediální výzkumy.", pozn: "Smrčka chytá mediální výzkum — 3 fáze (pre/mid/post) + tradiční metriky (reach, GRP) + online." },
+  ];
+
+  const podcastMkt16 = { title: "Marketing 16 — Řízení a výzkum komunikační kampaně", description: "Postup komunikační kampaně (fáze, návaznost na 5M z M13). Výzkum mkt komunikace: co měříme × testujeme × cíle. Testy podle načasování (pre/korekční/post — Mikovcová). Kvalitativní × kvantitativní přístup. Měření komunikačních a prodejních efektů. Mediální výzkum a metriky: reach, GRP, CTR, CPC, CPM, CPA, ROAS (Stříteský).", audioUrl: null, notebookLmUrl: null };
 
   const examStrategyMkt16 = `
-    <b style="color:#A82A5F">1.</b> Začni definicí — <b>výzkum mkt komunikace = měření efektivity v rámci 5M (M13)</b>.<br/>
-    <b style="color:#A82A5F">2.</b> Návaznost na M1 (obecný MV), M12 (cenový výzkum), M13 (5M), M14 (online metriky).<br/>
-    <b style="color:#A82A5F">3.</b> ⚠️ <b>5 typů výzkumu komunikace</b> — Pre-test / Tracking / Post-test / MMM-MTA / Mystery+Social.<br/>
-    <b style="color:#A82A5F">4.</b> Pre-testing — concept, animatic, focus groups, A/B testing, neuromarketing. ROI 10-50×.<br/>
-    <b style="color:#A82A5F">5.</b> ⚠️ <b>Tracking studie</b> (Mikovcová!) — Brand Health Tracker, TOTE model, funnel tracking (awareness → loyalty).<br/>
-    <b style="color:#A82A5F">6.</b> ⚠️ <b>Post-test</b> — Brand Lift Study (exposed × control), benchmarks +3-7 pp awareness lift.<br/>
-    <b style="color:#A82A5F">7.</b> ⚠️ <b>MMM (top-down)</b> — statistická regrese, ROI per kanál, strategic allocation. P&G standard.<br/>
-    <b style="color:#A82A5F">8.</b> ⚠️ <b>MTA (bottom-up)</b> — 5 modelů: Last Click / First Click / Linear / Time-decay / Data-driven.<br/>
-    <b style="color:#A82A5F">9.</b> Incrementality testing — A/B geographic regions. Gold standard pro causation.<br/>
-    <b style="color:#A82A5F">10.</b> ⚠️ <b>MIS</b> (Tahal!) — 4 zdroje Kotler: interní záznamy / mkt intelligence / mkt research / DSS.<br/>
-    <b style="color:#A82A5F">11.</b> Druhy dat — primary × secondary / 1st × 2nd × 3rd party / structured × unstructured.<br/>
-    <b style="color:#A82A5F">12.</b> ⚠️ <b>Cookie-less era</b> — Apple ATT 2021, Google sunset 2025. Shift k 1st-party + server-side.<br/>
-    <b style="color:#A82A5F">13.</b> Analytical tooling — GA4 / Adobe / Mixpanel / Tableau / Brandwatch / Robyn MMM / Sprinklr.<br/>
-    <b style="color:#A82A5F">14.</b> Aplikace na PS — vybrat 2-3 metody podle cíle + sample + budget + tooling + GDPR.
+    <b style="color:#A82A5F">1.</b> <b>Postup kampaně</b>: cíle → rozpočet → sdělení a média → realizace → měření. Kostra = <b>5M model (M13)</b>.<br/>
+    <b style="color:#A82A5F">2.</b> <b>Výzkum komunikace</b>: co měříme (vnímání, dosah) × co testujeme (slogany, obrazy) × cíle (zaujetí, zapamatovatelnost).<br/>
+    <b style="color:#A82A5F">3.</b> 🔴 <b>Testy v čase</b> (Mikovcová): pre-test (před, úprava) / korekční (během) / post-test (po, výsledky).<br/>
+    <b style="color:#A82A5F">4.</b> <b>Kvalitativní × kvantitativní</b> — focus group (hloubka, malé vzorky) × standardizované (benchmarking, velké vzorky).<br/>
+    <b style="color:#A82A5F">5.</b> <b>Efekty</b>: komunikační (test vybavení, rozpoznání, postoje) + prodejní (experimenty, analýza dat).<br/>
+    <b style="color:#A82A5F">6.</b> 🔴 <b>Mediální metriky</b> (Stříteský): reach, GRP + online CTR, CPC, CPM, CPA, <b>ROAS</b>.<br/>
+    <b style="color:#A82A5F">7.</b> <b>Napoj na případovku</b> — pro firmu z PS navrhni, jak by kampaň vypadala a jak by se měřila.
   `;
 
   const caseStudyMkt16 = {
-    title: "Karolína — Head of Insights v Bonduelle CZ, marketing food retail (140 mil. Kč obrat, 50 zaměstnanců)",
-    subtitle: "Postavit research strategy pro relaunch značky + měřit efektivitu kampaně 25 mil. Kč",
-    scenario: "Karolína (36 let) je nová Head of Insights v Bonduelle CZ tři měsíce. Firma je český branch francouzského FMCG (konzervovaná zelenina, fazole, kukuřice). Distribuováno v Albertu, Lidlu, Tescu — celý retail. CMO Lucie ji najala s jasným úkolem: postavit research strategy pro velký relaunch značky příští rok, kdy bude 25 mil. Kč budget na kampaň, a CFO chce vědět ROI.\n\nProblém je, že Bonduelle CZ nemá žádnou strukturovanou research infrastrukturu. Předchozí marketing tým spoléhal na 'gut feeling' + ad hoc focus groups jednou ročně. Brand health metrics nikdo netrackuje. Last creative kampaň 2023 vyšla 18 mil. Kč, ale firma neví, jestli přinesla nějaký lift v awareness nebo sales — žádná pre/post measurement.\n\nKonkurence (Vitana, Knorr od Unilever, lokální dodavatelé) má sofistikovaný research. Unilever dělá monthly Brand Health Tracker. Vitana měsíční social listening. Bonduelle je v Top 3 v konzervách (15 % market share), ale share klesá poslední 3 roky (z 19 %). CMO Lucie podezřívá, že nemají správnou attribution a budget jde do špatných kanálů.\n\nKarolína má 6 měsíců a 1.5 mil. Kč research budget na rok 1. Tři otázky si zapsala: Jak postavit baseline research infrastrukturu (pre-test + tracking + MMM)? Jak měřit 25M Kč kampaň, aby CFO viděl konkrétní ROI? A jak zjistit, jestli ten 4pp share decline je kvůli komunikaci, produktu, distribuci, nebo ceně?",
+    title: "Marek — marketér v EcoHome, e-shopu s udržitelnými potřebami",
+    subtitle: "Naplánuj měření kampaně před spuštěním i po něm",
+    scenario: "Marek (29) chystá první velkou kampaň pro EcoHome, e-shop s ekologickými produkty pro domácnost. Rozpočet 2 miliony, kombinace TV spotu a online reklamy. Šéfka Jana chce na konci vědět jediné: vyplatilo se to?\n\nMarek ví, že reklama musí být odladěná, než ji pustí — má dvě verze spotu a neví, která zabere líp. Taky se bojí, aby spot omylem nepůsobil mentorsky a neodradil lidi.\n\nU online části má jasno míň. Jana se ho zeptala, jak pozná, že online reklama funguje, a Marek řekl, že má Google Analytics. Jana chce konkrétnější čísla — kolik stojí jeden zákazník a jestli každá investovaná koruna přinesla víc, než stála.\n\nNa konci kampaně chce Marek změřit dvě věci: jestli si lidé EcoHome víc pamatují a jestli se zvedly tržby.",
     signals: [
-      { text: "žádnou strukturovanou research infrastrukturu", color: VSE.danger, reason: "Klíčový problém — bez MIS (Marketing Information System) firma jede naslepo. Tahal chytá! Potřeba <b>4 zdroje dat (Kotler)</b> — interní záznamy + mkt intelligence + mkt research + DSS." },
-      { text: "Last creative kampaň 2023 vyšla 18 mil. Kč, ale firma neví, jestli přinesla nějaký lift", color: VSE.danger, reason: "Klasický problém — <b>žádný pre/post measurement</b>. Potřeba <b>Brand Lift Study</b> (Smrčka chytá!) pro future kampaně. 18 mil. Kč bez měření = pravděpodobně 50 % wasted." },
-      { text: "Unilever dělá monthly Brand Health Tracker", color: VSE.warning, reason: "<b>Konkurenční benchmark</b> — Bonduelle musí postavit tracker minimálně kvartálně, aby viděla trendy + reagovala. P&G/Unilever model." },
-      { text: "Bonduelle je v Top 3 v konzervách (15 % market share), ale share klesá poslední 3 roky (z 19 %)", color: VSE.fph, reason: "<b>4 pp share decline za 3 roky</b> vyžaduje <b>root cause analysis</b>. Mohou být 4 příčiny: komunikace (M16!), produkt (M9), distribuce (M14 logistika), cena (M11). Research musí identifikovat." },
-      { text: "CFO chce vědět ROI", color: VSE.danger, reason: "Klasický CFO demand. Vyžaduje <b>MMM (Marketing Mix Modeling)</b> pro per-channel ROI + <b>Brand Lift Study</b> pro brand metrics + <b>MTA</b> pro digital attribution." },
-      { text: "1.5 mil. Kč research budget na rok 1", color: VSE.warning, reason: "<b>Limitovaný budget</b> — vyžaduje strategická volba 2-3 metod (Pre-test + Brand Health Tracker + MMM lite), ne všech 5 typů." },
+      { text: "má dvě verze spotu a neví, která zabere líp", color: VSE.fis, reason: "Případ pro pre-test — otestovat obě verze na focus group před spuštěním a vybrat lepší." },
+      { text: "aby spot omylem nepůsobil mentorsky a neodradil lidi", color: VSE.warning, reason: "Pre-test odhalí nežádoucí asociace dřív, než se utratí 2 miliony. Levná pojistka." },
+      { text: "Marek řekl, že má Google Analytics", color: VSE.danger, reason: "Přesně to, co Stříteský odmítá. Google Analytics není metrika — Marek musí znát CTR, CPA, ROAS." },
+      { text: "kolik stojí jeden zákazník a jestli každá investovaná koruna přinesla víc", color: VSE.danger, reason: "CPA (cena za akci/zákazníka) a ROAS (výnos/náklady na reklamu). Konkrétní online metriky." },
+      { text: "jestli si lidé EcoHome víc pamatují a jestli se zvedly tržby", color: VSE.success, reason: "Dvě roviny: komunikační efekt (zapamatování — test vybavení) a prodejní efekt (tržby — analýza dat)." },
     ],
     quiz1: {
-      question: "Co je hlavní research challenge Karolíny?",
+      question: "Jak Marek vyřeší dvě verze spotu?",
       options: [
-        "Příliš mnoho dat",
-        "Špatný produkt",
-        "Žádná baseline research infrastruktura + potřeba měřit 25M Kč kampaň ROI + identifikovat příčinu 4pp share decline",
-        "Nedostatek financí",
+        "Pustí obě v TV a uvidí",
+        "Pre-test na focus group před spuštěním — vybere lepší verzi a odhalí nežádoucí asociace, než se utratí rozpočet",
+        "Post-test po kampani",
+        "Nechá rozhodnout šéfku",
       ],
-      correct: 2,
+      correct: 1,
     },
     quiz2: {
-      question: "Jak by Karolína měla postavit research strategy pro Bonduelle CZ v 6 měsících + 1.5 mil. Kč?",
+      question: "Jak Marek nastaví celé měření?",
       options: [
-        { text: "Pre-test infrastructure: Concept testing 3-5 creative options PŘED launchem nové kampaně, focus groups (2 sessions x 200k), animatic testing top spotu (300k). Total 700k.", correct: true, reason: "✓ Klasický pre-test approach. Chrání 25M Kč investici. ROI 35×. Nezbytné pro Bonduelle bez historických research." },
-        { text: "Brand Health Tracker — kvartálně, 500 respondentů per wave (cílovka 30-60 let, supermarket shoppers). 250k per wave × 4 = 1M ročně. Metriky: awareness/consideration/preference/NPS/brand attributes.", correct: true, reason: "✓ Long-term tracking essential. Levnější verze než monthly (P&G/Unilever). Catch up postupně." },
-        { text: "Brand Lift Study post-launch kampaně 25M Kč — Google Brand Lift (free pro YouTube ads) + Nielsen Brand Lift Study pro TV (400k). Měření awareness lift +3-7 pp benchmark.", correct: true, reason: "✓ Direct ROI proof pro CFO. Brand Lift Study standardní pro CMO accountability." },
-        { text: "MMM lite — analýza 2 let weekly sales × spend per kanál + externí faktory. Open-source Robyn (Meta) nebo LightweightMMM (Google), in-house data scientist. Cena 100k Kč setup + 50k Kč ročně.", correct: true, reason: "✓ MMM identifikuje, kam dát budget. Tahal chytá! Open-source levné. Strategic allocation." },
-        { text: "Root cause analysis pro 4 pp share decline — separátní studie: 1) Communication audit (vlastní + konkurence advertising), 2) Product research (Conjoint + Kano, M9), 3) Distribution check (mystery shopping v Albertech), 4) Price elasticity (Gabor-Granger, M12)", correct: true, reason: "✓ Komplexní root cause analysis. Identifikuje pravou příčinu před investicí 25M Kč. Cross-functional research." },
-        { text: "Mystery shopping v top 30 supermarketech (Albert/Lidl/Tesco/Penny) — visibility, planogram compliance, sales talk recommendations. Cena 150k Kč. Konkurenční intelligence.", correct: true, reason: "✓ Real-world brand experience check. Identifikuje, jestli problém je v retail execution vs komunikace." },
-        { text: "Social listening setup — Brandwatch nebo Talkwalker subscription (300k Kč ročně). Monitoring social mentions, sentiment, share of voice vs Vitana/Knorr.", correct: true, reason: "✓ Continuous brand health metric. Real-time crisis detection + competitive intelligence." },
-        { text: "1st-party data strategy — newsletter subscription + loyalty program app (in-house s IT týmem). Cookie-less era prep. Direct customer relationship.", correct: true, reason: "✓ Tahal chytá data acquisition! Klíčové pro cookie-less era. Long-term asset." },
-        { text: "Žádný research, jet podle gut feel", correct: false, reason: "✗ 25M Kč bez research = predictable failure. CFO tlačí na accountability. Research za 1.5M chrání 25M investici." },
-        { text: "Pouze Google Analytics free tracking", correct: false, reason: "✗ Tahal chytá: &quot;Google Analytics mu nestačí&quot;! GA4 je basic web tracking. Pro FMCG brand research potřeba MIS approach (4 zdroje)." },
+        { text: "Pre-test obou spotů na focus group — vybrat lepší, odhalit špatné asociace", correct: true, reason: "✓ Pre-test před spuštěním šetří rozpočet a ladí kreativu." },
+        { text: "Online měřit přes CTR, CPA a ROAS — ne jen 'mám Google Analytics'", correct: true, reason: "✓ Konkrétní metriky. CPA = cena za zákazníka, ROAS = výnos na korunu reklamy. Přesně co Jana (i Stříteský) chce." },
+        { text: "Po kampani komunikační efekt: test vybavení (pamatují si EcoHome?)", correct: true, reason: "✓ Komunikační efekt měří, co se stalo v hlavě — zapamatovatelnost značky." },
+        { text: "Po kampani prodejní efekt: analýza tržeb před/během/po kampani", correct: true, reason: "✓ Prodejní efekt měří dopad na tržby — analýza prodejních dat." },
+        { text: "Spolehnout se jen na pocit, že kampaň byla hezká", correct: false, reason: "✗ Bez měření nelze říct, jestli se vyplatila. Jana chce čísla, ne pocity." },
+        { text: "Měřit jen zapamatovatelnost a tržby ignorovat", correct: false, reason: "✗ Kampaň může zvednout povědomí, ale ne prodej. Měřit obě roviny." },
       ],
     },
-    summary: "<b>Karolína potřebuje postavit kompletní research infrastrukturu — baseline tracking + pre/post test budoucí kampaně + MMM pro budget allocation + root cause analysis pro share decline.</b><br/><br/><b>6-měsíční plán (1.5 mil. Kč):</b><br/><br/>• <b>Měsíc 1 (Foundation, 300k):</b> Setup analytical tooling — Brandwatch social listening (annual sub 200k), GA4 + custom dashboard (interní), data warehouse setup (50k), 1st-party data strategy (newsletter + loyalty app planning, 50k).<br/><br/>• <b>Měsíc 2-3 (Baseline + Root Cause, 500k):</b> Brand Health Tracker wave 1 (250k — 500 respondentů, full setup pro recurring). Root cause analysis pro 4pp share decline (250k) — communication audit + mystery shopping (150k) + product survey (100k).<br/><br/>• <b>Měsíc 3-4 (Pre-test pro 25M kampaň, 500k):</b> Concept testing 3 creative options (200k) + 2 focus groups (200k) + animatic testing top spotu (100k). PŘED produkcí TV. ROI: 25M chráněno research za 500k = 50× ROI.<br/><br/>• <b>Měsíc 5-6 (MMM + Post-test, 200k):</b> MMM setup s open-source Robyn (100k — in-house data analyst + setup). Brand Lift Study post-launch (Google free pro YouTube + 100k Nielsen pro TV).<br/><br/>• <b>Continuous (annual):</b> Brand Health Tracker kvartálně (4 × 250k = 1M ročně), Brandwatch social listening (200k ročně). Total recurring: 1.2M ročně.<br/><br/>• <b>Měření výsledků:</b> Pre-launch baseline (awareness/consideration/NPS) → Post-launch lift (+5-7 pp target) → MMM výsledky (budget reallocation pro Year 2) → market share recovery z 15 % na 17-18 %.<br/><br/><b>Pro komisi:</b> Klasický scenario research-deficient FMCG firmy. <b>P&G (sophisticated research)</b>, <b>Unilever (MMM + tracking)</b>, <b>Coca-Cola (global brand tracker)</b>, <b>Amazon (1st-party data)</b> jako benchmark. <b>5 typů výzkumu</b> (Smrčka/Stříteský) + <b>MMM + MTA + Brand Lift</b> + <b>MIS 4 zdroje Kotler + cookie-less era data strategy</b> (Tahal). Anti-vzor: gut feel + ad hoc focus groups = 50 % wasted spend. Vzor: <b>structured research infrastruktura + pre/post measurement + continuous tracking + 1st-party data</b>.",
+    summary: "<b>Dobrá kampaň se měří před spuštěním i po něm — a online potřebuje konkrétní metriky.</b><br/><br/><b>Co Marek udělá:</b><br/>• <b>Pre-test</b> obou verzí spotu na focus group → vybere lepší a odhalí nežádoucí asociace, než utratí 2 miliony<br/>• <b>Online metriky</b>: CTR (kliky), CPA (cena za zákazníka), ROAS (výnos na korunu reklamy) — ne jen &quot;mám Google Analytics&quot; (to Stříteský odmítá)<br/>• <b>Po kampani komunikační efekt</b>: test vybavení — pamatují si EcoHome?<br/>• <b>Po kampani prodejní efekt</b>: analýza tržeb před/během/po<br/><br/><b>Pro komisi:</b> Tohle spojuje celý okruh — řízení kampaně (fáze, 5M z M13) a její výzkum (testy v čase, efekty, metriky). Klíč: <b>pre-test</b> ladí před spuštěním, <b>post-test</b> vyhodnocuje, měříme <b>komunikační i prodejní efekt</b>, a online <b>konkrétní metriky</b> (ROAS, CPA), ne jen názvy nástrojů. A napoj na případovku.",
   };
 
   return (
     <OkruhPanel
-      subject="Marketing" subjectId="marketing" number={16} title="Výzkum mkt komunikace + Mediální výzkum + MIS"
-      subtitle="5 typů výzkumu + Brand Lift + MMM + MTA + Incrementality + MIS 4 zdroje + cookie-less era"
+      subject="Marketing" subjectId="marketing" number={16} title="Řízení a výzkum komunikační kampaně"
+      subtitle="Postup kampaně, výzkum komunikace, pre/post testy, efekty, mediální metriky"
       color={VSE.fis}
-      questionText="Výzkum marketingové komunikace + mediální výzkumy + marketingový informační systém."
-      sloz={3} roz={4} freq={4}
-      examStrategy={examStrategyMkt16}
+      questionText="Řízení marketingové kampaně a výzkum marketingové komunikace — testy, efekty, mediální metriky"
+      sloz={3} roz={3} freq={3}
       studySections={studySectionsMkt16}
       flashcards={flashcardsMkt16}
       quiz={quizMkt16}
       praxe={praxeMkt16}
       examQuestions={examQuestionsMkt16}
       podcast={podcastMkt16}
+      examStrategy={examStrategyMkt16}
       caseStudy={caseStudyMkt16}
     />
   );
 }
 
-/* ════════════════════════════════════════════════════════
-   MARKETING 17 — Řízení marketingových kampaní (CAPSTONE — integrace M13-M16)
-   ════════════════════════════════════════════════════════ */
-function OkruhMkt17Panel() {
-  const studySectionsMkt17 = [
-    { id: "intro", title: "Řízení mkt kampaní — capstone okruh", subtitle: "Integrace M13 + M14 + M15 + M16 do end-to-end procesu", color: VSE.fis, emoji: "compass",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Řízení marketingových kampaní (Campaign Management)</b> = end-to-end proces od strategického plánování po post-launch evaluation. <b>Capstone okruh</b> — integruje teorii z M13-M16. Komise <b>Heřman, Nový, Stříteský</b> chytá explicitně.
-        </Def>
-        <Tag color={VSE.fis}>Návaznost — kde se který předmět propojuje</Tag>
-        <Bullet items={[
-          "<b>M13 (IMK + 5M):</b> Plánovací framework — Mission, Money, Message, Media, Measurement.",
-          "<b>M14 (hromadná komunikace):</b> Execution kanály — reklama, PR, sponzoring, events.",
-          "<b>M15 (osobní komunikace):</b> Direct mkt + osobní prodej + ABM pro B2B.",
-          "<b>M16 (výzkum komunikace):</b> Pre-test → tracking → post-test → MMM/MTA.",
-          "<b>M17 (řízení kampaní):</b> Integrace všeho + procesní řízení + agency + project mgmt.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>5 fází kampaně lifecycle</Tag>
-        <div style={{ display: "flex", justifyContent: "center", margin: "12px 0 8px" }}>
-          <svg viewBox="0 0 720 200" style={{ width: "100%", maxWidth: 720, height: "auto" }}>
-            <defs>
-              <marker id="arrowCampaign" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#888"/>
-              </marker>
-            </defs>
-            {[
-              { x: 20, c: VSE.fph, icon: "📋", t: "BRIEF" },
-              { x: 160, c: VSE.warning, icon: "📐", t: "PLAN" },
-              { x: 300, c: VSE.fmv, icon: "🎨", t: "CREATIVE" },
-              { x: 440, c: VSE.success, icon: "🚀", t: "EXECUTE" },
-              { x: 580, c: VSE.fis, icon: "📊", t: "EVALUATE" },
-            ].map((s, i) => (
-              <g key={i}>
-                <rect x={s.x} y="55" width="120" height="100" rx="10" fill={s.c} opacity="0.85"/>
-                <text x={s.x + 60} y="92" textAnchor="middle" fontSize="28" fill="#fff">{s.icon}</text>
-                <text x={s.x + 60} y="120" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="Inter Tight">{s.t}</text>
-                <text x={s.x + 60} y="138" textAnchor="middle" fontSize="9" fill="#fff" fontFamily="Inter Tight">{i === 0 ? "client → agency" : i === 1 ? "5M + media" : i === 2 ? "concept + creative" : i === 3 ? "launch + manage" : "MMM + learnings"}</text>
-              </g>
-            ))}
-            {[140, 280, 420, 560].map((x, i) => (
-              <line key={i} x1={x} y1="105" x2={x + 18} y2="105" stroke="#666" strokeWidth="2.5" markerEnd="url(#arrowCampaign)"/>
-            ))}
-            <text x="360" y="180" textAnchor="middle" fontSize="11" fontWeight="700" fill={VSE.fis} fontFamily="Inter Tight">End-to-end campaign lifecycle</text>
-          </svg>
-        </div>
-        <Tag color={VSE.fph}>Klíčové role v kampani</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "👔 CMO / MARKETING DIRECTOR", d: "Strategická accountability. Brief approval, budget, KPIs, board reporting." },
-            { c: VSE.warning, t: "🎯 BRAND MANAGER / CAMPAIGN MANAGER", d: "Day-to-day řízení. Koordinace agency, internal stakeholders, deadlines." },
-            { c: VSE.fph, t: "🎨 CREATIVE AGENCY", d: "Concept, creative production. McCann, Ogilvy, Wieden+Kennedy. ČR: AKQA, Triad, McCann Prague." },
-            { c: VSE.success, t: "📺 MEDIA AGENCY", d: "Media planning + buying. GroupM, OMG, Publicis. ČR: Mindshare, Carat, Initiative." },
-            { c: VSE.danger, t: "📊 RESEARCH AGENCY", d: "Pre/post measurement. Kantar, Nielsen, IPSOS. ČR: Median, STEM/MARK, Confess Research." },
-            { c: VSE.fis, t: "🏢 IN-HOUSE TÝM", d: "Designer, copywriter, performance specialist, data analyst. Rostoucí trend — Adidas, Loreal in-house creative." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <ExamAlert
-          komise="Nový + Kolouchová + Svobodová 2025 + Heřman 2026 + Stříteský Double 2025"
-          what="3 komise chytají <b>řízení mkt kampaní</b>. Capstone otázka — naučit 5 fází lifecycle + brief structure + 5M aplikace + měření + agency mgmt."
-        />
-      </div>) },
 
-    { id: "brief", title: "Brief — fáze 1 (basis kampaně)", subtitle: "Co je správný brief + struktura + 4 typy briefů", color: VSE.fis, emoji: "scroll",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Marketing brief</b> = dokument, který klient (firma) předává agentuře. <b>Bez kvalitního briefu nelze očekávat kvalitní kampaň.</b> &quot;Garbage in, garbage out.&quot; Klíčový dokument celé kampaně.
-        </Def>
-        <Tag color={VSE.fis}>Struktura kvalitního briefu (Kotler + best practice)</Tag>
-        <Bullet items={[
-          "<b>1. Background:</b> Kontext firmy, produktu, historie kampaní. Co se dělo doteď.",
-          "<b>2. Challenge / Business problem:</b> Co řešíme? (sales decline, awareness gap, new product launch). NE řešení — JEN problém.",
-          "<b>3. Target audience:</b> Detail cílovky — demografie, psychografie, behavior, pain points (M3 personas).",
-          "<b>4. Insight:</b> Klíčové konsumer insight — co cílovka myslí/cítí/dělá, co je relevant pro brand.",
-          "<b>5. Objectives:</b> SMART cíle — Specific, Measurable, Achievable, Relevant, Time-bound. Z 5M Mission (M13).",
-          "<b>6. Key message:</b> Co chceme komunikovat? Single-minded proposition (SMP) — JEDNA hlavní myšlenka.",
-          "<b>7. Reasons to believe (RTB):</b> Proč by tomu klient měl věřit? Fakty, social proof, testimonials.",
-          "<b>8. Tonality + brand guidelines:</b> Jak má kampaň znít/vypadat? Premium × playful × technical?",
-          "<b>9. Mandatory / Considerations:</b> Logo placement, legal disclaimer, color codes.",
-          "<b>10. Budget + timing + deliverables:</b> Kdy musí být co hotovo. Milestones + final delivery.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>4 typy briefů</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "📋 CLIENT BRIEF (od firmy)", d: "Klient (CMO/brand manager) předává agentuře. Strategický pohled — co a proč. 5-15 stran." },
-            { c: VSE.warning, t: "🎯 STRATEGIC BRIEF (interní agency)", d: "Strategist v agency převede client brief do strategic brief. Insight + Single-minded proposition. 2-3 strany." },
-            { c: VSE.fph, t: "🎨 CREATIVE BRIEF (pro creative team)", d: "Kreativní directors + copywriteri/art directori. Tonality, mandatories, deliverables. 1-2 strany." },
-            { c: VSE.success, t: "📺 MEDIA BRIEF (pro media agency)", d: "Cílovka detail, GRP target, reach/frequency, budget allocation, timing. Z M14 + M16 výzkumu." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.fph}>Top 5 chyb v briefu (anti-vzor)</Tag>
-        <Bullet items={[
-          "<b>❌ Příliš mnoho cílů</b> — &quot;awareness + sales + brand image + loyalty&quot;. Single-minded proposition!",
-          "<b>❌ Cílovka &quot;everyone&quot;</b> — bez konkrétní persona = generic messaging.",
-          "<b>❌ Žádný insight</b> — jen faktický popis produktu, ne emocionální spojení.",
-          "<b>❌ Žádné KPIs / měření</b> — &quot;dělej to dobře&quot; není measurable.",
-          "<b>❌ Brief delivered late</b> — agency má 24 h na response místo 2 týdnů.",
-        ]} color={VSE.fph} />
-      </div>) },
 
-    { id: "planning", title: "Planning — fáze 2 (5M aplikace na kampaň)", subtitle: "Aplikace 5M frameworku z M13 + media + research", color: VSE.fis, emoji: "target",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Campaign planning</b> = převod briefu do konkrétního plánu. Aplikace <b>5M frameworku (M13)</b> + integrace M14 (media) + M16 (research). Trvá 2-6 týdnů podle komplexnosti.
-        </Def>
-        <Tag color={VSE.fis}>5M aplikace na konkrétní kampaň</Tag>
-        <Bullet items={[
-          "<b>🎯 MISSION:</b> Konkretizovat cíle — &quot;+15 % aided awareness do Q4&quot;, &quot;100k qualified leads&quot;, &quot;+8 % sales lift&quot;. SMART format.",
-          "<b>💰 MONEY:</b> Budget breakdown — kreativa (15-20 %), media (60-70 %), research (3-5 %), production (10-15 %).",
-          "<b>💬 MESSAGE:</b> Single-minded proposition + 3-5 supporting messages. Brand voice + tone. Pre-test concept (M16!).",
-          "<b>📺 MEDIA:</b> Media mix podle cílovky — TV/digital/OOH/print/social. Reach × frequency × GRP plánování (M14).",
-          "<b>📊 MEASUREMENT:</b> Pre-test → tracking → post-test plán. KPIs definované UPFRONT, ne ex post (M16).",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Media planning detail</Tag>
-        <Bullet items={[
-          "<b>Reach × Frequency × Impact</b> trade-off (M14). Effective frequency 3-7×.",
-          "<b>Flighting × Pulsing × Continuous</b> patterns:",
-          "&nbsp;&nbsp;Flighting = burst kampaně + off periods (Coca-Cola Christmas).",
-          "&nbsp;&nbsp;Pulsing = continuous low + peaks (FMCG standard).",
-          "&nbsp;&nbsp;Continuous = stejná intenzita (B2B SaaS).",
-          "<b>Channel mix</b> podle cílovky (M3 segmentace) + product (M8 PLC) + budget.",
-          "<b>Media allocation</b>: launch fáze (heavy spend) → maintenance (lower) → tactical bursts.",
-          "<b>Programmatic vs reservation</b> — 80 % digital display dnes programmatic (real-time bidding).",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Gantt chart + project timeline (klasické)</Tag>
-        <Bullet items={[
-          "<b>T-12 týdnů:</b> Client brief delivered.",
-          "<b>T-10 týdnů:</b> Strategic + creative brief.",
-          "<b>T-8 týdnů:</b> Concept presentation + pre-test (M16).",
-          "<b>T-6 týdnů:</b> Production start (TV natáčení, foto shoot).",
-          "<b>T-4 týdny:</b> Media plan locked, ads trafficked.",
-          "<b>T-2 týdny:</b> Final approvals, asset delivery.",
-          "<b>T-0:</b> Launch.",
-          "<b>T+2 týdny:</b> First post-launch performance review.",
-          "<b>T+8 týdnů:</b> Brand Lift Study results.",
-          "<b>T+12 týdnů:</b> Full campaign post-mortem + learnings.",
-        ]} color={VSE.fph} />
-      </div>) },
-
-    { id: "execution", title: "Execution — fáze 3+4 (creative + launch)", subtitle: "Creative production + media buying + launch management", color: VSE.fis, emoji: "construction",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Execution</b> = transformace plánu do reality. Creative production + media buying + launch management + crisis prevention. Nejvíc operational fáze.
-        </Def>
-        <Tag color={VSE.fis}>Creative production</Tag>
-        <Bullet items={[
-          "<b>Concept development:</b> 3-5 directions od creative agency. Client vybere 1, pak refinement.",
-          "<b>Storyboard / animatic:</b> Vizualizace TV spotu PŘED výrobou. Pre-test (M16) na 100-300k.",
-          "<b>Production:</b> Natáčení TV (2-10M Kč), foto shoot (200-800k), digital assets (50-500k), copywriting (50-300k).",
-          "<b>Post-production:</b> Editing, color grading, sound design, VFX.",
-          "<b>Asset adaptace:</b> Master asset → 30s TV + 15s cutdown + 6s bumper + social cuts + statics + banners. 1 koncept → 50+ assets.",
-          "<b>Legal + brand approval:</b> Compliance check, brand guidelines compliance.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Media buying + trafficking</Tag>
-        <Bullet items={[
-          "<b>Media buying:</b> Nákup ad space — TV stanice, programmatic platforms, sociální sítě.",
-          "<b>Ad trafficking:</b> Upload assets do platforem (Google Ads, Meta, TV broadcaster systems). Set targeting + bidding.",
-          "<b>Quality assurance:</b> Test all creative variants, all devices, all browsers PŘED launch.",
-          "<b>Programmatic setup:</b> Demand-Side Platform (DSP) konfigurace — Google DV360, The Trade Desk, Adform.",
-          "<b>Frequency capping:</b> Limit, kolikrát uvidí jeden user reklamu. 3-7× optimum, víc = wear-out.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Launch + real-time management</Tag>
-        <Bullet items={[
-          "<b>Launch day:</b> Coordinated start napříč kanály. PR push, sociální posts, paid kampaně aktivace.",
-          "<b>Real-time monitoring:</b> First 48 h kritické. Sledování CTR, conversion, social sentiment.",
-          "<b>A/B testing v real-time:</b> 3-5 creative variants, killing underperformers po 7-14 dnech.",
-          "<b>Budget reallocation:</b> Move spend od underperforming kanálů (Google search vs Meta) na top performers.",
-          "<b>Bid optimization:</b> Increase bids na high-converting placements, decrease na low.",
-          "<b>Daily / Weekly reports</b> pro brand manager + CMO. Quarterly board reports.",
-        ]} color={VSE.fph} />
-        <Tag color={VSE.danger}>Crisis management v kampani</Tag>
-        <Bullet items={[
-          "<b>Pre-launch crisis prep:</b> Scenario planning — co když cílovka reaguje negativně? Co když negative PR? Backup creative.",
-          "<b>Negative sentiment spike:</b> Real-time social listening (M16) detekuje. Plán response do 24 h.",
-          "<b>Pull / Pause vs Continue:</b> Když kampaň selhává, kdy zastavit? Decision matrix — sales lift × brand sentiment × cost.",
-          "<b>Příklady:</b> Pepsi Kendall Jenner ad 2017 (stažena za 24 h), Dove ad 2017 (omluva + stažena), H&M 2018 hoodie controversy.",
-          "<b>Crisis PR:</b> Apology + corrective action. KFC FCK (positive case study M13).",
-        ]} color={VSE.danger} />
-      </div>) },
-
-    { id: "evaluation", title: "Evaluation — fáze 5 (post-launch + learnings)", subtitle: "Měření výsledků + atribuce + learnings pro další kampaň", color: VSE.fis, emoji: "chart",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Post-launch evaluation</b> = systematické vyhodnocení kampaně + learnings pro budoucnost. Vrací nás zpět k M16 výzkum. Bez evaluation = neuvidíš learnings + opakuješ chyby.
-        </Def>
-        <Tag color={VSE.fis}>3 vrstvy evaluation</Tag>
-        <ResponsiveGrid cols3>
-          {[
-            { c: VSE.fmv, t: "📊 OPERATIONAL (denní)", d: "Real-time dashboards. CTR, CPC, impressions, daily sales. Pro brand managera + agency." },
-            { c: VSE.warning, t: "📈 TACTICAL (týdenní/měsíční)", d: "Cohort analysis, attribution model, sales lift per kanál. Pro CMO + marketing tým." },
-            { c: VSE.fph, t: "🎯 STRATEGIC (kvartálně/ročně)", d: "Brand Health Tracker, MMM, market share analysis. Pro board + investment decisions." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.warning}>KPIs hierarchie pro kampaň</Tag>
-        <Bullet items={[
-          "<b>📈 Business KPIs (top):</b> Sales lift, market share gain, revenue growth, profit lift.",
-          "<b>🎯 Brand KPIs (middle):</b> Awareness lift, brand consideration, NPS, brand image attributes.",
-          "<b>📺 Marketing KPIs (operational):</b> Reach, frequency, GRP, CPM, CPC, CTR, conversion rate.",
-          "<b>👀 Engagement KPIs:</b> Time on page, video views, social engagement rate, email open rate.",
-          "<b>💰 Financial KPIs:</b> ROI, ROAS, CAC, CLV, payback period.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Post-mortem workshop (best practice)</Tag>
-        <Bullet items={[
-          "<b>Timing:</b> 4-8 týdnů po skončení kampaně (data finalizovaná).",
-          "<b>Participants:</b> Brand manager + CMO + agency leadership + research lead.",
-          "<b>Struktura:</b>",
-          "&nbsp;&nbsp;<b>1. What worked?</b> Top 3 učení co fungovalo (creative, kanály, timing).",
-          "&nbsp;&nbsp;<b>2. What didn't?</b> Top 3 učení co nefungovalo (overspent kanály, weak creative).",
-          "&nbsp;&nbsp;<b>3. Why?</b> Root cause analýza (data + qualitative insights).",
-          "&nbsp;&nbsp;<b>4. What's next?</b> Action items + recommendations pro další kampaň.",
-          "<b>Output:</b> Post-mortem report (10-30 stran) + presentation pro board. Knowledge management.",
-        ]} color={VSE.fph} />
-        <Tag color={VSE.success}>Learnings → next campaign cycle</Tag>
-        <Bullet items={[
-          "<b>Creative learnings:</b> Které messages fungovaly nejlépe? Které appeals (M14)?",
-          "<b>Audience learnings:</b> Která persona reagovala nejlíp? Kde jsme přeinvestili / underinvestovali?",
-          "<b>Channel learnings:</b> ROI per kanál — kam dát víc, kam míň next time (MMM output).",
-          "<b>Timing learnings:</b> Když fungovala kampaň nejvíc? Day-parts, dny, sezónnost.",
-          "<b>Operational learnings:</b> Co zlepšit v procesu — brief quality, agency response, vendor performance.",
-        ]} color={VSE.success} />
-      </div>) },
-
-    { id: "agency", title: "Agency management + relationship + budgeting", subtitle: "Spolupráce s agency + budget management + KPI accountability", color: VSE.fis, emoji: "people",
-      content: (<div>
-        <Def color={VSE.fis}>
-          <b>Agency management</b> = řízení vztahu klient ↔ agency. Klíčové pro velké kampaně. Bez správného agency relationship management = horší kreativa + dražší execution.
-        </Def>
-        <Tag color={VSE.fis}>Typy agency setupu</Tag>
-        <Bullet items={[
-          "<b>🏢 Full-service agency:</b> Strategy + creative + media + production pod 1 střechou (WPP, Publicis, Omnicom). Pro mid-large brands.",
-          "<b>🎯 Specialized agencies:</b> Separátně kreativa + media + research. Best-of-breed approach. Apple, P&G model.",
-          "<b>🏠 In-house team:</b> Vlastní marketing tým bez externí agency. Adidas, L'Oréal, Unilever trend. Levnější, ale risk skill gap.",
-          "<b>🔀 Hybrid model:</b> In-house core + freelancers/agencies pro spec projects. Klíčový trend 2024+.",
-        ]} color={VSE.fis} />
-        <Tag color={VSE.warning}>Klientsko-agency vztah — best practices</Tag>
-        <Bullet items={[
-          "<b>Single point of contact (SPOC):</b> 1 brand manager ↔ 1 account manager v agency. Žádné by-pass komunikace.",
-          "<b>Weekly status meetings:</b> Statusování projektů, action items, blockers.",
-          "<b>Quarterly business reviews (QBR):</b> Strategic review, performance metrics, future planning.",
-          "<b>360° feedback:</b> Roční evaluation agency od klienta + klienta od agency.",
-          "<b>Trust + transparency:</b> Sdílení sales dat, brand challenges. Agency potřebuje kontext.",
-          "<b>Long-term partnerships:</b> Switching agencies každý rok = ztracený equity. P&G + Saatchi 30+ let.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Kompenzační modely agency</Tag>
-        <ResponsiveGrid cols2>
-          {[
-            { c: VSE.fmv, t: "⏰ HOURLY RATE", d: "Hourly billable — junior 1500 Kč/h, senior 3-5k Kč/h, partner 8-15k Kč/h. Pro projects." },
-            { c: VSE.warning, t: "💰 PROJECT-BASED FEE", d: "Fixní cena za projekt. Předvídatelnost pro klienta, ale risk pro agency (overrun)." },
-            { c: VSE.fph, t: "🔄 RETAINER", d: "Měsíční fixní platba za long-term services. 200k-2M Kč/měsíc. Standard pro brands." },
-            { c: VSE.success, t: "🎯 PERFORMANCE-BASED", d: "Bonus za splnění KPIs (sales lift, awareness). Risk sharing s agency. Rostoucí trend." },
-            { c: VSE.danger, t: "📺 MEDIA COMMISSION", d: "Tradiční model — 15 % z media spend pro media agency. Klesající (klesající transparentnost)." },
-            { c: VSE.fis, t: "🔀 HYBRID", d: "Retainer + project fees + performance bonus. Nejčastější enterprise model 2024+." },
-          ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 14, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
-            </GlassBox>
-          ))}
-        </ResponsiveGrid>
-        <Tag color={VSE.danger}>Marketing budgeting (annual planning)</Tag>
-        <Bullet items={[
-          "<b>4 metody stanovení mkt budgetu</b> (Kotler M13):",
-          "&nbsp;&nbsp;<b>1. % z obratu</b> — industry standard 5-15 % obratu. FMCG 10-15 %, B2B 5-10 %.",
-          "&nbsp;&nbsp;<b>2. Competitive parity</b> — jako konkurence (share of voice = share of market).",
-          "&nbsp;&nbsp;<b>3. Affordable</b> — kolik můžeme utratit (CFO-driven). Worst method.",
-          "&nbsp;&nbsp;<b>4. Objective-and-task</b> — kolik potřeba na splnění cílů. Best practice (z MMM analysis).",
-          "<b>Budget breakdown</b> typický enterprise B2C:",
-          "&nbsp;&nbsp;Media spend: 60-70 %",
-          "&nbsp;&nbsp;Creative production: 10-15 %",
-          "&nbsp;&nbsp;Research: 3-5 %",
-          "&nbsp;&nbsp;Agency fees: 10-15 %",
-          "&nbsp;&nbsp;Internal team: 5-10 %",
-        ]} color={VSE.danger} />
-      </div>) },
-  ];
-
-  const flashcardsMkt17 = [
-    { term: "Řízení mkt kampaní (Campaign Management)", def: "End-to-end proces od strategického plánování po post-launch evaluation. Capstone okruh integrující M13-M16.", tag: "POJEM" },
-    { term: "5 fází kampaně lifecycle", def: "Brief → Plan → Creative → Execute → Evaluate.", tag: "POJEM" },
-    { term: "6 klíčových rolí v kampani", def: "CMO / Brand Manager / Creative Agency / Media Agency / Research Agency / In-house tým.", tag: "POJEM" },
-    { term: "Marketing brief", def: "Dokument klient → agency. Background, challenge, audience, insight, objectives, message, RTB, tone, budget, timing.", tag: "BRIEF" },
-    { term: "4 typy briefů", def: "Client brief (firma → agency) / Strategic brief (interní agency) / Creative brief (pro creative team) / Media brief (pro media agency).", tag: "BRIEF" },
-    { term: "Single-minded proposition (SMP)", def: "JEDNA hlavní myšlenka kampaně. Pravidlo: pokud řekneš 3 věci, slyší 0. Pokud řekneš 1, slyší 1.", tag: "BRIEF" },
-    { term: "Reasons to believe (RTB)", def: "Proč by tomu klient měl věřit? Fakty, social proof, testimonials. Podpora SMP.", tag: "BRIEF" },
-    { term: "SMART cíle", def: "Specific, Measurable, Achievable, Relevant, Time-bound. Z 5M Mission (M13).", tag: "PLAN" },
-    { term: "5M aplikace na kampaň", def: "Mission (cíle SMART) / Money (budget breakdown) / Message (SMP) / Media (mix per cílovka) / Measurement (pre/post test).", tag: "PLAN" },
-    { term: "Media flighting × pulsing × continuous", def: "Flighting = burst + off periods (Coca-Cola Christmas). Pulsing = continuous + peaks (FMCG). Continuous = stejná intenzita (B2B).", tag: "PLAN" },
-    { term: "Concept development", def: "3-5 directions od creative agency. Client vybere 1, pak refinement. Standard creative process.", tag: "CREATIVE" },
-    { term: "Asset adaptace", def: "Master asset → 30s TV + 15s cutdown + 6s bumper + social cuts + statics. 1 koncept → 50+ assets.", tag: "CREATIVE" },
-    { term: "Production náklady", def: "TV natáčení 2-10M Kč / foto shoot 200-800k / digital assets 50-500k / copywriting 50-300k.", tag: "CREATIVE" },
-    { term: "Media buying + trafficking", def: "Nákup ad space (TV/programmatic/social). Trafficking = upload assets do platforem + targeting.", tag: "EXECUTE" },
-    { term: "Frequency capping", def: "Limit, kolikrát uvidí jeden user reklamu. 3-7× optimum, víc = wear-out.", tag: "EXECUTE" },
-    { term: "Real-time monitoring (launch 48 h)", def: "First 48 h kritické. CTR, conversion, social sentiment. A/B testing variants, kill underperformers.", tag: "EXECUTE" },
-    { term: "Crisis management v kampani", def: "Pre-launch scenario planning + real-time social listening + decision matrix pro pull/pause/continue.", tag: "EXECUTE" },
-    { term: "Pepsi Kendall Jenner 2017", def: "Klasický crisis example — kampaň stažena za 24 h po negative sentiment spike. Pre-launch testing chybělo.", tag: "EXECUTE" },
-    { term: "3 vrstvy evaluation", def: "Operational (denní, brand mgr) / Tactical (týden-měsíc, CMO) / Strategic (kvartál-rok, board).", tag: "EVAL" },
-    { term: "KPIs hierarchie", def: "Business (sales/market share) → Brand (awareness/NPS) → Marketing (reach/CTR) → Financial (ROI/ROAS/CAC/CLV).", tag: "EVAL" },
-    { term: "Post-mortem workshop", def: "4-8 týdnů po kampani. What worked / didn't / why / what next. Brand mgr + CMO + agency + research lead.", tag: "EVAL" },
-    { term: "5 typů learnings", def: "Creative / Audience / Channel / Timing / Operational. Feed do next campaign cycle.", tag: "EVAL" },
-    { term: "Full-service vs Specialized agency", def: "Full-service = vše pod 1 střechou (WPP, Publicis). Specialized = best-of-breed per discipline (Apple model).", tag: "AGENCY" },
-    { term: "In-house trend", def: "Vlastní marketing tým bez externí agency. Adidas, L'Oréal, Unilever. Levnější, ale risk skill gap.", tag: "AGENCY" },
-    { term: "Single point of contact (SPOC)", def: "1 brand manager ↔ 1 account manager v agency. Žádné by-pass komunikace.", tag: "AGENCY" },
-    { term: "Quarterly business reviews (QBR)", def: "Strategic review s agency. Performance metrics, future planning. Standard pro long-term partnerships.", tag: "AGENCY" },
-    { term: "5 kompenzačních modelů agency", def: "Hourly rate / Project-based fee / Retainer / Performance-based / Media commission + Hybrid.", tag: "AGENCY" },
-    { term: "Retainer model", def: "Měsíční fixní platba za long-term services. 200k-2M Kč/měsíc. Standard pro brands.", tag: "AGENCY" },
-    { term: "4 metody stanovení mkt budgetu", def: "% z obratu (5-15 %) / Competitive parity (jako konkurence) / Affordable / Objective-and-task (best).", tag: "BUDGET" },
-    { term: "Budget breakdown B2C", def: "Media 60-70 % / Creative 10-15 % / Research 3-5 % / Agency fees 10-15 % / Internal team 5-10 %.", tag: "BUDGET" },
-  ];
-
-  const quizMkt17 = [
-    { q: "Co je řízení mkt kampaní?", opts: ["Audit", "End-to-end proces od strategického plánování po post-launch evaluation (capstone)", "Reklamní kampaň", "Brand management"], correct: 1 },
-    { q: "Kolik fází má kampaně lifecycle?", opts: ["3", "5 (Brief → Plan → Creative → Execute → Evaluate)", "7", "10"], correct: 1 },
-    { q: "Co je marketing brief?", opts: ["Krátká reklama", "Dokument klient → agency s background, challenge, audience, insight, objectives, message", "Tisková zpráva", "Briefing kampaně novinářům"], correct: 1 },
-    { q: "Kolik typů briefů rozlišujeme?", opts: ["2", "3", "4 (client brief / strategic / creative / media)", "6"], correct: 2 },
-    { q: "Co je Single-minded proposition (SMP)?", opts: ["Sales metric", "JEDNA hlavní myšlenka kampaně. Pravidlo: řekneš 3 věci → slyší 0", "Strategie", "Vize firmy"], correct: 1 },
-    { q: "Co je RTB v briefu?", opts: ["Real-Time Bidding", "Reasons to believe — proč by tomu klient měl věřit (fakty, social proof, testimonials)", "Right to Buy", "Return to Brand"], correct: 1 },
-    { q: "Co znamená SMART v cílech?", opts: ["Inteligentní", "Specific, Measurable, Achievable, Relevant, Time-bound", "Smart marketing", "Strategy and tactics"], correct: 1 },
-    { q: "Flighting media pattern znamená:", opts: ["Letecká reklama", "Burst kampaně + off periods (Coca-Cola Christmas)", "Continuous reklama", "Online kampaň"], correct: 1 },
-    { q: "Optimální frequency cap je:", opts: ["1×", "3-7× (optimum recall, víc = wear-out)", "10×", "100×"], correct: 1 },
-    { q: "Kolik vrstev má evaluation?", opts: ["2", "3 (operational / tactical / strategic)", "5", "7"], correct: 1 },
-    { q: "Kdy se dělá post-mortem workshop?", opts: ["Den po kampani", "4-8 týdnů po kampani (data finalizovaná)", "Rok po", "Nikdy"], correct: 1 },
-    { q: "Která NENÍ z 5 typů learnings?", opts: ["Creative", "Audience", "Channel", "Financial reporting"], correct: 3 },
-    { q: "Kdo je Pepsi Kendall Jenner 2017 example?", opts: ["Úspěšná kampaň", "Klasický crisis example — kampaň stažena za 24 h po negative sentiment spike", "Soutěž", "Sponzoring"], correct: 1 },
-    { q: "In-house tým trend znamená:", opts: ["Outsourcing agency", "Vlastní marketing tým bez externí agency (Adidas, L'Oréal, Unilever trend)", "Freelancers", "Konzultanti"], correct: 1 },
-    { q: "Kolik kompenzačních modelů agency rozlišujeme?", opts: ["2", "3", "5 (hourly / project / retainer / performance / commission) + hybrid", "10"], correct: 2 },
-    { q: "Kolik metod stanovení mkt budgetu definuje Kotler?", opts: ["2", "3", "4 (% z obratu / competitive parity / affordable / objective-and-task)", "6"], correct: 2 },
-  ];
-
-  const praxeMkt17 = {
-    caseStudy: {
-      company: "Mastercard 'Priceless' — 25-letá kampaň jako case study řízení",
-      subtitle: "Long-term campaign management napříč 200+ zemích",
-      content: (<>
-        <b>Mastercard &quot;Priceless&quot;</b> kampaň je <b>etalon long-term campaign management</b>. Spuštěna 1997 v US, dnes běží ve 200+ zemích, 100+ jazyků. Kontinuální evolving kampaň 28 let.<br/><br/>
-        <b style={{ color: VSE.fmv }}>📋 BRIEF 1997 — McCann Erickson:</b><br/><br/>
-        • <b>Challenge:</b> Mastercard #2 vs Visa. Awareness gap.<br/><br/>
-        • <b>Insight:</b> Lidé pamatují emotional moments, ne transakce<br/><br/>
-        • <b>Single-minded proposition:</b> &quot;There are some things money can't buy. For everything else, there's Mastercard.&quot;<br/><br/>
-        • <b>RTB:</b> Universal payment acceptance + emotional connection<br/><br/>
-        • <b>Audience:</b> Affluent consumers, family-oriented<br/><br/>
-        <b style={{ color: VSE.warning }}>📐 PLANNING — 5M aplikace:</b><br/><br/>
-        • <b>Mission:</b> +20 % aided awareness do 12 měsíců + brand consideration lift<br/><br/>
-        • <b>Money:</b> 25M USD launch budget US + global rollout<br/><br/>
-        • <b>Message:</b> &quot;Priceless&quot; tagline + emotional moments<br/><br/>
-        • <b>Media:</b> TV-led (60 %) + print (20 %) + sponzoring (20 %)<br/><br/>
-        • <b>Measurement:</b> Pre-test concept + Brand Health Tracker měsíčně + MMM ročně<br/><br/>
-        <b style={{ color: VSE.fph }}>🎨 CREATIVE EVOLUTION 1997-2024:</b><br/><br/>
-        • <b>Phase 1 (1997-2005):</b> TV ads — basketball game, baseball game, vacation moments. Storytelling emocí.<br/><br/>
-        • <b>Phase 2 (2005-2015):</b> Sport sponzoring — UEFA Champions League, Olympics. &quot;Priceless Surprises&quot;.<br/><br/>
-        • <b>Phase 3 (2015-2020):</b> Digital pivot — &quot;Priceless Cities&quot; experiences platform. Loyalty integration.<br/><br/>
-        • <b>Phase 4 (2020+):</b> Purpose-driven — &quot;Priceless Causes&quot;, sustainability, ESG. Female empowerment campaigns.<br/><br/>
-        <b style={{ color: VSE.success }}>🚀 EXECUTION — global to local:</b><br/><br/>
-        • <b>Global creative platform:</b> Universal &quot;Priceless&quot; framework<br/><br/>
-        • <b>Local adaptation:</b> 200+ countries customize stories per kultura<br/><br/>
-        • <b>Multi-language:</b> 100+ jazyků, kulturní specifika<br/><br/>
-        • <b>200+ creative agencies</b> spolupracují pod McCann global brand custody<br/><br/>
-        <b style={{ color: VSE.danger }}>📊 EVALUATION — 28 let learnings:</b><br/><br/>
-        • <b>Brand awareness:</b> 95 % aided globally (vs Visa 93 %, AmEx 75 %)<br/><br/>
-        • <b>MMM:</b> Identifikovala shift z TV (klesající ROI 2015+) na digital + experiential (+200 % ROI)<br/><br/>
-        • <b>Brand Lift Studies</b> per campaign — průměrný awareness lift +5 pp<br/><br/>
-        • <b>Market share gain:</b> 21 % global market share 2024 (vs 17 % 1997)<br/><br/>
-        • <b>Awards:</b> 200+ Cannes Lions, longest-running global advertising campaign<br/><br/>
-        <b style={{ color: VSE.success }}>Výsledek:</b> Mastercard &quot;Priceless&quot; je <b>nejdéle běžící global advertising kampaň</b>. Klasický důkaz, že <b>správné brand foundation + adaptive execution + sophisticated measurement</b> umožňuje 25+ let úspěchu.
-      </>),
-      lessons: "Mastercard Priceless je <b>etalon long-term campaign management</b>. Pro PS doporuč: <b>5M framework + emotional insight + global creative platform + local adaptation + sophisticated MMM + 25-letá evolving execution</b>. Alternativy: <b>Nike &quot;Just Do It&quot; (1988+, 36 let), Apple &quot;Think Different&quot; (1997-2002 + revival), Always &quot;Like a Girl&quot; (2014+), Dove &quot;Real Beauty&quot; (2004+, 20 let)</b>."
-    },
-    miniExamples: [
-      { tag: "BRIEF", color: VSE.fmv, company: "Apple keynote — etalon briefing process", content: "Apple <b>brief proces</b> pro každou keynote: Steve Jobs / Tim Cook + product marketing + creative team. <b>SMP definované 6 měsíců předem</b> (&quot;iPhone redefines mobile&quot; 2007). Single-minded — žádné rozptýlení. 200+ iterací keynote presentation. Pre-test interní + small focus groups. Výsledek: 60-100M live views per keynote, stock impact billions." },
-      { tag: "PLANNING", color: VSE.warning, company: "Old Spice 2010 — etalon planning + creative", content: "P&G + Wieden+Kennedy 2010: <b>Brief identifikoval problém</b> — Old Spice umírá u Gen Y (15 % share). Planning: TV-led + viral video bet. Creative: &quot;Man Your Man Could Smell Like&quot; — humor + masculinity reinvention. Production 2 dny natáčení. Launch: SuperBowl Sunday. <b>Real-time response Twitter</b> — Isaiah Mustafa odpovídal personalizovanými videi 24 h. 40M views v týdnu. Sales +27 % YoY." },
-      { tag: "EXECUTION", color: VSE.fph, company: "Spotify Wrapped — execution mistrovství", content: "Spotify Wrapped je <b>roční December campaign</b> 2016+. Execution: Personalized data report per user (data engineering), share-friendly assets (designed for social), perfectně timed (December nostalgia season). <b>1 koncept → 500M+ adaptations</b> (1 per user). Result: $7B brand value lift annually. Klasický příklad data-driven personalized execution at scale." },
-      { tag: "EVALUATION", color: VSE.success, company: "Dove 'Real Beauty' — 20-year evaluation", content: "Unilever Dove launched <b>&quot;Real Beauty&quot; 2004</b>. Continuous evaluation 20 let: <b>Brand Health Tracker</b> showed +30 % brand consideration. <b>MMM</b> identified emotional campaigns vs product-focused ROI delta. <b>Sales</b>: Dove z $2B na $5.5B revenue 2004-2024. Klasický důkaz long-term brand investment ROI. Post-mortem každé kampaně feed next." },
-      { tag: "CRISIS", color: VSE.danger, company: "Pepsi Kendall Jenner 2017 — etalon crisis", content: "Pepsi <b>spustila kampaň 4. dubna 2017</b> — Kendall Jenner protest scene. <b>Sentiment spike v první 6 h</b> — accused of trivializing Black Lives Matter. <b>Stažena za 24 h</b>, public apology. Lessons: <b>Pre-launch testing chybělo</b>, <b>diversity v creative team</b> chyběla, <b>social listening</b> identifikoval crisis okamžitě. P&G + Unilever od té doby dělají pre-test pro každou kampaň." },
-    ]
-  };
-
-  const examQuestionsMkt17 = [
-    { komise: "2025-02-05 — Nový + Kolouchová + Svobodová", otazka: "Řízení marketingových kampaní", pozn: "Nový otevřená otázka — naučit <b>5 fází lifecycle (Brief → Plan → Creative → Execute → Evaluate)</b> + 4 typy briefů + 5M aplikace + agency mgmt." },
-    { komise: "2026-02-06 — Heřman + Schovancová + Vávra (Výroba kol)", otazka: "Hromadná marketingová komunikace — plánování a řízení marketingové kampaně, 5M, aplikace na PS", pozn: "Heřman chytá <b>plánování + řízení + 5M aplikace</b>. M13 = 5M teorie, M17 = aplikace na PS. Naučit kampaň lifecycle + brief structure + 5M konkrétně." },
-    { komise: "2025-06-16 — Double Stříteský + Mareš (Nádobí)", otazka: "Mass marketing. 5P, řízení mkt kampaně, PR, nástroje, měření obou", pozn: "Stříteský chytá KOMPLET — řízení kampaně + 5P (4P + lidé/services) + měření. Naučit 5 fází lifecycle + komunikační mix + měření per fáze." },
-    { komise: "2025-02-05 — Krause + Viktora + Tahal (Neziskovka)", otazka: "Řízení marketingových kanálů, logistický řetězec a distribuční výzkum", pozn: "Krause chytá <b>řízení marketingových KANÁLŮ</b> = distribuce (přímé/nepřímé) + intenzivní/selektivní/exkluzivní strategie + komunikace přes kanály. Patří částečně do logistiky (M14-Log)." },
-  ];
-
-  const podcastMkt17 = { title: "Marketing 17 — Řízení marketingových kampaní (capstone)", description: "Capstone okruh integrace M13-M16. Definice řízení kampaní + 5 fází lifecycle (Brief → Plan → Creative → Execute → Evaluate). 6 klíčových rolí (CMO/Brand Manager/Creative Agency/Media Agency/Research Agency/In-house). Brief structure (10 elementů + SMP + RTB) + 4 typy briefů. Planning (5M aplikace + media flighting/pulsing/continuous + Gantt timeline). Creative production (concept/storyboard/production/asset adaptace). Media buying + trafficking + real-time monitoring + A/B testing. Crisis management (Pepsi Kendall Jenner case). Evaluation (3 vrstvy: operational/tactical/strategic + KPIs hierarchie + post-mortem workshop). Agency management (full-service vs specialized vs in-house + SPOC + QBR + 5 kompenzačních modelů). Marketing budgeting (4 metody Kotler + budget breakdown). Mastercard Priceless 28-letá, Apple keynote, Old Spice 2010, Spotify Wrapped, Dove Real Beauty.", audioUrl: null, notebookLmUrl: null };
-
-  const examStrategyMkt17 = `
-    <b style="color:#A82A5F">1.</b> Začni definicí — <b>řízení mkt kampaní = end-to-end proces, capstone</b>.<br/>
-    <b style="color:#A82A5F">2.</b> Návaznost na M13 (5M), M14 (hromadná), M15 (osobní), M16 (výzkum).<br/>
-    <b style="color:#A82A5F">3.</b> ⚠️ <b>5 fází lifecycle</b> — Brief → Plan → Creative → Execute → Evaluate.<br/>
-    <b style="color:#A82A5F">4.</b> 6 klíčových rolí — CMO / Brand Manager / Creative Agency / Media Agency / Research / In-house.<br/>
-    <b style="color:#A82A5F">5.</b> ⚠️ <b>Brief structure</b> (Heřman, Stříteský!) — 10 elementů + SMP + RTB + 4 typy briefů.<br/>
-    <b style="color:#A82A5F">6.</b> Planning — 5M aplikace na konkrétní kampaň + media flighting/pulsing/continuous + Gantt timeline.<br/>
-    <b style="color:#A82A5F">7.</b> Creative — concept development, storyboard, production, asset adaptace (1 koncept → 50+ assets).<br/>
-    <b style="color:#A82A5F">8.</b> Execution — media buying, trafficking, frequency capping, real-time monitoring 48 h.<br/>
-    <b style="color:#A82A5F">9.</b> Crisis management — pre-launch scenario planning + decision matrix pull/pause/continue.<br/>
-    <b style="color:#A82A5F">10.</b> ⚠️ <b>Evaluation</b> — 3 vrstvy (operational/tactical/strategic) + KPIs hierarchie + post-mortem workshop.<br/>
-    <b style="color:#A82A5F">11.</b> Agency management — full-service vs specialized vs in-house + SPOC + QBR + 5 kompenzačních modelů.<br/>
-    <b style="color:#A82A5F">12.</b> ⚠️ <b>Mkt budgeting</b> — 4 metody Kotler (% obratu / competitive parity / affordable / objective-and-task).<br/>
-    <b style="color:#A82A5F">13.</b> Aplikace na PS — kampaň plan s 5 fázemi + brief + budget breakdown + measurement plan.
-  `;
-
-  const caseStudyMkt17 = {
-    title: "Veronika — CMO v ZdravýStůl, českém food-tech startupu (180 mil. Kč obrat, 90 zaměstnanců)",
-    subtitle: "Řídit první velkou integrovanou kampaň 40 mil. Kč pro rebrand a expanze",
-    scenario: "Veronika (39 let) je CMO ZdravýStůl 2 roky. Firma je český food-tech startup — meal prep boxes pro zdraví životní styl, 35 tisíc aktivních předplatitelů. Firma získala 250 mil. Kč Series B a Veronika dostala úkol postavit první velkou integrovanou kampaň 40 mil. Kč pro rebrand z 'ZdravýStůl' na 'NORDIE' + expanze do SK + PL trhů.\n\nProblém je, že ZdravýStůl dosud dělal jen performance marketing (Google + Meta), žádné velké brand kampaně. Veronika nikdy neřídila kampaň nad 5 mil. Kč. CEO Tomáš chce přesný plán pro board meeting za 6 týdnů. Konkurence (Lite n' Easy v UK, HelloFresh, Goustobox) má sofistikované integrované kampaně 50-200 mil. Kč ročně.\n\nVeronika dostává 4 návrhy od creative agencies (McCann, AKQA, Triad, Bistro). Každá agency má jiný approach: McCann = TV-led traditional, AKQA = digital-led, Triad = experiential + influencer, Bistro = performance + content. Media agency Mindshare doporučuje 70 % digital + 20 % TV + 10 % OOH. Research agency Median nabízí pre-test creative + Brand Lift Study post-launch za 800k Kč.\n\nVeronika musí integrovat všechno — vybrat agency, schválit brief, postavit 5M plán, naplánovat timing, definovat KPIs, a hlavně přesvědčit board, že 40 mil. Kč přinese 100k nových předplatitelů (CAC 400 Kč) + brand awareness lift z 15 % na 35 %. Tři otázky si zapsala: Jak strukturovat brief pro 4 agencies? Jak nastavit 5M plán pro rebrand kampaň? A jak měřit, aby CFO viděl konkrétní ROI?",
-    signals: [
-      { text: "první velkou integrovanou kampaň 40 mil. Kč pro rebrand", color: VSE.danger, reason: "<b>Rebrand kampaň</b> = high-risk, high-reward. Vyžaduje <b>kompletní 5 fází lifecycle</b> (M17). Bez procesního řízení = chaos + budget waste." },
-      { text: "Veronika nikdy neřídila kampaň nad 5 mil. Kč", color: VSE.warning, reason: "<b>Skill gap</b> — potřebuje strukturovaný framework. M17 5 fází + brief structure + agency mgmt jsou kritické nástroje." },
-      { text: "ZdravýStůl dosud dělal jen performance marketing", color: VSE.warning, reason: "<b>B2C performance → brand pivot</b> jako Adéla (M13). Potřeba kompletního IMK přístupu — brand building je jiná dimenze než performance." },
-      { text: "4 návrhy od creative agencies", color: VSE.fph, reason: "<b>Agency selection</b> kritická volba. Každý approach jiný (TV vs digital vs experiential vs performance). Vyžaduje strukturovanou evaluaci podle briefu." },
-      { text: "Media agency Mindshare doporučuje 70 % digital + 20 % TV + 10 % OOH", color: VSE.fph, reason: "<b>Media mix doporučení</b> z M14. Pro Gen Y/Z cílovku digital-led mix dává smysl. TV stále pro mass awareness." },
-      { text: "Research agency Median nabízí pre-test + Brand Lift Study za 800k Kč", color: VSE.success, reason: "<b>Research investice 2 % budget</b> chrání 40M Kč. Pre-test (M16) eliminuje creative weakness PŘED produkcí. ROI 50×." },
-      { text: "100k nových předplatitelů (CAC 400 Kč) + brand awareness lift z 15 % na 35 %", color: VSE.warning, reason: "<b>SMART cíle</b> (specific, measurable, achievable, relevant, time-bound). Klasický 5M Mission. Dual KPI — performance + brand." },
-      { text: "expanze do SK + PL trhů", color: VSE.fph, reason: "<b>Multi-country execution</b> = global brief + local adaptation. Jako Mastercard Priceless model. Vyžaduje regional plánování." },
-    ],
-    quiz1: {
-      question: "Co je hlavní strukturální výzva Veroniky?",
-      options: [
-        "Příliš mnoho agency návrhů",
-        "Špatný produkt",
-        "Postavit první velkou integrovanou kampaň (40M Kč rebrand) s capstone procesem — brief + 5M plan + creative + execution + evaluation napříč 3 zemí",
-        "Nedostatek financí",
-      ],
-      correct: 2,
-    },
-    quiz2: {
-      question: "Jak by Veronika měla strukturovat kampaň management v 6 týdnech?",
-      options: [
-        { text: "Week 1-2: Brief development — Client brief (10 elementů) → Strategic brief → Creative brief → Media brief. Single-minded proposition: 'Real food, real lives, real you.' Distribuce všem 4 agencies pro pitch.", correct: true, reason: "✓ Klasický kampaň start. Single-minded proposition kritický (M17). 4 typy briefů (client/strategic/creative/media)." },
-        { text: "Week 2: Agency pitch evaluation — kreativní hodnota (40 %), strategic fit (20 %), execution capability (20 %), cost (10 %), team chemistry (10 %). Doporučení: Triad (experiential + influencer) pro Gen Y/Z food brand.", correct: true, reason: "✓ Strukturovaná agency selection. Cost není primární kritérium — kreativní quality + chemistry kritická pro 12-18 měsíc partnership." },
-        { text: "5M plán: Mission (100k subs + awareness 35 %), Money (40M breakdown — 60 % media / 15 % creative / 5 % research / 15 % agency / 5 % internal), Message (Real food positioning), Media (Mindshare doporučení 70/20/10), Measurement (pre-test + Brand Lift + MMM)", correct: true, reason: "✓ 5M aplikace z M13. Budget breakdown M17 standard. Research 5 % = chrání 95 % investice." },
-        { text: "Timeline (Gantt): T-12 week brief → T-10 strategic + creative brief → T-8 concept presentation + pre-test → T-6 production → T-4 media plan locked → T-2 final approvals → T-0 launch → T+2 first review → T+8 Brand Lift results → T+12 post-mortem", correct: true, reason: "✓ Klasický 12-week timeline. M17 standard. Pre-test chrání 8M Kč production investment." },
-        { text: "Pre-test creative (Median 200k) PŘED produkcí TV spotu (5M Kč). Concept testing 500 respondentů + animatic testing top 2 directions + brand fit check. Kill underperforming concept PŘED investicí.", correct: true, reason: "✓ M16 best practice. ROI 25× (200k chrání 5M). P&G standard. Eliminuje creative failure risk." },
-        { text: "Multi-country execution: Master creative platform CZ + local adaptation pro SK + PL. 1 koncept → 3 jazyky × 50+ assets per země. Mastercard Priceless model.", correct: true, reason: "✓ Global brief + local adaptation. Standard multi-country approach. Asset adaptace M17." },
-        { text: "Real-time monitoring 48 h post-launch + A/B testing 3 creative variants + budget reallocation per kanál podle ROAS. Daily reports prvních 14 dní + weekly poté.", correct: true, reason: "✓ Execution management M17. Real-time optimization kritická pro 40M Kč budget. Kill underperformers rychle." },
-        { text: "Crisis prep: Pre-launch scenario planning (negative sentiment ke greenwashing?) + Brandwatch social listening + decision matrix pull/pause/continue. Backup creative ready.", correct: true, reason: "✓ Pepsi Kendall Jenner lesson — crisis prep před launch. Brand reputation > short-term sales." },
-        { text: "Evaluation: 3 vrstvy — operational (denní dashboardy CTR/conversion), tactical (weekly sales lift + attribution), strategic (T+8 Brand Lift Study + T+12 MMM + post-mortem workshop)", correct: true, reason: "✓ M17 3 vrstvy evaluation. Multi-level reporting pro brand mgr → CMO → board." },
-        { text: "Bez pre-testu, jet rovnou do produkce 5M Kč TV spotu", correct: false, reason: "✗ Pre-test 200k chrání 5M produkce + 28M media spend. ROI 175×. Pepsi Kendall Jenner lesson." },
-        { text: "Single agency full-service approach + žádný research", correct: false, reason: "✗ 40M kampaň bez research = predictable failure. CFO chce ROI accountability. Research 2 % budget = nezbytná investice." },
-        { text: "Pokračovat s performance marketing only (Google + Meta)", correct: false, reason: "✗ Brand awareness lift z 15 % na 35 % nelze dosáhnout performance marketing. Mass reach kanály (TV, OOH, video) nezbytné." },
-      ],
-    },
-    summary: "<b>Veronika potřebuje strukturovaný campaign management proces — 5 fází lifecycle + brief + 5M plan + research-driven execution + multi-level evaluation.</b><br/><br/><b>6-týdenní pre-launch plán:</b><br/><br/>• <b>Týden 1-2 (Brief development, 100k Kč):</b> Client brief (10 elementů + SMP &quot;Real food, real lives, real you.&quot; + RTB) → Strategic + Creative + Media brief. Distribuce 4 agencies pro pitch.<br/><br/>• <b>Týden 2-3 (Agency selection, 200k Kč):</b> Pitch evaluation — kreativita (40 %) + strategic fit (20 %) + execution (20 %) + cost (10 %) + chemistry (10 %). Doporučení Triad. Smlouva 12-měsíční retainer 5M Kč.<br/><br/>• <b>Týden 3-4 (Planning + 5M):</b> 5M plán — Mission (100k subs + awareness 35 % v 12 měs), Money (40M breakdown), Message (Real food SMP), Media (Mindshare 70/20/10), Measurement (Median 800k research budget).<br/><br/>• <b>Týden 4-5 (Concept + Pre-test, 700k):</b> Triad 3 concept directions → klientova volba 1 → pre-test (Median 200k concept + 300k animatic). Brand Lift Study setup pre-baseline.<br/><br/>• <b>Týden 5-6 (Production + Media setup, 6M):</b> TV natáčení (3M), foto shoot + assets (1M), copywriting + design (500k), media plan locked (Mindshare), localization SK + PL (1,5M).<br/><br/><b>Launch + Evaluation (post-launch 6 měsíců, 33M):</b><br/><br/>• <b>Launch T-0:</b> Coordinated start napříč kanály + PR push + influencer activation.<br/><br/>• <b>T+1 týden:</b> Real-time monitoring 48 h, kill underperforming creative variants, budget reallocation.<br/><br/>• <b>T+2-12 týdnů:</b> Operational reports daily/weekly, A/B testing kontinuální, social listening (Brandwatch).<br/><br/>• <b>T+8 týdnů:</b> Brand Lift Study results (Median 500k). Target +5-7 pp awareness lift.<br/><br/>• <b>T+12 týdnů:</b> Full post-mortem workshop (brand mgr + CMO + Triad + Mindshare + Median + CEO Tomáš). Learnings → year 2 planning.<br/><br/>• <b>T+6 měsíců:</b> MMM lite analýza per kanál ROI + market share check (15 % → target 22 % CZ).<br/><br/><b>Pro komisi:</b> Klasický capstone campaign management scenario. <b>Mastercard Priceless (28-letá kampaň)</b>, <b>Old Spice 2010 (planning + creative mistrovství)</b>, <b>Spotify Wrapped (execution at scale)</b>, <b>Dove Real Beauty (long-term evaluation)</b>, <b>Pepsi Kendall Jenner (anti-vzor crisis)</b> jako benchmark. <b>5 fází lifecycle</b> + <b>brief 10 elementů + SMP + RTB</b> + <b>5M aplikace</b> + <b>agency mgmt (SPOC + QBR)</b> + <b>3 vrstvy evaluation (operational/tactical/strategic)</b>. Anti-vzor: bez pre-testu + bez brief + jen performance = předvídatelný failure. Vzor: <b>structured 5-phase lifecycle + research-driven + multi-level evaluation + post-mortem learnings</b>.",
-  };
-
-  return (
-    <OkruhPanel
-      subject="Marketing" subjectId="marketing" number={17} title="Řízení marketingových kampaní (CAPSTONE)"
-      subtitle="5 fází lifecycle + brief + 5M aplikace + agency management + evaluation + budgeting"
-      color={VSE.fis}
-      questionText="Řízení marketingových kampaní — end-to-end proces, brief, 5M, agency management, měření."
-      sloz={3} roz={4} freq={4}
-      examStrategy={examStrategyMkt17}
-      studySections={studySectionsMkt17}
-      flashcards={flashcardsMkt17}
-      quiz={quizMkt17}
-      praxe={praxeMkt17}
-      examQuestions={examQuestionsMkt17}
-      podcast={podcastMkt17}
-      caseStudy={caseStudyMkt17}
-    />
-  );
-}
-
-/* ════════════════════════════════════════════════════════
-   STRATEGIE 1 — Strategie + strategické uvažování (foundation)
-   ════════════════════════════════════════════════════════ */
 function OkruhStr1Panel() {
   const studySectionsStr1 = [
     { id: "definice", title: "Co je strategie a proč ji firma potřebuje", subtitle: "Definice, tři patra, k čemu slouží", color: VSE.fmv, emoji: "compass",
@@ -36547,6 +35190,23 @@ function App() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
+  // Mobilní viewport + PWA-like meta tagy (bez nich se @media pravidla na telefonu neaktivují)
+  useEffect(() => {
+    const ensureMeta = (attrs) => {
+      const selector = attrs.name ? `meta[name="${attrs.name}"]` : `meta[property="${attrs.property}"]`;
+      let el = document.head.querySelector(selector);
+      if (!el) { el = document.createElement("meta"); document.head.appendChild(el); }
+      Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+      return el;
+    };
+    ensureMeta({ name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5" });
+    ensureMeta({ name: "theme-color", content: themeMode === "light" ? "#f5f1e8" : "#14110c" });
+    ensureMeta({ name: "apple-mobile-web-app-capable", content: "yes" });
+    ensureMeta({ name: "apple-mobile-web-app-status-bar-style", content: "default" });
+    ensureMeta({ name: "mobile-web-app-capable", content: "yes" });
+    ensureMeta({ name: "format-detection", content: "telephone=no" });
+  }, [themeMode]);
+
   const handleNavigate = (result) => {
     setActiveTab("okruhy");
     setNavTarget({ subjectId: result.subjectId, okruhN: result.okruhN, type: result.type, sectionId: result.sectionId });
@@ -36786,6 +35446,14 @@ function App() {
           background: var(--bg) !important;
           margin: 0;
           min-height: 100vh;
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+        /* Mobilní pojistka proti horizontálnímu scrollu — nic nepřeteče přes okraj */
+        @media (max-width: 900px) {
+          [data-modal-content], [data-dropdown] { max-width: calc(100vw - 24px) !important; }
+          [data-okruh-panel] img, [data-okruh-panel] svg, [data-section-content] img, [data-section-content] svg { max-width: 100% !important; }
+          [data-okruh-panel] > *, [data-section-content] > * { max-width: 100% !important; }
         }
       `}</style>
       <div style={{
