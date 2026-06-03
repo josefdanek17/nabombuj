@@ -11558,6 +11558,8 @@ function OkruhFin7Panel() {
     { q: "Co je reorganizace?", a: "Firma pokračuje v provozu podle ozdravného plánu a postupně splácí věřitele. Pro větší firmy, kde má smysl je zachovat. Sanační řešení." },
     { q: "Role insolvenčního správce?", a: "Rozhoduje o průběhu insolvence, firma ztrácí kontrolu nad majetkem. Spravuje majetkovou podstatu, dohlíží na uspokojení věřitelů." },
     { q: "Jak souvisí krize s bankrotními modely?", a: "Bankrotní modely (Altman, IN) predikují úpadek dřív, než nastane — slouží jako včasný varovný systém před krizí." },
+    { q: "Co je oddlužení?", a: "Způsob řešení úpadku pro fyzické osoby a menší dlužníky — splátkový kalendář nebo zpeněžení části majetku, část dluhů se odpustí." },
+    { q: "Může být zisková firma v úpadku?", a: "Ano — platební neschopnost se týká hotovosti, ne zisku. I zisková firma může mít peníze vázané v zásobách a pohledávkách a nezvládat splatné závazky." },
   ];
 
   const quizFin7 = [
@@ -13056,6 +13058,8 @@ function OkruhFin2Panel() {
     { q: "Tafflerův a Beaverův model?", a: "Taffler = používá se hlavně v Británii. Beaver = jeden z prvních bankrotních modelů." },
     { q: "Co je Index bonity?", a: "Bonitní (ne bankrotní) model — jednodušší, méně ukazatelů, pro menší podniky. Bonita = schopnost dostát závazkům." },
     { q: "Index bonity — pásma?", a: "B > 1,8 = ok. 0–1,8 = nic moc. B < 0 = špatné. Vysoká hodnota = finančně stabilní firma." },
+    { q: "Co Altmanovo Z-skóre kombinuje?", a: "5 poměrových ukazatelů (pracovní kapitál, zadržené zisky, EBIT, tržní hodnota VK, tržby — vše k aktivům) složených s váhami do jednoho čísla." },
+    { q: "Kdo používá bankrotní modely v praxi?", a: "Banky před schválením úvěru, ratingové agentury (Moody's, S&P), dodavatelé a investoři — jako rychlý screening finančního zdraví firmy." },
   ];
 
   const quizFin2 = [
@@ -32773,6 +32777,10 @@ function OkruhInov6Panel() {
     { q: "Co je IPO?", a: "Initial Public Offering = vstup na burzu. Pro zavedené úspěšné firmy. Primární emise akcií (underwriter zajistí úpis)." },
     { q: "Účelové × institucionální financování?", a: "Účelové = na schválený účel (GAČR, TAČR, ministerstva). Institucionální = ke krytí výzkumných institucí." },
     { q: "Přímá × nepřímá veřejná podpora?", a: "Přímá = dotace, granty. Nepřímá = daňové úlevy. Reaguje na selhání trhu (riziko moc vysoké pro soukromé investory)." },
+    { q: "Co je SPV u LBO?", a: "Special Purpose Vehicle — speciálně vytvořená společnost, která si vezme úvěr, koupí cílovou firmu a později s ní splyne. Klasická technika leverage buyoutu." },
+    { q: "Co je seed kapitál?", a: "Kapitálová investice do základního kapitálu úplně mladé firmy, odměňovaná podílem. Např. Operační program Podnikání a inovace (státem zřízený, investoři privátní)." },
+    { q: "Proč existuje veřejné financování inovací?", a: "Reaguje na selhání trhu — riziko inovací je pro soukromé investory někdy moc vysoké, takže stát mezeru vyplní (dotace, granty, daňové úlevy)." },
+    { q: "Jak se liší zdroj podle fáze firmy?", a: "Čím mladší a rizikovější firma, tím dražší a rizikovější zdroj (FFF → angels → VC). Čím zralejší, tím levnější (PE, IPO, banky). Ve špatné fázi nedostaneš správné peníze." },
   ];
 
   const quizInov6 = [
@@ -33065,37 +33073,41 @@ function OkruhInov7Panel() {
         ]} color={VSE.warning} />
       </div>) },
 
-    { id: "pitra_vlcek", title: "Pitra a Vlček — české přístupy k inovační strategii", subtitle: "Specifika české akademické tradice", color: VSE.primary, emoji: "people",
+    { id: "pitra_vlcek", title: "Pitra × Vlček — české přístupy k inovační strategii", subtitle: "Vlček = mapa oblastí řízení, Pitra = škála věda vs kopírování", color: VSE.primary, emoji: "people",
       content: (<div>
         <Def color={VSE.primary}>
-          <b>Zbyněk Pitra</b> a <b>Radim Vlček</b> jsou klíčoví čeští akademici v oblasti managementu inovací. Jejich přístupy jsou součástí osnov státnic VŠE — komise může chtít rozlišit od mezinárodních autorů.
+          <b>Radim Vlček</b> a <b>Zbyněk Pitra</b> jsou čeští akademici (VŠE). Liší se úhlem pohledu: <b>Vlček</b> dává <b>mapu oblastí, které lze u inovací strategicky řídit</b>. <b>Pitra</b> dává <b>škálu podle toho, jak moc firma sází na vlastní vědu vs. kopírování</b>.
         </Def>
-        <Tag color={VSE.primary}>Pitra — 5 inovačních strategií</Tag>
+        <Tag color={VSE.fis}>VLČEK — co všechno lze strategicky řídit (6 oblastí)</Tag>
         <Bullet items={[
-          "<b>1. Strategie nákladového vůdce</b> — inovace zaměřená na úsporu nákladů (procesní inovace, automatizace). Cíl: nejnižší cena na trhu.",
-          "<b>2. Strategie diferenciace</b> — inovace pro unikátní hodnotu (nové vlastnosti, design, brand). Cíl: prémiová cena.",
-          "<b>3. Strategie tržního výklenku (niche)</b> — focus na úzkou cílovou skupinu, kterou velkým firmám nezvládají obsluhovat.",
-          "<b>4. Strategie kooperace</b> — partnerství s univerzitami, klienty, dodavateli (otevřená inovace). Vlastní R&D minimalizováno.",
-          "<b>5. Strategie akvizic</b> — kupování inovativních startupů místo vlastního R&D. Rychlejší time-to-market.",
-        ]} color={VSE.primary} />
-        <Tag color={VSE.warning}>Vlček — 6 dimenzí inovační strategie</Tag>
+          "<b>1. Složitost inovací</b> — jednoduché (drobné úpravy, racionalizace, řízení údržby) × složité (inkrementální až radikální, řídí se jako projekt).",
+          "<b>2. Stanovení podnětné inovace</b> — kde začít a jak postupovat pro max efekt? Tři cesty: odstraňování neefektivností, inovační dominanta (od klíčové technologie/výrobku se odvine zbytek), souhrnná strategie.",
+          "<b>3. Vznik produktových × procesních inovací</b> — push (tlačím vlastní vývoj) × pull (táhne mě poptávka); podnik jako výrobce, stakeholdeři.",
+          "<b>4. Volba konkurenčního boje</b> — patří sem modré × rudé oceány, Porterovy generické strategie, Ansoffova matice (= nástroje uvnitř této dimenze).",
+          "<b>5. Druh restrukturalizace firmy</b> (inovační rekonstrukce) — strategie prosperity, revitalizace, resuscitace (záchrana).",
+          "<b>6. Vnímaný stupeň novosti</b> — novost vnímá výrobce nebo zákazník (Škoda Superb není technicky daleko od VW, ale zákazník ji vnímá jako jinou).",
+        ]} color={VSE.fis} />
+        <div style={{ padding: "8px 12px", background: `${VSE.fis}10`, borderRadius: 8, fontSize: 13, color: "var(--text)", fontFamily: fontSans, fontStyle: "italic", marginBottom: 8 }}>
+          Vlček = <b>nejkomplexnější rámec</b>, rozcestník 6 oblastí, ve kterých se firma u inovace rozhoduje. Realizuje se ve 3 oblastech: výrobkově-technická (co), marketingová (pro koho), výrobně-technologická (jak).
+        </div>
+        <Tag color={VSE.warning}>PITRA — podle vztahu k vědě a rozpočtu (5 strategií)</Tag>
         <Bullet items={[
-          "<b>1. Časová dimenze</b> — kdy inovovat (first mover × follower × pozdní).",
-          "<b>2. Technologická dimenze</b> — vlastní vývoj × nákup technologie × licence.",
-          "<b>3. Tržní dimenze</b> — stávající × nový trh, lokální × globální.",
-          "<b>4. Produktová dimenze</b> — inkrementální × radikální (viz Inov 1), produkt × proces × organizace × marketing.",
-          "<b>5. Organizační dimenze</b> — interní R&D × outsourcing × joint venture × akvizice.",
-          "<b>6. Finanční dimenze</b> — vlastní financování × dluhové × venture capital × granty.",
+          "<b>1. Progresivnost technického řešení</b> — vsadí na nejnovější vědu, ale opomíjí zákazníka. Nákladné a rizikové. Jasný cíl, špičkový vývoj, slabina = neptal se zákazníka.",
+          "<b>2. Vyvážená strategie</b> — 🏆 <b>nejúspěšnější</b>: kombinuje dokonalé technické řešení + potřeby zákazníka. Př. Galaxy Note Edge.",
+          "<b>3. Strategie ověřených technických přístupů</b> — aplikace osvědčeného, často napodobování. Skoro žádné vlastní R&D.",
+          "<b>4. Konzervativní strategie nízkého rozpočtu</b> — kopíruje lídra trhu, navazuje na předchozí produkty, osvědčené trhy. Zisková, nízké riziko. Př. Xiaomi.",
+          "<b>5. Strategie diverzifikovaných vysokých rozpočtů</b> — ⚠️ vývoj izolovaný od trhu, vysoké náklady, <b>nejasné cíle</b>. Drahý chaos bez směru. Př. Concorde.",
         ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Vlček × ostatní přístupy</Tag>
-        <Bullet items={[
-          "<b>Vlček je nejkomplexnější</b> — kombinuje Ansoffa (kde inovovat), Freemana (jak rychle), Pitru (s jakým cílem).",
-          "<b>Pro českou praxi</b> komise ráda chytá, že Vlček je VŠE-friendly autor — jeho 6 dimenzí je rámec, kterým lze analyzovat každou firmu.",
-          "<b>Vlček a Pitra publikovali společně</b> — jejich přístupy se doplňují. V praxi firma kombinuje 1-2 Pitrovy strategie a všech 6 Vlčkových dimenzí.",
-        ]} color={VSE.fph} />
+        <div style={{ padding: "10px 14px", background: `${VSE.warning}12`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          🔴 <b>Pozor na rozdíl strategie 1 × 5</b> (obě drahé, obě upozaďují zákazníka): <b>(1)</b> = drahý technický perfekcionismus s <b>jasným cílem</b> (špičková věda, jen zapomněli na zákazníka). <b>(5)</b> = drahý chaos s <b>nejasnými cíli</b>, vývoj odtržený od trhu. U jedničky aspoň vznikne špičková technologie, u pětky se rozhází balík bez směru.
+        </div>
+        <Tag color={VSE.fph}>Srovnání v jedné větě</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.fph}10`, border: `1px solid ${VSE.fph}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>Vlček ti dá mapu</b> — 6 oblastí, kde se u inovace rozhoduješ. <b>Pitra ti dá žebříček</b> — jak agresivně tlačit vlastní vědu vs. kopírovat, a říká, že nejlíp jsou na tom firmy <b>uprostřed (vyvážené)</b>.
+        </div>
         <ExamAlert
-          komise="Tažené: Inovační strategie (Mladkova+Šperka+Cejthamr, Nový+Mareš+Mladkova, Pichanič+Heřman+Zamazalová)"
-          what="Komise chce <b>typologii inovačních strategií</b> + <b>Ansoff × Mintzberg rozdíl</b> (racionalistický × gradualistický) + <b>Freemanových 6 strategií</b> + <b>Pitrových 5</b> + <b>Vlčkových 6 dimenzí</b>. Klíčové: vědět autora ke každému frameworku."
+          komise="Tažené: Inovační strategie (Mládková+Šperka+Cejthamr, Nový+Mareš+Mládková, Pichanič+Heřman+Zamazalová)"
+          what="Komise chce <b>typologii inovačních strategií</b> + <b>Ansoff × Mintzberg</b> (racionalistický × gradualistický) + <b>Freemanových 6</b> + <b>Vlčkových 6 oblastí řízení</b> + <b>Pitrových 5 strategií</b> (od progresivní vědy po konzervativní kopírování, vyvážená = nejlepší). Vědět autora ke každému rámci."
         />
       </div>) },
 
@@ -33110,8 +33122,8 @@ function OkruhInov7Panel() {
           "<b>2.</b> Aplikuj <b>Ansoffovu matici</b> — který kvadrant je nejvhodnější? Penetrace × Rozvoj produktu × Rozvoj trhu × Diverzifikace.",
           "<b>3.</b> Doporuč <b>přístup k tvorbě strategie</b> — racionalistický (Ansoff, stabilní trh) × gradualistický (Mintzberg, turbulentní trh) × kombinace.",
           "<b>4.</b> Vyber <b>Freemanovu typologii</b> — ofenzivní/defenzivní/imitační/závislá/tradiční/oportunistická. Která sedí dané firmě?",
-          "<b>5.</b> Aplikuj <b>Pitrových 5 strategií</b> — náklady × diferenciace × niche × kooperace × akvizice. Která je pro firmu nejvhodnější?",
-          "<b>6.</b> Analyzuj přes <b>Vlčkových 6 dimenzí</b> — časová, technologická, tržní, produktová, organizační, finanční. Toto je nejkomplexnější rámec.",
+          "<b>5.</b> Aplikuj <b>Pitrových 5 strategií</b> — od progresivnosti tech. řešení po konzervativní kopírování. Kam firma patří a má-li jít k vyvážené (věda + zákazník)?",
+          "<b>6.</b> Analyzuj přes <b>Vlčkových 6 oblastí řízení</b> — složitost inovací, podnětná inovace, push × pull, konkurenční boj, restrukturalizace, vnímaná novost. Nejkomplexnější rámec.",
           "<b>7.</b> Doporuč konkrétní akce — alokace R&D rozpočtu (70-20-10 pravidlo), klíčové projekty, partnerství, akvizice.",
         ]} color={VSE.success} />
         <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
@@ -33119,7 +33131,7 @@ function OkruhInov7Panel() {
           "<b>✅ Dobře:</b> Vědět <b>všech 5 autorů</b> (Ansoff, Mintzberg, Vlček, Pitra, Freeman) + jejich klíčové frameworky.",
           "<b>✅ Dobře:</b> <b>Ansoff × Mintzberg rozdíl</b> — racionalistický × gradualistický (plánovaný × emergentní).",
           "<b>✅ Dobře:</b> <b>Freemanových 6 strategií</b> s jasnými příklady.",
-          "<b>✅ Dobře:</b> <b>Vlčkových 6 dimenzí</b> jako analytický rámec.",
+          "<b>✅ Dobře:</b> <b>Vlčkových 6 oblastí řízení</b> jako analytický rámec; u Pitry vědět, že vyvážená (věda + zákazník) je nejúspěšnější.",
           "<b>✅ Dobře:</b> Spojit s Schumpeterem (Inov 1), Druckerem (Inov 2), Galbraithem (Inov 2).",
           "<b>❌ Špatně:</b> Mluvit jen o Ansoffovi a doufat — komise chce všech 5 autorů.",
           "<b>❌ Špatně:</b> Zaměnit autory (Freeman ≠ Vlček, Pitra ≠ Mintzberg).",
@@ -33147,10 +33159,10 @@ function OkruhInov7Panel() {
     { term: "Závislá strategie (Freeman)", def: "Subdodavatelé velkých firem. Inovuje pod tlakem zákazníků. Příklad: Foxconn pro Apple, čeští dodavatelé pro VW.", tag: "FREEMAN" },
     { term: "Tradiční strategie (Freeman)", def: "Téměř neinovuje. Produkt stagnuje, stabilní trh. Komodity, řemesla. Příklad: tradiční sklárny, kovárny.", tag: "FREEMAN" },
     { term: "Oportunistická strategie (Freeman)", def: "Hledá niches. Bez velkého R&D, využívá rychlosti a flexibility. Příklad: niche e-commerce, specializované značky.", tag: "FREEMAN" },
-    { term: "Pitra — 5 inovačních strategií", def: "1) Nákladový vůdce, 2) Diferenciace, 3) Tržní výklenek (niche), 4) Kooperace, 5) Akvizice.", tag: "PITRA" },
-    { term: "Vlček — kdo a co", def: "Radim Vlček (VŠE). Definoval 6 dimenzí inovační strategie — nejkomplexnější český rámec.", tag: "VLČEK" },
-    { term: "Vlček — 6 dimenzí inovační strategie", def: "1) Časová, 2) Technologická, 3) Tržní, 4) Produktová, 5) Organizační, 6) Finanční.", tag: "VLČEK" },
-    { term: "Vlček × ostatní", def: "Vlček je nejkomplexnější — kombinuje Ansoffa (kde), Freemana (jak rychle), Pitru (s jakým cílem). Pro českou praxi VŠE-friendly autor.", tag: "VLČEK" },
+    { term: "Pitra — 5 inovačních strategií", def: "Podle vztahu k vědě: 1) progresivnost technického řešení (špičková věda, opomíjí zákazníka), 2) vyvážená (věda + zákazník, NEJLEPŠÍ), 3) ověřené technické přístupy (napodobování), 4) konzervativní nízký rozpočet (kopíruje lídra, Xiaomi), 5) diverzifikované vysoké rozpočty (odtržené od trhu, nejasné cíle, Concorde).", tag: "PITRA" },
+    { term: "Vlček — kdo a co", def: "Radim Vlček (VŠE). Dává mapu 6 oblastí, které lze u inovací strategicky řídit — nejkomplexnější český rámec.", tag: "VLČEK" },
+    { term: "Vlček — 6 oblastí řízení inovací", def: "1) Složitost inovací (jednoduché × složité), 2) Stanovení podnětné inovace (kde začít), 3) Vznik produktových × procesních inovací (push × pull), 4) Volba konkurenčního boje (oceány, Porter, Ansoff), 5) Druh restrukturalizace (prosperita/revitalizace/resuscitace), 6) Vnímaný stupeň novosti (výrobce × zákazník).", tag: "VLČEK" },
+    { term: "Vlček × Pitra — rozdíl", def: "Vlček = mapa 6 oblastí, kde se u inovace rozhoduješ. Pitra = škála podle toho, jak moc sázíš na vlastní vědu vs. kopírování (vyvážená = nejlepší).", tag: "ROZDÍL" },
   ];
 
   const quizInov6 = [
@@ -33166,9 +33178,9 @@ function OkruhInov7Panel() {
     { q: "Která Freemanova strategie znamená 'být první'?", opts: ["Tradiční", "Ofenzivní — silné R&D, ochota riskovat (Apple, Tesla, SpaceX)", "Imitační", "Závislá"], correct: 1 },
     { q: "Která Freemanova strategie odpovídá Samsung vs Apple?", opts: ["Ofenzivní", "Defenzivní — fast follower, nízký základní výzkum ale rychlá adaptace", "Tradiční", "Imitační"], correct: 1 },
     { q: "Která Freemanova strategie sedí Foxconnu (Apple subdodavatel)?", opts: ["Ofenzivní", "Závislá — inovuje pod tlakem zákazníka, vlastní R&D minimální", "Tradiční", "Oportunistická"], correct: 1 },
-    { q: "Kolik strategií má Pitra?", opts: ["3", "5 (nákladový vůdce, diferenciace, niche, kooperace, akvizice)", "6", "10"], correct: 1 },
-    { q: "Kolik dimenzí má Vlčkova inovační strategie?", opts: ["3", "6 (časová, technologická, tržní, produktová, organizační, finanční)", "9", "12"], correct: 1 },
-    { q: "Proč je Vlček 'nejkomplexnější' český autor?", opts: ["Je nejstarší", "Jeho 6 dimenzí kombinuje Ansoffa (kde), Freemana (jak rychle), Pitru (s jakým cílem)", "Žádný důvod", "Marketing"], correct: 1 },
+    { q: "Která Pitrova strategie je nejúspěšnější?", opts: ["Progresivnost technického řešení", "Vyvážená (věda + zákazník)", "Konzervativní nízký rozpočet", "Diverzifikované vysoké rozpočty"], correct: 1 },
+    { q: "Co dává Vlčkův přístup k inovační strategii?", opts: ["5 hotových strategií", "Mapu 6 oblastí, které lze strategicky řídit", "Jen finanční plán", "Porterovy generické strategie"], correct: 1 },
+    { q: "Jak se liší Pitrova strategie 1 (progresivnost) a 5 (diverzifikované rozpočty)?", opts: ["Nijak", "1 = jasný cíl + špičková věda (jen opomíjí zákazníka); 5 = nejasné cíle, vývoj odtržený od trhu", "1 je levná, 5 drahá", "Obě kopírují lídra"], correct: 1 },
     { q: "Co znamená 70-20-10 pravidlo?", opts: ["Daňové sazby", "70 % R&D do core (kontinuální), 20 % adjacent (související), 10 % transformative (radikální/disruptivní)", "Pracovní doba", "Cena vs marže"], correct: 1 },
   ];
 
@@ -33196,19 +33208,19 @@ function OkruhInov7Panel() {
         Mintzberg by řekl: 'strategie vzorec emerguje z akcí firmy'. Tesla žije Mintzberg každý den.<br/><br/>
         🏛️ PITRA + VLČEK PERSPEKTIVA:<br/><br/>
         <b>Pitra (5 strategií):</b> Tesla je <b>diferenciace</b> (premium brand, unikátní vlastnosti — Autopilot, OTA, supercharger síť) + <b>akvizice</b> (SolarCity, DeepScale, Maxwell Technologies — pro pokročilé baterie).<br/><br/>
-        <b>Vlček (6 dimenzí):</b><br/>
-        - <b>Časová:</b> first mover v EV (2003), first mover v autonomous (2014).<br/>
-        - <b>Technologická:</b> vlastní vývoj + akvizice.<br/>
-        - <b>Tržní:</b> globální (USA → Evropa → Čína → Indie).<br/>
-        - <b>Produktová:</b> radikální (Schumpeter 5. typ — nová organizace odvětví, viz Inov 1).<br/>
-        - <b>Organizační:</b> interní R&D + akvizice (SolarCity, Grohmann Engineering).<br/>
-        - <b>Finanční:</b> IPO 2010 + multiple stock offerings + cash from operations po 2020.<br/><br/>
+        <b>Vlček (6 oblastí řízení):</b><br/>
+        - <b>Složitost:</b> složité radikální inovace (řízené jako velké projekty).<br/>
+        - <b>Podnětná inovace:</b> inovační dominanta = baterie/software, od nich se odvíjí zbytek.<br/>
+        - <b>Produktové × procesní:</b> obojí — produkt (EV) i proces (Gigafactory).<br/>
+        - <b>Konkurenční boj:</b> modrý oceán (vytvořila trh prémiových EV).<br/>
+        - <b>Restrukturalizace:</b> strategie prosperity (růst, ne záchrana).<br/>
+        - <b>Vnímaná novost:</b> vysoká u výrobce i zákazníka (technologický skok).<br/><br/>
         💡 PROČ TO FUNGUJE:<br/><br/>
         Tesla není jeden kvadrant Ansoffa nebo jedna Freemanova strategie. Je to <b>komplexní portfolio strategií</b>:<br/>
         - Ansoff: rozvoj produktu + diverzifikace.<br/>
         - Freeman: ofenzivní (technologický leadership).<br/>
         - Pitra: diferenciace + akvizice.<br/>
-        - Vlček: všech 6 dimenzí aktivně.<br/>
+        - Vlček: aktivní ve všech 6 oblastech řízení (dominanta = baterie/SW, modrý oceán, prosperita).<br/>
         - Mintzberg: emergentní strategie z technologických průlomů.<br/><br/>
         Klíč: Tesla má jasnou <b>vizi (sustainable energy future)</b>, ale strategie se postupně vyvíjí podle technologie a trhu. Pro PS to znamená — neaplikovat jeden framework, ale kombinovat.
       </>),
@@ -33216,8 +33228,8 @@ function OkruhInov7Panel() {
     },
     miniExamples: [
       { tag: "FREEMAN — DEFENZIVNÍ", color: VSE.warning, company: "Samsung — fast follower jako defenzivní strategie", content: "Samsung je etalon <b>defenzivní strategie</b> podle Freemana. Nevyvíjí radikální průlomy (jako Apple s iPhone 2007 nebo iPad 2010), ale <b>velmi rychle reaguje</b> a vylepšuje. Po iPhone 2007 vydal Samsung Galaxy S 2010 — 3 roky later. Po iPad 2010 vydal Galaxy Tab. Po Apple Watch 2015 vydal Galaxy Watch. Klíč: <b>obrovská výrobní kapacita</b> (Samsung vyrábí čipy pro Apple!) + <b>silný aplikovaný R&D</b> (ne základní výzkum). Výsledek: 20 % světového smartphone trhu vs Apple 17 %. Defenzivní ≠ slabý — je to validní strategie." },
-      { tag: "PITRA — KOOPERACE", color: VSE.fph, company: "Avast (CZ) → Norton akvizice — Pitrova kooperace + akvizice", content: "Avast (česká kybersecurity firma) ukazuje Pitrovu <b>strategii kooperace</b> + <b>akvizice</b>. Avast spolupracoval s univerzitami (ČVUT, MFF UK) pro talent pipeline. Akvizicemi (Piriform CCleaner, Jumpshot data analytics) rozšířil portfolio. V 2021 byl <b>sám akvírován NortonLifeLock za 8 mld USD</b> — to ukazuje, že kooperace + akvizice strategie funguje. Z české firmy se stala součást globálního giganta. Pro PS: Pitra = různé strategie pro různé fáze růstu firmy." },
-      { tag: "VLČEK — 6 DIMENZÍ", color: VSE.fmv, company: "Škoda Auto (CZ) — Vlčkův analytický rámec v praxi", content: "Škoda Auto je etalon Vlčkových <b>6 dimenzí inovační strategie</b>: <b>Časová</b> = fast follower za VW Group (ne first mover). <b>Technologická</b> = sdílení platforem MQB s VW (kooperace), žádný vlastní základní výzkum. <b>Tržní</b> = střední Evropa core, expanze do Indie/Číny/Ruska. <b>Produktová</b> = inkrementální (každoroční facelifty) + radikální v nových segmentech (Enyaq EV 2020). <b>Organizační</b> = interní vývoj v Mladé Boleslavi + VW Group platforma. <b>Finanční</b> = vlastní cash flow + investice z VW Group (zisky reinvestovány). Vlčkův rámec přesně popisuje Škoda strategy." },
+      { tag: "PITRA — VYVÁŽENÁ", color: VSE.fph, company: "Avast (CZ) → Norton — Pitrova vyvážená strategie", content: "Avast (česká kybersecurity firma) ukazuje Pitrovu <b>vyváženou strategii</b> — kombinuje špičkovou vědu (vlastní detekční algoritmy, spolupráce s ČVUT a MFF UK) se silnou tržní orientací (freemium model pro miliony uživatelů). Není to ani čistá progresivnost (věda bez ohledu na trh), ani konzervativní kopírování. V 2021 byl akvírován NortonLifeLock za 8 mld USD. Pro PS: vyvážená strategie (věda + zákazník) je podle Pitry nejúspěšnější." },
+      { tag: "VLČEK — 6 OBLASTÍ", color: VSE.fmv, company: "Škoda Auto (CZ) — Vlčkův rámec v praxi", content: "Škoda jde Vlčkovými <b>6 oblastmi řízení</b>: <b>Složitost</b> = mix jednoduchých (facelifty) i složitých inovací (Enyaq EV). <b>Podnětná inovace</b> = dominanta = sdílená platforma VW (MQB), od ní se odvíjí zbytek. <b>Push × pull</b> = pull, reaguje na poptávku trhu. <b>Konkurenční boj</b> = pozice value-for-money mezi levnými a prémiovými značkami. <b>Restrukturalizace</b> = prosperita (růst z lokální značky na globální). <b>Vnímaná novost</b> = Superb vnímán zákazníkem jako prémiový, i když sdílí techniku s VW." },
       { tag: "MINTZBERG — EMERGENT", color: VSE.success, company: "3M — Post-it Notes jako emergentní strategie", content: "3M je etalon Mintzbergova <b>emergentního přístupu</b>. Spencer Silver v 1968 omylem vyvinul <b>slabé lepidlo</b> (chtěl silné). 5 let to leželo v šuplíku. Pak Art Fry (taky 3M) v 1974 dostal nápad použít to na záložky do zpěvníku v kostele. Tak vznikl <b>Post-it Note</b>. <b>3M to NEPLÁNOVALA</b> jako strategii — emergovalo to z 15 % pravidla (zaměstnanci mají 15 % času na vlastní projekty). Z emergentní akce vznikl jeden z nejúspěšnějších produktů v historii. Mintzberg by řekl: 'strategie = pattern v chování firmy'. 3M kultura podpory experimentů → emergentní inovační strategie. Pro PS: deliberate (Ansoff) plánuje, emergent (Mintzberg) reaguje. Obojí má místo." },
     ]
   };
@@ -33226,13 +33238,13 @@ function OkruhInov7Panel() {
     { komise: "Obecně — Inovační strategie (kombinace autorů)", otazka: "Inovační strategie — typy podle Ansoffa, Mintzberga, Vlčka, Pitry, Freemana", pozn: "Tažené 1× ze 45, ale komplexní otázka. Komise chce <b>všech 5 autorů</b> + jejich frameworky + rozdíl Ansoff (deliberate) × Mintzberg (emergent)." },
     { komise: "Obecně — Ansoffova matice", otazka: "Ansoffova matice produkt × trh — 4 strategie růstu", pozn: "Penetrace × Rozvoj trhu × Rozvoj produktu × Diverzifikace. Riziko stoupá od penetrace k diverzifikaci. Penetrace NENÍ inovace." },
     { komise: "Obecně — Freeman", otazka: "Freemanových 6 typů inovační strategie", pozn: "Ofenzivní × defenzivní × imitační × závislá × tradiční × oportunistická. Každá s příkladem firmy." },
-    { komise: "Obecně — Vlček", otazka: "Vlčkových 6 dimenzí inovační strategie", pozn: "Časová, technologická, tržní, produktová, organizační, finanční. Vlček = nejkomplexnější český autor, VŠE-friendly." },
+    { komise: "Obecně — Vlček × Pitra", otazka: "Inovační strategie podle Vlčka a Pitry", pozn: "Vlček = mapa 6 oblastí řízení inovací. Pitra = 5 strategií podle vztahu k vědě (vyvážená nejlepší). Pozor na rozdíl Pitra 1 (jasný cíl, špičková věda) × 5 (nejasné cíle, odtržené od trhu)." },
     { komise: "Obecně — Mintzberg vs Ansoff", otazka: "Rozdíl racionalistického (Ansoff) a gradualistického (Mintzberg) přístupu", pozn: "Ansoff = deliberate plánování top-down. Mintzberg = emergent z akcí firmy bottom-up. V praxi kombinace." },
   ];
 
   const podcastInov6 = {
     title: "Inovace 6 — Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)",
-    description: "Inovační strategie je dlouhodobý plán, jak firma využívá inovace pro získání konkurenční výhody. Definuje do čeho budeme inovovat, jak rychle, s jakými zdroji a v jakém pořadí. Není to ad-hoc rozhodování, je to systémová odpověď. Proč firmy formulují inovační strategii - alokace zdrojů (bez strategie firma rozsype rozpočet na 50 malých projektů), sladění s firemní strategií, časový horizont (kontinuální vs průlomové), risk profile (70-20-10 pravidlo - 70 procent core, 20 procent adjacent, 10 procent transformative), time-to-market (first mover vs fast follower). Klíčové otázky - kde inovovat (produkty, procesy, BM), jak (interně in-house vs otevřená vs akvizice), kdy (být první vs následovat vs imitovat), s kým (dodavatelé, univerzity, startupy, konkurenti), pro koho (stávající vs noví zákazníci). Igor Ansoff (1957) je otec strategického plánování. Ansoffova matice 2 krát 2 produkt krát trh, 4 strategické cesty růstu. Racionalistický přístup k inovační strategii. 4 kvadranty - 1) Penetrace trhu (stávající produkt krát stávající trh, nejmenší riziko, lepší marketing, slevy, věrnostní programy, NENÍ inovace), 2) Rozvoj trhu (stávající produkt krát nový trh, mírné riziko, Škoda Auto expanze na Indii), 3) Rozvoj produktu (nový produkt krát stávající trh, Apple iPhone iPad Apple Watch), 4) Diverzifikace (nový produkt krát nový trh, nejvyšší riziko, Virgin hudba letectví telekomunikace, často přes akvizice). Henry Mintzberg z McGill University navrhl gradualistický emergentní přístup. Strategie nevzniká jen z formálního plánu ale emerguje z každodenních rozhodnutí firmy v reakci na trh. Ansoff vs Mintzberg - Ansoff racionalistický deliberate (strategie vzniká plánováním, top-down, stabilní prostředí), Mintzberg gradualistický emergent (strategie emerguje z akcí firmy, bottom-up, turbulentní prostředí). Mintzbergových 5 P strategie - Plan (vědomý plán Ansoff pojetí), Ploy (manévr taktika), Pattern (vzorec v chování firmy v čase emergentní pojetí), Position (pozice na trhu Porterův přístup), Perspective (úhel pohledu firemní osobnost kultura). Christopher Freeman z SPRU University of Sussex je britský ekonom, jeden z otců economics of innovation. Definoval 6 typů inovační strategie podle vztahu firmy k technologickému vývoji. 1) Ofenzivní - být první na trhu, silné R&D, vysoké investice, ochota riskovat, technologický leadership, Apple Tesla SpaceX. 2) Defenzivní - reagovat na ofenzivní hráče, aplikovaný R&D, fast follower, Samsung vs Apple. 3) Imitační - kopírovat etablovaná řešení, nízké R&D, focus na cenu, Aldi private labels, čínští výrobci. 4) Závislá - subdodavatelé velkých firem, inovuje pod tlakem zákazníků, Foxconn pro Apple, čeští dodavatelé pro VW. 5) Tradiční - téměř neinovuje, produkt stagnuje, stabilní trh, komodity, řemesla. 6) Oportunistická - hledá tržní mezery niches, bez velkého R&D, využívá rychlosti, niche e-commerce. Zbyněk Pitra a Radim Vlček jsou čeští akademici. Pitrových 5 inovačních strategií - 1) Nákladového vůdce (procesní inovace, automatizace, nejnižší cena), 2) Diferenciace (unikátní hodnota, design, brand, prémiová cena), 3) Tržního výklenku niche (úzká cílová skupina), 4) Kooperace (partnerství s univerzitami, klienty, otevřená inovace), 5) Akvizice (kupování inovativních startupů místo vlastního R&D). Vlčkových 6 dimenzí inovační strategie - 1) Časová (kdy inovovat - first mover vs follower), 2) Technologická (vlastní vývoj vs nákup vs licence), 3) Tržní (stávající vs nový trh, lokální vs globální), 4) Produktová (inkrementální vs radikální, produkt vs proces vs organizace vs marketing), 5) Organizační (interní R&D vs outsourcing vs joint venture vs akvizice), 6) Finanční (vlastní vs dluhové vs venture capital vs granty). Vlček je nejkomplexnější český autor - kombinuje Ansoffa kde, Freemana jak rychle, Pitru s jakým cílem. Pro českou praxi VŠE-friendly autor.",
+    description: "Inovační strategie je dlouhodobý plán, jak firma využívá inovace pro získání konkurenční výhody. Definuje do čeho budeme inovovat, jak rychle, s jakými zdroji a v jakém pořadí. Není to ad-hoc rozhodování, je to systémová odpověď. Proč firmy formulují inovační strategii - alokace zdrojů (bez strategie firma rozsype rozpočet na 50 malých projektů), sladění s firemní strategií, časový horizont (kontinuální vs průlomové), risk profile (70-20-10 pravidlo - 70 procent core, 20 procent adjacent, 10 procent transformative), time-to-market (first mover vs fast follower). Klíčové otázky - kde inovovat (produkty, procesy, BM), jak (interně in-house vs otevřená vs akvizice), kdy (být první vs následovat vs imitovat), s kým (dodavatelé, univerzity, startupy, konkurenti), pro koho (stávající vs noví zákazníci). Igor Ansoff (1957) je otec strategického plánování. Ansoffova matice 2 krát 2 produkt krát trh, 4 strategické cesty růstu. Racionalistický přístup k inovační strategii. 4 kvadranty - 1) Penetrace trhu (stávající produkt krát stávající trh, nejmenší riziko, lepší marketing, slevy, věrnostní programy, NENÍ inovace), 2) Rozvoj trhu (stávající produkt krát nový trh, mírné riziko, Škoda Auto expanze na Indii), 3) Rozvoj produktu (nový produkt krát stávající trh, Apple iPhone iPad Apple Watch), 4) Diverzifikace (nový produkt krát nový trh, nejvyšší riziko, Virgin hudba letectví telekomunikace, často přes akvizice). Henry Mintzberg z McGill University navrhl gradualistický emergentní přístup. Strategie nevzniká jen z formálního plánu ale emerguje z každodenních rozhodnutí firmy v reakci na trh. Ansoff vs Mintzberg - Ansoff racionalistický deliberate (strategie vzniká plánováním, top-down, stabilní prostředí), Mintzberg gradualistický emergent (strategie emerguje z akcí firmy, bottom-up, turbulentní prostředí). Mintzbergových 5 P strategie - Plan (vědomý plán Ansoff pojetí), Ploy (manévr taktika), Pattern (vzorec v chování firmy v čase emergentní pojetí), Position (pozice na trhu Porterův přístup), Perspective (úhel pohledu firemní osobnost kultura). Christopher Freeman z SPRU University of Sussex je britský ekonom, jeden z otců economics of innovation. Definoval 6 typů inovační strategie podle vztahu firmy k technologickému vývoji. 1) Ofenzivní - být první na trhu, silné R&D, vysoké investice, ochota riskovat, technologický leadership, Apple Tesla SpaceX. 2) Defenzivní - reagovat na ofenzivní hráče, aplikovaný R&D, fast follower, Samsung vs Apple. 3) Imitační - kopírovat etablovaná řešení, nízké R&D, focus na cenu, Aldi private labels, čínští výrobci. 4) Závislá - subdodavatelé velkých firem, inovuje pod tlakem zákazníků, Foxconn pro Apple, čeští dodavatelé pro VW. 5) Tradiční - téměř neinovuje, produkt stagnuje, stabilní trh, komodity, řemesla. 6) Oportunistická - hledá tržní mezery niches, bez velkého R&D, využívá rychlosti, niche e-commerce. Zbyněk Pitra a Radim Vlček jsou čeští akademici. Pitrových 5 inovačních strategií podle vztahu k vědě a rozpočtu - 1) Progresivnost technického řešení (sází na nejnovější vědu, ale opomíjí zákazníka, nákladné a rizikové), 2) Vyvážená strategie (kombinuje dokonalé technické řešení a potřeby zákazníka, je nejúspěšnější, např. Galaxy Note Edge), 3) Ověřené technické přístupy (napodobování osvědčeného, skoro žádné vlastní R&D), 4) Konzervativní strategie nízkého rozpočtu (kopíruje lídra trhu, např. Xiaomi, zisková s nízkým rizikem), 5) Diverzifikované vysoké rozpočty (vývoj izolovaný od trhu, vysoké náklady, nejasné cíle, např. Concorde). Pozor na rozdíl strategie 1 a 5 - obě jsou drahé a obě opomíjejí zákazníka, ale jednička má jasný cíl a špičkovou vědu, zatímco pětka má nejasné cíle a vývoj odtržený od trhu. Vlčkových 6 oblastí, které lze u inovací strategicky řídit - 1) Složitost inovací (jednoduché vs složité), 2) Stanovení podnětné inovace (kde začít - odstraňování neefektivností, inovační dominanta, souhrnná strategie), 3) Vznik produktových a procesních inovací (push vs pull), 4) Volba konkurenčního boje (modré a rudé oceány, Porterovy generické strategie, Ansoffova matice), 5) Druh restrukturalizace firmy (prosperita, revitalizace, resuscitace), 6) Vnímaný stupeň novosti (vnímaný výrobcem nebo zákazníkem). Vlček dává mapu oblastí řízení, Pitra dává škálu podle vztahu k vědě - vyvážená je nejlepší. Vlček je nejkomplexnější český rámec.",
     audioUrl: null,
     notebookLmUrl: null,
   };
@@ -33243,13 +33255,13 @@ function OkruhInov7Panel() {
     <b style="color:#1E938D">3.</b> ⚠️ <b>Mintzberg</b> — gradualistický (emergent) přístup, strategie z akcí firmy. <b>5 P</b> (Plan, Ploy, Pattern, Position, Perspective).<br/>
     <b style="color:#1E938D">4.</b> <b>Ansoff × Mintzberg rozdíl</b> — racionalistický × gradualistický (komise se ráda ptá).<br/>
     <b style="color:#1E938D">5.</b> ⚠️ <b>Freeman — 6 strategií</b>: ofenzivní, defenzivní, imitační, závislá, tradiční, oportunistická. Každá s příkladem.<br/>
-    <b style="color:#1E938D">6.</b> <b>Pitra — 5 strategií</b>: nákladový vůdce, diferenciace, niche, kooperace, akvizice.<br/>
-    <b style="color:#1E938D">7.</b> ⚠️ <b>Vlček — 6 dimenzí</b>: časová, technologická, tržní, produktová, organizační, finanční. <b>Nejkomplexnější český rámec</b>.<br/>
+    <b style="color:#1E938D">6.</b> <b>Pitra — 5 strategií</b> podle vztahu k vědě: progresivnost → vyvážená (NEJLEPŠÍ) → ověřené přístupy → konzervativní (Xiaomi) → diverzifikované rozpočty (Concorde).<br/>
+    <b style="color:#1E938D">7.</b> <b>Vlček — 6 oblastí řízení</b>: složitost, podnětná inovace, push × pull, konkurenční boj, restrukturalizace, vnímaná novost. <b>Nejkomplexnější rámec</b>.<br/>
     <b style="color:#1E938D">8.</b> <b>70-20-10 pravidlo</b> alokace R&D — core × adjacent × transformative.<br/>
     <b style="color:#1E938D">9.</b> Aplikace na PS — identifikuj Ansoffův kvadrant + Freemanovu kategorii + Vlčkovy dimenze.<br/>
     <b style="color:#1E938D">10.</b> Spojit s ostatními inovacemi — Schumpeter (Inov 1), Drucker (Inov 2), Galbraith (Inov 2), DT (Inov 4), SGCP (Inov 5).<br/>
     <b style="color:#1E938D">11.</b> Etalony — Tesla (kombinace všech), Samsung (defenzivní), 3M (emergent), Škoda (Vlčkovy dimenze), Avast (Pitra kooperace+akvizice).<br/>
-    <b style="color:#1E938D">12.</b> Anti-vzor: mluvit jen o R&D rozpočtu, to je jen finanční dimenze Vlčka.
+    <b style="color:#1E938D">12.</b> Anti-vzor: zaměnit Pitru za Porterovy generické strategie nebo mluvit jen o R&D rozpočtu.
   `;
 
   const caseStudyInov6 = {
@@ -33287,7 +33299,7 @@ function OkruhInov7Panel() {
         { text: "Skočit přímo na DIVERZIFIKACI (nový produkt + nový trh) — nejrizikovější kvadrant", correct: false, reason: "✗ Diverzifikace je nejrizikovější. Pro firmu, která 5 let stagnuje a má slabé R&D, je to recept na zánik. Lepší postupně přes rozvoj produktu/trhu." },
       ],
     },
-    summary: "<b>Petr by měl aplikovat všech 5 frameworků inovační strategie — Ansoff + Mintzberg + Freeman + Pitra + Vlček.</b><br/><br/><b>Postup:</b><br/><br/>• <b>ANSOFF (4 kvadranty):</b> Vyhnout se PENETRACI TRHU (past). Zaměřit se na <b>ROZVOJ PRODUKTU</b> (nové AI/cloud/mobile features pro stávající nemocnice) + <b>ROZVOJ TRHU</b> (home care, EU export, soukromé kliniky) + opatrná <b>DIVERZIFIKACE</b> (niche segmenty jako veterinární medicína nebo home dialýza).<br/><br/>• <b>MINTZBERG (5P):</b> Najít rovnováhu mezi <b>DELIBERATE</b> (3letý plán pro board s milníky) a <b>EMERGENT</b> (pilotní home care projekt 2026, experimentování s AI). Plan + Pattern současně.<br/><br/>• <b>FREEMAN (6 typů):</b> Posun z dnešní imitační/defenzivní na <b>hybrid OFENZIVNÍ + OPORTUNISTICKÁ</b> — ofenzivní v AI funkcích pro nemocnice, oportunistická v home care niche, kde velcí hráči nemají sílu.<br/><br/>• <b>PITRA (5 strategií):</b> Kombinovat <b>DIFERENCIACI</b> (Made in EU, GDPR, lokální podpora — premium pozice oproti levné Mindray) + <b>KOOPERACI</b> (partnerství s ČVUT/VUT/FEL pro talent a R&D) + případně <b>AKVIZICI</b> (česká AI/healthtech startup — rychlejší než vlastní vývoj).<br/><br/>• <b>VLČEK (6 dimenzí) — konkrétní plán:</b><br/>– <b>Časová:</b> fast follower v AI globálně, ale first mover v ČR home care.<br/>– <b>Technologická:</b> kombinace interní R&D + akvizice + univerzitní kooperace.<br/>– <b>Tržní:</b> rozšířit z CZ+SK na EU export + home care segment + soukromé kliniky.<br/>– <b>Produktová:</b> radikální skok v AI funkcích (Schumpetrův 2. typ — viz Inov 1), inkrementální v hardware.<br/>– <b>Organizační:</b> interní R&D + akvizice startupu pro AI + JV s univerzitou.<br/>– <b>Finanční:</b> zvýšit R&D z 3 % na 8 % (z 25 mil na 70 mil ročně) — financovat z cash flow + případně EIB úvěr.<br/><br/>• <b>70-20-10 alokace R&D (70 mil ročně):</b><br/>– 70 % core (49 mil) — vylepšování stávajících produktů (pumpy, monitory).<br/>– 20 % adjacent (14 mil) — cloud connectivity, mobile apps pro stávající.<br/>– 10 % transformative (7 mil) — AI diagnostika, home care platform, novel segment.<br/><br/>• <b>3letý plán:</b><br/>– Rok 1: zvýšit R&D na 5 %, akvizice AI startup (~50 mil), pilot home care s 2 nemocnicemi.<br/>– Rok 2: launch AI funkcí v stávajících produktech, expanze do EU (Polsko, Rakousko, Maďarsko), scale home care.<br/>– Rok 3: 1,5 miliardy tržeb (těsně pod board cílem 1,7 mld), ale udržitelný růst, nezávislost.<br/><br/><b>Pro komisi:</b> Klíč — <b>všech 5 autorů</b> (Ansoff, Mintzberg, Vlček, Pitra, Freeman) + jejich frameworky + aplikace na firmu. <b>Vědět autora ke každému rámci.</b> Anti-vzor: mluvit jen o R&D rozpočtu — to je jen finanční dimenze Vlčka, ne celá strategie.",
+    summary: "<b>Petr by měl aplikovat všech 5 frameworků inovační strategie — Ansoff + Mintzberg + Freeman + Pitra + Vlček.</b><br/><br/><b>Postup:</b><br/><br/>• <b>ANSOFF (4 kvadranty):</b> Vyhnout se PENETRACI TRHU (past). Zaměřit se na <b>ROZVOJ PRODUKTU</b> (nové AI/cloud/mobile features pro stávající nemocnice) + <b>ROZVOJ TRHU</b> (home care, EU export, soukromé kliniky) + opatrná <b>DIVERZIFIKACE</b> (niche segmenty jako veterinární medicína nebo home dialýza).<br/><br/>• <b>MINTZBERG (5P):</b> Najít rovnováhu mezi <b>DELIBERATE</b> (3letý plán pro board s milníky) a <b>EMERGENT</b> (pilotní home care projekt 2026, experimentování s AI). Plan + Pattern současně.<br/><br/>• <b>FREEMAN (6 typů):</b> Posun z dnešní imitační/defenzivní na <b>hybrid OFENZIVNÍ + OPORTUNISTICKÁ</b> — ofenzivní v AI funkcích pro nemocnice, oportunistická v home care niche, kde velcí hráči nemají sílu.<br/><br/>• <b>PITRA (5 strategií):</b> Kombinovat <b>DIFERENCIACI</b> (Made in EU, GDPR, lokální podpora — premium pozice oproti levné Mindray) + <b>KOOPERACI</b> (partnerství s ČVUT/VUT/FEL pro talent a R&D) + případně <b>AKVIZICI</b> (česká AI/healthtech startup — rychlejší než vlastní vývoj).<br/><br/>• <b>VLČEK (6 oblastí řízení) — konkrétní plán:</b><br/>– <b>Složitost:</b> mix — inkrementální v hardware + radikální skok v AI funkcích.<br/>– <b>Podnětná inovace:</b> dominanta = AI/cloud, od ní odvinout zbytek portfolia.<br/>– <b>Push × pull:</b> pull — reagovat na rostoucí poptávku po home care.<br/>– <b>Konkurenční boj:</b> diferenciace (Made in EU, GDPR) místo cenové války s Mindray.<br/>– <b>Restrukturalizace:</b> revitalizace stagnující firmy (ne resuscitace — ještě není v krizi).<br/>– <b>Vnímaná novost:</b> AI funkce vnímané zákazníkem (nemocnicí) jako výrazná novinka.<br/><br/>• <b>70-20-10 alokace R&D (70 mil ročně):</b><br/>– 70 % core (49 mil) — vylepšování stávajících produktů (pumpy, monitory).<br/>– 20 % adjacent (14 mil) — cloud connectivity, mobile apps pro stávající.<br/>– 10 % transformative (7 mil) — AI diagnostika, home care platform, novel segment.<br/><br/>• <b>3letý plán:</b><br/>– Rok 1: zvýšit R&D na 5 %, akvizice AI startup (~50 mil), pilot home care s 2 nemocnicemi.<br/>– Rok 2: launch AI funkcí v stávajících produktech, expanze do EU (Polsko, Rakousko, Maďarsko), scale home care.<br/>– Rok 3: 1,5 miliardy tržeb (těsně pod board cílem 1,7 mld), ale udržitelný růst, nezávislost.<br/><br/><b>Pro komisi:</b> Klíč — <b>všech 5 autorů</b> (Ansoff, Mintzberg, Vlček, Pitra, Freeman) + jejich frameworky + aplikace na firmu. <b>Vědět autora ke každému rámci.</b> Anti-vzor: zaměnit Pitrových 5 strategií za Porterovy generické strategie (častá chyba) — Pitra řadí podle vztahu k vědě, ne podle nákladů/diferenciace.",
   };
 
   return (
@@ -33295,7 +33307,7 @@ function OkruhInov7Panel() {
       subject="Inovace" subjectId="inov" number={7} title="Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)"
       subtitle="Inovační strategie — Ansoffova matice (racionalistický) × Mintzberg 5P (gradualistický emergent), Freemanových 6 strategií, Pitrových 5 strategií, Vlčkových 6 dimenzí. Kombinace všech 5 autorů."
       color={VSE.primary}
-      questionText="Inovační strategie — 5 autorů: Ansoff, Mintzberg, Freeman, Pitra, Vlček (6 dimenzí)."
+      questionText="Inovační strategie — 5 autorů: Ansoff, Mintzberg, Freeman, Pitra (5 strategií), Vlček (6 oblastí řízení)."
       sloz={3} roz={4} freq={3}
       examStrategy={examStrategyInov6}
       studySections={studySectionsInov7}
@@ -33315,51 +33327,51 @@ function OkruhInov7Panel() {
    ════════════════════════════════════════════════════════ */
 function OkruhInov8Panel() {
   const studySectionsInov8 = [
-    { id: "proc_selhavaji", title: "Proč inovace selhávají — Hobcraft × O'Sullivan", subtitle: "Top důvody selhání inovačních projektů", color: VSE.primary, emoji: "scale",
+    { id: "proc_selhavaji", title: "Chyba × selhání + příčiny (Hobcraft × O'Sullivan)", subtitle: "Proč inovace selhávají a jak to komise rozlišuje", color: VSE.primary, emoji: "scale",
       content: (<div>
         <Def color={VSE.primary}>
-          <b>Většina inovací selhává.</b> Studie ukazují, že <b>70-90 % radikálních inovací nedosáhne komerčního úspěchu</b>. Otázka není 'jestli selžu', ale 'jak často, jak rychle, jak draho a co se z toho naučím'. <b>Paul Hobcraft</b> a <b>David O'Sullivan</b> definovali klíčové důvody, proč to firmy nezvládají.
+          Komise rozlišuje dva pojmy: <b>chyba</b> = něco děláme špatně, i když víme, jak by se to mělo dělat správně. <b>Selhání</b> = pokoušíme se o něco nového a nevíme s předstihem, jak to dovést k úspěchu. U inovací je selhání běžné — důležité je se z něj poučit.
         </Def>
-        <Tag color={VSE.primary}>Hobcraft × O'Sullivan — 5 hlavních důvodů selhání</Tag>
+        <Tag color={VSE.fis}>Selhání — ctihodné × nekompetentní (Sloane)</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Ctihodné selhání" color={VSE.success} items={["Snažili jsme se, dali jsme do toho úsilí, ale nevyšlo to.", "Cenné — vzniká při poctivém pokusu o něco nového."]} />
+          <ModelCard name="Nekompetentní selhání" color={VSE.danger} items={["Selhání kvůli nízkému úsilí a schopnostem.", "Bezcenné — dalo se mu předejít."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Typologie selhání</Tag>
         <Bullet items={[
-          "<b>1. Slabé pochopení zákazníka</b> — firma vyvíjí produkt 'od stolu', bez vcítění (chybí Design Thinking — viz Inov 4). Klasický Henry Ford: 'kdybych se zeptal, lidi by chtěli rychlejšího koně'.",
-          "<b>2. Nejasná inovační strategie</b> — firma neví, do čeho a proč inovuje. Bez frameworku (Ansoff/Mintzberg/Vlček — viz Inov 6) jen rozsype rozpočet.",
-          "<b>3. Špatná exekuce</b> — nápad je dobrý, ale vývoj/launch je chaotický. Chybí SGCP (viz Inov 5) — žádné gates, žádné formální schvalování, žádné KILL.",
-          "<b>4. Firemní kultura</b> — 'imunitní systém' firmy (viz Inov 2 — Galbraith) odmítá nové. Strach z chyby, trest za experimenty, hierarchie potlačuje šampiony.",
-          "<b>5. Nedostatečné zdroje</b> — málo R&D budgetu (méně než 3-5 % tržeb), málo času, nedostatečně kvalifikovaný tým, žádný interní inovační fond.",
-        ]} color={VSE.primary} />
-        <Tag color={VSE.warning}>Další časté důvody (rozšíření Hobcrafta)</Tag>
-        <Bullet items={[
-          "<b>Špatný timing</b> — předběhnutí trhu (Apple Newton 1993, Google Glass 2014) nebo opožděné uvedení.",
-          "<b>Slabý business model</b> — produkt funguje, ale firma neumí vydělat (chybí Lean Canvas/BMC — viz Inov 3).",
-          "<b>Konkurenční reakce</b> — silný incumbent rychle kopíruje (Facebook → Snapchat Stories, Instagram).",
-          "<b>Regulační překážky</b> — Uber v Německu, Airbnb v New Yorku.",
-          "<b>Technologická nezralost</b> — VR brýle 2016 (mnoho firem), autonomous driving 2020+ (Waymo, Cruise).",
+          "Selhání může být: <b>systému, produktu, procesu, nápadu, business modelu</b>.",
+          "Obecné příčiny: špatně definovaný cíl, špatná strategie, nedostatek zdrojů, nerealistická očekávání, nevhodný tým, nekvalitní vedení, špatná komunikace, špatný plán.",
         ]} color={VSE.warning} />
+        <Tag color={VSE.danger}>Příčiny selhání podle dvou autorů (komise chytá!)</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="HOBCRAFT" color={VSE.fph} items={["Nevhodně definovaná strategie", "Nedostatek zdrojů", "Orientace na produkty a technologie", "Nevhodní lidé a lidé v silo efektu", "Nerealistická očekávání"]} />
+          <ModelCard name="O'SULLIVAN" color={VSE.fmv} items={["Nekvalitní řízení systémů", "Nekvalitní vedení", "Nekvalitní organizace", "Nízká akceschopnost", "Špatná organizace / komunikace"]} />
+        </ResponsiveGrid>
+        <ExamAlert komise="Tažené: Bariéry inovací (externí × interní)" what="Komise chce <b>rozdíl chyba × selhání</b> + <b>obě tabulky příčin (Hobcraft × O'Sullivan)</b> + <b>10 zabijáků (interní bariéry)</b> + <b>externí bariéry</b>. Hobcraft = spíš strategie a zdroje, O'Sullivan = spíš vedení a organizace." />
       </div>) },
 
     { id: "vnitrni_barery", title: "Vnitřní (interní) bariéry inovací — 10 kategorií", subtitle: "Co uvnitř firmy brání úspěchu inovace", color: VSE.primary, emoji: "tools",
       content: (<div>
         <Def color={VSE.primary}>
-          <b>Vnitřní bariéry</b> jsou ty, které firma má pod kontrolou — může je odstranit, ale často neumí. Komise tažené 5× chce <b>vyjmenovat aspoň 6-8 interních bariér</b>.
+          <b>Vnitřní bariéry</b> jsou ty, které firma má pod kontrolou — může je odstranit, ale často neumí. Zdroj je uvádí jako <b>„10 zabijáků inovací"</b>. Komise chce vyjmenovat aspoň 6-8 z nich.
         </Def>
-        <Tag color={VSE.primary}>10 klíčových interních bariér</Tag>
+        <Tag color={VSE.primary}>10 zabijáků inovací</Tag>
         <ResponsiveGrid cols2>
           {[
-            { c: VSE.fph, t: "1. FIREMNÍ KULTURA", d: "<b>Imunitní systém firmy</b> (viz Inov 2). Strach z chyby, trest za experiment, hierarchie, 'tak se to u nás nedělá'. Nejčastější bariéra." },
-            { c: VSE.warning, t: "2. LEADERSHIP", d: "<b>Vedení nepodporuje inovace</b> aktivně. Žádný 'innovation champion' na C-úrovni. Top management bere inovace jako nákladovou položku." },
-            { c: VSE.fmv, t: "3. ORGANIZAČNÍ STRUKTURA", d: "<b>Strikt hierarchie a silo</b> — R&D, marketing, sales spolu nemluví. Inovace umírá v meziprostoru. Chybí multidisciplinární týmy." },
-            { c: VSE.danger, t: "4. PROCESY", d: "<b>Žádný formální inovační proces</b> (chybí SGCP — viz Inov 5). Nebo naopak <b>příliš byrokratický</b> — schvalování trvá rok." },
-            { c: VSE.success, t: "5. LIDÉ A TALENT", d: "<b>Chybí inovační role</b> (idea šampioni, sponzoři, lídři — viz Inov 2). Žádné vzdělávání v DT, brainstormingu, agile metodikách." },
-            { c: VSE.primary, t: "6. FINANCE", d: "<b>Příliš nízký R&D budget</b> (méně než 3 % tržeb), žádný interní inovační fond, krátkozraké myšlení (ROI do roka, jinak KILL)." },
-            { c: VSE.fph, t: "7. ČAS A KAPACITY", d: "<b>Lidé jsou přetížení provozem</b>, nemají čas na inovace. Chybí 15 % pravidlo (3M) nebo 20 % pravidlo (Google)." },
-            { c: VSE.warning, t: "8. ZNALOSTI A INFORMACE", d: "<b>Firma nezná zákazníky</b> (chybí Vcítění — Inov 4), nezná konkurenci, nezná trendy. Žádný systematický market research." },
-            { c: VSE.fmv, t: "9. ZÁKAZNICKÝ FEEDBACK", d: "<b>Firma nesbírá zpětnou vazbu</b>, nebo ji ignoruje. Žádné focus groups, žádní lead users (viz Inov 4). Vývoj 'od stolu'." },
-            { c: VSE.danger, t: "10. DODAVATELÉ A PARTNERSTVÍ", d: "<b>Žádná otevřená inovace</b> (Connect+Develop). Firma se uzavírá, nespolupracuje s univerzitami, startupy, dodavateli." },
+            { c: VSE.fph, t: "1. Firemní kultura", d: "Nebyla vytvořena kultura, která podporuje inovace. Musí být odstraněn strach lidí z neúspěchu." },
+            { c: VSE.warning, t: "2. Angažovanost", d: "Nebyla zajištěna osobní angažovanost a 'procesní vlastnictví' ze strany manažerů útvarů. Chybí systém hodnocení." },
+            { c: VSE.fmv, t: "3. Chápaný proces", d: "Není k dispozici široce chápaný proces — má být zdokumentovaný a všichni mu mají rozumět." },
+            { c: VSE.danger, t: "4. Alokace zdrojů", d: "Neexistuje alokace zdrojů na proces inovací (čas, peníze, lidé)." },
+            { c: VSE.success, t: "5. Propojení se strategií", d: "Neexistuje propojení projektů s firemní strategií." },
+            { c: VSE.primary, t: "6. Fuzzy front-end", d: "Nebylo vynaloženo přiměřené množství času a energie na fuzzy front-end (fáze mezi nápadem a zahájením vývoje). Chybí monitoring trendů." },
+            { c: VSE.fph, t: "7. Různorodost", d: "Není začleněna dostatečná různorodost do procesu — různé styly uvažování, pohledy, odborné znalosti." },
+            { c: VSE.warning, t: "8. Kritéria a metriky", d: "Nejsou v předstihu vyvinuta kritéria a metriky (ale nesmí být moc omezující)." },
+            { c: VSE.fmv, t: "9. Trénink týmů", d: "Inovační týmy nebyly náležitě trénovány a koučovány." },
+            { c: VSE.danger, t: "10. Management nápadů", d: "Neexistuje management myšlenek a nápadů — musí být motivující, aby lidi povzbudil v tvorbě." },
           ].map((b, i) => (
             <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
             </GlassBox>
           ))}
         </ResponsiveGrid>
@@ -33368,16 +33380,16 @@ function OkruhInov8Panel() {
           <text x="360" y="40" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" fontStyle="italic">razene podle frekvence vyskytu (cervene = nejcastejsi)</text>
           {/* 10 boxes in 2 rows × 5 columns */}
           {[
-            {x: 20,  y: 70,  c: VSE.danger,  n: "1", label: "KULTURA",      sub: "imunitni system"},
-            {x: 160, y: 70,  c: VSE.danger,  n: "2", label: "LEADERSHIP",   sub: "zadny champion"},
-            {x: 300, y: 70,  c: VSE.warning, n: "3", label: "STRUKTURA",    sub: "silo, hierarchie"},
-            {x: 440, y: 70,  c: VSE.warning, n: "4", label: "PROCESY",      sub: "zadny SGCP"},
-            {x: 580, y: 70,  c: VSE.fmv,     n: "5", label: "LIDE",         sub: "chybi sampioni"},
-            {x: 20,  y: 210, c: VSE.fmv,     n: "6", label: "FINANCE",      sub: "R&D pod 3%"},
-            {x: 160, y: 210, c: VSE.fph,     n: "7", label: "CAS",          sub: "pretizeni provoz"},
-            {x: 300, y: 210, c: VSE.fph,     n: "8", label: "ZNALOSTI",     sub: "nezna zakazniky"},
-            {x: 440, y: 210, c: VSE.success, n: "9", label: "FEEDBACK",     sub: "zadne focus group"},
-            {x: 580, y: 210, c: VSE.success, n: "10", label: "PARTNERSTVI", sub: "uzavrena firma"},
+            {x: 20,  y: 70,  c: VSE.fph,     n: "1", label: "KULTURA",      sub: "odstranit strach"},
+            {x: 160, y: 70,  c: VSE.warning, n: "2", label: "ANGAZOVANOST",  sub: "procesni vlastnictvi"},
+            {x: 300, y: 70,  c: VSE.fmv,     n: "3", label: "PROCES",       sub: "siroce chapany"},
+            {x: 440, y: 70,  c: VSE.danger,  n: "4", label: "ZDROJE",       sub: "alokace na proces"},
+            {x: 580, y: 70,  c: VSE.success, n: "5", label: "STRATEGIE",    sub: "propojeni projektu"},
+            {x: 20,  y: 210, c: VSE.primary, n: "6", label: "FRONT-END",    sub: "fuzzy fronts-end"},
+            {x: 160, y: 210, c: VSE.fph,     n: "7", label: "RUZNORODOST",  sub: "ruzne pohledy"},
+            {x: 300, y: 210, c: VSE.warning, n: "8", label: "METRIKY",      sub: "kriteria predem"},
+            {x: 440, y: 210, c: VSE.fmv,     n: "9", label: "TRENINK",      sub: "treninky tymu"},
+            {x: 580, y: 210, c: VSE.danger,  n: "10", label: "NAPADY",      sub: "management napadu"},
           ].map((b, i) => (
             <g key={i}>
               <rect x={b.x} y={b.y} width="120" height="120" rx="10" fill={b.c} opacity="0.18" stroke={b.c} strokeWidth="2"/>
@@ -33401,42 +33413,45 @@ function OkruhInov8Panel() {
         ]} color={VSE.warning} />
       </div>) },
 
-    { id: "vnejsi_barery", title: "Vnější (externí) bariéry inovací", subtitle: "Co mimo firmu komplikuje inovace", color: VSE.primary, emoji: "globe",
+    { id: "vnejsi_barery", title: "Vnější (externí) bariéry inovací", subtitle: "Co mimo firmu komplikuje inovace + kroky pro funkční proces", color: VSE.primary, emoji: "globe",
       content: (<div>
         <Def color={VSE.primary}>
-          <b>Vnější bariéry</b> jsou ty, které firma nekontroluje — musí se s nimi vyrovnat, obejít je, nebo počkat. Komise se ráda ptá na 4-6 hlavních.
+          <b>Vnější bariéry</b> jsou ty, které firma nekontroluje — musí se s nimi vyrovnat, obejít je, nebo počkat. Zdroj uvádí <b>6 hlavních</b>.
         </Def>
-        <Tag color={VSE.primary}>Hlavní externí bariéry</Tag>
-        <ResponsiveGrid cols2>
+        <Tag color={VSE.primary}>6 externích bariér</Tag>
+        <ResponsiveGrid cols3>
           {[
-            { c: VSE.danger, t: "REGULACE A LEGISLATIVA", d: "<b>Příliš přísné zákony</b> (Uber v Německu, Airbnb v NYC), <b>chybějící zákony</b> (autonomous driving, krypto), <b>pomalé schvalování</b> (farma, medical devices — 5-10 let)." },
-            { c: VSE.warning, t: "KONKURENCE", d: "<b>Silný incumbent</b> rychle kopíruje (Meta vůči Snapchatu, Microsoft vůči Slacku) nebo zničí cenou. <b>Bariéra vstupu</b> v networked trzích (network effects)." },
-            { c: VSE.fmv, t: "MAKROEKONOMIKA", d: "<b>Recese</b> snižuje ochotu firem investovat do R&D. <b>Inflace + úrokové sazby</b> snižují dostupnost kapitálu (VC). <b>Trade wars</b> komplikují supply chain." },
-            { c: VSE.success, t: "TECHNOLOGIE", d: "<b>Nezralost technologie</b> (VR 2016, mRNA před COVIDem, AI před 2020). <b>Chybějící infrastruktura</b> (EV bez nabíjecí sítě, 5G před 2022)." },
-            { c: VSE.primary, t: "TRH A ZÁKAZNÍCI", d: "<b>Konzervativní zákazníci</b> (B2B enterprise IT), <b>nízká ochota platit</b> (B2C v rozvojových zemích), <b>kulturní bariéry</b> (Halal/Kosher, Sharia banking)." },
-            { c: VSE.fph, t: "FINANCOVÁNÍ", d: "<b>Banky neradi financují inovace</b> (chybí kolaterál). <b>VC funding cycles</b> (boom-bust). <b>Dotace EU/národní</b> jsou byrokratické a nejisté." },
+            { c: VSE.danger, t: "Legislativní", d: "Zákony a regulace brzdí nebo komplikují inovaci." },
+            { c: VSE.warning, t: "Politické", d: "Politická situace, stabilita, podpora státu." },
+            { c: VSE.success, t: "Ekologické", d: "Environmentální požadavky a omezení." },
+            { c: VSE.fmv, t: "Monopolní / tržní", d: "Silní hráči na trhu, bariéry vstupu, monopol." },
+            { c: VSE.fis, t: "Kulturní", d: "Kulturní zvyklosti a postoje zákazníků." },
+            { c: VSE.fph, t: "Dostupnost zdrojů", d: "Přístup ke kapitálu, talentům, technologiím." },
           ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 4 }}>{b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            <GlassBox key={i} opacity={0.5} style={{ padding: "10px 13px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontSans, marginBottom: 3 }}>{b.t}</div>
+              <div style={{ fontSize: 12.5, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
             </GlassBox>
           ))}
         </ResponsiveGrid>
-        <Tag color={VSE.warning}>Jak externí bariéry obejít</Tag>
+        <Tag color={VSE.fis}>Model řetězového propojení</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.fis}10`, border: `1px solid ${VSE.fis}30`, borderRadius: 10, fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          Vysvětluje, jak vznikají inovace ve firmách a jak je proces ovlivněn <b>externími vlivy</b>. Inovace chápe jako vzájemné působení mezi <b>tržními příležitostmi</b>, <b>potenciálem znalostí</b> a <b>kapacitami firmy</b>. Cesta nejde jen vpřed — často je nutné vrátit se k předchozím fázím.
+        </div>
+        <Tag color={VSE.warning}>Kroky pro funkční inovační proces</Tag>
         <Bullet items={[
-          "<b>Regulace:</b> lobbing, spolupráce s úřady (Tesla Direct Sales legalizace), pilot projekty (regulatory sandbox v UK pro fintech).",
-          "<b>Konkurence:</b> network effects budovat brzy, vendor lock-in, IP ochrana (patenty).",
-          "<b>Makroekonomika:</b> diverzifikace trhů, conservatve cash management, hedging.",
-          "<b>Technologie:</b> partnerství s univerzitami, otevřená inovace, akvizice deep-tech startupů.",
-          "<b>Financování:</b> mix VC + grants + cash flow + strategic investors (corporate VC).",
+          "Odstranit strach z neúspěchu (bez něj lidé nebudou inovovat), zařadit inovace do hodnocení zaměstnanců.",
+          "Dokumentovat proces inovací a vyjasnit role, podporovat otevřenost a spolupráci.",
+          "Propojovat inovace se strategií, sledovat trendy, zajistit různorodost myšlení a zkušeností.",
+          "Nastavit motivující kritéria pro nové nápady, trénovat inovační týmy, zavést systém pro sběr a správu nápadů.",
         ]} color={VSE.warning} />
         <ExamAlert
-          komise="Tažené: Vnitřní + externí bariéry inovací (Mladkova+Špaček+Cejthamr 2025, Pichanič+Cejthamr+Schönfeld 2025, Krause+Mladkova+Pernica)"
-          what="Komise chce <b>vyjmenovat aspoň 6-8 interních + 4-6 externích bariér</b> + popsat, jak je překonat. Klíčové: rozdíl mezi tím, co firma kontroluje (interní) a nekontroluje (externí). Hobcraft jako 'extra body' za citaci."
+          komise="Tažené: Vnitřní + externí bariéry inovací (Mládková+Špaček+Cejthamr, Pichanič+Cejthamr+Schönfeld, Krause+Mládková+Pernica)"
+          what="Komise chce <b>vyjmenovat interní bariéry (10 zabijáků) + 6 externích</b> + rozdíl, co firma kontroluje (interní) × nekontroluje (externí). Plus kroky, jak proces zfunkčnit."
         />
       </div>) },
 
-    { id: "ip_ochrana", title: "Ochrana inovace — duševní vlastnictví (IP)", subtitle: "Patenty, know-how, ochranné známky, autorská práva", color: VSE.primary, emoji: "tools",
+    { id: "ip_ochrana", title: "Ochrana inovace — duševní vlastnictví (IP)", subtitle: "Patenty, know-how, ochranné známky, autorská práva", color: VSE.primary, emoji: "scroll",
       content: (<div>
         <Def color={VSE.primary}>
           <b>Intellectual Property (IP)</b> je <b>klíčový obranný štít</b> inovace — bez něj konkurence okamžitě zkopíruje. Komise může chtít znát typy IP a kroky pro jejich získání.
@@ -33474,34 +33489,28 @@ function OkruhInov8Panel() {
         ]} color={VSE.fph} />
       </div>) },
 
-    { id: "anatomie_selhani", title: "Anatomie skvělého selhání + učení z chyb", subtitle: "Sitkin — 'intelligent failure' a kritéria", color: VSE.primary, emoji: "brain",
+    { id: "anatomie_selhani", title: "Anatomie selhání — existují i skvělá selhání", subtitle: "4 kritéria, kdy je selhání ve skutečnosti cenné", color: VSE.primary, emoji: "brain",
       content: (<div>
         <Def color={VSE.primary}>
-          <b>Sim Sitkin</b> (Duke University, 1992) definoval koncept <b>'intelligent failure'</b> — skvělé selhání, ze kterého se firma něco naučí. Klíč: <b>ne všechna selhání jsou stejná</b>. Některá jsou cenná, jiná katastrofa.
+          Ne každé selhání je špatné. Existují i <b>skvělá selhání</b> — taková, ze kterých firma i okolí získají hodnotu. Zdroj definuje <b>4 kritéria</b>, kdy lze selhání označit za skvělé.
         </Def>
-        <Tag color={VSE.primary}>4 kritéria 'skvělého' (intelligent) selhání podle Sitkina</Tag>
-        <Bullet items={[
-          "<b>1. Experimentální záměr</b> — selhání pochází z <b>záměrného experimentu</b>, ne z nedbalosti. Firma vědomě testovala hypotézu, ne 'plácala se naslepo'.",
-          "<b>2. Malé riziko (small scale)</b> — selhání je <b>levné a rychlé</b>. Lean Startup MVP (viz Inov 4), pilot projekty, A/B testy. NE celý launch.",
-          "<b>3. Generuje znalosti</b> — z chyby <b>se firma reálně něco dozví</b>, ne jen 'no tak to nefunguje'. Postmortem analýza, root cause (5x Proč — viz Inov 3).",
-          "<b>4. Znalosti se sdílí</b> — naučené je <b>uloženo a sdíleno v organizaci</b>. Knowledge management, internal wiki, lessons learned databáze, blameless postmortems.",
-        ]} color={VSE.primary} />
-        <Tag color={VSE.warning}>Anatomie selhání — typický průběh</Tag>
-        <Bullet items={[
-          "<b>1. Příliš velká očekávání</b> — board chce 10× ROI za rok, tým slibuje 'breakthrough innovation'.",
-          "<b>2. Nedostatečná validace</b> — žádné MVP, žádní lead users, žádný Lean Canvas. Vývoj 'od stolu'.",
-          "<b>3. Eskalace závazku (escalation of commitment)</b> — i když data ukazují problém, tým tlačí dál ('už jsme investovali 50 milionů, nemůžeme přestat'). <b>Klasická Sunk Cost Fallacy.</b>",
-          "<b>4. Pozdní KILL</b> — místo brzkého KILL na Gate 2-3 (SGCP, Inov 5) projekt jde až do launchu. Google Stadia (Inov 5 příklad).",
-          "<b>5. Bez postmortem</b> — po selhání tým rozpustí, znalosti zmizí. Firma opakuje stejnou chybu.",
-        ]} color={VSE.warning} />
-        <Tag color={VSE.fph}>Jak z chyb učit (kultura učení)</Tag>
-        <Bullet items={[
-          "<b>Blameless postmortems</b> (Google, Amazon) — analýza chyby bez hledání 'koho potrestat'. Cíl: co se naučit, ne kdo za to může.",
-          "<b>Lessons learned databáze</b> — sdílená wiki s 'co fungovalo / nefungovalo' z minulých projektů.",
-          "<b>Innovation graveyards</b> — některé firmy (Google) veřejně publikují seznam zabitých projektů a důvody — pro učení i pro inspiraci.",
-          "<b>Failure resumes</b> — manažeři sdílí svá selhání, ne jen úspěchy. Vytváří kulturu psychological safety.",
-          "<b>Pre-mortems</b> (Gary Klein) — před launchem si tým představí, že projekt selhal, a zpětně analyzuje proč. Identifikuje rizika dopředu.",
-        ]} color={VSE.fph} />
+        <Tag color={VSE.primary}>4 kritéria skvělého selhání</Tag>
+        <ResponsiveGrid cols2>
+          {[
+            { c: VSE.fph, n: "1", t: "Dobré úmysly", d: "Inovátor se řídí dobrými úmysly — ne na úkor druhých či společnosti. Cíl je poctivý." },
+            { c: VSE.warning, n: "2", t: "Snaha vyhnout se zbytečným chybám", d: "Dělá vše pro to, aby se ostatní vyhnuli nadbytečným chybám. Selhání z nedostatečné přípravy nebo hloupých chyb NENÍ skvělé." },
+            { c: VSE.success, n: "3", t: "Výsledek má hodnotu", d: "Nesplnil původní cíl, ALE výsledek má hodnotu pro jednotlivce nebo společnost → lze ho klasifikovat jako skvělé." },
+            { c: VSE.fmv, n: "4", t: "Poučení a inspirace", d: "Poučil se ze selhání ostatních; jeho zkušenosti, odvaha a vytrvalost mohou inspirovat ostatní." },
+          ].map((b, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontMono, marginBottom: 4 }}>{b.n}. {b.t}</div>
+              <div style={{ fontSize: 13, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
+            </GlassBox>
+          ))}
+        </ResponsiveGrid>
+        <div style={{ marginTop: 8, padding: "10px 14px", background: `${VSE.warning}12`, border: `1px solid ${VSE.warning}30`, borderRadius: 10, fontSize: 13.5, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          💡 <b>Pomůcka:</b> Skvělé selhání = poctivý pokus o něco nového, ze kterého i přes nesplněný cíl vznikne hodnota a poučení pro ostatní. Selhání z lenosti nebo hlouposti skvělé není — to je jen nekompetentní selhání (viz Sloane výše).
+        </div>
       </div>) },
 
     { id: "metriky", title: "Metriky inovací — co měřit a jak", subtitle: "Input × Process × Output × Outcome metriky", color: VSE.primary, emoji: "chart",
@@ -33596,14 +33605,14 @@ function OkruhInov8Panel() {
           "<b>4.</b> Doporuč <b>konkrétní akce</b> pro překonání bariér — leadership change, struktura R&D, SGCP, kultura experimentů.",
           "<b>5.</b> Navrhni <b>strategii IP ochrany</b> — patent × know-how × ochranné známky (podle typu inovace).",
           "<b>6.</b> Nastav <b>metriky inovací</b> ve 4 kategoriích (input/process/output/outcome) — co budeme měřit a kdy review.",
-          "<b>7.</b> Zmínit <b>kulturu učení z chyb</b> — blameless postmortems, lessons learned, Sitkin intelligent failure.",
+          "<b>7.</b> Zmínit <b>4 kritéria skvělého selhání</b> — dobré úmysly, snaha vyhnout se zbytečným chybám, výsledek má hodnotu, poučení inspiruje ostatní.",
           "<b>8.</b> Spojit s ostatními inovačními okruhy — Schumpeter (Inov 1), Drucker+Galbraith (Inov 2), Lean Canvas/BMC (Inov 3), DT (Inov 4), SGCP (Inov 5), strategie (Inov 6).",
         ]} color={VSE.success} />
         <Tag color={VSE.warning}>Co komise oceňuje × čemu se vyhnout</Tag>
         <Bullet items={[
           "<b>✅ Dobře:</b> Vyjmenovat <b>aspoň 6-8 interních bariér</b> + <b>4-6 externích</b> + konkrétní akce na překonání.",
           "<b>✅ Dobře:</b> <b>4 kategorie metrik</b> (input/process/output/outcome) + konkrétní příklady (NPI, R&D intensity, time-to-market).",
-          "<b>✅ Dobře:</b> <b>Sitkinova 4 kritéria 'intelligent failure'</b> — experimentální záměr, malé riziko, generuje znalosti, sdílí znalosti.",
+          "<b>✅ Dobře:</b> rozlišit <b>chybu × selhání</b> a <b>ctihodné × nekompetentní selhání</b> (Sloane); znát <b>4 kritéria skvělého selhání</b>.",
           "<b>✅ Dobře:</b> <b>IP strategie</b> — patent × know-how kdy co (Coca-Cola příklad: know-how silnější než patent).",
           "<b>✅ Dobře:</b> <b>Hobcraft × O'Sullivan</b> jako akademický citát.",
           "<b>❌ Špatně:</b> Mluvit jen o 'firemní kultuře' jako bariéře a doufat — komise chce konkrétní 6-8 kategorií.",
@@ -33625,11 +33634,11 @@ function OkruhInov8Panel() {
     { term: "IP — 4 typy", def: "1) Patenty (20 let, technické řešení, veřejné), 2) Ochranné známky (10 let, brand), 3) Autorská práva (70 let po smrti, automatické), 4) Know-how (neomezené, tajné).", tag: "IP" },
     { term: "Patent — kroky získání", def: "1) Patentová rešerše, 2) Sestavení přihlášky, 3) Podání, 4) Formální průzkum, 5) Věcný průzkum (1-3 roky), 6) Udělení. Celkem 2-5 let, 100-500 tis. Kč.", tag: "IP" },
     { term: "Patent × know-how", def: "Patent: 20 let ale vyžaduje zveřejnění. Know-how: neomezené pokud tajné, ale riziko leaků. Coca-Cola = know-how silnější než patent.", tag: "IP" },
-    { term: "Sitkin — intelligent failure", def: "Sim Sitkin (Duke 1992). Koncept 'skvělého selhání', ze kterého se firma naučí. Ne všechna selhání jsou stejná — některá cenná, jiná katastrofa.", tag: "SELHÁNÍ" },
-    { term: "Sitkinova 4 kritéria skvělého selhání", def: "1) Experimentální záměr (záměrný experiment), 2) Malé riziko (levné a rychlé, MVP), 3) Generuje znalosti, 4) Znalosti se sdílí v organizaci.", tag: "SELHÁNÍ" },
-    { term: "Escalation of commitment", def: "Eskalace závazku / Sunk Cost Fallacy. I když data ukazují problém, tým tlačí dál ('už jsme investovali 50 mil'). Klasická chyba inovace.", tag: "SELHÁNÍ" },
-    { term: "Blameless postmortem", def: "Google/Amazon — analýza chyby bez hledání 'koho potrestat'. Cíl: co se naučit, ne kdo za to může. Kultura psychological safety.", tag: "SELHÁNÍ" },
-    { term: "Pre-mortem (Gary Klein)", def: "Před launchem si tým představí, že projekt selhal, a zpětně analyzuje proč. Identifikuje rizika dopředu.", tag: "SELHÁNÍ" },
+    { term: "Chyba × selhání", def: "Chyba = něco děláme špatně, i když víme jak správně. Selhání = zkoušíme nové a nevíme s předstihem, jak dojít k úspěchu.", tag: "SELHÁNÍ" },
+    { term: "4 kritéria skvělého selhání", def: "1) Inovátor má dobré úmysly, 2) snaží se, aby se ostatní vyhnuli zbytečným chybám, 3) nesplnil cíl, ale výsledek má hodnotu, 4) poučil se a inspiruje ostatní.", tag: "SELHÁNÍ" },
+    { term: "Ctihodné × nekompetentní selhání (Sloane)", def: "Ctihodné = snažili jsme se, dali úsilí, ale nevyšlo to (cenné). Nekompetentní = selhání kvůli nízkému úsilí a schopnostem (bezcenné).", tag: "SLOANE" },
+    { term: "Hobcraft × O'Sullivan", def: "Dvě tabulky příčin selhání. Hobcraft = spíš strategie a zdroje (nevhodná strategie, nedostatek zdrojů, orientace na produkty, silo, nereálná očekávání). O'Sullivan = spíš vedení a organizace.", tag: "PŘÍČINY" },
+    { term: "Model řetězového propojení", def: "Vysvětluje vznik inovací jako působení mezi tržními příležitostmi, potenciálem znalostí a kapacitami firmy. Lze se vracet k předchozím fázím.", tag: "EXTERNÍ" },
     { term: "4 kategorie metrik inovací", def: "INPUT (R&D budget, lidi), PROCESS (time-to-market, gate kill rate), OUTPUT (patenty, nové produkty), OUTCOME (% tržeb z nových, ROI, NPV).", tag: "METRIKY" },
     { term: "NPI — New Product Index", def: "% tržeb z produktů uvedených v posledních 5 letech. 3M cíl: 30 %, Apple ~50 %. Klíčová outcome metrika.", tag: "METRIKY" },
     { term: "R&D Intensity", def: "R&D / tržby. Tech 10-15 %, FMCG 3-5 %, automotive 5-8 %, farmaceutika 15-20 %.", tag: "METRIKY" },
@@ -33648,10 +33657,10 @@ function OkruhInov8Panel() {
     { q: "Jak dlouho trvá ochrana patentu?", opts: ["5 let", "20 let (s povinností zveřejnit popis)", "neomezeně", "70 let"], correct: 1 },
     { q: "Co je hlavní rozdíl patent × know-how?", opts: ["Cena", "Patent 20 let ale vyžaduje zveřejnění. Know-how neomezené pokud tajné, ale riziko leaků", "Žádný", "Geografie"], correct: 1 },
     { q: "Proč Coca-Cola nikdy nepatentovala recept?", opts: ["Zapomněli", "Patent by exposed ingredience — know-how 140 let silnější ochrana", "Žádný důvod", "Marketing"], correct: 1 },
-    { q: "Kdo definoval koncept 'intelligent failure'?", opts: ["Drucker", "Sim Sitkin (Duke University, 1992)", "Schumpeter", "Cooper"], correct: 1 },
-    { q: "Kolik kritérií má Sitkinovo 'skvělé selhání'?", opts: ["2", "4 (experimentální záměr, malé riziko, generuje znalosti, sdílí znalosti)", "6", "10"], correct: 1 },
-    { q: "Co je 'escalation of commitment'?", opts: ["Loajalita", "Sunk Cost Fallacy — tým tlačí dál, i když data ukazují problém ('už jsme investovali...')", "Investice", "Plánování"], correct: 1 },
-    { q: "Co je 'blameless postmortem'?", opts: ["Pojišťovna", "Analýza chyby bez hledání viníka — cíl: co se naučit, ne kdo za to může (Google, Amazon)", "Audit", "Sankce"], correct: 1 },
+    { q: "Jaký je rozdíl mezi chybou a selháním?", opts: ["Žádný", "Chyba = děláme špatně, i když víme jak; selhání = zkoušíme nové a nevíme, jak dojít k úspěchu", "Chyba je horší", "Selhání je vždy bezcenné"], correct: 1 },
+    { q: "Co charakterizuje skvělé selhání?", opts: ["Velká ztráta", "Dobré úmysly, snaha vyhnout se zbytečným chybám, výsledek má hodnotu, poučení inspiruje ostatní", "Žádná příprava", "Kopírování konkurence"], correct: 1 },
+    { q: "Ctihodné selhání (Sloane) znamená:", opts: ["Selhání z lenosti", "Snažili jsme se a dali úsilí, ale nevyšlo to", "Kopírování lídra", "Žádné riziko"], correct: 1 },
+    { q: "Co řeší Hobcraft a O'Sullivan?", opts: ["Typy inovací", "Příčiny selhání inovací (Hobcraft = strategie/zdroje, O'Sullivan = vedení/organizace)", "Financování", "Metriky"], correct: 1 },
     { q: "Kolik kategorií metrik inovací?", opts: ["2", "4 (Input, Process, Output, Outcome)", "6", "10"], correct: 1 },
     { q: "Co je NPI (New Product Index)?", opts: ["Index inflace", "% tržeb z produktů uvedených v posledních 5 letech (3M cíl: 30 %, Apple ~50 %)", "Cenový index", "HDI"], correct: 1 },
     { q: "Jaká je typická R&D Intensity ve farma?", opts: ["1-2 %", "15-20 % (vysoká, oproti FMCG 3-5 %, automotive 5-8 %, tech 10-15 %)", "50 %", "0 %"], correct: 1 },
@@ -33680,44 +33689,44 @@ function OkruhInov8Panel() {
         <b>Technologie:</b> Kodak měl prvenství (1975 vynález).<br/>
         <b>Financování:</b> Kodak byl ziskový gigant s cash flow.<br/><br/>
         Selhal POUZE z interních důvodů — <b>vlastní imunitní systém firmy ho zničil</b>.<br/><br/>
-        💀 ANATOMIE SELHÁNÍ — KLASICKÉ FÁZE:<br/><br/>
-        <b>1. Příliš velká očekávání filmu:</b> Kodak věřil, že film bude 'navždy'.<br/>
-        <b>2. Nedostatečná validace digital:</b> Žádný MVP s digital, žádní lead users.<br/>
-        <b>3. Eskalace závazku k filmu:</b> 'Už jsme investovali miliardy do film výroby, nemůžeme to opustit'. Klasická Sunk Cost Fallacy.<br/>
-        <b>4. Pozdní KILL:</b> Kodak udělal digital launch až v 2005, kdy už Canon/Nikon/Sony dominovali.<br/>
-        <b>5. Bez postmortem:</b> I po bankrotu 2012 firma nedělala blameless analysis. Vedení odešlo s velkými balíčky, knowledge se rozsypal.<br/><br/>
+        💀 INTERNÍ BARIÉRY, KTERÉ KODAK ZNIČILY:<br/><br/>
+        <b>1. Firemní kultura:</b> strach ohrozit ziskový film — digital vnímán jako hrozba, ne příležitost.<br/>
+        <b>2. Propojení se strategií:</b> vynález digitálu (1975) nikdo nepropojil se strategií firmy.<br/>
+        <b>3. Management nápadů:</b> Sassonův vynález skončil v šuplíku — žádný systém, jak nápad posunout dál.<br/>
+        <b>4. Alokace zdrojů:</b> peníze tekly do filmu, ne do digitálu, i když trh se měnil.<br/>
+        <b>5. Fuzzy front-end:</b> Kodak ignoroval signály trhu (nástup digitální fotografie) celé roky.<br/><br/>
         📊 METRIKY, KTERÉ KODAK NESLEDOVAL:<br/><br/>
         <b>NPI (New Product Index):</b> Kodak měl ~10 % tržeb z nových produktů (vs Apple 50 %).<br/>
         <b>R&D Intensity:</b> Klesala z 8 % (90. léta) na 4 % (2000s) — místo růstu.<br/>
         <b>Time-to-Market pro digital:</b> 30 let (1975-2005) — katastrofa.<br/>
         <b>Success rate:</b> Nízký — žádný major hit po 90. letech.<br/><br/>
         🎓 CO SE Z KODAKU NAUČIT:<br/><br/>
-        Sitkinovo 'intelligent failure' kritéria — Kodak selhal na všech 4:<br/>
-        <b>1. Experimentální záměr:</b> ✗ Kodak NEEXPERIMENTOVAL s digital, schoval ho.<br/>
-        <b>2. Malé riziko:</b> ✗ Když konečně skočil do digital v 2000s, šel hned do plného launch — žádný MVP.<br/>
-        <b>3. Generuje znalosti:</b> ✗ Sassonův vynález byl 30 let v šuplíku.<br/>
-        <b>4. Znalosti se sdílí:</b> ✗ Po bankrotu se rozpadlo.
+        Kodakovo selhání nebylo skvělé — bylo to <b>nekompetentní selhání</b> (Sloane): firma měla zdroje i technologii, ale z lenosti a strachu je nevyužila.<br/>
+        <b>Dobré úmysly:</b> ✗ chránil status quo místo zákazníka.<br/>
+        <b>Snaha ušetřit chyby:</b> ✗ nepoučil sebe ani ostatní.<br/>
+        <b>Hodnotný výsledek:</b> ✗ vynález 30 let ležel v šuplíku.<br/>
+        <b>Poučení a inspirace:</b> ✗ po bankrotu se znalosti rozpadly.
       </>),
-      lessons: "Kodak je etalon, jak <b>všech 10 interních bariér</b> může zničit i giganta s technologickým prvenstvím. Externí bariéry NEBYLY problém — vše bylo interní. <b>Sitkinova 4 kritéria 'intelligent failure'</b> ukazují, že Kodak selhal i v učení z chyb. Pro PS: identifikovat bariéry v případové firmě, navrhnout konkrétní akce na překonání, doporučit IP strategii, nastavit metriky ve 4 kategoriích, vybudovat kulturu učení z chyb. Anti-vzor: říct 'firma má problém s kulturou' a doufat — komise chce detailní analýzu."
+      lessons: "Kodak je etalon, jak <b>všech 10 interních bariér</b> může zničit i giganta s technologickým prvenstvím. Externí bariéry NEBYLY problém — vše bylo interní. <b>4 kritéria skvělého selhání</b> ukazují, že Kodakovo selhání bylo nekompetentní (Sloane) — ne skvělé. Pro PS: identifikovat bariéry v případové firmě, navrhnout konkrétní akce na překonání, doporučit IP strategii, nastavit metriky ve 4 kategoriích, vybudovat kulturu učení z chyb. Anti-vzor: říct 'firma má problém s kulturou' a doufat — komise chce detailní analýzu."
     },
     miniExamples: [
       { tag: "IP — KNOW-HOW VS PATENT", color: VSE.fph, company: "Coca-Cola — 140 let know-how silnější než patent", content: "Coca-Cola má recept od 1886 — <b>nikdy ho nepatentovala</b>. Proč? Patent by vyžadoval zveřejnění ingrediencí a po 20 letech (1906) by byl public domain. Místo toho Coca-Cola používá <b>know-how strategii</b> — recept zná jen 2-3 lidé, je uložen v bance Suntrust, neceluje se. 140 let ochrany vs 20 let patentu. Tento příklad ukazuje, kdy <b>know-how je silnější než patent</b> — pro recepty, algoritmy, procesy, které nelze snadno reverse-engineerovat z výsledného produktu." },
-      { tag: "ANATOMIE SELHÁNÍ", color: VSE.warning, company: "Google Stadia — eskalace závazku v praxi", content: "Google Stadia (cloud gaming, 2019-2023) je nedávný příklad <b>eskalace závazku</b>. Google investoval ~5 mld USD do cloud gaming přes 5 let. Stage Gate Process selhal v Gate 2 (Business Case) — adopce byla pomalá, latence problém, konkurence (Microsoft xCloud, GeForce Now) lepší. Místo brzkého KILL (G2 nebo G3) projekt šel až do Stage 5 (Launch listopad 2019). Po 3 letech těžkostí Google KILL až v lednu 2023. <b>Klasický Sunk Cost Fallacy</b> — 'už jsme investovali miliardy, ještě vydržíme'. Sitkin by řekl: <b>není to intelligent failure</b>, je to drahé selhání bez učení (Google nebyl ochotný udělat veřejný blameless postmortem)." },
+      { tag: "CHYBA × SELHÁNÍ", color: VSE.warning, company: "James Dyson — 5126 prototypů jako ctihodné selhání", content: "James Dyson testoval <b>5126 prototypů</b> bezsáčkového vysavače, než našel ten funkční. Každý nefungující prototyp bylo <b>ctihodné selhání</b> (Sloane) — poctivý pokus, ze kterého se poučil. Splňuje 4 kritéria skvělého selhání: dobré úmysly, každá chyba ho posunula, výsledek měl obrovskou hodnotu (Dyson je dnes globální značka) a jeho vytrvalost inspiruje. Opak Kodaku — tam selhání bylo nekompetentní (zdroje byly, vůle ne)." },
       { tag: "METRIKY — 3M ETALON", color: VSE.fmv, company: "3M — vědomé řízení inovací přes metriky", content: "3M je etalon firemních metrik inovací. <b>NPI (New Product Index)</b> = % tržeb z produktů uvedených v posledních 5 letech. 3M má vnitřní cíl <b>30 %</b> a publikuje to ročně. Pokud klesne, board reaguje. <b>R&D Intensity 6 %</b> tržeb (stabilní 50 let). <b>15 % pravidlo</b> = každý zaměstnanec smí 15 % času na vlastní projekty (input metrika). <b>~60 patentů ročně</b> (output). 3M dokazuje, že <b>metriky inovací jsou strategický nástroj</b>, ne accounting položka. Pro PS: doporučit 4 kategorie metrik (input/process/output/outcome) + konkrétní cíle." },
-      { tag: "KULTURA UČENÍ Z CHYB", color: VSE.success, company: "Pixar — Braintrust meeting jako blameless postmortem", content: "Pixar (etalon DT — viz Inov 4) má unikátní mechanismus <b>'Braintrust meeting'</b> — pravidelné setkání režisérů a tvůrců, kde si <b>brutálně upřímně dávají zpětnou vazbu</b> na nedokončené filmy. <b>Blameless postmortem</b> v praxi — žádný 'kdo za to může', jen 'co můžeme zlepšit'. Ed Catmull (CTO Pixar) říkal: 'Mít skvělé nápady je snadné. Dělat z nich skvělé filmy je těžké — Braintrust nás v tom drží.' Toy Story 2 měl být téměř zrušen (klasický Sunk Cost Fallacy by ho dotlačil), Braintrust ho zachránil přepsáním celého scénáře. Sitkin by řekl: <b>Pixar žije všech 4 kritéria 'intelligent failure'</b> — experimentální záměr, malé riziko (early review), učení, sdílení." },
+      { tag: "KULTURA UČENÍ Z CHYB", color: VSE.success, company: "Pixar — kultura, kde se chyby řeší bez hledání viníka", content: "Pixar (etalon DT — viz Inov 4) má pravidelná setkání tvůrců, kde si <b>upřímně dávají zpětnou vazbu</b> na nedokončené filmy — bez hledání 'kdo za to může', jen 'co zlepšit'. Tím odstraňuje <b>strach z neúspěchu</b> (krok 1 pro funkční inovační proces). Toy Story 2 byl málem propadák, ale otevřená kultura ho zachránila přepsáním scénáře. Splňuje to, co zdroj nazývá skvělým selháním — poctivý pokus, ze kterého vznikne hodnota a poučení." },
     ]
   };
 
   const examQuestionsInov7 = [
     { komise: "2025-06-13 Mladkova+Špaček+Cejthamr, 2025-06-16 Pichanič+Cejthamr+Schönfeld, 2025-02-04 Krause+Mladkova+Pernica, 2025-02-05 Stříteský+Heřman+Kuděj, 2026-02-06 Nový+Lorencová+Mikan", otazka: "Bariéry inovací — vnitřní a vnější, jak je překonat", pozn: "5× tažené. Komise chce <b>vyjmenovat 6-8 interních + 4-6 externích bariér</b> + konkrétní akce. Hobcraft × O'Sullivan jako akademický citát. Klíč: kulturu nemůže firma kontrolovat? Může! Interní = pod kontrolou firmy." },
     { komise: "2025-02-04 Nový+Kuděj+Zamazalová, 2025-06-04 Pichanič+Stříteský, 2026-02-03 Heřman+Mareš+Schönfeld", otazka: "Metriky inovací — co měřit a jak", pozn: "3× tažené. Komise chce <b>4 kategorie</b> (input/process/output/outcome) + příklady (NPI, R&D intensity, time-to-market, success rate). Pichanič chce ROI portfolia, ne projektu." },
-    { komise: "Obecně — Anatomie selhání", otazka: "Proč inovace selhávají + jak z chyb učit (Sitkin intelligent failure)", pozn: "Hobcraft × O'Sullivan 5 důvodů. Sitkinova 4 kritéria. Escalation of commitment. Blameless postmortem. Pre-mortem (Klein)." },
+    { komise: "Obecně — Anatomie selhání", otazka: "Proč inovace selhávají + kdy je selhání skvělé", pozn: "Chyba × selhání. Ctihodné × nekompetentní (Sloane). Hobcraft × O'Sullivan tabulky příčin. 4 kritéria skvělého selhání." },
     { komise: "Obecně — IP ochrana", otazka: "Ochrana inovace — patenty, know-how, ochranné známky", pozn: "4 typy IP. Patent vs know-how (Coca-Cola). Kroky pro získání patentu (rešerše → přihláška → průzkum → udělení, 2-5 let, 100-500 tis. Kč)." },
   ];
 
   const podcastInov7 = {
     title: "Inovace 7 — Bariéry inovací, anatomie selhání, metriky",
-    description: "Většina inovací selhává - 70-90 procent radikálních inovací nedosáhne komerčního úspěchu. Otázka není jestli selžu ale jak často, jak rychle, jak draho a co se z toho naučím. Hobcraft × O'Sullivan definovali 5 hlavních důvodů selhání. 1) Slabé pochopení zákazníka - firma vyvíjí od stolu bez vcítění, Henry Ford rychlejší kůň. 2) Nejasná inovační strategie - firma neví do čeho a proč inovuje. 3) Špatná exekuce - nápad je dobrý ale vývoj chaotický. 4) Firemní kultura - imunitní systém firmy odmítá nové. 5) Nedostatečné zdroje - málo R&D budgetu, málo času, slabý tým. Další důvody - špatný timing (Apple Newton 1993, Google Glass 2014), slabý business model, konkurenční reakce (Facebook proti Snapchat), regulační překážky (Uber Německo), technologická nezralost (VR 2016). Vnitřní bariéry jsou ty, které firma kontroluje. 10 klíčových - 1) Firemní kultura (imunitní systém, strach z chyby, nejčastější bariéra), 2) Leadership (vedení nepodporuje aktivně, žádný innovation champion), 3) Organizační struktura (hierarchie a silo, R&D marketing sales spolu nemluví), 4) Procesy (žádný formální SGCP nebo příliš byrokratický), 5) Lidé a talent (chybí idea šampioni, sponzoři, lídři), 6) Finance (R&D pod 3 procenta tržeb, žádný inovační fond), 7) Čas a kapacity (lidé přetížení provozem), 8) Znalosti a informace (firma nezná zákazníky, konkurenci, trendy), 9) Zákaznický feedback (žádné focus groups, lead users), 10) Dodavatelé a partnerství (žádná otevřená inovace). Vnější bariéry jsou mimo kontrolu - 1) Regulace a legislativa (Uber Německo, Airbnb NYC, farma 5-10 let schvalování), 2) Konkurence (silný incumbent kopíruje, network effects), 3) Makroekonomika (recese, inflace, úrokové sazby), 4) Technologie (nezralost VR, mRNA před COVID, chybějící infrastruktura EV), 5) Trh a zákazníci (konzervativní B2B, nízká ochota platit), 6) Financování (banky neradi inovace, VC cykly). Intellectual Property (IP) - 4 hlavní typy. Patenty - ochrana technického řešení, 20 let, veřejně dostupné, 100-500 tisíc Kč, Nespresso kapsle. Ochranné známky - ochrana značky/loga, 10 let s obnovou, 10-50 tisíc Kč, Apple jablko. Autorská práva - tvůrčí díla, automatické, 70 let po smrti autora, software, knihy, hudba. Know-how a obchodní tajemství - neveřejné informace, není časově omezené pokud zůstane tajemstvím, Coca-Cola recept 140 let, KFC koření. Kroky pro získání patentu - 1) Patentová rešerše, 2) Sestavení přihlášky, 3) Podání (ÚPV ČR, EPO Evropa, PCT mezinárodně), 4) Formální průzkum 6 měsíců, 5) Věcný průzkum 1-3 roky, 6) Udělení. Celkem 2-5 let, 100-500 tisíc Kč. Patent vs know-how - patent chrání 20 let ale vyžaduje zveřejnění, know-how chrání neomezeně pokud zůstane tajné. Coca-Cola nikdy nepatentovala recept - patent by exposed ingredience. Sim Sitkin (Duke University 1992) definoval koncept intelligent failure. Ne všechna selhání jsou stejná - některá cenná, jiná katastrofa. 4 kritéria skvělého selhání - 1) Experimentální záměr (záměrný experiment ne nedbalost), 2) Malé riziko (levné a rychlé, MVP, pilot, A/B test ne celý launch), 3) Generuje znalosti (firma se reálně něco dozví), 4) Znalosti se sdílí (uloženo a sdíleno v organizaci, knowledge management, blameless postmortems). Anatomie selhání - příliš velká očekávání, nedostatečná validace, eskalace závazku (Sunk Cost Fallacy), pozdní KILL, bez postmortem. Kultura učení - blameless postmortems (Google Amazon), lessons learned databáze, innovation graveyards, failure resumes, pre-mortems (Gary Klein - před launchem si představit selhání). Metriky inovací - 4 kategorie. INPUT (kolik a co investujeme - R&D budget, lidi, čas), PROCESS (jak efektivně inovujeme - time-to-market, pipeline, gate kill rate), OUTPUT (co produkuje - patenty, nové produkty), OUTCOME (jaký byznys výsledek - procento tržeb z nových, ROI, NPV). 3M etalon - NPI (% tržeb z produktů posledních 5 let, cíl 30 procent, Apple 50 procent), R&D Intensity (tech 10-15 procent, FMCG 3-5 procent, automotive 5-8 procent, farmaceutika 15-20 procent), Time-to-Market (SaaS 3-6 měsíců, automotive 4-6 let, farma 10-15 let), Success rate (5-10 procent z idea se stane úspěchem). Finanční metriky - NPV (současná hodnota CF, pokud větší než 0 vydělává - detail v Finance subject), IRR (vnitřní výnosové procento - detail v Finance), payback period (3-7 let pro inovace), ROI inovačního portfolia ne projektu. NPV limitace pro inovace - nedoceňuje optionality (real options theory) a vysoce nejisté projekty zamítá.",
+    description: "Bariéry inovací se dělí na vnitřní (firma je kontroluje) a vnější (nekontroluje). Nejdřív rozlišení dvou pojmů - chyba je když něco děláme špatně, i když víme jak správně; selhání je když zkoušíme něco nového a nevíme s předstihem, jak to dovést k úspěchu. Selhání podle Paula Sloaneho - ctihodné (snažili jsme se, dali úsilí, ale nevyšlo to, cenné) versus nekompetentní (nízké úsilí a schopnosti, bezcenné). Typologie selhání - systému, produktu, procesu, nápadu, business modelu. Příčiny selhání podle dvou autorů. Hobcraft - nevhodně definovaná strategie, nedostatek zdrojů, orientace na produkty a technologie, nevhodní lidé a silo efekt, nerealistická očekávání. O Sullivan - nekvalitní řízení systémů, nekvalitní vedení, nekvalitní organizace, nízká akceschopnost, špatná organizace. Vnitřní bariéry jsou tzv. 10 zabijáků inovací - 1) nebyla vytvořena firemní kultura podporující inovace (musí být odstraněn strach), 2) nebyla zajištěna osobní angažovanost a procesní vlastnictví ze strany manažerů, 3) není k dispozici široce chápaný proces, 4) neexistuje alokace zdrojů na proces, 5) neexistuje propojení projektů s firemní strategií, 6) nebylo vynaloženo dost času a energie na fuzzy front-end, 7) není začleněna dostatečná různorodost do procesu, 8) nejsou v předstihu vyvinuta kritéria a metriky, 9) inovační týmy nebyly trénovány a koučovány, 10) neexistuje management myšlenek a nápadů. Vnější bariéry - legislativní, politické, ekologické, monopolní a tržní, kulturní, dostupnost zdrojů. Model řetězového propojení vysvětluje vznik inovací jako působení mezi tržními příležitostmi, potenciálem znalostí a kapacitami firmy. Kroky pro funkční inovační proces - odstranit strach z neúspěchu, zařadit inovace do hodnocení, dokumentovat proces, podporovat otevřenost, propojit se strategií, sledovat trendy, různorodost, motivující kritéria, trénovat týmy, zavést systém pro sběr nápadů. Anatomie selhání - existují i skvělá selhání, která naplňují 4 kritéria. 1) inovátor se řídí dobrými úmysly, ne na úkor druhých, 2) dělá vše, aby se ostatní vyhnuli nadbytečným chybám (selhání z nedostatečné přípravy nebo hloupých chyb není skvělé), 3) nesplnil původní cíl, ale výsledek má hodnotu pro jednotlivce nebo společnost, 4) poučil se ze selhání ostatních a jeho zkušenosti, odvaha a vytrvalost inspirují ostatní. Ochrana inovace - duševní vlastnictví, 4 typy. Patenty (technické řešení, 20 let, vyžaduje zveřejnění). Ochranné známky (značka a logo). Autorská práva (tvůrčí díla, automaticky). Know-how a obchodní tajemství (neveřejné, neomezeně dokud zůstane tajné, např. recept Coca-Coly). Metriky inovací - 4 kategorie. Input (kolik investujeme - R&D budget, lidé, čas), Process (jak efektivně - time-to-market, počet projektů v pipeline), Output (co vzniká - počet patentů, nové produkty na trh, počet lidí zabývajících se inovací), Outcome (byznys výsledek - podíl tržeb z nových produktů, návratnost nákladů na R&D, staří versus noví zákazníci). Plus cost-benefit analýza. Finanční metriky hodnocení investic (NPV, IRR) jsou detailně v předmětu Finance.",
     audioUrl: null,
     notebookLmUrl: null,
   };
@@ -33729,12 +33738,12 @@ function OkruhInov8Panel() {
     <b style="color:#1E938D">4.</b> <b>Externí bariéry</b> — regulace, konkurence, makro, technologie, trh, financování.<br/>
     <b style="color:#1E938D">5.</b> <b>4 typy IP</b> — patenty (20 let), ochranné známky (10 let), autorská práva (70 let po smrti), know-how (neomezeně).<br/>
     <b style="color:#1E938D">6.</b> <b>Patent × know-how</b> — Coca-Cola příklad (know-how silnější).<br/>
-    <b style="color:#1E938D">7.</b> ⚠️ <b>Sitkinova 4 kritéria 'intelligent failure'</b> — experimentální záměr, malé riziko, generuje znalosti, sdílí znalosti.<br/>
-    <b style="color:#1E938D">8.</b> <b>Anatomie selhání</b> — eskalace závazku (Sunk Cost), pozdní KILL, bez postmortem.<br/>
+    <b style="color:#1E938D">7.</b> <b>4 kritéria skvělého selhání</b> — dobré úmysly, snaha ušetřit ostatním chyby, výsledek má hodnotu, poučení inspiruje. Rozlišit chybu × selhání (Sloane).<br/>
+    <b style="color:#1E938D">8.</b> <b>Skvělé selhání</b> — 4 kritéria (dobré úmysly, ušetřit ostatním chyby, výsledek má hodnotu, poučení inspiruje).<br/>
     <b style="color:#1E938D">9.</b> ⚠️ <b>4 kategorie metrik inovací</b> — INPUT (R&D budget), PROCESS (time-to-market), OUTPUT (patenty), OUTCOME (NPI, ROI, NPV).<br/>
     <b style="color:#1E938D">10.</b> <b>NPI</b> = % tržeb z nových produktů (3M 30%, Apple 50%). <b>R&D Intensity</b> dle odvětví.<br/>
     <b style="color:#1E938D">11.</b> <b>NPV/IRR</b> pro inovace — odkaz na Finance subject. Pozor na limitace (nedoceňuje optionality).<br/>
-    <b style="color:#1E938D">12.</b> Etalony — Kodak (anatomie selhání), Coca-Cola (know-how), Google Stadia (eskalace), 3M (metriky), Pixar (kultura učení).
+    <b style="color:#1E938D">12.</b> Etalony — Kodak (interní bariéry), Coca-Cola (know-how), Dyson (ctihodné selhání), 3M (metriky), Pixar (kultura učení).
   `;
 
   const caseStudyInov7 = {
@@ -33747,7 +33756,7 @@ function OkruhInov8Panel() {
       { text: "Mladý inženýr s nápadem 3D tisku zesměšněn na poradě, lessons learned neexistuje, postmortems se neděla", color: VSE.danger, reason: "FIREMNÍ KULTURA (Inov 7 + Inov 2) - imunitní systém firmy. Strach z chyby, trest za experiment, blame culture. NEJČASTĚJŠÍ BARIÉRA inovací." },
       { text: "Patentovat senzor (i přes blok CFO) - 300 tisíc Kč investice", color: VSE.success, reason: "IP STRATEGIE (Inov 7) - Adam správně chápe, že bez patentu konkurence okamžitě zkopíruje. 300 tisíc je nízká investice oproti 18 měsícům R&D vývoje." },
       { text: "Nastavit metriky inovací ve 4 kategoriích", color: VSE.primary, reason: "METRIKY (Inov 7) - input/process/output/outcome. Bez metrik board nemůže racionálně rozhodovat. NPI, R&D intensity, time-to-market, success rate." },
-      { text: "Vytvořit kulturu učení z chyb (Sitkin intelligent failure)", color: VSE.fph, reason: "KULTURA UČENÍ (Inov 7) - blameless postmortems, lessons learned, pre-mortems. Bez toho firma opakuje stejné chyby. Klíč pro long-term inovační schopnost." },
+      { text: "Vytvořit kulturu učení z chyb (odstranit strach)", color: VSE.fph, reason: "Krok 1 pro funkční inovační proces - bez odstranění strachu lidé nebudou inovovat. Skvělé selhání = poctivý pokus, ze kterého vznikne poučení." },
     ],
     quiz1: {
       question: "Co by měl Adam udělat jako první?",
@@ -33764,7 +33773,7 @@ function OkruhInov8Panel() {
       options: [
         { text: "DIAGNOSTIKA BARIÉR — všech 10 interních (kultura, leadership, struktura, procesy, lidi, finance, čas, znalosti, feedback, partnerství) + 4 externí (regulace, konkurence, technologie, financování). Detailní mapa s konkrétními příklady.", correct: true, reason: "✓ Inov 7 — bez systematické analýzy bariér nemůže Adam udělat strategii. Komise vždy chce 6-8 interních + 4-6 externích." },
         { text: "IP STRATEGIE — patentovat senzor (300 tis. Kč) přes EPO (Evropa) + PCT (mezinárodně). Bez patentu konkurence (čínští, indičtí výrobci) zkopíruje za měsíce. Patent + know-how kombinace.", correct: true, reason: "✓ Inov 7 — 300 tis. Kč vs 18 měsíců R&D + potenciální miliardy na EV trhu. Patent je nutná investice." },
-        { text: "KULTURA UČENÍ — zavést blameless postmortems (Google model), lessons learned databázi, pre-mortems (Klein). Aplikovat Sitkinova 4 kritéria intelligent failure (experimentální záměr, malé riziko, generuje a sdílí znalosti).", correct: true, reason: "✓ Inov 7 — bez kultury učení firma opakuje chyby. Sitkin je akademický citát, který komise ocení." },
+        { text: "KULTURA UČENÍ — odstranit strach z neúspěchu, zařadit inovace do hodnocení, motivující kritéria pro nové nápady, trénovat týmy. Rozlišit ctihodné selhání (cenné) od nekompetentního.", correct: true, reason: "✓ Kroky pro funkční inovační proces. Skvělé selhání naplňuje 4 kritéria - dobré úmysly, ušetří ostatním chyby, výsledek má hodnotu, poučení inspiruje." },
         { text: "METRIKY INOVACÍ — nastavit ve 4 kategoriích: INPUT (R&D budget 5-8 % tržeb), PROCESS (time-to-market, gate kill rate), OUTPUT (patenty/rok, nové produkty), OUTCOME (NPI cíl 25 %, ROI portfolia, NPV).", correct: true, reason: "✓ Inov 7 — 4 kategorie + konkrétní KPI. NPI 25 % je realistický cíl pro automotive supplier." },
         { text: "ZÁKAZNICKÁ STRATEGIE PRO SENZOR — Vcítění s EV maker (Tesla, BYD, NIO, Rivian) přes Design Thinking (Inov 4), MVP demo, lead users testování. Diverzifikovat z Škoda/BMW/Audi.", correct: true, reason: "✓ Inov 7 + Inov 4 + Inov 6 (Ansoff rozvoj trhu) — najít EV zákazníky je rozšíření trhu, klíčové pro snížení závislosti na ICE automotive." },
         { text: "PŘEKONÁNÍ INTERNÍCH BARIÉR — leadership change (innovation champion na C-úrovni), oddělit R&D pro radikální projekty (Inov 2), R&D budget na 8 % tržeb (z aktuálních 3 %), interní inovační fond (1 % tržeb = 42 mil. ročně).", correct: true, reason: "✓ Inov 7 — konkrétní akce na bariéry. Inovační champion + oddělené R&D + budget = nutné minimum." },
@@ -33772,13 +33781,13 @@ function OkruhInov8Panel() {
         { text: "Pokračovat v současné situaci a doufat, že CEO odejde do důchodu", correct: false, reason: "✗ Pasivní přístup. Mezitím čínská konkurence dohání, EV trh roste, CzechTech ztrácí relevanci. Klasická Kodak situace." },
       ],
     },
-    summary: "<b>Adam by měl udělat systematickou diagnostiku všech bariér + IP strategii + kulturu učení + metriky + zákaznickou diverzifikaci.</b><br/><br/><b>Postup:</b><br/><br/>• <b>DIAGNOSTIKA BARIÉR:</b><br/>– <b>Interní (všech 10):</b> Kultura (toxická, trest za experiment) + Leadership (CEO nevěří EV) + Struktura (silo) + Procesy (žádný SGCP) + Lidé (přetížení) + Finance (R&D 3 %) + Čas (žádný innovation time) + Znalosti (žádný EV market research) + Feedback (sales nemluví s EV makers) + Partnerství (žádná univerzitní spolupráce).<br/>– <b>Externí (4):</b> Konkurence (asijští výrobci tlačí ceny) + Technologie (EV transition rychlejší než ICE upgrade) + Regulace (EU CO2 cíle 2035) + Financování (banky neradi automotive).<br/><br/>• <b>IP STRATEGIE PRO SENZOR:</b><br/>– <b>Patent</b> přes EPO + PCT (300-500 tis. Kč, 2-3 roky proces).<br/>– <b>Know-how:</b> kalibrace, kód, manufacturing process — neveřejné.<br/>– <b>Ochranná známka</b> pro brand senzoru (50 tis. Kč).<br/>– <b>Defenzivní citation</b> v patentech, aby zabránila čínským kopiím.<br/><br/>• <b>KULTURA UČENÍ Z CHYB (Sitkin):</b><br/>– <b>Blameless postmortems</b> po každém projektu (Google model).<br/>– <b>Lessons learned databáze</b> sdílená pro celou firmu.<br/>– <b>Pre-mortems</b> (Klein) před launchem každého projektu — 'co může selhat?'.<br/>– <b>Failure resumes</b> — vedoucí sdílí selhání, ne jen úspěchy.<br/>– <b>Aplikace Sitkinových 4 kritérií:</b> experimentální záměr (vědomé experimenty s MVP), malé riziko (pilot s 1 zákazníkem, ne plný launch), generuje znalosti (postmortem), sdílí znalosti (lessons learned).<br/><br/>• <b>METRIKY INOVACÍ (4 kategorie):</b><br/>– <b>INPUT:</b> R&D budget z 3 % na 8 % (z 126 mil. na 336 mil. ročně), 15 % pravidlo pro inženýry, 2 nové univerzitní partnerství.<br/>– <b>PROCESS:</b> Time-to-Market cíl 18 měsíců (oproti aktuálním 36+), Gate kill rate 70 % (filtr brzy), pipeline 30 idea v Stage 0 ročně.<br/>– <b>OUTPUT:</b> 8 patentů ročně (oproti 1-2 aktuálním), 3-5 nových produktů ročně.<br/>– <b>OUTCOME:</b> NPI 25 % (oproti aktuálním 8 %), ROI inovačního portfolia 15 %+, NPS od zákazníků 50+.<br/><br/>• <b>ZÁKAZNICKÁ DIVERZIFIKACE:</b><br/>– Vcítění (DT — Inov 4) s EV makers — návštěvy Tesla Berlín, BYD Maďarsko, NIO HQ.<br/>– MVP demo senzoru pro 3-5 lead users.<br/>– Cíl: do 18 měsíců 1 major EV zákazník, do 36 měsíců 3+ EV zákazníci = 20 % tržeb mimo ICE automotive.<br/><br/>• <b>PŘEKONÁNÍ INTERNÍCH BARIÉR:</b><br/>– <b>Leadership:</b> Adam jako 'innovation champion' s direct reportingem na CEO + board. Pokud CEO Pavel nepodporuje, eskalace na board.<br/>– <b>Struktura:</b> Oddělené R&D pro EV/inovace (Inov 2 — proč firmy oddělují R&D).<br/>– <b>Finance:</b> Innovation fund 1 % tržeb (42 mil. ročně) jako budget na pilot projekty.<br/>– <b>Čas:</b> 15 % pravidlo (3M model) pro inženýry.<br/>– <b>Kultura:</b> Workshop o Sitkin intelligent failure, training v blameless postmortems.<br/><br/>• <b>BOARD PRESENTATION 12 MĚSÍCŮ:</b><br/>– <b>Měsíc 1-3:</b> Diagnostika bariér + akční plán + senzor patent application.<br/>– <b>Měsíc 4-6:</b> Pilot s 1 EV maker + R&D budget increase do plánu 2027.<br/>– <b>Měsíc 7-9:</b> Kultura změna (postmortems, lessons learned) + první nové projekty pipeline.<br/>– <b>Měsíc 10-12:</b> Metriky reportování, board approval pro 3letý inovační plán.<br/><br/><b>Pro komisi:</b> Klíč — <b>10 interních + 4-6 externích bariér</b> s konkrétními příklady, <b>4 typy IP</b> (patent vs know-how Coca-Cola), <b>Sitkinova 4 kritéria intelligent failure</b>, <b>4 kategorie metrik</b> (input/process/output/outcome) s NPI/R&D intensity/time-to-market, <b>kombinace s ostatními okruhy</b> (Inov 2 oddělené R&D, Inov 4 DT, Inov 5 SGCP, Inov 6 strategie). Anti-vzor: říct 'firma má problém s kulturou' a doufat — komise chce detailní 10 bariér + akce.",
+    summary: "<b>Adam by měl udělat systematickou diagnostiku všech bariér + IP strategii + kulturu učení + metriky + zákaznickou diverzifikaci.</b><br/><br/><b>Postup:</b><br/><br/>• <b>DIAGNOSTIKA BARIÉR:</b><br/>– <b>Interní (všech 10):</b> Kultura (toxická, trest za experiment) + Leadership (CEO nevěří EV) + Struktura (silo) + Procesy (žádný SGCP) + Lidé (přetížení) + Finance (R&D 3 %) + Čas (žádný innovation time) + Znalosti (žádný EV market research) + Feedback (sales nemluví s EV makers) + Partnerství (žádná univerzitní spolupráce).<br/>– <b>Externí (4):</b> Konkurence (asijští výrobci tlačí ceny) + Technologie (EV transition rychlejší než ICE upgrade) + Regulace (EU CO2 cíle 2035) + Financování (banky neradi automotive).<br/><br/>• <b>IP STRATEGIE PRO SENZOR:</b><br/>– <b>Patent</b> přes EPO + PCT (300-500 tis. Kč, 2-3 roky proces).<br/>– <b>Know-how:</b> kalibrace, kód, manufacturing process — neveřejné.<br/>– <b>Ochranná známka</b> pro brand senzoru (50 tis. Kč).<br/>– <b>Defenzivní citation</b> v patentech, aby zabránila čínským kopiím.<br/><br/>• <b>KULTURA UČENÍ Z CHYB:</b><br/>– <b>Odstranit strach</b> z neúspěchu (krok 1 funkčního inovačního procesu) — bez něj lidé nebudou inovovat.<br/>– <b>Zařadit inovace do hodnocení</b> zaměstnanců, nastavit motivující kritéria pro nové nápady.<br/>– <b>Rozlišit ctihodné selhání</b> (poctivý pokus, cenné) od nekompetentního (lenost, bezcenné).<br/>– <b>Cílit na skvělá selhání</b> — taková, ze kterých i přes nesplněný cíl vznikne hodnota a poučení pro ostatní.<br/><br/>• <b>METRIKY INOVACÍ (4 kategorie):</b><br/>– <b>INPUT:</b> R&D budget z 3 % na 8 % (z 126 mil. na 336 mil. ročně), 15 % pravidlo pro inženýry, 2 nové univerzitní partnerství.<br/>– <b>PROCESS:</b> Time-to-Market cíl 18 měsíců (oproti aktuálním 36+), Gate kill rate 70 % (filtr brzy), pipeline 30 idea v Stage 0 ročně.<br/>– <b>OUTPUT:</b> 8 patentů ročně (oproti 1-2 aktuálním), 3-5 nových produktů ročně.<br/>– <b>OUTCOME:</b> NPI 25 % (oproti aktuálním 8 %), ROI inovačního portfolia 15 %+, NPS od zákazníků 50+.<br/><br/>• <b>ZÁKAZNICKÁ DIVERZIFIKACE:</b><br/>– Vcítění (DT — Inov 4) s EV makers — návštěvy Tesla Berlín, BYD Maďarsko, NIO HQ.<br/>– MVP demo senzoru pro 3-5 lead users.<br/>– Cíl: do 18 měsíců 1 major EV zákazník, do 36 měsíců 3+ EV zákazníci = 20 % tržeb mimo ICE automotive.<br/><br/>• <b>PŘEKONÁNÍ INTERNÍCH BARIÉR:</b><br/>– <b>Leadership:</b> Adam jako 'innovation champion' s direct reportingem na CEO + board. Pokud CEO Pavel nepodporuje, eskalace na board.<br/>– <b>Struktura:</b> Oddělené R&D pro EV/inovace (Inov 2 — proč firmy oddělují R&D).<br/>– <b>Finance:</b> Innovation fund 1 % tržeb (42 mil. ročně) jako budget na pilot projekty.<br/>– <b>Čas:</b> 15 % pravidlo (3M model) pro inženýry.<br/>– <b>Kultura:</b> workshop o tom, jak odstranit strach z chyb a rozlišit ctihodné × nekompetentní selhání.<br/><br/>• <b>BOARD PRESENTATION 12 MĚSÍCŮ:</b><br/>– <b>Měsíc 1-3:</b> Diagnostika bariér + akční plán + senzor patent application.<br/>– <b>Měsíc 4-6:</b> Pilot s 1 EV maker + R&D budget increase do plánu 2027.<br/>– <b>Měsíc 7-9:</b> Kultura změna (postmortems, lessons learned) + první nové projekty pipeline.<br/>– <b>Měsíc 10-12:</b> Metriky reportování, board approval pro 3letý inovační plán.<br/><br/><b>Pro komisi:</b> Klíč — <b>10 interních + 4-6 externích bariér</b> s konkrétními příklady, <b>4 typy IP</b> (patent vs know-how Coca-Cola), <b>4 kritéria skvělého selhání</b>, <b>4 kategorie metrik</b> (input/process/output/outcome) s NPI/R&D intensity/time-to-market, <b>kombinace s ostatními okruhy</b> (Inov 2 oddělené R&D, Inov 4 DT, Inov 5 SGCP, Inov 6 strategie). Anti-vzor: říct 'firma má problém s kulturou' a doufat — komise chce detailní 10 bariér + akce.",
   };
 
   return (
     <OkruhPanel
       subject="Inovace" subjectId="inov" number={8} title="Bariéry inovací + anatomie selhání + metriky"
-      subtitle="Hobcraft × O'Sullivan 5 důvodů selhání. 10 interních + 6 externích bariér. 4 typy IP (patent/známka/AP/know-how). Sitkinova 4 kritéria intelligent failure. 4 kategorie metrik (input/process/output/outcome)."
+      subtitle="Chyba × selhání (Sloane), Hobcraft × O'Sullivan příčiny, 10 zabijáků + 6 externích bariér, 4 typy IP, 4 kritéria skvělého selhání, metriky (input/process/output/outcome)."
       color={VSE.primary}
       questionText="Bariéry inovací (vnitřní × vnější), anatomie selhání, ochrana inovací (IP), metriky inovací (input/process/output/outcome)."
       sloz={2} roz={3} freq={4}
