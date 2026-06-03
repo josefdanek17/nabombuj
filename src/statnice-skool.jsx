@@ -606,8 +606,9 @@ const SUBJECTS = [
       { n: 3, title: "Metody a techniky inovací — Lean Canvas, Business Model Canvas, Gassmann", status: "done", difficulty: 3 },
       { n: 4, title: "Design Thinking — 5 fází + Double Diamond", status: "done", difficulty: 2 },
       { n: 5, title: "Stage Gate Control Process (Roberts × Cooper, gatekeeping)", status: "done", difficulty: 3 },
-      { n: 6, title: "Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)", status: "done", difficulty: 3 },
-      { n: 7, title: "Bariéry inovací + anatomie selhání + metriky inovací", status: "done", difficulty: 3 },
+      { n: 6, title: "Financování inovací podle fází ŽC firmy (VC × PE, buyouts, IPO)", status: "done", difficulty: 2 },
+      { n: 7, title: "Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)", status: "done", difficulty: 3 },
+      { n: 8, title: "Bariéry inovací + anatomie selhání + metriky inovací", status: "done", difficulty: 3 },
     ],
   },
   {
@@ -7301,6 +7302,7 @@ function OkruhContent({ subjectId, okruhN }) {
   if (subjectId === "inov" && okruhN === 5) return <OkruhInov5Panel />;
   if (subjectId === "inov" && okruhN === 6) return <OkruhInov6Panel />;
   if (subjectId === "inov" && okruhN === 7) return <OkruhInov7Panel />;
+  if (subjectId === "inov" && okruhN === 8) return <OkruhInov8Panel />;
 
   // Fallback placeholder pro okruhy, které ještě nejsou připravené (status: "todo")
   const _subj = SUBJECTS.find(s => s.id === subjectId);
@@ -31251,7 +31253,7 @@ function OkruhInov2Panel() {
       subject="Inovace" subjectId="inov" number={2} title="Schumpeter, Drucker, inovační podnikání a inovativní organizace"
       subtitle="Schumpeter (koncept ekon. inovace) + Drucker (7 zdrojů) + determinanty inovačního podnikání + Galbraith 4 faktory inovativní organizace + inovační role + kultura"
       color={VSE.primary}
-      questionText="Schumpeter — koncept ekonomické inovace a kreativní destrukce. Drucker — 7 zdrojů inovace. Inovační podnikání a jeho determinanty (vhodný BM, kultura, motivace, styl řízení, organizace). Inovativní organizace dle Galbraitha (4 faktory). Inovační role (idea šampioni, sponzoři, lídři) a kultura."
+      questionText="Schumpeter (kreativní destrukce), Drucker (7 zdrojů inovace), inovační podnikání, inovativní organizace (Galbraith), inovační role a kultura."
       sloz={3} roz={4} freq={5}
       examStrategy={examStrategyInov2}
       studySections={studySectionsInov2}
@@ -31711,7 +31713,7 @@ function OkruhInov3Panel() {
       subject="Inovace" subjectId="inov" number={3} title="Metody a techniky inovací — Lean Canvas, BMC, Gassmann"
       subtitle="Business Model + BMC 9 bloků (Osterwalder) + Lean Canvas 9 bloků (Maurya) + Gassmann 4 dimenze BM + SCAMPER + Walt Disney + 5x Proč + Bass model"
       color={VSE.primary}
-      questionText="Metody a techniky inovací — Lean Canvas, Business Model Canvas, Gassmann (Business Model Navigator), kreativní techniky (SCAMPER, Walt Disney, 5x Proč, brainstorming/brainwriting/6-3-5), modely šíření inovací (Bass, epidemický)."
+      questionText="Metody a techniky inovací — Business Model Canvas, Lean Canvas, Gassmann, kreativní techniky, modely šíření inovací."
       sloz={3} roz={4} freq={5}
       examStrategy={examStrategyInov3}
       studySections={studySectionsInov3}
@@ -32166,7 +32168,7 @@ function OkruhInov4Panel() {
       subject="Inovace" subjectId="inov" number={4} title="Design Thinking — 5 fází + Double Diamond"
       subtitle="DT 5 fází (Vcítění/Definování/Generování/Prototypování/Testování) + Double Diamond (Discover/Define/Develop/Deliver) + MVP (Ries) + lead users (von Hippel) + rozdíl DT × SGCP"
       color={VSE.primary}
-      questionText="Design Thinking — uživatelsky orientovaný přístup k řešení problémů. 5 fází podle Stanford d.school (Vcítění, Definování, Generování nápadů, Prototypování, Testování). Double Diamond model. MVP a lead users. Rozdíl Design Thinking × Stage Gate Control Process."
+      questionText="Design Thinking — 5 fází (Stanford d.school), Double Diamond, MVP a lead users, rozdíl oproti Stage-Gate."
       sloz={2} roz={3} freq={4}
       examStrategy={examStrategyInov4}
       studySections={studySectionsInov4}
@@ -32191,71 +32193,37 @@ function OkruhInov5Panel() {
         <Def color={VSE.primary}>
           <b>Stage Gate Control Process (SGCP)</b> = nástroj řízení inovačních procesů pro jejich <b>postupnou implementaci</b>. Podrobný plán <b>od nápadu po uvedení na trh</b>. Celý proces je rozčleněn do stádií (Stages), mezi kterými jsou <b>brány (Gates)</b>, kde se rozhoduje, zda projekt postoupí dál nebo skončí.
         </Def>
-        <Tag color={VSE.primary}>Klíčové principy SGCP</Tag>
+        <Tag color={VSE.primary}>Jak SGCP funguje</Tag>
         <Bullet items={[
-          "<b>Celý proces je rozčleněn do stádií STAGES</b> — postupně se při splnění kritérií posouváme z jednoho do druhého.",
-          "<b>Dle potřeby rozkládán do dílčích stádií</b> s cílem činit <b>sledování projektu přehlednějším, ilustrativnějším a efektivnějším</b>.",
-          "<b>Posun se řídí GATEKEEPINGEM</b> — <b>vedoucí pracovníci kontrolují</b> tento proces. Říká se jim <b>gatekeepers</b>.",
-          "<b>Týmy vyvíjející inovace musí splnit předem daná kritéria</b>, aby inovace mohla projít do dalšího kritéria.",
-          "<b>Hledáme nejlepší řešení = GATE CONTROL.</b>",
-          "<b>Jakmile je etapa ukončena, projekt je kriticky posouván s předem stanoveným souborem metrik</b>, které jsou kvalifikačním kritériem pro propuštění projektu do další etapy.",
+          "Proces je rozdělen do <b>stádií (Stages)</b>, mezi kterými jsou <b>brány (Gates)</b>.",
+          "Na každé bráně <b>gatekeepers</b> (vedoucí pracovníci) rozhodnou, zda projekt postoupí — tým musí splnit předem daná kritéria (sada metrik).",
+          "<b>Počet stádií podle typu inovace</b>: radikální = volnější měřítka, inkrementální = tvrdší. Každá firma si proces sestaví podle svých kritických faktorů úspěchu.",
+          "<b>Přínos</b>: zkracuje čas vývoje, eliminuje zbytečnou práci a chyby, stanovuje kritické milníky.",
         ]} color={VSE.primary} />
-        <Tag color={VSE.warning}>Proč firmy SGCP používají</Tag>
-        <Bullet items={[
-          "<b>Bere v úvahu kritické faktory úspěchu</b>.",
-          "<b>Počet stádií podle typu inovace</b> — čím složitější, tím víc stádií:",
-          "&nbsp;&nbsp;• <b>Radikální inovace</b> — volnější měřítka na výstup z etapy.",
-          "&nbsp;&nbsp;• <b>Inkrementální inovace</b> — tvrdší měřítka.",
-          "<b>Každá firma si sestaví podle sebe</b>, podle svých critical success factors.",
-          "<b>+ Bere v úvahu CSF, zkracuje čas vývoje, eliminuje zbytečnou práci a chyby.</b>",
-          "<b>Tento formalizovaný postup:</b> usnadňuje přechod inovačních projektů stadii, stanovuje kritické milníky, bere v úvahu kritické faktory úspěchu.",
-        ]} color={VSE.warning} />
       </div>) },
 
-    { id: "roberts", title: "SGCP podle Robertse — 6 stádií", subtitle: "Klasický model SGCP — od příležitosti ke komerčnímu vývoji", color: VSE.primary, emoji: "path",
+    { id: "modely", title: "2 přístupy — Roberts × Cooper", subtitle: "Akademický (MIT, 6 stadií) × korporátní (5 stage)", color: VSE.primary, emoji: "path",
       content: (<div>
-        <Def color={VSE.primary}>
-          <b>Edward Roberts</b> (MIT) navrhl <b>6 stadií</b> inovačního procesu. Klasická akademická verze SGCP — zaměřená na technologické a R&D inovace. <b>Komise se na rozdíl Roberts × Cooper ráda ptá.</b>
+        <Def color={VSE.fis}>
+          Existují <b>2 hlavní verze SGCP</b> a komise se na jejich rozdíl ráda ptá. <b>Roberts</b> (MIT) je akademický, R&D zaměřený, <b>6 stadií</b>. <b>Cooper</b> (McMaster) je formalizovaná korporátní praxe, <b>5 stage (0–5)</b> — dnes nejrozšířenější (P&G, 3M, J&J).
         </Def>
-        <Tag color={VSE.primary}>6 stadií Roberts</Tag>
+        <Tag color={VSE.primary}>Roberts — 6 stadií (akademický, R&D)</Tag>
         <ResponsiveGrid cols2>
           {[
-            { c: VSE.fph, n: "1", t: "ROZPOZNÁNÍ PŘÍLEŽITOSTI", d: "Vyhledává se tržní příležitost, myšlenky, nápady. V úvahu <b>technická uskutečnitelnost</b>, na základě požadavků zákazníka, analogií." },
-            { c: VSE.warning, n: "2", t: "GENEROVÁNÍ A TŘÍDĚNÍ MYŠLENEK", d: "Nápad přetvořen na model. <b>Životaschopnost a technická proveditelnost</b>. První formální přezkoumání (důraz na kvalitu). Kreativní metody." },
-            { c: VSE.fmv, n: "3", t: "ŘEŠENÍ PROBLÉMŮ", d: "Validace modelu, odhad poptávky a nákladů. <b>Cenová politika, finanční rozpočet.</b> V laboratoři, dílně, simulační systémy." },
-            { c: VSE.success, n: "4", t: "PROTOTYP", d: "Pracovníci nalézají <b>technická řešení problémů</b>. Plně funkční celek (ne odlitek) — zda bude inovace fungovat." },
-            { c: VSE.danger, n: "5", t: "VYUŽITÍ ŘEŠENÍ", d: "Objevené řešení převedeno do <b>využitelného</b>. Uvést na trh první sérii + otestování <b>lead users</b> (viz Inov 4)." },
-            { c: VSE.primary, n: "6", t: "KOMERČNÍ VÝVOJ", d: "<b>Výroba a uvedení na trh.</b> Preference zákazníků → výběr dodavatelského modelu. Marketing, distribuce, vhodné mít plány." },
+            { c: VSE.fph, n: "1", t: "ROZPOZNÁNÍ PŘÍLEŽITOSTI", d: "Tržní příležitost, nápady. Technická uskutečnitelnost dle požadavků zákazníka." },
+            { c: VSE.warning, n: "2", t: "GENEROVÁNÍ A TŘÍDĚNÍ MYŠLENEK", d: "Nápad přetvořen na model. První formální přezkoumání, kreativní metody." },
+            { c: VSE.fmv, n: "3", t: "ŘEŠENÍ PROBLÉMŮ", d: "Validace modelu, odhad poptávky a nákladů. Cenová politika, rozpočet." },
+            { c: VSE.success, n: "4", t: "PROTOTYP", d: "Plně funkční celek — ověření, zda inovace bude fungovat." },
+            { c: VSE.danger, n: "5", t: "VYUŽITÍ ŘEŠENÍ", d: "Uvedení první série + test lead users (viz Inov 4)." },
+            { c: VSE.primary, n: "6", t: "KOMERČNÍ VÝVOJ", d: "Výroba a uvedení na trh. Marketing, distribuce — až na konci." },
           ].map((b, i) => (
-            <GlassBox key={i} opacity={0.5} style={{ padding: "12px 14px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: b.c, fontFamily: fontMono, marginBottom: 4 }}>{b.n}. {b.t}</div>
-              <div style={{ fontSize: 13.5, color: "var(--text)", fontFamily: fontSans }} dangerouslySetInnerHTML={{ __html: b.d }} />
+            <GlassBox key={i} opacity={0.5} style={{ padding: "10px 13px", borderLeft: `3px solid ${b.c}`, borderRadius: 10 }}>
+              <div style={{ fontSize: 12.5, fontWeight: 700, color: b.c, fontFamily: fontMono, marginBottom: 3 }}>{b.n}. {b.t}</div>
+              <div style={{ fontSize: 13, color: "var(--text)", fontFamily: fontSans }}>{b.d}</div>
             </GlassBox>
           ))}
         </ResponsiveGrid>
-        <Tag color={VSE.warning}>Hlavní rys Robertse</Tag>
-        <Bullet items={[
-          "<b>Akademický + R&D focused</b> — vychází z univerzitního a laboratorního prostředí (MIT).",
-          "<b>Důraz na technickou proveditelnost</b> a validaci modelu před výrobou.",
-          "<b>Lead users testují první sérii</b> (krok 5) — kvalitní feedback před masovým uvedením.",
-          "<b>Komerční vývoj až na konci (krok 6)</b> — marketing přichází relativně pozdě v procesu.",
-        ]} color={VSE.warning} />
-      </div>) },
-
-    { id: "cooper", title: "SGCP podle Coopera — formalizovaný 5-stage proces", subtitle: "Praktická manažerská verze pro průmysl", color: VSE.primary, emoji: "grid",
-      content: (<div>
-        <Def color={VSE.primary}>
-          <b>Robert G. Cooper</b> (kanadský konzultant a profesor McMaster University) navrhl <b>formalizovaný 5-stage proces</b> v 80. letech. <b>Dnes nejrozšířenější verze SGCP</b> v korporátní praxi (Procter & Gamble, 3M, Johnson & Johnson).
-        </Def>
-        <Tag color={VSE.primary}>Cooper — klíčové principy</Tag>
-        <Bullet items={[
-          "<b>Formalizovaný proces</b> — jasné kroky, dokumenty, schvalování.",
-          "<b>Zachycení myšlenky a zvládnutí systému.</b>",
-          "<b>'Voice of customer'</b> — diskuze s <b>lead users</b> (viz Inov 4) ve všech fázích.",
-          "<b>Generování scénářů</b> — různé možnosti vývoje produktu.",
-          "<b>Organizační akce</b> — kdo co dělá, jasná odpovědnost.",
-        ]} color={VSE.primary} />
-        <Tag color={VSE.warning}>5 stage Cooper modelu</Tag>
+        <Tag color={VSE.warning}>Cooper — 5 stage (korporátní praxe, nejrozšířenější)</Tag>
         <ResponsiveGrid cols2>
           {[
             { c: VSE.fph, n: "Stage 0", t: "DISCOVERY (objev)", d: "<b>Nové myšlenky, příležitosti.</b> Vstupní brainstorming, sběr nápadů, market research." },
@@ -32624,7 +32592,7 @@ function OkruhInov5Panel() {
       subject="Inovace" subjectId="inov" number={5} title="Stage Gate Control Process (Roberts × Cooper)"
       subtitle="SGCP — stadia + brány + gatekeeping. Roberts (MIT) 6 stadií akademický R&D × Cooper 5 stage 0-5 korporátní komerční. 7 CSF úspěchu. Aplikace v malých × velkých firmách."
       color={VSE.primary}
-      questionText="Stage Gate Control Process (SGCP) — nástroj řízení inovačních procesů přes stadia a brány. Gatekeeping (gatekeepers, rozhodnutí Go/Kill/Hold/Recycle). 2 přístupy — Roberts (MIT, 6 stadií, akademický) × Cooper (McMaster, 5 stage 0-5, korporátní). Kritické faktory úspěchu (7 CSF). Aplikace v menších firmách (light Stage Gate). Kombinace s DT a Lean (MVP)."
+      questionText="Stage-Gate Control Process — řízení inovací přes brány, gatekeeping (Go/Kill/Hold/Recycle), Roberts × Cooper, kritické faktory úspěchu."
       sloz={3} roz={4} freq={5}
       examStrategy={examStrategyInov5}
       studySections={studySectionsInov5}
@@ -32644,6 +32612,260 @@ function OkruhInov5Panel() {
    ════════════════════════════════════════════════════════ */
 function OkruhInov6Panel() {
   const studySectionsInov6 = [
+    { id: "zdroje_princip", title: "Zdroje financí + princip fází", subtitle: "Vlastní × cizí zdroje a proč každá fáze chce jiný", color: VSE.primary, emoji: "coins",
+      content: (<div>
+        <Def color={VSE.primary}>
+          Financování inovací = jak firma sežene peníze na vývoj a růst. Klíčová myšlenka: <b>každá fáze životního cyklu firmy potřebuje jiný typ financování</b> — čím mladší a rizikovější firma, tím dražší a rizikovější peníze.
+        </Def>
+        <Tag color={VSE.primary}>Zdroje financí</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Vlastní zdroje" color={VSE.success} items={["Základní kapitál, zisk z minulých let, fondy, emisní ážio, odpisy.", "Nemusím splácet, ale je jich omezeně."]} />
+          <ModelCard name="Cizí zdroje" color={VSE.danger} items={["Úvěry, rezervy, závazky (daně), dary.", "Musím splácet, ale umožní rychlejší růst."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.warning}>Princip: financování podle fáze ŽC firmy</Tag>
+        <Bullet items={[
+          "Pro každý stupeň rozvoje je <b>optimální jiný stupeň financování</b>.",
+          "Financování je podmíněno ochotou financujícího subjektu <b>podstoupit riziko nevratnosti</b> — čím rizikovější fáze, tím vyšší očekávaný výnos investora.",
+        ]} color={VSE.warning} />
+        <Tag color={VSE.fis}>Schody financování — od nejrizikovější fáze po nejstabilnější</Tag>
+        <ResponsiveSVG viewBox="0 0 600 300" maxHeight={290}>
+          <line x1="55" y1="265" x2="560" y2="265" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <line x1="55" y1="30" x2="55" y2="265" stroke="var(--text-muted)" strokeWidth="1.5"/>
+          <text x="40" y="45" textAnchor="end" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">vysoké</text>
+          <text x="40" y="260" textAnchor="end" fontFamily={fontMono} fontSize="9" fill="var(--text-muted)">nízké</text>
+          <text x="30" y="150" textAnchor="middle" fontFamily={fontMono} fontSize="10" fill="var(--text-muted)" transform="rotate(-90 30 150)">RIZIKO</text>
+          {[
+            { x: 80, w: 110, y: 50, c: VSE.danger, t: "FFF, Crowdfunding", t2: "Seed kapitál" },
+            { x: 160, w: 120, y: 85, c: VSE.fmv, t: "Business Angels", t2: "Start-up kapitál" },
+            { x: 250, w: 120, y: 120, c: VSE.warning, t: "Rizikový kapitál", t2: "(VC / PE)" },
+            { x: 330, w: 110, y: 155, c: VSE.fph, t: "Mezzanine", t2: "P2P lending" },
+            { x: 400, w: 90, y: 190, c: VSE.danger, t: "Buy-outs", t2: "" },
+            { x: 460, w: 95, y: 220, c: VSE.success, t: "Veřejné trhy", t2: "(IPO)" },
+            { x: 380, w: 175, y: 245, c: VSE.fis, t: "Banky", t2: "" },
+          ].map((b, i) => (
+            <g key={i}>
+              <rect x={b.x} y={b.y} width={b.w} height="26" fill={`${b.c}25`} stroke={b.c} strokeWidth="1.5" rx="5"/>
+              <text x={b.x + b.w/2} y={b.y + (b.t2 ? 12 : 17)} textAnchor="middle" fontFamily={fontSans} fontSize="9.5" fontWeight="700" fill={b.c}>{b.t}</text>
+              {b.t2 && <text x={b.x + b.w/2} y={b.y + 22} textAnchor="middle" fontFamily={fontSans} fontSize="8" fill="var(--text-muted)">{b.t2}</text>}
+            </g>
+          ))}
+          <text x="105" y="285" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill="var(--text-muted)">Seed</text>
+          <text x="220" y="285" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill="var(--text-muted)">Start-up</text>
+          <text x="350" y="285" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill="var(--text-muted)">Počáteční růst</text>
+          <text x="490" y="285" textAnchor="middle" fontFamily={fontMono} fontSize="8.5" fill="var(--text-muted)">Etablovaná</text>
+        </ResponsiveSVG>
+        <ExamAlert komise="Bočková + Nový + Kolouchová 2026 / Nový + Svobodová 2025" what="Komise chce <b>financování inovací v závislosti na ŽC firmy</b> (FFF, business angels, VC...) a hlavně <b>rozdíl mezi venture capital a private equity</b>. Naučit fáze + VC×PE (sekce níže)." />
+      </div>) },
+
+    { id: "seed_start", title: "🌱 SEED + START — nejranější fáze", subtitle: "FFF, crowdfunding, seed kapitál, business angels", color: VSE.success, emoji: "growth",
+      content: (<div>
+        <Def color={VSE.success}>
+          <b>SEED</b> = firma ještě nevznikla, je tu jen nápad a představa. <b>START</b> = pomoc při rozjezdu v začátcích. Nejrizikovější fáze — produkt se teprve ověřuje, takže klasické banky ani VC fondy ještě nepůjčí.
+        </Def>
+        <Tag color={VSE.success}>SEED — financování nápadu</Tag>
+        <Bullet items={[
+          "<b>FFF (Family, Fools, Friends)</b> — rodina, blázni, přátelé. Většinou za podíl, velmi rizikové (často vloží peníze z důvěry, ne z analýzy).",
+          "<b>Crowdfunding</b> = komunitní financování od široké veřejnosti v omezeném čase (hithit.cz). Musí přesvědčit cílovou částku, jinak se peníze vrací přispěvatelům.",
+          "<b>Seed kapitál</b> — kapitálová investice do základního kapitálu, odměňováno podílem. Např. Operační program Podnikání a inovace (zřízen státem, i když investoři jsou privátní).",
+        ]} color={VSE.success} />
+        <Tag color={VSE.fmv}>START — Business Angels</Tag>
+        <div style={{ padding: "10px 14px", background: `${VSE.fmv}10`, border: `1px solid ${VSE.fmv}30`, borderRadius: 10, fontSize: 14, color: "var(--text)", fontFamily: fontSans, lineHeight: 1.6 }}>
+          <b>Business Angels</b> = majetní jedinci (andělští investoři), kteří poskytují kapitál výměnou za podíl. Často <b>diverzifikují portfolio</b> rizikových investic a mají <b>prostředky i analytické schopnosti</b> — kromě peněz přinášejí i know-how a kontakty. Typicky první větší investor po FFF.
+        </div>
+      </div>) },
+
+    { id: "rust", title: "📈 Počáteční růst — VC × PE, mezzanine, P2P", subtitle: "Venture Capital vs Private Equity (Svobodová past!)", color: VSE.warning, emoji: "chart",
+      content: (<div>
+        <Def color={VSE.warning}>
+          <b>Rizikový kapitál</b> = investice do rizikových projektů s odhadovanou výnosností <b>20–30 %</b>. Firma už musí mít podnikatelský plán a produkt, který prokázal, že se na trhu prosadí. Investor většinou <b>odkupuje majoritní podíl</b> na základním kapitálu.
+        </Def>
+        <ExamAlert komise="Svobodová (ZS 2025 + 2026)" what="🔴 <b>Svobodová chce přesně rozdíl Venture Capital × Private Equity.</b> VC = pro společnosti v začátcích (vyšší riziko). PE = menší, nekotované zralé podniky (nižší riziko). Nestačí 'rozumím tomu' — umět to pojmenovat." />
+        <Tag color={VSE.warning}>Venture Capital × Private Equity</Tag>
+        <ResponsiveGrid cols2>
+          <ModelCard name="Venture Capital (VC)" color={VSE.danger} items={["Pro společnosti <b>v začátcích</b> (early stage).", "<b>Vyšší riziko</b> — firma se teprve etabluje.", "Investice do růstu, očekává vysoký výnos."]} />
+          <ModelCard name="Private Equity (PE)" color={VSE.success} items={["Pro <b>menší, nekotované zralé podniky</b> (ve fázi zralosti).", "<b>Nižší riziko</b> — firma už funguje.", "Často odkup většinového podílu, optimalizace a prodej."]} />
+        </ResponsiveGrid>
+        <Tag color={VSE.fph}>Mezzanine + P2P</Tag>
+        <Bullet items={[
+          "<b>Mezzanine</b> = dluhové financování se zástavním právem → při nesplacení se dluh změní na podíl (kapitalizace dluhu). Hybridní druh (mezi dluhem a kapitálem), rychlé a majetkově mezizajištěné. Pro expanzi stávajících podniků.",
+          "<b>P2P (peer to peer / people to people)</b> = půjčení si od lidí přes online tržiště (zonky.cz). Pro malé a střední podniky.",
+        ]} color={VSE.fph} />
+      </div>) },
+
+    { id: "etablovana", title: "🏢 Etablovaná firma — buyouts, IPO, úvěry", subtitle: "Odkupy (MBO/MBI/LBO), vstup na burzu, bankovní úvěry", color: VSE.fis, emoji: "building",
+      content: (<div>
+        <Def color={VSE.fis}>
+          Zavedená firma má přístup k nejlevnějším a nejstabilnějším zdrojům — banky, burza, odkupy. Riziko pro investory je nízké, protože firma má historii a prokazatelné výsledky.
+        </Def>
+        <Tag color={VSE.fis}>Buyouts (odkupy) — typy</Tag>
+        <Bullet items={[
+          "<b>Vykoupení vlastnického podílu</b> managementem společnosti (např. pro růst, spojení s jinou firmou). Po exitu kapitálových fondů.",
+          "<b>MBO</b> (management buyout) — odkup podílu z vlastních zdrojů managementu.",
+          "<b>MBI</b> (management buy in) — odkup managementem zvenčí (mimo firmu).",
+          "<b>LBO</b> (leverage buyout) — odkup z vypůjčených zdrojů (na úvěr). Často přes <b>SPV</b> (Special Purpose Vehicle — speciálně vytvořená společnost, která později splyne s cílovou firmou).",
+        ]} color={VSE.fis} />
+        <Tag color={VSE.success}>IPO + úvěry</Tag>
+        <Bullet items={[
+          "<b>IPO (Initial Public Offering)</b> = vstup na burzu. Pro zavedené a úspěšné firmy → marketing nebo technologická expanze. Primární emise akcií na burze (underwriter zajistí úpis).",
+          "<b>Úvěry</b> (bankovní, mezifiremní, dodavatelský) — nejběžnější forma financování. Fixní řízovací poplatky a úroková sazba. <b>+</b> dostupnost s minimálním halem na zhodnocení. Banka ověřuje bonitu.",
+        ]} color={VSE.success} />
+      </div>) },
+
+    { id: "verejne_recept", title: "🎯 Veřejné financování + recept na komisi", subtitle: "GAČR, TAČR, dotace × daňové úlevy + napojení", color: VSE.fmv, emoji: "target",
+      content: (<div>
+        <Def color={VSE.fmv}>
+          Stát podporuje inovace, protože samotný trh do nich někdy neinvestuje dost (<b>selhání trhu</b> — riziko je moc vysoké pro soukromé investory). Veřejné zdroje vyplňují tuto mezeru.
+        </Def>
+        <Tag color={VSE.fmv}>Účelové a institucionální financování</Tag>
+        <Bullet items={[
+          "<b>Účelové</b> — na předem schválený účel: GAČR (Grantová agentura ČR), TAČR (Technologická agentura), ministerstva.",
+          "<b>Institucionální</b> — ke krytí výzkumných institucí (provoz univerzit, ústavů).",
+        ]} color={VSE.fmv} />
+        <Tag color={VSE.success}>Financování z veřejných zdrojů — proč existuje</Tag>
+        <Bullet items={[
+          "Reaguje na <b>selhání trhu</b>: tržní selhání, systémové selhání (locked problémy, trh nepřijímá inovační řešení), selhání vlády.",
+          "<b>Přímá podpora</b> — dotace, granty. <b>Nepřímá podpora</b> — daňové úlevy.",
+        ]} color={VSE.success} />
+        <ExamAlert komise="napojení na ostatní okruhy" what="📎 <b>Finanční metriky hodnocení (NPV, IRR, PI, PP, EVA)</b> a <b>finanční páka</b> → <b>Finance 4 a Finance 5</b>. <b>Nefinanční metriky inovací</b> (počet patentů, návratnost na R&D) → <b>Inovace 8</b>. Tady jde o ZDROJE peněz, ne o hodnocení projektů." />
+        <Tag color={VSE.warning}>Recept na komisi (30 s)</Tag>
+        <Bullet items={[
+          "<b>1.</b> Princip: každá fáze ŽC firmy = jiný zdroj, čím rizikovější, tím dražší peníze.",
+          "<b>2.</b> Projdi fáze: SEED (FFF, crowdfunding) → START (business angels) → RŮST (VC/PE, mezzanine) → ETABLOVANÁ (buyouts, IPO, banky).",
+          "<b>3.</b> Zdůrazni <b>VC × PE</b> (Svobodová): VC = rané fáze, vyšší riziko; PE = zralé nekotované, nižší riziko.",
+          "<b>4.</b> Napoj na případovku — v jaké fázi je firma z PS a jaký zdroj by jí seděl.",
+        ]} color={VSE.warning} />
+      </div>) },
+  ];
+
+  const praxeInov6 = {
+    caseStudy: {
+      company: "Jak se financuje startup od nápadu po burzu",
+      subtitle: "Cesta penězi podle toho, jak firma roste",
+      content: (<>
+        Představ si tým, co má nápad na appku. Projde celým žebříkem financování, jak roste.<br/><br/>
+        <b>Na začátku (seed)</b> nemá nic než prezentaci. Banka se zasměje, VC fond taky. Tak si půjčí od rodiny a kamarádů (FFF) a spustí kampaň na Hithitu (crowdfunding), aby ověřil, že o produkt vůbec někdo stojí.<br/><br/>
+        <b>Když má první verzi (start)</b>, osloví business angela — bývalého podnikatele, co dá peníze za podíl a k tomu zkušenosti a kontakty.<br/><br/>
+        <b>Když produkt roste a má tržby</b>, přijde venture capital fond — nalije velké peníze do růstu výměnou za majoritní podíl, protože věří, že firma vystřelí. Riziko je pořád vysoké, proto chce výnos 20–30 %.<br/><br/>
+        <b>Když je firma zavedená a zisková</b>, může jít na burzu (IPO), vzít si levný bankovní úvěr, nebo ji odkoupí private equity fond. Riziko je nízké, peníze levné.<br/><br/>
+        Pointa: <b>ve špatné fázi nedostaneš správné peníze</b>. Banka mladému startupu nepůjčí, VC zase nemá zájem o nudnou zralou firmu.
+      </>),
+      lessons: "Financování kopíruje životní cyklus firmy: čím mladší a rizikovější firma, tím dražší a rizikovější zdroj (FFF → business angels → venture capital). Čím zralejší, tím levnější (private equity, IPO, banky). Klíčové je zvolit zdroj odpovídající fázi."
+    },
+    miniExamples: [
+      { company: "VC × PE — past Svobodové", tag: "ROZLIŠIT", color: VSE.danger, content: "Venture capital jde do mladých rizikových firem v začátcích (vysoké riziko, vysoký výnos). Private equity odkupuje zralé nekotované firmy (nižší riziko, optimalizace a prodej). Kdo to splete, u Svobodové neprojde — chce přesný rozdíl." },
+      { company: "Crowdfunding na Hithitu", tag: "SEED", color: VSE.success, content: "Komunitní financování od veřejnosti v omezeném čase. Buď se vybere cílová částka a projekt se spustí, nebo se peníze vrátí přispěvatelům. Zároveň ověří poptávku — když lidi nepřispějí, možná o produkt nestojí." },
+      { company: "LBO a SPV", tag: "BUYOUT", color: VSE.fis, content: "Leverage buyout = odkup firmy na úvěr. Často se k tomu založí SPV (special purpose vehicle) — prázdná společnost, která si vezme dluh, koupí cílovou firmu a pak s ní splyne. Klasická technika private equity." },
+    ]
+  };
+
+  const flashcardsInov6 = [
+    { q: "Hlavní princip financování inovací?", a: "Každá fáze životního cyklu firmy potřebuje jiný typ financování. Čím mladší a rizikovější firma, tím dražší a rizikovější peníze." },
+    { q: "Vlastní × cizí zdroje?", a: "Vlastní = ZK, zisk, fondy, emisní ážio, odpisy (nesplácím). Cizí = úvěry, rezervy, závazky, dary (splácím)." },
+    { q: "Co je fáze SEED?", a: "Firma ještě nevznikla, je tu jen nápad. Financování: FFF, crowdfunding, seed kapitál. Nejrizikovější fáze." },
+    { q: "Co je FFF?", a: "Family, Fools, Friends — rodina, blázni, přátelé. První peníze pro startup, většinou za podíl, velmi rizikové." },
+    { q: "Co je crowdfunding?", a: "Komunitní financování od široké veřejnosti v omezeném čase (hithit.cz). Buď se vybere cílová částka, nebo se peníze vrací." },
+    { q: "Co jsou Business Angels?", a: "Majetní jedinci, kteří poskytují kapitál výměnou za podíl. Přinášejí i know-how a kontakty. Diverzifikují portfolio rizikových investic." },
+    { q: "Co je rizikový kapitál?", a: "Investice do rizikových projektů s výnosností 20–30 %. Firma musí mít plán a produkt, co se prosadil. Investor odkupuje majoritní podíl." },
+    { q: "Venture Capital × Private Equity? (Svobodová)", a: "VC = pro firmy v začátcích, vyšší riziko. PE = menší nekotované zralé podniky, nižší riziko, často odkup většiny." },
+    { q: "Co je mezzanine?", a: "Dluhové financování se zástavním právem — při nesplacení se dluh změní na podíl. Hybridní druh, pro expanzi stávajících firem." },
+    { q: "Co je P2P financování?", a: "Peer to peer — půjčení od lidí přes online tržiště (zonky.cz). Pro malé a střední podniky." },
+    { q: "MBO × MBI × LBO?", a: "MBO = odkup managementem z vlastních zdrojů. MBI = odkup managementem zvenčí. LBO = odkup na úvěr (často přes SPV)." },
+    { q: "Co je IPO?", a: "Initial Public Offering = vstup na burzu. Pro zavedené úspěšné firmy. Primární emise akcií (underwriter zajistí úpis)." },
+    { q: "Účelové × institucionální financování?", a: "Účelové = na schválený účel (GAČR, TAČR, ministerstva). Institucionální = ke krytí výzkumných institucí." },
+    { q: "Přímá × nepřímá veřejná podpora?", a: "Přímá = dotace, granty. Nepřímá = daňové úlevy. Reaguje na selhání trhu (riziko moc vysoké pro soukromé investory)." },
+  ];
+
+  const quizInov6 = [
+    { q: "Hlavní princip financování inovací:", opts: ["Vždy bankovní úvěr", "Každá fáze ŽC firmy potřebuje jiný zdroj", "Jen vlastní zdroje", "Jen dotace"], correct: 1 },
+    { q: "FFF znamená:", opts: ["Fast Funding Firms", "Family, Fools, Friends", "Foreign Finance Fund", "Fixed Financial Flow"], correct: 1 },
+    { q: "Crowdfunding je:", opts: ["Bankovní úvěr", "Komunitní financování od veřejnosti v omezeném čase", "Odkup firmy", "Státní dotace"], correct: 1 },
+    { q: "Business Angels poskytují kapitál:", opts: ["Zdarma", "Výměnou za podíl + přinášejí know-how", "Jako úvěr s úrokem", "Jako dotaci"], correct: 1 },
+    { q: "Rizikový kapitál má odhadovanou výnosnost:", opts: ["2–5 %", "20–30 %", "100 %", "0 %"], correct: 1 },
+    { q: "Venture Capital je pro:", opts: ["Zralé nekotované firmy", "Firmy v začátcích (vyšší riziko)", "Banky", "Stát"], correct: 1 },
+    { q: "Private Equity je pro:", opts: ["Startupy v začátcích", "Menší nekotované zralé podniky (nižší riziko)", "Crowdfunding", "FFF"], correct: 1 },
+    { q: "Mezzanine financování:", opts: ["Je čistě vlastní kapitál", "Dluh se zástavním právem, při nesplacení se mění na podíl", "Je státní dotace", "Je crowdfunding"], correct: 1 },
+    { q: "LBO znamená:", opts: ["Odkup z vlastních zdrojů", "Leverage buyout — odkup na úvěr (často přes SPV)", "Vstup na burzu", "Crowdfunding"], correct: 1 },
+    { q: "IPO je:", opts: ["Odkup managementem", "Vstup na burzu (primární emise akcií)", "Bankovní úvěr", "Dotace"], correct: 1 },
+    { q: "GAČR a TAČR jsou příklady:", opts: ["Bank", "Účelového veřejného financování (granty)", "Venture fondů", "Crowdfundingu"], correct: 1 },
+    { q: "Nepřímá veřejná podpora inovací:", opts: ["Dotace", "Daňové úlevy", "Granty", "Business angels"], correct: 1 },
+  ];
+
+  const examQuestionsInov6 = [
+    { komise: "ZS 2026 — Bočková, Nový, Kolouchová", otazka: "Financování inovací v závislosti na ŽC firmy (FFF, business angels…). Uveďte rozdíl mezi venture capital a private equity.", pozn: "🔴 Fáze ŽC firmy + VC × PE rozdíl. Projít celý žebřík SEED → ETABLOVANÁ a zdůraznit VC (rané, riziko) vs PE (zralé, nižší riziko)." },
+    { komise: "ZS 2025 — Nový, Kolouchová, Svobodová", otazka: "Financování inovací dle fází. (VK, FFF, crowdfunding, business angels, rizikový, P2P, buyouts, banky.)", pozn: "🔴 Svobodová chtěla venture capital a private equity konkrétně. Nestačí vyjmenovat — umět rozlišit VC × PE a zařadit do fází." },
+    { komise: "obecná příprava", otazka: "Zdroje financování inovací — vlastní × cizí, veřejné zdroje.", pozn: "Vlastní (ZK, zisk, odpisy) × cizí (úvěry, dary). Veřejné: GAČR, TAČR, dotace (přímá) × daňové úlevy (nepřímá). Selhání trhu jako důvod státní podpory." },
+  ];
+
+  const podcastInov6 = { title: "Inovace 6 — Financování inovací podle fází ŽC firmy", description: "Zdroje financí (vlastní × cizí). Princip: každá fáze ŽC firmy chce jiný zdroj. SEED (FFF, crowdfunding, seed kapitál), START (business angels), počáteční růst (rizikový kapitál, venture capital × private equity, mezzanine, P2P), etablovaná firma (buyouts MBO/MBI/LBO, IPO, úvěry), veřejné financování (GAČR, TAČR, dotace × daňové úlevy).", audioUrl: null, notebookLmUrl: null };
+
+  const examStrategyInov6 = `
+    <b style="color:#2E8B57">1.</b> Princip: <b>každá fáze ŽC firmy potřebuje jiný zdroj</b> — čím rizikovější, tím dražší peníze.<br/>
+    <b style="color:#2E8B57">2.</b> <b>Zdroje</b>: vlastní (ZK, zisk, odpisy) × cizí (úvěry, dary).<br/>
+    <b style="color:#2E8B57">3.</b> <b>SEED</b>: FFF (Family, Fools, Friends), crowdfunding (hithit), seed kapitál.<br/>
+    <b style="color:#2E8B57">4.</b> <b>START</b>: business angels (kapitál za podíl + know-how).<br/>
+    <b style="color:#2E8B57">5.</b> <b>RŮST</b>: rizikový kapitál (20–30 %), 🔴 <b>VC × PE</b> (Svobodová!): VC = rané/riziko, PE = zralé/nižší riziko. Mezzanine, P2P.<br/>
+    <b style="color:#2E8B57">6.</b> <b>ETABLOVANÁ</b>: buyouts (MBO/MBI/LBO + SPV), IPO (burza), úvěry.<br/>
+    <b style="color:#2E8B57">7.</b> <b>Veřejné</b>: GAČR, TAČR, dotace (přímá) × daňové úlevy (nepřímá). Důvod = selhání trhu.<br/>
+    <b style="color:#2E8B57">8.</b> 📎 Finanční metriky (NPV/IRR/EVA) → Finance 4/5. Nefinanční metriky → Inovace 8. <b>Napoj na případovku</b> (v jaké fázi je firma + jaký zdroj).
+  `;
+
+  const caseStudyInov6 = {
+    title: "Tomáš — zakladatel foodtech startupu FreshBox",
+    subtitle: "Vyber správný zdroj financování pro každou fázi",
+    scenario: "Tomáš (28) zakládá FreshBox — appku na rozvoz čerstvých surovin s recepty. Má jen prototyp a prezentaci, žádné tržby. Potřebuje peníze, ale neví, kam jít.\n\nNejdřív zašel do banky o úvěr 2 miliony. Bankéř se podíval na to, že firma nemá historii ani tržby, a odmítl — banka chce bonitu a zajištění, ne sliby.\n\nKámoš mu poradil oslovit velký venture capital fond. Ten ale řekl, že je na ně moc brzy — VC chodí, až když firma má produkt a roste, ne na pouhý nápad.\n\nTomáš tedy zvažuje: půjčit si od rodiny a spustit kampaň na Hithitu, aby ověřil zájem. Za rok, až bude mít první uživatele, plánuje oslovit business angela. A sní o tom, že jednou půjde FreshBox na burzu. Jen si není jistý, co je v jeho fázi reálné.",
+    signals: [
+      { text: "Má jen prototyp a prezentaci, žádné tržby", color: VSE.danger, reason: "Fáze SEED — firma prakticky nevznikla. Sem patří FFF a crowdfunding, ne banka ani VC." },
+      { text: "Bankéř... odmítl — banka chce bonitu a zajištění, ne sliby", color: VSE.warning, reason: "Správně. Banka je zdroj pro etablované firmy s historií. Startup v seed fázi na úvěr nedosáhne." },
+      { text: "velký venture capital fond... řekl, že je na ně moc brzy", color: VSE.warning, reason: "VC chodí ve fázi růstu (produkt + tržby), ne na seed nápad. Tomáš přeskočil několik fází." },
+      { text: "půjčit si od rodiny a spustit kampaň na Hithitu", color: VSE.success, reason: "Přesně správné pro seed fázi — FFF (rodina) + crowdfunding (ověří i poptávku). Levné a dostupné." },
+      { text: "až bude mít první uživatele, plánuje oslovit business angela", color: VSE.success, reason: "Logický další krok (START fáze) — business angel dá kapitál za podíl + know-how, když už něco běží." },
+    ],
+    quiz1: {
+      question: "Proč Tomáše odmítla banka i VC fond?",
+      options: [
+        "Protože má špatný nápad",
+        "Protože je ve fázi SEED — banka chce zavedené firmy, VC chodí až ve fázi růstu. Žádný neodpovídá jeho fázi",
+        "Protože nemá vysokoškolský titul",
+        "Protože chtěl příliš málo peněz",
+      ],
+      correct: 1,
+    },
+    quiz2: {
+      question: "Jak má Tomáš financovat FreshBox podle fází?",
+      options: [
+        { text: "SEED teď: FFF (rodina) + crowdfunding na Hithitu — ověří i poptávku", correct: true, reason: "✓ Správné pro nejranější fázi. Dostupné a navíc otestuje, jestli o produkt někdo stojí." },
+        { text: "START (za rok s uživateli): business angel — kapitál za podíl + know-how", correct: true, reason: "✓ Logický krok, až bude mít první trakci. Angel přinese i kontakty a zkušenosti." },
+        { text: "RŮST (s tržbami): venture capital fond na škálování", correct: true, reason: "✓ VC dává smysl, až firma roste a má produkt — přesně to, co mu fond řekl." },
+        { text: "Trvat na bankovním úvěru hned teď", correct: false, reason: "✗ Banka chce bonitu a historii. Seed startup na úvěr nedosáhne — špatný zdroj pro tuto fázi." },
+        { text: "IPO (burza) hned po spuštění appky", correct: false, reason: "✗ IPO je pro zavedené úspěšné firmy s historií. Pro seed startup naprosto nereálné." },
+        { text: "Zvolit zdroj podle fáze, ne podle toho, co zní nejlépe", correct: true, reason: "✓ Jádro celého okruhu — financování musí odpovídat fázi životního cyklu firmy." },
+      ],
+    },
+    summary: "<b>Tomáš narazil na základní pravidlo: ve špatné fázi nedostaneš správné peníze.</b> Banka i VC ho odmítly, protože jsou ve fázi SEED — a každá fáze má svůj zdroj.<br/><br/><b>Co Tomáš udělá:</b><br/>• <b>SEED (teď)</b>: FFF (rodina) + crowdfunding na Hithitu — levné, dostupné a ověří poptávku<br/>• <b>START (za rok)</b>: business angel — kapitál za podíl + know-how a kontakty<br/>• <b>RŮST (s tržbami)</b>: venture capital na škálování<br/>• <b>ETABLOVANÁ (sen)</b>: IPO nebo banka, až bude mít historii<br/><br/><b>Pro komisi:</b> Tohle je jádro okruhu — financování kopíruje životní cyklus firmy. Čím mladší a rizikovější, tím dražší zdroj (FFF → angels → VC). Čím zralejší, tím levnější (PE, IPO, banky). A nezapomeň na <b>VC × PE</b> (Svobodová): VC = rané fáze a vyšší riziko, PE = zralé nekotované firmy a nižší riziko. Napoj na případovku — v jaké fázi je firma z PS.",
+  };
+
+  return (
+    <OkruhPanel
+      subject="Inovace" subjectId="inov" number={6} title="Financování inovací podle fází ŽC firmy"
+      subtitle="Zdroje, fáze (SEED → etablovaná), VC × PE, buyouts, IPO, veřejné zdroje"
+      color={VSE.primary}
+      questionText="Financování inovací v závislosti na fázi životního cyklu firmy + rozdíl venture capital a private equity"
+      sloz={2} roz={3} freq={2}
+      studySections={studySectionsInov6}
+      flashcards={flashcardsInov6}
+      quiz={quizInov6}
+      praxe={praxeInov6}
+      examQuestions={examQuestionsInov6}
+      podcast={podcastInov6}
+      examStrategy={examStrategyInov6}
+      caseStudy={caseStudyInov6}
+    />
+  );
+}
+
+
+function OkruhInov7Panel() {
+  const studySectionsInov7 = [
     { id: "co_je_iast", title: "Co je inovační strategie a kdy ji formulujeme", subtitle: "Strategie zaměřená na inovaci jako KV", color: VSE.primary, emoji: "compass",
       content: (<div>
         <Def color={VSE.primary}>
@@ -33070,13 +33292,13 @@ function OkruhInov6Panel() {
 
   return (
     <OkruhPanel
-      subject="Inovace" subjectId="inov" number={6} title="Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)"
+      subject="Inovace" subjectId="inov" number={7} title="Inovační strategie (Ansoff, Mintzberg, Vlček, Pitra, Freeman)"
       subtitle="Inovační strategie — Ansoffova matice (racionalistický) × Mintzberg 5P (gradualistický emergent), Freemanových 6 strategií, Pitrových 5 strategií, Vlčkových 6 dimenzí. Kombinace všech 5 autorů."
       color={VSE.primary}
-      questionText="Inovační strategie — dlouhodobý plán využití inovací pro KV. 5 klíčových autorů: Ansoff (matice produkt × trh, racionalistický), Mintzberg (emergent, 5P), Freeman (6 typů strategie), Pitra (5 strategií), Vlček (6 dimenzí — nejkomplexnější rámec)."
+      questionText="Inovační strategie — 5 autorů: Ansoff, Mintzberg, Freeman, Pitra, Vlček (6 dimenzí)."
       sloz={3} roz={4} freq={3}
       examStrategy={examStrategyInov6}
-      studySections={studySectionsInov6}
+      studySections={studySectionsInov7}
       flashcards={flashcardsInov6}
       quiz={quizInov6}
       praxe={praxeInov6}
@@ -33091,8 +33313,8 @@ function OkruhInov6Panel() {
 /* ════════════════════════════════════════════════════════
    INOVACE 7 — Bariéry inovací + anatomie selhání + metriky
    ════════════════════════════════════════════════════════ */
-function OkruhInov7Panel() {
-  const studySectionsInov7 = [
+function OkruhInov8Panel() {
+  const studySectionsInov8 = [
     { id: "proc_selhavaji", title: "Proč inovace selhávají — Hobcraft × O'Sullivan", subtitle: "Top důvody selhání inovačních projektů", color: VSE.primary, emoji: "scale",
       content: (<div>
         <Def color={VSE.primary}>
@@ -33555,13 +33777,13 @@ function OkruhInov7Panel() {
 
   return (
     <OkruhPanel
-      subject="Inovace" subjectId="inov" number={7} title="Bariéry inovací + anatomie selhání + metriky"
+      subject="Inovace" subjectId="inov" number={8} title="Bariéry inovací + anatomie selhání + metriky"
       subtitle="Hobcraft × O'Sullivan 5 důvodů selhání. 10 interních + 6 externích bariér. 4 typy IP (patent/známka/AP/know-how). Sitkinova 4 kritéria intelligent failure. 4 kategorie metrik (input/process/output/outcome)."
       color={VSE.primary}
-      questionText="Bariéry inovací (vnitřní 10 kategorií + vnější 6) + anatomie selhání (Hobcraft × O'Sullivan, Sitkin intelligent failure, eskalace závazku, blameless postmortems) + ochrana inovací (4 typy IP — patenty/ochranné známky/autorská práva/know-how) + metriky inovací (4 kategorie: input/process/output/outcome). Stručná zmínka NPV/IRR s odkazem na Finance subject."
+      questionText="Bariéry inovací (vnitřní × vnější), anatomie selhání, ochrana inovací (IP), metriky inovací (input/process/output/outcome)."
       sloz={2} roz={3} freq={4}
       examStrategy={examStrategyInov7}
-      studySections={studySectionsInov7}
+      studySections={studySectionsInov8}
       flashcards={flashcardsInov7}
       quiz={quizInov7}
       praxe={praxeInov7}
