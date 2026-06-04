@@ -34805,16 +34805,17 @@ function CheatSheet1() {
 function CheatStyles() {
   return (<style>{`
     @media print {
+      html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
       body * { visibility: hidden !important; }
       .cheatsheet-page, .cheatsheet-page * { visibility: visible !important; }
       .cheatsheet-no-print { display: none !important; }
-      body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
-      .cheatsheet-sheet { width: auto !important; margin: 0 !important; padding: 0 !important; }
-      .cheatsheet-page { box-shadow: none !important; margin: 0 auto !important; width: 210mm !important; min-height: 297mm !important; page-break-after: always; break-after: page; }
+      /* Sheet kontejner: zrušíme centrování/overflow/padding z náhledu, necháme přirozený tok */
+      .cheatsheet-sheet { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; background: #fff !important; overflow: visible !important; }
+      .cheatsheet-page { box-shadow: none !important; border: none !important; border-radius: 0 !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; min-height: auto !important; height: auto !important; padding: 0 !important; page-break-after: always; break-after: page; }
       .cheatsheet-page:last-child { page-break-after: auto; break-after: auto; }
       .cs-grid { grid-template-columns: 1fr 1fr 1fr !important; }
     }
-    @page { size: A4; margin: 0; }
+    @page { size: A4 portrait; margin: 10mm; }
     .cheatsheet-page { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1a1a1a; }
     .cs-headline { color: #A82A5F; font-weight: 800; }
     .cs-subhead { color: #5A2F5F; font-weight: 700; }
