@@ -7207,13 +7207,14 @@ function OkruhContent({ subjectId, okruhN }) {
   const okruh = subject?.okruhy.find(o => o.n === okruhN);
 
   if (!okruh) {
-    if (subjectId === "mng") {
+    if (subjectId === "mng" || subjectId === "str") {
+      const Gallery = subjectId === "mng" ? CheatGallery : StrCheatGallery;
       return (
         <div style={{ flex: 1, overflowY: "auto", background: t.bg, padding: "24px 20px" }}>
           <div style={{ maxWidth: 900, margin: "0 auto 18px", textAlign: "center" }}>
             <BombikEmpty mood="think" size={90} caption="Vyber okruh vlevo — nebo si stáhni cheat sheety" sub="Cheat sheet je jednostránkový tahák na okruh. Měj ho vedle při čtení okruhu." />
           </div>
-          <CheatGallery />
+          <Gallery />
         </div>
       );
     }
@@ -8134,21 +8135,29 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
     { id: "podcast", label: "Podcast", color: VSE.primary, icon: "lightbulb" },
   ];
 
-  const hasCheatSheet = subject === "Management" && typeof MNG_CHEATS !== "undefined" && MNG_CHEATS[number];
+  const cheatMap = subject === "Management" && typeof MNG_CHEATS !== "undefined" ? MNG_CHEATS
+                 : subject === "Strategie" && typeof STR_CHEATS !== "undefined" ? STR_CHEATS
+                 : null;
+  const hasCheatSheet = cheatMap && cheatMap[number];
 
   if (cheatOpen && hasCheatSheet) {
-    const CheatBody = number === 1 ? CheatSheet1Body : MNG_CHEATS[number].comp;
+    const CheatBody = (subject === "Management" && number === 1) ? CheatSheet1Body : cheatMap[number].comp;
+    const accentCol = subject === "Strategie" ? "#7C4DFF" : "#A82A5F";
     return (
       <div style={{ flex: 1, overflowY: "auto", height: "calc(100vh - 105px)", background: "#f5f5f5" }}>
         <CheatStyles />
         <div className="cheatsheet-no-print" style={{ position: "sticky", top: 0, zIndex: 10, background: "#fff", borderBottom: "1px solid #ddd", padding: "12px 20px", display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ fontSize: 15.5, fontWeight: 600, color: "#333" }}>📄 Cheat sheet — {subject} okruh {number}</div>
           <div style={{ display: "flex", gap: 8 }}>
-            <button onClick={() => window.print()} style={{ padding: "8px 16px", borderRadius: 8, border: "none", background: "#A82A5F", color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>🖨️ Tisk / PDF</button>
+            <button onClick={() => window.print()} style={{ padding: "8px 16px", borderRadius: 8, border: "none", background: accentCol, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>🖨️ Tisk / PDF</button>
             <button onClick={() => setCheatOpen(false)} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět do okruhu</button>
           </div>
         </div>
-        <CheatBody />
+        <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 160px)" }}>
+          <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+            <CheatBody />
+          </div>
+        </div>
       </div>
     );
   }
@@ -8171,7 +8180,7 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
                 cursor: "pointer", fontSize: 14, fontWeight: 600, fontFamily: fontSans,
                 whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: 6,
               }}>
-                <Icon name="file" size={12} color={t.text} />
+                <Icon name="scroll" size={13} color={t.text} />
                 Cheat sheet
               </button>
             )}
@@ -34545,10 +34554,11 @@ function WatchToggleButton({ subjectId, okruhN, sectionId, sectionTitle, subject
 function CheatSheet1Body() {
   return (
         <div className="cheatsheet-page" style={{
-          width: "210mm", minHeight: "297mm", padding: "10mm 12mm",
-          margin: "20px auto", background: "#fff",
-          boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-          boxSizing: "border-box", fontSize: 11.5, lineHeight: 1.45,
+          width: "100%", maxWidth: "190mm", padding: "8px 12px 10px",
+          margin: "0 auto 14px", background: "#fff",
+          border: "1px solid #A82A5F33", borderRadius: 8,
+          boxShadow: "0 1px 6px rgba(0,0,0,0.08)",
+          boxSizing: "border-box", fontSize: 10.5, lineHeight: 1.4,
         }}>
           {/* Header */}
           <div style={{ borderBottom: "2px solid #A82A5F", paddingBottom: 6, marginBottom: 10 }}>
@@ -34796,19 +34806,21 @@ function CheatSheet1() {
 function CheatStyles() {
   return (<style>{`
     @media print {
-      body { margin: 0; padding: 0; }
+      body * { visibility: hidden !important; }
+      .cheatsheet-page, .cheatsheet-page * { visibility: visible !important; }
       .cheatsheet-no-print { display: none !important; }
-      .cheatsheet-page { box-shadow: none !important; margin: 0 !important; page-break-after: always; width: 210mm !important; min-height: 297mm !important; }
-      .cs-grid { grid-template-columns: 1fr 1fr 1fr !important; }
+      body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
+      .cheatsheet-sheet { width: 190mm !important; margin: 0 auto !important; padding: 0 !important; }
+      .cheatsheet-page { box-shadow: none !important; margin: 0 0 6mm 0 !important; width: 100% !important; break-inside: avoid !important; page-break-inside: avoid !important; }
     }
+    @page { size: A4; margin: 8mm; }
     .cheatsheet-page { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1a1a1a; }
     .cs-headline { color: #A82A5F; font-weight: 800; }
     .cs-subhead { color: #5A2F5F; font-weight: 700; }
     .cs-tag { color: #5FA4CA; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
     .cs-warn { color: #E06D1E; font-weight: 700; }
-    /* Náhled na obrazovce: stránka se vejde do šířky, 3 sloupce zůstanou na širokém, na úzkém padají. Tisk vždy A4 + 3 sloupce. */
+    /* Náhled na obrazovce: bloky se vejdou do šířky, na úzkém 1 sloupec. */
     @media screen and (max-width: 880px) {
-      .cheatsheet-page { width: 100% !important; min-height: 0 !important; padding: 16px !important; }
       .cs-grid { grid-template-columns: 1fr !important; }
     }
   `}</style>);
@@ -34846,28 +34858,26 @@ function CNote({ children }) {
 }
 
 // Obal celé A4 stránky cheatu
-function CheatPage({ okruh, title, subtitle, children, examBar }) {
+function CheatPage({ okruh, title, subtitle, children, examBar, accent = "#A82A5F", accentBg = "#fff5f8", subjectLabel = "Management" }) {
   return (
     <div className="cheatsheet-page" style={{
-      width: "210mm", minHeight: "297mm", padding: "10mm 12mm",
-      margin: "20px auto", background: "#fff",
-      boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-      boxSizing: "border-box", fontSize: 11.5, lineHeight: 1.45,
+      width: "100%", maxWidth: "190mm", padding: "8px 12px 10px",
+      margin: "0 auto 14px", background: "#fff",
+      border: `1px solid ${accent}33`, borderRadius: 8,
+      boxShadow: "0 1px 6px rgba(0,0,0,0.08)",
+      boxSizing: "border-box", fontSize: 10.5, lineHeight: 1.4,
     }}>
-      <div style={{ borderBottom: "2px solid #A82A5F", paddingBottom: 6, marginBottom: 10 }}>
+      <div style={{ borderBottom: `2px solid ${accent}`, paddingBottom: 4, marginBottom: 7 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-          <h1 style={{ margin: 0, fontSize: 18, color: "#A82A5F", fontWeight: 800 }}>OKRUH {okruh} — {title}</h1>
-          <span style={{ fontSize: 11, color: "#888", fontFamily: "JetBrains Mono, monospace" }}>nabombuj.cz</span>
+          <h1 style={{ margin: 0, fontSize: 15, color: accent, fontWeight: 800 }}>OKRUH {okruh} — {title}</h1>
+          <span style={{ fontSize: 9.5, color: "#888", fontFamily: "JetBrains Mono, monospace" }}>nabombuj.cz · {subjectLabel}</span>
         </div>
-        <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>{subtitle}</div>
+        <div style={{ fontSize: 10.5, color: "#666", marginTop: 1 }}>{subtitle}</div>
       </div>
-      <div className="cs-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>{children}</div>
-      <div style={{ marginTop: 10, padding: "6px 10px", border: "1.5px solid #A82A5F", borderRadius: 4, background: "#fff5f8" }}>
-        <div className="cs-warn" style={{ fontSize: 11, marginBottom: 3, letterSpacing: 1 }}>⚠️ NA ZKOUŠCE</div>
-        <div style={{ fontSize: 10.5, lineHeight: 1.5 }}>{examBar}</div>
-      </div>
-      <div style={{ marginTop: 8, fontSize: 9.5, color: "#888", textAlign: "center", borderTop: "1px solid #eee", paddingTop: 4 }}>
-        Nabombuj · Příprava na státnice VŠE · Cheat sheet — asistent při učení, ne náhrada okruhu
+      <div className="cs-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 7 }}>{children}</div>
+      <div style={{ marginTop: 7, padding: "5px 9px", border: `1.5px solid ${accent}`, borderRadius: 4, background: accentBg }}>
+        <div className="cs-warn" style={{ fontSize: 10, marginBottom: 2, letterSpacing: 1 }}>⚠️ NA ZKOUŠCE</div>
+        <div style={{ fontSize: 9.8, lineHeight: 1.45 }}>{examBar}</div>
       </div>
     </div>
   );
@@ -35085,6 +35095,13 @@ function CheatSheetMng6() {
         <div style={{ marginTop: 3 }}><span style={{ background: "#fff8e1", padding: "1px 4px", borderRadius: 3, fontSize: 9.6 }}>TVRDÉ: Strategy · Structure · Systems</span></div>
         <div style={{ marginTop: 3 }}><span style={{ background: "#e1f5e1", padding: "1px 4px", borderRadius: 3, fontSize: 9.6 }}>MĚKKÉ: Skills · Staff · Style · Shared values</span></div>
         <CNote><b>Shared values</b> = uprostřed, propojuje všechno. Změna jednoho S ovlivní ostatní.</CNote>
+        <CT>SCHEIN — KULTURA (ledovec)</CT>
+        <div style={{ fontSize: 10 }}>3 vrstvy organizační kultury:</div>
+        <ul style={{ margin: "2px 0 0", paddingLeft: 13, fontSize: 9.6 }}>
+          <li><b>Artefakty</b> — viditelné (logo, dress code, rituály)</li>
+          <li><b>Hodnoty</b> — deklarované normy a postoje</li>
+          <li><b>Předpoklady</b> — neuvědomované, nejhlubší (špička × ponořená část ledovce)</li>
+        </ul>
       </CCol>
     </CheatPage>
   );
@@ -35109,7 +35126,9 @@ function CheatSheetMng7() {
         <CT0>MBO + KPI</CT0>
         <div style={{ fontSize: 10.5 }}><b>MBO</b> stanoví cíle, <b>KPI</b> (Key Performance Indicators) je měří. Hierarchie: firemní cíle → týmové → individuální KPI. KPI musí být SMART.</div>
         <CT>NPS + SIX SIGMA</CT>
-        <div style={{ fontSize: 10.5 }}><b>NPS</b> (Net Promoter Score) — měří loajalitu zákazníků (doporučil bys? 0–10). <b>Six Sigma</b> — metoda snižování chyb a variability procesů (DMAIC).</div>
+        <div style={{ fontSize: 10.3 }}><b>NPS</b> (Net Promoter Score) — měří loajalitu (doporučil bys? 0–10): promoteři − detraktoři. <b>Six Sigma</b> — snižování chyb přes cyklus <b>DMAIC</b>: Define → Measure → Analyze → Improve → Control.</div>
+        <CT>SMART CÍLE</CT>
+        <div style={{ fontSize: 10 }}>KPI musí být <b>S</b>pecific, <b>M</b>easurable, <b>A</b>chievable, <b>R</b>elevant, <b>T</b>ime-bound. MBO kaskáda: firemní cíl → týmový → individuální.</div>
       </CCol>
       <CCol>
         <CT0>BSC — BALANCED SCORECARD</CT0>
@@ -35144,7 +35163,7 @@ function CheatSheetMng8() {
         </ol>
         <CNote>Vhodný pro <b>jednodušší, jasně definované</b> změny ve stabilním prostředí.</CNote>
         <CT>TEORIE U (Scharmer)</CT>
-        <div style={{ fontSize: 10.5 }}>Hlubší změna přes <b>cestu dolů a nahoru U</b>: vnímat → ztišit se (presencing) → jednat z budoucnosti. Cíl: odbourat staré vzorce myšlení.</div>
+        <div style={{ fontSize: 10 }}>Hlubší změna přes cestu dolů a nahoru U: vnímat → ztišit se (presencing) → jednat z budoucnosti. <b>4 úrovně naslouchání:</b> stahování (downloading) → faktické → empatické → generativní.</div>
       </CCol>
       <CCol>
         <CT0>KOTTER — 8 KROKŮ</CT0>
@@ -35286,6 +35305,8 @@ function CheatSheetMng11() {
         <CNote>Posun: filantropie (CSR) → byznys (CSV) → měření a regulace (ESG).</CNote>
         <CT>UDRŽITELNÝ MANAGEMENT</CT>
         <div style={{ fontSize: 10.2 }}>Uspokojit dnešní potřeby, aniž ohrozíme budoucí generace. Dlouhodobá perspektiva nad krátkodobým ziskem.</div>
+        <CT>HOFSTEDE — kult. dimenze</CT>
+        <div style={{ fontSize: 9.8 }}>Etika v mezinár. firmě se liší dle kultury: vzdálenost moci, individualismus × kolektivismus, maskulinita × feminita, vyhýbání nejistotě, dlouhodobá orientace.</div>
       </CCol>
     </CheatPage>
   );
@@ -35325,7 +35346,11 @@ function CheatViewer({ okruh, onBack }) {
           <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
         </div>
       </div>
-      {okruh === 1 ? <CheatSheet1Body /> : <Comp />}
+      <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+        <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+          {okruh === 1 ? <CheatSheet1Body /> : <Comp />}
+        </div>
+      </div>
     </>
   );
 }
@@ -35345,10 +35370,14 @@ function CheatViewerAll({ onBack }) {
           <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
         </div>
       </div>
-      {Object.keys(MNG_CHEATS).map((k) => {
-        const Comp = MNG_CHEATS[k].comp;
-        return <div key={k}>{Number(k) === 1 ? <CheatSheet1Body /> : <Comp />}</div>;
-      })}
+      <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+        <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+          {Object.keys(MNG_CHEATS).map((k) => {
+            const Comp = MNG_CHEATS[k].comp;
+            return <div key={k}>{Number(k) === 1 ? <CheatSheet1Body /> : <Comp />}</div>;
+          })}
+        </div>
+      </div>
     </>
   );
 }
@@ -35378,6 +35407,562 @@ function CheatGallery() {
           }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: "#A82A5F", fontFamily: "JetBrains Mono, monospace" }}>OKRUH {k}</div>
             <div style={{ fontSize: 13.5, fontWeight: 600, color: "var(--text)", lineHeight: 1.3 }}>{MNG_CHEATS[k].title}</div>
+            <div style={{ fontSize: 11.5, color: "var(--text-muted)", marginTop: 2 }}>📄 1 strana · otevřít / tisknout</div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+/* ════════════════════════════════════════════════════════
+   CHEAT SHEETS — Strategie (okruhy 1–10)
+   Accent: fialová #7C4DFF. Stejné helpery jako Management.
+   ════════════════════════════════════════════════════════ */
+
+const STR_ACCENT = "#7C4DFF";
+const STR_ACCENT_BG = "#f3efff";
+
+function SP(props) {
+  return <CheatPage {...props} accent={STR_ACCENT} accentBg={STR_ACCENT_BG} subjectLabel="Strategie" />;
+}
+
+/* ─────────── STR 1 — Strategie + strategické uvažování ─────────── */
+function CheatSheetStr1() {
+  return (
+    <SP okruh={1} title="Strategie + strategické uvažování"
+      subtitle="3 patra strategie · logika × intuice · strategické paradoxy · 4 kroky tvorby strategie"
+      examBar={<>
+        <b>Obecně</b> — <i>co je strategie, strategické × operativní myšlení, paradoxy jako kostra předmětu</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> rozliš 3 patra (corporate/business/funkční), ukaž strategické myšlení (cíl, čas, souvislosti) a pojmenuj relevantní paradox z případovky.
+      </>}>
+      <CCol>
+        <CT0>CO JE STRATEGIE</CT0>
+        <CD term="Strategie">Dlouhodobé směřování firmy a cesta, jak ho dosáhnout. Ne plán na příští týden — směr na roky.</CD>
+        <CT>3 PATRA STRATEGIE</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Corporate</b> (celofiremní) — v jakých byznysech být</li>
+          <li><b>Business</b> (konkurenční) — jak vyhrát v daném odvětví</li>
+          <li><b>Funkční</b> (provozní) — jak to provést v marketingu, výrobě…</li>
+        </ul>
+        <CT>STRATEGICKÝ × OPERATIVNÍ</CT>
+        <div style={{ fontSize: 10.5 }}>Nejčastější chyba manažera: řeší operativu (úkoly dneška) místo strategie (směr a cíl). Strateg myslí cílem, ne úkolem.</div>
+      </CCol>
+      <CCol>
+        <CT0>LOGIKA × INTUICE</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.8 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#f3efff" }}><b>Logika (věda)</b><br /><span style={{ fontSize: 9.3 }}>analýzy, data, frameworky, fakta</span></td>
+          <td style={{ padding: 3, border: "1px solid #ddd", background: "#fff0e1" }}><b>Intuice (umění)</b><br /><span style={{ fontSize: 9.3 }}>cit, zkušenost, vize — NE hádání</span></td></tr>
+        </tbody></table>
+        <CNote>Strategie = <b>obojí</b>. Analýza dá podklad, intuice rozhodne, kam s nejasností.</CNote>
+        <CT>5 ZNAKŮ STRAT. MYŠLENÍ</CT>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.2 }}>
+          <li>Myslí cílem, ne úkolem</li>
+          <li>Vidí v čase (dlouhodobě)</li>
+          <li>Umí využít příležitost</li>
+          <li>Vidí souvislosti</li>
+          <li>Přijímá nejistotu</li>
+        </ol>
+      </CCol>
+      <CCol>
+        <CT0>STRATEGICKÉ PARADOXY</CT0>
+        <div style={{ fontSize: 10.5 }}>Paradox = dvě věci proti sobě, ale <b>obě platí</b>. Strategie není „buď-anebo", ale jak je skloubit (embracing). Paradoxy = kostra celého předmětu:</div>
+        <ul style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 10 }}>
+          <li>Tržní × Zdrojový (Str3/4)</li>
+          <li>Konkurence × Kooperace (Str5)</li>
+          <li>Integrace × Samostatnost (Str6)</li>
+          <li>Plánování × Emergence (Str7)</li>
+          <li>Evoluce × Revoluce (Str8)</li>
+          <li>Exploitace × Explorace (Str9)</li>
+          <li>Globální × Lokální (Str10)</li>
+        </ul>
+        <CT>4 KROKY TVORBY STRATEGIE</CT>
+        <div style={{ fontSize: 10.2 }}>1. Analýza → 2. Formulace → 3. Implementace → 4. Kontrola. Opakuje se. Chyba = přeskočit analýzu.</div>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── STR 2 — Zisk × společenská odpovědnost ─────────── */
+function CheatSheetStr2() {
+  return (
+    <SP okruh={2} title="Zisk × společenská odpovědnost"
+      subtitle="vize × mise · Carrollova pyramida · Friedman × Freeman · CSR × CSV · stakeholdeři (Mendelow)"
+      examBar={<>
+        <b>Obecně</b> — <i>CSR/CSV, stakeholdeři, zisk × odpovědnost, etické dilema</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> ukaž paradox Friedman × Freeman, zařaď firmu na Carrollovu pyramidu, rozliš CSR (reakce) × CSV (součást strategie), zmapuj stakeholdery Mendelowem.
+      </>}>
+      <CCol>
+        <CT0>VIZE × MISE</CT0>
+        <div style={{ fontSize: 10.5 }}><b>Vize</b> = kam firma chce jít (budoucnost). <b>Mise</b> = proč existuje (smysl). Dohromady = kompas firmy.</div>
+        <CT>FRIEDMAN × FREEMAN</CT>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.6 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#f3efff" }}><b>Friedman (1970)</b><br /><span style={{ fontSize: 9.2 }}>firma existuje pro vlastníky — maximalizace zisku</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Freeman (1984)</b><br /><span style={{ fontSize: 9.2 }}>firma existuje pro všechny dotčené — stakeholdery</span></td></tr>
+        </tbody></table>
+        <CNote>Klíčový paradox: pro koho firma existuje? Moderní pohled = embracing (zisk i odpovědnost).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>CARROLLOVA PYRAMIDA (1991)</CT0>
+        <div style={{ fontSize: 10.5 }}>Odpovědnost firmy ve 4 patrech zdola:</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 3, marginTop: 4 }}>
+          <div style={{ background: "#7C4DFF", color: "#fff", padding: "3px 7px", borderRadius: 3, fontSize: 10 }}><b>4. Filantropická</b> — přispívat</div>
+          <div style={{ background: "#9b6dff", color: "#fff", padding: "3px 7px", borderRadius: 3, fontSize: 10 }}><b>3. Etická</b> — být fér</div>
+          <div style={{ background: "#b89bff", color: "#fff", padding: "3px 7px", borderRadius: 3, fontSize: 10 }}><b>2. Legální</b> — dodržovat zákony</div>
+          <div style={{ background: "#d6c7ff", color: "#1a1a1a", padding: "3px 7px", borderRadius: 3, fontSize: 10 }}><b>1. Ekonomická</b> — být ziskový (základ)</div>
+        </div>
+        <CT>ETICKÉ DILEMA</CT>
+        <div style={{ fontSize: 10.2 }}>Absolutní etika (platí všude stejně) × relativní (záleží na kultuře/situaci).</div>
+      </CCol>
+      <CCol>
+        <CT0>CSR × CSV</CT0>
+        <div style={{ fontSize: 10.5 }}><b>CSR</b> = odpovědnost jako <b>reakce</b>, oddělená od byznysu (filantropie, dárky). <b>CSV</b> (Porter, shared value) = odpovědnost je <b>součást strategie</b>, vytváří hodnotu pro firmu i společnost.</div>
+        <CT>STAKEHOLDEŘI — MENDELOW</CT>
+        <div style={{ fontSize: 10.2 }}>Matice <b>moc × zájem</b>:</div>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.2, marginTop: 3 }}><tbody>
+          <tr><CBox bg="#fff0e1" title="Vysoká moc, nízký zájem" sub="udržuj spokojené" /><CBox bg="#e1f5e1" title="Vysoká moc, vysoký zájem" sub="řiď zblízka (klíčoví)" /></tr>
+          <tr><CBox bg="#f5f5f5" title="Nízká moc, nízký zájem" sub="minimální úsilí" /><CBox bg="#e1f0fa" title="Nízká moc, vysoký zájem" sub="informuj" /></tr>
+        </tbody></table>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── STR 3 — Tržní přístup (PESTLE + Porter) ─────────── */
+function CheatSheetStr3() {
+  return (
+    <SP okruh={3} title="Tržní přístup volby strategie"
+      subtitle="outside-in PULL · PESTLE (makro) · Porter 5 sil (mikro) · Kotler pozice · benchmark"
+      examBar={<>
+        <b>Obecně</b> — <i>PESTLE, Porter 5 sil, analýza konkurence, aplikace na PS</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> tržní přístup = outside-in (trh určuje strategii), udělej PESTLE (makro) + Porter 5 sil (mikro), zařaď konkurenční pozici a propoj se zdrojovým přístupem (Str4).
+      </>}>
+      <CCol>
+        <CT0>TRŽNÍ PŘÍSTUP (MBV)</CT0>
+        <CD term="Market-Based View">Strategie se odvíjí od <b>vnějšího prostředí</b> — trh a příležitosti určují, co firma má dělat. Filosofie <b>OUTSIDE-IN / PULL</b> (trh táhne).</CD>
+        <CNote>Paradox: Tržní (trh, Str3) × Zdrojový (zdroje, Str4). Komise chytá 6×!</CNote>
+        <CT>KOTLER — 4 POZICE</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.2 }}>
+          <li><b>Leader</b> (40 %+) — brání pozici</li>
+          <li><b>Challenger</b> (20–40 %) — útočí na lídra</li>
+          <li><b>Follower</b> (10–20 %) — napodobuje</li>
+          <li><b>Nicher</b> (1–10 %) — úzký segment</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>PESTLE — MAKROPROSTŘEDÍ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.3 }}>
+          <li><b>P</b> — Politické</li>
+          <li><b>E</b> — Ekonomické</li>
+          <li><b>S</b> — Sociální</li>
+          <li><b>T</b> — Technologické</li>
+          <li><b>L</b> — Legislativní</li>
+          <li><b>E</b> — Environmentální</li>
+        </ul>
+        <CNote>6 vnějších faktorů, které firma <b>nekontroluje</b>, ale musí na ně reagovat.</CNote>
+        <CT>TYP ODVĚTVÍ</CT>
+        <div style={{ fontSize: 10.2 }}>Cyklické (auta, stavebnictví) × anti-cyklické (základní potraviny) × neutrální.</div>
+      </CCol>
+      <CCol>
+        <CT0>PORTER — 5 SIL (1979)</CT0>
+        <div style={{ fontSize: 10.3 }}>Intenzita konkurence v odvětví:</div>
+        <ol style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 10.2 }}>
+          <li><b>Rivalita</b> mezi stávajícími</li>
+          <li><b>Hrozba nových</b> vstupů</li>
+          <li><b>Hrozba substitutů</b></li>
+          <li><b>Síla dodavatelů</b></li>
+          <li><b>Síla odběratelů</b></li>
+        </ol>
+        <CNote>Čím silnější síly, tím nižší ziskovost odvětví. Cíl = najít pozici, kde jsou síly slabé.</CNote>
+        <CT>BENCHMARK</CT>
+        <div style={{ fontSize: 10.2 }}>Porovnání s konkurencí / nejlepšími — kde firma zaostává a kde vede.</div>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── STR 4 — Zdrojový přístup (VRIO + SWOT) ─────────── */
+function CheatSheetStr4() {
+  return (
+    <SP okruh={4} title="Zdrojový přístup volby strategie"
+      subtitle="inside-out PUSH · VRIO/VRIN (Barney) · hodnotový řetězec (Porter) · SWOT · Tržní × Zdrojový paradox"
+      examBar={<>
+        <b>Obecně</b> — <i>VRIO, hodnotový řetězec, SWOT, Tržní × Zdrojový paradox (6× chytaný!)</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> zdrojový přístup = inside-out (zdroje firmy určují strategii), otestuj zdroj přes VRIO, udělej SWOT a ukaž embracing s tržním přístupem (Str3).
+      </>}>
+      <CCol>
+        <CT0>ZDROJOVÝ PŘÍSTUP (RBV)</CT0>
+        <CD term="Resource-Based View">Strategie se odvíjí od <b>vnitřních zdrojů</b> firmy (co umím nejlíp). Filosofie <b>INSIDE-OUT / PUSH</b> (zdroje tlačí).</CD>
+        <CT>VRIO (Barney 1991)</CT>
+        <div style={{ fontSize: 10.3 }}>4 testy, jestli je zdroj zdrojem KV:</div>
+        <ul style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 10.2 }}>
+          <li><b>V</b>aluable — cenný?</li>
+          <li><b>R</b>are — vzácný?</li>
+          <li><b>I</b>nimitable — nenapodobitelný?</li>
+          <li><b>O</b>rganized — umí ho firma využít?</li>
+        </ul>
+        <CNote>Všechny 4 ✓ = trvalá KV. VRIN = původní verze (poslední kritérium Non-substitutable).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>HODNOTOVÝ ŘETĚZEC (Porter 1985)</CT0>
+        <div style={{ fontSize: 10.2 }}><b>5 primárních</b> (přímá tvorba hodnoty):</div>
+        <div style={{ fontSize: 9.8 }}>vstupní logistika → výroba → výstupní logistika → marketing &amp; sales → servis</div>
+        <div style={{ fontSize: 10.2, marginTop: 3 }}><b>4 podpůrné</b>: infrastruktura, HR, technologie, nákup.</div>
+        <CNote>Cíl: najít, kde firma tvoří hodnotu a kde má rezervy / KV.</CNote>
+        <CT>SPACE / BENCHMARK</CT>
+        <div style={{ fontSize: 10.2 }}>SPACE matice — strategická pozice. Benchmarking — interní / konkurenční / funkční.</div>
+      </CCol>
+      <CCol>
+        <CT0>SWOT</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.4 }}><tbody>
+          <tr><CBox bg="#e1f5e1" title="S — Strengths" sub="vnitřní +" /><CBox bg="#fbecea" title="W — Weaknesses" sub="vnitřní −" /></tr>
+          <tr><CBox bg="#e1f0fa" title="O — Opportunities" sub="vnější +" /><CBox bg="#fff0e1" title="T — Threats" sub="vnější −" /></tr>
+        </tbody></table>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}><b>4 strategie:</b> SO (využij), WO (zlepši), ST (braň se), WT (vyhni se).</div>
+        <CT>TRŽNÍ × ZDROJOVÝ</CT>
+        <div style={{ fontSize: 10.2 }}>Klíčový paradox. <b>Embracing</b> = kombinuj obojí: trh (kam) + zdroje (čím). PESTLE+Porter+VRIO+SWOT = kompletní toolkit.</div>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── STR 5 — Konkurenční strategie + Konkurence × Kooperace ─────────── */
+function CheatSheetStr5() {
+  return (
+    <SP okruh={5} title="Konkurenční strategie + Konkurence × Kooperace"
+      subtitle="Porter generické (3 cesty KV) · Bowman hodiny · pyramida KV (Treacy-Wiersema) · aliance · paradox"
+      examBar={<>
+        <b>Obecně</b> — <i>Porterovy generické strategie, kooperace × konkurence, aliance, aplikace na PS</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> urči generickou strategii (náklady / diferenciace / focus), ukaž paradox konkurence × kooperace a navrhni typ aliance, pokud dává smysl.
+      </>}>
+      <CCol>
+        <CT0>PORTER — 3 GENERICKÉ STRATEGIE</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.3 }}>
+          <li><b>Vedení v nákladech</b> — být nejlevnější (Lidl, Ryanair)</li>
+          <li><b>Diferenciace</b> — být unikátní (Apple)</li>
+          <li><b>Focus</b> — úzký segment (náklady i diferenciace)</li>
+        </ol>
+        <CNote>Pozor: <b>uvíznutí uprostřed</b> (stuck in the middle) = ani levný, ani unikátní = prohra.</CNote>
+        <CT>KONKURENCE × KOOPERACE</CT>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.5 }}><tbody>
+          <tr><CBox bg="#fbecea" title="Konkurence" sub="Win-Lose, soupeření" /><CBox bg="#e1f5e1" title="Kooperace" sub="Win-Win, aliance" /></tr>
+        </tbody></table>
+      </CCol>
+      <CCol>
+        <CT0>BOWMAN — STRATEGICKÉ HODINY</CT0>
+        <div style={{ fontSize: 10.3 }}>8 pozic na ose <b>cena × vnímaná hodnota</b>. Alternativa k Porterovi, jemnější.</div>
+        <CNote>Úspěšné: nízká cena+hodnota, hybrid, diferenciace. Neudržitelné: vysoká cena + nízká hodnota = odchod zákazníků.</CNote>
+        <CT>PYRAMIDA KV (Treacy-Wiersema)</CT>
+        <ul style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 10.2 }}>
+          <li><b>Provozní dokonalost</b> — levně a spolehlivě</li>
+          <li><b>Vztah se zákazníkem</b> — řešení na míru</li>
+          <li><b>Produktové vůdcovství</b> — nejlepší produkt</li>
+        </ul>
+        <CNote>Princip: <b>exceluj v 1</b>, buď OK ve zbylých 2. Nelze být nejlepší ve všem.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>ALIANCE / KOOPERACE</CT0>
+        <div style={{ fontSize: 10.3 }}>Kdy kooperovat: doplnění zdrojů, sdílení rizika, přístup na trh, společný standard.</div>
+        <CT>DISCRETE × EMBEDDED</CT>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.4 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fff0e1" }}><b>Discrete</b><br /><span style={{ fontSize: 9.1 }}>volný, transakční vztah, krátkodobý</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Embedded</b><br /><span style={{ fontSize: 9.1 }}>hluboké propojení, důvěra, dlouhodobý</span></td></tr>
+        </tbody></table>
+        <CT>ŘEŠENÍ PARADOXU</CT>
+        <div style={{ fontSize: 10 }}>Navigating (přepínat) · Parallel (oboje naráz) · Juxtaposing (koexistence). Pojem: <b>co-opetition</b> — soupeř i partner zároveň.</div>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── STR 6 — SBU + portfolio + Integrace × Samostatnost ─────────── */
+function CheatSheetStr6() {
+  return (
+    <SP okruh={6} title="SBU + portfolio + Integrace × Samostatnost"
+      subtitle="SBU + životní cyklus · Ansoffova matice · BCG matice · GE matice · typy integrace · paradox"
+      examBar={<>
+        <b>Obecně</b> — <i>portfolio matice (BCG, GE), Ansoff, SBU, integrace × diverzifikace</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> zařaď SBU do BCG/GE matice, urči růstovou strategii Ansoffem a ukaž paradox integrace (synergie) × samostatnost (flexibilita).
+      </>}>
+      <CCol>
+        <CT0>SBU + INTEGRACE × SAMOSTATNOST</CT0>
+        <CD term="SBU">Strategic Business Unit — samostatně řízená podnikatelská jednotka s vlastním trhem a konkurencí.</CD>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.5 }}><tbody>
+          <tr><CBox bg="#e1f0fa" title="Samostatnost" sub="flexibilita, rychlost" /><CBox bg="#e1f5e1" title="Integrace" sub="synergie, úspory" /></tr>
+        </tbody></table>
+        <CT>ŽIVOTNÍ CYKLUS SBU</CT>
+        <div style={{ fontSize: 10.2 }}>Vznik → Růst → Stabilizace → Pokles. Každá fáze = jiná strategie a cash flow.</div>
+        <CT>3 TYPY EXPANZE</CT>
+        <div style={{ fontSize: 10.2 }}>Horizontální (stejná úroveň) · Vertikální (dodavatel/odběratel) · Konglomerátní (nesouvisející obory).</div>
+      </CCol>
+      <CCol>
+        <CT0>ANSOFFOVA MATICE (růst)</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.3 }}><tbody>
+          <tr><CBox bg="#e1f5e1" title="Penetrace" sub="stávající produkt × stávající trh" /><CBox bg="#e1f0fa" title="Rozvoj produktu" sub="nový produkt × stávající trh" /></tr>
+          <tr><CBox bg="#fff0e1" title="Rozvoj trhu" sub="stávající produkt × nový trh" /><CBox bg="#fbecea" title="Diverzifikace" sub="nový produkt × nový trh (nejrizik.)" /></tr>
+        </tbody></table>
+        <CNote>Osy: produkt (stávající × nový) × trh (stávající × nový). Riziko roste k diverzifikaci.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>BCG MATICE (portfolio)</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.2 }}><tbody>
+          <tr><CBox bg="#fff0e1" title="❓ Otazníky" sub="vysoký růst, nízký podíl — investovat/zrušit" /><CBox bg="#fff8e1" title="⭐ Hvězdy" sub="vysoký růst, vysoký podíl — investovat" /></tr>
+          <tr><CBox bg="#fbecea" title="🐕 Psi" sub="nízký růst, nízký podíl — utlumit" /><CBox bg="#e1f5e1" title="🐄 Dojné krávy" sub="nízký růst, vysoký podíl — dojit" /></tr>
+        </tbody></table>
+        <CNote>Cash flow: krávy financují otazníky → z těch hvězdy → z hvězd krávy.</CNote>
+        <CT>GE MATICE (3×3)</CT>
+        <div style={{ fontSize: 10 }}>Atraktivita trhu × konkurenční síla. 3 zóny: investovat (zelená) · selektivně (žlutá) · sklidit/odejít (červená). Jemnější než BCG.</div>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── STR 7 — Proces strategie + Mintzberg 5P ─────────── */
+function CheatSheetStr7() {
+  return (
+    <SP okruh={7} title="Proces strategie + Mintzberg 5P"
+      subtitle="top-down × bottom-up · Plánování × Emergence (Mintzberg) · 5P · Balanced Scorecard · učící se org."
+      examBar={<>
+        <b>Obecně</b> — <i>Mintzberg 5P, plánování × emergence, proces tvorby strategie, BSC</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> ukaž paradox plánování (záměr) × emergence (reakce), použij 5P na zařazení strategie firmy a navrhni BSC pro měření.
+      </>}>
+      <CCol>
+        <CT0>TVORBA STRATEGIE</CT0>
+        <div style={{ fontSize: 10.3 }}><b>Top-down</b> — shora od vedení (deliberate). <b>Bottom-up</b> — zdola z praxe (emergent). Realita = mix.</div>
+        <CT>PLÁNOVÁNÍ × EMERGENCE</CT>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.5 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f0fa" }}><b>Plánování</b> (deliberate)<br /><span style={{ fontSize: 9.1 }}>záměr, analýza, shora, stabilní prostředí</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Emergence</b> (Mintzberg)<br /><span style={{ fontSize: 9.1 }}>reakce, inkrementalismus, zdola, turbulence</span></td></tr>
+        </tbody></table>
+        <CNote>Řešení: balancing / juxtaposing = <b>plánovaná emergence</b> (rámec + prostor pro reakci).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>MINTZBERG — 5P</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.3 }}>
+          <li><b>Plan</b> — záměrný plán</li>
+          <li><b>Ploy</b> — manévr/lest proti konkurenci</li>
+          <li><b>Pattern</b> — vzorec chování (i nezáměrný)</li>
+          <li><b>Position</b> — umístění na trhu</li>
+          <li><b>Perspective</b> — způsob vidění světa firmou</li>
+        </ol>
+        <CNote>5 úhlů pohledu na to, co strategie je. Komise chce umět vyjmenovat a aplikovat.</CNote>
+        <CT>UČÍCÍ SE ORGANIZACE</CT>
+        <div style={{ fontSize: 10 }}>Adaptivní učení (reaguje) × generativní (tvoří nové). Intrapreneurs = vnitřní podnikatelé.</div>
+      </CCol>
+      <CCol>
+        <CT0>BALANCED SCORECARD (Kaplan-Norton)</CT0>
+        <div style={{ fontSize: 10.2 }}>Měří strategii ve 4 perspektivách:</div>
+        <ol style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 10.2 }}>
+          <li><b>Finanční</b> — zisk, ROE</li>
+          <li><b>Zákaznická</b> — spokojenost, podíl</li>
+          <li><b>Interní procesy</b> — kvalita, efektivita</li>
+          <li><b>Učení a růst</b> — rozvoj, inovace</li>
+        </ol>
+        <CNote>Propojuje strategii s měřitelnými cíli. Ne jen finance — vyvážený pohled.</CNote>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── STR 8 — Strategická změna: Evoluce × Revoluce ─────────── */
+function CheatSheetStr8() {
+  return (
+    <SP okruh={8} title="Strategická změna: Evoluce × Revoluce"
+      subtitle="Evoluce × Revoluce · Kotter 8 kroků · Lewin 3 fáze · U-křivka · Kaizen/Lean/Six Sigma · reengineering"
+      examBar={<>
+        <b>Obecně</b> — <i>Evoluce × Revoluce, Kotter, Lewin, řízení změny, aplikace na PS</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> rozliš evoluci (postupně, Kaizen) × revoluci (skokem, reengineering), vyber model změny (Lewin = jednoduché, Kotter = velké) a pojmenuj bariéry.
+      </>}>
+      <CCol>
+        <CT0>EVOLUCE × REVOLUCE</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.5 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>🌱 Evoluce</b> (postupně)<br /><span style={{ fontSize: 9.1 }}>malé kroky, nízké riziko, Kaizen, dlouhé</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fbecea" }}><b>⚡ Revoluce</b> (skokem)<br /><span style={{ fontSize: 9.1 }}>radikální, vysoké riziko, reengineering, rychlé</span></td></tr>
+        </tbody></table>
+        <CNote>Ideál: revolucí nastartovat, evolucí dotvořit a udržet.</CNote>
+        <CT>EVOLUCE — NÁSTROJE</CT>
+        <div style={{ fontSize: 10.2 }}><b>Kaizen</b> (Toyota, neustálé zlepšování) · <b>Lean</b> (eliminace plýtvání) · <b>Six Sigma</b> (DMAIC, snížení chyb) · <b>PDCA</b> cyklus.</div>
+      </CCol>
+      <CCol>
+        <CT0>KOTTER — 8 KROKŮ</CT0>
+        <ol style={{ margin: 0, paddingLeft: 13, fontSize: 9.8 }}>
+          <li>Naléhavost</li><li>Vedoucí koalice</li><li>Vize a strategie</li><li>Komunikace vize</li>
+          <li>Empowerment</li><li>Krátkodobá vítězství</li><li>Upevnit, pokračovat</li><li>Zakotvit v kultuře</li>
+        </ol>
+        <CNote>Pro <b>velké transformace</b>. 1–3 příprava, 4–6 realizace, 7–8 ukotvení.</CNote>
+        <CT>LEWIN — 3 FÁZE</CT>
+        <div style={{ fontSize: 10.2 }}><b>Unfreeze</b> (rozmrazit) → <b>Change</b> (změna) → <b>Refreeze</b> (zmrazit). Pro jednodušší změny. + Force Field Analysis (síly pro × proti).</div>
+      </CCol>
+      <CCol>
+        <CT0>U-KŘIVKA změny</CT0>
+        <div style={{ fontSize: 10.2 }}>Emocionální cesta lidí změnou: šok → popření → odpor → (dno) → přijetí → zkoušení → integrace. Výkon nejdřív klesne, pak roste.</div>
+        <CT>REVOLUCE — REENGINEERING</CT>
+        <div style={{ fontSize: 10.2 }}>BPR (Hammer &amp; Champy 1993) — radikální přepracování procesů od nuly. Mechanická × klanová organizace.</div>
+        <CNote>Reengineering (procesy) × Restructuring (struktura) × Sanace (záchrana krize) — nezaměnit.</CNote>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── STR 9 — Strategie inovací: Exploitace × Explorace ─────────── */
+function CheatSheetStr9() {
+  return (
+    <SP okruh={9} title="Strategie inovací: Exploitace × Explorace"
+      subtitle="Schumpeter · otevřené × uzavřené · Push × Pull · Exploitation × Exploration (March) · modrý oceán"
+      examBar={<>
+        <b>Obecně</b> — <i>exploitace × explorace, modrý/rudý oceán, typy inovací, Innovator's Dilemma</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> ukaž paradox exploitace (využívat staré) × explorace (hledat nové), rozliš modrý × rudý oceán a zmiň Innovator's Dilemma (proč lídři padnou).
+      </>}>
+      <CCol>
+        <CT0>EXPLOITATION × EXPLORATION (March 1991)</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.5 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>⚙️ Exploitation</b> (využívání)<br /><span style={{ fontSize: 9.1 }}>vytěžit stávající, efektivita, jistota, dnešní zisk</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f0fa" }}><b>🚀 Exploration</b> (objevování)<br /><span style={{ fontSize: 9.1 }}>hledat nové, experiment, riziko, budoucí zisk</span></td></tr>
+        </tbody></table>
+        <CNote><b>Ambidexterita</b> = firma zvládá obojí naráz. Příliš exploitace = stagnace, příliš explorace = chaos.</CNote>
+        <CT>INNOVATOR'S DILEMMA (Christensen)</CT>
+        <div style={{ fontSize: 10 }}>Úspěšní lídři padnou, protože ignorují disruptivní inovaci (zprvu horší, ale levnější) — moc se soustředí na stávající zákazníky.</div>
+      </CCol>
+      <CCol>
+        <CT0>TYPY INOVACÍ</CT0>
+        <div style={{ fontSize: 10.2 }}><b>Schumpeter (5):</b> nový produkt, nová metoda, nový trh, nový zdroj, nová organizace.</div>
+        <div style={{ fontSize: 10.2, marginTop: 3 }}><b>Disruptive × Sustaining</b> (Christensen): bořící × udržující.</div>
+        <CT>OTEVŘENÉ × UZAVŘENÉ (Chesbrough)</CT>
+        <div style={{ fontSize: 10.2 }}><b>Closed</b> — vše vlastní R&D. <b>Open</b> — spolupráce, licence, externí nápady.</div>
+        <CT>PUSH × PULL</CT>
+        <div style={{ fontSize: 10 }}>Technology Push (tlačí technologie) × Market Pull (táhne poptávka).</div>
+      </CCol>
+      <CCol>
+        <CT0>MODRÝ × RUDÝ OCEÁN (Kim-Mauborgne)</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.4 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fbecea" }}><b>🩸 Rudý oceán</b><br /><span style={{ fontSize: 9.1 }}>existující trh, krvavá konkurence, boj o podíl</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f0fa" }}><b>🌊 Modrý oceán</b><br /><span style={{ fontSize: 9.1 }}>nový trh bez konkurence, vytvořit poptávku</span></td></tr>
+        </tbody></table>
+        <CT>HODNOTOVÁ INOVACE</CT>
+        <div style={{ fontSize: 10.2 }}>Současně <b>snížit náklady</b> i <b>zvýšit hodnotu</b> pro zákazníka → vytvoří modrý oceán. Př. Cirque du Soleil (cirkus bez zvířat + divadlo).</div>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── STR 10 — Kontextový rozměr: Globální × Lokální ─────────── */
+function CheatSheetStr10() {
+  return (
+    <SP okruh={10} title="Kontextový rozměr: Globální × Lokální"
+      subtitle="3 kontexty · hnací síly internacionalizace · CAGE + diamant · 4 strategie vstupu · glokalizace"
+      examBar={<>
+        <b>Obecně</b> — <i>globální × lokální, mezinárodní strategie, expanze na cizí trhy, glokalizace</i>. ·
+        <b style={{ color: STR_ACCENT }}> Vždy:</b> urči 4 typy mezinárodní strategie (osy úspory × adaptace), posuď trh (CAGE, diamant) a vyřeš paradox glokalizací (mysli globálně, jednej lokálně).
+      </>}>
+      <CCol>
+        <CT0>3 KONTEXTY STRATEGIE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.3 }}>
+          <li><b>Odvětvový</b> — pravidla oboru</li>
+          <li><b>Organizační</b> — kontrola × chaos uvnitř</li>
+          <li><b>Mezinárodní</b> — globální × lokální</li>
+        </ul>
+        <CT>HNACÍ SÍLY EXPANZE</CT>
+        <div style={{ fontSize: 10.2 }}>Trh (nasycení domácího), náklady (levnější výroba), konkurence, zdroje, zákazníci jdoucí do světa.</div>
+        <CT>VÝHODY × STÍNY GLOBALIZACE</CT>
+        <div style={{ fontSize: 10 }}>+ růst, úspory, přístup na trhy. − ztráta identity, závislost na řetězcích, kulturní střety.</div>
+      </CCol>
+      <CCol>
+        <CT0>4 STRATEGIE NA CIZÍCH TRZÍCH</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.2 }}><tbody>
+          <tr><CBox bg="#fff8e1" title="Mezinárodní" sub="nízký tlak na obojí — export" /><CBox bg="#e1f5e1" title="Globální" sub="úspory ↑, adaptace ↓ — jednotná" /></tr>
+          <tr><CBox bg="#fff0e1" title="Multinacionální" sub="úspory ↓, adaptace ↑ — lokální" /><CBox bg="#e1f0fa" title="Transnacionální" sub="obojí ↑ — glokalizace" /></tr>
+        </tbody></table>
+        <CNote>Osy: tlak na úspory z rozsahu × tlak na lokální přizpůsobení.</CNote>
+        <CT>CAGE + DIAMANT</CT>
+        <div style={{ fontSize: 10 }}><b>CAGE</b> — vzdálenost trhu: Cultural, Administrative, Geographic, Economic. <b>Porterův diamant</b> — proč je země v oboru úspěšná.</div>
+      </CCol>
+      <CCol>
+        <CT0>FORMY A TEMPO VSTUPU</CT0>
+        <div style={{ fontSize: 10.2 }}><b>Tempo:</b> Sprinkler (najednou) × Waterfall (postupně) × Wage (po skupinách).</div>
+        <div style={{ fontSize: 10.2, marginTop: 3 }}><b>Formy</b> (od nejjednodušší): export → licence/franšíza → joint venture → vlastní pobočka.</div>
+        <CT>GLOKALIZACE — ŘEŠENÍ PARADOXU</CT>
+        <div style={{ fontSize: 10.3 }}>Paradox globální (úspory, standardizace) × lokální (přizpůsobení). Řešení = <b>glokalizace</b>: globální značka + lokální adaptace.</div>
+        <CNote>Heslo: <b>„Mysli globálně, jednej lokálně."</b> Př. McDonald's — stejná značka, lokální menu.</CNote>
+      </CCol>
+    </SP>
+  );
+}
+
+/* ─────────── Mapa STR + galerie ─────────── */
+const STR_CHEATS = {
+  1: { title: "Strategie + strategické uvažování", comp: CheatSheetStr1 },
+  2: { title: "Zisk × společenská odpovědnost", comp: CheatSheetStr2 },
+  3: { title: "Tržní přístup (PESTLE + Porter)", comp: CheatSheetStr3 },
+  4: { title: "Zdrojový přístup (VRIO + SWOT)", comp: CheatSheetStr4 },
+  5: { title: "Konkurenční strategie + Kooperace", comp: CheatSheetStr5 },
+  6: { title: "SBU + portfolio (BCG, GE, Ansoff)", comp: CheatSheetStr6 },
+  7: { title: "Proces strategie + Mintzberg 5P", comp: CheatSheetStr7 },
+  8: { title: "Strategická změna (Evoluce × Revoluce)", comp: CheatSheetStr8 },
+  9: { title: "Strategie inovací (modrý oceán)", comp: CheatSheetStr9 },
+  10: { title: "Globální × Lokální (glokalizace)", comp: CheatSheetStr10 },
+};
+
+function StrCheatViewerAll({ onBack }) {
+  return (
+    <>
+      <CheatStyles />
+      <div className="cheatsheet-no-print" style={{ position: "sticky", top: 0, zIndex: 10, background: "#fff", borderBottom: "1px solid #ddd", padding: "12px 20px", display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ fontSize: 15.5, fontWeight: 600, color: "#333" }}>📄 Cheat sheet — celá Strategie (10 okruhů)</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button onClick={() => window.print()} style={{ padding: "8px 16px", borderRadius: 8, border: "none", background: STR_ACCENT, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>🖨️ Vytisknout vše / Uložit PDF</button>
+          <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
+        </div>
+      </div>
+      <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+        <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+          {Object.keys(STR_CHEATS).map((k) => { const C = STR_CHEATS[k].comp; return <div key={k}><C /></div>; })}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function StrCheatViewer({ okruh, onBack }) {
+  const entry = STR_CHEATS[okruh]; if (!entry) return null;
+  const Comp = entry.comp;
+  return (
+    <>
+      <CheatStyles />
+      <div className="cheatsheet-no-print" style={{ position: "sticky", top: 0, zIndex: 10, background: "#fff", borderBottom: "1px solid #ddd", padding: "12px 20px", display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ fontSize: 15.5, fontWeight: 600, color: "#333" }}>📄 Cheat sheet — Strategie okruh {okruh}</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button onClick={() => window.print()} style={{ padding: "8px 16px", borderRadius: 8, border: "none", background: STR_ACCENT, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>🖨️ Tisk / PDF</button>
+          <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
+        </div>
+      </div>
+      <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+        <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+          <Comp />
+        </div>
+      </div>
+    </>
+  );
+}
+
+function StrCheatGallery() {
+  const [view, setView] = useState(null);
+  if (view === "all") return <StrCheatViewerAll onBack={() => setView(null)} />;
+  if (view !== null) return <StrCheatViewer okruh={view} onBack={() => setView(null)} />;
+  return (
+    <div style={{ maxWidth: 900, margin: "0 auto", padding: "4px 4px 24px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10, marginBottom: 14 }}>
+        <div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: "var(--text)" }}>📄 Cheat sheety — Strategie</div>
+          <div style={{ fontSize: 13.5, color: "var(--text-muted)", marginTop: 2 }}>Jednostránkové taháky na okruh. Asistent při učení — otevři okruh a měj cheat vedle.</div>
+        </div>
+        <button onClick={() => setView("all")} style={{ padding: "10px 18px", borderRadius: 10, border: "none", background: STR_ACCENT, color: "#fff", cursor: "pointer", fontWeight: 700, fontSize: 14.5, whiteSpace: "nowrap" }}>⬇️ Stáhnout celý předmět (10 okruhů)</button>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))", gap: 10 }}>
+        {Object.keys(STR_CHEATS).map((k) => (
+          <button key={k} onClick={() => setView(Number(k))} style={{ textAlign: "left", border: "1px solid var(--border)", borderRadius: 12, padding: "12px 14px", background: "var(--card)", cursor: "pointer", display: "flex", flexDirection: "column", gap: 4 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: STR_ACCENT, fontFamily: "JetBrains Mono, monospace" }}>OKRUH {k}</div>
+            <div style={{ fontSize: 13.5, fontWeight: 600, color: "var(--text)", lineHeight: 1.3 }}>{STR_CHEATS[k].title}</div>
             <div style={{ fontSize: 11.5, color: "var(--text-muted)", marginTop: 2 }}>📄 1 strana · otevřít / tisknout</div>
           </button>
         ))}
