@@ -8153,7 +8153,7 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
             <button onClick={() => setCheatOpen(false)} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět do okruhu</button>
           </div>
         </div>
-        <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 160px)" }}>
+        <div className="cheatsheet-print-wrap" style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 160px)" }}>
           <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
             <CheatBody />
           </div>
@@ -34805,13 +34805,14 @@ function CheatSheet1() {
 function CheatStyles() {
   return (<style>{`
     @media print {
-      html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
+      html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; width: 100% !important; height: auto !important; }
       body * { visibility: hidden !important; }
       .cheatsheet-page, .cheatsheet-page * { visibility: visible !important; }
       .cheatsheet-no-print { display: none !important; }
-      /* Sheet kontejner: zrušíme centrování/overflow/padding z náhledu, necháme přirozený tok */
-      .cheatsheet-sheet { width: 100% !important; max-width: 100% !important; margin: 0 !important; padding: 0 !important; background: #fff !important; overflow: visible !important; }
-      .cheatsheet-page { box-shadow: none !important; border: none !important; border-radius: 0 !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; min-height: auto !important; height: auto !important; padding: 0 !important; page-break-after: always; break-after: page; }
+      /* Reset všech kontejnerů kolem cheatu — aby cheat dostal plnou šířku tiskové plochy */
+      .cheatsheet-print-wrap { all: unset !important; display: block !important; width: 100% !important; margin: 0 !important; padding: 0 !important; background: #fff !important; }
+      .cheatsheet-sheet { display: block !important; width: 100% !important; max-width: none !important; min-width: 0 !important; margin: 0 !important; padding: 0 !important; background: #fff !important; overflow: visible !important; box-sizing: border-box !important; }
+      .cheatsheet-page { display: block !important; box-shadow: none !important; border: none !important; border-radius: 0 !important; margin: 0 !important; width: 100% !important; max-width: none !important; min-height: auto !important; height: auto !important; padding: 0 !important; box-sizing: border-box !important; page-break-after: always; break-after: page; }
       .cheatsheet-page:last-child { page-break-after: auto; break-after: auto; }
       .cs-grid { grid-template-columns: 1fr 1fr 1fr !important; }
     }
@@ -35355,7 +35356,7 @@ function CheatViewer({ okruh, onBack }) {
           <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
         </div>
       </div>
-      <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+      <div className="cheatsheet-print-wrap" style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
         <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
           {okruh === 1 ? <CheatSheet1Body /> : <Comp />}
         </div>
@@ -35379,7 +35380,7 @@ function CheatViewerAll({ onBack }) {
           <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
         </div>
       </div>
-      <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+      <div className="cheatsheet-print-wrap" style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
         <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
           {Object.keys(MNG_CHEATS).map((k) => {
             const Comp = MNG_CHEATS[k].comp;
@@ -35923,7 +35924,7 @@ function StrCheatViewerAll({ onBack }) {
           <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
         </div>
       </div>
-      <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+      <div className="cheatsheet-print-wrap" style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
         <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
           {Object.keys(STR_CHEATS).map((k) => { const C = STR_CHEATS[k].comp; return <div key={k}><C /></div>; })}
         </div>
@@ -35945,7 +35946,7 @@ function StrCheatViewer({ okruh, onBack }) {
           <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
         </div>
       </div>
-      <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+      <div className="cheatsheet-print-wrap" style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
         <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
           <Comp />
         </div>
