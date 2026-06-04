@@ -8154,7 +8154,7 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
           </div>
         </div>
         <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 160px)" }}>
-          <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+          <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
             <CheatBody />
           </div>
         </div>
@@ -34554,11 +34554,10 @@ function WatchToggleButton({ subjectId, okruhN, sectionId, sectionTitle, subject
 function CheatSheet1Body() {
   return (
         <div className="cheatsheet-page" style={{
-          width: "100%", maxWidth: "190mm", padding: "8px 12px 10px",
-          margin: "0 auto 14px", background: "#fff",
-          border: "1px solid #A82A5F33", borderRadius: 8,
-          boxShadow: "0 1px 6px rgba(0,0,0,0.08)",
-          boxSizing: "border-box", fontSize: 10.5, lineHeight: 1.4,
+          width: "210mm", minHeight: "297mm", padding: "10mm 12mm",
+          margin: "0 auto 20px", background: "#fff",
+          boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+          boxSizing: "border-box", fontSize: 11.5, lineHeight: 1.45,
         }}>
           {/* Header */}
           <div style={{ borderBottom: "2px solid #A82A5F", paddingBottom: 6, marginBottom: 10 }}>
@@ -34810,17 +34809,20 @@ function CheatStyles() {
       .cheatsheet-page, .cheatsheet-page * { visibility: visible !important; }
       .cheatsheet-no-print { display: none !important; }
       body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
-      .cheatsheet-sheet { width: 190mm !important; margin: 0 auto !important; padding: 0 !important; }
-      .cheatsheet-page { box-shadow: none !important; margin: 0 0 6mm 0 !important; width: 100% !important; break-inside: avoid !important; page-break-inside: avoid !important; }
+      .cheatsheet-sheet { width: auto !important; margin: 0 !important; padding: 0 !important; }
+      .cheatsheet-page { box-shadow: none !important; margin: 0 auto !important; width: 210mm !important; min-height: 297mm !important; page-break-after: always; break-after: page; }
+      .cheatsheet-page:last-child { page-break-after: auto; break-after: auto; }
+      .cs-grid { grid-template-columns: 1fr 1fr 1fr !important; }
     }
-    @page { size: A4; margin: 8mm; }
+    @page { size: A4; margin: 0; }
     .cheatsheet-page { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1a1a1a; }
     .cs-headline { color: #A82A5F; font-weight: 800; }
     .cs-subhead { color: #5A2F5F; font-weight: 700; }
     .cs-tag { color: #5FA4CA; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
     .cs-warn { color: #E06D1E; font-weight: 700; }
-    /* Náhled na obrazovce: bloky se vejdou do šířky, na úzkém 1 sloupec. */
+    /* Náhled na obrazovce: na úzkém 1 sloupec. */
     @media screen and (max-width: 880px) {
+      .cheatsheet-page { width: 100% !important; min-height: 0 !important; padding: 16px !important; }
       .cs-grid { grid-template-columns: 1fr !important; }
     }
   `}</style>);
@@ -34861,23 +34863,29 @@ function CNote({ children }) {
 function CheatPage({ okruh, title, subtitle, children, examBar, accent = "#A82A5F", accentBg = "#fff5f8", subjectLabel = "Management" }) {
   return (
     <div className="cheatsheet-page" style={{
-      width: "100%", maxWidth: "190mm", padding: "8px 12px 10px",
-      margin: "0 auto 14px", background: "#fff",
-      border: `1px solid ${accent}33`, borderRadius: 8,
-      boxShadow: "0 1px 6px rgba(0,0,0,0.08)",
-      boxSizing: "border-box", fontSize: 10.5, lineHeight: 1.4,
+      width: "210mm", minHeight: "297mm", padding: "10mm 12mm",
+      margin: "0 auto 20px", background: "#fff",
+      boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+      boxSizing: "border-box", fontSize: 11.5, lineHeight: 1.45,
     }}>
-      <div style={{ borderBottom: `2px solid ${accent}`, paddingBottom: 4, marginBottom: 7 }}>
+      <div style={{ borderBottom: `2px solid ${accent}`, paddingBottom: 6, marginBottom: 10 }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-          <h1 style={{ margin: 0, fontSize: 15, color: accent, fontWeight: 800 }}>OKRUH {okruh} — {title}</h1>
-          <span style={{ fontSize: 9.5, color: "#888", fontFamily: "JetBrains Mono, monospace" }}>nabombuj.cz · {subjectLabel}</span>
+          <h1 style={{ margin: 0, fontSize: 18, color: accent, fontWeight: 800 }}>OKRUH {okruh} — {title}</h1>
+          <span style={{ fontSize: 11, color: "#888", fontFamily: "JetBrains Mono, monospace" }}>nabombuj.cz · {subjectLabel}</span>
         </div>
-        <div style={{ fontSize: 10.5, color: "#666", marginTop: 1 }}>{subtitle}</div>
+        <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>{subtitle}</div>
       </div>
-      <div className="cs-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 7 }}>{children}</div>
-      <div style={{ marginTop: 7, padding: "5px 9px", border: `1.5px solid ${accent}`, borderRadius: 4, background: accentBg }}>
-        <div className="cs-warn" style={{ fontSize: 10, marginBottom: 2, letterSpacing: 1 }}>⚠️ NA ZKOUŠCE</div>
-        <div style={{ fontSize: 9.8, lineHeight: 1.45 }}>{examBar}</div>
+      <div className="cs-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>{children}</div>
+      <div style={{ marginTop: 10, padding: "6px 10px", border: `1.5px solid ${accent}`, borderRadius: 4, background: accentBg }}>
+        <div className="cs-warn" style={{ fontSize: 11, marginBottom: 3, letterSpacing: 1 }}>⚠️ NA ZKOUŠCE</div>
+        <div style={{ fontSize: 10.5, lineHeight: 1.5 }}>{examBar}</div>
+      </div>
+      <div style={{ marginTop: 12, paddingTop: 8, borderTop: "1px dashed #ccc" }}>
+        <div style={{ fontSize: 10, color: "#aaa", fontFamily: "JetBrains Mono, monospace", letterSpacing: 1, marginBottom: 4 }}>✎ MÍSTO NA POZNÁMKY</div>
+        <div style={{ minHeight: "40mm", backgroundImage: "repeating-linear-gradient(transparent, transparent 27px, #eee 27px, #eee 28px)" }} />
+      </div>
+      <div style={{ marginTop: 6, fontSize: 9.5, color: "#888", textAlign: "center", borderTop: "1px solid #eee", paddingTop: 4 }}>
+        Nabombuj · Příprava na státnice VŠE · Cheat sheet — asistent při učení, ne náhrada okruhu
       </div>
     </div>
   );
@@ -35347,7 +35355,7 @@ function CheatViewer({ okruh, onBack }) {
         </div>
       </div>
       <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
-        <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+        <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
           {okruh === 1 ? <CheatSheet1Body /> : <Comp />}
         </div>
       </div>
@@ -35371,7 +35379,7 @@ function CheatViewerAll({ onBack }) {
         </div>
       </div>
       <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
-        <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+        <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
           {Object.keys(MNG_CHEATS).map((k) => {
             const Comp = MNG_CHEATS[k].comp;
             return <div key={k}>{Number(k) === 1 ? <CheatSheet1Body /> : <Comp />}</div>;
@@ -35915,7 +35923,7 @@ function StrCheatViewerAll({ onBack }) {
         </div>
       </div>
       <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
-        <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+        <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
           {Object.keys(STR_CHEATS).map((k) => { const C = STR_CHEATS[k].comp; return <div key={k}><C /></div>; })}
         </div>
       </div>
@@ -35937,7 +35945,7 @@ function StrCheatViewer({ okruh, onBack }) {
         </div>
       </div>
       <div style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
-        <div className="cheatsheet-sheet" style={{ width: "190mm", maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+        <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
           <Comp />
         </div>
       </div>
