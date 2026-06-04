@@ -7207,9 +7207,19 @@ function OkruhContent({ subjectId, okruhN }) {
   const okruh = subject?.okruhy.find(o => o.n === okruhN);
 
   if (!okruh) {
+    if (subjectId === "mng") {
+      return (
+        <div style={{ flex: 1, overflowY: "auto", background: t.bg, padding: "24px 20px" }}>
+          <div style={{ maxWidth: 900, margin: "0 auto 18px", textAlign: "center" }}>
+            <BombikEmpty mood="think" size={90} caption="Vyber okruh vlevo — nebo si stáhni cheat sheety" sub="Cheat sheet je jednostránkový tahák na okruh. Měj ho vedle při čtení okruhu." />
+          </div>
+          <CheatGallery />
+        </div>
+      );
+    }
     return (
       <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: 40, background: t.bg }}>
-        <BombikEmpty mood="think" size={120} caption="Vyber okruh v seznamu vlevo" sub="Klikni na nějaký okruh — Bombík tě prohoní látkou." />
+        <BombikEmpty mood="think" size={120} caption="Vyber okruh v seznamu vlevo" sub="Klikni na nějaký okruh — Bombík tě prohoní látkou." />
       </div>
     );
   }
@@ -8124,19 +8134,21 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
     { id: "podcast", label: "Podcast", color: VSE.primary, icon: "lightbulb" },
   ];
 
-  const hasCheatSheet = subject === "Management" && number === 1;
+  const hasCheatSheet = subject === "Management" && typeof MNG_CHEATS !== "undefined" && MNG_CHEATS[number];
 
   if (cheatOpen && hasCheatSheet) {
+    const CheatBody = number === 1 ? CheatSheet1Body : MNG_CHEATS[number].comp;
     return (
       <div style={{ flex: 1, overflowY: "auto", height: "calc(100vh - 105px)", background: "#f5f5f5" }}>
-        <div style={{ position: "sticky", top: 0, zIndex: 10, background: "#fff", borderBottom: "1px solid #ddd", padding: "12px 20px", display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+        <CheatStyles />
+        <div className="cheatsheet-no-print" style={{ position: "sticky", top: 0, zIndex: 10, background: "#fff", borderBottom: "1px solid #ddd", padding: "12px 20px", display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ fontSize: 15.5, fontWeight: 600, color: "#333" }}>📄 Cheat sheet — {subject} okruh {number}</div>
           <div style={{ display: "flex", gap: 8 }}>
             <button onClick={() => window.print()} style={{ padding: "8px 16px", borderRadius: 8, border: "none", background: "#A82A5F", color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>🖨️ Tisk / PDF</button>
             <button onClick={() => setCheatOpen(false)} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět do okruhu</button>
           </div>
         </div>
-        <CheatSheet1 />
+        <CheatBody />
       </div>
     );
   }
@@ -33404,7 +33416,7 @@ function OkruhInov8Panel() {
         </ResponsiveSVG>
         <Tag color={VSE.warning}>Jak interní bariéry překonat</Tag>
         <Bullet items={[
-          "<b>Kultura:</b> leadership jako model role, akceptace neúspěchu, psychological safety (Google Project Aristotle).",
+          "<b>Kultura:</b> leadership jako vzor, odstranit strach z neúspěchu, zařadit inovace do hodnocení zaměstnanců.",
           "<b>Struktura:</b> oddělit R&D od provozu (viz Inov 2 — proč firmy oddělují R&D), multidisciplinární týmy.",
           "<b>Procesy:</b> implementovat SGCP (viz Inov 5) + DT (viz Inov 4) + Lean Canvas (viz Inov 3).",
           "<b>Lidé:</b> identifikovat idea šampiony, dát jim sponzory, vzdělávat v inovačních metodikách.",
@@ -34530,6 +34542,203 @@ function WatchToggleButton({ subjectId, okruhN, sectionId, sectionTitle, subject
    CHEAT SHEET — okruh 1 (A4 print)
    ════════════════════════════════════════════════════════ */
 
+function CheatSheet1Body() {
+  return (
+        <div className="cheatsheet-page" style={{
+          width: "210mm", minHeight: "297mm", padding: "10mm 12mm",
+          margin: "20px auto", background: "#fff",
+          boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+          boxSizing: "border-box", fontSize: 11.5, lineHeight: 1.45,
+        }}>
+          {/* Header */}
+          <div style={{ borderBottom: "2px solid #A82A5F", paddingBottom: 6, marginBottom: 10 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+              <h1 style={{ margin: 0, fontSize: 18, color: "#A82A5F", fontWeight: 800 }}>OKRUH 1 — Současné přístupy k managementu</h1>
+              <span style={{ fontSize: 11, color: "#888", fontFamily: "JetBrains Mono, monospace" }}>nabombuj.cz</span>
+            </div>
+            <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>
+              Definice managementu · Birkinshawovy 4 dimenze · Business model × Management model · Inovace v managementu
+            </div>
+          </div>
+  
+          {/* 3-sloupcový grid */}
+          <div className="cs-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+  
+            {/* === SLOUPEC 1: 4 ZÁKLADNÍ POJMY === */}
+            <div style={{ border: "1px solid #ddd", borderRadius: 4, padding: "6px 8px" }}>
+              <div className="cs-tag" style={{ fontSize: 10, marginBottom: 5, letterSpacing: 1 }}>4 ZÁKLADNÍ POJMY</div>
+  
+              <div style={{ marginBottom: 6 }}>
+                <div className="cs-subhead" style={{ fontSize: 12 }}>Management</div>
+                <div style={{ fontSize: 10.5 }}>Proces plánování, organizování, vedení a kontroly k dosažení cílů. <b>3 chápání:</b> činnost / lidé / disciplína.</div>
+              </div>
+  
+              <div style={{ marginBottom: 6 }}>
+                <div className="cs-subhead" style={{ fontSize: 12 }}>Business Model (BM)</div>
+                <div style={{ fontSize: 10.5 }}><b>Co</b> firma dělá pro zákazníka. Logika tvorby a zachycení hodnoty. → BMC, Lean Canvas.</div>
+              </div>
+  
+              <div style={{ marginBottom: 6 }}>
+                <div className="cs-subhead" style={{ fontSize: 12 }}>Management Model (MM)</div>
+                <div style={{ fontSize: 10.5 }}><b>Jak</b> firma řídí. Volby v 4 dimenzích podle Birkinshawa.</div>
+              </div>
+  
+              <div style={{ marginBottom: 8 }}>
+                <div className="cs-subhead" style={{ fontSize: 12 }}>BMC × Lean Canvas</div>
+                <div style={{ fontSize: 10.5 }}>
+                  <b>BMC</b> (Osterwalder, 9 bloků) — etablované firmy.<br />
+                  <b>Lean</b> (Maurya, 9 bloků) — startupy, problém + řešení místo Key Partners.
+                </div>
+              </div>
+  
+              <div className="cs-tag" style={{ fontSize: 10, marginTop: 8, marginBottom: 4, letterSpacing: 1 }}>4 FÁZE VÝVOJE MNG</div>
+              <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+                <li><b>Klasický</b> (Taylor) — vědecké řízení, časové studie</li>
+                <li><b>Paternalistický</b> (Baťa) — péče o zaměstnance + tvrdá disciplína</li>
+                <li><b>Lidské vztahy</b> (Mayo) — Hawthorne, motivace</li>
+                <li><b>Humanistický</b> (Drucker) — znalostní pracovníci, smysl</li>
+              </ol>
+            </div>
+  
+            {/* === SLOUPEC 2: BIRKINSHAW === */}
+            <div style={{ border: "1px solid #ddd", borderRadius: 4, padding: "6px 8px" }}>
+              <div className="cs-tag" style={{ fontSize: 10, marginBottom: 5, letterSpacing: 1 }}>BIRKINSHAW — 4 DIMENZE MM</div>
+  
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 10 }}>
+                <thead>
+                  <tr style={{ background: "#f5f5f5" }}>
+                    <th style={{ padding: 3, border: "1px solid #ddd", textAlign: "left" }}>Dimenze</th>
+                    <th style={{ padding: 3, border: "1px solid #ddd", textAlign: "left" }}>Tradiční</th>
+                    <th style={{ padding: 3, border: "1px solid #ddd", textAlign: "left" }}>Alternativní</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}><b>Koordinace</b></td>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}>Byrokracie</td>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}>Emergence</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}><b>Rozhodování</b></td>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}>Hierarchie</td>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}>Kolektiv. moudrost</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}><b>Cíle (ends)</b></td>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}>Alignment (tight)</td>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}>Obliquity (loose)</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}><b>Motivace</b></td>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}>Vnější (peníze)</td>
+                    <td style={{ padding: 3, border: "1px solid #ddd" }}>Vnitřní (smysl)</td>
+                  </tr>
+                </tbody>
+              </table>
+  
+              <div className="cs-tag" style={{ fontSize: 10, marginTop: 8, marginBottom: 4, letterSpacing: 1 }}>4 TYPY MODELŮ (means × ends)</div>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 10 }}>
+                <tbody>
+                  <tr>
+                    <td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1" }}>
+                      <b>PLANNING</b><br />
+                      <span style={{ fontSize: 9.5 }}>tight means + tight ends</span><br />
+                      <span style={{ fontSize: 9.5, color: "#666" }}>Toyota, McDonald's</span>
+                    </td>
+                    <td style={{ padding: 3, border: "1px solid #ddd", background: "#fff0e1" }}>
+                      <b>QUEST</b><br />
+                      <span style={{ fontSize: 9.5 }}>loose means + tight ends</span><br />
+                      <span style={{ fontSize: 9.5, color: "#666" }}>Tesla (mise: Mars)</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}>
+                      <b>SCIENCE</b><br />
+                      <span style={{ fontSize: 9.5 }}>tight means + loose ends</span><br />
+                      <span style={{ fontSize: 9.5, color: "#666" }}>Pfizer R&D, MIT</span>
+                    </td>
+                    <td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f0fa" }}>
+                      <b>DISCOVERY</b><br />
+                      <span style={{ fontSize: 9.5 }}>loose means + loose ends</span><br />
+                      <span style={{ fontSize: 9.5, color: "#666" }}>Google 20 %, startupy</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+  
+              <div style={{ fontSize: 9.5, color: "#666", marginTop: 4, fontStyle: "italic" }}>
+                <b>Means</b> = jak (procesy/prostředky). <b>Ends</b> = co (cíle).
+              </div>
+            </div>
+  
+            {/* === SLOUPEC 3: INOVACE + GASSMANN === */}
+            <div style={{ border: "1px solid #ddd", borderRadius: 4, padding: "6px 8px" }}>
+              <div className="cs-tag" style={{ fontSize: 10, marginBottom: 5, letterSpacing: 1 }}>INOVATION PYRAMID (HAMEL)</div>
+  
+              <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                <div style={{ background: "#A82A5F", color: "#fff", padding: "4px 8px", borderRadius: 3, fontSize: 10.5 }}>
+                  <b>1. Manažerská</b> — KV 10+ let<br />
+                  <span style={{ fontSize: 9.5 }}>Toyota Production · Google free time</span>
+                </div>
+                <div style={{ background: "#5A2F5F", color: "#fff", padding: "4px 8px", borderRadius: 3, fontSize: 10.5 }}>
+                  <b>2. Strategická</b> — KV 3-5 let<br />
+                  <span style={{ fontSize: 9.5 }}>Apple iPhone, Netflix streaming</span>
+                </div>
+                <div style={{ background: "#E06D1E", color: "#fff", padding: "4px 8px", borderRadius: 3, fontSize: 10.5 }}>
+                  <b>3. Produktová</b> — KV 1-2 roky<br />
+                  <span style={{ fontSize: 9.5 }}>Nový iPhone model, nový BMW</span>
+                </div>
+                <div style={{ background: "#1E938D", color: "#fff", padding: "4px 8px", borderRadius: 3, fontSize: 10.5 }}>
+                  <b>4. Operační</b> — KV {`<`} 1 rok<br />
+                  <span style={{ fontSize: 9.5 }}>Optimalizace logistiky, nová verze SW</span>
+                </div>
+              </div>
+  
+              <div style={{ fontSize: 9.5, color: "#666", marginTop: 4, fontStyle: "italic" }}>
+                Manažerská inovace = nejsilnější + nejtěžší napodobit
+              </div>
+  
+              <div className="cs-tag" style={{ fontSize: 10, marginTop: 8, marginBottom: 4, letterSpacing: 1 }}>GASSMANN — 4 OTÁZKY (4W)</div>
+              <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+                <li><b>WHO</b> — kdo je zákazník?</li>
+                <li><b>WHAT</b> — co nabízíme (value prop)?</li>
+                <li><b>HOW</b> — jak to vyrobíme?</li>
+                <li><b>WHY</b> — proč to vydělává (revenue)?</li>
+              </ol>
+              <div style={{ fontSize: 9.5, color: "#666", marginTop: 4, fontStyle: "italic" }}>
+                55 vzorových modelů (subscription, freemium, razor-blade, …)
+              </div>
+  
+              <div className="cs-tag" style={{ fontSize: 10, marginTop: 8, marginBottom: 4, letterSpacing: 1 }}>5 VÝZEV (HAMEL)</div>
+              <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+                <li>Demokracie nápadů</li>
+                <li>Zesílení přitažlivosti</li>
+                <li>Relokace zdrojů (rychle k novým příležitostem)</li>
+                <li>Mentální modely (zbavit se dogmat)</li>
+                <li>Příležitost pro všechny</li>
+              </ol>
+            </div>
+          </div>
+  
+          {/* Spodní pruh: Komise tipy */}
+          <div style={{ marginTop: 10, padding: "6px 10px", border: "1.5px solid #A82A5F", borderRadius: 4, background: "#fff5f8" }}>
+            <div className="cs-warn" style={{ fontSize: 11, marginBottom: 3, letterSpacing: 1 }}>⚠️ NA ZKOUŠCE</div>
+            <div style={{ fontSize: 10.5, lineHeight: 1.5 }}>
+              <b>Vrbová/Tahal/Svobodová</b> — <i>vztáhni Birkinshaw 4 dimenze na případovku</i>. ·
+              <b> Bočková/Nový/Kolouchová</b> — <i>výzvy 21. století + Birkinshaw</i>. ·
+              <b> Heřman/Schovancová/Vávra</b> — <i>výzvy 21. století (globalizace, Průmysl 4.0, automatizace)</i>. ·
+              <b style={{ color: "#A82A5F" }}> Vždy:</b> definuj BM × MM, najdi v PS, navrhni posun směrem k alternativnímu modelu (Discovery / emergence) pokud je odvětví turbulentní.
+            </div>
+          </div>
+  
+          {/* Footer */}
+          <div style={{ marginTop: 8, fontSize: 9.5, color: "#888", textAlign: "center", borderTop: "1px solid #eee", paddingTop: 4 }}>
+            Nabombuj · Příprava na státnice VŠE · Vygenerováno z poznámek + tažených otázek 2025-26
+          </div>
+        </div>
+  );
+}
+
 function CheatSheet1() {
   return (
     <>
@@ -34568,198 +34777,7 @@ function CheatSheet1() {
         </div>
       </div>
 
-      <div className="cheatsheet-page" style={{
-        width: "210mm", minHeight: "297mm", padding: "10mm 12mm",
-        margin: "20px auto", background: "#fff",
-        boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-        boxSizing: "border-box", fontSize: 11.5, lineHeight: 1.45,
-      }}>
-        {/* Header */}
-        <div style={{ borderBottom: "2px solid #A82A5F", paddingBottom: 6, marginBottom: 10 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-            <h1 style={{ margin: 0, fontSize: 18, color: "#A82A5F", fontWeight: 800 }}>OKRUH 1 — Současné přístupy k managementu</h1>
-            <span style={{ fontSize: 11, color: "#888", fontFamily: "JetBrains Mono, monospace" }}>nabombuj.cz</span>
-          </div>
-          <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>
-            Definice managementu · Birkinshawovy 4 dimenze · Business model × Management model · Inovace v managementu
-          </div>
-        </div>
-
-        {/* 3-sloupcový grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
-
-          {/* === SLOUPEC 1: 4 ZÁKLADNÍ POJMY === */}
-          <div style={{ border: "1px solid #ddd", borderRadius: 4, padding: "6px 8px" }}>
-            <div className="cs-tag" style={{ fontSize: 10, marginBottom: 5, letterSpacing: 1 }}>4 ZÁKLADNÍ POJMY</div>
-
-            <div style={{ marginBottom: 6 }}>
-              <div className="cs-subhead" style={{ fontSize: 12 }}>Management</div>
-              <div style={{ fontSize: 10.5 }}>Proces plánování, organizování, vedení a kontroly k dosažení cílů. <b>3 chápání:</b> činnost / lidé / disciplína.</div>
-            </div>
-
-            <div style={{ marginBottom: 6 }}>
-              <div className="cs-subhead" style={{ fontSize: 12 }}>Business Model (BM)</div>
-              <div style={{ fontSize: 10.5 }}><b>Co</b> firma dělá pro zákazníka. Logika tvorby a zachycení hodnoty. → BMC, Lean Canvas.</div>
-            </div>
-
-            <div style={{ marginBottom: 6 }}>
-              <div className="cs-subhead" style={{ fontSize: 12 }}>Management Model (MM)</div>
-              <div style={{ fontSize: 10.5 }}><b>Jak</b> firma řídí. Volby v 4 dimenzích podle Birkinshawa.</div>
-            </div>
-
-            <div style={{ marginBottom: 8 }}>
-              <div className="cs-subhead" style={{ fontSize: 12 }}>BMC × Lean Canvas</div>
-              <div style={{ fontSize: 10.5 }}>
-                <b>BMC</b> (Osterwalder, 9 bloků) — etablované firmy.<br />
-                <b>Lean</b> (Maurya, 9 bloků) — startupy, problém + řešení místo Key Partners.
-              </div>
-            </div>
-
-            <div className="cs-tag" style={{ fontSize: 10, marginTop: 8, marginBottom: 4, letterSpacing: 1 }}>4 FÁZE VÝVOJE MNG</div>
-            <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
-              <li><b>Klasický</b> (Taylor) — vědecké řízení, časové studie</li>
-              <li><b>Paternalistický</b> (Baťa) — péče o zaměstnance + tvrdá disciplína</li>
-              <li><b>Lidské vztahy</b> (Mayo) — Hawthorne, motivace</li>
-              <li><b>Humanistický</b> (Drucker) — znalostní pracovníci, smysl</li>
-            </ol>
-          </div>
-
-          {/* === SLOUPEC 2: BIRKINSHAW === */}
-          <div style={{ border: "1px solid #ddd", borderRadius: 4, padding: "6px 8px" }}>
-            <div className="cs-tag" style={{ fontSize: 10, marginBottom: 5, letterSpacing: 1 }}>BIRKINSHAW — 4 DIMENZE MM</div>
-
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 10 }}>
-              <thead>
-                <tr style={{ background: "#f5f5f5" }}>
-                  <th style={{ padding: 3, border: "1px solid #ddd", textAlign: "left" }}>Dimenze</th>
-                  <th style={{ padding: 3, border: "1px solid #ddd", textAlign: "left" }}>Tradiční</th>
-                  <th style={{ padding: 3, border: "1px solid #ddd", textAlign: "left" }}>Alternativní</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}><b>Koordinace</b></td>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}>Byrokracie</td>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}>Emergence</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}><b>Rozhodování</b></td>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}>Hierarchie</td>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}>Kolektiv. moudrost</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}><b>Cíle (ends)</b></td>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}>Alignment (tight)</td>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}>Obliquity (loose)</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}><b>Motivace</b></td>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}>Vnější (peníze)</td>
-                  <td style={{ padding: 3, border: "1px solid #ddd" }}>Vnitřní (smysl)</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div className="cs-tag" style={{ fontSize: 10, marginTop: 8, marginBottom: 4, letterSpacing: 1 }}>4 TYPY MODELŮ (means × ends)</div>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 10 }}>
-              <tbody>
-                <tr>
-                  <td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1" }}>
-                    <b>PLANNING</b><br />
-                    <span style={{ fontSize: 9.5 }}>tight means + tight ends</span><br />
-                    <span style={{ fontSize: 9.5, color: "#666" }}>Toyota, McDonald's</span>
-                  </td>
-                  <td style={{ padding: 3, border: "1px solid #ddd", background: "#fff0e1" }}>
-                    <b>QUEST</b><br />
-                    <span style={{ fontSize: 9.5 }}>loose means + tight ends</span><br />
-                    <span style={{ fontSize: 9.5, color: "#666" }}>Tesla (mise: Mars)</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}>
-                    <b>SCIENCE</b><br />
-                    <span style={{ fontSize: 9.5 }}>tight means + loose ends</span><br />
-                    <span style={{ fontSize: 9.5, color: "#666" }}>Pfizer R&D, MIT</span>
-                  </td>
-                  <td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f0fa" }}>
-                    <b>DISCOVERY</b><br />
-                    <span style={{ fontSize: 9.5 }}>loose means + loose ends</span><br />
-                    <span style={{ fontSize: 9.5, color: "#666" }}>Google 20 %, startupy</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div style={{ fontSize: 9.5, color: "#666", marginTop: 4, fontStyle: "italic" }}>
-              <b>Means</b> = jak (procesy/prostředky). <b>Ends</b> = co (cíle).
-            </div>
-          </div>
-
-          {/* === SLOUPEC 3: INOVACE + GASSMANN === */}
-          <div style={{ border: "1px solid #ddd", borderRadius: 4, padding: "6px 8px" }}>
-            <div className="cs-tag" style={{ fontSize: 10, marginBottom: 5, letterSpacing: 1 }}>INOVATION PYRAMID (HAMEL)</div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-              <div style={{ background: "#A82A5F", color: "#fff", padding: "4px 8px", borderRadius: 3, fontSize: 10.5 }}>
-                <b>1. Manažerská</b> — KV 10+ let<br />
-                <span style={{ fontSize: 9.5 }}>Toyota Production · Google free time</span>
-              </div>
-              <div style={{ background: "#5A2F5F", color: "#fff", padding: "4px 8px", borderRadius: 3, fontSize: 10.5 }}>
-                <b>2. Strategická</b> — KV 3-5 let<br />
-                <span style={{ fontSize: 9.5 }}>Apple iPhone, Netflix streaming</span>
-              </div>
-              <div style={{ background: "#E06D1E", color: "#fff", padding: "4px 8px", borderRadius: 3, fontSize: 10.5 }}>
-                <b>3. Produktová</b> — KV 1-2 roky<br />
-                <span style={{ fontSize: 9.5 }}>Nový iPhone model, nový BMW</span>
-              </div>
-              <div style={{ background: "#1E938D", color: "#fff", padding: "4px 8px", borderRadius: 3, fontSize: 10.5 }}>
-                <b>4. Operační</b> — KV {`<`} 1 rok<br />
-                <span style={{ fontSize: 9.5 }}>Optimalizace logistiky, nová verze SW</span>
-              </div>
-            </div>
-
-            <div style={{ fontSize: 9.5, color: "#666", marginTop: 4, fontStyle: "italic" }}>
-              Manažerská inovace = nejsilnější + nejtěžší napodobit
-            </div>
-
-            <div className="cs-tag" style={{ fontSize: 10, marginTop: 8, marginBottom: 4, letterSpacing: 1 }}>GASSMANN — 4 OTÁZKY (4W)</div>
-            <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
-              <li><b>WHO</b> — kdo je zákazník?</li>
-              <li><b>WHAT</b> — co nabízíme (value prop)?</li>
-              <li><b>HOW</b> — jak to vyrobíme?</li>
-              <li><b>WHY</b> — proč to vydělává (revenue)?</li>
-            </ol>
-            <div style={{ fontSize: 9.5, color: "#666", marginTop: 4, fontStyle: "italic" }}>
-              55 vzorových modelů (subscription, freemium, razor-blade, …)
-            </div>
-
-            <div className="cs-tag" style={{ fontSize: 10, marginTop: 8, marginBottom: 4, letterSpacing: 1 }}>5 VÝZEV (HAMEL)</div>
-            <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
-              <li>Demokracie nápadů</li>
-              <li>Zesílení přitažlivosti</li>
-              <li>Relokace zdrojů (rychle k novým příležitostem)</li>
-              <li>Mentální modely (zbavit se dogmat)</li>
-              <li>Příležitost pro všechny</li>
-            </ol>
-          </div>
-        </div>
-
-        {/* Spodní pruh: Komise tipy */}
-        <div style={{ marginTop: 10, padding: "6px 10px", border: "1.5px solid #A82A5F", borderRadius: 4, background: "#fff5f8" }}>
-          <div className="cs-warn" style={{ fontSize: 11, marginBottom: 3, letterSpacing: 1 }}>⚠️ NA ZKOUŠCE</div>
-          <div style={{ fontSize: 10.5, lineHeight: 1.5 }}>
-            <b>Vrbová/Tahal/Svobodová</b> — <i>vztáhni Birkinshaw 4 dimenze na případovku</i>. ·
-            <b> Bočková/Nový/Kolouchová</b> — <i>výzvy 21. století + Birkinshaw</i>. ·
-            <b> Heřman/Schovancová/Vávra</b> — <i>výzvy 21. století (globalizace, Průmysl 4.0, automatizace)</i>. ·
-            <b style={{ color: "#A82A5F" }}> Vždy:</b> definuj BM × MM, najdi v PS, navrhni posun směrem k alternativnímu modelu (Discovery / emergence) pokud je odvětví turbulentní.
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div style={{ marginTop: 8, fontSize: 9.5, color: "#888", textAlign: "center", borderTop: "1px solid #eee", paddingTop: 4 }}>
-          Nabombuj · Příprava na státnice VŠE · Vygenerováno z poznámek + tažených otázek 2025-26
-        </div>
-      </div>
+      <CheatSheet1Body />
     </>
   );
 }
@@ -34769,6 +34787,606 @@ function CheatSheet1() {
    ════════════════════════════════════════════════════════ */
 
 // Helper: rekurzivně extrahuje text z JSX node (pro studySections.content)
+/* ════════════════════════════════════════════════════════
+   CHEAT SHEETS — Management (okruhy 2–11) + helpery + galerie
+   Vzor: CheatSheet1. Každý cheat = 1 A4, 3 sloupce, komise pruh.
+   ════════════════════════════════════════════════════════ */
+
+// Sdílené styly (vloží se jednou)
+function CheatStyles() {
+  return (<style>{`
+    @media print {
+      body { margin: 0; padding: 0; }
+      .cheatsheet-no-print { display: none !important; }
+      .cheatsheet-page { box-shadow: none !important; margin: 0 !important; page-break-after: always; width: 210mm !important; min-height: 297mm !important; }
+      .cs-grid { grid-template-columns: 1fr 1fr 1fr !important; }
+    }
+    .cheatsheet-page { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1a1a1a; }
+    .cs-headline { color: #A82A5F; font-weight: 800; }
+    .cs-subhead { color: #5A2F5F; font-weight: 700; }
+    .cs-tag { color: #5FA4CA; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+    .cs-warn { color: #E06D1E; font-weight: 700; }
+    /* Náhled na obrazovce: stránka se vejde do šířky, 3 sloupce zůstanou na širokém, na úzkém padají. Tisk vždy A4 + 3 sloupce. */
+    @media screen and (max-width: 880px) {
+      .cheatsheet-page { width: 100% !important; min-height: 0 !important; padding: 16px !important; }
+      .cs-grid { grid-template-columns: 1fr !important; }
+    }
+  `}</style>);
+}
+
+// Tag (malý modrý nadpis kartičky)
+function CT({ children }) {
+  return <div className="cs-tag" style={{ fontSize: 10, marginTop: 8, marginBottom: 4, letterSpacing: 1 }}>{children}</div>;
+}
+// první tag bez horního marginu
+function CT0({ children }) {
+  return <div className="cs-tag" style={{ fontSize: 10, marginBottom: 5, letterSpacing: 1 }}>{children}</div>;
+}
+// Pojem + definice
+function CD({ term, children }) {
+  return (<div style={{ marginBottom: 6 }}>
+    <div className="cs-subhead" style={{ fontSize: 12 }}>{term}</div>
+    <div style={{ fontSize: 10.5 }}>{children}</div>
+  </div>);
+}
+// Sloupec (ohraničená karta)
+function CCol({ children }) {
+  return <div style={{ border: "1px solid #ddd", borderRadius: 4, padding: "6px 8px" }}>{children}</div>;
+}
+// Barevný box (pro 2×2 matice apod.)
+function CBox({ bg, title, sub, ex }) {
+  return (<td style={{ padding: 3, border: "1px solid #ddd", background: bg, verticalAlign: "top" }}>
+    <b>{title}</b>{sub ? <><br /><span style={{ fontSize: 9.5 }}>{sub}</span></> : null}
+    {ex ? <><br /><span style={{ fontSize: 9.5, color: "#666" }}>{ex}</span></> : null}
+  </td>);
+}
+// malá poznámka kurzívou
+function CNote({ children }) {
+  return <div style={{ fontSize: 9.5, color: "#666", marginTop: 4, fontStyle: "italic" }}>{children}</div>;
+}
+
+// Obal celé A4 stránky cheatu
+function CheatPage({ okruh, title, subtitle, children, examBar }) {
+  return (
+    <div className="cheatsheet-page" style={{
+      width: "210mm", minHeight: "297mm", padding: "10mm 12mm",
+      margin: "20px auto", background: "#fff",
+      boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+      boxSizing: "border-box", fontSize: 11.5, lineHeight: 1.45,
+    }}>
+      <div style={{ borderBottom: "2px solid #A82A5F", paddingBottom: 6, marginBottom: 10 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+          <h1 style={{ margin: 0, fontSize: 18, color: "#A82A5F", fontWeight: 800 }}>OKRUH {okruh} — {title}</h1>
+          <span style={{ fontSize: 11, color: "#888", fontFamily: "JetBrains Mono, monospace" }}>nabombuj.cz</span>
+        </div>
+        <div style={{ fontSize: 12, color: "#666", marginTop: 2 }}>{subtitle}</div>
+      </div>
+      <div className="cs-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>{children}</div>
+      <div style={{ marginTop: 10, padding: "6px 10px", border: "1.5px solid #A82A5F", borderRadius: 4, background: "#fff5f8" }}>
+        <div className="cs-warn" style={{ fontSize: 11, marginBottom: 3, letterSpacing: 1 }}>⚠️ NA ZKOUŠCE</div>
+        <div style={{ fontSize: 10.5, lineHeight: 1.5 }}>{examBar}</div>
+      </div>
+      <div style={{ marginTop: 8, fontSize: 9.5, color: "#888", textAlign: "center", borderTop: "1px solid #eee", paddingTop: 4 }}>
+        Nabombuj · Příprava na státnice VŠE · Cheat sheet — asistent při učení, ne náhrada okruhu
+      </div>
+    </div>
+  );
+}
+
+/* ─────────── OKRUH 2 — Výzvy 21. století ─────────── */
+function CheatSheetMng2() {
+  return (
+    <CheatPage okruh={2} title="Výzvy 21. století"
+      subtitle="Paradigma (tradiční × postmoderní) · 5 oblastí výzev · Průmysl 4.0 · VUCA · posun k Birkinshaw alternativě"
+      examBar={<>
+        <b>Heřman/Schovancová/Vávra</b> — <i>výzvy 21. stol. (globalizace, turbulence, Průmysl 4.0, automatizace)</i>. ·
+        <b> Mikovcová/Vávra/Viktora</b> — <i>výzvy + paradigmata + aplikace na PS</i>. ·
+        <b> Vávra/Mládková/Svobodová</b> — <i>porovnat tradiční × postmoderní paradigma</i>. ·
+        <b> Abíková/Kolouchová/Smrčka</b> — <i>zmínit i historii vývoje managementu</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> ukázat, jak výzvy tlačí firmu z tradičního Birkinshaw pólu k alternativnímu (emergence, obliquity).
+      </>}>
+      <CCol>
+        <CT0>PARADIGMA</CT0>
+        <CD term="Paradigma">Přijímané schéma / vzorec myšlení. Soubor předpokladů, jak svět funguje. <b>Posun paradigmatu</b> = změna způsobu uvažování o řízení.</CD>
+        <CT>TRADIČNÍ × POSTMODERNÍ</CT>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.8 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1" }}><b>Tradiční</b><br /><span style={{ fontSize: 9.3 }}>stabilita, hierarchie, kontrola, plán, jistota</span></td>
+          <td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f0fa" }}><b>Postmoderní</b><br /><span style={{ fontSize: 9.3 }}>změna, síť, autonomie, flexibilita, nejistota</span></td></tr>
+        </tbody></table>
+        <CNote>Komise chce umět <b>porovnat</b> obě a zařadit, kam firma z PS patří a kam se posouvá.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>5 OBLASTÍ VÝZEV 21. STOLETÍ</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Globalizace</b> — propojení trhů, konkurence odkudkoli</li>
+          <li><b>Technologie / Průmysl 4.0</b> — digitalizace, AI, automatizace</li>
+          <li><b>Turbulence (VUCA)</b> — rychlá nepředvídatelná změna</li>
+          <li><b>Znalostní ekonomika</b> — lidé a know-how = hlavní zdroj</li>
+          <li><b>Společenská odpovědnost</b> — udržitelnost, CSR/ESG (→ Okruh 11)</li>
+        </ol>
+        <CNote>Výzvy = vnější faktory, které <b>nutí firmu měnit management</b>. Kdo nereaguje, zaostane.</CNote>
+        <CT>PRŮMYSL 4.0</CT>
+        <div style={{ fontSize: 10.5 }}>4. průmyslová revoluce — propojení fyzického a digitálního světa. IoT, kyber-fyzické systémy, big data, automatizace.</div>
+      </CCol>
+      <CCol>
+        <CT0>VUCA</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>V</b>olatility — proměnlivost</li>
+          <li><b>U</b>ncertainty — nejistota</li>
+          <li><b>C</b>omplexity — složitost</li>
+          <li><b>A</b>mbiguity — nejednoznačnost</li>
+        </ul>
+        <CT>CSR × CSV</CT>
+        <div style={{ fontSize: 10.5 }}><b>CSR</b> = firma vrací část zisku společnosti (filantropie). <b>CSV</b> (shared value) = společenský přínos je <b>součást byznysu</b>, ne náklad navíc. → detail Okruh 11.</div>
+        <CT>POSUN K BIRKINSHAWOVI</CT>
+        <div style={{ fontSize: 10.5 }}>Výzvy tlačí firmu z <b>tradičního pólu</b> (byrokracie, hierarchie, alignment) k <b>alternativnímu</b> (emergence, kolektivní moudrost, obliquity). Turbulentní odvětví → Discovery model.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── OKRUH 3 — Koordinace aktivit ─────────── */
+function CheatSheetMng3() {
+  return (
+    <CheatPage okruh={3} title="Koordinace aktivit"
+      subtitle="Byrokracie × emergence · Job Design × Job Crafting · hybridní modely · Birkinshaw dimenze Koordinace"
+      examBar={<>
+        <b>Bočková/Nový/Kolouchová</b>, <b>Heřman</b>, <b>Krause</b>, <b>Mareš</b> — <i>koordinace aktivit, byrokracie × emergence, aplikace na PS</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> zařaď firmu (byrokracie / emergence / hybrid), zhodnoť vhodnost vůči prostředí (stabilní → byrokracie, turbulentní → emergence) a navrhni posun.
+      </>}>
+      <CCol>
+        <CT0>CO JE KOORDINACE</CT0>
+        <CD term="Koordinace aktivit">Proces rozdělení rolí a sladění činností v organizaci, aby fungovaly k jednomu cíli. První Birkinshawova dimenze (jak se práce slaďuje).</CD>
+        <CT>JOB DESIGN × JOB CRAFTING</CT>
+        <div style={{ fontSize: 10.5 }}><b>Job Design</b> = role navrhne shora management (tradiční). <b>Job Crafting</b> = zaměstnanec si práci sám přetváří podle silných stránek (moderní, emergence).</div>
+      </CCol>
+      <CCol>
+        <CT0>BYROKRACIE — formální řád</CT0>
+        <div style={{ fontSize: 10.5 }}>Horizontální koordinace přes <b>procesy, pravidla a formální strukturu</b>. Jasné role, předvídatelnost.</div>
+        <div style={{ marginTop: 4 }}><span style={{ background: "#e1f5e1", padding: "1px 5px", borderRadius: 3, fontSize: 9.8 }}>+ stabilita, efektivita, škálovatelnost</span></div>
+        <div style={{ marginTop: 3 }}><span style={{ background: "#fbecea", padding: "1px 5px", borderRadius: 3, fontSize: 9.8 }}>− pomalá, rigidní, dusí inovaci</span></div>
+        <CNote>Vhodná pro <b>stabilní prostředí</b> a opakované procesy (McDonald's, výroba).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>EMERGENCE — spontánní řád</CT0>
+        <div style={{ fontSize: 10.5 }}>Spontánní kolektivní práce a <b>sebeorganizace</b>. Řád vzniká zdola z interakcí lidí, ne z příkazů.</div>
+        <div style={{ marginTop: 4 }}><span style={{ background: "#e1f5e1", padding: "1px 5px", borderRadius: 3, fontSize: 9.8 }}>+ flexibilní, inovativní, rychlá adaptace</span></div>
+        <div style={{ marginTop: 3 }}><span style={{ background: "#fbecea", padding: "1px 5px", borderRadius: 3, fontSize: 9.8 }}>− chaos, hůř škáluje, závisí na lidech</span></div>
+        <CNote>Vhodná pro <b>turbulentní prostředí</b> a kreativní práci (startupy, Spotify squads).</CNote>
+        <CT>HYBRID</CT>
+        <div style={{ fontSize: 10.5 }}>Většina firem není čistá — kombinují <b>byrokracii v provozu</b> (mzdy, compliance) a <b>emergenci v inovaci</b> (R&D, projekty).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── OKRUH 4 — Rozhodování + distribuce moci ─────────── */
+function CheatSheetMng4() {
+  return (
+    <CheatPage okruh={4} title="Rozhodování + distribuce moci"
+      subtitle="Hierarchie × collective wisdom · French-Raven 5 zdrojů moci · McGregor X/Y · organizační struktury"
+      examBar={<>
+        <b>Mikovcová</b>, <b>Bočková/Nový/Kolouchová</b>, <b>Krause</b>, <b>Mareš</b> — <i>rozhodování, distribuce moci, struktury, aplikace na PS</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> zařaď strukturu firmy, urči zdroje moci (French-Raven), zhodnoť hierarchii × kolektivní moudrost a navrhni vhodnější model dle prostředí.
+      </>}>
+      <CCol>
+        <CT0>DISTRIBUCE MOCI</CT0>
+        <CD term="Distribuce moci">Jak je řízená organizace — kdo a jak rozhoduje. Birkinshawova dimenze Rozhodování.</CD>
+        <CT>HIERARCHIE × COLLECTIVE WISDOM</CT>
+        <div style={{ fontSize: 10.5 }}><b>Hierarchie</b> — vertikální, nadřízený rozhodne, podřízený plní. Rychlé, jasná odpovědnost, ale úzký pohled.<br /><b>Collective wisdom</b> — velká různorodá skupina dojde k lepšímu rozhodnutí (wisdom of crowds). Potřebuje různorodost a nezávislost názorů.</div>
+      </CCol>
+      <CCol>
+        <CT0>FRENCH-RAVEN — 5 ZDROJŮ MOCI</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Legitimní</b> — z pozice / funkce</li>
+          <li><b>Odměňovací</b> — moc dát odměnu</li>
+          <li><b>Donucovací</b> — moc potrestat</li>
+          <li><b>Expertní</b> — ze znalostí a dovedností</li>
+          <li><b>Referenční</b> — z osobnosti, charisma, vzor</li>
+        </ol>
+        <CNote>Expertní + referenční = nejtrvalejší (nejsou vázané na pozici).</CNote>
+        <CT>McGREGOR — TEORIE X × Y</CT>
+        <div style={{ fontSize: 10.5 }}><b>X</b> — lidé jsou líní, nutno kontrolovat (autoritativní). <b>Y</b> — lidé chtějí pracovat, dej jim autonomii (participativní).</div>
+      </CCol>
+      <CCol>
+        <CT0>ORGANIZAČNÍ STRUKTURY</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Liniová</b> — jasná hierarchie, jeden nadřízený</li>
+          <li><b>Funkční</b> — dělení podle funkcí (HR, výroba…)</li>
+          <li><b>Divizní</b> — podle produktů / trhů / regionů</li>
+          <li><b>Maticová</b> — dvojí podřízenost (projekt × funkce)</li>
+          <li><b>Síťová / plochá</b> — málo úrovní, autonomie</li>
+        </ul>
+        <CT>WEBER + MIKROPOLITIKA</CT>
+        <div style={{ fontSize: 10.5 }}>Weber: <b>3 typy legitimní autority</b> — tradiční, charismatická, legální (byrokratická). <b>Mikropolitika</b> = neformální boj o moc a vliv uvnitř firmy.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── OKRUH 5 — Plánování ─────────── */
+function CheatSheetMng5() {
+  return (
+    <CheatPage okruh={5} title="Plánování"
+      subtitle="Alignment × obliquity · MBO × OKR · typy a horizonty plánů · limity plánování"
+      examBar={<>
+        <b>Mládková/Černá/Kopkáně</b> — <i>co je alignment a obliquity</i>. ·
+        <b> Tahal/Pauknerová/Schönfeld</b> — <i>planning + aplikace na PS</i>. ·
+        <b> Nový/Müllerová/Kolouchová</b> — <i>jaký systém plánování firma využívá a jaký by měla</i>. ·
+        <b> Tahal/Kuděj/Kučera</b> — <i>principy, limity, doporučení</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> rozliš alignment × obliquity, urči, co firma má, a navrhni vhodný systém (stabilní → MBO, turbulentní → OKR).
+      </>}>
+      <CCol>
+        <CT0>CO JE PLÁNOVÁNÍ</CT0>
+        <CD term="Plánování">Stanovení cíle a cesty, která k němu vede. Příprava na budoucnost, minimalizace nejistoty. První manažerská funkce.</CD>
+        <CT>TYPY PLÁNŮ (horizont)</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Strategické</b> — 3–5+ let, vrcholový mng</li>
+          <li><b>Taktické</b> — 1 rok, střední mng</li>
+          <li><b>Operativní</b> — dny/týdny, liniový mng</li>
+        </ul>
+        <CT>LIMITY PLÁNOVÁNÍ</CT>
+        <div style={{ fontSize: 10.5 }}>Nejistota budoucnosti, rigidita plánu, čas a náklady na tvorbu, falešný pocit jistoty. V turbulenci plán rychle zastará.</div>
+      </CCol>
+      <CCol>
+        <CT0>ALIGNMENT — přímé cíle</CT0>
+        <div style={{ fontSize: 10.5 }}>Cíle stanoveny <b>přímo a shora</b>. Zaměstnanci plní úkoly, aby se dosáhlo společného cíle. <b>Tradiční</b> Birkinshaw pól (tight ends).</div>
+        <CNote>Vhodné pro stabilní prostředí, kde cíl jde jasně určit.</CNote>
+        <CT0 >OBLIQUITY — nepřímé cíle</CT0>
+        <div style={{ fontSize: 10.5 }}>Cíle <b>nejdou přesně nadefinovat</b> (okolí se mění). Dosahujeme jich <b>oklikou</b> — přes smysl a hodnoty. <b>Alternativní</b> pól (loose ends). Základ = OKR.</div>
+        <CNote>Př.: nejziskovější firmy nesledují zisk přímo, ale skrz hodnotu pro zákazníka.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>MBO × OKR</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.8 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1" }}><b>MBO</b> (Drucker)<br /><span style={{ fontSize: 9.3 }}>cíle shora, roční, vázané na odměny, alignment</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f0fa" }}><b>OKR</b> (Google)<br /><span style={{ fontSize: 9.3 }}>Objectives + Key Results, čtvrtletní, ambiciózní, transparentní, NE vázané na odměny, obliquity</span></td></tr>
+        </tbody></table>
+        <CNote>Komise chce <b>rozdíl MBO × OKR</b>: MBO = stabilní/kontrola, OKR = flexibilní/motivace. OKR cíleně ambiciózní (70 % = úspěch).</CNote>
+        <CT>PROPOJENÍ S BIRKINSHAWEM</CT>
+        <div style={{ fontSize: 10.5 }}>Plánování = dimenze ENDS (cíle). Alignment = tight ends, obliquity = loose ends.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── OKRUH 6 — Modely a systémy řízení ─────────── */
+function CheatSheetMng6() {
+  return (
+    <CheatPage okruh={6} title="Modely a systémy řízení"
+      subtitle="4 modely řízení · tvrdé × měkké prvky prosperity · 7S McKinsey · CSF"
+      examBar={<>
+        <b>Mikovcová</b>, <b>Bočková</b>, <b>Krause</b>, <b>Nový</b>, <b>Pauknerová</b> — <i>modely řízení, měkké × tvrdé prvky, 7S, aplikace na PS</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> identifikuj model řízení firmy, roztřiď její prvky na tvrdé × měkké, použij 7S jako check-list a najdi CSF.
+      </>}>
+      <CCol>
+        <CT0>4 MODELY ŘÍZENÍ</CT0>
+        <div style={{ fontSize: 10.5 }}>Celkový přístup firmy k lidem:</div>
+        <ol style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Direktivní</b> — příkazy, kontrola</li>
+          <li><b>Participativní</b> — zapojení lidí</li>
+          <li><b>Delegativní</b> — autonomie týmů</li>
+          <li><b>Týmový / vztahový</b> — důvěra, spolupráce</li>
+        </ol>
+        <CT>CSF — kritické faktory úspěchu</CT>
+        <div style={{ fontSize: 10.5 }}>Nejpodstatnější faktory, které <b>musí</b> fungovat, aby firma uspěla. Na ně se soustředí měření a zdroje.</div>
+      </CCol>
+      <CCol>
+        <CT0>TVRDÉ × MĚKKÉ PRVKY</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.8 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1", verticalAlign: "top" }}><b>TVRDÉ</b><br /><span style={{ fontSize: 9.3 }}>měřitelné, dají se nařídit: strategie, struktura, systémy, procesy, čísla</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1", verticalAlign: "top" }}><b>MĚKKÉ</b><br /><span style={{ fontSize: 9.3 }}>vázané na člověka: hodnoty, kultura, schopnosti, styl, lidé. Nedají se nařídit, budují se</span></td></tr>
+        </tbody></table>
+        <CNote>Prosperita firmy stojí na <b>obojím</b> — tvrdé bez měkkých nefunguje a naopak.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>7S McKINSEY</CT0>
+        <div style={{ fontSize: 10.5 }}>7 vzájemně propojených faktorů, které musí být v souladu:</div>
+        <div style={{ marginTop: 3 }}><span style={{ background: "#fff8e1", padding: "1px 4px", borderRadius: 3, fontSize: 9.6 }}>TVRDÉ: Strategy · Structure · Systems</span></div>
+        <div style={{ marginTop: 3 }}><span style={{ background: "#e1f5e1", padding: "1px 4px", borderRadius: 3, fontSize: 9.6 }}>MĚKKÉ: Skills · Staff · Style · Shared values</span></div>
+        <CNote><b>Shared values</b> = uprostřed, propojuje všechno. Změna jednoho S ovlivní ostatní.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── OKRUH 7 — Performance Management ─────────── */
+function CheatSheetMng7() {
+  return (
+    <CheatPage okruh={7} title="Performance Management"
+      subtitle="PM cyklus · check-in × check-out · MBO + KPI · Balanced Scorecard (Kaplan-Norton) · NPS · Six Sigma"
+      examBar={<>
+        <b>Mikovcová</b>, <b>Heřman</b>, <b>Pichanič</b>, <b>Smrčka</b> — <i>performance management, BSC, KPI, aplikace na PS</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> popiš PM jako cyklus (cíle → měření → zpětná vazba → rozvoj), urči nástroje firmy a navrhni BSC (4 perspektivy) + posun z check-out na check-in.
+      </>}>
+      <CCol>
+        <CT0>CO JE PM</CT0>
+        <CD term="Performance Management">Integrovaný systém: stanovení cílů → měření výkonu → zpětná vazba → odměna a rozvoj. Není to jen hodnocení 1×/rok, ale kontinuální cyklus.</CD>
+        <CT>CHECK-IN × CHECK-OUT</CT>
+        <div style={{ fontSize: 10.5 }}><b>Check-out</b> (tradiční) — roční hodnocení zpětně, formální. <b>Check-in</b> (moderní) — průběžná, častá zpětná vazba, dopředu orientovaná. Trend = check-in.</div>
+      </CCol>
+      <CCol>
+        <CT0>MBO + KPI</CT0>
+        <div style={{ fontSize: 10.5 }}><b>MBO</b> stanoví cíle, <b>KPI</b> (Key Performance Indicators) je měří. Hierarchie: firemní cíle → týmové → individuální KPI. KPI musí být SMART.</div>
+        <CT>NPS + SIX SIGMA</CT>
+        <div style={{ fontSize: 10.5 }}><b>NPS</b> (Net Promoter Score) — měří loajalitu zákazníků (doporučil bys? 0–10). <b>Six Sigma</b> — metoda snižování chyb a variability procesů (DMAIC).</div>
+      </CCol>
+      <CCol>
+        <CT0>BSC — BALANCED SCORECARD</CT0>
+        <div style={{ fontSize: 10.5 }}>Kaplan &amp; Norton. Měří výkon ve <b>4 vyvážených perspektivách</b> (ne jen finance):</div>
+        <ol style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Finanční</b> — zisk, ROE, tržby</li>
+          <li><b>Zákaznická</b> — spokojenost, podíl, NPS</li>
+          <li><b>Interní procesy</b> — kvalita, čas, efektivita</li>
+          <li><b>Učení a růst</b> — rozvoj lidí, inovace</li>
+        </ol>
+        <CNote>Propojuje strategii s měřením. Leading (předbíhající) × lagging (zpožděné) ukazatele.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── OKRUH 8 — Change Management ─────────── */
+function CheatSheetMng8() {
+  return (
+    <CheatPage okruh={8} title="Change Management"
+      subtitle="Lewin 3 fáze · Kotter 8 kroků · Teorie U (Scharmer) · change program × platform · bariéry změny"
+      examBar={<>
+        <b>Mikovcová</b>, <b>Cejthamr</b>, <b>Heřman</b>, <b>Mládková</b>, <b>Stříteský</b> — <i>change management, Kotter/Lewin, bariéry, aplikace na PS</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> vyber model dle složitosti (Lewin = jednoduchá změna, Kotter = velká transformace), pojmenuj bariéry a navrhni jak odbourat odpor.
+      </>}>
+      <CCol>
+        <CT0>LEWIN — 3 FÁZE</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Rozmrazení</b> (unfreeze) — připravit, vyvolat potřebu změny</li>
+          <li><b>Změna</b> (change) — provést přechod</li>
+          <li><b>Zmrazení</b> (refreeze) — ukotvit nový stav</li>
+        </ol>
+        <CNote>Vhodný pro <b>jednodušší, jasně definované</b> změny ve stabilním prostředí.</CNote>
+        <CT>TEORIE U (Scharmer)</CT>
+        <div style={{ fontSize: 10.5 }}>Hlubší změna přes <b>cestu dolů a nahoru U</b>: vnímat → ztišit se (presencing) → jednat z budoucnosti. Cíl: odbourat staré vzorce myšlení.</div>
+      </CCol>
+      <CCol>
+        <CT0>KOTTER — 8 KROKŮ</CT0>
+        <ol style={{ margin: 0, paddingLeft: 13, fontSize: 10 }}>
+          <li>Vyvolat pocit naléhavosti</li>
+          <li>Sestavit vedoucí koalici</li>
+          <li>Vytvořit vizi a strategii</li>
+          <li>Komunikovat vizi</li>
+          <li>Posílit (empower) k jednání</li>
+          <li>Krátkodobá vítězství</li>
+          <li>Upevnit a pokračovat</li>
+          <li>Zakotvit v kultuře</li>
+        </ol>
+        <CNote>Nejdůležitější model. <b>1–3</b> = příprava, <b>4–6</b> = realizace, <b>7–8</b> = ukotvení. Vhodný pro <b>velké transformace</b>.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>PROGRAM × PLATFORM</CT0>
+        <div style={{ fontSize: 10.5 }}><b>Change Program</b> = jednorázový projekt se začátkem a koncem (shora). <b>Change Platform</b> = trvalá schopnost firmy se měnit (zdola, kontinuální).</div>
+        <CT>BARIÉRY ZMĚNY</CT>
+        <div style={{ fontSize: 10.5 }}><b>3 typy odporu:</b> nechci (emoce, strach), neumím (chybí dovednosti), nemůžu (struktura brání).</div>
+        <CNote>Řešení: komunikace + zapojení + vzdělávání + odstranit strukturální překážky. Klíč = odbourat strach.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── OKRUH 9 — Trendy + Birkinshaw modely ─────────── */
+function CheatSheetMng9() {
+  return (
+    <CheatPage okruh={9} title="Trendy v managementu + Birkinshaw modely"
+      subtitle="MEANS × ENDS osy · 4 modely (Planning/Quest/Science/Discovery) · VUCA · Hamel 3 typy inovace managementu"
+      examBar={<>
+        <b>Mikovcová</b>, <b>Bočková</b>, <b>Nový</b>, <b>Pernica</b> — <i>Birkinshaw modely, trendy, inovace managementu, aplikace na PS</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> zařaď firmu do kvadrantu (means × ends), zhodnoť, zda sedí prostředí, a navrhni posun (turbulentní → Discovery/Quest).
+      </>}>
+      <CCol>
+        <CT0>MEANS × ENDS — OSY</CT0>
+        <div style={{ fontSize: 10.5 }}><b>MEANS</b> (jak / prostředky): tight = jasně dané × loose = volné.<br /><b>ENDS</b> (co / cíle): tight = jasný cíl × loose = otevřený.</div>
+        <CNote>Birkinshaw zjednodušil 4 otázky řízení do těchto 2 os → 4 modely.</CNote>
+        <CT>HAMEL — 3 TYPY INOVACE</CT>
+        <div style={{ fontSize: 10.5 }}><b>Manažerská</b> (nejsilnější KV, nejtěžší napodobit) &gt; <b>strategická</b> &gt; <b>operační/produktová</b>. Změna způsobu řízení = nejtrvalejší výhoda.</div>
+      </CCol>
+      <CCol>
+        <CT0>4 MODELY (means × ends)</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.5 }}><tbody>
+          <tr><CBox bg="#fff8e1" title="PLANNING" sub="tight + tight" ex="Toyota, McDonald's" /><CBox bg="#fff0e1" title="QUEST" sub="loose means + tight ends" ex="Tesla (mise)" /></tr>
+          <tr><CBox bg="#e1f5e1" title="SCIENCE" sub="tight means + loose ends" ex="Pfizer R&D" /><CBox bg="#e1f0fa" title="DISCOVERY" sub="loose + loose" ex="Google 20 %, startupy" /></tr>
+        </tbody></table>
+        <CNote><b>Planning</b> = stabilita/efektivita. <b>Discovery</b> = inovace/turbulence.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>VUCA — proč trendy</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>V</b>olatility · <b>U</b>ncertainty</li>
+          <li><b>C</b>omplexity · <b>A</b>mbiguity</li>
+        </ul>
+        <div style={{ fontSize: 10.5, marginTop: 3 }}>Turbulentní svět tlačí firmy z <b>Planning</b> k <b>alternativním modelům</b> (Quest, Discovery) — víc autonomie a adaptace.</div>
+        <CT>MANAGEMENT MODEL</CT>
+        <div style={{ fontSize: 10.5 }}>Birkinshaw: způsob, <b>jakým firma volí cíle a prostředky</b> k jejich dosažení. Není univerzálně nejlepší — záleží na prostředí.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── OKRUH 10 — Globální × Lokální řízení ─────────── */
+function CheatSheetMng10() {
+  return (
+    <CheatPage okruh={10} title="Globální × Lokální řízení firmy"
+      subtitle="Globalizace × lokalizace × glokalizace · 4 typy mezinárodních strategií · hnací síly internacionalizace"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mládková</b>, <b>Tahal</b>, <b>Vávra</b>, <b>Heřman</b> — <i>globální × lokální řízení, mezinárodní strategie, aplikace na PS</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> zařaď firmu (globální / lokální / glokální), urči typ mezinárodní strategie a zhodnoť tlaky (úspory × lokální přizpůsobení).
+      </>}>
+      <CCol>
+        <CT0>3 ZÁKLADNÍ POJMY</CT0>
+        <CD term="Globalizace">Standardizace napříč zeměmi — jeden produkt/proces všude. Úspory z rozsahu. (Apple, Coca-Cola).</CD>
+        <CD term="Lokalizace">Přizpůsobení každému trhu — kultura, jazyk, regulace, chutě. (McDonald's menu v Indii).</CD>
+        <CD term="Glokalizace">Řešení paradoxu: <b>mysli globálně, jednej lokálně</b>. Globální značka + lokální adaptace.</CD>
+      </CCol>
+      <CCol>
+        <CT0>4 TYPY MEZINÁR. STRATEGIÍ</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.4 }}><tbody>
+          <tr><CBox bg="#fff8e1" title="MEZINÁRODNÍ" sub="nízký tlak na úspory i adaptaci — vývoz" /><CBox bg="#e1f5e1" title="GLOBÁLNÍ" sub="vysoký tlak na úspory, nízký na adaptaci — standardizace" /></tr>
+          <tr><CBox bg="#fff0e1" title="MULTI­DOMESTIC" sub="nízký tlak na úspory, vysoký na adaptaci — lokální" /><CBox bg="#e1f0fa" title="TRANS­NACIONÁLNÍ" sub="vysoký tlak na obojí — glokalizace" /></tr>
+        </tbody></table>
+        <CNote>Osy: <b>tlak na úspory z rozsahu</b> × <b>tlak na lokální přizpůsobení</b>.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>HNACÍ SÍLY INTERNACIONALIZACE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Trh</b> — nasycení domácího, nové trhy</li>
+          <li><b>Náklady</b> — levnější výroba, úspory z rozsahu</li>
+          <li><b>Konkurence</b> — následovat / předběhnout rivaly</li>
+          <li><b>Vláda / regulace</b> — bariéry, dotace, dohody</li>
+        </ul>
+        <CT>DOPADY GLOBALIZACE</CT>
+        <div style={{ fontSize: 10.5 }}>Propojení ekonomik, kultur, technologií. + růst, přístup na trhy. − ztráta lokální identity, závislost na dodavatelských řetězcích, nerovnosti.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── OKRUH 11 — Etika, CSR/ESG ─────────── */
+function CheatSheetMng11() {
+  return (
+    <CheatPage okruh={11} title="Etika v managementu, CSR/ESG"
+      subtitle="3 pojetí etiky · etické dilema (6 kroků) · 4 typy manažerů · 3P + Carrollova pyramida · CSR × CSV × ESG"
+      examBar={<>
+        <b>Mládková</b>, <b>Pichanič</b>, <b>Nový</b>, <b>Heřman</b>, <b>Svobodová</b> — <i>etika, CSR/ESG, etické dilema, aplikace na PS</i>. ·
+        <b style={{ color: "#A82A5F" }}> Vždy:</b> najdi etické dilema v PS, urči typ manažera, použij Carrollovu pyramidu a rozliš CSR × CSV × ESG (evoluce přístupu).
+      </>}>
+      <CCol>
+        <CT0>3 POJETÍ ETIKY</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Utilitární</b> — co přinese největší užitek pro nejvíc lidí (důsledky)</li>
+          <li><b>Deontologické</b> — povinnost, pravidla a principy (bez ohledu na důsledky)</li>
+          <li><b>Ctnostní</b> — co by udělal charakterní člověk (ctnosti)</li>
+        </ol>
+        <CT>ETICKÉ DILEMA — 6 KROKŮ</CT>
+        <div style={{ fontSize: 10.2 }}>Fakta → kdo je dotčen → varianty → posouzení (3 pojetí) → rozhodnutí → reflexe. Dilema = nelze najít 100% uspokojivé řešení.</div>
+      </CCol>
+      <CCol>
+        <CT0>4 TYPY MANAŽERŮ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Imorální</b> — vědomě neetický, zisk za každou cenu</li>
+          <li><b>Amorální</b> — etiku neřeší (záměrně/nezáměrně)</li>
+          <li><b>Morální</b> — etika je standard rozhodování</li>
+        </ul>
+        <CT>3P — TRIPLE BOTTOM LINE</CT>
+        <div style={{ fontSize: 10.5 }}><b>People · Planet · Profit</b> — firma má být odpovědná v sociální, environmentální i ekonomické rovině.</div>
+        <CT>CARROLLOVA PYRAMIDA</CT>
+        <div style={{ fontSize: 10.2 }}>Zdola: <b>Ekonomická</b> (být ziskový) → <b>Legální</b> (dodržovat zákony) → <b>Etická</b> (být fér) → <b>Filantropická</b> (přispívat).</div>
+      </CCol>
+      <CCol>
+        <CT0>CSR × CSV × ESG — EVOLUCE</CT0>
+        <div style={{ fontSize: 10.5 }}><b>CSR</b> — firma vrací část zisku společnosti (filantropie, oddělené od byznysu).</div>
+        <div style={{ fontSize: 10.5, marginTop: 3 }}><b>CSV</b> (Porter, shared value) — společenský přínos je <b>součást strategie</b>, vytváří hodnotu pro firmu i společnost.</div>
+        <div style={{ fontSize: 10.5, marginTop: 3 }}><b>ESG</b> — <b>měřitelná</b> kritéria pro investory: Environmental, Social, Governance. Reporting, ratingy.</div>
+        <CNote>Posun: filantropie (CSR) → byznys (CSV) → měření a regulace (ESG).</CNote>
+        <CT>UDRŽITELNÝ MANAGEMENT</CT>
+        <div style={{ fontSize: 10.2 }}>Uspokojit dnešní potřeby, aniž ohrozíme budoucí generace. Dlouhodobá perspektiva nad krátkodobým ziskem.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── Mapování okruh → komponenta ─────────── */
+const MNG_CHEATS = {
+  1: { title: "Současné přístupy k managementu", comp: CheatSheet1 },
+  2: { title: "Výzvy 21. století", comp: CheatSheetMng2 },
+  3: { title: "Koordinace aktivit", comp: CheatSheetMng3 },
+  4: { title: "Rozhodování + distribuce moci", comp: CheatSheetMng4 },
+  5: { title: "Plánování", comp: CheatSheetMng5 },
+  6: { title: "Modely a systémy řízení", comp: CheatSheetMng6 },
+  7: { title: "Performance Management", comp: CheatSheetMng7 },
+  8: { title: "Change Management", comp: CheatSheetMng8 },
+  9: { title: "Trendy + Birkinshaw modely", comp: CheatSheetMng9 },
+  10: { title: "Globální × Lokální řízení", comp: CheatSheetMng10 },
+  11: { title: "Etika, CSR/ESG", comp: CheatSheetMng11 },
+};
+
+/* ─────────── Viewer jednoho cheatu (s tlačítky tisk/zpět) ─────────── */
+function CheatViewer({ okruh, onBack }) {
+  const entry = MNG_CHEATS[okruh];
+  if (!entry) return null;
+  const Comp = entry.comp;
+  // CheatSheet1 má vlastní obal; ostatní použijí CheatPage. Sjednotíme hlavičku zde.
+  return (
+    <>
+      <CheatStyles />
+      <div className="cheatsheet-no-print" style={{
+        position: "sticky", top: 0, zIndex: 10, background: "#fff", borderBottom: "1px solid #ddd",
+        padding: "12px 20px", display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between",
+      }}>
+        <div style={{ fontSize: 15.5, fontWeight: 600, color: "#333" }}>📄 Cheat sheet — Management okruh {okruh}</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button onClick={() => window.print()} style={{ padding: "8px 16px", borderRadius: 8, border: "none", background: "#A82A5F", color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>🖨️ Vytisknout / Uložit PDF</button>
+          <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
+        </div>
+      </div>
+      {okruh === 1 ? <CheatSheet1Body /> : <Comp />}
+    </>
+  );
+}
+
+/* ─────────── Viewer celého předmětu (11 cheatů za sebou) ─────────── */
+function CheatViewerAll({ onBack }) {
+  return (
+    <>
+      <CheatStyles />
+      <div className="cheatsheet-no-print" style={{
+        position: "sticky", top: 0, zIndex: 10, background: "#fff", borderBottom: "1px solid #ddd",
+        padding: "12px 20px", display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between",
+      }}>
+        <div style={{ fontSize: 15.5, fontWeight: 600, color: "#333" }}>📄 Cheat sheet — celý Management (11 okruhů)</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button onClick={() => window.print()} style={{ padding: "8px 16px", borderRadius: 8, border: "none", background: "#A82A5F", color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>🖨️ Vytisknout vše / Uložit PDF</button>
+          <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
+        </div>
+      </div>
+      {Object.keys(MNG_CHEATS).map((k) => {
+        const Comp = MNG_CHEATS[k].comp;
+        return <div key={k}>{Number(k) === 1 ? <CheatSheet1Body /> : <Comp />}</div>;
+      })}
+    </>
+  );
+}
+
+/* ─────────── Galerie cheatů (sekce uvnitř předmětu Management) ─────────── */
+function CheatGallery() {
+  const [view, setView] = useState(null); // null | "all" | číslo okruhu
+  if (view === "all") return <CheatViewerAll onBack={() => setView(null)} />;
+  if (view !== null) return <CheatViewer okruh={view} onBack={() => setView(null)} />;
+  return (
+    <div style={{ maxWidth: 900, margin: "0 auto", padding: "4px 4px 24px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10, marginBottom: 14 }}>
+        <div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: "var(--text)" }}>📄 Cheat sheety — Management</div>
+          <div style={{ fontSize: 13.5, color: "var(--text-muted)", marginTop: 2 }}>Jednostránkové taháky na okruh. Asistent při učení — otevři okruh a měj cheat vedle.</div>
+        </div>
+        <button onClick={() => setView("all")} style={{
+          padding: "10px 18px", borderRadius: 10, border: "none", background: "#A82A5F", color: "#fff",
+          cursor: "pointer", fontWeight: 700, fontSize: 14.5, whiteSpace: "nowrap",
+        }}>⬇️ Stáhnout celý předmět (11 okruhů)</button>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))", gap: 10 }}>
+        {Object.keys(MNG_CHEATS).map((k) => (
+          <button key={k} onClick={() => setView(Number(k))} style={{
+            textAlign: "left", border: "1px solid var(--border)", borderRadius: 12, padding: "12px 14px",
+            background: "var(--card)", cursor: "pointer", display: "flex", flexDirection: "column", gap: 4,
+          }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#A82A5F", fontFamily: "JetBrains Mono, monospace" }}>OKRUH {k}</div>
+            <div style={{ fontSize: 13.5, fontWeight: 600, color: "var(--text)", lineHeight: 1.3 }}>{MNG_CHEATS[k].title}</div>
+            <div style={{ fontSize: 11.5, color: "var(--text-muted)", marginTop: 2 }}>📄 1 strana · otevřít / tisknout</div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
 function extractText(node) {
   if (node == null) return "";
   if (typeof node === "string" || typeof node === "number") return String(node);
