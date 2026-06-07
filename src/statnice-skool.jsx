@@ -34063,8 +34063,8 @@ const PS_PIVOVAR_FULLTEXT = {
       h: "Základní informace o společnosti",
       odstavce: [
         "Právní forma podnikání: akciová společnosti (neobchodovaná)",
-        "Statutární orgán: Představenstvo \u2013 5 členů",
-        "Kontrolní orgán: Dozorčí rada \u2013 3 členové",
+        "Statutární orgán: Představenstvo – 5 členů",
+        "Kontrolní orgán: Dozorčí rada – 3 členové",
         "Odvětví: Pivovarnictví",
         "Tržby: přibližně 14,5 mld. Kč",
         "Počet zaměstnanců: přibližně 2.000",
@@ -34082,7 +34082,7 @@ const PS_PIVOVAR_FULLTEXT = {
       ],
       tabulky: [
         {
-          caption: "Výstav a spotřeba piva 2010\u20132015",
+          caption: "Výstav a spotřeba piva 2010–2015",
           head: ["Rok", "2010", "2011", "2012", "2013", "2014", "2015"],
           rows: [
             ["Výstav piva vč. nealko (tis. hl)", "16117", "16084", "16484", "16313", "16287", "16249"],
@@ -34109,7 +34109,7 @@ const PS_PIVOVAR_FULLTEXT = {
         "Společnost byla ještě nedávno součástí významné nadnárodní skupiny. Díky zmíněné fúzi však muselo dojít k vydělení této společnosti z celé skupiny a jejímu prodeji jiné pivovarnické skupině. Součástí společnosti jsou kromě původního pivovaru i další tři pivovary v rámci České republiky. Téměř jedna čtvrtina celkové produkce společnosti je vyráběna v licenci v zahraničí v rámci pivovarů, které patří do současné nadnárodní skupiny. Podíl exportu stále roste a v dnešní době představuje cca 3,5 mil. hektolitrů ročně. Díky poslední změně vlastníka se očekává podpora a zvýšení možností exportu, nicméně při zachování tradičních výrobních postupů a know-how společnosti. Nicméně, několikátá změna vlastníka vyvolává řadu nejistot, jak u top managementu, který byl najat původním vlastníkem, tak i u řadových zaměstnanců. Hodnota transakce vyvolává obavy z velkého tlaku na efektivitu a ziskovost, který může vést k redukci pracovních míst. Navíc se proslýchá, že nový vlastník uvažuje o evropském centru sdílených služeb, zejména v oblasti infrastrukturních procesů (IT, centrální nákup, logistika, HR). Současně i do pivovarnictví stále více proniká digitalizace a automatizace nejenom výrobních procesů. Mezi zaměstnanci se šíří i obavy z naprosto jiné kultury mateřské firmy a jiného manažerského stylu.",
         "Firma je silně řízena podle ročních cílů, které se odvíjejí od stanovených strategických priorit na příští 3 roky. Roční cíle pro generálního ředitele společnosti jsou stanoveny v oblasti zisku a ziskové marže, tržeb a tržního podílu v ČR. Tyto cíle jsou stanoveny aspirativně, zejména v oblasti on-trade obchodu.",
         "Hlavním posláním společnosti je přinášet milovníkům piva po celém světě skrze nápoje radost a potěšení. Firma se hlásí ke společenské odpovědnosti a trvalé udržitelnosti, která je realizována v jednotlivých regionech ČR formou různých podpořených projektů v oblasti zvyšování kvality života jejich obyvatel. Jedná se zejména o projekty v oblasti sociálního rozvoje a ochrany životního prostředí. Firma má definované svoje hodnoty, se kterými jsou zaměstnanci seznamováni při nástupním školení a pak při různých firemních akcích.",
-        "Společnost má hierarchické řízení, funkční organizační strukturu, firmu řídí 5ti členné představenstvo a v přímé podřízenosti generálního ředitele je obchodní ředitel, finanční a IT ředitel, marketingový ředitel, výrobní ředitel, supply chain ředitel, ředitel lidských zdrojů, ředitel prodeje na Slovensku a ředitel pro firemní vztahy a komunikaci. Společnost má v některých funkcích až 4 úrovně řízení. K řízení firmy je používán kaskádovitý rozpad cílů, plánování cílů probíhá top down a bottom up. Firma se snaží o rozpad cílů v oblasti finančních, obchodních cílů, cílů kvality a v oblasti lidských zdrojů. Pro stanovování cílů a jejich vyhodnocování společnost používá integrovaný systém řízení výkonu organizace i zaměstnanců, cíle jsou dvakrát ročně vyhodnocovány a výsledky mají zásadní vliv na výkonové odměny, vzdělávání i revizi mezd. Pro řízení obchodu je používán nástroj na řízení obchodní sítě, který umožňuje na denní bázi sledovat plnění obchodních cílů a řídit obchodní aktivity jednotlivých obchodních zástupců. Celkově se zdá, že tento způsob řízení podle cílů je účinný, nicméně cíle se každoročně zvyšují a celkově po změně vlastníků a vlivem určité nejistoty, která je vyvolána stále nejasným budoucím vlastníkem, není tento systém stanovování cílů příliš motivační. Přístup k práci u středního managementu je spíše transakční povahy a je zaměřen \u201Epouze\u201C na plnění stanovených cílů. Zejména však v tomto přechodovém období by bylo vhodné více posílit jejich angažovanost a tím podpořit motivaci přes celou společnost.",
+        "Společnost má hierarchické řízení, funkční organizační strukturu, firmu řídí 5ti členné představenstvo a v přímé podřízenosti generálního ředitele je obchodní ředitel, finanční a IT ředitel, marketingový ředitel, výrobní ředitel, supply chain ředitel, ředitel lidských zdrojů, ředitel prodeje na Slovensku a ředitel pro firemní vztahy a komunikaci. Společnost má v některých funkcích až 4 úrovně řízení. K řízení firmy je používán kaskádovitý rozpad cílů, plánování cílů probíhá top down a bottom up. Firma se snaží o rozpad cílů v oblasti finančních, obchodních cílů, cílů kvality a v oblasti lidských zdrojů. Pro stanovování cílů a jejich vyhodnocování společnost používá integrovaný systém řízení výkonu organizace i zaměstnanců, cíle jsou dvakrát ročně vyhodnocovány a výsledky mají zásadní vliv na výkonové odměny, vzdělávání i revizi mezd. Pro řízení obchodu je používán nástroj na řízení obchodní sítě, který umožňuje na denní bázi sledovat plnění obchodních cílů a řídit obchodní aktivity jednotlivých obchodních zástupců. Celkově se zdá, že tento způsob řízení podle cílů je účinný, nicméně cíle se každoročně zvyšují a celkově po změně vlastníků a vlivem určité nejistoty, která je vyvolána stále nejasným budoucím vlastníkem, není tento systém stanovování cílů příliš motivační. Přístup k práci u středního managementu je spíše transakční povahy a je zaměřen „pouze“ na plnění stanovených cílů. Zejména však v tomto přechodovém období by bylo vhodné více posílit jejich angažovanost a tím podpořit motivaci přes celou společnost.",
         "Organizační struktura přesně vymezuje vztahy nadřízenosti a podřízenosti, pravomoci i kompetence. Rozhodování se děje seshora dolu, manažeři dost delegují a jsou zodpovědní za finální výsledky práce svého týmu. V organizaci je nastavený systém pravidelných porad, začínající pondělním setkáním výkonného managementu, následovaným poradami na dalších úrovních řízení. Problémy se eskalují po řídících liniích.",
         "Každá pracovní pozice má dobře zpracovaný popis pracovní pozice, který je součástí i pracovní smlouvy a je základem dalších HR procesů. S ohledem na více než 100letou historii, má organizace rozsáhlý systém vnitropodnikových norem, obsahují velké množství formalizovaných pravidel, postupů a norem. S mírnou nadsázkou lze říci, že na vše je formulář a pravidlo. Projektové řízení se děje pouze v linii, málokdy se stane, že by bylo možné mít velké projekty napříč firmou, a pokud ano, je to spíše navíc ke každodenní práci. Inovace či nápady na zlepšení nejsou explicitně očekávány od zaměstnanců, přicházejí zejména z vlastního oddělení vývoje, z nejvyšších pater managementu a případně z externích zdrojů. Pokud už někdo přijde s nápadem, musí o něm nejprve přesvědčit svého liniového nadřízeného, připravit prezentaci a přesvědčit další rozhodovací úrovně. Získání zdrojů pro rozpracování nápadu je i tak velmi obtížné.",
       ],
@@ -34117,7 +34117,7 @@ const PS_PIVOVAR_FULLTEXT = {
     {
       h: "Produktové portfolio, marketing a positioning",
       odstavce: [
-        "Pokud jde o produktové portfolio společnosti, lze ho rozdělit do pěti produktových segmentů: prémiová piva (včetně pivních speciálů), mainstream, ekonomický segment, nové kategorie (např. cidery) a nealkoholická piva. Specifickým produktovým segmentem jsou regionální piva, ta se však v portfoliu společnosti nenacházejí. Vlajkovou lodí firmy je její tradiční ležák, který firma vyrábí od svého vzniku, tj. cca 160 let. Pozicování tohoto produktu je založeno na jeho dlouhé tradici, prémiové kvalitě, tradiční pivní chuti a faktu, že značka tohoto piva patří celosvětově mezi nejznámější značky pocházející z České republiky. Oproti silné pozici na domácím trhu je však tato značka pouze jednou z mnoha na zahraničních trzích. To se marketingoví pracovníci snaží změnit s cílem stát se mezinárodní ikonickou značkou. Tento cíl si samozřejmě vyžádá změnu způsobu prezentace na zahraničních trzích, upuštění od tradičních \u201Epivních klišé\u201C. Cenová strategie firmy odpovídá pozicování značky. Lze tedy konstatovat, že cena produktu je relativně vysoká ve srovnání s ostatními pivy na trhu. Distribuční síť je na trhu České republiky velmi široká a pivo z tohoto pivovaru lze prakticky koupit v každém městě i menší vesnici po celé zemi bez ohledu na to, jestli se jedná o prodej lahvového piva v obchodech a supermarketech nebo o točené pivo prodávané v restauracích a hospodách.",
+        "Pokud jde o produktové portfolio společnosti, lze ho rozdělit do pěti produktových segmentů: prémiová piva (včetně pivních speciálů), mainstream, ekonomický segment, nové kategorie (např. cidery) a nealkoholická piva. Specifickým produktovým segmentem jsou regionální piva, ta se však v portfoliu společnosti nenacházejí. Vlajkovou lodí firmy je její tradiční ležák, který firma vyrábí od svého vzniku, tj. cca 160 let. Pozicování tohoto produktu je založeno na jeho dlouhé tradici, prémiové kvalitě, tradiční pivní chuti a faktu, že značka tohoto piva patří celosvětově mezi nejznámější značky pocházející z České republiky. Oproti silné pozici na domácím trhu je však tato značka pouze jednou z mnoha na zahraničních trzích. To se marketingoví pracovníci snaží změnit s cílem stát se mezinárodní ikonickou značkou. Tento cíl si samozřejmě vyžádá změnu způsobu prezentace na zahraničních trzích, upuštění od tradičních „pivních klišé“. Cenová strategie firmy odpovídá pozicování značky. Lze tedy konstatovat, že cena produktu je relativně vysoká ve srovnání s ostatními pivy na trhu. Distribuční síť je na trhu České republiky velmi široká a pivo z tohoto pivovaru lze prakticky koupit v každém městě i menší vesnici po celé zemi bez ohledu na to, jestli se jedná o prodej lahvového piva v obchodech a supermarketech nebo o točené pivo prodávané v restauracích a hospodách.",
         "Ostatní značky v produktovém portfoliu firmy jsou pozicovány odlišně. Záleží na typu produktu a trhu. Díky různým značkám v portfoliu se firmě daří pokrýt téměř všechny tržní segmenty od low-end přes střední třídu až po prémiové segmenty. Některé z novějších značek v portfoliu pokrývají nově vzniklé tržní segmenty ochucených a nealkoholických piv. Firma spoléhá na strategii individuálních značek. Při uvádění nových produktů společnost využívá extenze značek.",
         "Pro svoji marketingovou komunikaci využívá firma téměř veškeré dostupné komunikační kanály počínaje televizní reklamou pro svoji vlajkovou loď v podobě prémiového ležáku a pro některé další mainstreamové značky, přes POS materiály v restauracích až po soutěže pro své loajální zákazníky na svých webových a facebookových stránkách, které slouží především na cílení na menší zákaznické skupiny.",
       ],
@@ -34129,9 +34129,9 @@ const PS_PIVOVAR_FULLTEXT = {
         "Vlastní i smluvní výzkum je financován kombinací vlastních zdrojů a úvěru, nicméně společnost se nebrání angažování fondů rizikového kapitálu, které by akcelerovalo výzkumné a inovační úsilí firmy.",
         "Testy na pokročilých uživatelích ukázaly, že prémiové značky společnosti (zejména piva typu Ale), která jsou prodávány za vyšší ceny, nelze vyrábět s využitím standardních a osvědčených postupů, využívajících chmelových koncentrátů a recyklovaných kvasinek. Tyto postupy, jakkoli ekonomicky výhodné, nejsou schopny zajistit špičkovou kvalitu produktů a potenciálně tak snižují hodnotu značky.",
         "Vedle produktových inovací se společnost věnuje v neztenčené míře procesním a marketingovým inovacím. Procesní inovace se zaměřují na procesní redesign, který byl implementován v souvislosti s adopcí norem řady ISO. V souladu s mandatorním principem permanentního zlepšování tak společnost zvyšuje svoji finanční a inovační výkonnost.",
-        "V oblasti marketingových inovací společnost uvedla na trh oblíbené sety pivních speciálů nabízené zákazníkům prostřednictvím distributorů v kartonovém oktaedru, případně i \u201Eochutnávkové sady\u201C distribuované v 1 dcl skleničkách zasazených do dřevěné podstavy ve vybraných pohostinských zařízeních. Společnost takto výrazně personalizovala své produkty a zajistila si tak vyšší míru identifikace zákazníků se svými produkty.",
-        "Společnost si je vědoma nebezpečí \u201Erozmělnění a devalvace značky\u201C, pokud by bezmyšlenkovitě respektovala módní vlny ciderů a podobných produktů, které souvisejí s pivem jen vzdáleně. V této souvislosti společnost jasně deklarovala svoji inovační strategii, která se těmto experimentům vyhýbá. Cílem je udržet firemní identitu inovujícího, nicméně respektovaného pivovaru s jasně vymezeným portfoliem spodně i svrchně kvašených piv.",
-        "Pro udržení a posílení své pozice na rostoucím trhu pivních speciálů v České republice společnost plánuje každoročně v průběhu dalších pěti let představit alespoň dva speciální typy piva. Díky situaci na domácím trhu (pokračující pokles, který trvá posledních 10 let), hodlá společnost dále rozvíjet své zahraniční aktivity. Obzvláště zajímavé se jeví rozvíjející se \u201Epivní trhy\u201C v Asii (jakým je např. Čína), post-sovětské státy (Rusko a Ukrajina), ale také některé rostoucí evropské trhy, jakými je Polsko a Bulharsko.",
+        "V oblasti marketingových inovací společnost uvedla na trh oblíbené sety pivních speciálů nabízené zákazníkům prostřednictvím distributorů v kartonovém oktaedru, případně i „ochutnávkové sady“ distribuované v 1 dcl skleničkách zasazených do dřevěné podstavy ve vybraných pohostinských zařízeních. Společnost takto výrazně personalizovala své produkty a zajistila si tak vyšší míru identifikace zákazníků se svými produkty.",
+        "Společnost si je vědoma nebezpečí „rozmělnění a devalvace značky“, pokud by bezmyšlenkovitě respektovala módní vlny ciderů a podobných produktů, které souvisejí s pivem jen vzdáleně. V této souvislosti společnost jasně deklarovala svoji inovační strategii, která se těmto experimentům vyhýbá. Cílem je udržet firemní identitu inovujícího, nicméně respektovaného pivovaru s jasně vymezeným portfoliem spodně i svrchně kvašených piv.",
+        "Pro udržení a posílení své pozice na rostoucím trhu pivních speciálů v České republice společnost plánuje každoročně v průběhu dalších pěti let představit alespoň dva speciální typy piva. Díky situaci na domácím trhu (pokračující pokles, který trvá posledních 10 let), hodlá společnost dále rozvíjet své zahraniční aktivity. Obzvláště zajímavé se jeví rozvíjející se „pivní trhy“ v Asii (jakým je např. Čína), post-sovětské státy (Rusko a Ukrajina), ale také některé rostoucí evropské trhy, jakými je Polsko a Bulharsko.",
       ],
     },
     {
@@ -34155,13 +34155,13 @@ const PS_PIVOVAR_FULLTEXT = {
       ],
     },
     {
-      h: "Rozvoj lídrů \u2013 příběh Miroslava",
+      h: "Rozvoj lídrů – příběh Miroslava",
       odstavce: [
-        "Podnik se také průběžně zajímá o rozvoj lídrů, na které jsou kladeny stále náročnější požadavky. Ne každý ze stávajících lídrů je schopen jim dostát. Jedním z nich byl i Miroslav, který byl několik let vedoucím výroby na jedné z linek. Byl svědomitý dříč, který se vždycky snažil mít věci pod svou kontrolou. To byly charakteristiky, které mu v dosavadní pracovní kariéře přinesly úspěch. V jeho nové pozici se však začaly jevit jako jeho slabiny. Až příliš se spoléhal sám na sebe, na své znalosti a dovednosti a nedostatečně využíval schopnosti a možnosti svých lidí. Nedokázal se odpoutat od detailních problémů každodenní práce a nechat jejich řešení na svých lidech. I zkušení mistři výroby s ním museli konzultovat veškeré své kroky. Pokud mu sdělili své návrhy na zlepšení a zefektivnění výroby, Miroslav se je obvykle snažil \u201Evylepšovat\u201C a zdokonalovat, čímž se velmi zpomalovalo jejich uvedení do praxe. Jeho lidé postupně ztráceli pocit osobní odpovědnosti za svoji práci. Miroslav jim uděloval strohé příkazy, na jejich dotazy odpovídal podrážděně a netrpělivě s tím, že nakonec všechno musí řešit sám; při potížích vyhrožoval sankcemi. Postupem času byl Miroslav natolik unavený a zahlcený řešením každodenních problémů, že přestal zaznamenávat změny a vývojové trendy, ke kterým začalo v \u201Ejeho\u201C odvětví v poslední době docházet, a nedokázal myslet a plánovat do budoucnosti. Každá změna podle něho představovala ohrožení plynulosti výroby. V očích nadřízených se stal brzdou dalšího rozvoje podniku. Obdobně jej vnímali i jeho podřízení a kolegové, což se projevilo i ve výsledcích 360° zpětné vazby, kterou podnik u manažerů realizoval.",
+        "Podnik se také průběžně zajímá o rozvoj lídrů, na které jsou kladeny stále náročnější požadavky. Ne každý ze stávajících lídrů je schopen jim dostát. Jedním z nich byl i Miroslav, který byl několik let vedoucím výroby na jedné z linek. Byl svědomitý dříč, který se vždycky snažil mít věci pod svou kontrolou. To byly charakteristiky, které mu v dosavadní pracovní kariéře přinesly úspěch. V jeho nové pozici se však začaly jevit jako jeho slabiny. Až příliš se spoléhal sám na sebe, na své znalosti a dovednosti a nedostatečně využíval schopnosti a možnosti svých lidí. Nedokázal se odpoutat od detailních problémů každodenní práce a nechat jejich řešení na svých lidech. I zkušení mistři výroby s ním museli konzultovat veškeré své kroky. Pokud mu sdělili své návrhy na zlepšení a zefektivnění výroby, Miroslav se je obvykle snažil „vylepšovat“ a zdokonalovat, čímž se velmi zpomalovalo jejich uvedení do praxe. Jeho lidé postupně ztráceli pocit osobní odpovědnosti za svoji práci. Miroslav jim uděloval strohé příkazy, na jejich dotazy odpovídal podrážděně a netrpělivě s tím, že nakonec všechno musí řešit sám; při potížích vyhrožoval sankcemi. Postupem času byl Miroslav natolik unavený a zahlcený řešením každodenních problémů, že přestal zaznamenávat změny a vývojové trendy, ke kterým začalo v „jeho“ odvětví v poslední době docházet, a nedokázal myslet a plánovat do budoucnosti. Každá změna podle něho představovala ohrožení plynulosti výroby. V očích nadřízených se stal brzdou dalšího rozvoje podniku. Obdobně jej vnímali i jeho podřízení a kolegové, což se projevilo i ve výsledcích 360° zpětné vazby, kterou podnik u manažerů realizoval.",
       ],
     },
     {
-      h: "Finanční data \u2013 Rozvaha (v mil. Kč)",
+      h: "Finanční data – Rozvaha (v mil. Kč)",
       odstavce: [],
       tabulky: [
         {
@@ -34175,7 +34175,7 @@ const PS_PIVOVAR_FULLTEXT = {
             ["Dlouhodobý finanční majetek B.III.", "11", "11", "11"],
             ["Oběžná aktiva C.", "2572", "2740", "2043"],
             ["Zásoby C.I.", "1115", "1047", "1164"],
-            ["Dlouhodobé pohledávky C.II.", "\u2013", "\u2013", "\u2013"],
+            ["Dlouhodobé pohledávky C.II.", "–", "–", "–"],
             ["Krátkodobé pohledávky C.III.", "1408", "1634", "847"],
             ["Krátkodobý finanční majetek C.IV.", "49", "59", "32"],
             ["Časové rozlišení D.", "981", "982", "955"],
@@ -34197,7 +34197,7 @@ const PS_PIVOVAR_FULLTEXT = {
       ],
     },
     {
-      h: "Finanční data \u2013 Výkaz zisku a ztráty (v mil. Kč)",
+      h: "Finanční data – Výkaz zisku a ztráty (v mil. Kč)",
       odstavce: [],
       tabulky: [
         {
@@ -34268,7 +34268,7 @@ const PRIPADOVKY = [
         okruhN: 11,
         color: VSE.fis,
         zadani: "Tvorba ceny na spotřebním trhu, faktory ovlivňující spotřebitelské vnímání cen, postup stanovení ceny. Postup konkretizujte pro firmu z PS.",
-        kdeNajit: "Marketing → M11 „Cenotvorba\u201C. Začni examStrategy (recept 7 kroků), pak studySections: intro → faktory → postup.",
+        kdeNajit: "Marketing → M11 „Cenotvorba“. Začni examStrategy (recept 7 kroků), pak studySections: intro → faktory → postup.",
         kostra: [
           "Cena jako MARKETINGOVÝ nástroj (ne ekonomická teorie poptávka×nabídka) — 4 role: generátor příjmů / signál kvality / segmentační nástroj / konkurenční zbraň. Nejflexibilnější prvek mixu, asymetrický dopad na profit.",
           "3 skupiny faktorů: interní (náklady, cíle, strategie, PLC) / externí (trh, konkurence, regulace) / vnímání zákazníka (reference price, price-quality inference, anchoring, decoy, bundling).",
@@ -34276,9 +34276,9 @@ const PRIPADOVKY = [
           "4 metody: nákladová / poptávková / konkurenční / value-based.",
         ],
         aplikace: [
-          "Vlajkový ležák = value-based + premium positioning. PS přímo říká: „cena relativně vysoká, odpovídá pozicování\u201C → price-quality inference: vysoká cena signalizuje kvalitu + tradici 160 let.",
+          "Vlajkový ležák = value-based + premium positioning. PS přímo říká: „cena relativně vysoká, odpovídá pozicování“ → price-quality inference: vysoká cena signalizuje kvalitu + tradici 160 let.",
           "Cenová diskriminace napříč 5 segmenty (prémium / mainstream / ekonomický / nealko / cidery) — různé značky pro různou cenovou hladinu (strategie individuálních značek).",
-          "Na zahraničních trzích slabší pozice → jiná cenová strategie než doma (cíl stát se ikonickou značkou = upustit od „pivních klišé\u201C).",
+          "Na zahraničních trzích slabší pozice → jiná cenová strategie než doma (cíl stát se ikonickou značkou = upustit od „pivních klišé“).",
         ],
         trap: "Komise (Kolouchová typ) chytá na tom, jestli začneš cenou jako MARKETINGOVÝM nástrojem, ne ekonomickou teorií nabídka×poptávka.",
       },
@@ -34290,15 +34290,15 @@ const PRIPADOVKY = [
         okruhN: 8,
         color: VSE.primary,
         zadani: "Identifikujte základní interní a externí bariéry inovací a navrhněte pro popsanou organizaci možné způsoby jejich překonání.",
-        kdeNajit: "Inovace → Inov 8 „Bariéry inovací + anatomie selhání + metriky\u201C. studySections: vnitřní bariéry → externí bariéry → překonání + IP.",
+        kdeNajit: "Inovace → Inov 8 „Bariéry inovací + anatomie selhání + metriky“. studySections: vnitřní bariéry → externí bariéry → překonání + IP.",
         kostra: [
           "Interní bariéry (vyjmenuj 6–8 z 10 zabijáků): firemní kultura, leadership, struktura/silo, procesy, lidé/talent, finance/R&D budget, čas, znalosti, zákaznický feedback, partnerství.",
           "Externí (4–6): regulace/legislativa, konkurence, makroekonomika, technologie, trh/zákazníci, financování.",
           "Sloane: rozdíl chyba × selhání. Sitkin — intelligent failure (4 kritéria) jako akademický bonus pro komisi.",
         ],
         aplikace: [
-          "PS doslova: „Inovace nejsou explicitně očekávány od zaměstnanců... kdo přijde s nápadem, musí přesvědčit liniového nadřízeného, připravit prezentaci, přesvědčit další úrovně, získání zdrojů je obtížné.\u201C → KULTURA + PROCESY + alokace zdrojů jako bariéry.",
-          "Struktura: projekty jen v linii, cross-firemní projekty „navíc k práci\u201C, schvalování přes víc úrovní, byrokracie („na vše formulář\u201C).",
+          "PS doslova: „Inovace nejsou explicitně očekávány od zaměstnanců... kdo přijde s nápadem, musí přesvědčit liniového nadřízeného, připravit prezentaci, přesvědčit další úrovně, získání zdrojů je obtížné.“ → KULTURA + PROCESY + alokace zdrojů jako bariéry.",
+          "Struktura: projekty jen v linii, cross-firemní projekty „navíc k práci“, schvalování přes víc úrovní, byrokracie („na vše formulář“).",
           "Externí: módní vlny ciderů (riziko devalvace značky), stagnující trh, asijská/východní konkurence.",
           "POZITIVUM: firma už má strategickou alianci s Výzkumným ústavem pivovarským = open innovation (dobrá praxe — zmínit!).",
           "Překonání: SGCP/Stage-Gate proces, inovační fond, oddělit R&D pro radikální inovace, kultura učení z chyb (blameless postmortems), snížit počet schvalovacích úrovní.",
@@ -34313,7 +34313,7 @@ const PRIPADOVKY = [
         okruhN: 5,
         color: VSE.ffu,
         zadani: "Jaký systém plánování může organizace využít? Jaký využívá organizace v PS? Jaké jsou jeho přínosy, podmínky a limity? Jaká opatření je možné doporučit ke zvýšení výkonnosti organizace v této oblasti?",
-        kdeNajit: "Management → Mng 5 „Plánování\u201C. Tato otázka je v platformě uložená DOSLOVA jako questionText u Mng5 a v examQuestions (komise Nový/Müllerová/Kolouchová, prádlo) — formulace sedí přesně.",
+        kdeNajit: "Management → Mng 5 „Plánování“. Tato otázka je v platformě uložená DOSLOVA jako questionText u Mng5 a v examQuestions (komise Nový/Müllerová/Kolouchová, prádlo) — formulace sedí přesně.",
         kostra: [
           "Plánování = Birkinshaw dimenze 3 (Managing Objectives): Alignment ↔ Obliquity.",
           "Alignment: přímé cíle, MBO/KPI, shareholder, McDonald's. + jasný cíl, soustředění zdrojů. − krátkodobost, lidé neví PROČ, limituje rozvoj.",
@@ -34321,11 +34321,11 @@ const PRIPADOVKY = [
           "4 modely matice: Planning (tight/tight) / Discovery (loose/loose) / Quest (tight ends, loose means) / Science (loose ends, tight means).",
         ],
         aplikace: [
-          "PS doslova: „kaskádovitý rozpad cílů, top-down i bottom-up, integrovaný systém řízení výkonu, cíle 2× ročně, vliv na odměny\u201C → pivovar = čistý Alignment / Planning model.",
-          "Limity v PS: „cíle se každoročně zvyšují... systém není příliš motivační\u201C + „přístup středního managementu je transakční, jen plnění cílů\u201C + nejistota z vlastníka oslabuje motivaci.",
-          "Doporučení ke zvýšení výkonnosti: posílit angažovanost (z transakčního na transformační vedení — propojení s Leadership), doplnit prvek Obliquity/OKR pro inovační oblasti, lépe komunikovat „proč\u201C, zachovat Alignment pro core výrobu.",
+          "PS doslova: „kaskádovitý rozpad cílů, top-down i bottom-up, integrovaný systém řízení výkonu, cíle 2× ročně, vliv na odměny“ → pivovar = čistý Alignment / Planning model.",
+          "Limity v PS: „cíle se každoročně zvyšují... systém není příliš motivační“ + „přístup středního managementu je transakční, jen plnění cílů“ + nejistota z vlastníka oslabuje motivaci.",
+          "Doporučení ke zvýšení výkonnosti: posílit angažovanost (z transakčního na transformační vedení — propojení s Leadership), doplnit prvek Obliquity/OKR pro inovační oblasti, lépe komunikovat „proč“, zachovat Alignment pro core výrobu.",
         ],
-        trap: "Mládková chytá na slovíčka — obliquity ≠ žádné plánování. Otázka explicitně chce „přínosy, podmínky a limity\u201C + „opatření ke zvýšení výkonnosti\u201C → bez doporučení nedostaneš plný počet.",
+        trap: "Mládková chytá na slovíčka — obliquity ≠ žádné plánování. Otázka explicitně chce „přínosy, podmínky a limity“ + „opatření ke zvýšení výkonnosti“ → bez doporučení nedostaneš plný počet.",
       },
     ],
     // Mapa: na co tě tahle PS může chytit napříč předměty
@@ -34350,7 +34350,7 @@ const PS_WORKFLOW = [
     faze: "FÁZE 1 — Příprava jedné PS (před zkouškou)",
     color: VSE.ffu,
     kroky: [
-      "Přečti PS 1× celou a podtrhej signály — každá věta typu „firma dělá X\u201C je hook na nějakou teorii.",
+      "Přečti PS 1× celou a podtrhej signály — každá věta typu „firma dělá X“ je hook na nějakou teorii.",
       "Udělej si mapu signál → okruh (jako tabulka níže). U pivovaru jich najdeš 10+.",
       "Projdi v platformě 3–4 nejpravděpodobnější okruhy. Zaměř se na sekci praxe/case study u každého — tam je vzor aplikace.",
     ],
@@ -34369,7 +34369,7 @@ const PS_WORKFLOW = [
     kroky: [
       "1. Definice + rámec (1–2 věty teorie) → ukážeš, že znáš pojem.",
       "2. Plný rozbor teorie (vyjmenuj kompletně — faktory, kroky, modely).",
-      "3. Identifikace v PS — „v případové studii firma používá...\u201C + citace konkrétní věty z PS.",
+      "3. Identifikace v PS — „v případové studii firma používá...“ + citace konkrétní věty z PS.",
       "4. Doporučení — co dělá špatně, co zlepšit (komise to chce skoro vždy).",
       "5. Cross-link — zmínit napojení na jiný okruh = bonusové body.",
     ],
@@ -34388,7 +34388,7 @@ function PripadovkyTab({ onNavigate }) {
         <div style={{ fontSize: 12.5, fontFamily: fontMono, color: VSE.fis, fontWeight: 700, letterSpacing: "1.5px", marginBottom: 6 }}>REÁLNÉ ZKUŠEBNÍ PŘÍPADOVKY</div>
         <div style={{ fontSize: isMobile ? 24 : 30, fontWeight: 800, color: t.text, fontFamily: fontSans, lineHeight: 1.2, marginBottom: 8 }}>Případovky</div>
         <div style={{ fontSize: 15, color: t.textMuted, fontFamily: fontSans, lineHeight: 1.6 }}>
-          Reálné PS, na kterých se zkouší. Nejdřív si přečteš celé zadání, pak si zkusíš odpovědět na otázky z konce \u2013 a teprve potom se odhalí, na co je to napojené v Nabombuj a na co se chytá komise.
+          Reálné PS, na kterých se zkouší. Nejdřív si přečteš celé zadání, pak si zkusíš odpovědět na otázky z konce – a teprve potom se odhalí, na co je to napojené v Nabombuj a na co se chytá komise.
         </div>
       </div>
 
@@ -34409,7 +34409,7 @@ function PripadovkyTab({ onNavigate }) {
         </div>
         <div style={{ marginTop: 12, padding: "12px 16px", borderRadius: 10, background: `${VSE.warning}15`, borderLeft: `3px solid ${VSE.warning}` }}>
           <span style={{ fontSize: 13.5, color: t.text, fontFamily: fontSans, lineHeight: 1.5 }}>
-            <b>Klíčové pravidlo:</b> Komise oceňuje aplikaci &gt; teorii. Teorii odříkat umí každý. Bod navíc dostaneš za to, že najdeš konkrétní větu v PS a řekneš \u201Etohle je přesně Alignment model, protože...\u201C
+            <b>Klíčové pravidlo:</b> Komise oceňuje aplikaci &gt; teorii. Teorii odříkat umí každý. Bod navíc dostaneš za to, že najdeš konkrétní větu v PS a řekneš „tohle je přesně Alignment model, protože...“
           </span>
         </div>
       </div>
@@ -34505,14 +34505,14 @@ function PripadovkaInteractive({ ps, onNavigate }) {
         <div>
           <div style={{ fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 700, letterSpacing: "1.5px", marginBottom: 8 }}>KROK 2 — ZKUS SI ODPOVĚDĚT (než se odhalí rozbor)</div>
           <div style={{ fontSize: 13.5, color: t.textMuted, fontFamily: fontSans, marginBottom: 16, lineHeight: 1.5 }}>
-            Tohle je vzorová kombinace otázek z konce zadání. Napiš si vlastní kostru \u2013 co bys řekl komisi. Pak se odhalí, jak to máš v Nabombuj a na co si dát pozor.
+            Tohle je vzorová kombinace otázek z konce zadání. Napiš si vlastní kostru – co bys řekl komisi. Pak se odhalí, jak to máš v Nabombuj a na co si dát pozor.
           </div>
           {ps.otazky.map((o, i) => (
             <div key={i} style={{ marginBottom: 18 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
                 <span style={{ fontSize: 11.5, fontWeight: 800, color: "#fff", background: o.color, borderRadius: 20, padding: "3px 11px", fontFamily: fontMono }}>OTÁZKA {o.n} · {o.predmet}</span>
               </div>
-              <div style={{ fontSize: 14.5, color: t.text, fontFamily: fontSans, lineHeight: 1.55, marginBottom: 8, fontStyle: "italic" }}>\u201E{o.zadani}\u201C</div>
+              <div style={{ fontSize: 14.5, color: t.text, fontFamily: fontSans, lineHeight: 1.55, marginBottom: 8, fontStyle: "italic" }}>„{o.zadani}“</div>
               <textarea
                 value={answers[i]}
                 onChange={(e) => setAnswer(i, e.target.value)}
@@ -34550,7 +34550,7 @@ function PripadovkaInteractive({ ps, onNavigate }) {
                     padding: "3px 11px", cursor: "pointer",
                   }}>{o.okruh} →</button>
                 </div>
-                <div style={{ fontSize: 14, color: t.text, fontFamily: fontSans, lineHeight: 1.55, fontStyle: "italic" }}>\u201E{o.zadani}\u201C</div>
+                <div style={{ fontSize: 14, color: t.text, fontFamily: fontSans, lineHeight: 1.55, fontStyle: "italic" }}>„{o.zadani}“</div>
               </div>
 
               {/* Tvoje odpověď (pokud něco napsal) */}
@@ -34601,7 +34601,7 @@ function PripadovkaInteractive({ ps, onNavigate }) {
         <div>
           <div style={{ fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 700, letterSpacing: "1.5px", marginBottom: 8 }}>KROK 4 — NA CO TĚ TAHLE PS MŮŽE CHYTIT JINDE</div>
           <div style={{ fontSize: 13, color: t.textMuted, fontFamily: fontSans, marginBottom: 14, lineHeight: 1.5 }}>
-            Tahle případovka je univerzální \u2013 pokrývá skoro všechny předměty. Mapa signál → okruh (klikni a přeskočíš na okruh):
+            Tahle případovka je univerzální – pokrývá skoro všechny předměty. Mapa signál → okruh (klikni a přeskočíš na okruh):
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {ps.crossMap.map((c, i) => (
