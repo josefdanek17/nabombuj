@@ -6977,6 +6977,7 @@ function OkruhMng11Panel() {
    ════════════════════════════════════════════════════════ */
 const NAV_TABS = [
   { id: "okruhy", label: "Okruhy", iconName: "chart" },
+  { id: "pripadovky", label: "Případovky", iconName: "target" },
   { id: "tracker", label: "Tracker", iconName: "target" },
   { id: "komunita", label: "Komunita", iconName: "people" },
   { id: "kalendar", label: "Kalendář", iconName: "target" },
@@ -34046,6 +34047,649 @@ function KalendarTab() {
   );
 }
 
+/* ════════════════════════════════════════════════════════
+   PŘÍPADOVKY — knihovna reálných zkušebních PS s rozborem
+   ════════════════════════════════════════════════════════ */
+
+// ════════════════════════════════════════════════════════
+// PLNÝ TEXT PŘÍPADOVKY "Velký pivovar" — přepsáno 1:1 z PDF
+// Struktura: sekce s nadpisy + odstavce + tabulky
+// ════════════════════════════════════════════════════════
+
+const PS_PIVOVAR_FULLTEXT = {
+  nadpis: "Velký pivovar",
+  sekce: [
+    {
+      h: "Základní informace o společnosti",
+      odstavce: [
+        "Právní forma podnikání: akciová společnosti (neobchodovaná)",
+        "Statutární orgán: Představenstvo \u2013 5 členů",
+        "Kontrolní orgán: Dozorčí rada \u2013 3 členové",
+        "Odvětví: Pivovarnictví",
+        "Tržby: přibližně 14,5 mld. Kč",
+        "Počet zaměstnanců: přibližně 2.000",
+        "Struktura zaměstnanců: 30 % ženy, 70 % muži. Cca 70 % zaměstnanců na manuálních pozicích, 20 % na pozicích technických, v administrativě, obchodu, 10 % vedoucí zaměstnanci. Výroba probíhá ve dvousměnném provozu.",
+        "Výstav: Celkem 9,7 mil. hl (včetně licenčních výrob v zahraničí v objemu 2,1 mil.)",
+        "Export: 3,5 mil. hl (2014, včetně licenčních výrob)",
+        "Produktové portfolio: 12 různých značek (vč. ležáků, tmavých piv, ochucených piv, nealkoholických piv, pivních speciálů a ciderů)",
+      ],
+    },
+    {
+      h: "Trendy v odvětví",
+      odstavce: [
+        "Na trhu působí 6 velkých pivovarských společností, naše společnost společně s druhou největší skupinou zaujímá cca 60 % domácího trhu. Na trhu dále působí 29 samostatných pivovarů (např. Svijany, Bernard apod.). Trendem je rozmach minipivovarů a restauračních pivovarů, kterých je aktuálně na domácím trhu kolem 300. Jejich celková roční výroba je 250 tis. hl.",
+        "Pokud jde o domácí pivní trh, pivovary se dlouhodobě potýkají se stagnující spotřebou (viz tabulka). Nepříjemným trendem je pak pokles spotřeby točeného piva v restauracích (tzv. on-trade), dlouhodobě klesá poměr on-trade vůči off-trade (prodej baleného piva v obchodech). Pokud jde o podíl spotřeby piva dle typu, na tuzemském trhu klesá podíl spotřeby výčepního piva, naopak roste podíl spotřeby ležáků, mírně rostou ostatní typy. Míchané nápoje na bázi piva byly velmi populární v roce 2012 (434 tis. hl), avšak již v roce 2013 propadly ve výstavu na 260 tis. hl. Na této úrovni se zhruba drží i nadále (v r. 2015 281 tis. hl). Import piva na český trh patří mezi nejnižší v Evropě, dovoz je převážně z Polska. Celkový výstav včetně exportu činil v r. 2015 20 076 tis. hl.",
+      ],
+      tabulky: [
+        {
+          caption: "Výstav a spotřeba piva 2010\u20132015",
+          head: ["Rok", "2010", "2011", "2012", "2013", "2014", "2015"],
+          rows: [
+            ["Výstav piva vč. nealko (tis. hl)", "16117", "16084", "16484", "16313", "16287", "16249"],
+            ["Spotřeba (litrů / obyvatele)", "143", "143", "146", "144", "144", "143"],
+          ],
+        },
+        {
+          caption: "Meziroční indexy domácí spotřeby dle typu obalu",
+          head: ["Typ obalu", "Index 15/14", "Podíl z celkové spotřeby"],
+          rows: [
+            ["Lahvové pivo", "99 %", "41 %"],
+            ["Sudové pivo", "97 %", "37 %"],
+            ["PET lahve", "96 %", "12 %"],
+            ["Plechovky", "125 %", "7 %"],
+            ["Pivo v cisternách", "106 %", "3 %"],
+          ],
+        },
+      ],
+    },
+    {
+      h: "Společnost v rámci odvětví",
+      odstavce: [
+        "Společnost byla založena v polovině 19. století v Čechách a od té doby se rozrůstá. Krátce po svém vzniku začala společnost svoji produkci také vyvážet do sousedních zemí. Míra exportu rostla vysokým tempem a v dnešní době můžeme produkty firmy nalézt ve více než padesáti státech po celém světě.",
+        "Společnost byla ještě nedávno součástí významné nadnárodní skupiny. Díky zmíněné fúzi však muselo dojít k vydělení této společnosti z celé skupiny a jejímu prodeji jiné pivovarnické skupině. Součástí společnosti jsou kromě původního pivovaru i další tři pivovary v rámci České republiky. Téměř jedna čtvrtina celkové produkce společnosti je vyráběna v licenci v zahraničí v rámci pivovarů, které patří do současné nadnárodní skupiny. Podíl exportu stále roste a v dnešní době představuje cca 3,5 mil. hektolitrů ročně. Díky poslední změně vlastníka se očekává podpora a zvýšení možností exportu, nicméně při zachování tradičních výrobních postupů a know-how společnosti. Nicméně, několikátá změna vlastníka vyvolává řadu nejistot, jak u top managementu, který byl najat původním vlastníkem, tak i u řadových zaměstnanců. Hodnota transakce vyvolává obavy z velkého tlaku na efektivitu a ziskovost, který může vést k redukci pracovních míst. Navíc se proslýchá, že nový vlastník uvažuje o evropském centru sdílených služeb, zejména v oblasti infrastrukturních procesů (IT, centrální nákup, logistika, HR). Současně i do pivovarnictví stále více proniká digitalizace a automatizace nejenom výrobních procesů. Mezi zaměstnanci se šíří i obavy z naprosto jiné kultury mateřské firmy a jiného manažerského stylu.",
+        "Firma je silně řízena podle ročních cílů, které se odvíjejí od stanovených strategických priorit na příští 3 roky. Roční cíle pro generálního ředitele společnosti jsou stanoveny v oblasti zisku a ziskové marže, tržeb a tržního podílu v ČR. Tyto cíle jsou stanoveny aspirativně, zejména v oblasti on-trade obchodu.",
+        "Hlavním posláním společnosti je přinášet milovníkům piva po celém světě skrze nápoje radost a potěšení. Firma se hlásí ke společenské odpovědnosti a trvalé udržitelnosti, která je realizována v jednotlivých regionech ČR formou různých podpořených projektů v oblasti zvyšování kvality života jejich obyvatel. Jedná se zejména o projekty v oblasti sociálního rozvoje a ochrany životního prostředí. Firma má definované svoje hodnoty, se kterými jsou zaměstnanci seznamováni při nástupním školení a pak při různých firemních akcích.",
+        "Společnost má hierarchické řízení, funkční organizační strukturu, firmu řídí 5ti členné představenstvo a v přímé podřízenosti generálního ředitele je obchodní ředitel, finanční a IT ředitel, marketingový ředitel, výrobní ředitel, supply chain ředitel, ředitel lidských zdrojů, ředitel prodeje na Slovensku a ředitel pro firemní vztahy a komunikaci. Společnost má v některých funkcích až 4 úrovně řízení. K řízení firmy je používán kaskádovitý rozpad cílů, plánování cílů probíhá top down a bottom up. Firma se snaží o rozpad cílů v oblasti finančních, obchodních cílů, cílů kvality a v oblasti lidských zdrojů. Pro stanovování cílů a jejich vyhodnocování společnost používá integrovaný systém řízení výkonu organizace i zaměstnanců, cíle jsou dvakrát ročně vyhodnocovány a výsledky mají zásadní vliv na výkonové odměny, vzdělávání i revizi mezd. Pro řízení obchodu je používán nástroj na řízení obchodní sítě, který umožňuje na denní bázi sledovat plnění obchodních cílů a řídit obchodní aktivity jednotlivých obchodních zástupců. Celkově se zdá, že tento způsob řízení podle cílů je účinný, nicméně cíle se každoročně zvyšují a celkově po změně vlastníků a vlivem určité nejistoty, která je vyvolána stále nejasným budoucím vlastníkem, není tento systém stanovování cílů příliš motivační. Přístup k práci u středního managementu je spíše transakční povahy a je zaměřen \u201Epouze\u201C na plnění stanovených cílů. Zejména však v tomto přechodovém období by bylo vhodné více posílit jejich angažovanost a tím podpořit motivaci přes celou společnost.",
+        "Organizační struktura přesně vymezuje vztahy nadřízenosti a podřízenosti, pravomoci i kompetence. Rozhodování se děje seshora dolu, manažeři dost delegují a jsou zodpovědní za finální výsledky práce svého týmu. V organizaci je nastavený systém pravidelných porad, začínající pondělním setkáním výkonného managementu, následovaným poradami na dalších úrovních řízení. Problémy se eskalují po řídících liniích.",
+        "Každá pracovní pozice má dobře zpracovaný popis pracovní pozice, který je součástí i pracovní smlouvy a je základem dalších HR procesů. S ohledem na více než 100letou historii, má organizace rozsáhlý systém vnitropodnikových norem, obsahují velké množství formalizovaných pravidel, postupů a norem. S mírnou nadsázkou lze říci, že na vše je formulář a pravidlo. Projektové řízení se děje pouze v linii, málokdy se stane, že by bylo možné mít velké projekty napříč firmou, a pokud ano, je to spíše navíc ke každodenní práci. Inovace či nápady na zlepšení nejsou explicitně očekávány od zaměstnanců, přicházejí zejména z vlastního oddělení vývoje, z nejvyšších pater managementu a případně z externích zdrojů. Pokud už někdo přijde s nápadem, musí o něm nejprve přesvědčit svého liniového nadřízeného, připravit prezentaci a přesvědčit další rozhodovací úrovně. Získání zdrojů pro rozpracování nápadu je i tak velmi obtížné.",
+      ],
+    },
+    {
+      h: "Produktové portfolio, marketing a positioning",
+      odstavce: [
+        "Pokud jde o produktové portfolio společnosti, lze ho rozdělit do pěti produktových segmentů: prémiová piva (včetně pivních speciálů), mainstream, ekonomický segment, nové kategorie (např. cidery) a nealkoholická piva. Specifickým produktovým segmentem jsou regionální piva, ta se však v portfoliu společnosti nenacházejí. Vlajkovou lodí firmy je její tradiční ležák, který firma vyrábí od svého vzniku, tj. cca 160 let. Pozicování tohoto produktu je založeno na jeho dlouhé tradici, prémiové kvalitě, tradiční pivní chuti a faktu, že značka tohoto piva patří celosvětově mezi nejznámější značky pocházející z České republiky. Oproti silné pozici na domácím trhu je však tato značka pouze jednou z mnoha na zahraničních trzích. To se marketingoví pracovníci snaží změnit s cílem stát se mezinárodní ikonickou značkou. Tento cíl si samozřejmě vyžádá změnu způsobu prezentace na zahraničních trzích, upuštění od tradičních \u201Epivních klišé\u201C. Cenová strategie firmy odpovídá pozicování značky. Lze tedy konstatovat, že cena produktu je relativně vysoká ve srovnání s ostatními pivy na trhu. Distribuční síť je na trhu České republiky velmi široká a pivo z tohoto pivovaru lze prakticky koupit v každém městě i menší vesnici po celé zemi bez ohledu na to, jestli se jedná o prodej lahvového piva v obchodech a supermarketech nebo o točené pivo prodávané v restauracích a hospodách.",
+        "Ostatní značky v produktovém portfoliu firmy jsou pozicovány odlišně. Záleží na typu produktu a trhu. Díky různým značkám v portfoliu se firmě daří pokrýt téměř všechny tržní segmenty od low-end přes střední třídu až po prémiové segmenty. Některé z novějších značek v portfoliu pokrývají nově vzniklé tržní segmenty ochucených a nealkoholických piv. Firma spoléhá na strategii individuálních značek. Při uvádění nových produktů společnost využívá extenze značek.",
+        "Pro svoji marketingovou komunikaci využívá firma téměř veškeré dostupné komunikační kanály počínaje televizní reklamou pro svoji vlajkovou loď v podobě prémiového ležáku a pro některé další mainstreamové značky, přes POS materiály v restauracích až po soutěže pro své loajální zákazníky na svých webových a facebookových stránkách, které slouží především na cílení na menší zákaznické skupiny.",
+      ],
+    },
+    {
+      h: "Inovace, výzkum a vývoj",
+      odstavce: [
+        "Společnost klade důraz na inovace, které plánovitě zajišťují v segmentu spodně kvašených piv (ležáky) minimálně udržení stávající konkurenční výhody a tržního podílu, zatímco v segmentu svrchně kvašených piv (pšeničné pivo a pivní speciály) zajišťují rozšíření tržního podílu v této rychle se rozšiřující oblasti. Zejména změna preferencí zákazníků a rostoucí obliba pivních speciálů nasměrovala společnost k intenzifikaci výzkumu a vývoje. Základní výzkum pivních speciálů není společnost schopna zajistit vlastními silami a z tohoto důvodu vytvořila strategickou alianci s Výzkumným ústavem pivovarským a sladařským, a.s. se sídlem v Praze. Tato instituce má dlouholeté zkušenosti s vývojem pivních speciálů, vlastní potřebné technologické zařízení a disponuje týmem zkušených pracovníků, čímž jsou vytvořeny předpoklady pro úspěšné zvládnutí základního výzkumu. Samotná společnost se zaměřuje na oblast aplikovaného výzkumu vývojem technologických zařízení a inovacemi v procesní a marketingové oblasti.",
+        "Vlastní i smluvní výzkum je financován kombinací vlastních zdrojů a úvěru, nicméně společnost se nebrání angažování fondů rizikového kapitálu, které by akcelerovalo výzkumné a inovační úsilí firmy.",
+        "Testy na pokročilých uživatelích ukázaly, že prémiové značky společnosti (zejména piva typu Ale), která jsou prodávány za vyšší ceny, nelze vyrábět s využitím standardních a osvědčených postupů, využívajících chmelových koncentrátů a recyklovaných kvasinek. Tyto postupy, jakkoli ekonomicky výhodné, nejsou schopny zajistit špičkovou kvalitu produktů a potenciálně tak snižují hodnotu značky.",
+        "Vedle produktových inovací se společnost věnuje v neztenčené míře procesním a marketingovým inovacím. Procesní inovace se zaměřují na procesní redesign, který byl implementován v souvislosti s adopcí norem řady ISO. V souladu s mandatorním principem permanentního zlepšování tak společnost zvyšuje svoji finanční a inovační výkonnost.",
+        "V oblasti marketingových inovací společnost uvedla na trh oblíbené sety pivních speciálů nabízené zákazníkům prostřednictvím distributorů v kartonovém oktaedru, případně i \u201Eochutnávkové sady\u201C distribuované v 1 dcl skleničkách zasazených do dřevěné podstavy ve vybraných pohostinských zařízeních. Společnost takto výrazně personalizovala své produkty a zajistila si tak vyšší míru identifikace zákazníků se svými produkty.",
+        "Společnost si je vědoma nebezpečí \u201Erozmělnění a devalvace značky\u201C, pokud by bezmyšlenkovitě respektovala módní vlny ciderů a podobných produktů, které souvisejí s pivem jen vzdáleně. V této souvislosti společnost jasně deklarovala svoji inovační strategii, která se těmto experimentům vyhýbá. Cílem je udržet firemní identitu inovujícího, nicméně respektovaného pivovaru s jasně vymezeným portfoliem spodně i svrchně kvašených piv.",
+        "Pro udržení a posílení své pozice na rostoucím trhu pivních speciálů v České republice společnost plánuje každoročně v průběhu dalších pěti let představit alespoň dva speciální typy piva. Díky situaci na domácím trhu (pokračující pokles, který trvá posledních 10 let), hodlá společnost dále rozvíjet své zahraniční aktivity. Obzvláště zajímavé se jeví rozvíjející se \u201Epivní trhy\u201C v Asii (jakým je např. Čína), post-sovětské státy (Rusko a Ukrajina), ale také některé rostoucí evropské trhy, jakými je Polsko a Bulharsko.",
+      ],
+    },
+    {
+      h: "Distribuce a logistika (supply chain)",
+      odstavce: [
+        "Distribuce a její optimalizace je hlavní náplní práce úseku supply chainu a probíhá v návaznosti na instrukce obchodního úseku. Řešena je vlastními dopravními prostředky (kamiony) přes síť vlastních skladů, která je dvouúrovňová, vedle centrálního distribučního skladu má v České republice síť 7 oblastních skladů rovnoměrně rozprostřených po republice, umístění vychází z dlouhodobě sledovaných objemů spotřeby v jednotlivých regionech. Dodávky do oblastních skladů probíhají pravidelně podle předem stanovených harmonogramů v množství podle predikcí oddělení odbytu. Ty jsou aktualizovány ve čtvrtletních a ročních termínech. V případě sezónních nárůstů prodeje jsou uzavírány operativně smlouvy s externími dopravci. V současné době je hlavním cílem úseku supply chainu připravit varianty dopravy na rozvíjející se trhy tak, aby byla co nejlevnější a nejrychlejší.",
+        "Vedle distribuce se v rámci logistiky řeší ještě zpětné toky, tedy především zpětný odběr obalů a přepravních prostředků (lahví, přepravek a palet), jsou pro ně zpracovány dlouhodobé plány s využitím plánování svozových tras pomocí tzv. Milkrunu.",
+        "Pro zlepšení distribuce má firma zavedeno jednotné označování jednotlivých prvků pomocí čárových kódů, ty se ale relativně často při manipulaci poškodí.",
+        "Úsek supply chainu se nezabývá optimalizací výroby samotné, při případném zvýšení produkce je jeho úkolem nárůst produkce absorbovat do skladů, v případě nedostatku místa v centrálním skladu dochází k operativním přesunům do oblastních skladů bez ohledu na jejich skutečnou potřebu a nastavené harmonogramy.",
+      ],
+    },
+    {
+      h: "Lidské zdroje (HR)",
+      odstavce: [
+        "Podnik má stanovenou strategii řízení lidských zdrojů podle modelu Dave Ulricha. Útvar vede ředitel lidských zdrojů, který je přímo podřízen členovi představenstva. HR strategie je určována v rámci strategického plánu podniku a je pravidelně inovována. HR business partneři zabezpečují podporu jednotlivým ředitelům úseků.",
+        "Podnik klade velký důraz na motivaci, zejména prostřednictvím odměňování. HR útvar ve spolupráci s řediteli útvarů a v souladu se zákonnými předpisy navrhuje vedení společnosti ke schválení mzdové předpisy a jejich změny (obvykle ročně). Podle schválených předpisů jsou stanoveny jednotlivé složky mzdy pro různé kategorie pracovníků. HR útvar současně navrhuje motivační programy a provádí průzkumy spokojenosti. Na základě jejich vyhodnocení navrhuje úpravy portfolia benefitů.",
+        "Mzdový systém podniku tvoří tarifní systém a pobídkové složky mzdy. Pracovní činnosti jsou zařazeny do skupin pomocí bodovací metody hodnocení práce. Základní mzda se zaměstnanci přiznává podle složitosti, náročnosti a odpovědnosti vykonávané práce. V podniku se provádí dvakrát ročně hodnocení pracovníků. Na základě hodnocení je přiznáno osobní ohodnocení. Pobídkovou složkou mzdy jsou dále bonusy, které jsou uplatněny odlišně pro různé kategorie zaměstnanců. Vyplácí se na základě splnění ukazatelů na měsíční, čtvrtletní nebo roční bázi dle zařazení zaměstnance. V případě mimořádných hospodářských výsledků podniku je přiznán mimořádný bonus.",
+        "Podnik má zaveden talentový program. Nominace do talentového programu je součástí ročního hodnocení zaměstnance. Nominace podléhá schválení talentové komise. Pracovníci zařazení do talentového programu procházejí rozvojovými programy podle předpokládaného dalšího působení v podniku. Systém kariérního plánování podporuje nástupnictví v podniku.",
+        "Podnik nemá díky talentovému programu problém s obsazením seniorních pozic, velké problémy má s náborem zaměstnanců do výroby. Značné úsilí tedy věnuje personálnímu marketingu a budování značky zaměstnavatele. Ukazuje se, že v lokalitách, kde má podnik své výrobní závody, ostatní zaměstnavatelé lákají manuální pracovníky příslibem benefitů a vyšších mezd, než je popisovaný podnik ochoten nabídnout. Stále se potýká s nedostatkem zaměstnanců ve výrobě, a proto u něho pracují agenturní zaměstnanci nebo najímá brigádníky. Organizace klade velký důraz na výběr manažerů, pro tyto účely používají rozsáhlou metodiku, včetně assessment cetra a finální slovo má nadřízený a HR oddělení. Tým se nepodílí na výběru svého manažera a obvykle ani členů týmů.",
+        "V rámci personálního controllingu má podnik stanoveny základní ukazatele. Podle srovnávacích studií vykazuje u manuálních pozic podprůměrné výsledky u kritéria doba do nástupu pracovníka, nemocnost a fluktuace. Naopak v oblasti pracovních úrazů je příkladem dobré praxe.",
+      ],
+    },
+    {
+      h: "Rozvoj lídrů \u2013 příběh Miroslava",
+      odstavce: [
+        "Podnik se také průběžně zajímá o rozvoj lídrů, na které jsou kladeny stále náročnější požadavky. Ne každý ze stávajících lídrů je schopen jim dostát. Jedním z nich byl i Miroslav, který byl několik let vedoucím výroby na jedné z linek. Byl svědomitý dříč, který se vždycky snažil mít věci pod svou kontrolou. To byly charakteristiky, které mu v dosavadní pracovní kariéře přinesly úspěch. V jeho nové pozici se však začaly jevit jako jeho slabiny. Až příliš se spoléhal sám na sebe, na své znalosti a dovednosti a nedostatečně využíval schopnosti a možnosti svých lidí. Nedokázal se odpoutat od detailních problémů každodenní práce a nechat jejich řešení na svých lidech. I zkušení mistři výroby s ním museli konzultovat veškeré své kroky. Pokud mu sdělili své návrhy na zlepšení a zefektivnění výroby, Miroslav se je obvykle snažil \u201Evylepšovat\u201C a zdokonalovat, čímž se velmi zpomalovalo jejich uvedení do praxe. Jeho lidé postupně ztráceli pocit osobní odpovědnosti za svoji práci. Miroslav jim uděloval strohé příkazy, na jejich dotazy odpovídal podrážděně a netrpělivě s tím, že nakonec všechno musí řešit sám; při potížích vyhrožoval sankcemi. Postupem času byl Miroslav natolik unavený a zahlcený řešením každodenních problémů, že přestal zaznamenávat změny a vývojové trendy, ke kterým začalo v \u201Ejeho\u201C odvětví v poslední době docházet, a nedokázal myslet a plánovat do budoucnosti. Každá změna podle něho představovala ohrožení plynulosti výroby. V očích nadřízených se stal brzdou dalšího rozvoje podniku. Obdobně jej vnímali i jeho podřízení a kolegové, což se projevilo i ve výsledcích 360° zpětné vazby, kterou podnik u manažerů realizoval.",
+      ],
+    },
+    {
+      h: "Finanční data \u2013 Rozvaha (v mil. Kč)",
+      odstavce: [],
+      tabulky: [
+        {
+          caption: "Aktiva a pasiva",
+          head: ["Položka", "31. 3. 2016", "31. 3. 2015", "31. 3. 2014"],
+          rows: [
+            ["CELKOVÁ AKTIVA", "14850", "15312", "14938"],
+            ["Dlouhodobý majetek B.", "11297", "11590", "11940"],
+            ["Dlouhodobý nehmotný majetek B.I.", "1227", "1168", "920"],
+            ["Dlouhodobý hmotný majetek B.II.", "10059", "10411", "11009"],
+            ["Dlouhodobý finanční majetek B.III.", "11", "11", "11"],
+            ["Oběžná aktiva C.", "2572", "2740", "2043"],
+            ["Zásoby C.I.", "1115", "1047", "1164"],
+            ["Dlouhodobé pohledávky C.II.", "\u2013", "\u2013", "\u2013"],
+            ["Krátkodobé pohledávky C.III.", "1408", "1634", "847"],
+            ["Krátkodobý finanční majetek C.IV.", "49", "59", "32"],
+            ["Časové rozlišení D.", "981", "982", "955"],
+            ["CELKOVÁ PASIVA", "14850", "15312", "14938"],
+            ["Vlastní kapitál A.", "4958", "5503", "5515"],
+            ["Základní kapitál A.I.", "2000", "2000", "2000"],
+            ["Kapitálové fondy A.II.", "(8)", "402", "308"],
+            ["Fondy ze zisku A.III.", "-", "-", "411"],
+            ["Nerozdělený zisk minulých let A.IV.", "10", "237", "(110)"],
+            ["VH běžného účetního období A.V.", "2957", "2864", "2906"],
+            ["Cizí zdroje B.", "9889", "9808", "9422"],
+            ["Rezervy B.I.", "256", "301", "402"],
+            ["Dlouhodobé závazky B.II.", "4866", "4939", "5005"],
+            ["Krátkodobé závazky B.III.", "4764", "4533", "4015"],
+            ["Bankovní úvěry a výpomoci B.IV.", "3", "35", "-"],
+            ["Časové rozlišení C.", "2", "1", "1"],
+          ],
+        },
+      ],
+    },
+    {
+      h: "Finanční data \u2013 Výkaz zisku a ztráty (v mil. Kč)",
+      odstavce: [],
+      tabulky: [
+        {
+          caption: "VZZ",
+          head: ["Položka", "31. 3. 2016", "31. 3. 2015", "31. 3. 2014"],
+          rows: [
+            ["Tržby za prodej zboží I.", "105", "69", "325"],
+            ["Náklady vynaložené na prodané zboží A.", "50", "49", "177"],
+            ["Obchodní marže +", "55", "20", "148"],
+            ["Výkony II.", "14481", "14031", "13252"],
+            ["Výkonová spotřeba B.", "7892", "7604", "6952"],
+            ["Přidaná hodnota +", "6644", "6447", "6449"],
+            ["Osobní náklady C.", "1592", "1487", "1317"],
+            ["Daně a poplatky D.", "46", "34", "31"],
+            ["Odpisy DNM a DHM E.", "1502", "1495", "1475"],
+            ["Tržby z prodeje DM a materiálu III.", "96", "115", "64"],
+            ["Zůstatková cena prodaného DM a materiálu F.", "72", "107", "71"],
+            ["Změna stavu rezerv a OP v provozní oblasti G.", "(39)", "36", "(45)"],
+            ["Ostatní provozní výnosy IV.", "287", "262", "187"],
+            ["Ostatní provozní náklady H.", "160", "123", "166"],
+            ["Provozní výsledek hospodaření *", "3694", "3542", "3685"],
+            ["Výnosy z přecenění derivátů IX.", "91", "119", "11"],
+            ["Náklady z přecenění derivátů L.", "7", "27", "9"],
+            ["Zvýšení OP ve finančním majetku M.", "-1", "-", "-"],
+            ["Výnosové úroky X.", "2", "-", "-"],
+            ["Nákladové úroky N.", "113", "113", "121"],
+            ["Ostatní finanční výnosy XI.", "22", "-", "65"],
+            ["Ostatní finanční náklady O", "1", "4", "43"],
+            ["Finanční výsledek hospodaření *", "(5)", "(25)", "(97)"],
+            ["Daň z příjmů za běžnou činnost Q", "732", "653", "682"],
+            ["VH za účetní období ***", "2957", "2864", "2906"],
+          ],
+        },
+      ],
+    },
+  ],
+  // 3 otázky ze vzorové kombinace na konci PS — 1:1 ze zadání
+  zadaniOtazky: [
+    "Tvorba ceny na spotřebním trhu, faktory ovlivňující spotřebitelské vnímání cen, postup stanovení ceny. Postup konkretizujte pro firmu popsanou v případové studii.",
+    "Identifikujte základní interní a externí bariéry inovací a navrhněte pro popsanou organizaci možné způsoby jejich překonání.",
+    "Jaký systém plánování může organizace využít? Jaký využívá organizace v případové studii? Jaké jsou jeho přínosy, podmínky a limity? Jaká opatření je možné doporučit ke zvýšení výkonnosti organizace v této oblasti?",
+  ],
+};
+
+const PRIPADOVKY = [
+  {
+    id: "pivovar",
+    title: "Velký pivovar",
+    tag: "MN2 · vzorová kombinace",
+    color: VSE.fis,
+    fullText: PS_PIVOVAR_FULLTEXT,
+    summary: "Akciovka, pivovarnictví, ~14,5 mld. Kč tržeb, ~2 000 zaměstnanců, 12 značek. Klíčový kontext: několikátá změna vlastníka → nejistota, tlak na efektivitu, hrozba sdílených služeb, digitalizace, obava z jiné kultury. Silné řízení podle ročních cílů, hierarchická funkční struktura, 4 úrovně řízení, byrokracie.",
+    profil: [
+      "Právní forma: a.s. (neobchodovaná), představenstvo 5 členů, DR 3 členové",
+      "Tržby ~14,5 mld. Kč, ~2 000 zaměstnanců (70 % muži, 70 % manuální pozice), dvousměnný provoz",
+      "12 značek (ležáky, tmavá, ochucená, nealko, speciály, cidery), výstav 9,7 mil. hl, export 3,5 mil. hl",
+      "HR podle Dave Ulricha, talentový program, personální controlling, model Schein/Denison v pozadí",
+      "Supply chain: 2úrovňová síť (1 centrální + 7 oblastních skladů), Milkrun, čárové kódy",
+      "Strategická aliance s Výzkumným ústavem pivovarským (open innovation)",
+    ],
+    // 3 otázky ze vzorové kombinace na konci PS
+    otazky: [
+      {
+        n: 1,
+        predmet: "Marketing",
+        okruh: "M11 — Cenotvorba",
+        subjectId: "marketing",
+        okruhN: 11,
+        color: VSE.fis,
+        zadani: "Tvorba ceny na spotřebním trhu, faktory ovlivňující spotřebitelské vnímání cen, postup stanovení ceny. Postup konkretizujte pro firmu z PS.",
+        kdeNajit: "Marketing → M11 „Cenotvorba\u201C. Začni examStrategy (recept 7 kroků), pak studySections: intro → faktory → postup.",
+        kostra: [
+          "Cena jako MARKETINGOVÝ nástroj (ne ekonomická teorie poptávka×nabídka) — 4 role: generátor příjmů / signál kvality / segmentační nástroj / konkurenční zbraň. Nejflexibilnější prvek mixu, asymetrický dopad na profit.",
+          "3 skupiny faktorů: interní (náklady, cíle, strategie, PLC) / externí (trh, konkurence, regulace) / vnímání zákazníka (reference price, price-quality inference, anchoring, decoy, bundling).",
+          "Postup 6 kroků (Kotler): cíl → poptávka (elasticita) → náklady → konkurence → metoda → finální cena.",
+          "4 metody: nákladová / poptávková / konkurenční / value-based.",
+        ],
+        aplikace: [
+          "Vlajkový ležák = value-based + premium positioning. PS přímo říká: „cena relativně vysoká, odpovídá pozicování\u201C → price-quality inference: vysoká cena signalizuje kvalitu + tradici 160 let.",
+          "Cenová diskriminace napříč 5 segmenty (prémium / mainstream / ekonomický / nealko / cidery) — různé značky pro různou cenovou hladinu (strategie individuálních značek).",
+          "Na zahraničních trzích slabší pozice → jiná cenová strategie než doma (cíl stát se ikonickou značkou = upustit od „pivních klišé\u201C).",
+        ],
+        trap: "Komise (Kolouchová typ) chytá na tom, jestli začneš cenou jako MARKETINGOVÝM nástrojem, ne ekonomickou teorií nabídka×poptávka.",
+      },
+      {
+        n: 2,
+        predmet: "Inovace",
+        okruh: "Inov 8 — Bariéry inovací",
+        subjectId: "inov",
+        okruhN: 8,
+        color: VSE.primary,
+        zadani: "Identifikujte základní interní a externí bariéry inovací a navrhněte pro popsanou organizaci možné způsoby jejich překonání.",
+        kdeNajit: "Inovace → Inov 8 „Bariéry inovací + anatomie selhání + metriky\u201C. studySections: vnitřní bariéry → externí bariéry → překonání + IP.",
+        kostra: [
+          "Interní bariéry (vyjmenuj 6–8 z 10 zabijáků): firemní kultura, leadership, struktura/silo, procesy, lidé/talent, finance/R&D budget, čas, znalosti, zákaznický feedback, partnerství.",
+          "Externí (4–6): regulace/legislativa, konkurence, makroekonomika, technologie, trh/zákazníci, financování.",
+          "Sloane: rozdíl chyba × selhání. Sitkin — intelligent failure (4 kritéria) jako akademický bonus pro komisi.",
+        ],
+        aplikace: [
+          "PS doslova: „Inovace nejsou explicitně očekávány od zaměstnanců... kdo přijde s nápadem, musí přesvědčit liniového nadřízeného, připravit prezentaci, přesvědčit další úrovně, získání zdrojů je obtížné.\u201C → KULTURA + PROCESY + alokace zdrojů jako bariéry.",
+          "Struktura: projekty jen v linii, cross-firemní projekty „navíc k práci\u201C, schvalování přes víc úrovní, byrokracie („na vše formulář\u201C).",
+          "Externí: módní vlny ciderů (riziko devalvace značky), stagnující trh, asijská/východní konkurence.",
+          "POZITIVUM: firma už má strategickou alianci s Výzkumným ústavem pivovarským = open innovation (dobrá praxe — zmínit!).",
+          "Překonání: SGCP/Stage-Gate proces, inovační fond, oddělit R&D pro radikální inovace, kultura učení z chyb (blameless postmortems), snížit počet schvalovacích úrovní.",
+        ],
+        trap: "Nezaměnit interní × externí. Kulturu firma KONTROLUJE = interní bariéra. Komise chce vyjmenovat aspoň 6–8 interních + 4–6 externích + konkrétní akce na překonání.",
+      },
+      {
+        n: 3,
+        predmet: "Management",
+        okruh: "Mng 5 — Plánování",
+        subjectId: "mng",
+        okruhN: 5,
+        color: VSE.ffu,
+        zadani: "Jaký systém plánování může organizace využít? Jaký využívá organizace v PS? Jaké jsou jeho přínosy, podmínky a limity? Jaká opatření je možné doporučit ke zvýšení výkonnosti organizace v této oblasti?",
+        kdeNajit: "Management → Mng 5 „Plánování\u201C. Tato otázka je v platformě uložená DOSLOVA jako questionText u Mng5 a v examQuestions (komise Nový/Müllerová/Kolouchová, prádlo) — formulace sedí přesně.",
+        kostra: [
+          "Plánování = Birkinshaw dimenze 3 (Managing Objectives): Alignment ↔ Obliquity.",
+          "Alignment: přímé cíle, MBO/KPI, shareholder, McDonald's. + jasný cíl, soustředění zdrojů. − krátkodobost, lidé neví PROČ, limituje rozvoj.",
+          "Obliquity: nepřímé cíle, OKR, stakeholder, cesta = cíl.",
+          "4 modely matice: Planning (tight/tight) / Discovery (loose/loose) / Quest (tight ends, loose means) / Science (loose ends, tight means).",
+        ],
+        aplikace: [
+          "PS doslova: „kaskádovitý rozpad cílů, top-down i bottom-up, integrovaný systém řízení výkonu, cíle 2× ročně, vliv na odměny\u201C → pivovar = čistý Alignment / Planning model.",
+          "Limity v PS: „cíle se každoročně zvyšují... systém není příliš motivační\u201C + „přístup středního managementu je transakční, jen plnění cílů\u201C + nejistota z vlastníka oslabuje motivaci.",
+          "Doporučení ke zvýšení výkonnosti: posílit angažovanost (z transakčního na transformační vedení — propojení s Leadership), doplnit prvek Obliquity/OKR pro inovační oblasti, lépe komunikovat „proč\u201C, zachovat Alignment pro core výrobu.",
+        ],
+        trap: "Mládková chytá na slovíčka — obliquity ≠ žádné plánování. Otázka explicitně chce „přínosy, podmínky a limity\u201C + „opatření ke zvýšení výkonnosti\u201C → bez doporučení nedostaneš plný počet.",
+      },
+    ],
+    // Mapa: na co tě tahle PS může chytit napříč předměty
+    crossMap: [
+      { signal: "Změna vlastníka, nejistota, jiná kultura", okruh: "Mng 8 Change management (Kotter), HR 1 kultura", subjectId: "mng", okruhN: 8 },
+      { signal: "Transakční střední management, Miroslav (vedoucí výroby)", okruh: "Lead styly vedení, Lead 4 motivace", subjectId: "lead", okruhN: 4 },
+      { signal: "360° zpětná vazba, talentový program", okruh: "HR 5 talent management", subjectId: "hr", okruhN: 5 },
+      { signal: "Personální controlling, fluktuace, nemocnost", okruh: "HR 7 HR controlling, leading × lagging", subjectId: "hr", okruhN: 7 },
+      { signal: "Dave Ulrich model HR", okruh: "HR 8 strategie ŘLZ", subjectId: "hr", okruhN: 8 },
+      { signal: "Nábor do výroby, employer branding, agentury", okruh: "HR personální marketing", subjectId: "hr", okruhN: 5 },
+      { signal: "Supply chain, Milkrun, 7 skladů, čárové kódy", okruh: "Logistika — distribuce", subjectId: "marketing", okruhN: 3 },
+      { signal: "Finanční data (rozvaha, VZZ)", okruh: "Finance 1–2 finanční analýza", subjectId: "mng", okruhN: 7 },
+      { signal: "Strategická aliance s ústavem", okruh: "Inov 1 modely, open innovation", subjectId: "inov", okruhN: 1 },
+      { signal: "Hierarchie, 4 úrovně, byrokracie", okruh: "Mng 3 koordinování (byrokracie × emergence)", subjectId: "mng", okruhN: 3 },
+    ],
+  },
+];
+
+// Univerzální workflow na případovky (zobrazuje se nahoře)
+const PS_WORKFLOW = [
+  {
+    faze: "FÁZE 1 — Příprava jedné PS (před zkouškou)",
+    color: VSE.ffu,
+    kroky: [
+      "Přečti PS 1× celou a podtrhej signály — každá věta typu „firma dělá X\u201C je hook na nějakou teorii.",
+      "Udělej si mapu signál → okruh (jako tabulka níže). U pivovaru jich najdeš 10+.",
+      "Projdi v platformě 3–4 nejpravděpodobnější okruhy. Zaměř se na sekci praxe/case study u každého — tam je vzor aplikace.",
+    ],
+  },
+  {
+    faze: "FÁZE 2 — Den před / ráno",
+    color: VSE.fis,
+    kroky: [
+      "Projdi examStrategy (recept) u rizikových okruhů — to je tvoje kostra odpovědi.",
+      "Zkontroluj examQuestions — uvidíš, jak danou otázku formulovaly konkrétní komise a co chytají.",
+    ],
+  },
+  {
+    faze: "FÁZE 3 — U zkoušky (struktura odpovědi na každou otázku)",
+    color: VSE.primary,
+    kroky: [
+      "1. Definice + rámec (1–2 věty teorie) → ukážeš, že znáš pojem.",
+      "2. Plný rozbor teorie (vyjmenuj kompletně — faktory, kroky, modely).",
+      "3. Identifikace v PS — „v případové studii firma používá...\u201C + citace konkrétní věty z PS.",
+      "4. Doporučení — co dělá špatně, co zlepšit (komise to chce skoro vždy).",
+      "5. Cross-link — zmínit napojení na jiný okruh = bonusové body.",
+    ],
+  },
+];
+
+function PripadovkyTab({ onNavigate }) {
+  const t = useTheme();
+  const isMobile = useIsMobile();
+  const [openId, setOpenId] = useState("pivovar");
+
+  return (
+    <div style={{ maxWidth: 920, margin: "0 auto", padding: isMobile ? "20px 16px 80px" : "40px 32px 100px" }}>
+      {/* Header */}
+      <div style={{ marginBottom: 28 }}>
+        <div style={{ fontSize: 12.5, fontFamily: fontMono, color: VSE.fis, fontWeight: 700, letterSpacing: "1.5px", marginBottom: 6 }}>REÁLNÉ ZKUŠEBNÍ PŘÍPADOVKY</div>
+        <div style={{ fontSize: isMobile ? 24 : 30, fontWeight: 800, color: t.text, fontFamily: fontSans, lineHeight: 1.2, marginBottom: 8 }}>Případovky</div>
+        <div style={{ fontSize: 15, color: t.textMuted, fontFamily: fontSans, lineHeight: 1.6 }}>
+          Reálné PS, na kterých se zkouší. Nejdřív si přečteš celé zadání, pak si zkusíš odpovědět na otázky z konce \u2013 a teprve potom se odhalí, na co je to napojené v Nabombuj a na co se chytá komise.
+        </div>
+      </div>
+
+      {/* Workflow */}
+      <div style={{ marginBottom: 32 }}>
+        <div style={{ fontSize: isMobile ? 18 : 20, fontWeight: 700, color: t.text, fontFamily: fontSans, marginBottom: 14 }}>🎯 Workflow na případovky</div>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 12 }}>
+          {PS_WORKFLOW.map((w, i) => (
+            <GlassBox key={i} opacity={0.5} style={{ padding: "14px 16px", borderRadius: 12, borderTop: `3px solid ${w.color}` }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: w.color, fontFamily: fontSans, marginBottom: 10, lineHeight: 1.35 }}>{w.faze}</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+                {w.kroky.map((k, j) => (
+                  <div key={j} style={{ fontSize: 13, color: t.text, fontFamily: fontSans, lineHeight: 1.5 }}>{k}</div>
+                ))}
+              </div>
+            </GlassBox>
+          ))}
+        </div>
+        <div style={{ marginTop: 12, padding: "12px 16px", borderRadius: 10, background: `${VSE.warning}15`, borderLeft: `3px solid ${VSE.warning}` }}>
+          <span style={{ fontSize: 13.5, color: t.text, fontFamily: fontSans, lineHeight: 1.5 }}>
+            <b>Klíčové pravidlo:</b> Komise oceňuje aplikaci &gt; teorii. Teorii odříkat umí každý. Bod navíc dostaneš za to, že najdeš konkrétní větu v PS a řekneš \u201Etohle je přesně Alignment model, protože...\u201C
+          </span>
+        </div>
+      </div>
+
+      {/* Seznam PS */}
+      <div style={{ fontSize: isMobile ? 18 : 20, fontWeight: 700, color: t.text, fontFamily: fontSans, marginBottom: 14 }}>📂 Knihovna případovek</div>
+      {PRIPADOVKY.map((ps) => {
+        const open = openId === ps.id;
+        return (
+          <div key={ps.id} style={{ marginBottom: 16 }}>
+            <button onClick={() => setOpenId(open ? null : ps.id)} style={{
+              width: "100%", textAlign: "left", cursor: "pointer", border: "none",
+              background: t.surface, borderRadius: open ? "14px 14px 0 0" : 14,
+              padding: isMobile ? "16px 18px" : "18px 22px",
+              borderLeft: `4px solid ${ps.color}`,
+              display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12,
+            }}>
+              <div>
+                <div style={{ fontSize: 11.5, fontFamily: fontMono, color: ps.color, fontWeight: 700, letterSpacing: "1px", marginBottom: 4 }}>{ps.tag}</div>
+                <div style={{ fontSize: isMobile ? 18 : 21, fontWeight: 800, color: t.text, fontFamily: fontSans }}>{ps.title}</div>
+              </div>
+              <div style={{ fontSize: 22, color: ps.color, transform: open ? "rotate(90deg)" : "none", transition: "transform 0.2s" }}>›</div>
+            </button>
+
+            {open && <PripadovkaInteractive ps={ps} onNavigate={onNavigate} />}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ── Interaktivní jádro jedné případovky: 4 kroky ── */
+function PripadovkaInteractive({ ps, onNavigate }) {
+  const t = useTheme();
+  const isMobile = useIsMobile();
+  const [step, setStep] = useState(1);
+  const [answers, setAnswers] = useState(ps.otazky.map(() => ""));
+  const [revealed, setRevealed] = useState(false);
+
+  const steps = [
+    { n: 1, label: "Přečti případovku" },
+    { n: 2, label: "Odpověz na otázky" },
+    { n: 3, label: "Odhalení rozboru" },
+    { n: 4, label: "Napojení jinde" },
+  ];
+
+  const setAnswer = (i, val) => setAnswers(prev => prev.map((a, idx) => idx === i ? val : a));
+
+  return (
+    <GlassBox opacity={0.5} style={{ padding: isMobile ? "16px 16px" : "22px 24px", borderRadius: "0 0 14px 14px" }}>
+      {/* Stepper */}
+      <div style={{ display: "flex", gap: isMobile ? 4 : 8, marginBottom: 20, flexWrap: "wrap" }}>
+        {steps.map((s) => {
+          const active = step === s.n;
+          const done = step > s.n;
+          return (
+            <button key={s.n} onClick={() => { if (s.n <= step || (s.n === 3 && revealed) || (s.n === 4 && revealed)) setStep(s.n); }}
+              disabled={s.n > step && !revealed}
+              style={{
+                flex: isMobile ? "1 1 45%" : "1 1 auto", cursor: (s.n <= step || revealed) ? "pointer" : "default",
+                padding: "8px 10px", borderRadius: 9, border: "none",
+                background: active ? ps.color : done ? `${ps.color}22` : "var(--surface)",
+                color: active ? "#fff" : done ? ps.color : t.textMuted,
+                fontSize: 12, fontWeight: 700, fontFamily: fontSans, lineHeight: 1.25,
+                display: "flex", alignItems: "center", gap: 6, justifyContent: "center",
+              }}>
+              <span style={{
+                width: 18, height: 18, borderRadius: 9, fontSize: 11, flexShrink: 0,
+                background: active ? "#fff" : done ? ps.color : t.borderSoft,
+                color: active ? ps.color : done ? "#fff" : t.textMuted,
+                display: "inline-flex", alignItems: "center", justifyContent: "center", fontWeight: 800,
+              }}>{done ? "✓" : s.n}</span>
+              {!isMobile && s.label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* ── KROK 1 — Plný text PS ── */}
+      {step === 1 && (
+        <div>
+          <div style={{ fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 700, letterSpacing: "1.5px", marginBottom: 12 }}>KROK 1 — PŘEČTI SI CELOU PŘÍPADOVKU</div>
+          <div style={{ borderRadius: 12, border: `1px solid ${t.borderSoft}`, padding: isMobile ? "16px 16px" : "24px 28px", background: "var(--surface)", maxHeight: isMobile ? "60vh" : "70vh", overflowY: "auto" }}>
+            <PSFullTextRender data={ps.fullText} color={ps.color} />
+          </div>
+          <button onClick={() => setStep(2)} style={primaryBtn(ps.color, isMobile)}>Mám přečteno → na otázky</button>
+        </div>
+      )}
+
+      {/* ── KROK 2 — Odpověz na otázky ── */}
+      {step === 2 && (
+        <div>
+          <div style={{ fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 700, letterSpacing: "1.5px", marginBottom: 8 }}>KROK 2 — ZKUS SI ODPOVĚDĚT (než se odhalí rozbor)</div>
+          <div style={{ fontSize: 13.5, color: t.textMuted, fontFamily: fontSans, marginBottom: 16, lineHeight: 1.5 }}>
+            Tohle je vzorová kombinace otázek z konce zadání. Napiš si vlastní kostru \u2013 co bys řekl komisi. Pak se odhalí, jak to máš v Nabombuj a na co si dát pozor.
+          </div>
+          {ps.otazky.map((o, i) => (
+            <div key={i} style={{ marginBottom: 18 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
+                <span style={{ fontSize: 11.5, fontWeight: 800, color: "#fff", background: o.color, borderRadius: 20, padding: "3px 11px", fontFamily: fontMono }}>OTÁZKA {o.n} · {o.predmet}</span>
+              </div>
+              <div style={{ fontSize: 14.5, color: t.text, fontFamily: fontSans, lineHeight: 1.55, marginBottom: 8, fontStyle: "italic" }}>\u201E{o.zadani}\u201C</div>
+              <textarea
+                value={answers[i]}
+                onChange={(e) => setAnswer(i, e.target.value)}
+                placeholder="Napiš si sem svou odpověď / kostru argumentu..."
+                style={{
+                  width: "100%", minHeight: 90, resize: "vertical", boxSizing: "border-box",
+                  padding: "12px 14px", borderRadius: 10, border: `1px solid ${t.borderSoft}`,
+                  background: t.surface, color: t.text, fontSize: 14, fontFamily: fontSans, lineHeight: 1.55,
+                }}
+              />
+            </div>
+          ))}
+          <button onClick={() => { setRevealed(true); setStep(3); }} style={primaryBtn(ps.color, isMobile)}>
+            Odhalit rozbor z Nabombuj →
+          </button>
+          <div style={{ fontSize: 12.5, color: t.textSubtle, fontFamily: fontSans, marginTop: 8, textAlign: "center" }}>
+            Tvoje poznámky zůstanou zobrazené i u rozboru, ať se můžeš porovnat.
+          </div>
+        </div>
+      )}
+
+      {/* ── KROK 3 — Odhalení rozboru ── */}
+      {step === 3 && (
+        <div>
+          <div style={{ fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 700, letterSpacing: "1.5px", marginBottom: 12 }}>KROK 3 — ROZBOR: NAPOJENÍ NA NABOMBUJ + CHYTÁKY</div>
+          {ps.otazky.map((o, i) => (
+            <div key={o.n} style={{ marginBottom: 20, borderRadius: 12, overflow: "hidden", border: `1px solid ${o.color}33` }}>
+              {/* Hlavička otázky */}
+              <div style={{ padding: isMobile ? "12px 14px" : "14px 18px", background: `${o.color}12`, borderBottom: `1px solid ${o.color}33` }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6, flexWrap: "wrap" }}>
+                  <span style={{ fontSize: 12, fontWeight: 800, color: "#fff", background: o.color, borderRadius: 20, padding: "3px 11px", fontFamily: fontMono }}>{o.predmet}</span>
+                  <button onClick={() => onNavigate && onNavigate(o.subjectId, o.okruhN)} style={{
+                    fontSize: 12.5, fontWeight: 700, color: o.color, fontFamily: fontMono,
+                    background: "transparent", border: `1px solid ${o.color}`, borderRadius: 20,
+                    padding: "3px 11px", cursor: "pointer",
+                  }}>{o.okruh} →</button>
+                </div>
+                <div style={{ fontSize: 14, color: t.text, fontFamily: fontSans, lineHeight: 1.55, fontStyle: "italic" }}>\u201E{o.zadani}\u201C</div>
+              </div>
+
+              {/* Tvoje odpověď (pokud něco napsal) */}
+              {answers[i] && answers[i].trim() && (
+                <div style={{ padding: isMobile ? "10px 14px" : "12px 18px", background: "var(--surface)", borderBottom: `1px solid ${t.borderSoft}` }}>
+                  <div style={{ fontSize: 11.5, fontWeight: 700, color: t.textMuted, fontFamily: fontMono, letterSpacing: "0.5px", marginBottom: 4 }}>✍️ TVOJE ODPOVĚĎ</div>
+                  <div style={{ fontSize: 13.5, color: t.text, fontFamily: fontSans, lineHeight: 1.55, whiteSpace: "pre-wrap" }}>{answers[i]}</div>
+                </div>
+              )}
+
+              {/* Tělo otázky */}
+              <div style={{ padding: isMobile ? "12px 14px" : "16px 18px" }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: o.color, fontFamily: fontSans, marginBottom: 6 }}>📍 Kde to najít v Nabombuj</div>
+                <div style={{ fontSize: 13.5, color: t.text, fontFamily: fontSans, lineHeight: 1.55, marginBottom: 16 }}>{o.kdeNajit}</div>
+
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: t.text, fontFamily: fontSans, marginBottom: 6 }}>🧩 Kostra odpovědi (teorie)</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 16 }}>
+                  {o.kostra.map((k, j) => (
+                    <div key={j} style={{ fontSize: 13.5, color: t.text, fontFamily: fontSans, lineHeight: 1.55, paddingLeft: 18, position: "relative" }}>
+                      <span style={{ position: "absolute", left: 0, color: o.color, fontWeight: 700 }}>{j + 1}.</span>{k}
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: VSE.success, fontFamily: fontSans, marginBottom: 6 }}>🏭 Aplikace na firmu v PS</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 16 }}>
+                  {o.aplikace.map((a, j) => (
+                    <div key={j} style={{ fontSize: 13.5, color: t.text, fontFamily: fontSans, lineHeight: 1.55, paddingLeft: 16, position: "relative" }}>
+                      <span style={{ position: "absolute", left: 0, color: VSE.success, fontWeight: 700 }}>→</span>{a}
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ padding: "10px 14px", borderRadius: 10, background: `${VSE.danger}12`, borderLeft: `3px solid ${VSE.danger}` }}>
+                  <span style={{ fontSize: 13, color: t.text, fontFamily: fontSans, lineHeight: 1.5 }}>
+                    <b style={{ color: VSE.danger }}>⚠️ Chyták komise:</b> {o.trap}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+          <button onClick={() => setStep(4)} style={primaryBtn(ps.color, isMobile)}>Na co tě PS chytí jinde →</button>
+        </div>
+      )}
+
+      {/* ── KROK 4 — Cross-map ── */}
+      {step === 4 && (
+        <div>
+          <div style={{ fontSize: 12.5, fontFamily: fontMono, color: t.textMuted, fontWeight: 700, letterSpacing: "1.5px", marginBottom: 8 }}>KROK 4 — NA CO TĚ TAHLE PS MŮŽE CHYTIT JINDE</div>
+          <div style={{ fontSize: 13, color: t.textMuted, fontFamily: fontSans, marginBottom: 14, lineHeight: 1.5 }}>
+            Tahle případovka je univerzální \u2013 pokrývá skoro všechny předměty. Mapa signál → okruh (klikni a přeskočíš na okruh):
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {ps.crossMap.map((c, i) => (
+              <div key={i} style={{
+                display: "flex", alignItems: "stretch", gap: 10,
+                borderRadius: 10, overflow: "hidden", border: `1px solid ${t.borderSoft}`,
+                flexDirection: isMobile ? "column" : "row",
+              }}>
+                <div style={{ flex: 1, padding: "10px 14px", fontSize: 13, color: t.text, fontFamily: fontSans, lineHeight: 1.45, background: "var(--surface)" }}>{c.signal}</div>
+                <button onClick={() => onNavigate && onNavigate(c.subjectId, c.okruhN)} style={{
+                  flex: isMobile ? "none" : "0 0 42%", textAlign: "left",
+                  padding: "10px 14px", fontSize: 12.5, fontWeight: 700, color: VSE.ffu,
+                  fontFamily: fontMono, lineHeight: 1.45, background: `${VSE.ffu}10`,
+                  border: "none", cursor: "pointer",
+                }}>{c.okruh} →</button>
+              </div>
+            ))}
+          </div>
+          <button onClick={() => setStep(1)} style={{ ...primaryBtn(ps.color, isMobile), background: "transparent", color: ps.color, border: `1px solid ${ps.color}` }}>↺ Projít znovu od začátku</button>
+        </div>
+      )}
+    </GlassBox>
+  );
+}
+
+/* ── Render plného textu PS (sekce, odstavce, tabulky) ── */
+function PSFullTextRender({ data, color }) {
+  const t = useTheme();
+  const isMobile = useIsMobile();
+  if (!data) return null;
+  return (
+    <div style={{ fontFamily: fontSans }}>
+      <div style={{ fontSize: isMobile ? 20 : 24, fontWeight: 800, color: t.text, marginBottom: 18, lineHeight: 1.2 }}>{data.nadpis}</div>
+      {data.sekce.map((s, si) => (
+        <div key={si} style={{ marginBottom: 22 }}>
+          <div style={{ fontSize: isMobile ? 15 : 16.5, fontWeight: 700, color: color, marginBottom: 10, paddingBottom: 6, borderBottom: `2px solid ${color}33` }}>{s.h}</div>
+          {s.odstavce.map((p, pi) => (
+            <p key={pi} style={{ fontSize: isMobile ? 13.5 : 14.5, color: t.text, lineHeight: 1.7, margin: "0 0 12px", textWrap: "pretty" }}>{p}</p>
+          ))}
+          {s.tabulky && s.tabulky.map((tab, ti) => (
+            <div key={ti} style={{ margin: "12px 0 6px", overflowX: "auto" }}>
+              {tab.caption && <div style={{ fontSize: 12.5, fontWeight: 700, color: t.textMuted, fontFamily: fontMono, marginBottom: 6 }}>{tab.caption}</div>}
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: isMobile ? 11.5 : 13, fontFamily: fontSans }}>
+                <thead>
+                  <tr>
+                    {tab.head.map((h, hi) => (
+                      <th key={hi} style={{ textAlign: hi === 0 ? "left" : "right", padding: "7px 9px", borderBottom: `2px solid ${color}`, color: color, fontWeight: 700, whiteSpace: "nowrap" }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {tab.rows.map((r, ri) => (
+                    <tr key={ri} style={{ background: ri % 2 ? "var(--surface)" : "transparent" }}>
+                      {r.map((cell, ci) => (
+                        <td key={ci} style={{ textAlign: ci === 0 ? "left" : "right", padding: "6px 9px", borderBottom: `1px solid ${t.borderSoft}`, color: t.text, fontWeight: ci === 0 ? 600 : 400, whiteSpace: ci === 0 ? "normal" : "nowrap" }}>{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ))}
+        </div>
+      ))}
+      {/* Zadání otázek na konci */}
+      <div style={{ marginTop: 26, padding: isMobile ? "14px 16px" : "18px 20px", borderRadius: 12, background: `${color}10`, border: `1px solid ${color}33` }}>
+        <div style={{ fontSize: 13, fontWeight: 800, color: color, fontFamily: fontMono, letterSpacing: "0.5px", marginBottom: 10 }}>UKÁZKA JEDNÉ Z N MOŽNÝCH KOMBINACÍ OTÁZEK K SZZ</div>
+        {data.zadaniOtazky.map((q, qi) => (
+          <div key={qi} style={{ fontSize: isMobile ? 13.5 : 14.5, color: t.text, lineHeight: 1.6, marginBottom: 10, paddingLeft: 22, position: "relative" }}>
+            <span style={{ position: "absolute", left: 0, color: color, fontWeight: 800 }}>{qi + 1}.</span>{q}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Sdílený styl primárního tlačítka ── */
+function primaryBtn(color, isMobile) {
+  return {
+    marginTop: 18, padding: isMobile ? "14px 20px" : "12px 24px",
+    width: isMobile ? "100%" : "auto",
+    background: color, color: "#fff", border: "none", borderRadius: 10, cursor: "pointer",
+    fontSize: 15, fontWeight: 700, fontFamily: fontSans, letterSpacing: "0.3px",
+    display: "flex", alignItems: "center", justifyContent: "center", gap: 8, minHeight: 48,
+  };
+}
+
 function AboutTab() {
   const t = useTheme();
   return (
@@ -36910,6 +37554,7 @@ function App() {
         <div style={{ position: "relative", zIndex: 1 }}>
           <SkoolNav activeTab={activeTab} setActiveTab={setActiveTab} themeMode={themeMode} setThemeMode={setThemeMode} />
           {activeTab === "okruhy" && <OkruhyTab navTarget={navTarget} clearNavTarget={() => setNavTarget(null)} />}
+          {activeTab === "pripadovky" && <PripadovkyTab onNavigate={(s, n) => { setNavTarget({ subjectId: s, okruhN: n }); setActiveTab("okruhy"); }} />}
           {activeTab === "tracker" && <TrackerTab onNavigate={(s, n) => { setNavTarget({ subjectId: s, okruhN: n }); setActiveTab("okruhy"); }} />}
           {activeTab === "komunita" && <KomunitaTab />}
           {activeTab === "kalendar" && <KalendarTab />}
