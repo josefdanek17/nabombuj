@@ -7208,6 +7208,13 @@ function OkruhContent({ subjectId, okruhN }) {
   const okruh = subject?.okruhy.find(o => o.n === okruhN);
 
   if (!okruh) {
+    const galleryMap = subjectId === "mng" ? null
+                     : subjectId === "str" ? null
+                     : subjectId === "lead" && typeof LEAD_CHEATS !== "undefined" ? { map: LEAD_CHEATS, accent: "#D04848", label: "Leadership" }
+                     : subjectId === "hr" && typeof HR_CHEATS !== "undefined" ? { map: HR_CHEATS, accent: "#C44A78", label: "Personální řízení" }
+                     : subjectId === "fin" && typeof FIN_CHEATS !== "undefined" ? { map: FIN_CHEATS, accent: "#3B6FD6", label: "Finance" }
+                     : subjectId === "roz" && typeof ROZ_CHEATS !== "undefined" ? { map: ROZ_CHEATS, accent: "#C79A1E", label: "Manažerské rozhodování" }
+                     : null;
     if (subjectId === "mng" || subjectId === "str") {
       const Gallery = subjectId === "mng" ? CheatGallery : StrCheatGallery;
       return (
@@ -7216,6 +7223,16 @@ function OkruhContent({ subjectId, okruhN }) {
             <BombikEmpty mood="think" size={90} caption="Vyber okruh vlevo — nebo si stáhni cheat sheety" sub="Cheat sheet je jednostránkový tahák na okruh. Měj ho vedle při čtení okruhu." />
           </div>
           <Gallery />
+        </div>
+      );
+    }
+    if (galleryMap) {
+      return (
+        <div style={{ flex: 1, overflowY: "auto", background: t.bg, padding: "24px 20px" }}>
+          <div style={{ maxWidth: 900, margin: "0 auto 18px", textAlign: "center" }}>
+            <BombikEmpty mood="think" size={90} caption="Vyber okruh vlevo — nebo si stáhni cheat sheety" sub="Cheat sheet je jednostránkový tahák na okruh. Měj ho vedle při čtení okruhu." />
+          </div>
+          <SubjectCheatGallery map={galleryMap.map} accent={galleryMap.accent} label={galleryMap.label} />
         </div>
       );
     }
@@ -8138,12 +8155,21 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
 
   const cheatMap = subject === "Management" && typeof MNG_CHEATS !== "undefined" ? MNG_CHEATS
                  : subject === "Strategie" && typeof STR_CHEATS !== "undefined" ? STR_CHEATS
+                 : subject === "Leadership" && typeof LEAD_CHEATS !== "undefined" ? LEAD_CHEATS
+                 : subject === "Personální řízení" && typeof HR_CHEATS !== "undefined" ? HR_CHEATS
+                 : subject === "Finance" && typeof FIN_CHEATS !== "undefined" ? FIN_CHEATS
+                 : subject === "Manažerské rozhodování" && typeof ROZ_CHEATS !== "undefined" ? ROZ_CHEATS
                  : null;
   const hasCheatSheet = cheatMap && cheatMap[number];
 
   if (cheatOpen && hasCheatSheet) {
     const CheatBody = (subject === "Management" && number === 1) ? CheatSheet1Body : cheatMap[number].comp;
-    const accentCol = subject === "Strategie" ? "#7C4DFF" : "#A82A5F";
+    const accentCol = subject === "Strategie" ? "#7C4DFF"
+                    : subject === "Leadership" ? "#D04848"
+                    : subject === "Personální řízení" ? "#C44A78"
+                    : subject === "Finance" ? "#3B6FD6"
+                    : subject === "Manažerské rozhodování" ? "#C79A1E"
+                    : "#A82A5F";
     return (
       <div style={{ flex: 1, overflowY: "auto", height: "calc(100vh - 105px)", background: "#f5f5f5" }}>
         <CheatStyles />
@@ -36544,6 +36570,1147 @@ function CheatSheetStr10() {
 }
 
 /* ─────────── Mapa STR + galerie ─────────── */
+/* ════════════════════════════════════════════════════════
+   LEADERSHIP CHEAT SHEETY — accent #D04848 (červená)
+   ════════════════════════════════════════════════════════ */
+
+const LEAD_ACCENT = "#D04848";
+const LEAD_BG = "#fdf3f3";
+
+/* ─────────── LEAD 1 — Kompetence a rozvoj lídra ─────────── */
+function CheatSheetLead1() {
+  return (
+    <CheatPage okruh={1} title="Kompetence a rozvoj lídra" subjectLabel="Leadership" accent={LEAD_ACCENT} accentBg={LEAD_BG}
+      subtitle="Leadership ≠ Management · Teorie rysů · 4 kompetence (Katz) · Situační · Transformační 4I · rozvoj lídra"
+      examBar={<>
+        <b>Smrčka/Nový/Mládková</b>, <b>Heřman/Bočková/Machek</b>, <b>Stříteský</b>, <b>Vrbová/Tahal</b> — <i>kompetence lídra, rozvoj, aplikace na PS</i>. ·
+        <b style={{ color: LEAD_ACCENT }}> Vždy:</b> odliš leadership × management (Kotter), zařaď styl lídra v PS a navrhni jeho rozvoj (transformační směr).
+      </>}>
+      <CCol>
+        <CT0>LEADERSHIP ≠ MANAGEMENT</CT0>
+        <CD term="Leadership">Schopnost ovlivňovat a vést lidi k dosažení cíle. <b>Kotter:</b> management = řád a stabilita (plán, kontrola), leadership = změna a směr (vize, motivace lidí).</CD>
+        <CNote>Manažer dělá věci správně, lídr dělá správné věci. Firma potřebuje obojí.</CNote>
+        <CT>TEORIE RYSŮ</CT>
+        <div style={{ fontSize: 10.5 }}>Nejstarší přístup (poč. 20. stol.) — lídrem se člověk <b>rodí</b>, má vrozené vlastnosti (inteligence, sebejistota, integrita, sociabilita). Kritika: rysy samy úspěch nezaručí.</div>
+      </CCol>
+      <CCol>
+        <CT0>KATZ — 4 KOMPETENCE LÍDRA</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Technické</b> — odborné znalosti (důležité pro liniové)</li>
+          <li><b>Lidské</b> — práce s lidmi (nutné na všech úrovních)</li>
+          <li><b>Koncepční</b> — vidět celek, strategie (top mng)</li>
+          <li><b>Sebeřízení</b> — sebereflexe, time/stress management</li>
+        </ol>
+        <CNote>Čím výš v hierarchii, tím méně technických a víc koncepčních dovedností.</CNote>
+        <CT>DOVEDNOSTNÍ PŘÍSTUP</CT>
+        <div style={{ fontSize: 10.5 }}>Na rozdíl od rysů — kompetence se dají <b>naučit a rozvíjet</b>. Leader = výsledek tréninku, ne jen vrozenosti.</div>
+      </CCol>
+      <CCol>
+        <CT0>TRANSFORMAČNÍ 4I (Bass)</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Idealized influence</b> — vzor, charisma</li>
+          <li><b>Inspirational motivation</b> — vize, smysl</li>
+          <li><b>Intellectual stimulation</b> — podněcuje myšlení</li>
+          <li><b>Individualized consideration</b> — rozvoj jednotlivce</li>
+        </ul>
+        <CT>ROZVOJ LÍDRA</CT>
+        <div style={{ fontSize: 10.5 }}>Koučink, mentoring, 360° zpětná vazba, akční učení, rotace rolí. <b>70-20-10:</b> 70 % praxí, 20 % od druhých, 10 % školením.</div>
+        <CNote>V PS: najdi, co lídr neumí, a přiřaď konkrétní rozvojový nástroj.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── LEAD 2 — Styly leadershipu ─────────── */
+function CheatSheetLead2() {
+  return (
+    <CheatPage okruh={2} title="Styly leadershipu" subjectLabel="Leadership" accent={LEAD_ACCENT} accentBg={LEAD_BG}
+      subtitle="4 vývojové éry · Ohio/Michigan · Blake-Mouton GRID 9×9 · Hersey-Blanchard situační · transformační"
+      examBar={<>
+        <b>Mládková/Nový/Stříteský</b>, <b>Mikovcová</b>, <b>Tahal</b>, <b>Machek</b> — <i>styly vedení, GRID, situační model, aplikace na PS</i>. ·
+        <b style={{ color: LEAD_ACCENT }}> Vždy:</b> zařaď styl lídra do GRIDu (zájem o úkoly × lidi) a urči vhodný styl podle zralosti týmu (Hersey-Blanchard).
+      </>}>
+      <CCol>
+        <CT0>4 VÝVOJOVÉ ÉRY</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Rysy</b> (poč. 20. st.) — vrozené vlastnosti</li>
+          <li><b>Behaviorální</b> (40–60.) — co lídr <i>dělá</i></li>
+          <li><b>Kontingenční</b> (od 70.) — situační vhodnost</li>
+          <li><b>Moderní</b> (od 90.) — transformační, servant, autentický</li>
+        </ol>
+        <CT>OHIO + MICHIGAN</CT>
+        <div style={{ fontSize: 10.5 }}>2 nezávislé dimenze: <b>Initiating structure</b> (úkoly — plánuje, definuje role) × <b>Consideration</b> (lidé — naslouchá, podporuje). Lídr může být vysoký v obou.</div>
+      </CCol>
+      <CCol>
+        <CT0>BLAKE-MOUTON GRID 9×9</CT0>
+        <div style={{ fontSize: 10.5 }}>Osy: <b>zájem o úkoly</b> × <b>zájem o lidi</b> (1–9). 5 hlavních stylů:</div>
+        <ul style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 10 }}>
+          <li><b>1.1</b> Ochuzený (nezájem)</li>
+          <li><b>9.1</b> Autorita-poslušnost (jen úkoly)</li>
+          <li><b>1.9</b> Klub (jen lidé)</li>
+          <li><b>5.5</b> Kompromis (střed)</li>
+          <li><b>9.9</b> Týmový — <b>ideál</b> (vysoký v obojím)</li>
+        </ul>
+        <CNote>Komise chce zařadit lídra z PS do mřížky a říct, kam se má posunout.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>HERSEY-BLANCHARD (situační)</CT0>
+        <div style={{ fontSize: 10.5 }}>Styl podle <b>zralosti</b> (kompetence + ochota) podřízeného:</div>
+        <ul style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 10 }}>
+          <li><b>S1 Telling</b> — nízká zralost → direktivně</li>
+          <li><b>S2 Selling</b> — koučuje, vysvětluje</li>
+          <li><b>S3 Participating</b> — podporuje, sdílí</li>
+          <li><b>S4 Delegating</b> — vysoká zralost → deleguje</li>
+        </ul>
+        <CT>TRANSFORMAČNÍ × TRANSAKČNÍ</CT>
+        <div style={{ fontSize: 10.5 }}><b>Transakční</b> = odměna za výkon (cukr a bič). <b>Transformační</b> = vize, inspirace, rozvoj → vyšší výkon a angažovanost.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── LEAD 3 — Kreativní klima v organizaci ─────────── */
+function CheatSheetLead3() {
+  return (
+    <CheatPage okruh={3} title="Kreativní klima v organizaci" subjectLabel="Leadership" accent={LEAD_ACCENT} accentBg={LEAD_BG}
+      subtitle="Kreativita × inovace · bariéry kreativity · faktory klimatu · Design Thinking · metody generování nápadů"
+      examBar={<>
+        <b>Mládková</b>, <b>Nový/Bočková</b>, <b>Stříteský</b>, <b>Heřman</b> — <i>kreativní klima, metody kreativity, aplikace na PS</i>. ·
+        <b style={{ color: LEAD_ACCENT }}> Vždy:</b> kreativita = nápad, inovace = zavedení. Najdi v PS bariéry kreativity a navrhni opatření (klima + transformační lídr).
+      </>}>
+      <CCol>
+        <CT0>KREATIVITA × INOVACE</CT0>
+        <CD term="Kreativita">Schopnost generovat nové a užitečné nápady. <b>Inovaci vždy předchází kreativní nápad</b> — kreativita = myšlenka, inovace = její zavedení do praxe.</CD>
+        <CT>BARIÉRY KREATIVITY</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li>Lpění na tradicích („takhle se to dělá")</li>
+          <li>Strach z neúspěchu, kritika kolegů</li>
+          <li>Rigidní hierarchie, pomalé schvalování</li>
+          <li>Nevhodné prostředí, nedostatek zdrojů</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>FAKTORY KREATIVNÍHO KLIMATU</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li>Strategie/vize zaměřená na inovace</li>
+          <li>Tolerance experimentu a neúspěchu</li>
+          <li>Flexibilní struktura, otevřená komunikace</li>
+          <li>Dostupné zdroje, motivační program</li>
+          <li><b>Transformační lídr</b> — klíč k inovacím</li>
+        </ul>
+        <CNote>Pozor na <b>paradox motivace</b>: vnější odměny mohou vnitřní kreativitu snížit.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>DESIGN THINKING (5 fází)</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Empathize</b> — pochop uživatele</li>
+          <li><b>Define</b> — formuluj problém</li>
+          <li><b>Ideate</b> — generuj nápady</li>
+          <li><b>Prototype</b> — MVP, rychlá vizualizace</li>
+          <li><b>Test</b> — zpětná vazba, iterace</li>
+        </ol>
+        <CT>METODY GENEROVÁNÍ NÁPADŮ</CT>
+        <div style={{ fontSize: 10 }}><b>Brainstorming</b> (bez cenzury), <b>Brainwriting</b>, <b>Metoda 635</b> (6 lidí × 3 nápady × 5 kol), <b>6 klobouků</b> (de Bono), <b>Synektika</b> (analogie), <b>TRIZ</b> (technické problémy).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── LEAD 4 — Teorie motivace, ovlivňování ─────────── */
+function CheatSheetLead4() {
+  return (
+    <CheatPage okruh={4} title="Teorie motivace, ovlivňování" subjectLabel="Leadership" accent={LEAD_ACCENT} accentBg={LEAD_BG}
+      subtitle="Maslow · Herzberg 2F · Vroom VIE · Adams · stimulace × motivace · 7 stimulů · motivační profil"
+      examBar={<>
+        <b>Smrčka/Mikovcová/Bočková</b>, <b>Špaček/Svobodová</b>, <b>Vávra/Nový</b>, <b>Tahal/Kolouchová</b> — <i>teorie motivace, aplikace na PS</i>. ·
+        <b style={{ color: LEAD_ACCENT }}> Vždy:</b> rozliš stimulace × motivace, použij 2+ teorie (Maslow + Herzberg/Vroom) a navrhni konkrétní stimuly pro pracovníka z PS.
+      </>}>
+      <CCol>
+        <CT0>STIMULACE × MOTIVACE</CT0>
+        <CD term="Motivace × stimulace"><b>Motivace</b> = vnitřní pohnutky (chci sám). <b>Stimulace</b> = vnější pobídky (odměna/trest). Stimul působí jen dokud trvá, motivace přetrvává.</CD>
+        <CT>MASLOW — 5 ÚROVNÍ</CT>
+        <div style={{ fontSize: 10 }}>fyziologické → bezpečí → sociální → uznání → seberealizace. Nižší musí být uspokojena dřív. <b>Yerkes-Dodson:</b> optimální úroveň aktivace = nejlepší výkon (moc i málo škodí).</div>
+      </CCol>
+      <CCol>
+        <CT0>HERZBERG — 2 FAKTORY</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.5 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fbecea" }}><b>Hygienické</b><br /><span style={{ fontSize: 9 }}>plat, podmínky, vztahy, jistota — nesmí klesnout, ale nemotivují</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Motivátory</b><br /><span style={{ fontSize: 9 }}>uznání, odpovědnost, růst, smysl — skutečně motivují</span></td></tr>
+        </tbody></table>
+        <CT>VROOM — VIE (očekávání)</CT>
+        <div style={{ fontSize: 10 }}><b>V</b>alence (hodnota cíle) × <b>I</b>nstrumentalita (výsledek → odměna) × <b>E</b>xpektance (úsilí → výsledek). Motivace = V × I × E.</div>
+      </CCol>
+      <CCol>
+        <CT0>ADAMS — TEORIE SPRAVEDLNOSTI</CT0>
+        <div style={{ fontSize: 10 }}>Lidé srovnávají poměr vstup/výstup s ostatními. 3 typy: <b>distribuční</b> (odměny), <b>procesní</b> (procesy), <b>interakční</b> (jednání nadřízeného). Nespravedlnost demotivuje.</div>
+        <CT>7 STIMULŮ (v rukou manažera)</CT>
+        <ul style={{ margin: 0, paddingLeft: 13, fontSize: 9.5 }}>
+          <li>Hmotná odměna (fix působí max 3 měs.!)</li>
+          <li>Obsah práce (seberealizace)</li>
+          <li>Styl lídra (transformační)</li>
+          <li>Povzbuzování (shaping, NE sandwich)</li>
+          <li>Spolupracovníci, kohese</li>
+          <li>Pracovní podmínky, kultura</li>
+          <li>Rozvoj a růst</li>
+        </ul>
+        <CNote>Moderní: <b>SDT</b> (autonomie–kompetence–vztahy), <b>4 drivers</b>, SMART cíle.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── LEAD 5 — Moc, distribuce moci, zdroje moci ─────────── */
+function CheatSheetLead5() {
+  return (
+    <CheatPage okruh={5} title="Moc, distribuce moci, zdroje moci" subjectLabel="Leadership" accent={LEAD_ACCENT} accentBg={LEAD_BG}
+      subtitle="Moc × pravomoc × autorita · French-Raven 5 zdrojů · hierarchie × kolektivní moudrost · 4 styly · mikropolitika"
+      examBar={<>
+        <b>Mikovcová</b>, <b>Nový/Bočková/Kolouchová</b>, <b>Mareš</b>, <b>Krause</b> — <i>zdroje moci, distribuce moci, aplikace na PS</i>. <b>French-Raven 4× v ZS 2026 — komise to chce přesně!</b> ·
+        <b style={{ color: LEAD_ACCENT }}> Vždy:</b> vyjmenuj 5 zdrojů moci, urči, které lídr v PS používá, a zhodnoť styl rozhodování (autokrat → delegování).
+      </>}>
+      <CCol>
+        <CT0>MOC × PRAVOMOC × AUTORITA</CT0>
+        <CD term="Moc">Schopnost prosadit svou vůli i proti odporu. <b>Pravomoc</b> = formální právo rozhodovat (z pozice). <b>Autorita</b> = uznávaný vliv (i neformální).</CD>
+        <div style={{ fontSize: 10, marginTop: 3 }}><b>Personalizovaná</b> moc (pro sebe) × <b>socializovaná</b> (pro tým/cíl).</div>
+      </CCol>
+      <CCol>
+        <CT0>FRENCH-RAVEN — 5 ZDROJŮ ⭐</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Legitimní</b> — z pozice/funkce</li>
+          <li><b>Odměňovací</b> — moc dát odměnu</li>
+          <li><b>Donucovací</b> — moc potrestat</li>
+          <li><b>Expertní</b> — ze znalostí</li>
+          <li><b>Referenční</b> — z charismatu, vzor</li>
+        </ol>
+        <CNote>Expertní + referenční = nejtrvalejší (nevážou se na pozici). Toto je nejtaženější část okruhu!</CNote>
+      </CCol>
+      <CCol>
+        <CT0>4 STYLY ROZHODOVÁNÍ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Autokratické</b> — rozhodne sám</li>
+          <li><b>Konzultování</b> — ptá se, rozhodne sám</li>
+          <li><b>Společné</b> — rozhoduje s týmem</li>
+          <li><b>Delegování</b> — předá rozhodnutí i odpovědnost</li>
+        </ul>
+        <div style={{ fontSize: 10, marginTop: 3 }}><b>Hierarchie</b> (top-down, rychlé v krizi) × <b>kolektivní moudrost</b> (crowd wisdom, kvalitnější, ale pomalé).</div>
+        <CT>MIKROPOLITIKA</CT>
+        <div style={{ fontSize: 10 }}>Neformální prosazování zájmů uvnitř firmy (nátlak, koalice, kontrola informací). Na hraně etiky, ale realita každé organizace.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── LEAD 6 — Team Excellence ─────────── */
+function CheatSheetLead6() {
+  return (
+    <CheatPage okruh={6} title="Team Excellence (Larson, LaFasto)" subjectLabel="Leadership" accent={LEAD_ACCENT} accentBg={LEAD_BG}
+      subtitle="Skupina × tým · Tuckman 5 fází · Belbin role · Team Excellence 8 znaků · Hackman · followership"
+      examBar={<>
+        <b>Nový/Bočková</b>, <b>Mládková</b>, <b>Stříteský</b>, <b>Tahal/Kuděj/Kučera</b> — <i>tým, Tuckman, Team Excellence, aplikace na PS</i>. ·
+        <b style={{ color: LEAD_ACCENT }}> Vždy:</b> odliš skupina × tým, zařaď Tuckman fázi, vyjmenuj 8 charakteristik a urči, které tým z PS má/postrádá. <b>Tahal/Kuděj/Kučera chtějí 9. bod — udržitelnost.</b>
+      </>}>
+      <CCol>
+        <CT0>SKUPINA × TÝM</CT0>
+        <CD term="Tým">Skupina lidí se <b>společným cílem</b>, vzájemnou <b>závislostí</b> a synergií (výkon &gt; suma jednotlivců). Skupina = sdílí prostor/cíl, ale bez závislosti.</CD>
+        <CT>TUCKMAN — 5 FÁZÍ</CT>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Forming</b> — formování, opatrnost</li>
+          <li><b>Storming</b> — konflikty, boj o role</li>
+          <li><b>Norming</b> — usazení norem</li>
+          <li><b>Performing</b> — vysoký výkon</li>
+          <li><b>Adjourning</b> — rozpuštění</li>
+        </ol>
+      </CCol>
+      <CCol>
+        <CT0>TEAM EXCELLENCE — 8 ZNAKŮ ⭐</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li>Jasný povznášející cíl</li>
+          <li>Výsledkově orientovaná struktura</li>
+          <li>Kompetentní členové</li>
+          <li>Jednotný závazek</li>
+          <li>Spolupracující atmosféra</li>
+          <li>Standardy excelence</li>
+          <li>Externí podpora a uznání</li>
+          <li>Principiální leadership</li>
+        </ol>
+        <CNote>Tahal/Kuděj/Kučera: dodej <b>9. bod — udržitelnost</b> (work-life balance, ne-burnout).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>BELBIN — 9 TÝMOVÝCH ROLÍ</CT0>
+        <div style={{ fontSize: 9.8 }}>3 skupiny: <b>akční</b> (formovač, realizátor, dokončovatel), <b>sociální</b> (koordinátor, týmový hráč, vyhledávač zdrojů), <b>myšlenkové</b> (inovátor, vyhodnocovač, specialista). Vyvážený tým potřebuje mix.</div>
+        <CT>HACKMAN + FOLLOWERSHIP</CT>
+        <div style={{ fontSize: 9.8 }}><b>Hackman</b> — 6 podmínek efektivity (smysl, lidé, reálný tým, normy, kontext, trénink). <b>Followership (Kelly):</b> typy následovníků; 3 úrovně ztotožnění — instrumentální → vnitřní → osobní identifikace.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+const LEAD_CHEATS = {
+  1: { title: "Kompetence a rozvoj lídra", comp: CheatSheetLead1 },
+  2: { title: "Styly leadershipu", comp: CheatSheetLead2 },
+  3: { title: "Kreativní klima v organizaci", comp: CheatSheetLead3 },
+  4: { title: "Teorie motivace, ovlivňování", comp: CheatSheetLead4 },
+  5: { title: "Moc, distribuce moci, zdroje moci", comp: CheatSheetLead5 },
+  6: { title: "Team Excellence", comp: CheatSheetLead6 },
+};
+
+/* ════════════════════════════════════════════════════════
+   HR / PERSONÁLNÍ ŘÍZENÍ CHEAT SHEETY — accent #D85A8C (růžová)
+   ════════════════════════════════════════════════════════ */
+
+const HR_ACCENT = "#C44A78";
+const HR_BG = "#fdf2f7";
+
+/* ─────────── HR 1 — Strategie + kultura + motivace ─────────── */
+function CheatSheetHr1() {
+  return (
+    <CheatPage okruh={1} title="Strategie + kultura + motivace" subjectLabel="Personální řízení" accent={HR_ACCENT} accentBg={HR_BG}
+      subtitle="Propojení Strategie ↔ Struktura ↔ Kultura ↔ Motivace · Schein 3 vrstvy · Hofstede 6D · Denison · 3 typy HR strategie"
+      examBar={<>
+        <b>Stříteský</b>, <b>Tahal</b>, <b>Mikovcová</b>, <b>Svobodová/Bočková</b>, <b>Vrbová</b> — <i>propojení 4 prvků, kultura, HR strategie, aplikace na PS</i>. ·
+        <b style={{ color: HR_ACCENT }}> Bočková chce 3 charakteristiky HR strategie (specifická/komplexní/provázaná).</b> Vždy: ukaž, že strategie–struktura–kultura–motivace na sebe sedí.
+      </>}>
+      <CCol>
+        <CT0>PROPOJENÍ 4 PRVKŮ</CT0>
+        <div style={{ fontSize: 10.5 }}><b>Strategie</b> (kam jdeme) → <b>Struktura</b> (kdo komu reportuje) → <b>Kultura</b> (jak se to u nás dělá) → <b>Motivace</b> (co lidi žene). Musí na sebe sedět, jinak firma drhne.</div>
+        <CT>SCHEIN — 3 VRSTVY KULTURY</CT>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Artefakty</b> — viditelné (logo, rituály, jazyk)</li>
+          <li><b>Hodnoty/normy</b> — deklarované (kodex, „jak se to dělá")</li>
+          <li><b>Předpoklady</b> — nevědomé, samozřejmé</li>
+        </ol>
+        <CNote>Komise miluje aplikaci Scheina na PS — najdi všechny 3 vrstvy ve firmě.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>3 CHARAKTERISTIKY HR STRATEGIE ⭐</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Specifická</b> — šitá na míru firmě</li>
+          <li><b>Komplexní</b> — pokrývá vše (nábor → odchod)</li>
+          <li><b>Provázaná</b> — navázaná na firemní strategii</li>
+        </ul>
+        <CNote>Bočková tyto 3 vždy chce vyjmenovat. Plus <b>Hard × Soft HRM</b>: Hard = lidé jako zdroj/náklad, Soft = lidé jako aktivum k rozvoji.</CNote>
+        <CT>HOFSTEDE — 6 DIMENZÍ</CT>
+        <div style={{ fontSize: 9.8 }}>PDI (mocenský odstup), IDV (individualismus), MAS (maskulinita), UAI (vyhýbání nejistotě), LTO (dlouhodobost), IVR (požitkářství).</div>
+      </CCol>
+      <CCol>
+        <CT0>DENISON — 4 TYPY KULTURY</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.3 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Adaptabilní</b> (vně, flex)</td><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Mise</b> (vně, stabil)</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Zapojení</b> (uvnitř, flex)</td><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Konzistence</b> (uvnitř, stabil)</td></tr>
+        </tbody></table>
+        <CT>MOTIVACE</CT>
+        <div style={{ fontSize: 10 }}>Vnitřní (smysl, růst) × vnější (plat, benefity). Stimuly: materiální, sociální, personální. Detail teorií → <b>Lead 4</b>.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── HR 2 — Motivace a odměňování ─────────── */
+function CheatSheetHr2() {
+  return (
+    <CheatPage okruh={2} title="Motivace a odměňování" subjectLabel="Personální řízení" accent={HR_ACCENT} accentBg={HR_BG}
+      subtitle="Motivace × stimulace · motivační profil · job design × crafting · model celkové odměny · mzdová politika"
+      examBar={<>
+        <b>Nový</b> (motivační profil!), <b>Stříteský</b>, <b>Mikovcová</b>, <b>Bočková</b> — <i>motivace + odměňování, aplikace na PS</i>. <b>HR 2 padá nejvíc z HR (14 taženek)!</b> ·
+        <b style={{ color: HR_ACCENT }}> Vždy:</b> teorie motivace stručně (detail Lead 4), pak motivační profil + model celkové odměny aplikuj na pracovníka z PS.
+      </>}>
+      <CCol>
+        <CT0>MOTIVAČNÍ PROFIL (Nový chce!)</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li>Co konkrétně člověka motivuje (peníze/smysl/uznání/vztahy)</li>
+          <li>Jak silně a jak stabilně motivy působí</li>
+          <li>Co ho demotivuje (frustrátory)</li>
+          <li>Jak reaguje na motivační situace</li>
+        </ul>
+        <CT>TEORIE (detail → Lead 4)</CT>
+        <div style={{ fontSize: 9.8 }}>Maslow (5 úrovní), Herzberg (hygienické × motivátory), Vroom (E×I×V), Adams (3× spravedlnost), SDT (autonomie/kompetence/vztahy), SMART.</div>
+      </CCol>
+      <CCol>
+        <CT0>JOB DESIGN × JOB CRAFTING</CT0>
+        <div style={{ fontSize: 10 }}><b>Job Design</b> = role navržená shora. <b>Job Crafting</b> = zaměstnanec si práci sám přetváří.</div>
+        <div style={{ fontSize: 10, marginTop: 4 }}>4 dimenze obohacení: <b>variety</b> (různorodost), <b>significance</b> (význam), <b>autonomy</b>, <b>feedback</b>.</div>
+        <CT>3 ZPŮSOBY ÚPRAVY PRÁCE</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Job rotation</b> — střídání míst</li>
+          <li><b>Job enlargement</b> — rozšíření obsahu (horizontálně)</li>
+          <li><b>Job enrichment</b> — vyšší úroveň úkolů (vertikálně)</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>MODEL CELKOVÉ ODMĚNY</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.3 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1" }}><b>Transakční</b> (hmotné)</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}>Základní mzda (úkolová/časová)</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}>Doplňková (příplatky, prémie, bonusy)</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}>Benefity (stravenky, auto, pojištění)</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Relační</b> (nehmotné): rozvoj, uznání, prostředí</td></tr>
+        </tbody></table>
+        <CNote>Mzdová politika: získat a stabilizovat lidi, mzdová spravedlnost, růst produktivity &gt; růst mzdy.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── HR 3 — Globální × lokální, expatrianti ─────────── */
+function CheatSheetHr3() {
+  return (
+    <CheatPage okruh={3} title="HR globální × lokální, expatrianti" subjectLabel="Personální řízení" accent={HR_ACCENT} accentBg={HR_BG}
+      subtitle="Globalizace × lokalizace × glokalizace · Bartlett-Ghoshal 4 typy · EPRG model · expat lifecycle · Hofstede v HR"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Nový</b>, <b>Bočková</b> — <i>globální × lokální HR, expatrianti, aplikace na PS</i>. ·
+        <b style={{ color: HR_ACCENT }}> Vždy:</b> urči orientaci firmy (EPRG), zařaď do Bartlett-Ghoshal matice a popiš expat lifecycle s riziky (repatriace!).
+      </>}>
+      <CCol>
+        <CT0>3 PŘÍSTUPY</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Globalizace</b> — standardizace, úspory z rozsahu (Apple)</li>
+          <li><b>Lokalizace</b> — adaptace na trh, drahé</li>
+          <li><b>Glokalizace</b> — globální hodnoty + lokální benefity (McD: Maharaja Mac v Indii)</li>
+        </ul>
+        <CT>EPRG MODEL (orientace)</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>E</b>tnocentric — centrála ví nejlíp, expati nahoře</li>
+          <li><b>P</b>olycentric — každá země si vládne sama</li>
+          <li><b>R</b>egiocentric — řízení po regionech</li>
+          <li><b>G</b>eocentric — nejlepší lidé bez ohledu na původ</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>BARTLETT-GHOSHAL 4 TYPY</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Global</b><br />vys. integrace, níz. adaptace (Apple)</td><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Transnational</b><br />vys. obojí (IKEA, McD)</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>International</b><br />níz. obojí (export)</td><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Multidomestic</b><br />níz. integ., vys. adapt.</td></tr>
+        </tbody></table>
+        <CT>HOFSTEDE V HR</CT>
+        <div style={{ fontSize: 9.8 }}>Vys. PDI (Indie) → direktivní, žádné 360°. Vys. UAI (Německo) → striktní job desc. Vys. IDV (USA) → individuální KPI.</div>
+      </CCol>
+      <CCol>
+        <CT0>EXPAT LIFECYCLE</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Výběr</b> — kulturní inteligence, ochota rodiny</li>
+          <li><b>Příprava</b> — cultural training (bez ní 30 % selže)</li>
+          <li><b>Pobyt</b> — 2–5 let, podpora z centrály</li>
+          <li><b>Repatriace</b> — návrat (25 % odejde do 2 let!)</li>
+        </ol>
+        <CNote>Repatriace je nejvíc podceněná fáze — chybí role po návratu, devalvace zkušeností.</CNote>
+        <div style={{ fontSize: 9.5, marginTop: 3 }}>Náklady: plat 3–5× lokální, housing, international school, tax equalization. ROI ~100–300k USD/rok.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── HR 4 — Diverzita a její řízení ─────────── */
+function CheatSheetHr4() {
+  return (
+    <CheatPage okruh={4} title="Diverzita a její řízení" subjectLabel="Personální řízení" accent={HR_ACCENT} accentBg={HR_BG}
+      subtitle="DEI (diverzita/inkluze/equity) · primární × sekundární dimenze · Roosevelt Thomas 4 fáze · nástroje · výhody i nevýhody"
+      examBar={<>
+        <b>Mládková</b> (chce výhody I nevýhody!), <b>Stříteský</b>, <b>Nový</b> — <i>diverzita, řízení diverzity, aplikace na PS</i>. ·
+        <b style={{ color: HR_ACCENT }}> Mládková vždy chce výhody A nevýhody diverzity + konkrétní doporučení.</b> Nestačí říct „diverzita je dobrá".
+      </>}>
+      <CCol>
+        <CT0>DEI — 3 RŮZNÉ POJMY</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Diverzita</b> — kdo tam je (zastoupení skupin)</li>
+          <li><b>Inkluze</b> — pocit sounáležitosti (můžou být sami sebou)</li>
+          <li><b>Equity</b> — spravedlivý přístup (fair start, ne stejné podmínky)</li>
+        </ul>
+        <CT>DIMENZE (iceberg)</CT>
+        <div style={{ fontSize: 10 }}><b>Primární</b> (viditelné, chráněné zákonem): věk, gender, etnicita, rasa, orientace. <b>Sekundární</b> (skryté): vzdělání, zkušenosti, jazyk, náboženství, rodinný stav.</div>
+      </CCol>
+      <CCol>
+        <CT0>ROOSEVELT THOMAS — 4 FÁZE</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Resistance</b> — aktivní odpor</li>
+          <li><b>Discrimination</b> — pasivní (glass ceiling, tokenism)</li>
+          <li><b>Tolerance</b> — tolerujeme, ale „cizí" (compliance)</li>
+          <li><b>Inclusion</b> — diverzita jako konkurenční výhoda</li>
+        </ol>
+        <CNote>Většina ČR firem ve fázi 2. Cíl = fáze 4 (Microsoft, Patagonia).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>VÝHODY × NEVÝHODY ⭐</CT0>
+        <div style={{ marginBottom: 3 }}><span style={{ background: "#e1f5e1", padding: "1px 5px", borderRadius: 3, fontSize: 9.5 }}>+ kreativita, inovace, lepší rozhodnutí (McKinsey +35 %), širší trh, employer brand</span></div>
+        <div><span style={{ background: "#fbecea", padding: "1px 5px", borderRadius: 3, fontSize: 9.5 }}>− konflikty, pomalejší komunikace, náklady na řízení, riziko tokenismu</span></div>
+        <CT>NÁSTROJE</CT>
+        <div style={{ fontSize: 9.8 }}>Slepý nábor, kvóty, ERG skupiny, mentoring minorit, školení unconscious bias, inkluzivní benefity, měření DEI metrik.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── HR 5 — Talent management, rozvoj ─────────── */
+function CheatSheetHr5() {
+  return (
+    <CheatPage okruh={5} title="Talent management, rozvoj zaměstnanců" subjectLabel="Personální řízení" accent={HR_ACCENT} accentBg={HR_BG}
+      subtitle="War for talent · 9-box grid · DDC model · 70-20-10 · KSA + Attitudes · GROW coaching · on/off the job"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Nový</b>, <b>Bočková</b> — <i>talent management, rozvoj, kompetenční model, aplikace na PS</i>. ·
+        <b style={{ color: HR_ACCENT }}> Bočková chce KSA se 4 komponentami včetně Attitudes!</b> Vždy: 9-box pro talenty + 70-20-10 + konkrétní rozvojový plán.
+      </>}>
+      <CCol>
+        <CT0>9-BOX GRID (výkon × potenciál)</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Top talent</b> (3,3) — stars, 5–10 %, retain za každou cenu</li>
+          <li><b>Solid contributor</b> (2,2) — páteř, 60–70 %</li>
+          <li><b>Underperformer</b> (1,1) — develop 3–6 měs. nebo exit</li>
+        </ul>
+        <CT>WAR FOR TALENT</CT>
+        <div style={{ fontSize: 10 }}>Drucker: talent dnes vzácnější než kapitál. Systematická identifikace, rozvoj, motivace a udržení klíčových lidí.</div>
+      </CCol>
+      <CCol>
+        <CT0>KSA + ATTITUDES ⭐</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>K</b>nowledge — co víš (studium)</li>
+          <li><b>S</b>kills — co umíš (praxe)</li>
+          <li><b>A</b>bilities — co dokážeš (vrozené, EQ)</li>
+          <li><b>A</b>ttitudes — jaký jsi (postoje) ⚠️ často chybí!</li>
+        </ul>
+        <CNote>Bočková: nezapomeň na 4. komponentu <b>Attitudes</b> — nejhůř měnitelná, ale často nejdůležitější.</CNote>
+        <CT>DDC MODEL</CT>
+        <div style={{ fontSize: 9.8 }}><b>Develop</b> (školení) / <b>Deploy</b> (stretch role) / <b>Connect</b> (mentoring, network).</div>
+      </CCol>
+      <CCol>
+        <CT0>70-20-10 RULE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>70 %</b> praxí (on the job — stretch, rotace)</li>
+          <li><b>20 %</b> od druhých (mentoring, ZV)</li>
+          <li><b>10 %</b> školením (kurzy, MBA)</li>
+        </ul>
+        <CNote>Většina firem investuje opačně — 80 % do školení (jen 10 % dopad).</CNote>
+        <CT>GROW COACHING</CT>
+        <div style={{ fontSize: 10 }}><b>G</b>oal (cíl) → <b>R</b>eality (stav) → <b>O</b>ptions (možnosti) → <b>W</b>ill (akce). Assessment × Development centrum.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── HR 6 — Nové trendy v HR ─────────── */
+function CheatSheetHr6() {
+  return (
+    <CheatPage okruh={6} title="Nové trendy v HR a strategie HR" subjectLabel="Personální řízení" accent={HR_ACCENT} accentBg={HR_BG}
+      subtitle="Ulrich 4 role HR · HRIS (BP / sdílené služby / centrum excelence) · trendy · EFQM · assessment × development"
+      examBar={<>
+        <b>Stříteský</b>, <b>Nový</b>, <b>Mikovcová</b>, <b>Bočková</b> — <i>moderní trendy, Ulrichův model, EFQM, aplikace na PS</i>. ·
+        <b style={{ color: HR_ACCENT }}> Vždy:</b> rozpoznej v PS zastaralé HR prvky a doporuč moderní přístup. Ulrich 4 role je jádro okruhu.
+      </>}>
+      <CCol>
+        <CT0>ULRICH — 4 ROLE HR ⭐</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.2 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Strategický partner</b><br />strateg. + procesy</td><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Agent změny</b><br />strateg. + lidé</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Administrat. expert</b><br />operat. + procesy</td><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Advokát zaměstnanců</b><br />operat. + lidé</td></tr>
+        </tbody></table>
+        <CNote>Osy: strategické × operativní zaměření / procesy × lidé.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>HRIS — MODERNÍ HR ODDĚLENÍ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Business partner</b> — spojka HR a vedení, tvář HR</li>
+          <li><b>Sdílené služby</b> — mzdy, administrativa (outsourceable)</li>
+          <li><b>Centrum excelence</b> — odborníci na metodiku</li>
+        </ul>
+        <CT>HLAVNÍ TRENDY</CT>
+        <div style={{ fontSize: 9.8 }}>HR marketing/employer branding, HR controlling, technologie/AI, diverzita, CSR, flexibilní týmy, freelanceři, transparentnost.</div>
+      </CCol>
+      <CCol>
+        <CT0>EFQM MODEL</CT0>
+        <div style={{ fontSize: 10 }}>Model excelence na principu <b>bodování</b>. Firma sbírá body v oblastech: vedení, strategie, lidé, partnerství, procesy → výsledky. Předpoklady → výsledky.</div>
+        <CT>ASSESSMENT × DEVELOPMENT</CT>
+        <div style={{ fontSize: 10 }}><b>Assessment centrum</b> — hodnotí chování v situacích (výběr). <b>Development centrum</b> — hledá silné stránky + plán rozvoje (růst).</div>
+        <CNote>V PS: najdi zastaralý prvek (papírování, žádná data) → doporuč Ulrich roli.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── HR 7 — HR controlling, ukazatele ─────────── */
+function CheatSheetHr7() {
+  return (
+    <CheatPage okruh={7} title="HR Canvas, HR controlling, ukazatele" subjectLabel="Personální řízení" accent={HR_ACCENT} accentBg={HR_BG}
+      subtitle="HR controlling · leading × lagging indikátory · HR Scorecard · HR Canvas · ukazatele výkonu lidí"
+      examBar={<>
+        <b>Mikovcová</b> (HR controlling, leading × lagging!), <b>Stříteský</b>, <b>Nový</b> — <i>HR controlling, ukazatele, aplikace na PS</i>. ·
+        <b style={{ color: HR_ACCENT }}> Mikovcová vždy chce leading × lagging indikátory.</b> Vždy: definuj controlling + rozliš oba typy ukazatelů + aplikuj na PS.
+      </>}>
+      <CCol>
+        <CT0>HR CONTROLLING</CT0>
+        <CD term="HR controlling">Koordinační koncept pro řízení podniku — měření, kontrola, hledání odchylek, data-driven rozhodování. Provazuje HR procesy s finančními výsledky.</CD>
+        <div style={{ fontSize: 10, marginTop: 3 }}>Cíle: flexibilita (včasné varování), adaptabilita (predikce), integrace (plán × realita).</div>
+      </CCol>
+      <CCol>
+        <CT0>LEADING × LAGGING ⭐</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.3 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>LEADING</b> (předbíhající)<br /><span style={{ fontSize: 9 }}>vstupy, těžko měřitelné, snadno ovlivnitelné, predikují: engagement, % talentů, kvalifikace</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1" }}><b>LAGGING</b> (zpožďující)<br /><span style={{ fontSize: 9 }}>výstupy, snadno měřitelné, těžko ovlivnitelné, reflektují minulost: fluktuace, náklady, absence</span></td></tr>
+        </tbody></table>
+        <CNote>Toto je nejtaženější část — Mikovcová chce oba typy s příklady.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>HR SCORECARD (4 perspektivy)</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Finanční</b> — cost per hire, ROI školení</li>
+          <li><b>Zákazník</b> — eNPS, engagement, exit témata</li>
+          <li><b>Procesy</b> — time to hire, onboarding</li>
+          <li><b>Učení</b> — skills coverage, succession pipeline</li>
+        </ul>
+        <CT>NÁSTROJE</CT>
+        <div style={{ fontSize: 9.8 }}>Personální statistiky, KPI dashboard, benchmarky, engagement surveys, externí HR audit. <b>HR Canvas</b> = analogie BMC pro HR.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── HR 8 — Strategie ŘLZ, nástroje, politiky ─────────── */
+function CheatSheetHr8() {
+  return (
+    <CheatPage okruh={8} title="Strategie ŘLZ, nástroje, politiky" subjectLabel="Personální řízení" accent={HR_ACCENT} accentBg={HR_BG}
+      subtitle="Systém ŘLZ (koloběh) · 3 typy strategie · plánování lidí · mechanistický × motivační přístup · liniový manažer"
+      examBar={<>
+        <b>Stříteský</b>, <b>Nový</b>, <b>Mikovcová</b>, <b>Bočková</b> — <i>strategie ŘLZ, nástroje, politiky, aplikace na PS</i>. ·
+        <b style={{ color: HR_ACCENT }}> Vždy:</b> najdi v PS, jakou strategii s lidmi firma má, kde má slabinu, a doporuč změny. Zdůrazni: výkon řídí liniový manažer, ne HR.
+      </>}>
+      <CCol>
+        <CT0>SYSTÉM ŘLZ — KOLOBĚH</CT0>
+        <div style={{ fontSize: 9.8 }}>Předvýběr → výběr → adaptace → stimulace a hodnocení → rozvoj → řízení kariéry → plánování míst → udržení a odchod. 8 kroků životního cyklu zaměstnance.</div>
+        <CD term="Cíl ŘLZ">Mít správné lidi ve správný čas na správném místě. Most mezi strategií firmy a péčí o lidi.</CD>
+      </CCol>
+      <CCol>
+        <CT0>3 TYPY HR STRATEGIE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Specifická</b> — jedna personální činnost (nábor/odměňování)</li>
+          <li><b>Komplexní (transformační)</b> — mění firmu jako celek (kultura)</li>
+          <li><b>Pracovních vztahů</b> — dlouhodobé vztahy firma–zaměstnanci/odbory</li>
+        </ul>
+        <CT>KDO ŘÍDÍ VÝKON</CT>
+        <div style={{ fontSize: 10 }}>Hlavní odpovědnost = <b>liniový manažer</b> (přímý nadřízený), ne HR. HR pomáhá rozvojem, motivací, ZV. Řízení výkonu: systematické, pravidelné, individuální, etické, objektivní.</div>
+      </CCol>
+      <CCol>
+        <CT0>MECHANISTICKÝ × MOTIVAČNÍ</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.3 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1" }}><b>Mechanistický</b><br /><span style={{ fontSize: 9 }}>úzká specializace, + levné zaučení a produktivita, − monotonie (pásová výroba)</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Motivační</b><br /><span style={{ fontSize: 9 }}>pestrá práce, autonomie, ZV, + spokojenost, − náročnější na řízení</span></td></tr>
+        </tbody></table>
+        <CNote>Plánování lidí: kolik, kdy, proč. S odbory = kolektivní vyjednávání.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── HR 9 — Intelektuální kapitál ─────────── */
+function CheatSheetHr9() {
+  return (
+    <CheatPage okruh={9} title="Intelektuální kapitál, kompetenční model" subjectLabel="Personální řízení" accent={HR_ACCENT} accentBg={HR_BG}
+      subtitle="Galbraith 3 složky IK · kompetenční model · měření (Skandia, Tobinovo Q, BSC) · role HR v budování IK"
+      examBar={<>
+        <b>Stříteský</b>, <b>Nový</b>, <b>Mikovcová</b>, <b>Bočková</b> — <i>intelektuální kapitál, kompetenční model, měření, aplikace na PS</i>. ·
+        <b style={{ color: HR_ACCENT }}> Vždy:</b> 3 složky IK (lidský/strukturální/vztahový), jak HR brání odchodu lidského kapitálu, a způsob měření.
+      </>}>
+      <CCol>
+        <CT0>GALBRAITH — 3 SLOŽKY IK ⭐</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Lidský</b> — znalosti, co odejdou s lidmi ⚠️</li>
+          <li><b>Strukturální</b> — zůstane ve firmě (postupy, kultura, IP)</li>
+          <li><b>Vztahový</b> — vnější vztahy (zákazníci, dodavatelé, image)</li>
+        </ul>
+        <CD term="Intelektuální kapitál">Nehmotné vlastnictví organizace. Dnes 80 % hodnoty firmy (Microsoft 88 % intangible).</CD>
+      </CCol>
+      <CCol>
+        <CT0>MĚŘENÍ IK</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Skandia Navigator</b> (Edvinsson) — 5 perspektiv, IK = lidský + strukturální</li>
+          <li><b>Intangible Assets Monitor</b> (Sveiby)</li>
+          <li><b>BSC</b> (Kaplan-Norton) — 4 perspektivy</li>
+          <li><b>Tobinovo Q</b> — tržní hodnota / náklady aktiv (Q&gt;1 = má IK; Apple ~5)</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>KOMPETENČNÍ MODEL</CT0>
+        <div style={{ fontSize: 10 }}>Popisuje schopnosti, na kterých firma staví konkurenční výhodu. Strategické schopnosti = co firma umí líp než konkurence (core competencies).</div>
+        <CT>ROLE HR V BUDOVÁNÍ IK</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li>Retence klíčových lidí (brání odchodu lidského kap.)</li>
+          <li>Knowledge management (převod lidský → strukturální)</li>
+          <li>Rozvoj, succession planning, kultura sdílení</li>
+        </ul>
+        <CNote>Klíč: lidský kapitál „chodí domů ve 4 odpoledne" — HR ho musí přeměnit na strukturální.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+const HR_CHEATS = {
+  1: { title: "Strategie + kultura + motivace", comp: CheatSheetHr1 },
+  2: { title: "Motivace a odměňování", comp: CheatSheetHr2 },
+  3: { title: "HR globální × lokální, expatrianti", comp: CheatSheetHr3 },
+  4: { title: "Diverzita a její řízení", comp: CheatSheetHr4 },
+  5: { title: "Talent management, rozvoj", comp: CheatSheetHr5 },
+  6: { title: "Nové trendy v HR a strategie HR", comp: CheatSheetHr6 },
+  7: { title: "HR Canvas, HR controlling", comp: CheatSheetHr7 },
+  8: { title: "Strategie ŘLZ, nástroje, politiky", comp: CheatSheetHr8 },
+  9: { title: "Intelektuální kapitál, kompetenční model", comp: CheatSheetHr9 },
+};
+
+/* ════════════════════════════════════════════════════════
+   FINANCE CHEAT SHEETY — accent #3B6FD6 (modrá)
+   ════════════════════════════════════════════════════════ */
+
+const FIN_ACCENT = "#3B6FD6";
+const FIN_BG = "#eff4fd";
+
+/* ─────────── FIN 1 — Finanční analýza, ukazatele ─────────── */
+function CheatSheetFin1() {
+  return (
+    <CheatPage okruh={1} title="Finanční analýza, ukazatele výkonnosti" subjectLabel="Finance" accent={FIN_ACCENT} accentBg={FIN_BG}
+      subtitle="Vertikální × horizontální · 4 skupiny poměrových ukazatelů · ROA/ROE/ROS · likvidita · EBIT/EBITDA · EVA · Du Pont"
+      examBar={<>
+        <b>Schönfeld</b>, <b>Tahal</b>, <b>Vávra</b>, <b>Abíková</b> — <i>finanční analýza, ukazatele, aplikace na PS</i>. ·
+        <b style={{ color: FIN_ACCENT }}> Svobodová chce vědět, proč je v ROA/ROI EBIT a ne EAT.</b> Vždy: spočítej z výkazů PS aspoň 1 ukazatel z každé skupiny.
+      </>}>
+      <CCol>
+        <CT0>VERTIKÁLNÍ × HORIZONTÁLNÍ</CT0>
+        <div style={{ fontSize: 10 }}><b>Vertikální</b> = struktura výkazu v JEDNOM období (položka k celku, „DHM = 40 % aktiv"). <b>Horizontální</b> = vývoj V ČASE (3–5 let), hledá trend.</div>
+        <CT>4 SKUPINY UKAZATELŮ</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Rentabilita</b> — vydělává? (chci max)</li>
+          <li><b>Likvidita</b> — umí platit? (ani moc, ani málo)</li>
+          <li><b>Aktivita</b> — hospodaří efektivně? (obrat vysoký)</li>
+          <li><b>Zadluženost</b> — jak je zadlužená? (vyvážit)</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>RENTABILITA ⭐</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.5 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>ROA</b> = EBIT / aktiva</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>ROE</b> = EAT / VK</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>ROS</b> = EAT / tržby</td></tr>
+        </tbody></table>
+        <CNote>ROA má <b>EBIT</b> (ne EAT), protože měří výnos CELÉHO kapitálu (VK i CK) — nezáleží na způsobu financování. To Svobodová chce!</CNote>
+      </CCol>
+      <CCol>
+        <CT0>LIKVIDITA</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Běžná</b> = OA / KZ (ideál 1,5–2,5)</li>
+          <li><b>Pohotová</b> = (OA − zásoby) / KZ (~1,0)</li>
+          <li><b>Okamžitá</b> = fin. majetek / KZ (~0,2)</li>
+        </ul>
+        <CT>ZISKOVÉ KATEGORIE + EVA</CT>
+        <div style={{ fontSize: 9.5 }}><b>EAT</b> (čistý) ⊂ <b>EBT</b> (+daň) ⊂ <b>EBIT</b> (+úroky) ⊂ <b>EBITDA</b> (+odpisy). <b>EVA</b> = NOPAT − WACC×kapitál (ekonomická přidaná hodnota). <b>Du Pont</b> rozklad ROE.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── FIN 2 — Bankrotní modely ─────────── */
+function CheatSheetFin2() {
+  return (
+    <CheatPage okruh={2} title="Bankrotní modely" subjectLabel="Finance" accent={FIN_ACCENT} accentBg={FIN_BG}
+      subtitle="Bankrotní × bonitní modely · Altman Z-skóre (USA) · Indexy IN (ČR) · k čemu slouží · napojení na fin. analýzu"
+      examBar={<>
+        <b>Tahal / Svobodová</b> (opakovaně) — <i>bankrotní modely, k čemu slouží, aplikace na PS</i>. ·
+        <b style={{ color: FIN_ACCENT }}> Komise chtějí JEN vyjmenovat a k čemu slouží — žádné vzorečky!</b> Stačí názvy, účel a rozdíl Altman (USA) × IN (ČR). Nepřetěžuj detaily.
+      </>}>
+      <CCol>
+        <CT0>BANKROTNÍ × BONITNÍ</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.5 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fbecea" }}><b>Bankrotní</b><br /><span style={{ fontSize: 9 }}>„Zkrachuje firma?" — pravděpodobnost úpadku. Altman, IN, Taffler, Beaver</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Bonitní</b><br /><span style={{ fontSize: 9 }}>„Jak je firma na tom?" — finanční zdraví, schopnost dostát závazkům. Index bonity</span></td></tr>
+        </tbody></table>
+        <CNote>Slouží investorům a věřitelům — kombinují víc ukazatelů (likvidita, zadluženost, rentabilita) do 1 čísla.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>ALTMAN Z-SKÓRE (USA)</CT0>
+        <div style={{ fontSize: 10 }}>Nejznámější, americký původ. Kombinuje 5 ukazatelů (PK/aktiva, nerozdělený zisk/aktiva, EBIT/aktiva, VK/cizí zdroje, tržby/aktiva), každý s váhou → výsledné <b>Z</b>.</div>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}>3 pásma: <b>bezpečné</b> / šedá zóna / <b>bankrot</b>.</div>
+      </CCol>
+      <CCol>
+        <CT0>INDEXY IN (ČR)</CT0>
+        <div style={{ fontSize: 10 }}>Neumaierovi — <b>český</b> ekvivalent Altmana, šitý na ČR podmínky. IN95, IN99, IN01, <b>IN05</b> (nejnovější). Kombinuje rentabilitu, zadluženost, likviditu, aktivitu.</div>
+        <CT>NAPOJENÍ</CT>
+        <div style={{ fontSize: 10 }}>Bankrotní modely navazují na <b>finanční analýzu</b> (Fin 1) a <b>krizi/úpadek</b> (Fin 7). V PS: spočítat trend ukazatelů → zařadit do pásma.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── FIN 3 — Pracovní kapitál, ČPK ─────────── */
+function CheatSheetFin3() {
+  return (
+    <CheatPage okruh={3} title="Pracovní kapitál, ČPK, optimální výše" subjectLabel="Finance" accent={FIN_ACCENT} accentBg={FIN_BG}
+      subtitle="4 složky PK · ČPK = OA − KZ · obratový cyklus peněz · 3 strategie · financování PK"
+      examBar={<>
+        <b>Hönig</b> (kterých útvarů se týká PK?), <b>Machek / Kučera</b> (vzorce likvidity), <b>Tahal</b> — <i>pracovní kapitál, ČPK, aplikace na PS</i>. ·
+        <b style={{ color: FIN_ACCENT }}> Hönig: PK se týká VŠECH útvarů (nákup→výroba→obchod→finance), ne jen financí.</b>
+      </>}>
+      <CCol>
+        <CT0>4 SLOŽKY PK</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Zásoby</b> (aktivum) — nejméně likvidní</li>
+          <li><b>Pohledávky</b> (aktivum) — skonto = pobídka k rychlé platbě</li>
+          <li><b>Kr. fin. majetek</b> (aktivum) — hotovost, kr. CP</li>
+          <li><b>Kr. závazky</b> (pasivum) — co firma dluží</li>
+        </ul>
+        <CD term="Pracovní kapitál">Kapitál, který v podniku neustále obíhá. Prochází celou firmou — proto se týká VŠECH útvarů (Hönig).</CD>
+      </CCol>
+      <CCol>
+        <CT0>ČPK + LIKVIDITA</CT0>
+        <div style={{ fontSize: 10 }}><b>Pracovní kapitál</b> = oběžná aktiva. <b>Čistý PK (ČPK)</b> = OA − kr. závazky. <b>Nefinanční PK</b> = zásoby + pohledávky.</div>
+        <div style={{ fontSize: 9.8, marginTop: 4 }}>Likvidita: běžná = OA/KZ (1,5–2,5), pohotová = (OA−zásoby)/KZ (~1), okamžitá = fin.maj./KZ.</div>
+        <CT>OBRATOVÝ CYKLUS PENĚZ (OCP)</CT>
+        <div style={{ fontSize: 9.8 }}>OCP = doba obratu zásob + doba inkasa pohledávek − doba odkladu závazků. Čím kratší, tím líp (méně vázaných peněz).</div>
+      </CCol>
+      <CCol>
+        <CT0>3 STRATEGIE PK</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Konzervativní</b> — vysoký ČPK, bezpečí, ale drahé</li>
+          <li><b>Agresivní</b> — nízký ČPK, levné, ale riziko nelikvidity</li>
+          <li><b>Umírněná</b> — kompromis (matching)</li>
+        </ul>
+        <CT>FINANCOVÁNÍ PK</CT>
+        <div style={{ fontSize: 9.8 }}>Krátkodobé zdroje: dodavatelský úvěr, kontokorent, krátkodobý bank. úvěr, faktoring. Trvalá část OA by se měla financovat dlouhodobě.</div>
+        <CNote>Zlaté pravidlo financování: dlouhodobý majetek → dlouhodobé zdroje.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── FIN 4 — Kapitálová struktura, WACC ─────────── */
+function CheatSheetFin4() {
+  return (
+    <CheatPage okruh={4} title="Kapitálová struktura, WACC" subjectLabel="Finance" accent={FIN_ACCENT} accentBg={FIN_BG}
+      subtitle="Finanční × kapitálová struktura · složky VK · U-křivka · WACC · finanční páka · daňový štít"
+      examBar={<>
+        <b>„3 týpci" (LS 2025)</b> — <i>kapitálová struktura, kapitálové fondy, druhy financování VK</i>. <b>Tahal</b>, <b>Schönfeld</b> — <i>WACC, optimální struktura</i>. ·
+        <b style={{ color: FIN_ACCENT }}> Měj pevně složky VK (hlavně kapitálové fondy) — ptají se na cokoliv.</b>
+      </>}>
+      <CCol>
+        <CT0>FINANČNÍ × KAPITÁLOVÁ STRUKTURA</CT0>
+        <div style={{ fontSize: 10 }}><b>Finanční (širší)</b> = veškeré závazky + VK, vč. krátkodobých → financování CELKOVÝCH aktiv. <b>Kapitálová (užší)</b> = jen DLOUHODOBÝ kapitál (VK + dl. CK) → financování dl. aktiv.</div>
+        <CT>SLOŽKY VK</CT>
+        <div style={{ fontSize: 9.8 }}>Základní kapitál, <b>kapitálové fondy</b> (emisní ážio, dary), fondy ze zisku (rezervní), VH minulých let, VH běžného období.</div>
+      </CCol>
+      <CCol>
+        <CT0>WACC ⭐</CT0>
+        <div style={{ fontSize: 11, fontFamily: "monospace", background: "#eff4fd", padding: "4px 6px", borderRadius: 3, margin: "2px 0" }}>WACC = re·(VK/C) + rd·(1−d)·(CK/C)</div>
+        <div style={{ fontSize: 9.8 }}>Vážené průměrné náklady kapitálu. re = náklady VK (požadovaná výnosnost), rd = úrok z CK, d = daň. Ukazuje, kolik firma průměrně platí za financování aktiv.</div>
+        <CNote>Cíl vlastníka = <b>minimální WACC</b> = optimální kapitálová struktura = max hodnota podniku.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>U-KŘIVKA + PÁKA</CT0>
+        <div style={{ fontSize: 10 }}>WACC nejdřív klesá (levnější CK + daňový štít), pak roste (riziko bankrotu). <b>Minimum U-křivky = optimum.</b></div>
+        <CT>DAŇOVÝ ŠTÍT + FIN. PÁKA</CT>
+        <div style={{ fontSize: 9.8 }}><b>Daňový štít</b> = úroky z CK jsou daňově uznatelné → snižují daň. <b>Finanční páka</b> = použití CK zvyšuje ROE (dokud výnos &gt; úrok). Moc dluhu → riziko.</div>
+        <CT>FINANCOVÁNÍ</CT>
+        <div style={{ fontSize: 9.5 }}>VK: vklady, nerozdělený zisk, emise akcií. CK: úvěry, dluhopisy, leasing.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── FIN 5 — Časová hodnota peněz, investice ─────────── */
+function CheatSheetFin5() {
+  return (
+    <CheatPage okruh={5} title="Časová hodnota peněz, hodnocení investic" subjectLabel="Finance" accent={FIN_ACCENT} accentBg={FIN_BG}
+      subtitle="PV / FV · diskontování · statické × dynamické metody · NPV / IRR / PI / PP · plánování CF investice"
+      examBar={<>
+        <b>Vávra / Štamfestová</b> (riziko v diskontní sazbě!), <b>Tahal</b>, <b>Schönfeld</b> — <i>časová hodnota, hodnocení investic, aplikace na PS</i>. ·
+        <b style={{ color: FIN_ACCENT }}> Vždy:</b> vysvětli proč Kč dnes &gt; Kč zítra, pak použij NPV/IRR a rozhodni o investici z PS.
+      </>}>
+      <CCol>
+        <CT0>ČASOVÁ HODNOTA PENĚZ</CT0>
+        <div style={{ fontSize: 10 }}>Koruna dnes &gt; koruna zítra (lze ji investovat). Zohledňuje inflaci, úrok, příležitostné náklady.</div>
+        <div style={{ fontSize: 10.5, fontFamily: "monospace", background: "#eff4fd", padding: "4px 6px", borderRadius: 3, margin: "3px 0" }}>PV = FV / (1+i)ⁿ<br />FV = PV · (1+i)ⁿ</div>
+        <CNote>Riziko se promítá do <b>diskontní sazby</b> (vyšší riziko → vyšší sazba → nižší PV). To Vávra/Štamfestová chtějí.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>STATICKÉ × DYNAMICKÉ</CT0>
+        <div style={{ fontSize: 10 }}><b>Statické</b> — ignorují čas i riziko (prostá doba návratnosti, rentabilita investice). Rychlé, ale nepřesné.</div>
+        <div style={{ fontSize: 10, marginTop: 3 }}><b>Dynamické</b> — diskontují → zohledňují čas i riziko (NPV, IRR, PI, diskontovaná PP). Správné pro velké investice.</div>
+      </CCol>
+      <CCol>
+        <CT0>NPV / IRR / PI / PP</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>NPV</b> = Σ diskontovaných CF − investice. NPV&gt;0 → přijmout. Hlavní kritérium.</li>
+          <li><b>IRR</b> = sazba, při níž NPV=0. IRR&gt;WACC → přijmout.</li>
+          <li><b>PI</b> = PV příjmů / investice. PI&gt;1 → přijmout.</li>
+          <li><b>PP</b> = doba návratnosti (za jak dlouho se vrátí).</li>
+        </ul>
+        <CNote>NPV &gt; IRR při výběru mezi projekty (IRR má problém s nekonvenčními CF).</CNote>
+        <CT>FÁZE INVESTICE</CT>
+        <div style={{ fontSize: 9.5 }}>Předinvestiční (studie) → investiční (realizace) → provozní → likvidační.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── FIN 6 — Řízení rizika, deriváty ─────────── */
+function CheatSheetFin6() {
+  return (
+    <CheatPage okruh={6} title="Řízení rizika, finanční deriváty" subjectLabel="Finance" accent={FIN_ACCENT} accentBg={FIN_BG}
+      subtitle="Systematické × nesystematické riziko · míry rizika · teorie portfolia · CAPM + beta · deriváty (forward, opce)"
+      examBar={<>
+        <b>Tahal</b>, <b>Schönfeld</b>, <b>Vávra</b> — <i>riziko, portfolio, CAPM, deriváty, aplikace na PS</i>. ·
+        <b style={{ color: FIN_ACCENT }}> Vždy:</b> rozliš systematické (nelze diverzifikovat, β) × nesystematické (lze) + vzorec CAPM.
+      </>}>
+      <CCol>
+        <CT0>DRUHY RIZIKA</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Systematické</b> — celý trh (ekonomika, úroky, politika), nelze diverzifikovat, měří β</li>
+          <li><b>Nesystematické</b> — specifické pro firmu (management, produkt), lze odstranit diverzifikací</li>
+        </ul>
+        <CT>MÍRY RIZIKA</CT>
+        <div style={{ fontSize: 9.8 }}><b>Směrodatná odchylka</b> = absolutní míra (√rozptylu). <b>Variační koeficient</b> = relativní míra (σ/průměr), chci nejnižší.</div>
+      </CCol>
+      <CCol>
+        <CT0>TEORIE PORTFOLIA</CT0>
+        <div style={{ fontSize: 10 }}>Markowitz — diverzifikací snížím <b>nesystematické</b> riziko. Klíč = <b>korelace</b>: nízká/záporná korelace aktiv → větší efekt diverzifikace. Systematické zůstává.</div>
+        <CT>CAPM ⭐</CT>
+        <div style={{ fontSize: 10.5, fontFamily: "monospace", background: "#eff4fd", padding: "4px 6px", borderRadius: 3, margin: "3px 0" }}>re = rf + β·(rm − rf)</div>
+        <div style={{ fontSize: 9.5 }}>rf = bezriziková sazba, rm = výnos trhu. Oceňuje systematické riziko. <b>β</b>&gt;1 rizikovější než trh, β&lt;1 stabilnější, β=1 jako trh.</div>
+      </CCol>
+      <CCol>
+        <CT0>FINANČNÍ DERIVÁTY</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Forward</b> — pevná dohoda na budoucí kurz/cenu (povinnost obou)</li>
+          <li><b>Futures</b> — standardizovaný forward na burze</li>
+          <li><b>Opce</b> — právo (ne povinnost) koupit (call) / prodat (put)</li>
+          <li><b>Swap</b> — výměna toků (úrokový, měnový)</li>
+        </ul>
+        <CNote>Hlavní využití = <b>hedging</b> (zajištění proti pohybu kurzu/úroku). Exportér se měnovým forwardem chrání před oslabením CZK.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── FIN 7 — Krize a úpadek podniku ─────────── */
+function CheatSheetFin7() {
+  return (
+    <CheatPage okruh={7} title="Krize a úpadek podniku, řešení úpadku" subjectLabel="Finance" accent={FIN_ACCENT} accentBg={FIN_BG}
+      subtitle="Krize: interní × externí příčiny · úpadek (insolvence × předlužení) · konkurz / reorganizace / oddlužení · going concern"
+      examBar={<>
+        <b>Tahal</b>, <b>Schönfeld</b>, <b>Svobodová</b> — <i>krize, úpadek, řešení úpadku, aplikace na PS</i>. ·
+        <b style={{ color: FIN_ACCENT }}> Vždy:</b> interní × externí příčiny + rozliš konkurz (zánik) × reorganizace (záchrana) + napoj na bankrotní modely a going concern.
+      </>}>
+      <CCol>
+        <CT0>PŘÍČINY KRIZE</CT0>
+        <div style={{ fontSize: 9.8 }}><b>Interní</b> (firma sama): vysoká zadluženost, nízká likvidita, špatná cenová politika, ztráta konkurenceschopnosti, neumí inovovat, rozpor vlastníci × management.</div>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}><b>Externí</b> (okolí): vysoké úroky, legislativa, recese, propad poptávky, nová konkurence.</div>
+      </CCol>
+      <CCol>
+        <CT0>ÚPADEK — KDY NASTÁVÁ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Platební neschopnost</b> (insolvence) — víc věřitelů, závazky po splatnosti &gt;30 dní. I zisková firma může být insolventní (vázaný kapitál)!</li>
+          <li><b>Předlužení</b> — závazky &gt; majetek (jen u PO a podnikajících FO)</li>
+        </ul>
+        <CT>GOING CONCERN</CT>
+        <div style={{ fontSize: 9.8 }}>Účetní princip = firma bude fungovat i nadále. Pokud ho nesplní → účetní závěrka se sestaví s předpokladem likvidace.</div>
+      </CCol>
+      <CCol>
+        <CT0>ŘEŠENÍ ÚPADKU</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.5 }}>
+          <li><b>Konkurz</b> — majetek se zpeněží, výtěžek věřitelům, firma zaniká (likvidační)</li>
+          <li><b>Reorganizace</b> — firma jede dál dle ozdravného plánu, splácí (sanační, pro větší firmy)</li>
+          <li><b>Oddlužení</b> — FO/menší dlužníci, splátkový kalendář, část dluhů odpuštěna</li>
+        </ul>
+        <CNote>Insolvenční správce řídí proces — firma ztrácí kontrolu nad majetkem. Reorganizace vs konkurz = zachránit × rozprodat.</CNote>
+        <CT>NAPOJENÍ</CT>
+        <div style={{ fontSize: 9.5 }}>Vazba na bankrotní modely (Fin 2) a finanční analýzu (Fin 1).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+const FIN_CHEATS = {
+  1: { title: "Finanční analýza, ukazatele", comp: CheatSheetFin1 },
+  2: { title: "Bankrotní modely", comp: CheatSheetFin2 },
+  3: { title: "Pracovní kapitál, ČPK", comp: CheatSheetFin3 },
+  4: { title: "Kapitálová struktura, WACC", comp: CheatSheetFin4 },
+  5: { title: "Časová hodnota peněz, investice", comp: CheatSheetFin5 },
+  6: { title: "Řízení rizika, finanční deriváty", comp: CheatSheetFin6 },
+  7: { title: "Krize a úpadek podniku", comp: CheatSheetFin7 },
+};
+
+/* ════════════════════════════════════════════════════════
+   MANAŽERSKÉ ROZHODOVÁNÍ CHEAT SHEETY — accent #C79A1E (žlutohnědá)
+   ════════════════════════════════════════════════════════ */
+
+const ROZ_ACCENT = "#C79A1E";
+const ROZ_BG = "#fdf8ec";
+
+/* ─────────── ROZ 1 — Rozhodovací problém + Kepner-Tregoe ─────────── */
+function CheatSheetRoz1() {
+  return (
+    <CheatPage okruh={1} title="Rozhodovací problém + Kepner-Tregoe" subjectLabel="Manažerské rozhodování" accent={ROZ_ACCENT} accentBg={ROZ_BG}
+      subtitle="Normativní × deskriptivní · typy problémů · podmínky (jistota/riziko/nejistota) · Kepner-Tregoe · kauzální analýza"
+      examBar={<>
+        <b>Mikovcová, Pichanič, Stříteský, Nový, Svobodová, Schönfeld</b> (desítky komisí) — <i>rozhodovací problém + Kepner-Tregoe, aplikace na PS</i>. <b>Nejtaženější okruh!</b> ·
+        <b style={{ color: ROZ_ACCENT }}> Vrbová se ptá, proč mít sloupec „co problém NENÍ".</b>
+      </>}>
+      <CCol>
+        <CT0>NORMATIVNÍ × DESKRIPTIVNÍ</CT0>
+        <div style={{ fontSize: 10 }}><b>Normativní</b> = návod do budoucna, jak BY SE mělo rozhodovat (modely, normy). <b>Deskriptivní</b> = popisuje, jak se rozhoduje SKUTEČNĚ (analýza proběhlých).</div>
+        <CD term="Rozhodovací problém">Odchylka od žádoucího stavu, kterou řešíme volbou mezi variantami.</CD>
+      </CCol>
+      <CCol>
+        <CT0>TYPY + PODMÍNKY</CT0>
+        <div style={{ fontSize: 9.8 }}><b>Dobře strukturovaný</b> — rutinní, známé řešení, matematické modely (vytížení linky). <b>Špatně strukturovaný</b> — nový, tvůrčí přístup (vstup na trh).</div>
+        <ul style={{ margin: "4px 0 0", paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Jistota</b> — známe všechny důsledky</li>
+          <li><b>Riziko</b> — známe stavy + pravděpodobnosti</li>
+          <li><b>Nejistota</b> — známe stavy, ne pravděpodobnosti</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>KEPNER-TREGOE ⭐</CT0>
+        <div style={{ fontSize: 10 }}>Tabulka 2 sloupce: <b>co problém JE × co NENÍ</b>. Ptáme se CO / KDE / KDY / KOLIK je vadné × kde/kdy by mohlo, ale není.</div>
+        <CNote>Sloupec „NENÍ" umožní <b>vyřadit příčiny logikou</b> — když příčina nevysvětlí, proč se problém neobjevuje jinde, není to ona. (Vrbová!)</CNote>
+        <CT>KAUZÁLNÍ ANALÝZA</CT>
+        <div style={{ fontSize: 9.8 }}>Problem tree, Ishikawa (rybí kost), 5× proč, GAP, Paretova analýza (80/20).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── ROZ 2 — Cíle, stakeholdeři, kritéria, varianty ─────────── */
+function CheatSheetRoz2() {
+  return (
+    <CheatPage okruh={2} title="Cíle, stakeholdeři, kritéria, varianty" subjectLabel="Manažerské rozhodování" accent={ROZ_ACCENT} accentBg={ROZ_BG}
+      subtitle="Strom cílů · stakeholdeři · kritéria (kvant × kval) · tvorba variant · eliminační (omezující) podmínky"
+      examBar={<>
+        <b>Stříteský+Schönfeld+Cejthamr</b>, <b>Hönig+Kučera+Machek</b>, <b>Špaček+Nový+Machek</b> — <i>propojení 5 prvků na rozhodovací problém z PS</i>. ·
+        <b style={{ color: ROZ_ACCENT }}> Vždy:</b> vyber 1 problém z PS a propoj cíle + stakeholdery + kritéria + varianty + eliminační podmínky.
+      </>}>
+      <CCol>
+        <CT0>STROM CÍLŮ</CT0>
+        <div style={{ fontSize: 10 }}>Hierarchie cílů: nahoru = <b>PROČ</b> (obecné), dolů = <b>JAK</b> (konkrétní). Cíle se <b>doplňují</b> (ruku v ruce) nebo jsou <b>konfliktní</b> (jeden brání druhému) — pak vyvážit.</div>
+        <CT>STAKEHOLDEŘI</CT>
+        <div style={{ fontSize: 10 }}>Zainteresované strany, kterých se rozhodnutí týká (vlastníci, zaměstnanci, zákazníci, dodavatelé, stát). Mapuj podle moci × zájmu.</div>
+      </CCol>
+      <CCol>
+        <CT0>KRITÉRIA</CT0>
+        <div style={{ fontSize: 10 }}><b>Kvantitativní</b> — přesné číslo (km, Kč, ks), snadno měřitelné. <b>Kvalitativní</b> — obtížně měřitelné (dopad na ŽP, sociální), škály (ordinální = pořadí, kardinální = intervaly).</div>
+        <CT>VARIANTY</CT>
+        <div style={{ fontSize: 9.8 }}><b>Intuitivní/kreativní</b> (špatně strukt.): brainstorming, design thinking, 635. <b>Systematicko-analytické</b> (dobře strukt.): stromy, Monte Carlo, morfologická analýza.</div>
+      </CCol>
+      <CCol>
+        <CT0>ELIMINAČNÍ PODMÍNKY ⭐</CT0>
+        <div style={{ fontSize: 10 }}>Tvrdé hranice „splní / nesplní" — NE běžná kritéria (která dávají body). Varianta, která je nesplní, vypadává hned (např. rozpočtový strop, legislativa).</div>
+        <CNote>Klíč okruhu: umět <b>propojit 5 prvků</b> (cíle → stakeholdeři → kritéria → varianty → eliminační podmínky) na jeden problém z PS.</CNote>
+        <CT>POSTUP</CT>
+        <div style={{ fontSize: 9.8 }}>1. cíl (kam míříme) → 2. kdo je dotčen → 3. podle čeho hodnotíme → 4. jaké máme možnosti → 5. co musí splnit.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── ROZ 3 — Rizika, závažnost, opatření ─────────── */
+function CheatSheetRoz3() {
+  return (
+    <CheatPage okruh={3} title="Rizika, závažnost, opatření" subjectLabel="Manažerské rozhodování" accent={ROZ_ACCENT} accentBg={ROZ_BG}
+      subtitle="Riziko × nejistota · matice rizika · závažnost = pravděpodobnost × dopad · preventivní × nápravná opatření"
+      examBar={<>
+        <b>Bočková+Nový+Kolouchová</b>, <b>Krause+Viktora+Tahal</b> — <i>určení rizik u varianty, závažnost, ošetření, aplikace na PS</i>. ·
+        <b style={{ color: ROZ_ACCENT }}> Bočková zmiňuje MEAT, prevenci, kontingenční kritéria.</b> Vždy: závažnost = pravděpodobnost × dopad.
+      </>}>
+      <CCol>
+        <CT0>RIZIKO × NEJISTOTA</CT0>
+        <div style={{ fontSize: 10 }}><b>Riziko</b> = známe stavy světa A jejich pravděpodobnosti → dá se počítat. <b>Nejistota</b> = známe stavy, ale NEznáme pravděpodobnosti → hůř se počítá.</div>
+        <CD term="Závažnost rizika">= pravděpodobnost × dopad (síla). Klíčový vzorec, který komise chce slyšet.</CD>
+      </CCol>
+      <CCol>
+        <CT0>MATICE RIZIKA</CT0>
+        <div style={{ fontSize: 10 }}>Osa X = pravděpodobnost (1–5), osa Y = dopad (1–5). Každé riziko se umístí do políčka. Vysoká pravděpodobnost × vysoký dopad = <b>kritické riziko</b> (řešit prioritně).</div>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}>3 zóny: zelená (akceptovat), žlutá (sledovat), červená (aktivně ošetřit).</div>
+      </CCol>
+      <CCol>
+        <CT0>OŠETŘENÍ RIZIK</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Vyhnutí</b> — nedělat rizikovou variantu</li>
+          <li><b>Snížení</b> — preventivní opatření (sníží pravděpodobnost/dopad)</li>
+          <li><b>Přenos</b> — pojištění, outsourcing</li>
+          <li><b>Akceptace</b> — přijmout (malé riziko) + rezerva</li>
+        </ul>
+        <CNote>Preventivní (před) × nápravná (po vzniku) opatření. Zohlednit při hodnocení variant.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── ROZ 4 — Metody rozhodování ─────────── */
+function CheatSheetRoz4() {
+  return (
+    <CheatPage okruh={4} title="Metody rozhodování (strom, Monte Carlo, scénáře)" subjectLabel="Manažerské rozhodování" accent={ROZ_ACCENT} accentBg={ROZ_BG}
+      subtitle="Rozhodovací strom · simulace Monte Carlo · tvorba scénářů · kdy který nástroj a PROČ"
+      examBar={<>
+        <b>Nový+Kolouchová+Svobodová</b>, <b>Tahal+Cejthamr</b>, <b>Smrčka+Zamazalová</b>, <b>Mládková+Mikan</b> — <i>vhodnost metody pro problém z PS</i>. ·
+        <b style={{ color: ROZ_ACCENT }}> Stříteský nechce teorii, jen praxi a vhodnost.</b> Vždy: urči, který nástroj a PROČ.
+      </>}>
+      <CCol>
+        <CT0>ROZHODOVACÍ STROM</CT0>
+        <div style={{ fontSize: 10 }}>Pro <b>několik etap za sebou</b>, málo variant, diskrétní hodnoty. Když se rozhoduji postupně a chci vidět větve.</div>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}>Uzly: <b>□ rozhodovací</b> (volím já), <b>○ situační</b> (rozhoduje náhoda/pravděpodobnost). Počítám očekávanou hodnotu zpětně (rollback).</div>
+      </CCol>
+      <CCol>
+        <CT0>MONTE CARLO</CT0>
+        <div style={{ fontSize: 10 }}>Pro <b>hodně proměnných</b> a velký počet scénářů, spojité hodnoty. Simulace tisíců opakování → rozdělení pravděpodobnosti výsledku.</div>
+        <CNote>Když je problém složitý a chci hloubkovou analýzu s rozptylem výsledků.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>SCÉNÁŘE</CT0>
+        <div style={{ fontSize: 10 }}>Pro <b>nestabilní prostředí</b>, kdy chci vidět odlišné možné budoucnosti. Obvykle 3: optimistický / realistický / pesimistický.</div>
+        <CNote>Když potřebuji rozšířit obzor a připravit se na různé varianty vývoje (ne přesné číslo).</CNote>
+        <CT>VOLBA NÁSTROJE</CT>
+        <div style={{ fontSize: 9.5 }}>Etapy + málo variant → strom. Mnoho proměnných → Monte Carlo. Nejistá budoucnost → scénáře.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── ROZ 5 — Postaudit ─────────── */
+function CheatSheetRoz5() {
+  return (
+    <CheatPage okruh={5} title="Postaudit" subjectLabel="Manažerské rozhodování" accent={ROZ_ACCENT} accentBg={ROZ_BG}
+      subtitle="Postaudit ≠ kontrola · ex ante × ex post · příčiny neúspěchu dle fáze · bariéry · výstupy"
+      examBar={<>
+        <b>Mikovcová+Vávra+Viktora</b>, <b>Krause</b>, <b>Stříteský</b>, <b>Špaček+Nový+Machek</b> — <i>postaudit + aplikace na PS</i>. ·
+        <b style={{ color: ROZ_ACCENT }}> Mikovcová zdůrazňuje: POSTAUDIT NENÍ KONTROLA!</b> Vždy: rozdíl postaudit × kontrola + ex ante × ex post.
+      </>}>
+      <CCol>
+        <CT0>POSTAUDIT ≠ KONTROLA ⭐</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.3 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1" }}><b>Kontrola</b><br /><span style={{ fontSize: 9 }}>PRŮBĚŽNĚ. „Jdou věci správně TEĎ?" Umožní zasáhnout hned (nápravná opatření).</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Postaudit</b><br /><span style={{ fontSize: 9 }}>PO dokončení. „Jak to dopadlo a co se naučíme?" Plán × dosažené. Cíl = poučení.</span></td></tr>
+        </tbody></table>
+        <CNote>Tohle je nejdůležitější rozdíl — Mikovcová na něm trvá.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>PROČ POSTAUDIT</CT0>
+        <div style={{ fontSize: 10 }}>Až <b>2 ze 3 projektů selžou</b> nebo nedopadnou dle plánu. Bez postauditu firma opakuje stejné chyby dokola.</div>
+        <CT>PŘÍČINY NEÚSPĚCHU DLE FÁZE</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.5 }}>
+          <li><b>Příprava</b> — nejasný cíl, špatný plán/rozpočet</li>
+          <li><b>Realizace</b> — nedodržení plánu, rizika, tým</li>
+          <li><b>Provoz/uvedení</b> — špatný čas/místo, málo testů</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>EX ANTE × EX POST</CT0>
+        <div style={{ fontSize: 10 }}><b>Ex ante</b> — ve fázi příprav, data se sbírají dopředu. <b>Ex post</b> — po realizaci (0,5–3 roky po dokončení, kdy se ukáže reálný dopad).</div>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}>Dělá se u <b>velkých i malých</b>, <b>úspěšných i neúspěšných</b> (i z úspěchu se učíme), opakujících i jednorázových.</div>
+        <CT>BARIÉRY + VÝSTUPY</CT>
+        <div style={{ fontSize: 9.5 }}>Bariéry: strach z viny, časová náročnost, „už to neřešíme". Výstup se prezentuje odpovědným a odsouhlasí oběma stranami.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+const ROZ_CHEATS = {
+  1: { title: "Rozhodovací problém + Kepner-Tregoe", comp: CheatSheetRoz1 },
+  2: { title: "Cíle, stakeholdeři, kritéria, varianty", comp: CheatSheetRoz2 },
+  3: { title: "Rizika, závažnost, opatření", comp: CheatSheetRoz3 },
+  4: { title: "Metody rozhodování", comp: CheatSheetRoz4 },
+  5: { title: "Postaudit", comp: CheatSheetRoz5 },
+};
+
 const STR_CHEATS = {
   1: { title: "Strategie + strategické uvažování", comp: CheatSheetStr1 },
   2: { title: "Zisk × společenská odpovědnost", comp: CheatSheetStr2 },
@@ -36625,6 +37792,76 @@ function StrCheatGallery() {
   );
 }
 
+
+/* ─────────── Univerzální cheat galerie + viewer (nové předměty) ─────────── */
+function SubjectCheatViewer({ map, okruh, accent, label, onBack }) {
+  const entry = map[okruh]; if (!entry) return null;
+  const Comp = entry.comp;
+  return (
+    <>
+      <CheatStyles />
+      <div className="cheatsheet-no-print" style={{ position: "sticky", top: 0, zIndex: 10, background: "#fff", borderBottom: "1px solid #ddd", padding: "12px 20px", display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ fontSize: 15.5, fontWeight: 600, color: "#333" }}>📄 Cheat sheet — {label} okruh {okruh}</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button onClick={() => window.print()} style={{ padding: "8px 16px", borderRadius: 8, border: "none", background: accent, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>🖨️ Tisk / PDF</button>
+          <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
+        </div>
+      </div>
+      <div className="cheatsheet-print-wrap" style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+        <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+          <Comp />
+        </div>
+      </div>
+    </>
+  );
+}
+
+function SubjectCheatViewerAll({ map, accent, label, onBack }) {
+  return (
+    <>
+      <CheatStyles />
+      <div className="cheatsheet-no-print" style={{ position: "sticky", top: 0, zIndex: 10, background: "#fff", borderBottom: "1px solid #ddd", padding: "12px 20px", display: "flex", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ fontSize: 15.5, fontWeight: 600, color: "#333" }}>📄 Všechny cheat sheety — {label}</div>
+        <div style={{ display: "flex", gap: 8 }}>
+          <button onClick={() => window.print()} style={{ padding: "8px 16px", borderRadius: 8, border: "none", background: accent, color: "#fff", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>🖨️ Tisk / PDF (vše)</button>
+          <button onClick={onBack} style={{ padding: "8px 16px", borderRadius: 8, border: "1px solid #ddd", background: "#fff", color: "#666", cursor: "pointer", fontWeight: 600, fontSize: 14.5 }}>← Zpět</button>
+        </div>
+      </div>
+      <div className="cheatsheet-print-wrap" style={{ background: "#ececec", padding: "16px 0", minHeight: "calc(100vh - 105px)" }}>
+        <div className="cheatsheet-sheet" style={{ maxWidth: "100%", margin: "0 auto", padding: "0 10px", boxSizing: "border-box" }}>
+          {Object.keys(map).map((k) => { const C = map[k].comp; return <div key={k}><C /></div>; })}
+        </div>
+      </div>
+    </>
+  );
+}
+
+function SubjectCheatGallery({ map, accent, label }) {
+  const [view, setView] = useState(null);
+  const count = Object.keys(map).length;
+  if (view === "all") return <SubjectCheatViewerAll map={map} accent={accent} label={label} onBack={() => setView(null)} />;
+  if (view !== null) return <SubjectCheatViewer map={map} okruh={view} accent={accent} label={label} onBack={() => setView(null)} />;
+  return (
+    <div style={{ maxWidth: 900, margin: "0 auto", padding: "4px 4px 24px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 10, marginBottom: 14 }}>
+        <div>
+          <div style={{ fontSize: 20, fontWeight: 800, color: "var(--text)" }}>📄 Cheat sheety — {label}</div>
+          <div style={{ fontSize: 13.5, color: "var(--text-muted)", marginTop: 2 }}>Jednostránkové taháky na okruh. Asistent při učení — otevři okruh a měj cheat vedle.</div>
+        </div>
+        <button onClick={() => setView("all")} style={{ padding: "10px 18px", borderRadius: 10, border: "none", background: accent, color: "#fff", cursor: "pointer", fontWeight: 700, fontSize: 14.5, whiteSpace: "nowrap" }}>⬇️ Stáhnout celý předmět ({count} okruhů)</button>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(190px, 1fr))", gap: 10 }}>
+        {Object.keys(map).map((k) => (
+          <button key={k} onClick={() => setView(Number(k))} style={{ textAlign: "left", border: "1px solid var(--border)", borderRadius: 12, padding: "12px 14px", background: "var(--card)", cursor: "pointer", display: "flex", flexDirection: "column", gap: 4 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: accent, fontFamily: "JetBrains Mono, monospace" }}>OKRUH {k}</div>
+            <div style={{ fontSize: 13.5, fontWeight: 600, color: "var(--text)", lineHeight: 1.3 }}>{map[k].title}</div>
+            <div style={{ fontSize: 11.5, color: "var(--text-muted)", marginTop: 2 }}>📄 1 strana · otevřít / tisknout</div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function extractText(node) {
   if (node == null) return "";
