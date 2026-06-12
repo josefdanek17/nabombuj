@@ -7214,6 +7214,9 @@ function OkruhContent({ subjectId, okruhN }) {
                      : subjectId === "hr" && typeof HR_CHEATS !== "undefined" ? { map: HR_CHEATS, accent: "#C44A78", label: "Personální řízení" }
                      : subjectId === "fin" && typeof FIN_CHEATS !== "undefined" ? { map: FIN_CHEATS, accent: "#3B6FD6", label: "Finance" }
                      : subjectId === "roz" && typeof ROZ_CHEATS !== "undefined" ? { map: ROZ_CHEATS, accent: "#C79A1E", label: "Manažerské rozhodování" }
+                     : subjectId === "marketing" && typeof MKT_CHEATS !== "undefined" ? { map: MKT_CHEATS, accent: "#D9601A", label: "Marketing" }
+                     : subjectId === "logistika" && typeof LOG_CHEATS !== "undefined" ? { map: LOG_CHEATS, accent: "#B5651D", label: "Logistika" }
+                     : subjectId === "inov" && typeof INOV_CHEATS !== "undefined" ? { map: INOV_CHEATS, accent: "#2E8B57", label: "Inovace" }
                      : null;
     if (subjectId === "mng" || subjectId === "str") {
       const Gallery = subjectId === "mng" ? CheatGallery : StrCheatGallery;
@@ -8159,6 +8162,9 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
                  : subject === "Personální řízení" && typeof HR_CHEATS !== "undefined" ? HR_CHEATS
                  : subject === "Finance" && typeof FIN_CHEATS !== "undefined" ? FIN_CHEATS
                  : subject === "Manažerské rozhodování" && typeof ROZ_CHEATS !== "undefined" ? ROZ_CHEATS
+                 : subject === "Marketing" && typeof MKT_CHEATS !== "undefined" ? MKT_CHEATS
+                 : subject === "Logistika" && typeof LOG_CHEATS !== "undefined" ? LOG_CHEATS
+                 : subject === "Inovace" && typeof INOV_CHEATS !== "undefined" ? INOV_CHEATS
                  : null;
   const hasCheatSheet = cheatMap && cheatMap[number];
 
@@ -8169,6 +8175,9 @@ function OkruhPanel({ subject, subjectId, number, title, subtitle, color, questi
                     : subject === "Personální řízení" ? "#C44A78"
                     : subject === "Finance" ? "#3B6FD6"
                     : subject === "Manažerské rozhodování" ? "#C79A1E"
+                    : subject === "Marketing" ? "#D9601A"
+                    : subject === "Logistika" ? "#B5651D"
+                    : subject === "Inovace" ? "#2E8B57"
                     : "#A82A5F";
     return (
       <div style={{ flex: 1, overflowY: "auto", height: "calc(100vh - 105px)", background: "#f5f5f5" }}>
@@ -37709,6 +37718,1092 @@ const ROZ_CHEATS = {
   3: { title: "Rizika, závažnost, opatření", comp: CheatSheetRoz3 },
   4: { title: "Metody rozhodování", comp: CheatSheetRoz4 },
   5: { title: "Postaudit", comp: CheatSheetRoz5 },
+};
+
+/* ════════════════════════════════════════════════════════
+   MARKETING CHEAT SHEETY — accent #E06D1E (oranžová)
+   ════════════════════════════════════════════════════════ */
+
+const MKT_ACCENT = "#D9601A";
+const MKT_BG = "#fdf4ec";
+
+/* ─────────── MKT 1 — Marketingový výzkum ─────────── */
+function CheatSheetMkt1() {
+  return (
+    <CheatPage okruh={1} title="Marketingový výzkum, metody a limity" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Definice MV · 3 cíle · proces (3 fáze) · primární × sekundární · kvalitativní × kvantitativní · MV jako součást MIS"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Vávra</b>, <b>Heřman</b> — <i>marketingový výzkum, metody, limity, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Vždy:</b> popiš proces MV, rozliš typy dat a urči, jakou metodu by firma z PS použila a proč.
+      </>}>
+      <CCol>
+        <CT0>CO JE MV</CT0>
+        <CD term="Marketingový výzkum">Systematický sběr, analýza a interpretace dat pro marketingová rozhodnutí. Snižuje nejistotu. Součást MIS (marketingový informační systém).</CD>
+        <CT>3 CÍLE</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Deskriptivní</b> — popsat stav (kdo, kolik)</li>
+          <li><b>Diagnostický</b> — vysvětlit proč</li>
+          <li><b>Prediktivní</b> — předpovědět vývoj</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>PROCES MV (3 fáze)</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Přípravná</b> — definice problému, plán, hypotézy</li>
+          <li><b>Realizační</b> — sběr dat (dotazování, pozorování, experiment)</li>
+          <li><b>Vyhodnocovací</b> — analýza, interpretace, report</li>
+        </ol>
+        <CT>TYPY DAT</CT>
+        <div style={{ fontSize: 10 }}><b>Primární</b> (sbírám sám pro účel) × <b>sekundární</b> (už existují). <b>Kvalitativní</b> (proč, hloubka — focus group) × <b>kvantitativní</b> (kolik, čísla — dotazník).</div>
+      </CCol>
+      <CCol>
+        <CT0>METODY SBĚRU</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Dotazování</b> — osobní, online, telefon, písemné</li>
+          <li><b>Pozorování</b> — chování zákazníka</li>
+          <li><b>Experiment</b> — A/B test, kauzalita</li>
+        </ul>
+        <CT>LIMITY MV</CT>
+        <div style={{ fontSize: 10 }}>Náklady a čas, reprezentativnost vzorku, zkreslení (bias), respondent neříká pravdu, rychlé zastarání dat. Mediální výzkum: sledovanost, GRP, zásah.</div>
+        <CNote>MV nedává rozhodnutí — dává podklad. Riziko paralýzy z analýzy.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 2 — Analytické metody ─────────── */
+function CheatSheetMkt2() {
+  return (
+    <CheatPage okruh={2} title="Analytické metody, primární × sekundární data" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="3 typy analýzy (sumarizace × diference × souvislosti) · ANOVA · korelace/regrese · faktorová a shluková analýza"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Vávra</b> — <i>analytické metody, kdy co použít, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Vždy:</b> přiřaď ke konkrétní otázce z PS správnou metodu (rozdíl skupin → ANOVA, souvislost → regrese).
+      </>}>
+      <CCol>
+        <CT0>1. SUMARIZACE (popis)</CT0>
+        <div style={{ fontSize: 10 }}>Popis dat: průměr, medián, modus, kvartily, směrodatná odchylka. „Kolik %, jaký průměr." Deskriptivní statistika.</div>
+        <CT>3. SOUVISLOSTI</CT>
+        <div style={{ fontSize: 10 }}>Co s čím souvisí? <b>Korelace</b> (síla vztahu), <b>regrese</b> (predikce), <b>faktorová analýza</b> (redukce proměnných). „Jak cena ovlivňuje prodej?"</div>
+      </CCol>
+      <CCol>
+        <CT0>2. DIFERENCE (rozdíly)</CT0>
+        <div style={{ fontSize: 10 }}>Liší se skupiny? <b>ANOVA</b> (3+ skupin), <b>t-test</b> (2 skupiny), <b>chí-kvadrát</b> (kategorie). „Liší se preference žen × mužů?"</div>
+        <CNote>ANOVA = analýza rozptylu, testuje rozdíl průměrů mezi více skupinami najednou.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>VÍCEROZMĚRNÉ METODY</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Shluková (cluster)</b> — tvoří segmenty (→ M3)</li>
+          <li><b>Faktorová</b> — redukuje proměnné na faktory</li>
+          <li><b>Conjoint</b> — váha atributů produktu</li>
+          <li><b>Diskriminační</b> — zařazení do skupin</li>
+        </ul>
+        <CT>NÁVAZNOST</CT>
+        <div style={{ fontSize: 10 }}>Shluková analýza je základ <b>segmentace</b> (M3). Conjoint se používá i v cenovém výzkumu (M12).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 3 — Segmentace ─────────── */
+function CheatSheetMkt3() {
+  return (
+    <CheatPage okruh={3} title="Segmentace trhu — typy, fáze, kritéria" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="STP model · 4 podmínky segmentu · segmentační kritéria · logistická segmentace · targeting"
+      examBar={<>
+        <b>Stříteský</b> (definice přesně!), <b>Krause</b>, <b>Zamazalová</b>, <b>Smrčka/Mikovcová</b> (log. segmentace) — <i>segmentace, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Stříteský chce slyšet: „homogenní uvnitř, heterogenní zvenku" — bez té věty nestačí.</b>
+      </>}>
+      <CCol>
+        <CT0>STP MODEL</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10.5 }}>
+          <li><b>Segmentation</b> — rozdělit trh</li>
+          <li><b>Targeting</b> — vybrat cílový segment</li>
+          <li><b>Positioning</b> — umístit v mysli (→ M4)</li>
+        </ol>
+        <CD term="Tržní segment">Skupina zákazníků <b>homogenní uvnitř, heterogenní navenek</b> — uvnitř si podobní, mezi segmenty odlišní.</CD>
+      </CCol>
+      <CCol>
+        <CT0>4 PODMÍNKY SEGMENTU</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Měřitelnost</b> — jde změřit velikost</li>
+          <li><b>Dostupnost</b> — jde oslovit</li>
+          <li><b>Velikost</b> — dost velký, aby se vyplatil</li>
+          <li><b>Akceschopnost</b> — jde na něj cílit mixem</li>
+        </ul>
+        <CT>KRITÉRIA SEGMENTACE</CT>
+        <div style={{ fontSize: 9.8 }}><b>Geografická</b> (region), <b>demografická</b> (věk, pohlaví, příjem), <b>psychografická</b> (životní styl, hodnoty), <b>behaviorální</b> (chování, loajalita).</div>
+      </CCol>
+      <CCol>
+        <CT0>TARGETING — 3 STRATEGIE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Nediferencovaný</b> — celý trh, 1 nabídka</li>
+          <li><b>Diferencovaný</b> — víc segmentů, víc nabídek</li>
+          <li><b>Koncentrovaný</b> — 1 segment (nika)</li>
+        </ul>
+        <CT>LOGISTICKÁ SEGMENTACE</CT>
+        <div style={{ fontSize: 9.8 }}>Segmentace dle <b>požadavků na logistické služby</b> (rychlost, spolehlivost, flexibilita dodávek). Smrčka/Mikovcová ji chtějí zmínit — různí zákazníci = různý servis level.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 4 — Positioning ─────────── */
+function CheatSheetMkt4() {
+  return (
+    <CheatPage okruh={4} title="Positioning, POP, POD, referenční rámec" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Pozice v mysli · DOCS model · POP × POD · referenční rámec · poziční mapa · repositioning"
+      examBar={<>
+        <b>Smrčka</b> (referenční rámec první!), <b>Stříteský</b>, <b>Krause</b> — <i>positioning, POP/POD, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Smrčka: vymezení referenčního rámce = první krok. Bez něj nelze určit konkurenci a POP/POD.</b>
+      </>}>
+      <CCol>
+        <CT0>POSITIONING</CT0>
+        <CD term="Positioning">Místo, které produkt zaujímá <b>v mysli zákazníka</b> vůči konkurenci. Ne co děláme s produktem, ale co děláme s vnímáním zákazníka.</CD>
+        <CT>REFERENČNÍ RÁMEC</CT>
+        <div style={{ fontSize: 10 }}>Kategorie, do které se firma řadí (kdo je konkurence). První krok — určuje, vůči komu se vymezujeme. (Smrčka!)</div>
+      </CCol>
+      <CCol>
+        <CT0>DOCS MODEL (4 kroky)</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>D</b>efine — definuj referenční rámec</li>
+          <li><b>O</b>utline — vymez POP a POD</li>
+          <li><b>C</b>reate — vytvoř poziční tvrzení</li>
+          <li><b>S</b>upport — podpoř důkazy (reasons to believe)</li>
+        </ol>
+      </CCol>
+      <CCol>
+        <CT0>POP × POD</CT0>
+        <div style={{ fontSize: 10 }}><b>POP (Points of Parity)</b> = body shody — co musíme mít jako konkurence (vstupenka do kategorie). <b>POD (Points of Difference)</b> = body odlišení — proč si vyberou nás.</div>
+        <CT>POZIČNÍ MAPA</CT>
+        <div style={{ fontSize: 10 }}>2 osy (např. cena × kvalita) → vizuální umístění značek. Hledá <b>mezeru na trhu</b> (gap). <b>Repositioning</b> = změna pozice (riziko ztráty stávajících zákazníků).</div>
+        <CNote>V PS: definuj rámec → najdi POP/POD firmy → navrhni poziční tvrzení.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 5 — Konkurence, KV, strategie ─────────── */
+function CheatSheetMkt5() {
+  return (
+    <CheatPage okruh={5} title="Konkurence, KV, konkurenční strategie" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Market/mind/heart share · Porter 5 sil · 3 generické strategie · logistické strategie jako KV"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Cejthamr/Machek/Heřman</b> (log. strategie) — <i>konkurence, KV, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Vždy:</b> Porter 5 sil pro odvětví z PS + zařaď generickou strategii + ukaž, kde má firma KV (i logistika může být core competence).
+      </>}>
+      <CCol>
+        <CT0>3 MĚŘÍTKA POZICE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Market share</b> — podíl na trhu (% tržeb)</li>
+          <li><b>Mind share</b> — podíl v povědomí</li>
+          <li><b>Heart share</b> — podíl v oblibě/preferenci</li>
+        </ul>
+        <CT>NÁSTROJE ANALÝZY</CT>
+        <div style={{ fontSize: 9.8 }}>SWOT, PESTLE (makro), Porter (mikro), SPACE matice, benchmark.</div>
+      </CCol>
+      <CCol>
+        <CT0>PORTER — 5 SIL</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li>Konkurence v odvětví (rivalita)</li>
+          <li>Síla dodavatelů</li>
+          <li>Síla odběratelů</li>
+          <li>Hrozba substitutů</li>
+          <li>Hrozba nových konkurentů</li>
+        </ol>
+        <CNote>Určuje ziskovost odvětví. Bez Porter 5 sil nelze udělat dobrou strategii.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>3 GENERICKÉ STRATEGIE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Cost Leadership</b> — nejnižší náklady (Lidl)</li>
+          <li><b>Diferenciace</b> — unikátnost (Apple)</li>
+          <li><b>Fokus</b> — úzký segment (nika)</li>
+        </ul>
+        <CNote>⚠️ „Stuck in the middle" = bez jasné strategie firma prohrává.</CNote>
+        <CT>LOGISTIKA JAKO KV</CT>
+        <div style={{ fontSize: 9.8 }}>IKEA: nejnižší marže, ale díky logistice/objemu nejziskovější — logistika je core competence, ne náklad.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 6 — Produkt ─────────── */
+function CheatSheetMkt6() {
+  return (
+    <CheatPage okruh={6} title="Produkt/výrobek — vrstvy, klasifikace" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Kompletní výrobek · 5 vrstev (Kotler) · komoditní × diferencované × symbolické · klasifikace · diferenciace"
+      examBar={<>
+        <b>Nový</b>, <b>Vávra</b>, <b>Heřman</b> — <i>produkt holisticky, vrstvy, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Komise chce slyšet, že produkt NENÍ jen fyzická věc — holistický pohled (vrstvy + symbolický náboj + branding).</b>
+      </>}>
+      <CCol>
+        <CT0>5 VRSTEV PRODUKTU (Kotler)</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Jádro</b> — základní užitek (proč to kupuju)</li>
+          <li><b>Základní</b> — reálný produkt</li>
+          <li><b>Očekávaný</b> — co zákazník čeká</li>
+          <li><b>Rozšířený</b> — navíc (servis, záruka)</li>
+          <li><b>Potenciální</b> — budoucí možnosti</li>
+        </ol>
+      </CCol>
+      <CCol>
+        <CT0>TYPY PRODUKTŮ</CT0>
+        <div style={{ fontSize: 10 }}><b>Komoditní</b> — zaměnitelné, rozhoduje cena (sůl, benzín), nízké marže. <b>Diferencované</b> — unikátní, branding (Apple, Tesla), vyšší marže.</div>
+        <CT>SYMBOLICKÝ NÁBOJ</CT>
+        <div style={{ fontSize: 10 }}>Produkt nese i význam/identitu — Patagonia = ekologie, Rolex = status. Zákazník kupuje i to, co produkt o něm vypovídá.</div>
+      </CCol>
+      <CCol>
+        <CT0>KLASIFIKACE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Spotřební</b>: rychloobrátkové, nákupní, zvláštní, nehledané</li>
+          <li><b>Průmyslové</b>: materiály, kapitálové statky, služby</li>
+        </ul>
+        <CT>DIFERENCIACE</CT>
+        <div style={{ fontSize: 10 }}>Jak se odlišit: vlastnosti, výkon, design, kvalita, služby, image. Cíl = vytvořit POD (→ M4) a uniknout cenové válce.</div>
+        <CNote>V PS: rozeber všech 5 vrstev produktu firmy + najdi symbolický náboj.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 7 — Výrobkové řady ─────────── */
+function CheatSheetMkt7() {
+  return (
+    <CheatPage okruh={7} title="Výrobkové řady, šířka/délka/hloubka" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Produkt × řada × mix · dimenze mixu (šířka/délka/hloubka/konzistence) · strategie řady · cenotvorba mixu"
+      examBar={<>
+        <b>Stříteský</b>, <b>Nový</b>, <b>Vávra</b> — <i>výrobkový mix, dimenze, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Vždy:</b> rozliš produkt/řada/mix a popiš 4 dimenze mixu firmy z PS + strategie (rozšíření/zúžení řady).
+      </>}>
+      <CCol>
+        <CT0>HIERARCHIE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Produkt (item)</b> — 1 SKU (iPhone 15 Pro 256GB)</li>
+          <li><b>Řada (line)</b> — příbuzné produkty (celá řada iPhone)</li>
+          <li><b>Mix</b> — celé portfolio (iPhone+iPad+Mac+Watch)</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>4 DIMENZE MIXU</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Šířka</b> — počet řad</li>
+          <li><b>Délka</b> — počet produktů celkem</li>
+          <li><b>Hloubka</b> — varianty 1 produktu (velikosti, barvy)</li>
+          <li><b>Konzistence</b> — provázanost řad</li>
+        </ul>
+        <CNote>Komise často chce všechny 4 dimenze pojmenovat a aplikovat na firmu z PS.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>STRATEGIE ŘADY</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Rozšiřování</b> (line extension) — nahoru/dolů/do stran</li>
+          <li><b>Doplňování</b> — mezi existující</li>
+          <li><b>Zúžení</b> — odstranění slabých (pruning)</li>
+        </ul>
+        <CT>CENOTVORBA MIXU</CT>
+        <div style={{ fontSize: 9.8 }}>Cenová linie (good-better-best), volitelné doplňky, vázané produkty (tiskárna+toner), balíčky (bundling), produkty-návnady.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 8 — Životní cyklus výrobku (PLC) ─────────── */
+function CheatSheetMkt8() {
+  return (
+    <CheatPage okruh={8} title="Životní cyklus výrobku (PLC)" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="5 fází · S-křivka · marketingový mix v každé fázi · Rogers adopce · chasm · revitalizace"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Vávra</b> — <i>PLC, fáze, strategie, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Vždy:</b> urči, v jaké fázi je produkt z PS, a navrhni mix (cena, propagace) pro tu fázi.
+      </>}>
+      <CCol>
+        <CT0>5 FÁZÍ PLC</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Vývoj</b> — náklady, žádné tržby</li>
+          <li><b>Zavádění</b> — pomalý růst, ztráta, budování povědomí</li>
+          <li><b>Růst</b> — rychlý růst tržeb a zisku</li>
+          <li><b>Zralost</b> — vrchol, konkurence, obrana podílu</li>
+          <li><b>Úpadek</b> — pokles, sklízení nebo stažení</li>
+        </ol>
+      </CCol>
+      <CCol>
+        <CT0>MIX DLE FÁZE</CT0>
+        <div style={{ fontSize: 9.8 }}><b>Zavádění:</b> skimming/penetration, informativní reklama. <b>Růst:</b> rozšíření distribuce, budování značky. <b>Zralost:</b> diferenciace, obrana ceny, věrnostní programy. <b>Úpadek:</b> harvest (sklízet) nebo divest (stáhnout).</div>
+      </CCol>
+      <CCol>
+        <CT0>ROGERS — ADOPCE INOVACÍ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li>Inovátoři 2,5 %</li>
+          <li>Early adopters 13,5 %</li>
+          <li>Raná většina 34 %</li>
+          <li>Pozdní většina 34 %</li>
+          <li>Opozdilci 16 %</li>
+        </ul>
+        <CT>CHASM</CT>
+        <div style={{ fontSize: 10 }}>Propast (Moore) mezi early adopters a ranou většinou — kde nejvíc produktů umírá. Klíč k masovému trhu.</div>
+        <CNote>Revitalizace: relaunch, nový segment, nové použití — prodloužení zralosti.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 9 — Výrobkový výzkum ─────────── */
+function CheatSheetMkt9() {
+  return (
+    <CheatPage okruh={9} title="Výrobkový výzkum, uvedení nového výrobku" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="4 typy nových výrobků · Kano model · Stage-Gate · GTM · testování konceptu · míra novosti"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Vávra</b> — <i>výrobkový výzkum, uvedení na trh, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Vždy:</b> zařaď novost produktu z PS (disruptive × rozšíření) a popiš proces uvedení (test → GTM).
+      </>}>
+      <CCol>
+        <CT0>4 TYPY NOVÝCH VÝROBKŮ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Zcela nové (disruptive)</b> — nový trh (iPhone 2007), vysoký risk/reward</li>
+          <li><b>Nové pro firmu</b> — trh existuje, firma vstupuje (Vision Pro)</li>
+          <li><b>Rozšíření řady</b> — modifikace (iPhone Pro Max), nízký risk</li>
+          <li><b>Vylepšení/repositioning</b> — nová verze, nový segment</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>KANO MODEL</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Must-be</b> — samozřejmé (chybí → naštvání)</li>
+          <li><b>Performance</b> — čím víc, tím líp</li>
+          <li><b>Delighters</b> — nadchnou (nečekané)</li>
+        </ul>
+        <CNote>Delighters se časem stávají must-be (kdysi wow, dnes standard).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>PROCES UVEDENÍ</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li>Generování nápadů → screening</li>
+          <li>Vývoj a test konceptu</li>
+          <li>Business analýza</li>
+          <li>Vývoj produktu + test trhu</li>
+          <li><b>Komercializace (GTM)</b> — launch</li>
+        </ol>
+        <CT>GTM (Go-To-Market)</CT>
+        <div style={{ fontSize: 9.8 }}>Kdy (timing), kde (geografie), komu (cílovka), jak (mix). <b>Stage-Gate</b> = řízení přes brány (→ Inov 5).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 10 — Značka (branding) ─────────── */
+function CheatSheetMkt10() {
+  return (
+    <CheatPage okruh={10} title="Značka (branding) — prvky, modely, strategie" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Funkce značky · prvky · Aaker (brand equity) · Keller CBBE pyramida · brand strategie · branding služeb"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Vávra</b>, <b>Heřman</b> — <i>značka, brand equity, modely, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Vždy:</b> popiš hodnotu značky (Aaker/Keller) a navrhni brand strategii pro firmu z PS.
+      </>}>
+      <CCol>
+        <CT0>FUNKCE ZNAČKY</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Identifikační</b> — rozpoznání (snižuje search cost)</li>
+          <li><b>Garanční</b> — signál kvality (snižuje riziko)</li>
+          <li><b>Symbolická</b> — status, identita (Rolex, Patagonia)</li>
+        </ul>
+        <CT>PRVKY ZNAČKY</CT>
+        <div style={{ fontSize: 9.8 }}>Jméno, logo, symbol, slogan, jingle, packaging, barva, font. Kritéria: zapamatovatelnost, smysluplnost, přenositelnost, ochranitelnost.</div>
+      </CCol>
+      <CCol>
+        <CT0>AAKER — BRAND EQUITY</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Povědomí</b> (awareness)</li>
+          <li><b>Vnímaná kvalita</b></li>
+          <li><b>Asociace</b> se značkou</li>
+          <li><b>Loajalita</b></li>
+        </ul>
+        <CNote>Brand equity = přidaná hodnota, kterou značka dává produktu nad rámec funkce.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>KELLER — CBBE PYRAMIDA</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Salience</b> — kdo jsi? (identita)</li>
+          <li><b>Performance + Imagery</b> — co jsi? (význam)</li>
+          <li><b>Judgments + Feelings</b> — co o tobě? (reakce)</li>
+          <li><b>Resonance</b> — vztah (loajalita, vrchol)</li>
+        </ol>
+        <CT>BRAND STRATEGIE + SLUŽBY</CT>
+        <div style={{ fontSize: 9.5 }}>Branded house (Apple) × house of brands (P&amp;G). Branding služeb: nehmotnost → značka = hlavní záruka kvality, klíčoví lidé a zkušenost.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 11 — Cenotvorba ─────────── */
+function CheatSheetMkt11() {
+  return (
+    <CheatPage okruh={11} title="Cenotvorba — faktory, postup, strategie" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Cena v mkt mixu · 3 faktory · Kotler 6 kroků · skimming × penetration · cenová diskriminace · psychologie ceny"
+      examBar={<>
+        <b>Nový + Svobodová + Kolouchová</b>, <b>Krause/Špaček/Vávra</b> (6 kroků!), <b>Mikovcová</b> (vnímání cen), <b>Stříteský</b> (strategie pro PLC) — <i>cenotvorba, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Kolouchová chce cenu jako MARKETINGOVÝ nástroj, NE ekonomickou teorii (poptávka/nabídka). Začni rolemi v mixu.</b>
+      </>}>
+      <CCol>
+        <CT0>CENA V MKT MIXU</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Generátor příjmů</b> — jediné P tvořící revenue</li>
+          <li><b>Signál kvality</b> — vysoká cena = premium</li>
+          <li><b>Segmentační nástroj</b> — filtruje cílovku</li>
+          <li><b>Konkurenční zbraň</b> — války, slevy</li>
+        </ul>
+        <CT>3 FAKTORY CENY</CT>
+        <div style={{ fontSize: 9.8 }}><b>Náklady</b> (dolní hranice), <b>poptávka/zákazník</b> (horní hranice), <b>konkurence</b> (orientace). + Mikovcová: vnímání ceny zákazníkem.</div>
+      </CCol>
+      <CCol>
+        <CT0>KOTLER — 6 KROKŮ ⭐</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li>Cíl cenotvorby</li>
+          <li>Odhad poptávky</li>
+          <li>Odhad nákladů</li>
+          <li>Analýza konkurence</li>
+          <li>Volba metody (nákladová/hodnotová/konkurenční)</li>
+          <li>Konečná cena</li>
+        </ol>
+        <CNote>Krause/Špaček/Vávra chtějí všech 6 kroků explicitně!</CNote>
+      </CCol>
+      <CCol>
+        <CT0>CENOVÉ STRATEGIE</CT0>
+        <div style={{ fontSize: 9.8 }}><b>Skimming</b> — vysoká cena při zavádění, premium (iPhone, Tesla Roadster), pak klesá. <b>Penetration</b> — nízká cena pro rychlý podíl (Netflix, Spotify). Stříteský chytá strategie pro fáze PLC.</div>
+        <CT>DISKRIMINACE + PSYCHOLOGIE</CT>
+        <div style={{ fontSize: 9.5 }}>Cenová diskriminace (1./2./3. stupeň — různá cena různým). Psycho: bait pricing, 9,99, kotvení, decoy efekt, prestige pricing.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 12 — Cenový výzkum ─────────── */
+function CheatSheetMkt12() {
+  return (
+    <CheatPage okruh={12} title="Cenový výzkum — metody" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Gabor-Granger · Van Westendorp (PSM) · BPTO · conjoint · SERVQUAL · cenová elasticita"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Vávra</b> — <i>cenový výzkum, metody, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Vždy:</b> přiřaď metodu k situaci z PS (rychlý odhad → Gabor-Granger, optimální pásmo → Van Westendorp, s konkurencí → BPTO).
+      </>}>
+      <CCol>
+        <CT0>GABOR-GRANGER</CT0>
+        <div style={{ fontSize: 10 }}>Pravděpodobnost nákupu při různých cenách → křivka poptávky, optimální cena pro max tržbu. Jednoduchá, ale ignoruje konkurenci.</div>
+        <CT>CENOVÁ ELASTICITA</CT>
+        <div style={{ fontSize: 10 }}>% změna poptávky / % změna ceny. Elastická (&gt;1) = citlivá na cenu, neelastická (&lt;1) = necitlivá (luxus, návyk).</div>
+      </CCol>
+      <CCol>
+        <CT0>VAN WESTENDORP (PSM)</CT0>
+        <div style={{ fontSize: 10 }}>4 otázky (moc levné / levné / drahé / moc drahé) → 2 křivky průniky → <b>optimální cena + akceptovatelné cenové pásmo</b>. Psycho pricing standard.</div>
+        <CNote>4 body: bod marginální laciné, marginální drahé, optimum, indiferentní cena.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>BPTO + CONJOINT</CT0>
+        <div style={{ fontSize: 10 }}><b>BPTO</b> (Brand-Price Trade-Off) — respondent vidí značky + ceny, vybírá → simuluje reálný nákup, zahrnuje konkurenci. <b>Conjoint</b> — váha atributů včetně ceny (kompromisy mezi vlastnostmi).</div>
+        <CT>SERVQUAL</CT>
+        <div style={{ fontSize: 9.8 }}>Měření kvality služeb (5 dimenzí: hmotné zázemí, spolehlivost, vstřícnost, jistota, empatie) — GAP mezi očekáváním a vnímáním.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 13 — Integrovaná mkt komunikace ─────────── */
+function CheatSheetMkt13() {
+  return (
+    <CheatPage okruh={13} title="Integrovaná mkt komunikace + AIDA + 5M" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="IMK definice · komunikační proces (Shannon-Weaver) · AIDA · komunikační mix · 5M (Heřman) · push × pull"
+      examBar={<>
+        <b>Heřman</b> (5M!), <b>Bočková</b> (faktory mixu), <b>Stříteský</b>, <b>Mikovcová</b> — <i>IMK, komunikační modely, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Heřman vždy chce 5M modelu komunikace.</b>
+      </>}>
+      <CCol>
+        <CT0>IMK</CT0>
+        <CD term="IMK">Integrovaná marketingová komunikace — sjednocení všech komunikačních nástrojů a kanálů do <b>konzistentního sdělení</b> (one voice). Plánovaná + vizuální tvář + image.</CD>
+        <CT>KOMUNIKAČNÍ PROCES</CT>
+        <div style={{ fontSize: 9.8 }}>Shannon-Weaver: zdroj → kódování → <b>sdělení/médium</b> → dekódování → příjemce + <b>šum</b> + zpětná vazba.</div>
+      </CCol>
+      <CCol>
+        <CT0>AIDA</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>A</b>ttention — pozornost</li>
+          <li><b>I</b>nterest — zájem</li>
+          <li><b>D</b>esire — touha</li>
+          <li><b>A</b>ction — akce (nákup)</li>
+        </ol>
+        <CNote>Hierarchie účinků — vede zákazníka od povědomí k nákupu. Rozšíření: AIDAS (+ Satisfaction).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>5M (Heřman) ⭐</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Mission</b> — cíl komunikace</li>
+          <li><b>Message</b> — sdělení</li>
+          <li><b>Media</b> — kanály</li>
+          <li><b>Money</b> — rozpočet</li>
+          <li><b>Measurement</b> — měření</li>
+        </ol>
+        <CT>KOMUNIKAČNÍ MIX + PUSH/PULL</CT>
+        <div style={{ fontSize: 9.5 }}>6 nástrojů: reklama, podpora prodeje, PR, osobní prodej, direct, online. <b>Push</b> (tlačím přes distribuci) × <b>pull</b> (táhnu poptávkou zákazníka).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 14 — Nástroje komunikačního mixu ─────────── */
+function CheatSheetMkt14() {
+  return (
+    <CheatPage okruh={14} title="Nástroje komunikačního mixu" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Hromadná × osobní komunikace · 6 nástrojů · B2B × B2C volba médií · CRM · ATL × BTL"
+      examBar={<>
+        <b>Bočková + Nový + Kolouchová</b>, <b>Stříteský</b>, <b>Heřman</b> — <i>nástroje komunikace, kdy co, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Bočková: B2B → osobní prodej, B2C → reklama. Umět rozlišit kdy jaký druh médií!</b>
+      </>}>
+      <CCol>
+        <CT0>HROMADNÁ × OSOBNÍ</CT0>
+        <div style={{ fontSize: 10 }}><b>Hromadná (masová)</b> — velká skupina najednou: reklama, podpora prodeje, PR, sponzoring. <b>Osobní</b> — jednotlivec/segment: osobní prodej, direct marketing.</div>
+        <CNote>B2B → osobní prodej (málo velkých zákazníků, složitý produkt). B2C → reklama (masa, levné produkty).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>6 NÁSTROJŮ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Reklama</b> — placená, masová</li>
+          <li><b>Podpora prodeje</b> — slevy, akce (krátkodobé)</li>
+          <li><b>PR</b> — vztahy s veřejností, image</li>
+          <li><b>Osobní prodej</b> — přímý kontakt</li>
+          <li><b>Direct marketing</b> — adresné oslovení</li>
+          <li><b>Online/digital</b> — SEO, social, PPC</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>ATL × BTL</CT0>
+        <div style={{ fontSize: 10 }}><b>ATL</b> (above the line) — masová média (TV, rádio, print, OOH), budování značky. <b>BTL</b> (below the line) — cílené (direct, POS, eventy), výkon. <b>TTL</b> = kombinace.</div>
+        <CT>CRM</CT>
+        <div style={{ fontSize: 10 }}>Řízení vztahů se zákazníky — sběr dat, segmentace, personalizace, retence. Levnější udržet zákazníka než získat nového.</div>
+        <CNote>V PS: vyber nástroje dle typu trhu (B2B/B2C) a fáze nákupu.</CNote>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── MKT 16 — Řízení a výzkum kampaně ─────────── */
+function CheatSheetMkt16() {
+  return (
+    <CheatPage okruh={16} title="Řízení a výzkum komunikační kampaně" subjectLabel="Marketing" accent={MKT_ACCENT} accentBg={MKT_BG}
+      subtitle="Postup kampaně · cíle (SMART) · pretest × posttest · metriky a efekty · zásah/frekvence/GRP"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Heřman</b> — <i>řízení kampaně, měření, aplikace na PS</i>. ·
+        <b style={{ color: MKT_ACCENT }}> Vždy:</b> popiš postup kampaně (cíl → cílovka → sdělení → média → rozpočet → měření) a jak ji vyhodnotit.
+      </>}>
+      <CCol>
+        <CT0>POSTUP KAMPANĚ</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li>Situační analýza</li>
+          <li>Cíl kampaně (SMART)</li>
+          <li>Cílová skupina</li>
+          <li>Sdělení (message)</li>
+          <li>Volba médií (media plán)</li>
+          <li>Rozpočet</li>
+          <li>Realizace + měření</li>
+        </ol>
+      </CCol>
+      <CCol>
+        <CT0>PRETEST × POSTTEST</CT0>
+        <div style={{ fontSize: 10 }}><b>Pretest</b> — před spuštěním (test konceptu, A/B kreativy), snižuje riziko. <b>Posttest</b> — po kampani (zásah, recall, dopad na prodej/povědomí).</div>
+        <CNote>Brand lift = nárůst povědomí/preference díky kampani.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>METRIKY MÉDIÍ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Zásah (reach)</b> — kolik lidí vidělo</li>
+          <li><b>Frekvence</b> — kolikrát viděli</li>
+          <li><b>GRP</b> = zásah × frekvence</li>
+          <li><b>CPT</b> — cena za tisíc kontaktů</li>
+        </ul>
+        <CT>VÝKONNOSTNÍ METRIKY</CT>
+        <div style={{ fontSize: 9.8 }}>CTR, konverze, CPA, ROAS, recall (vybavení), recognition (poznání). Efekty: kognitivní → afektivní → konativní (chování).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+const MKT_CHEATS = {
+  1: { title: "Marketingový výzkum, metody a limity", comp: CheatSheetMkt1 },
+  2: { title: "Analytické metody, primární × sekundární data", comp: CheatSheetMkt2 },
+  3: { title: "Segmentace trhu", comp: CheatSheetMkt3 },
+  4: { title: "Positioning, POP, POD", comp: CheatSheetMkt4 },
+  5: { title: "Konkurence, KV, strategie", comp: CheatSheetMkt5 },
+  6: { title: "Produkt — vrstvy, klasifikace", comp: CheatSheetMkt6 },
+  7: { title: "Výrobkové řady, mix", comp: CheatSheetMkt7 },
+  8: { title: "Životní cyklus výrobku (PLC)", comp: CheatSheetMkt8 },
+  9: { title: "Výrobkový výzkum, uvedení na trh", comp: CheatSheetMkt9 },
+  10: { title: "Značka (branding)", comp: CheatSheetMkt10 },
+  11: { title: "Cenotvorba", comp: CheatSheetMkt11 },
+  12: { title: "Cenový výzkum", comp: CheatSheetMkt12 },
+  13: { title: "Integrovaná mkt komunikace + AIDA + 5M", comp: CheatSheetMkt13 },
+  14: { title: "Nástroje komunikačního mixu", comp: CheatSheetMkt14 },
+  16: { title: "Řízení a výzkum kampaně", comp: CheatSheetMkt16 },
+};
+
+/* ════════════════════════════════════════════════════════
+   LOGISTIKA CHEAT SHEETY — accent #B5651D (hnědooranžová)
+   ════════════════════════════════════════════════════════ */
+
+const LOG_ACCENT = "#B5651D";
+const LOG_BG = "#fbf3ea";
+
+/* ─────────── LOG 1 — Distribuce, kanály, řetězce ─────────── */
+function CheatSheetLog1() {
+  return (
+    <CheatPage okruh={1} title="Distribuce, distribuční kanály, log. řetězce" subjectLabel="Logistika" accent={LOG_ACCENT} accentBg={LOG_BG}
+      subtitle="Distribuce v mkt mixu · přímé × nepřímé kanály · intenzivní/selektivní/exkluzivní · push × pull · konflikty kanálů"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Cejthamr/Machek/Heřman</b> — <i>distribuce, kanály, aplikace na PS</i>. ·
+        <b style={{ color: LOG_ACCENT }}> Vždy:</b> urči distribuční strategii firmy z PS (intenzivní × selektivní × exkluzivní) a zhodnoť vhodnost vůči produktu.
+      </>}>
+      <CCol>
+        <CT0>3 ROZHODNUTÍ DISTRIBUCE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Kanály</b> — přímé × nepřímé, kolik prostředníků</li>
+          <li><b>Intenzita</b> — kolik prodejen v oblasti</li>
+          <li><b>Řízení</b> — push × pull, motivace partnerů</li>
+        </ul>
+        <CD term="Distribuce">Cesta produktu od výrobce ke spotřebiteli + s tím spojené toky (zboží, informace, peníze). Jedno ze 4P.</CD>
+      </CCol>
+      <CCol>
+        <CT0>3 DISTRIBUČNÍ STRATEGIE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Intenzivní</b> — max prodejen (Coca-Cola, baterie). Pokrytí &gt; kontrola. Denní potřeba.</li>
+          <li><b>Selektivní</b> — vybraní prodejci (elektronika). Rovnováha.</li>
+          <li><b>Exkluzivní</b> — 1 v oblasti (Rolex, Ferrari). Kontrola &gt; pokrytí, premium image.</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>PŘÍMÉ × NEPŘÍMÉ KANÁLY</CT0>
+        <div style={{ fontSize: 10 }}><b>Přímé</b> — výrobce → zákazník (D2C, e-shop, vlastní prodejny). Kontrola, marže, data. <b>Nepřímé</b> — přes velkoobchod/maloobchod/agenty. Dosah, ale ztráta marže a kontaktu.</div>
+        <CT>PUSH × PULL + KONFLIKTY</CT>
+        <div style={{ fontSize: 9.8 }}><b>Push</b> = tlačím zboží přes distribuci (motivace obchodníků). <b>Pull</b> = táhnu poptávkou zákazníka (reklama). Konflikty kanálů: horizontální (stejná úroveň), vertikální, vícekanálové (e-shop × prodejny).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── LOG 2 — SCM, materiálové strategie, zásoby ─────────── */
+function CheatSheetLog2() {
+  return (
+    <CheatPage okruh={2} title="SCM, materiálové strategie a řízení zásob" subjectLabel="Logistika" accent={LOG_ACCENT} accentBg={LOG_BG}
+      subtitle="Cíl logistiky (7S) · plánovací oblasti SCM · 6 typů SCM · řízení zásob (JIT, Kanban) · bullwhip efekt"
+      examBar={<>
+        <b>Pichanič+Kuděj+Zamazalová</b>, <b>Cejthamr+Machek+Heřman</b> — <i>strategie v logistice + konkurenční výhoda + plánovací oblasti SCM</i>. ·
+        <b style={{ color: LOG_ACCENT }}> Vždy:</b> propoj cíl logistiky (dodat co/kdy/kam/kolik) s konkrétní konkurenční výhodou + zařaď typ SCM firmy z PS.
+      </>}>
+      <CCol>
+        <CT0>CÍL LOGISTIKY (7S)</CT0>
+        <div style={{ fontSize: 10 }}>Dodat <b>správný produkt, ve správném množství a stavu, na správné místo, ve správný čas, správnému zákazníkovi, za správnou cenu</b>. Minimalizace nákladů při dané úrovni služeb.</div>
+        <CT>PLÁNOVACÍ OBLASTI SCM</CT>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Dlouhodobé</b> — návrh řetězce, dodavatelé, lokace</li>
+          <li><b>Střednědobé</b> — plán kapacit, materiálu, distribuce</li>
+          <li><b>Krátkodobé</b> — operativa, rozvrhování, přeprava</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>6 TYPŮ SCM</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.3 }}>
+          <li><b>Mass</b> — objem, nízké náklady, PUSH</li>
+          <li><b>Lean</b> — odstranění plýtvání (mudá), JIT, Kanban</li>
+          <li><b>Agile</b> — pružná reakce na poptávku, bod rozpojení</li>
+          <li><b>Resilient</b> — odolný, risk mgmt, strateg. zásoby</li>
+          <li><b>Green</b> — ekologie jako KV (ISO 20400)</li>
+          <li><b>SCM 4.0</b> — automatizace, nearshoring (Průmysl 4.0)</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>ŘÍZENÍ ZÁSOB</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>JIT</b> — just in time, dodávky přesně kdy třeba (Toyota)</li>
+          <li><b>Kanban</b> — tažný systém, signál k doplnění</li>
+          <li><b>ABC analýza</b> — A (drahé, hlídat) / B / C (levné)</li>
+          <li><b>EOQ</b> — optimální velikost objednávky</li>
+        </ul>
+        <CT>BULLWHIP EFEKT</CT>
+        <div style={{ fontSize: 9.8 }}>Bičový efekt — malá změna poptávky u zákazníka se zesiluje směrem k dodavatelům (zkreslené objednávky). Řešení: sdílení informací po řetězci.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── LOG 3 — Logistický řetězec, nákup, IS ─────────── */
+function CheatSheetLog3() {
+  return (
+    <CheatPage okruh={3} title="Logistický řetězec, nákup a informační systémy" subjectLabel="Logistika" accent={LOG_ACCENT} accentBg={LOG_BG}
+      subtitle="Logistický řetězec (3 vlastnosti) · nákup (3 fáze) · Make or Buy · 2PL–5PL · informační systémy (ERP, EDI, RFID)"
+      examBar={<>
+        <b>Stříteský</b>, <b>Mikovcová</b>, <b>Cejthamr/Machek</b> — <i>logistický řetězec, nákup, outsourcing, IS, aplikace na PS</i>. ·
+        <b style={{ color: LOG_ACCENT }}> Vždy:</b> rozhodni Make or Buy pro firmu z PS (kapitál, know-how, fokus) a urči úroveň poskytovatele (3PL/4PL).
+      </>}>
+      <CCol>
+        <CT0>LOGISTICKÝ ŘETĚZEC</CT0>
+        <div style={{ fontSize: 10 }}>Spojuje trh surovin s trhem spotřebitelů. 3 vlastnosti:</div>
+        <ul style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Transparentnost</b> — průhlednost po celé délce</li>
+          <li><b>Konektivita</b> — propojitelnost článků, výměna informací</li>
+          <li><b>Agilnost</b> — rychlé cílevědomé změny</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>NÁKUP (purchasing)</CT0>
+        <div style={{ fontSize: 10 }}>Opatřovací/pořizovací logistika. Pojmy: purchasing → procurement → supply. 3 fáze: příprava (poptávka, výběr dodavatele) → realizace (objednávka) → kontrola (převzetí, hodnocení).</div>
+        <CT>MAKE OR BUY</CT>
+        <div style={{ fontSize: 9.8 }}>Outsourcovat když: nemám kapitál, chybí know-how, chci fokus na core business. Vyrábět když: je to KV, citlivé, kontrola kvality.</div>
+      </CCol>
+      <CCol>
+        <CT0>ÚROVNĚ POSKYTOVATELŮ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.5 }}>
+          <li><b>2PL</b> — dopravce (část dopravy)</li>
+          <li><b>3PL</b> — komplexní logistika (sklad + doprava)</li>
+          <li><b>4PL</b> — řídí celý řetězec (integrátor)</li>
+          <li><b>5PL</b> — optimalizace přes technologie/sítě</li>
+        </ul>
+        <CT>INFORMAČNÍ SYSTÉMY</CT>
+        <div style={{ fontSize: 9.5 }}><b>ERP</b> (páteř firmy — zásoby, nákup, prodej, finance), <b>EDI</b> (elektronická výměna dat), <b>WMS</b> (sklad), <b>RFID</b>/čárové kódy (sledování), <b>APS</b> (pokročilé plánování).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+const LOG_CHEATS = {
+  1: { title: "Distribuce, distribuční kanály", comp: CheatSheetLog1 },
+  2: { title: "SCM, materiálové strategie a řízení zásob", comp: CheatSheetLog2 },
+  3: { title: "Logistický řetězec, nákup a IS", comp: CheatSheetLog3 },
+};
+
+/* ════════════════════════════════════════════════════════
+   INOVACE CHEAT SHEETY — accent #2E8B57 (zelená)
+   ════════════════════════════════════════════════════════ */
+
+const INOV_ACCENT = "#2E8B57";
+const INOV_BG = "#eef7f1";
+
+/* ─────────── INOV 1 — Co je inovace, modely procesu ─────────── */
+function CheatSheetInov1() {
+  return (
+    <CheatPage okruh={1} title="Co je inovace, modely inovačního procesu" subjectLabel="Inovace" accent={INOV_ACCENT} accentBg={INOV_BG}
+      subtitle="Invence × inovace × imitace · Schumpeter 5 typů · inkrementální × radikální × disruptivní · push × pull modely"
+      examBar={<>
+        <b>Mikovcová</b>, <b>Tahal</b>, <b>Vávra</b>, <b>Mládková</b> — <i>definice inovace, modely procesu, aplikace na PS</i>. ·
+        <b style={{ color: INOV_ACCENT }}> Mikovcová ráda slyší: „všichni jsou imitátoři, jen první firma inovuje".</b>
+      </>}>
+      <CCol>
+        <CT0>SCHUMPETROVA TRIÁDA</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>Invence</b> — nápad/vynález (Tesla: střídavý proud)</li>
+          <li><b>Inovace</b> — uvedení na trh = hodnota (jen 1. firma)</li>
+          <li><b>Imitace</b> — ostatní kopírují, výhoda se smaže</li>
+        </ul>
+        <CNote>Proto firma musí inovovat neustále — výhoda je dočasná.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>SCHUMPETER — 5 TYPŮ</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li>Nový výrobek</li>
+          <li>Nová metoda výroby</li>
+          <li>Nový trh</li>
+          <li>Nový zdroj surovin</li>
+          <li>Nová organizace odvětví</li>
+        </ol>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}>Inovace = ekonomická změna, ne jen technologie. Organizace stejně důležitá jako produkt.</div>
+      </CCol>
+      <CCol>
+        <CT0>TYPY DLE NOVOSTI</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Inkrementální</b> — drobné zlepšení po stejné S-křivce (nový iPhone)</li>
+          <li><b>Radikální</b> — skok na novou S-křivku</li>
+          <li><b>Disruptivní</b> — nový trh/BM (Uber, ChatGPT), malí vyšlou velké</li>
+        </ul>
+        <CT>MODELY PROCESU</CT>
+        <div style={{ fontSize: 9.8 }}><b>Technology push</b> (z výzkumu → trh) × <b>market pull</b> (z potřeby trhu → vývoj). Moderní: interaktivní/coupling modely, open innovation.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── INOV 2 — Schumpeter, Drucker ─────────── */
+function CheatSheetInov2() {
+  return (
+    <CheatPage okruh={2} title="Schumpeter, Drucker, inovativní organizace" subjectLabel="Inovace" accent={INOV_ACCENT} accentBg={INOV_BG}
+      subtitle="Schumpeter (kreativní destrukce) · Drucker 7 zdrojů inovace · inovační podnikání · inovativní organizace"
+      examBar={<>
+        <b>Tahal+Lorencová+Schönfeld</b>, <b>Mikovcová+Vávra+Viktora</b>, <b>Mládková+Mareš</b>, <b>Špaček+Nový+Machek</b> — <i>Schumpeter, Drucker, aplikace na PS</i>. ·
+        <b style={{ color: INOV_ACCENT }}> Schumpeter = duchovní otec teorie inovací + kreativní destrukce. Drucker = 7 zdrojů.</b>
+      </>}>
+      <CCol>
+        <CT0>SCHUMPETER</CT0>
+        <div style={{ fontSize: 10 }}>Duchovní otec teorie inovací. <b>Kreativní destrukce</b> = nové inovace ničí staré (auta zničily kočáry). Inovace = motor ekonomického cyklu, ne kosmetika.</div>
+        <CD term="Kreativní destrukce">Proces, kdy inovace likviduje zastaralé firmy/odvětví a nahrazuje je novými. Nutnost neustálé obnovy.</CD>
+      </CCol>
+      <CCol>
+        <CT0>DRUCKER — 7 ZDROJŮ INOVACE</CT0>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 9.5 }}>
+          <li>Nečekaná událost</li>
+          <li>Rozpor (realita × předpoklad)</li>
+          <li>Potřeba procesu</li>
+          <li>Změna struktury odvětví/trhu</li>
+          <li>Demografické změny</li>
+          <li>Změna vnímání a nálad</li>
+          <li>Nové znalosti</li>
+        </ol>
+        <CNote>První 4 = uvnitř firmy/odvětví, poslední 3 = vnější prostředí.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>INOVATIVNÍ ORGANIZACE</CT0>
+        <div style={{ fontSize: 10 }}>Znaky: tolerance rizika a chyb, plochá struktura, zdroje na experimenty, slack time (Google 20 %, 3M 15 %), diverzita, otevřená komunikace, inovační kultura (→ Lead 3).</div>
+        <CT>INOVAČNÍ PODNIKÁNÍ</CT>
+        <div style={{ fontSize: 9.8 }}>Entrepreneur (Schumpeter) = nositel inovace, přebírá riziko. Intrapreneurship = podnikavost uvnitř velké firmy.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── INOV 3 — Metody a techniky (BMC, Gassmann) ─────────── */
+function CheatSheetInov3() {
+  return (
+    <CheatPage okruh={3} title="Metody a techniky inovací — BMC, Lean Canvas" subjectLabel="Inovace" accent={INOV_ACCENT} accentBg={INOV_BG}
+      subtitle="Business model · BMC (9 bloků Osterwalder) · Lean Canvas · Gassmann (55 patternů) · BM inovace"
+      examBar={<>
+        <b>Tahal</b>, <b>Mikovcová</b>, <b>Mládková</b>, <b>Schönfeld</b> — <i>business model, BMC, aplikace na PS</i>. ·
+        <b style={{ color: INOV_ACCENT }}> Vždy:</b> rozkresli BMC firmy z PS (9 bloků) a ukaž, kde je prostor pro BM inovaci.
+      </>}>
+      <CCol>
+        <CT0>BUSINESS MODEL</CT0>
+        <CD term="Business model">Jak firma <b>vytváří, dodává a získává hodnotu</b>. Inovace BM = 5. typ Schumpetera (nová organizace odvětví).</CD>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}>Etalony: Uber (platforma), Airbnb (sdílení), Spotify (předplatné), Nespresso (kapsle), Tesla (D2C + OTA).</div>
+      </CCol>
+      <CCol>
+        <CT0>BMC — 9 BLOKŮ (Osterwalder)</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.3 }}>
+          <li>Zákaznické segmenty</li>
+          <li>Hodnotová nabídka</li>
+          <li>Kanály</li>
+          <li>Vztahy se zákazníky</li>
+          <li>Zdroje příjmů</li>
+          <li>Klíčové zdroje</li>
+          <li>Klíčové činnosti</li>
+          <li>Klíčová partnerství</li>
+          <li>Struktura nákladů</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>LEAN CANVAS</CT0>
+        <div style={{ fontSize: 10 }}>Adaptace BMC pro startupy (Maurya). Nahrazuje bloky: <b>Problém, Řešení, Klíčové metriky, Unfair advantage</b> místo partnerství/zdrojů. Důraz na nejistotu a validaci.</div>
+        <CT>GASSMANN — 55 PATTERNŮ</CT>
+        <div style={{ fontSize: 9.8 }}>St. Gallen — inovace BM kombinací existujících vzorců (55 patternů: freemium, razor-blade, subscription, long tail…). „Who-What-How-Value" magický trojúhelník.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── INOV 4 — Design Thinking ─────────── */
+function CheatSheetInov4() {
+  return (
+    <CheatPage okruh={4} title="Design Thinking — 5 fází + Double Diamond" subjectLabel="Inovace" accent={INOV_ACCENT} accentBg={INOV_BG}
+      subtitle="Human-centered · 5 fází (Stanford) · Double Diamond · divergence × konvergence · MVP · wicked problems"
+      examBar={<>
+        <b>Tahal</b>, <b>Mikovcová</b>, <b>Mládková</b> — <i>Design Thinking, fáze, aplikace na PS</i>. ·
+        <b style={{ color: INOV_ACCENT }}> Vždy:</b> DT je pro komplexní problémy s nejasnou definicí (wicked). Pro škálování ověřeného → Stage-Gate (Inov 5).
+      </>}>
+      <CCol>
+        <CT0>DESIGN THINKING</CT0>
+        <div style={{ fontSize: 10 }}>Přístup zaměřený na <b>člověka</b> (human-centered) — empatie + iterace + prototypování. Pro <b>wicked problems</b> (komplexní, nejasná definice).</div>
+        <CT>5 FÁZÍ (Stanford d.school)</CT>
+        <ol style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Empathize</b> — vcítění, pochop uživatele</li>
+          <li><b>Define</b> — formulace problému (POV)</li>
+          <li><b>Ideate</b> — generování nápadů</li>
+          <li><b>Prototype</b> — MVP, rychlá vizualizace</li>
+          <li><b>Test</b> — zpětná vazba, iterace</li>
+        </ol>
+      </CCol>
+      <CCol>
+        <CT0>DOUBLE DIAMOND</CT0>
+        <div style={{ fontSize: 10 }}>British Design Council. 2 diamanty střídající <b>divergenci</b> (rozšiř možnosti) a <b>konvergenci</b> (zužuj):</div>
+        <ul style={{ margin: "3px 0 0", paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>Discover</b> → Define (správný problém)</li>
+          <li><b>Develop</b> → Deliver (správné řešení)</li>
+        </ul>
+        <CNote>„Řeš správný problém správně" — nejdřív najdi problém, pak řešení.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>PROTOTYPOVÁNÍ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>MVP</b> — minimální funkční verze pro feedback</li>
+          <li><b>Wireframe/mockup</b> — vizuální náčrt</li>
+          <li><b>User stories</b> — scénáře použití</li>
+          <li><b>Funkční prototyp</b> — ne vše dotažené (Concorde efekt)</li>
+        </ul>
+        <CT>NÁSTROJE</CT>
+        <div style={{ fontSize: 9.8 }}>Empathy map, persona, customer journey, „How Might We", brainstorming. Fail fast, learn fast.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── INOV 5 — Stage Gate Control Process ─────────── */
+function CheatSheetInov5() {
+  return (
+    <CheatPage okruh={5} title="Stage Gate Control Process (Roberts × Cooper)" subjectLabel="Inovace" accent={INOV_ACCENT} accentBg={INOV_BG}
+      subtitle="SGCP · stages × gates · gatekeepers · Roberts (MIT 6) × Cooper (5 stage) · GO/KILL/HOLD/RECYCLE"
+      examBar={<>
+        <b>Tahal</b>, <b>Mikovcová</b>, <b>Schönfeld</b> — <i>Stage-Gate, brány, aplikace na PS</i>. ·
+        <b style={{ color: INOV_ACCENT }}> Vždy:</b> popiš logiku bran (gate = rozhodnutí GO/KILL) a rozdíl Roberts (akademický) × Cooper (korporátní).
+      </>}>
+      <CCol>
+        <CT0>SGCP</CT0>
+        <CD term="Stage-Gate">Nástroj řízení inovačního procesu přes <b>brány (gates)</b>. Proces = stádia (stages) oddělená branami, na kterých gatekeepers rozhodnou o pokračování.</CD>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}>Snižuje riziko — projekt musí na každé bráně splnit kritéria (sada metrik), jinak se zastaví.</div>
+      </CCol>
+      <CCol>
+        <CT0>ROZHODNUTÍ NA BRÁNĚ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 10 }}>
+          <li><b>GO</b> — pokračuj do další fáze</li>
+          <li><b>KILL</b> — zastav (nesplnil kritéria)</li>
+          <li><b>HOLD</b> — pozastav (čekej)</li>
+          <li><b>RECYCLE</b> — vrať k přepracování</li>
+        </ul>
+        <CNote>Gatekeepers = vedoucí pracovníci s rozhodovací pravomocí a zdroji.</CNote>
+      </CCol>
+      <CCol>
+        <CT0>ROBERTS × COOPER</CT0>
+        <div style={{ fontSize: 10 }}><b>Roberts (MIT)</b> — akademický, 6 stadií (od generování myšlenky po realizaci). <b>Cooper</b> — korporátní, 5 stage-gate (discovery, scoping, business case, development, testing, launch).</div>
+        <CT>VÝHODY × LIMITY</CT>
+        <div style={{ fontSize: 9.8 }}>+ disciplína, řízení rizika, jasná kritéria. − rigidní, pomalé pro disruptivní inovace (tam DT/Lean). Vhodné pro inkrementální vývoj.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── INOV 6 — Financování inovací podle fází ŽC ─────────── */
+function CheatSheetInov6() {
+  return (
+    <CheatPage okruh={6} title="Financování inovací podle fází ŽC firmy" subjectLabel="Inovace" accent={INOV_ACCENT} accentBg={INOV_BG}
+      subtitle="Vlastní × cizí zdroje · princip fází (riziko × výnos) · seed · VC × PE · mezzanine · IPO"
+      examBar={<>
+        <b>Svobodová</b> (VC × PE!), <b>Tahal</b>, <b>Mikovcová</b> — <i>financování inovací dle fází, aplikace na PS</i>. ·
+        <b style={{ color: INOV_ACCENT }}> ⚠️ Svobodová chce přesně rozdíl VC × PE. VC = začátky/vyšší riziko. PE = zralé NEKOTOVANÉ firmy. Reálně na tom propadla studentka!</b>
+      </>}>
+      <CCol>
+        <CT0>PRINCIP FÁZÍ</CT0>
+        <div style={{ fontSize: 10 }}>Pro každý stupeň rozvoje je optimální jiný zdroj. Čím <b>rizikovější fáze</b>, tím vyšší <b>očekávaný výnos</b> investora (ochota podstoupit riziko nevratnosti).</div>
+        <CT>VLASTNÍ × CIZÍ</CT>
+        <div style={{ fontSize: 9.8 }}><b>Vlastní</b> — ZK, zisk, fondy, odpisy. Nemusím splácet, ale omezeně. <b>Cizí</b> — úvěry, závazky, dary. Splácím, ale rychlejší růst.</div>
+      </CCol>
+      <CCol>
+        <CT0>RANÉ FÁZE</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.8 }}>
+          <li><b>3F</b> — Family, Friends, Fools (úplný začátek)</li>
+          <li><b>Business angels</b> — privátní investoři + know-how</li>
+          <li><b>Seed kapitál</b> — vklad do ZK za podíl (i státní programy)</li>
+          <li><b>Granty/dotace</b> — OP Podnikání a inovace</li>
+        </ul>
+      </CCol>
+      <CCol>
+        <CT0>VC × PE ⭐</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.3 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fff8e1" }}><b>Venture Capital</b><br /><span style={{ fontSize: 9 }}>firmy v ZAČÁTCÍCH, vyšší riziko, růstové</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Private Equity</b><br /><span style={{ fontSize: 9 }}>menší, NEKOTOVANÉ ZRALÉ podniky, nižší riziko</span></td></tr>
+        </tbody></table>
+        <CNote>NEPLEŤ: PE = nekotované (ne burzovní) zralé firmy. Toto je past, na které studenti padají!</CNote>
+        <CT>EXPANZE + EXIT</CT>
+        <div style={{ fontSize: 9.5 }}><b>Mezzanine</b> = hybrid dluh/kapitál (při nesplacení → podíl). <b>IPO</b> = vstup na burzu (exit pro investory).</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── INOV 7 — Inovační strategie ─────────── */
+function CheatSheetInov7() {
+  return (
+    <CheatPage okruh={7} title="Inovační strategie (Ansoff, Mintzberg, Freeman)" subjectLabel="Inovace" accent={INOV_ACCENT} accentBg={INOV_BG}
+      subtitle="Ansoff matice · deliberate × emergent (Mintzberg) · Freeman 6 strategií · first mover × fast follower · Vlček, Pitra"
+      examBar={<>
+        <b>Tahal</b>, <b>Mikovcová</b>, <b>Mládková</b>, <b>Schönfeld</b> — <i>inovační strategie, aplikace na PS</i>. ·
+        <b style={{ color: INOV_ACCENT }}> Vždy:</b> zařaď strategii firmy z PS (Ansoff kvadrant + Freeman typ) a urči time-to-market pozici.
+      </>}>
+      <CCol>
+        <CT0>ANSOFF MATICE (deliberate)</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Penetrace</b><br />stáv. P × stáv. T</td><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Rozvoj trhu</b><br />stáv. P × nový T</td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Rozvoj produktu</b><br />nový P × stáv. T</td><td style={{ padding: 3, border: "1px solid #ddd" }}><b>Diverzifikace</b><br />nový P × nový T (nejvyšší riziko)</td></tr>
+        </tbody></table>
+        <CNote>Racionalistický — strategie vzniká plánováním (top-down, stabilní prostředí).</CNote>
+      </CCol>
+      <CCol>
+        <CT0>MINTZBERG (emergent)</CT0>
+        <div style={{ fontSize: 10 }}>Gradualistický — strategie jako <b>vzorec (pattern)</b> v chování firmy v čase. Firma zkouší experimenty, úspěšné se stávají strategií (3M 15 %). Pro turbulentní prostředí.</div>
+        <CT>TIME-TO-MARKET</CT>
+        <div style={{ fontSize: 10 }}><b>First mover</b> — vést trh (výhoda, ale riziko). <b>Fast follower</b> — rychle následovat (nižší riziko, učí se z chyb lídra).</div>
+      </CCol>
+      <CCol>
+        <CT0>FREEMAN — 6 STRATEGIÍ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.5 }}>
+          <li><b>Ofenzivní</b> — být první (lídr, vlastní R&D)</li>
+          <li><b>Defenzivní</b> — rychlý druhý (fast follower)</li>
+          <li><b>Imitační</b> — kopíruje s odstupem</li>
+          <li><b>Závislá</b> — subdodavatel, dle zadavatele</li>
+          <li><b>Tradiční</b> — neinovuje, stálý produkt</li>
+          <li><b>Oportunistická</b> — hledá mezery (niku)</li>
+        </ul>
+        <CT>SLADĚNÍ</CT>
+        <div style={{ fontSize: 9.5 }}>Inovační strategie musí podporovat business strategii (cost leadership × diferenciace × focus). Vlček, Pitra — čeští autoři typologií.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+/* ─────────── INOV 8 — Bariéry inovací + selhání + metriky ─────────── */
+function CheatSheetInov8() {
+  return (
+    <CheatPage okruh={8} title="Bariéry inovací + anatomie selhání + metriky" subjectLabel="Inovace" accent={INOV_ACCENT} accentBg={INOV_BG}
+      subtitle="Vnitřní × vnější bariéry · ctihodné × nekompetentní selhání (Hobcraft) · příčiny · metriky inovací · open innovation"
+      examBar={<>
+        <b>Tahal</b>, <b>Mikovcová</b>, <b>Mládková</b>, <b>Schönfeld</b> — <i>bariéry inovací, selhání, metriky, aplikace na PS</i>. ·
+        <b style={{ color: INOV_ACCENT }}> Vždy:</b> najdi v PS bariéry (kultura, procesy, zdroje) a navrhni překonání. Rozliš ctihodné × nekompetentní selhání.
+      </>}>
+      <CCol>
+        <CT0>BARIÉRY INOVACÍ</CT0>
+        <div style={{ fontSize: 9.8 }}><b>Vnitřní:</b> rigidní kultura, byrokracie, strach z rizika, nedostatek zdrojů, schvalování přes víc úrovní, žádný slack time, špatné vedení.</div>
+        <div style={{ fontSize: 9.8, marginTop: 3 }}><b>Vnější:</b> legislativa, nedostatek kapitálu, konzervativní trh, ochrana IP, konkurence.</div>
+      </CCol>
+      <CCol>
+        <CT0>SELHÁNÍ (Hobcraft)</CT0>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 9.3 }}><tbody>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#e1f5e1" }}><b>Ctihodné</b><br /><span style={{ fontSize: 9 }}>poctivý pokus o nové, nevyšlo. CENNÉ — učení.</span></td></tr>
+          <tr><td style={{ padding: 3, border: "1px solid #ddd", background: "#fbecea" }}><b>Nekompetentní</b><br /><span style={{ fontSize: 9 }}>nízké úsilí/schopnosti. BEZCENNÉ — dalo se předejít.</span></td></tr>
+        </tbody></table>
+        <div style={{ fontSize: 9.5, marginTop: 3 }}>Selhání může být: systému, produktu, procesu, nápadu, BM. Příčiny: špatný cíl, strategie, zdroje, tým, vedení, komunikace.</div>
+      </CCol>
+      <CCol>
+        <CT0>METRIKY INOVACÍ</CT0>
+        <ul style={{ margin: 0, paddingLeft: 14, fontSize: 9.5 }}>
+          <li><b>Input</b> — R&D výdaje, % rozpočtu, počet nápadů</li>
+          <li><b>Process</b> — time-to-market, success rate bran</li>
+          <li><b>Output</b> — % tržeb z nových produktů, patenty, ROI inovací</li>
+        </ul>
+        <CT>OPEN INNOVATION</CT>
+        <div style={{ fontSize: 9.8 }}>Chesbrough — inovace přes vnější zdroje (aliance, univerzity, crowdsourcing, akvizice). Inbound (dovnitř) × outbound (ven, licencování). Překonává vnitřní bariéry.</div>
+      </CCol>
+    </CheatPage>
+  );
+}
+
+const INOV_CHEATS = {
+  1: { title: "Co je inovace, modely procesu", comp: CheatSheetInov1 },
+  2: { title: "Schumpeter, Drucker, inovativní organizace", comp: CheatSheetInov2 },
+  3: { title: "Metody a techniky — BMC, Lean Canvas", comp: CheatSheetInov3 },
+  4: { title: "Design Thinking — 5 fází + Double Diamond", comp: CheatSheetInov4 },
+  5: { title: "Stage Gate Control Process", comp: CheatSheetInov5 },
+  6: { title: "Financování inovací podle fází ŽC", comp: CheatSheetInov6 },
+  7: { title: "Inovační strategie", comp: CheatSheetInov7 },
+  8: { title: "Bariéry inovací + selhání + metriky", comp: CheatSheetInov8 },
 };
 
 const STR_CHEATS = {
